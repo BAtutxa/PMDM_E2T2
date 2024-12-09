@@ -1,20 +1,33 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Iniciar Sesión</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding login-page">
+  <!-- Imagen responsive -->
+  <img src="assets/Images/stzLH.jpg" alt="Peluqueria Santurtzi LH" />
+  
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Bienvenido</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form (submit)="login()">
+        <ion-item>
+          <ion-label position="floating">Correo electronico</ion-label>
+          <ion-input  class="label"  type="email" [(ngModel)]="email" name="email" required></ion-input>
+        </ion-item>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+        <ion-item>
+          <ion-label class="label" position="floating">Contraseña</ion-label>
+          <ion-input  type="password" [(ngModel)]="password" name="password" required></ion-input>
+        </ion-item>
+        <ion-text color="danger" *ngIf="errorMessage"> 
+          <p>{{errorMessage}}</p>
+        </ion-text>
+        <ion-button class="button" expand="block" type="submit" color="primary">Iniciar Sesión</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

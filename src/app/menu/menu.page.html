@@ -1,0 +1,21 @@
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Menu principal</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Contenido principal -->
+  <div class="container">
+    <!-- Imagen -->
+    <ion-img src="assets/Images/cortarPelo.jpg" alt="Imagen" class="top-image"></ion-img>
+    <h1 class="main-title">Menu principal</h1>
+    <!-- Botones -->
+    <div class="button-group">
+      <ion-button shape="round" class="historia"  [routerLink]="'/historioa'">Productos</ion-button>
+      <ion-button shape="round" class="seriespelis" [routerLink]="'/table'">Citas</ion-button>
+      <ion-button shape="round" class="personajes" [routerLink]="'/pertsonaiak'">Servicios</ion-button>
+      <ion-button shape="round" class="merchandising" [routerLink]="'/merch'">Administracion</ion-button>
+    </div>
+  </div>
+</ion-content>

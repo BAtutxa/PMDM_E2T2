@@ -1,0 +1,36 @@
+/* Fondo de la página */
+ion-content {
+    --overflow: auto;
+    padding-bottom: 20px;
+    padding-top: 20px; /* Margen superior */
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Asegura que ocupe toda la pantalla */
+  }
+  
+  /* Contenedor principal */
+  .container {
+    text-align: center;
+  }
+  
+  /* Imagen */
+  .container ion-img {
+    margin-bottom: 20px; /* Margen entre imagen y título */
+  }
+  
+  /* Título principal */
+  .main-title {
+    font-size: 32px;
+    font-weight: bold;
+    margin: 0 0 20px; /* Margen entre título y botones */
+  }
+  
+  /* Grupo de botones */
+  .button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Separación entre botones */
+  }
+  
