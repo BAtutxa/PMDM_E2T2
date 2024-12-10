@@ -1,11 +1,14 @@
 .footer {
-    background-color: #7dcdb3;
-    color: white;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    font-size: 14px;
-  }
-  
+  background-color: #7dcdb3;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  width: 100%;
+  font-size: 14px;
+  position: sticky;
+  bottom: 0;
+}
+
+ion-content {
+  padding-bottom: 60px
+}
