@@ -1,23 +1,45 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Menu principal</ion-title>
+      <ion-title size="large">Menú principal</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <!-- Contenido principal -->
-  <div class="container">
-    <!-- Imagen -->
-    <ion-img src="assets/Images/cortarPelo.jpg" alt="Imagen" class="top-image"></ion-img>
-    <h1 class="main-title">Menu principal</h1>
+  <ion-grid class="container">
+    <!-- Imagen centrada -->
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <ion-img src="assets/Images/cortarPelo.jpg" alt="Imagen" class="top-image"></ion-img>
+      </ion-col>
+    </ion-row>
+
+    <!-- Título centrado -->
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <h1 class="main-title">Menú principal</h1>
+      </ion-col>
+    </ion-row>
+
     <!-- Botones -->
-    <div class="button-group">
-      <ion-button shape="round" class="historia"  [routerLink]="'/historioa'">Productos</ion-button>
-      <ion-button shape="round" class="seriespelis" [routerLink]="'/table'">Citas</ion-button>
-      <ion-button shape="round" class="personajes" [routerLink]="'/pertsonaiak'">Clientes</ion-button>
-      <ion-button shape="round" class="merchandising" [routerLink]="'/merch'">Servicios</ion-button>
-      <ion-button shape="round" class="merchandising" [routerLink]="'/merch'">Crear tickets</ion-button>
-      <ion-button shape="round" class="merchandising" [routerLink]="'/merch'">Administración</ion-button>
-    </div>
-  </div>
+    <ion-row class="buttons-row">
+      <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
+        <ion-button shape="round" [routerLink]="'/inventario'">Inventario</ion-button>
+      </ion-col>
+      <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
+        <ion-button shape="round" [routerLink]="'/table'">Citas</ion-button>
+      </ion-col>
+      <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
+        <ion-button shape="round" [routerLink]="'/pertsonaiak'">Clientes</ion-button>
+      </ion-col>
+      <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
+        <ion-button shape="round" [routerLink]="'/merch'">Servicios</ion-button>
+      </ion-col>
+      <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
+        <ion-button shape="round" [routerLink]="'/merch'">Tickets</ion-button>
+      </ion-col>
+      <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
+        <ion-button shape="round" [routerLink]="'/merch'">Administración</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

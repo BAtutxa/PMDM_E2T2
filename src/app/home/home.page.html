@@ -5,29 +5,42 @@
 </ion-header>
 
 <ion-content class="ion-padding login-page">
-  <!-- Imagen responsive -->
-  <img src="assets/Images/stzLH.jpg" alt="Peluqueria Santurtzi LH" />
-  
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Bienvenido</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <form (submit)="login()">
-        <ion-item>
-          <ion-label position="floating">Correo electronico</ion-label>
-          <ion-input  class="label"  type="email" [(ngModel)]="email" name="email" required></ion-input>
-        </ion-item>
+  <ion-grid>
+    <!-- Imagen -->
+    <ion-row class="image-row">
+      <ion-col size="12" class="ion-text-center">
+        <img src="assets/Images/stzLH.jpg" alt="Peluquería Santurtzi LH" class="login-image" />
+      </ion-col>
+    </ion-row>
 
-        <ion-item>
-          <ion-label class="label" position="floating">Contraseña</ion-label>
-          <ion-input  type="password" [(ngModel)]="password" name="password" required></ion-input>
-        </ion-item>
-        <ion-text color="danger" *ngIf="errorMessage"> 
-          <p>{{errorMessage}}</p>
-        </ion-text>
-        <ion-button class="button" expand="block" type="submit" color="primary">Iniciar Sesión</ion-button>
-      </form>
-    </ion-card-content>
-  </ion-card>
+    <!-- Formulario de inicio de sesión -->
+    <ion-row class="form-row">
+      <ion-col size="12" size-md="8" offset-md="2" size-lg="6" offset-lg="3">
+        <ion-card class="login-card">
+          <ion-card-header>
+            <ion-card-title>Bienvenido</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <form (submit)="login()">
+              <ion-item color="primary">
+                <ion-label position="floating">Correo electrónico</ion-label>
+                <ion-input type="email" [(ngModel)]="email" name="email" required></ion-input>
+              </ion-item>
+
+              <ion-item color="primary">
+                <ion-label position="floating">Contraseña</ion-label>
+                <ion-input type="password" [(ngModel)]="password" name="password" required></ion-input>
+              </ion-item>
+
+              <ion-text color="danger" *ngIf="errorMessage">
+                <p>{{ errorMessage }}</p>
+              </ion-text>
+
+              <ion-button expand="block" type="submit" color="primary" class="submit-button">Iniciar Sesión</ion-button>
+            </form>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

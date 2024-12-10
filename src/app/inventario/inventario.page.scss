@@ -1,0 +1,94 @@
+ion-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  ion-grid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  ion-row {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px; /* Espaciado entre filas */
+  }
+  
+  .buttons-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; /* Espaciado entre botones */
+  }
+  
+  ion-button {
+    width: 100%;
+    max-width: 200px; /* Tamaño máximo del botón */
+    margin: 10px auto;
+  }
+  .main-title{
+    color:black;
+  }
+  img {
+    width: 100%;
+    max-width: 300px; 
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .main-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  .footer {
+    background-color: #7dcdb3;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-size: 14px;
+    z-index: 10;
+    left: 0; /* Asegura que el footer ocupe toda la anchura */
+  }
+  
+  ion-content {
+    padding-bottom: 80px; /* Espacio para el footer */
+    overflow-y: auto; /* Permite el desplazamiento dentro del contenido */
+    position: relative;
+    height: 100%; /* Asegura que el contenido ocupe todo el espacio disponible */
+  }
+
+  .page-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  ion-content {
+    flex: 1;
+    overflow-y: auto;  /* Habilita el desplazamiento */
+  }
+  
+  app-footer {
+    position: relative;  /* Mantiene el footer al final de la página */
+  }
+  
+  
+
+  

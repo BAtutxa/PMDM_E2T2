@@ -1,95 +1,57 @@
-.login-page {
+/* Centrar contenido vertical y horizontalmente */
+ion-content {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   flex-direction: column;
-  height: 100%;
 }
 
-/* Estilo base para la imagen */
-img {
-  width: 100%;      /* La imagen ocupará todo el ancho disponible */
-  height: auto;     /* Mantiene la proporción de la imagen */
-  margin-bottom: 20px;  /* Espaciado debajo de la imagen */
-  border-radius: 10px;   /* Borde redondeado para la imagen */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave para dar un efecto */
-  transition: transform 0.3s ease-in-out;  /* Efecto de transición */
+/* Imagen responsiva */
+.login-image {
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
 }
 
-/* Media Queries para diferentes tamaños de pantalla */
-
-/* Para pantallas pequeñas, entre 375px y 667px (móviles pequeños) */
-@media (min-width: 375px) and (max-width: 667px) {
-  img {
-    max-width: 100%;    /* La imagen se ajusta al ancho del contenedor */
-    max-height: 250px;  /* Altura máxima de 250px */
-  }
-
-  ion-card-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%; /* Para asegurar que ocupe todo el ancho */
-    max-height: none; /* El contenido se ajustará sin restricciones */
-  }
-}
-
-/* Para pantallas medianas, entre 667px y 1280px (tabletas y pantallas medianas) */
-@media (min-width: 667px) and (max-width: 1280px) {
-  img {
-    max-width: 100%;    /* La imagen se ajusta al ancho del contenedor */
-    max-height: 400px;  /* Altura máxima de 400px */
-  }
-
-  ion-card-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%; /* Para asegurar que ocupe todo el ancho */
-    max-height: none; /* El contenido se ajustará sin restricciones */
-  }
-}
-
-/* Para pantallas grandes, entre 1280px y 1368px (pantallas grandes de escritorio) */
-@media (min-width: 1280px) and (max-width: 1368px) {
-  img {
-    max-width: 100%;    /* Imagen se ajusta al ancho disponible */
-    max-height: 600px;  /* Altura máxima de 600px */
-  }
-
-  ion-card-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%; /* Para asegurar que ocupe todo el ancho */
-    max-height: none; /* El contenido se ajustará sin restricciones */
-  }
-}
-
-/* Para pantallas muy grandes (por encima de 1368px) */
-@media (min-width: 1369px) {
-  img {
-    max-width: 1200px;   /* Limita el ancho máximo de la imagen a 1200px */
-    max-height: 800px;   /* Limita la altura máxima de la imagen a 800px */
-    width: 100%;         /* Asegura que la imagen sigue siendo responsive */
-    height: auto;        /* Mantiene la proporción */
-  }
-
-  ion-card-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%; /* Para asegurar que ocupe todo el ancho */
-    max-height: none; /* El contenido se ajustará sin restricciones */
-  }
-}
-
-/* Estilo para ion-card */
-ion-card {
-  width: 90%;
+/* Estilo del formulario */
+.login-card {
+  width: 100%;
   max-width: 400px;
-  margin-top: 20px;  /* Añadir espacio entre la imagen y el card */
+  margin: 0 auto;
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.input{
-  background-color:  #7dcdb3;
+
+/* Título centrado */
+ion-card-title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Ítems del formulario */
+ion-item {
+  margin-top: 15px;
+  border-radius: 10px;
+}
+
+/* Botón principal */
+.submit-button {
+  margin-top: 20px;
+  padding: 10px;
+}
+
+/* Filas con espaciado */
+.image-row {
+  margin-bottom: 30px;
+}
+
+.form-row {
+  margin-top: 10px;
 }
