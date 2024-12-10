@@ -51,10 +51,29 @@ h1 {
 
 ion-item {
   margin-bottom: 16px; /* Aumenté el margen inferior para separar más los campos */
+  padding: 12px; /* Aumentar el padding alrededor del item */
 }
 
+/* Estilo para el textarea (citas) */
 ion-textarea {
-  height: auto;
+  height: 100%; /* Hacer que el campo ocupe el 100% del espacio disponible */
+  min-height: 120px; /* Aseguramos que tenga al menos 120px de altura */
+  padding: 12px; /* Añadir padding dentro del textarea para mayor espacio */
+  resize: none; /* Evitar que el usuario redimensione el textarea */
+  overflow: hidden; /* Eliminar la barra de desplazamiento */
+  box-sizing: border-box; /* Aseguramos que el padding se tenga en cuenta en el cálculo del tamaño */
+}
+
+/* Para pantallas pequeñas */
+@media (max-width: 576px) {
+  ion-item {
+    padding: 8px; /* Reducir padding para pantallas pequeñas */
+  }
+
+  ion-textarea {
+    height: 100%; /* Aseguramos que ocupe todo el espacio disponible */
+    min-height: 100px; /* Ajustar la altura mínima del campo en pantallas pequeñas */
+  }
 }
 
 /* Estilo para el calendario en formato grid */
@@ -74,7 +93,6 @@ ion-textarea {
   justify-content: center;
   align-items: center;
   font-size: 16px;
-  cursor: pointer;
 }
 
 /* Para pantallas pequeñas */
@@ -88,3 +106,4 @@ ion-textarea {
     font-size: 14px;
   }
 }
+
