@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>Productos</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,34 +12,23 @@
     </ion-toolbar>
   </ion-header>
 
-  <!-- Tabla responsive -->
   <ion-grid>
-    <ion-row>
-      <!-- Encabezados de la tabla -->
-      <ion-col size="2" class="ion-text-center">
-        <strong>ID</strong>
-      </ion-col>
-      <ion-col size="3" class="ion-text-center">
-        <strong>Nombre</strong>
-      </ion-col>
-      <ion-col size="2" class="ion-text-center">
-        <strong>Tipo</strong>
-      </ion-col>
-      <ion-col size="2" class="ion-text-center">
-        <strong>Marca</strong>
-      </ion-col>
-      <ion-col size="2" class="ion-text-center">
-        <strong>Stock</strong>
-      </ion-col>
+    <!-- Encabezados de la tabla solo cuando no es móvil -->
+    <ion-row *ngIf="!mobilaDa">
+      <ion-col size="2" class="ion-text-center"><strong>ID</strong></ion-col>
+      <ion-col size="3" class="ion-text-center"><strong>Nombre</strong></ion-col>
+      <ion-col size="2" class="ion-text-center"><strong>Tipo</strong></ion-col>
+      <ion-col size="2" class="ion-text-center"><strong>Marca</strong></ion-col>
+      <ion-col size="2" class="ion-text-center"><strong>Stock</strong></ion-col>
     </ion-row>
 
-    <!-- Fila de datos de ejemplo -->
+    <!-- Filas de datos -->
     <ion-row *ngFor="let producto of productos">
-      <ion-col size="2" class="ion-text-center">{{ producto.id }}</ion-col>
-      <ion-col size="3" class="ion-text-center">{{ producto.nombre }}</ion-col>
-      <ion-col size="2" class="ion-text-center">{{ producto.tipo }}</ion-col>
-      <ion-col size="2" class="ion-text-center">{{ producto.marca }}</ion-col>
-      <ion-col size="2" class="ion-text-center">{{ producto.stock }}</ion-col>
+      <ion-col size="2" class="ion-text-center" data-label="ID">{{ producto.id }}</ion-col>
+      <ion-col size="3" class="ion-text-center" data-label="Nombre">{{ producto.nombre }}</ion-col>
+      <ion-col size="2" class="ion-text-center" data-label="Tipo">{{ producto.tipo }}</ion-col>
+      <ion-col size="2" class="ion-text-center" data-label="Marca">{{ producto.marca }}</ion-col>
+      <ion-col size="2" class="ion-text-center" data-label="Stock">{{ producto.stock }}</ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>

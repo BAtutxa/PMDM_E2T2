@@ -11,3 +11,8 @@
   ion-content {
     --background: #ffffff;
   }
+  ion-grid {
+    display: block;
+    overflow-x: auto; /* Permite scroll horizontal */
+    white-space: nowrap; /* Mantiene las filas en línea */
+  }

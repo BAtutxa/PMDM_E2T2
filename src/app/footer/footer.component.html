@@ -1,3 +1,11 @@
-<footer class="footer">
-  <p>&copy; 2024 Todos los derechos reservados</p>
-</footer>
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="agertu">
+  <ion-fab-button (click)="homebueltatu()">
+    <ion-icon name="home"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+<ion-fab vertical="bottom" horizontal="start" slot="fixed" *ngIf="agertu">
+  <ion-fab-button (click)="bueltatu()">
+    <ion-icon name="refresh"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
