@@ -1,109 +1,56 @@
-/* Fondo de la página */
 ion-content {
-    --overflow: auto;
-    padding-bottom: 20px;
-    padding-top: 20px; /* Margen superior */
-    margin-top: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%; /* Asegura que ocupe toda la pantalla */
-  }
-  
-  /* Contenedor principal */
-  .container {
-    text-align: center;
-  }
-  
-  /* Imagen */
-  .container ion-img {
-    margin-bottom: 20px; /* Margen entre imagen y título */
-  }
-  
-  /* Título principal */
-  .main-title {
-    font-size: 32px;
-    font-weight: bold;
-    margin: 0 0 20px; /* Margen entre título y botones */
-  }
-  
-  /* Grupo de botones */
-  .button-group {
-    display: flex;
-    flex-direction: column;
-    gap: 15px; /* Separación entre botones */
-  }
-  h1 {
-    margin-bottom: 16px;
-  }
-  
-  .calendar-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 16px;
-  }
-  
-  .calendar-header span {
-    margin: 0 8px;
-    font-weight: bold;
-  }
-  
-  .dia-header {
-    text-align: center;
-    font-weight: bold;
-  }
-  
-  .dia {
-    text-align: center;
-    padding: 12px;
-    margin: 4px;
-    cursor: pointer;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .dia[disabled] {
-    color: #ccc;
-    pointer-events: none;
-  }
-  
-  .dia.seleccionado {
-    background-color: #3880ff;
-    color: #fff;
-  }
-  
-  .info {
-    margin-top: 30px; /* Aumenté el margen superior para separar más */
-    text-align: left;
-  }
-  
-  ion-item {
-    margin-bottom: 16px; /* Aumenté el margen inferior para separar más los campos */
-  }
-  
-  ion-textarea {
-    height: auto;
-  }
-  
-  /* Estilo para el calendario en formato grid */
-  .calendario-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr); /* 7 columnas para los 7 días de la semana */
-    grid-gap: 4px;
-    justify-items: center;
-    margin-top: 10px;
-  }
-  
-  /* Estilos para los días */
-  .dia {
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+ion-grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+ion-row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px; /* Espaciado entre filas */
+}
+
+.buttons-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px; /* Espaciado entre botones */
+}
+
+ion-button {
+  width: 100%;
+  max-width: 200px; /* Tamaño máximo del botón */
+  margin: 10px auto;
+}
+.main-title{
+  color:black;
+}
+img {
+  width: 100%;
+  max-width: 300px; 
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.main-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}

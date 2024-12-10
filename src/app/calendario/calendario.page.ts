@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit,  } from '@angular/core';
 
 @Component({
   selector: 'app-calendario',
@@ -68,5 +68,7 @@ export class CalendarioPage {
         () => this.citas[Math.floor(Math.random() * this.citas.length)],
       );
     }
+  }
+  ngOnInit() {
   }
 }
