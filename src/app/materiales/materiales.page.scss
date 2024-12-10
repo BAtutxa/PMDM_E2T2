@@ -34,13 +34,7 @@ ion-row {
       text-align: left; /* Alinea texto a la izquierda */
       display: block;
     }
-  
-    /* Añade encabezados visibles en cada celda */
-    ion-col[data-label]:before {
-      content: attr(data-label);
-      font-weight: bold;
-      margin-right: 5px;
-      display: inline-block;
-      color: #444;
-    }
   }
+  
+
+
