@@ -27,13 +27,13 @@ export class FooterComponent implements OnInit {
   // Método para mostrar el botón de Home cuando no estamos en la página Home ni en Calendario
   homebotoiaAgertu() {
     const url = this.router.url;
-    this.agertuHome = url !== '/home' && url !== '/calendario';  // El botón de Home aparece si no estamos ni en /home ni en /calendario
+    this.agertuHome = url !== '/home' && url !== '/calendario' && url !== '/menu';
   }
 
   // Método para mostrar el botón de Volver cuando no estamos en la página Calendario
   bueltatubotoiaAgertu() {
     const url = this.router.url;
-    this.agertuBueltatu = url !== '/calendario';  // El botón de Volver aparece si no estamos en /calendario
+    this.agertuBueltatu = url !== '/calendario' && url!== '/home';  // El botón de Volver aparece si no estamos en /calendario
   }
 
   // Método para navegar hacia atrás
