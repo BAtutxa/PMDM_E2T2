@@ -44,13 +44,13 @@ export class FooterComponent implements OnInit {
 
   // Método de logout
   logout() {
-    this.router.navigate(['/home']);  // Cambia a la ruta de login o lo que necesites
+    this.router.navigate(['/home']);  
   }
 
   // Método para mostrar el botón de Log Out solo en la página Home
   logoutAgertu() {
     const url = this.router.url;
-    this.logOutAgertu = url === '/menu';  // El botón de Log Out solo aparece en /home
+    this.logOutAgertu = url === '/menu';  
   }
 
   ngOnInit() {

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { UserService } from '../services/user.service';  
 
 @Component({
   selector: 'app-home',
@@ -7,23 +8,20 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  email: string = '';
-  password: string = '';
-  errorMessage: string = ''; // Variable para el mensaje de error
+  public name: string = '';
+  public password: string = '';
+  errorMessage: string = ''; 
 
-  constructor(private navCtrl: NavController) {}
+  constructor(private router: Router, private userService: UserService) {}  // Inyectar el servicio
 
   login() {
     if (
-      (this.password === 'admin' && this.email === 'admin@gmail.com') ||
-      (this.password === 'user' && this.email === 'user@gmail.com')
+      (this.password === 'admin' && this.name === 'Jon Ibarra') ||
+      (this.password === 'user' && this.name === 'Oier Garcia')
     ) {
-      this.navCtrl.navigateForward('/menu');
-    } else if (
-      (this.password !== 'user' && this.email === 'user@gmail.com') ||
-      (this.password !== 'admin' && this.email === 'admin@gmail.com')
-    ) {
-      this.errorMessage = 'Contraseña incorrecta.';
+      // Guardar las credenciales usando el servicio
+      this.userService.setIzenaEtaPasahitza(this.name, this.password);
+      this.router.navigate(['/menu']); 
     } else {
       this.errorMessage = 'Correo o contraseña incorrectos.';
     }
