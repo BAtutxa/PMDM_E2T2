@@ -9,3 +9,10 @@
     <ion-icon name="refresh"></ion-icon>
   </ion-fab-button>
 </ion-fab>
+
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="logOutAgertu">
+  <ion-fab-button (click)="logout()">
+    <ion-icon name="log-out"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+

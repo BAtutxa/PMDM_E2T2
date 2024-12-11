@@ -10,6 +10,7 @@ import { Location } from '@angular/common';
 export class FooterComponent implements OnInit {
   agertuHome: boolean = true;
   agertuBueltatu: boolean = true;
+  logOutAgertu: boolean = false;
 
   constructor(private router: Router, private ubikazioa: Location) {}
 
@@ -33,7 +34,7 @@ export class FooterComponent implements OnInit {
   // Método para mostrar el botón de Volver cuando no estamos en la página Calendario
   bueltatubotoiaAgertu() {
     const url = this.router.url;
-    this.agertuBueltatu = url !== '/calendario' && url!== '/home';  // El botón de Volver aparece si no estamos en /calendario
+    this.agertuBueltatu = url !== '/calendario' && url !== '/home';  // El botón de Volver aparece si no estamos en /calendario
   }
 
   // Método para navegar hacia atrás
@@ -41,14 +42,26 @@ export class FooterComponent implements OnInit {
     this.ubikazioa.back();
   }
 
+  // Método de logout
+  logout() {
+    this.router.navigate(['/home']);  // Cambia a la ruta de login o lo que necesites
+  }
+
+  // Método para mostrar el botón de Log Out solo en la página Home
+  logoutAgertu() {
+    const url = this.router.url;
+    this.logOutAgertu = url === '/menu';  // El botón de Log Out solo aparece en /home
+  }
+
   ngOnInit() {
     this.homebotoiaAgertu();
-    this.bueltatubotoiaAgertu();  // Asegurarse de que el estado del botón de volver se actualiza al cargar
+    this.bueltatubotoiaAgertu();
+    this.logoutAgertu();  // Asegúrate de llamar a logoutAgertu al inicializar el componente
 
-    // Suscribirse a los cambios en las rutas
     this.router.events.subscribe(() => {
-      this.homebotoiaAgertu();  // Actualiza visibilidad del botón de home
-      this.bueltatubotoiaAgertu();  // Actualiza visibilidad del botón de volver
+      this.homebotoiaAgertu();
+      this.bueltatubotoiaAgertu();
+      this.logoutAgertu();  // Llamar siempre que cambie la ruta
     });
   }
 }
