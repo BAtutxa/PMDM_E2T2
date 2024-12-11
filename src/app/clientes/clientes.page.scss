@@ -1,0 +1,29 @@
+ion-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #f8f8f8;
+  padding: 10px 0;
+}
+
+ion-toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ion-button {
+  font-weight: bold;
+  margin: 0 5px; /* Espaciado entre botones */
+}
+
+ion-button[color='danger'] {
+  --background: #ff6347;
+  --color: white;
+}
+
+ion-button[color='warning'] {
+  --background: #ffcc00;
+  --color: white;
+}

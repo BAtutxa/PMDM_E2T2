@@ -1,18 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { IonicModule } from '@ionic/angular';
 
-import { GruposPageRoutingModule } from './grupos-routing.module';
-import { GruposPage } from './grupos.page';
+import { ServiciosPageRoutingModule } from './servicios-routing.module';
+
+import { ServiciosPage } from './servicios.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    GruposPageRoutingModule
+    ServiciosPageRoutingModule
   ],
-  declarations: [GruposPage]
+  declarations: [ServiciosPage]
 })
-export class GruposPageModule {}
+export class ServiciosPageModule {}
