@@ -50,9 +50,9 @@
       <ion-col size="2" class="ion-text-center" data-label="Tipo">{{ producto.tipo }}</ion-col>
       <ion-col size="2" class="ion-text-center" data-label="Marca">{{ producto.marca }}</ion-col>
       <ion-col size="2" class="ion-text-center" data-label="Stock">{{ producto.stock }}</ion-col>
-      <ion-col size="1" class="ion-text-center">
-        <ion-button (click)="editarMaterial(producto)">Editar</ion-button>
-      </ion-col>
+      <ion-col size="12" class="ion-text-center">
+        <ion-button class="movil button" (click)="editarMaterial(producto)">Editar</ion-button>
+      </ion-col>      
     </ion-row>
     
     <!-- Botones de Confirmar y Cancelar edición, solo aparecen cuando estamos editando -->

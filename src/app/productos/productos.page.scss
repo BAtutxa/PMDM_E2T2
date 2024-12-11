@@ -1,9 +1,3 @@
-ion-row {
-  border-bottom: 1px solid #ccc;
-  align-items: center; /* Centra verticalmente el contenido */
-}
-
-/* Estiliza las columnas */
 ion-col {
   padding: 10px;
   text-align: center; /* Centra el texto */
@@ -25,11 +19,6 @@ strong {
     font-size: 14px; /* Reduce el tamaño de los encabezados */
   }
 
-  ion-row {
-    display: flex;
-    flex-direction: column; /* Cambia a diseño en columna para móviles */
-  }
-
   ion-col {
     text-align: left; /* Alinea texto a la izquierda */
     display: block;
@@ -48,4 +37,46 @@ ion-title{
   display: flex;
   text-align: center;
   justify-content: center;
+}
+
+/* General: Aplica color negro a todo el texto de las columnas */
+ion-col {
+  color: black; /* Hace el texto negro */
+}
+
+/* Estilo adicional para los títulos (strong) */
+strong {
+  color: black; /* Asegura que los títulos sean negros */
+}
+
+/* Estilo para ion-title para mantener el texto negro */
+ion-title {
+  color: black; /* Hace que el texto del título sea negro */
+}
+
+/* Para elementos con texto de tipo data-label (usado en móviles) */
+ion-col[data-label]:before {
+  color: black; /* Asegura que las etiquetas también sean negras */
+}
+
+/* Si necesitas asegurar otros textos personalizados */
+ion-text-cente {
+  color: black !important; /* Añade !important para forzar este estilo si es necesario */
+}
+
+ion-row {
+  display: flex;
+  justify-content: center; /* Alinea los elementos horizontalmente */
+  align-items: center; /* Alinea los elementos verticalmente */
+}
+
+ion-col {
+  text-align: center; /* Centra el contenido dentro de cada columna */
+}
+
+ion-button.movil {
+  margin: auto; /* Asegura que el botón esté centrado */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
