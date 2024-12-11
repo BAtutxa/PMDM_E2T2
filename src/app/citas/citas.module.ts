@@ -21,4 +21,3 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [CitasPage],
 })
 export class CitasPageModule {}
-
