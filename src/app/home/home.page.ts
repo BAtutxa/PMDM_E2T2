@@ -17,7 +17,7 @@ export class HomePage {
   login() {
     if (
       (this.password === 'admin' && this.name === 'Jon Ibarra') ||
-      (this.password === 'user' && this.name === 'Oier Garcia')
+      (this.password === 'user' && this.name === 'Oier García')
     ) {
       // Guardar las credenciales usando el servicio
       this.userService.setIzenaEtaPasahitza(this.name, this.password);
