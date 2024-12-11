@@ -15,12 +15,12 @@
   <ion-list>
     <ion-item *ngFor="let pedido of pedidos" (click)="openFichaCliente(pedido)">
       <ion-label>
-        <h3>Día: hoy</h3>
-        <h2>ID: {{ pedido.id }}</h2>
-        <p><strong>Cliente:</strong> {{ pedido.nombreCliente }}</p>
-        <p><strong>Pedido:</strong> {{ pedido.servicio }}</p>
-        <p><strong>Hora:</strong> {{ pedido.hora }}</p>
-        <p><strong>Precio:</strong> {{ pedido.precio }}€</p>
+        <h3>Eguna: Gaur.</h3>
+        <h2>ID-a: {{ pedido.id }}</h2>
+        <p><strong>Bezeroa:</strong> {{ pedido.nombreCliente }}</p>
+        <p><strong>Enkargua:</strong> {{ pedido.servicio }}</p>
+        <p><strong>Ordua:</strong> {{ pedido.hora }}</p>
+        <p><strong>Prezioa:</strong> {{ pedido.precio }}€</p>
       </ion-label>
     </ion-item>
   </ion-list>
@@ -30,9 +30,9 @@
     <ng-template>
       <ion-header>
         <ion-toolbar>
-          <ion-title>Ficha del Cliente</ion-title>
+          <ion-title>Bezeroaren fitxa</ion-title>
           <ion-buttons slot="end">
-            <ion-button (click)="closeFicha()">Cerrar</ion-button>
+            <ion-button (click)="closeFicha()">Itxi</ion-button>
           </ion-buttons>
         </ion-toolbar>
       </ion-header>

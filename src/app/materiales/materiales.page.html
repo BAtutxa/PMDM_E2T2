@@ -7,18 +7,18 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Materiales</ion-title>
+      <ion-title size="large">Materialak</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-grid>
     <!-- Encabezados visibles solo en pantallas grandes -->
     <ion-row *ngIf="!mobilaDa">
-      <ion-col size="2" class="ion-text-center"><strong>ID</strong></ion-col>
-      <ion-col size="3" class="ion-text-center"><strong>Nombre</strong></ion-col>
-      <ion-col size="2" class="ion-text-center"><strong>Tipo</strong></ion-col>
-      <ion-col size="2" class="ion-text-center"><strong>Marca</strong></ion-col>
-      <ion-col size="2" class="ion-text-center"><strong>Stock</strong></ion-col>
+      <ion-col size="2" class="ion-text-center"><strong>ID-a</strong></ion-col>
+      <ion-col size="3" class="ion-text-center"><strong>Izena</strong></ion-col>
+      <ion-col size="2" class="ion-text-center"><strong>Mota</strong></ion-col>
+      <ion-col size="2" class="ion-text-center"><strong>Marka</strong></ion-col>
+      <ion-col size="2" class="ion-text-center"><strong>"Stock"-a</strong></ion-col>
     </ion-row>
 
     <!-- Fila de edición solo aparece en modo edición y en vista movil -->
@@ -40,9 +40,9 @@
       </ion-col>
       <!-- Botones en la misma columna que el botón "Editar" -->
       <ion-col size="12" class="ion-text-center botones-edicion">
-        <ion-button *ngIf="editandoMaterial" (click)="confirmarEdicion()">Confirmar</ion-button>
-        <ion-button *ngIf="editandoMaterial" color="danger" (click)="cancelarEdicion()">Cancelar</ion-button>
-        <ion-button *ngIf="!editandoMaterial" (click)="editarMaterial(materialSeleccionado)">Editar</ion-button>
+        <ion-button *ngIf="editandoMaterial" (click)="confirmarEdicion()">Baieztatu</ion-button>
+        <ion-button *ngIf="editandoMaterial" color="danger" (click)="cancelarEdicion()">Kantzelatu</ion-button>
+        <ion-button *ngIf="!editandoMaterial" (click)="editarMaterial(materialSeleccionado)">Editatu</ion-button>
       </ion-col>
     </ion-row>
 

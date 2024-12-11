@@ -13,11 +13,11 @@ export class StockPage implements OnInit {
   materialSeleccionado: any = {};  // Para almacenar el material seleccionado
 
   materiales = [
-    { id: 1, nombre: 'Shampoo', tipo: 'Higiene', marca: 'Edurne Senosiain', stock: 100 },
-    { id: 2, nombre: 'Acondicionador', tipo: 'Higiene', marca: 'Natura Siberica', stock: 50 },
-    { id: 3, nombre: 'Secador', tipo: 'Herramienta', marca: 'GHD Helios', stock: 20 },
-    { id: 4, nombre: 'Tijeras', tipo: 'Herramienta', marca: 'Filarmónica', stock: 30 },
-    { id: 5, nombre: 'Gel', tipo: 'Higiene', marca: 'Magno Classic', stock: 75 }
+    { id: 1, nombre: '"Shampoo"', tipo: 'Higienea', marca: 'Edurne Senosiain', stock: 100 },
+    { id: 2, nombre: 'Ile-egokitzailea', tipo: 'Higienea', marca: 'Natura Sibérica', stock: 50 },
+    { id: 3, nombre: 'Lehorgailua', tipo: 'Herreminta', marca: 'GHD Helios', stock: 20 },
+    { id: 4, nombre: 'Artaziak', tipo: 'Herreminta', marca: 'Filarmónica', stock: 30 },
+    { id: 5, nombre: 'Krema', tipo: 'Higienea', marca: 'Magno Classic', stock: 75 }
   ];
 
   constructor(private alertController: AlertController) {}
@@ -104,17 +104,17 @@ export class StockPage implements OnInit {
   
     // Pedimos el ID
     const idAlert = await this.alertController.create({
-      header: 'Añadir Producto',
+      header: 'Produktua gehitu',
       inputs: [
         {
           name: 'id',
           type: 'number',
-          placeholder: 'ID del producto',
+          placeholder: 'Produktuaren ID-a',
         },
       ],
       buttons: [
         {
-          text: 'Cancelar',
+          text: 'Kantzelatu',
           role: 'cancel',
           handler: () => {
             // Si se cancela, no añadimos el producto
@@ -122,7 +122,7 @@ export class StockPage implements OnInit {
           }
         },
         {
-          text: 'Confirmar',
+          text: 'Konfirmatu',
           handler: (data) => {
             if (data.id) {
               nuevoProducto.id = data.id; // Asignamos el ID al producto
@@ -139,17 +139,17 @@ export class StockPage implements OnInit {
   
     // Después pedimos el nombre
     const nombreAlert = await this.alertController.create({
-      header: 'Añadir Producto',
+      header: 'Produktua gehitu',
       inputs: [
         {
           name: 'nombre',
           type: 'text',
-          placeholder: 'Nombre del producto',
+          placeholder: 'Produktuaren izena',
         },
       ],
       buttons: [
         {
-          text: 'Cancelar',
+          text: 'Kantzelatu',
           role: 'cancel',
           handler: () => {
             // Si se cancela, no añadimos el producto
@@ -157,7 +157,7 @@ export class StockPage implements OnInit {
           }
         },
         {
-          text: 'Confirmar',
+          text: 'Konfirmatu',
           handler: (data) => {
             if (data.nombre) {
               nuevoProducto.nombre = data.nombre; // Asignamos el nombre
@@ -173,17 +173,17 @@ export class StockPage implements OnInit {
   
     // Pedimos el tipo
     const tipoAlert = await this.alertController.create({
-      header: 'Añadir Producto',
+      header: 'Produktua gehitu',
       inputs: [
         {
           name: 'tipo',
           type: 'text',
-          placeholder: 'Tipo del producto',
+          placeholder: 'Produktu mota',
         },
       ],
       buttons: [
         {
-          text: 'Cancelar',
+          text: 'Kantzelatu',
           role: 'cancel',
           handler: () => {
             // Si se cancela, no añadimos el producto
@@ -191,7 +191,7 @@ export class StockPage implements OnInit {
           }
         },
         {
-          text: 'Confirmar',
+          text: 'konfirmatu',
           handler: (data) => {
             if (data.tipo) {
               nuevoProducto.tipo = data.tipo; // Asignamos el tipo
@@ -207,17 +207,17 @@ export class StockPage implements OnInit {
   
     // Pedimos la marca
     const marcaAlert = await this.alertController.create({
-      header: 'Añadir Producto',
+      header: 'Produktua gehitu',
       inputs: [
         {
           name: 'marca',
           type: 'text',
-          placeholder: 'Marca del producto',
+          placeholder: 'Produktuaren marka',
         },
       ],
       buttons: [
         {
-          text: 'Cancelar',
+          text: 'Kantzelatu',
           role: 'cancel',
           handler: () => {
             // Si se cancela, no añadimos el producto
@@ -225,7 +225,7 @@ export class StockPage implements OnInit {
           }
         },
         {
-          text: 'Confirmar',
+          text: 'Konfirmatu',
           handler: (data) => {
             if (data.marca) {
               nuevoProducto.marca = data.marca; // Asignamos la marca
@@ -241,17 +241,17 @@ export class StockPage implements OnInit {
   
     // Finalmente pedimos el stock
     const stockAlert = await this.alertController.create({
-      header: 'Añadir Producto',
+      header: 'Produktua gehitu',
       inputs: [
         {
           name: 'stock',
           type: 'number',
-          placeholder: 'Stock del producto',
+          placeholder: 'Produktuaren "stock"-a',
         },
       ],
       buttons: [
         {
-          text: 'Cancelar',
+          text: 'Kantzelatu',
           role: 'cancel',
           handler: () => {
             // Si se cancela, no añadimos el producto
@@ -259,7 +259,7 @@ export class StockPage implements OnInit {
           }
         },
         {
-          text: 'Confirmar',
+          text: 'Konfirmatu',
           handler: (data) => {
             if (data.stock) {
               nuevoProducto.stock = data.stock; // Asignamos el stock

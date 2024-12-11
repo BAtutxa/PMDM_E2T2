@@ -1,24 +1,24 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title>Administración de Stock</ion-title>
+    <ion-title>"Stock"-aren administrazioa</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Administración de Stock</ion-title>
+      <ion-title size="large">"Stock"-aren administrazioa</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-grid>
     <!-- Encabezados visibles solo en pantallas grandes -->
     <ion-row *ngIf="!mobilaDa">
-      <ion-col size="2" class="ion-text-center"><strong>ID</strong></ion-col>
-      <ion-col size="3" class="ion-text-center"><strong>Nombre</strong></ion-col>
-      <ion-col size="2" class="ion-text-center"><strong>Tipo</strong></ion-col>
-      <ion-col size="2" class="ion-text-center"><strong>Marca</strong></ion-col>
-      <ion-col size="2" class="ion-text-center"><strong>Stock</strong></ion-col>
+      <ion-col size="2" class="ion-text-center"><strong>ID-a</strong></ion-col>
+      <ion-col size="3" class="ion-text-center"><strong>Izena</strong></ion-col>
+      <ion-col size="2" class="ion-text-center"><strong>Mota</strong></ion-col>
+      <ion-col size="2" class="ion-text-center"><strong>Marka</strong></ion-col>
+      <ion-col size="2" class="ion-text-center"><strong>"Stock"-a</strong></ion-col>
     </ion-row>
 
     <!-- Fila de edición solo aparece en modo edición y en vista movil -->
@@ -40,20 +40,20 @@
       </ion-col>
       <!-- Botones centrados -->
       <ion-col size="12" class="ion-text-center botones-edicion">
-        <ion-button *ngIf="editandoMaterial" (click)="confirmarEdicion()">Confirmar</ion-button>
-        <ion-button *ngIf="editandoMaterial" color="danger" (click)="cancelarEdicion()">Cancelar</ion-button>
-        <ion-button *ngIf="!editandoMaterial" (click)="editarMaterial(materialSeleccionado)">Editar</ion-button>
+        <ion-button *ngIf="editandoMaterial" (click)="confirmarEdicion()">Konfirmatu</ion-button>
+        <ion-button *ngIf="editandoMaterial" color="danger" (click)="cancelarEdicion()">Kantzelatu</ion-button>
+        <ion-button *ngIf="!editandoMaterial" (click)="editarMaterial(materialSeleccionado)">Editatu</ion-button>
       </ion-col>
     </ion-row>
     
 
     <ion-row *ngFor="let material of materiales">
       <ion-col *ngIf="mobilaDa" size="12">
-        <p><strong>ID:</strong> {{ material.id }}</p>
-        <p><strong>Nombre:</strong> {{ material.nombre }}</p>
-        <p><strong>Tipo:</strong> {{ material.tipo }}</p>
-        <p><strong>Marca:</strong> {{ material.marca }}</p>
-        <p><strong>Stock:</strong> {{ material.stock }}</p>
+        <p><strong>ID-a:</strong> {{ material.id }}</p>
+        <p><strong>Izena:</strong> {{ material.nombre }}</p>
+        <p><strong>Mota:</strong> {{ material.tipo }}</p>
+        <p><strong>Marka:</strong> {{ material.marca }}</p>
+        <p><strong>"Stock"-a:</strong> {{ material.stock }}</p>
       </ion-col>
       <ion-col *ngIf="!mobilaDa" size="2" class="ion-text-center">{{ material.id }}</ion-col>
       <ion-col *ngIf="!mobilaDa" size="3" class="ion-text-center">{{ material.nombre }}</ion-col>
@@ -62,9 +62,9 @@
       <ion-col *ngIf="!mobilaDa" size="2" class="ion-text-center">{{ material.stock }}</ion-col>
       <!-- Solo el botón de "Editar" cuando no estás editando -->
       <ion-col size="12" class="ion-text-center" *ngIf="!editandoMaterial">
-        <ion-button (click)="editarMaterial(material)">Editar</ion-button>
+        <ion-button (click)="editarMaterial(material)">Editatu</ion-button>
       </ion-col>
     </ion-row>
-    <ion-button (click)="produktuGehitu()">Añadir productos</ion-button>
+    <ion-button (click)="produktuGehitu()">Produktuak gehitu</ion-button>
   </ion-grid>
 </ion-content>

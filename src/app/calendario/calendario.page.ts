@@ -7,10 +7,10 @@ import { Component, OnInit,  } from '@angular/core';
 })
 export class CalendarioPage {
   meses = [
-    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre',
+    'Urtarrila', 'Otsaila', 'Martxoa', 'Apirila', 'Maiatza', 'Ekaina',
+    'Uztaila', 'Abuztua', 'Iraila', 'Urria', 'Azaroa', 'Abendua',
   ];
-  diasSemana = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
+  diasSemana = ['A', 'A', 'A', 'O', 'O', 'L', 'I'];
   
   anioActual: number = new Date().getFullYear();
   mesActual: number = new Date().getMonth();
@@ -21,7 +21,7 @@ export class CalendarioPage {
   citasSeleccionadas: string[] = [];
 
   grupos = ['Talde_1', 'Talde_2', 'Talde_3', 'Talde_4', 'Talde_5'];
-  citas = ['Alejandro, corte de pelo', 'Oier, corte de pelo', 'Raúl, tinte', 'Luca, peinado'];
+  citas = ['Alejandro, ile mozketa', 'Oier, ile mozketa', 'Raúl, tintaketa', 'Luca, orrazketa'];
 
   constructor() {
     this.generarCalendario();

@@ -23,7 +23,7 @@ export class GruposPage implements OnInit {
   ngOnInit() {
     this.grupos = [
       {
-        nombre: 'Grupo 1',
+        nombre: 'Talde 1',
         integrantes: [
           { id: 1, nombre: 'Juan' },
           { id: 2, nombre: 'Ana' },
@@ -32,7 +32,7 @@ export class GruposPage implements OnInit {
         ],
       },
       {
-        nombre: 'Grupo 2',
+        nombre: 'Talde 2',
         integrantes: [
           { id: 5, nombre: 'Carlos' },
           { id: 6, nombre: 'Marta' },
@@ -47,10 +47,10 @@ export class GruposPage implements OnInit {
     const nuevoGrupo: Grupo = {
       nombre: `Grupo ${this.grupos.length + 1}`,
       integrantes: [
-        { id: Date.now(), nombre: 'Integrante 1' },
-        { id: Date.now() + 1, nombre: 'Integrante 2' },
-        { id: Date.now() + 2, nombre: 'Integrante 3' },
-        { id: Date.now() + 3, nombre: 'Integrante 4' },
+        { id: Date.now(), nombre: 'Taldekide 1' },
+        { id: Date.now() + 1, nombre: 'Taldekide 2' },
+        { id: Date.now() + 2, nombre: 'Taldekide 3' },
+        { id: Date.now() + 3, nombre: 'Taldekide 4' },
       ],
     };
     this.grupos.push(nuevoGrupo);
@@ -58,12 +58,12 @@ export class GruposPage implements OnInit {
 
   editarGrupo(index: number) {
     const grupo = this.grupos[index];
-    const nuevoNombre = prompt('Nuevo nombre del grupo:', grupo.nombre);
+    const nuevoNombre = prompt('Talde berriaren izena:', grupo.nombre);
     if (nuevoNombre) {
       grupo.nombre = nuevoNombre;
       grupo.integrantes.forEach((integrante, i) => {
         const nuevoNombreIntegrante = prompt(
-          `Nuevo nombre para ${integrante.nombre}:`,
+          `Taldekide honentzako izen berria: ${integrante.nombre}:`,
           integrante.nombre
         );
         if (nuevoNombreIntegrante) {

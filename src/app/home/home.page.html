@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Iniciar Sesión</ion-title>
+    <ion-title>Saioa hasi</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -18,17 +18,17 @@
       <ion-col size="12" size-md="8" offset-md="2" size-lg="6" offset-lg="3">
         <ion-card class="login-card">
           <ion-card-header>
-            <ion-card-title>Bienvenido</ion-card-title>
+            <ion-card-title>Ongi etorri</ion-card-title>
           </ion-card-header>
           <ion-card-content>
             <form (submit)="login()">
               <ion-item color="primary">
-                <ion-label position="floating">Nombre y apellidos</ion-label>
+                <ion-label position="floating">Izen abizenak</ion-label>
                 <ion-input type="string" [(ngModel)]="name" name="name" required></ion-input>
               </ion-item>
 
               <ion-item color="primary">
-                <ion-label position="floating">Contraseña</ion-label>
+                <ion-label position="floating">Pasahitza</ion-label>
                 <ion-input type="password" [(ngModel)]="password" name="password" required></ion-input>
               </ion-item>
 
@@ -36,7 +36,7 @@
                 <p>{{ errorMessage }}</p>
               </ion-text>
 
-              <ion-button expand="block" type="submit" color="primary" class="submit-button">Iniciar Sesión</ion-button>
+              <ion-button expand="block" type="submit" color="primary" class="submit-button">Saioa hasi</ion-button>
             </form>
           </ion-card-content>
         </ion-card>

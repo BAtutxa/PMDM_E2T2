@@ -35,9 +35,9 @@ export class AdministracionPage implements OnInit {
 
   async denegarAcceso() {
     const alert = await this.alertController.create({
-      header: 'Acceso Denegado',
-      message: 'Solo los profesores pueden entrar.',
-      buttons: ['OK'],
+      header: 'Sarbide ukatua',
+      message: 'Soilik irakasleak sar daitezke.',
+      buttons: ['"OK."'],
     });
 
     await alert.present();
