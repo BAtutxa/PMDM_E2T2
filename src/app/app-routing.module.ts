@@ -35,12 +35,23 @@ const routes: Routes = [
   {
     path: 'materiales',
     loadChildren: () => import('./materiales/materiales.module').then( m => m.MaterialesPageModule)
-  },  {
+  },
+  {
     path: 'administracion',
     loadChildren: () => import('./administracion/administracion.module').then( m => m.AdministracionPageModule)
   },
-
-
+  {
+    path: 'stock',
+    loadChildren: () => import('./stock/stock.module').then( m => m.StockPageModule)
+  },
+  {
+    path: 'grupos',
+    loadChildren: () => import('./grupos/grupos.module').then( m => m.GruposPageModule)
+  },
+  {
+    path: 'informes',
+    loadChildren: () => import('./informes/informes.module').then( m => m.InformesPageModule)
+  },
 ];
 
 @NgModule({

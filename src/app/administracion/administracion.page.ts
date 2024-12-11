@@ -20,7 +20,6 @@ export class AdministracionPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Obtener las credenciales desde el servicio
     const datuak = this.userService.getIzenaEtaPasahitza();
     this.name = datuak.name;
     this.password = datuak.password;
@@ -30,7 +29,7 @@ export class AdministracionPage implements OnInit {
   async mirarPrivilegios() {
     if (this.name !== 'Jon Ibarra' || this.password !== 'admin') {
       await this.denegarAcceso();
-      this.router.navigate(['/menu']);  // Redirigir si no tiene acceso
+      this.router.navigate(['/menu']);
     }
   }
 

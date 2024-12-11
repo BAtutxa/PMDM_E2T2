@@ -100,15 +100,4 @@ export class MaterialesPage implements OnInit {
   cancelarEdicion() {
     this.editandoMaterial = false;  // Salimos del modo de edición sin guardar los cambios
   }
-
-  // Método para pedir stock
-  async pedirStock() {
-    const alert = await this.alertController.create({
-      header: 'Consulta enviada',
-      message: 'Su consulta sobre el stock ha sido enviada.',
-      buttons: ['OK']
-    });
-
-    await alert.present();
-  }
 }

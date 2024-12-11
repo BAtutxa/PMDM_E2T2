@@ -1,0 +1,46 @@
+/* General para columnas */
+ion-col {
+    padding: 8px;
+    text-align: left;
+    color: black;
+  }
+  
+  /* Datos en móviles */
+  ion-col[data-label]:before {
+    content: attr(data-label);
+    font-weight: bold;
+    margin-right: 5px;
+    display: inline-block;
+    color: black;
+  }
+  
+  /* Botón centrado */
+  ion-button {
+    display: block;
+    margin: 10px auto;
+  }
+  
+  /* Responsividad para pantallas móviles */
+  @media (max-width: 768px) {
+    ion-row {
+      flex-direction: column;
+    }
+    ion-col {
+      display: block;
+      width: 100%;
+      text-align: center; /* Alineación centrada en móvil */
+    }
+  }
+  
+  /* Ajustar el espacio de las columnas de edición */
+  @media (min-width: 769px) {
+    ion-row {
+      flex-direction: row;
+    }
+    ion-col {
+      display: inline-block;
+      width: auto;
+      max-width: 100%; /* Asegura que no se desborden */
+    }
+  }
+  
