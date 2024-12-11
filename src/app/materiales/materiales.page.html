@@ -7,11 +7,12 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Lista Materiales</ion-title>
+      <ion-title size="large">Materiales</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-grid>
+    <!-- Encabezados visibles solo en pantallas grandes -->
     <ion-row *ngIf="!mobilaDa">
       <ion-col size="2" class="ion-text-center"><strong>ID</strong></ion-col>
       <ion-col size="3" class="ion-text-center"><strong>Nombre</strong></ion-col>
@@ -19,50 +20,50 @@
       <ion-col size="2" class="ion-text-center"><strong>Marca</strong></ion-col>
       <ion-col size="2" class="ion-text-center"><strong>Stock</strong></ion-col>
     </ion-row>
-    
-    <!-- Fila de edición solo se muestra si estamos en modo edición -->
+
+    <!-- Fila de edición solo aparece en modo edición y en vista movil -->
     <ion-row *ngIf="editandoMaterial">
-      <ion-col size="2" class="ion-text-center">
+      <ion-col size="1" class="ion-text-center">
         <ion-input [(ngModel)]="materialSeleccionado.id" readonly></ion-input>
       </ion-col>
       <ion-col size="3" class="ion-text-center">
         <ion-input [(ngModel)]="materialSeleccionado.nombre"></ion-input>
-        <ion-button (click)="editarCampo('nombre')">Editar Nombre</ion-button>
       </ion-col>
       <ion-col size="2" class="ion-text-center">
         <ion-input [(ngModel)]="materialSeleccionado.tipo"></ion-input>
-        <ion-button (click)="editarCampo('tipo')">Editar Tipo</ion-button>
       </ion-col>
       <ion-col size="2" class="ion-text-center">
         <ion-input [(ngModel)]="materialSeleccionado.marca"></ion-input>
-        <ion-button (click)="editarCampo('marca')">Editar Marca</ion-button>
       </ion-col>
       <ion-col size="2" class="ion-text-center">
         <ion-input [(ngModel)]="materialSeleccionado.stock" readonly></ion-input>
       </ion-col>
+      <!-- Botones en la misma columna que el botón "Editar" -->
+      <ion-col size="12" class="ion-text-center botones-edicion">
+        <ion-button *ngIf="editandoMaterial" (click)="confirmarEdicion()">Confirmar</ion-button>
+        <ion-button *ngIf="editandoMaterial" color="danger" (click)="cancelarEdicion()">Cancelar</ion-button>
+        <ion-button *ngIf="!editandoMaterial" (click)="editarMaterial(materialSeleccionado)">Editar</ion-button>
+      </ion-col>
     </ion-row>
-    
-    <!-- Fila de materiales, con el botón de editar -->
+
+    <!-- Filas de productos -->
     <ion-row *ngFor="let material of materiales">
-      <ion-col size="2" class="ion-text-center" data-label="ID">{{ material.id }}</ion-col>
-      <ion-col size="3" class="ion-text-center" data-label="Nombre">{{ material.nombre }}</ion-col>
-      <ion-col size="2" class="ion-text-center" data-label="Tipo">{{ material.tipo }}</ion-col>
-      <ion-col size="2" class="ion-text-center" data-label="Marca">{{ material.marca }}</ion-col>
-      <ion-col size="2" class="ion-text-center" data-label="Stock">{{ material.stock }}</ion-col>
-      <ion-col size="1" class="ion-text-center">
+      <ion-col *ngIf="mobilaDa" size="12">
+        <p><strong>ID:</strong> {{ material.id }}</p>
+        <p><strong>Nombre:</strong> {{ material.nombre }}</p>
+        <p><strong>Tipo:</strong> {{ material.tipo }}</p>
+        <p><strong>Marca:</strong> {{ material.marca }}</p>
+        <p><strong>Stock:</strong> {{ material.stock }}</p>
+      </ion-col>
+      <ion-col *ngIf="!mobilaDa" size="2" class="ion-text-center">{{ material.id }}</ion-col>
+      <ion-col *ngIf="!mobilaDa" size="3" class="ion-text-center">{{ material.nombre }}</ion-col>
+      <ion-col *ngIf="!mobilaDa" size="2" class="ion-text-center">{{ material.tipo }}</ion-col>
+      <ion-col *ngIf="!mobilaDa" size="2" class="ion-text-center">{{ material.marca }}</ion-col>
+      <ion-col *ngIf="!mobilaDa" size="2" class="ion-text-center">{{ material.stock }}</ion-col>
+      <!-- Solo el botón de "Editar" cuando no estás editando -->
+      <ion-col size="12" class="ion-text-center" *ngIf="!editandoMaterial">
         <ion-button (click)="editarMaterial(material)">Editar</ion-button>
       </ion-col>
     </ion-row>
-    
-    <!-- Botones de Confirmar y Cancelar edición, solo aparecen cuando estamos editando -->
-    <ion-row *ngIf="editandoMaterial">
-      <ion-col size="6" class="ion-text-center">
-        <ion-button (click)="confirmarEdicion()">Confirmar Edición</ion-button>
-      </ion-col>
-      <ion-col size="6" class="ion-text-center">
-        <ion-button (click)="cancelarEdicion()">Cancelar</ion-button>
-      </ion-col>
-    </ion-row>
-    
   </ion-grid>
 </ion-content>

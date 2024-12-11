@@ -1,76 +1,32 @@
-ion-row {
-  border-bottom: 1px solid #ccc;
-  align-items: center; /* Centra verticalmente el contenido */
-}
-
-/* Estiliza las columnas */
+/* General para columnas */
 ion-col {
-  padding: 10px;
-  text-align: center; /* Centra el texto */
+  padding: 8px;
+  text-align: left;
+  color: black;
 }
 
-/* Títulos de columnas */
-strong {
-  font-size: 16px;
-}
-
-
-@media (max-width: 768px) {
-  ion-col {
-    font-size: 12px; 
-    padding: 5px;
-  }
-
-  strong {
-    font-size: 14px; /* Reduce el tamaño de los encabezados */
-  }
-
-  ion-row {
-    display: flex;
-    flex-direction: column; /* Cambia a diseño en columna para móviles */
-  }
-
-  ion-col {
-    text-align: left; /* Alinea texto a la izquierda */
-    display: block;
-  }
-
-  /* Añade encabezados visibles en cada celda */
-  ion-col[data-label]:before {
-    content: attr(data-label);
-    font-weight: bold;
-    margin-right: 5px;
-    display: inline-block;
-    color: #444;
-  }
-}
-ion-title{
-  display: flex;
-  text-align: center;
-  justify-content: center;
-}
-
-/* General: Aplica color negro a todo el texto de las columnas */
-ion-col {
-  color: black; /* Hace el texto negro */
-}
-
-/* Estilo adicional para los títulos (strong) */
-strong {
-  color: black; /* Asegura que los títulos sean negros */
-}
-
-/* Estilo para ion-title para mantener el texto negro */
-ion-title {
-  color: black; /* Hace que el texto del título sea negro */
-}
-
-/* Para elementos con texto de tipo data-label (usado en móviles) */
+/* Datos en móviles */
 ion-col[data-label]:before {
-  color: black; /* Asegura que las etiquetas también sean negras */
+  content: attr(data-label);
+  font-weight: bold;
+  margin-right: 5px;
+  display: inline-block;
+  color: black;
 }
 
-/* Si necesitas asegurar otros textos personalizados */
-ion-text-cente {
-  color: black !important; /* Añade !important para forzar este estilo si es necesario */
+/* Botón centrado */
+ion-button {
+  display: block;
+  margin: 10px auto;
+}
+
+/* Responsividad para pantallas móviles */
+@media (max-width: 768px) {
+  ion-row {
+    flex-direction: column;
+  }
+  ion-col {
+    display: block;
+    width: 100;
+  }
 }
