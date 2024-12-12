@@ -335,7 +335,6 @@ export class ClientesPage implements OnInit {
     return; // Retorna un valor explícito al final
   }
   
-  
   async editarDatosCliente(cliente: any) {
     const alert = await this.alertController.create({
       header: 'Editar Datos del Cliente',
@@ -345,6 +344,7 @@ export class ClientesPage implements OnInit {
           type: 'text',
           placeholder: 'Nombre del cliente',
           value: cliente.nombreCliente || '',
+          id: 'nombreCliente', // Agrega un id para poder referenciar el campo
         },
         {
           name: 'servicio',
@@ -404,8 +404,16 @@ export class ClientesPage implements OnInit {
       ],
     });
   
+    // Presentar la alerta
     await alert.present();
-    return; // Retorna un valor explícito al final
+  
+    // Dar foco al campo 'nombreCliente' cuando se muestra el alert
+    setTimeout(() => {
+      const nombreInput = document.getElementById('nombreCliente') as HTMLInputElement;
+      if (nombreInput) {
+        nombreInput.focus();
+      }
+    }, 100); // Dar un pequeño retraso para asegurarse de que el DOM de la alerta esté completamente cargado
   }
   
   
