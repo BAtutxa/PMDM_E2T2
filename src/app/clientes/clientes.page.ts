@@ -10,12 +10,12 @@ export class ClientesPage implements OnInit {
 
   // Lista de pedidos con datos de ejemplo
   pedidos = [
-    { id: 1, nombreCliente: 'Juan Pérez', servicio: 'Ile orrazketa.', hora: '10:00', precio: 20.5, comentarios: 'Ile orrazketa.' },
+    { id: 1, nombreCliente: 'Juan Pérez', servicio: 'Orrazketa', hora: '10:00', precio: 20.5, comentarios: 'Orrazketa.' },
     { id: 2, nombreCliente: 'María López', servicio: 'Mozketa', hora: '10:00', precio: 15.0, comentarios: 'Mozketa.' },
-    { id: 3, nombreCliente: 'Carlos García', servicio: 'Ile orrazketa', hora: '10:00', precio: 30.0, comentarios: 'Ile orrazketa.' },
-    { id: 4, nombreCliente: 'Alejandro Rivas', servicio: 'Ile orrazketa.', hora: '10:00', precio: 20.5, comentarios: 'Ile orrazketa.' },
+    { id: 3, nombreCliente: 'Carlos García', servicio: 'Orrazketa', hora: '10:00', precio: 30.0, comentarios: 'Orrazketa.' },
+    { id: 4, nombreCliente: 'Alejandro Rivas', servicio: 'Orrazketa', hora: '10:00', precio: 20.5, comentarios: 'Orrazketa.' },
     { id: 5, nombreCliente: 'María Pérez', servicio: 'Mozketa', hora: '10:00', precio: 15.0, comentarios: 'Mozketa.' },
-    { id: 6, nombreCliente: 'Carlos López', servicio: 'Ile orrazketa.', hora: '10:00', precio: 30.0, comentarios: 'Ile orrazketa.' }
+    { id: 6, nombreCliente: 'Carlos López', servicio: 'Orrazketa', hora: '10:00', precio: 30.0, comentarios: 'Orrazketa.' }
   ];
 
   // Ficha del cliente actual
@@ -46,22 +46,22 @@ export class ClientesPage implements OnInit {
 
     // Pedimos el ID
     const idAlert = await this.alertController.create({
-      header: 'Añadir cliente',
+      header: 'Bezero berria gehitu',
       inputs: [
         {
           name: 'id',
           type: 'number',
-          placeholder: 'ID del cliente',
+          placeholder: 'Bezeroaren ID-a',
         },
       ],
       buttons: [
         {
-          text: 'Cancelar',
+          text: 'Kantzelatu',
           role: 'cancel',
           handler: () => {}
         },
         {
-          text: 'Siguiente',
+          text: 'Hurrengoa',
           handler: (data) => {
             if (data.id) {
               nuevoCliente.id = data.id; // Asignamos el ID al cliente
@@ -77,22 +77,22 @@ export class ClientesPage implements OnInit {
 
     // Pedimos el nombre del cliente
     const nombreAlert = await this.alertController.create({
-      header: 'Añadir cliente',
+      header: 'Bezero berria gehitu',
       inputs: [
         {
           name: 'nombreCliente',
           type: 'text',
-          placeholder: 'Nombre del cliente',
+          placeholder: 'Bezeroaren izena',
         },
       ],
       buttons: [
         {
-          text: 'Cancelar',
+          text: 'Kantzelatu',
           role: 'cancel',
           handler: () => {}
         },
         {
-          text: 'Siguiente',
+          text: 'Hurrengoa',
           handler: (data) => {
             if (data.nombreCliente) {
               nuevoCliente.nombreCliente = data.nombreCliente; // Asignamos el nombre del cliente
@@ -108,22 +108,22 @@ export class ClientesPage implements OnInit {
 
     // Pedimos el servicio
     const servicioAlert = await this.alertController.create({
-      header: 'Añadir cliente',
+      header: 'Bezero berria gehitu',
       inputs: [
         {
           name: 'servicio',
           type: 'text',
-          placeholder: 'Servicio solicitado',
+          placeholder: 'Zerbitzua',
         },
       ],
       buttons: [
         {
-          text: 'Cancelar',
+          text: 'Kantzelatu',
           role: 'cancel',
           handler: () => {}
         },
         {
-          text: 'Siguiente',
+          text: 'Hurrengoa',
           handler: (data) => {
             if (data.servicio) {
               nuevoCliente.servicio = data.servicio; // Asignamos el servicio
@@ -139,22 +139,22 @@ export class ClientesPage implements OnInit {
 
     // Pedimos la hora
     const horaAlert = await this.alertController.create({
-      header: 'Añadir cliente',
+      header: 'Bezero berria gehitu',
       inputs: [
         {
           name: 'hora',
           type: 'time',
-          placeholder: 'Hora del servicio',
+          placeholder: 'Ordua',
         },
       ],
       buttons: [
         {
-          text: 'Cancelar',
+          text: 'Kantzelatu',
           role: 'cancel',
           handler: () => {}
         },
         {
-          text: 'Siguiente',
+          text: 'Hurrengoa',
           handler: (data) => {
             if (data.hora) {
               nuevoCliente.hora = data.hora; // Asignamos la hora
@@ -170,22 +170,22 @@ export class ClientesPage implements OnInit {
 
     // Pedimos el precio
     const precioAlert = await this.alertController.create({
-      header: 'Añadir cliente',
+      header: 'Bezero berria gehitu',
       inputs: [
         {
           name: 'precio',
           type: 'number',
-          placeholder: 'Precio del servicio',
+          placeholder: 'Zerbitzuaren prezioa',
         },
       ],
       buttons: [
         {
-          text: 'Cancelar',
+          text: 'Kantzelatu',
           role: 'cancel',
           handler: () => {}
         },
         {
-          text: 'Siguiente',
+          text: 'Hurrengoa',
           handler: (data) => {
             if (data.precio) {
               nuevoCliente.precio = data.precio; // Asignamos el precio
@@ -201,22 +201,22 @@ export class ClientesPage implements OnInit {
 
     // Pedimos los comentarios
     const comentariosAlert = await this.alertController.create({
-      header: 'Añadir cliente',
+      header: 'Bezero berria gehitu',
       inputs: [
         {
           name: 'comentarios',
           type: 'text',
-          placeholder: 'Comentarios adicionales',
+          placeholder: 'Iruzkina',
         },
       ],
       buttons: [
         {
-          text: 'Cancelar',
+          text: 'Kantzelatu',
           role: 'cancel',
           handler: () => {}
         },
         {
-          text: 'Finalizar',
+          text: 'Baieztatu',
           handler: (data) => {
             if (data.comentarios) {
               nuevoCliente.comentarios = data.comentarios; // Asignamos los comentarios
@@ -295,17 +295,17 @@ export class ClientesPage implements OnInit {
 
   async editarCliente() {
     const idAlert = await this.alertController.create({
-      header: 'Editar Cliente',
+      header: 'Bezeroa editatu',
       inputs: [
         {
           name: 'id',
           type: 'number',
-          placeholder: 'ID del cliente',
+          placeholder: 'Bezeroaren ID-a',
         },
       ],
       buttons: [
         {
-          text: 'Cancelar',
+          text: 'Kantzelatu',
           role: 'cancel',
           handler: () => {
             console.log('Edición cancelada.');
@@ -313,7 +313,7 @@ export class ClientesPage implements OnInit {
           },
         },
         {
-          text: 'Siguiente',
+          text: 'Hurrengoa',
           handler: (data) => {
             if (!data.id) {
               console.error('Debe ingresar un ID válido.');
@@ -321,7 +321,7 @@ export class ClientesPage implements OnInit {
             }
             const cliente = this.pedidos.find((pedido) => pedido.id === parseInt(data.id, 10));
             if (!cliente) {
-              this.mostrarMensaje('Error', `No se encontró ningún cliente con ID: ${data.id}`);
+              this.mostrarMensaje('Errorea', `Ez da existitzen ID hau duen bezerorik:  ${data.id}`);
               return false; // Retorna un valor explícito
             }
             this.editarDatosCliente(cliente); // Asegúrate de manejar lo que esta función retorna
@@ -337,46 +337,46 @@ export class ClientesPage implements OnInit {
   
   async editarDatosCliente(cliente: any) {
     const alert = await this.alertController.create({
-      header: 'Editar Datos del Cliente',
+      header: 'Bezeroaren datuak editatu',
       inputs: [
         {
           name: 'nombreCliente',
           type: 'text',
-          placeholder: 'Nombre del cliente',
+          placeholder: 'Bezeroaren izena',
           value: cliente.nombreCliente || '',
           id: 'nombreCliente', // Agrega un id para poder referenciar el campo
         },
         {
           name: 'servicio',
           type: 'text',
-          placeholder: 'Servicio solicitado',
+          placeholder: 'Zerbiztua',
           value: cliente.servicio || '',
         },
         {
           name: 'hora',
           type: 'time',
-          placeholder: 'Hora del servicio',
+          placeholder: 'Ordua',
           value: cliente.hora || '',
         },
         {
           name: 'precio',
           type: 'number',
-          placeholder: 'Precio del servicio',
+          placeholder: 'Prezioa',
           value: cliente.precio || '',
         },
         {
           name: 'comentarios',
           type: 'text',
-          placeholder: 'Comentarios adicionales',
+          placeholder: 'Iruzkinak',
           value: cliente.comentarios || '',
         },
       ],
       buttons: [
         {
-          text: 'Cancelar',
+          text: 'Kantzelatu',
           role: 'cancel',
           handler: () => {
-            console.log('Edición cancelada.');
+            console.log('Edizioa kantzelatuta.');
             return false; // Retorna un valor explícito
           },
         },
@@ -385,7 +385,7 @@ export class ClientesPage implements OnInit {
           handler: (data) => {
             if (!data.nombreCliente || !data.servicio || !data.hora || !data.precio || !data.comentarios) {
               console.error('Todos los campos deben estar completos.');
-              this.mostrarMensaje('Error', 'Todos los campos son obligatorios.');
+              this.mostrarMensaje('Errorea', 'Eremu guztiak nahitaezkoak dira.');
               return false; // Retorna un valor explícito
             }
   
@@ -397,7 +397,7 @@ export class ClientesPage implements OnInit {
             cliente.comentarios = data.comentarios;
   
             console.log(`Cliente con ID ${cliente.id} actualizado:`, cliente);
-            this.mostrarMensaje('Éxito', 'Los datos del cliente se actualizaron correctamente.');
+            this.mostrarMensaje('Zorionak!', 'Bezeroaren informazioa eguneratu da.');
             return true; // Retorna un valor explícito
           },
         },
@@ -422,7 +422,7 @@ export class ClientesPage implements OnInit {
     const alert = await this.alertController.create({
       header: titulo,
       message: mensaje,
-      buttons: ['OK'],
+      buttons: ['"OK"'],
     });
   
     await alert.present();
