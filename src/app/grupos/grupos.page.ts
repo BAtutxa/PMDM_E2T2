@@ -45,7 +45,7 @@ export class GruposPage implements OnInit {
 
   crearGrupo() {
     const nuevoGrupo: Grupo = {
-      nombre: `Grupo ${this.grupos.length + 1}`,
+      nombre: `Talde ${this.grupos.length + 1}`,
       integrantes: [
         { id: Date.now(), nombre: 'Taldekide 1' },
         { id: Date.now() + 1, nombre: 'Taldekide 2' },
