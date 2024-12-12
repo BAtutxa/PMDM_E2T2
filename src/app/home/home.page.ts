@@ -17,13 +17,13 @@ export class HomePage {
   login() {
     if (
       (this.password === 'admin' && this.name === 'Jon Ibarra') ||
-      (this.password === 'user' && this.name === 'Oier García')
+      (this.password === 'user' && this.name === 'Oier Garcia')
     ) {
       // Guardar las credenciales usando el servicio
       this.userService.setIzenaEtaPasahitza(this.name, this.password);
       this.router.navigate(['/menu']); 
     } else {
-      this.errorMessage = 'Correo o contraseña incorrectos.';
+      this.errorMessage = 'Posta edo pasahitz okerra.';
     }
   }
 }
