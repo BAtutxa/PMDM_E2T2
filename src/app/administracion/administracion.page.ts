@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { UserService } from '../services/user.service';  // Importar el servicio
+import { UserService } from '../services/user.service';  
 
 @Component({
   selector: 'app-administracion',
@@ -16,7 +16,7 @@ export class AdministracionPage implements OnInit {
   constructor(
     private alertController: AlertController,
     private router: Router,
-    private userService: UserService  // Inyectar el servicio
+    private userService: UserService  
   ) {}
 
   ngOnInit() {
@@ -27,31 +27,26 @@ export class AdministracionPage implements OnInit {
   }
 
   async mirarPrivilegios() {
-    // Hacemos la solicitud para obtener la información del usuario
     this.userService.getUserByUsername(this.name).subscribe(
       async (response) => {
-        // Verificamos el valor de 'rola'
         if (response && response.rola === 'IR') {
-          // El usuario puede acceder, no hacemos nada
         } else {
-          // El usuario no puede acceder, denegamos el acceso
           await this.denegarAcceso();
-          this.router.navigate(['/menu']);  // Redirigir al menú
+          this.router.navigate(['/menu']);  
         }
       },
       async (error) => {
         console.error('Error al obtener los datos del usuario', error);
         await this.denegarAcceso();
-        this.router.navigate(['/menu']);  // Redirigir al menú en caso de error
+        this.router.navigate(['/menu']);  
       }
     );
   }
 
-  // Función para mostrar la alerta de "Acceso Denegado"
   async denegarAcceso() {
     const alert = await this.alertController.create({
-      header: 'Acceso Denegado',
-      message: 'Solo los profesores con privilegios adecuados pueden entrar.',
+      header: 'Sarbidea ukatuta',
+      message: 'Pribilegio egokiak dituzten irakasleak bakarrik sar daitezke.',
       buttons: ['OK'],
     });
 
