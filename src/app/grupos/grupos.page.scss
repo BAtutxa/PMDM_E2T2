@@ -1,0 +1,50 @@
+ion-content {
+  --background: #f2f2f2;
+  padding: 16px;
+}
+
+ion-item {
+  --background: #ffffff;
+  margin: 10px 0;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+ion-label h2 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+ion-label p {
+  color: #666;
+  font-size: 14px;
+  margin: 4px 0;
+}
+
+ion-chip {
+  margin-right: 5px;
+  font-size: 14px;
+}
+
+ion-button {
+  margin: 5px;
+}
+
+
+ion-fab-button ion-icon {
+  font-size: 24px;
+}
+
+ion-header {
+  background-color: #fff;
+  color: #000;
+}
+
+ion-header ion-toolbar {
+  border-bottom: none;
+}
+
+ion-toolbar {
+  --background: #fff;
+}

@@ -11,11 +11,11 @@ export class ProductosPage implements OnInit {
   productoSeleccionado: any = {}; 
 
   productos = [
-    { id: 1, nombre: 'Shampoo', tipo: 'Higiene', marca: 'Edurne Senosiain', stock: 100 },
-    { id: 2, nombre: 'Acondicionador', tipo: 'Higiene', marca: 'Natura Siberica', stock: 50 },
-    { id: 3, nombre: 'Secador', tipo: 'Herramienta', marca: 'GHD Helios', stock: 20 },
-    { id: 4, nombre: 'Tijeras', tipo: 'Herramienta', marca: 'Filarmónica', stock: 30 },
-    { id: 5, nombre: 'Gel', tipo: 'Higiene', marca: 'Magno Classic', stock: 75 }
+    { id: 1, nombre: 'Shampoo', tipo: 'Higienea', marca: 'Edurne Senosiain', stock: 100 },
+    { id: 2, nombre: 'Ile-egokitzailea', tipo: 'Higienea', marca: 'Natura Sibérica', stock: 50 },
+    { id: 3, nombre: 'Lehorgailua', tipo: 'Herreminta', marca: 'GHD Helios', stock: 20 },
+    { id: 4, nombre: 'Artaziak', tipo: 'Herreminta', marca: 'Filarmónica', stock: 30 },
+    { id: 5, nombre: 'Krema', tipo: 'Higienea', marca: 'Magno Classic', stock: 75 }
   ];
 
   constructor(private alertController: AlertController) {}
@@ -43,21 +43,21 @@ export class ProductosPage implements OnInit {
   // Método para solicitar la edición de un campo
   async editarCampo(campo: string) {
     const alert = await this.alertController.create({
-      header: `Editar ${campo}`,
+      header: `Aldatu ${campo}`,
       inputs: [
         {
-          name: 'nuevoValor',
+          name: 'Balore berria',
           type: 'text',
-          placeholder: `Nuevo valor para ${campo}`,
+          placeholder: `Balore berri bat eremu honetan: ${campo}`,
         },
       ],
       buttons: [
         {
-          text: 'Cancelar',
+          text: 'Kantzelatu',
           role: 'cancel',
         },
         {
-          text: 'Confirmar',
+          text: 'Konfirmatu',
           handler: (data) => {
             if (data.nuevoValor) {
               this.productoSeleccionado[campo] = data.nuevoValor;
@@ -73,15 +73,15 @@ export class ProductosPage implements OnInit {
   // Método para confirmar la edición
   async confirmarEdicion() {
     const alert = await this.alertController.create({
-      header: '¿Estás seguro?',
-      message: '¿Quieres guardar los cambios realizados?',
+      header: '¿Seguru zaude?',
+      message: 'Aldatuko dira baloreak',
       buttons: [
         {
-          text: 'Cancelar',
+          text: 'Kantzelatu',
           role: 'cancel',
         },
         {
-          text: 'Confirmar',
+          text: 'Konfirmatu',
           handler: () => {
             // Guardamos los cambios realizados
             const index = this.productos.findIndex(producto => producto.id === this.productoSeleccionado.id);
@@ -100,16 +100,5 @@ export class ProductosPage implements OnInit {
   // Método para cancelar la edición
   cancelarEdicion() {
     this.editandoProducto = false;  // Salimos del modo de edición sin guardar los cambios
-  }
-
-  // Método para pedir stock
-  async pedirStock() {
-    const alert = await this.alertController.create({
-      header: 'Consulta enviada',
-      message: 'Su consulta sobre el stock ha sido enviada.',
-      buttons: ['OK']
-    });
-
-    await alert.present();
   }
 }

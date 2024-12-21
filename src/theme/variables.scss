@@ -16,3 +16,13 @@
     overflow-x: auto; /* Permite scroll horizontal */
     white-space: nowrap; /* Mantiene las filas en línea */
   }
+
+  .backdrop, .alert-backdrop {
+    backdrop-filter: none !important;
+    opacity: 1 !important;
+  }
+  .alert input:focus {
+    backdrop-filter: none !important;
+  }
+  
+  

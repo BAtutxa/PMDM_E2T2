@@ -9,29 +9,29 @@
     <h2>DATOS</h2>
     <form [formGroup]="citaForm" (ngSubmit)="confirmarCita()">
       <ion-item>
-        <ion-label position="floating">Nombre</ion-label>
+        <ion-label position="floating">Izena</ion-label>
         <ion-input formControlName="nombre"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Apellidos</ion-label>
+        <ion-label position="floating">Abizenak</ion-label>
         <ion-input formControlName="apellidos"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Teléfono</ion-label>
+        <ion-label position="floating">Telefonoa</ion-label>
         <ion-input formControlName="telefono" type="tel"></ion-input>
       </ion-item>      
       
       <ion-item>
-        <ion-label position="floating">Servicio</ion-label>
+        <ion-label position="floating">Zerbiztua</ion-label>
         <ion-select formControlName="servicio">
-          <ion-select-option value="corte">Corte</ion-select-option>
-          <ion-select-option value="tinte">Tinte</ion-select-option>
-          <ion-select-option value="peinado">Peinado</ion-select-option>
+          <ion-select-option value="corte">Mozketa</ion-select-option>
+          <ion-select-option value="tinte">Tindagaia</ion-select-option>
+          <ion-select-option value="peinado">Orrazketa</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label position="floating">Hora</ion-label>
-        <ion-input formControlName="hora" type="text" placeholder="Ingresa la hora (ej: 14:30)"></ion-input>
+        <ion-label position="floating">Ordua</ion-label>
+        <ion-input formControlName="hora" type="text" placeholder="Ordua sartu (adb: 14:30)"></ion-input>
       </ion-item>
       
       <div class="button-container">
