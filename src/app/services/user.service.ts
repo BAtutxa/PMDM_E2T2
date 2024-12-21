@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
+//interface tiene que tener los mismos nombres que los atributos de la tabla
 interface User {
   username: string;
   pasahitza: string;
@@ -13,12 +14,12 @@ interface User {
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl: string = 'http://localhost:8080/';  // API-REST
+  private apiUrl: string = 'http://localhost:8080/'; 
 
   constructor(private http: HttpClient) { }
 
   getUserByUsername(username: string): Observable<User | null> {
-    return this.http.get<User>(`${this.apiUrl}erabiltzaileak/${username}`).pipe( //url forma
+    return this.http.get<User>(`${this.apiUrl}erabiltzaileak/${username}`).pipe( 
       catchError(error => {
         console.error('Error al obtener el usuario:', error);
         return of(null);  
@@ -26,14 +27,13 @@ export class UserService {
     );
   }
   login(username: string, password: string): Observable<boolean> {
-    console.log('Login iniciado para el usuario:', username); // Verifica que el nombre de usuario se pasa correctamente
+    console.log('Login iniciado para el usuario:', username); 
   
     // Llama a la API para obtener los datos del usuario
     return this.getUserByUsername(username).pipe(
       map((user: User | null) => {
-        console.log('Datos del usuario obtenidos de la API:', user); // Registra los datos del usuario para confirmar si se obtienen correctamente
-  
-        // Si no se encuentra el usuario o la contraseña, retorna false y registra el error
+        console.log('Datos del usuario obtenidos de la API:', user); 
+
         if (!user || !user.pasahitza) {
           console.error('No se encontró el usuario o la contraseña');
           return false;
