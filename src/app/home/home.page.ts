@@ -18,32 +18,19 @@ export class HomePage {
   ) {}
 
   login() {
-<<<<<<< HEAD
     this.userService.login(this.name, this.password).subscribe(
       (isAuthenticated) => {
         console.log('Autenticación:', isAuthenticated);
         if (isAuthenticated) {
           this.router.navigate(['/menu']);  // Si la autenticación es exitosa, redirigir
         } else {
-          this.errorMessage = 'Correo o contraseña incorrectos.';  // Mostrar error si el login falla
+          this.errorMessage = 'Ez dago ondo ondo zure pasahitza edo erabiltzaile.';  // Mostrar error si el login falla
         }
       },
       (error) => {
         console.error('Error en el login:', error);
-        this.errorMessage = 'Hubo un error al intentar autenticarte.';  // Manejo de errores
+        this.errorMessage = 'Errore bat egon da autentifikazioan.';  // Manejo de errores
       }
     );
-=======
-    if (
-      (this.password === 'admin' && this.name === 'Jon Ibarra') ||
-      (this.password === 'user' && this.name === 'Oier Garcia')
-    ) {
-      // Guardar las credenciales usando el servicio
-      this.userService.setIzenaEtaPasahitza(this.name, this.password);
-      this.router.navigate(['/menu']); 
-    } else {
-      this.errorMessage = 'Posta edo pasahitz okerra.';
-    }
->>>>>>> oier_en_casa
   }
 }
