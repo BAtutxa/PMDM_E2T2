@@ -27,16 +27,31 @@ export class AdministracionPage implements OnInit {
   }
 
   async mirarPrivilegios() {
-    if (this.name !== 'Jon Ibarra' || this.password !== 'admin') {
-      await this.denegarAcceso();
-      this.router.navigate(['/menu']);
-    }
+    // Hacemos la solicitud para obtener la información del usuario
+    this.userService.getUserByUsername(this.name).subscribe(
+      async (response) => {
+        // Verificamos el valor de 'rola'
+        if (response && response.rola === 'IR') {
+          // El usuario puede acceder, no hacemos nada
+        } else {
+          // El usuario no puede acceder, denegamos el acceso
+          await this.denegarAcceso();
+          this.router.navigate(['/menu']);  // Redirigir al menú
+        }
+      },
+      async (error) => {
+        console.error('Error al obtener los datos del usuario', error);
+        await this.denegarAcceso();
+        this.router.navigate(['/menu']);  // Redirigir al menú en caso de error
+      }
+    );
   }
 
+  // Función para mostrar la alerta de "Acceso Denegado"
   async denegarAcceso() {
     const alert = await this.alertController.create({
       header: 'Acceso Denegado',
-      message: 'Solo los profesores pueden entrar.',
+      message: 'Solo los profesores con privilegios adecuados pueden entrar.',
       buttons: ['OK'],
     });
 
