@@ -1,64 +1,61 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title>Produktuak</ion-title>
+    <ion-title>Productos</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
   <ion-grid>
-    <!-- Encabezados visibles solo en pantallas grandes -->
-    <ion-row *ngIf="!mobilaDa">
-      <ion-col size="2" class="ion-text-center"><strong>ID-a</strong></ion-col>
-      <ion-col size="3" class="ion-text-center"><strong>Izena</strong></ion-col>
-      <ion-col size="2" class="ion-text-center"><strong>Mota</strong></ion-col>
-      <ion-col size="2" class="ion-text-center"><strong>Marka</strong></ion-col>
-      <ion-col size="2" class="ion-text-center"><strong>"Stock"-a</strong></ion-col>
+    <!-- Fila de edición visible solo en modo edición y en vista móvil -->
+    <ion-row *ngIf="editandoProducto">
+      <ion-col size="12">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Editar Producto</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-item>
+              <ion-label position="floating">ID</ion-label>
+              <ion-input [(ngModel)]="productoSeleccionado.id" readonly></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Nombre</ion-label>
+              <ion-input [(ngModel)]="productoSeleccionado.izena"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Marca</ion-label>
+              <ion-input [(ngModel)]="productoSeleccionado.marka"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">ID Categoría</ion-label>
+              <ion-input [(ngModel)]="productoSeleccionado.id_kategoria"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Stock</ion-label>
+              <ion-input [(ngModel)]="productoSeleccionado.stock" readonly></ion-input>
+            </ion-item>
+            <ion-button expand="full" (click)="confirmarEdicion()">Confirmar</ion-button>
+            <ion-button expand="full" color="danger" (click)="cancelarEdicion()">Cancelar</ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
     </ion-row>
 
-  <!-- Fila de edición solo aparece en modo edición y en vista movil -->
-<ion-row *ngIf="editandoProducto">
-  <ion-col size="2" class="ion-text-center">
-    <ion-input [(ngModel)]="productoSeleccionado.id" readonly></ion-input>
-  </ion-col>
-  <ion-col size="3" class="ion-text-center">
-    <ion-input [(ngModel)]="productoSeleccionado.nombre"></ion-input>
-  </ion-col>
-  <ion-col size="2" class="ion-text-center">
-    <ion-input [(ngModel)]="productoSeleccionado.tipo"></ion-input>
-  </ion-col>
-  <ion-col size="2" class="ion-text-center">
-    <ion-input [(ngModel)]="productoSeleccionado.marca"></ion-input>
-  </ion-col>
-  <ion-col size="2" class="ion-text-center">
-    <ion-input [(ngModel)]="productoSeleccionado.stock" readonly></ion-input>
-  </ion-col>
-  <!-- Botones en la misma columna que el botón "Editar" -->
-  <ion-col size="12" class="ion-text-center botones-edicion">
-    <ion-button *ngIf="editandoProducto" (click)="confirmarEdicion()">Konfirmatu</ion-button>
-    <ion-button *ngIf="editandoProducto" color="danger" (click)="cancelarEdicion()">Kantzelatu</ion-button>
-    <ion-button *ngIf="!editandoProducto" (click)="editarMaterial(productoSeleccionado)">Editatu</ion-button>
-  </ion-col>
-</ion-row>
-
-
-    <!-- Filas de productos -->
+    <!-- Fila de productos -->
     <ion-row *ngFor="let producto of productos">
-      <ion-col *ngIf="mobilaDa" size="12">
-        <p><strong>ID:</strong> {{ producto.id }}</p>
-        <p><strong>Nombre:</strong> {{ producto.nombre }}</p>
-        <p><strong>Tipo:</strong> {{ producto.tipo }}</p>
-        <p><strong>Marca:</strong> {{ producto.marca }}</p>
-        <p><strong>Stock:</strong> {{ producto.stock }}</p>
-      </ion-col>
-      <ion-col *ngIf="!mobilaDa" size="2" class="ion-text-center">{{ producto.id }}</ion-col>
-      <ion-col *ngIf="!mobilaDa" size="3" class="ion-text-center">{{ producto.nombre }}</ion-col>
-      <ion-col *ngIf="!mobilaDa" size="2" class="ion-text-center">{{ producto.tipo }}</ion-col>
-      <ion-col *ngIf="!mobilaDa" size="2" class="ion-text-center">{{ producto.marca }}</ion-col>
-      <ion-col *ngIf="!mobilaDa" size="2" class="ion-text-center">{{ producto.stock }}</ion-col>
-      <!-- Solo el botón de "Editar" cuando no estás editando -->
-      <ion-col size="12" class="ion-text-center" *ngIf="!editandoProducto">
-        <ion-button (click)="editarMaterial(producto)">Editatu</ion-button>
+      <ion-col size="12" size-md="6" size-lg="4">
+        <ion-card (click)="editarProducto(producto)">
+          <ion-card-header>
+            <ion-card-title>{{ producto.izena || '-' }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p><strong>ID:</strong> {{ producto.id || '-' }}</p>
+            <p><strong>Izena:</strong> {{ producto.izena || '-' }}</p>
+            <p><strong>Marca:</strong> {{ producto.marka || '-' }}</p>
+            <p><strong>ID Categoría:</strong> {{ producto.id_kategoria || '-' }}</p>
+            <p><strong>Stock:</strong> {{ producto.stock || '-' }}</p>
+          </ion-card-content>
+        </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>

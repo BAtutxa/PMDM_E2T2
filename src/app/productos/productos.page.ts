@@ -1,5 +1,6 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
+import { ProductoService } from '../services/productos.service';
 
 @Component({
   selector: 'app-productos',
@@ -7,88 +8,67 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./productos.page.scss'],
 })
 export class ProductosPage implements OnInit {
-  editandoProducto: boolean = false; 
-  productoSeleccionado: any = {}; 
-
-  productos = [
-    { id: 1, nombre: 'Shampoo', tipo: 'Higienea', marca: 'Edurne Senosiain', stock: 100 },
-    { id: 2, nombre: 'Ile-egokitzailea', tipo: 'Higienea', marca: 'Natura Sibérica', stock: 50 },
-    { id: 3, nombre: 'Lehorgailua', tipo: 'Herreminta', marca: 'GHD Helios', stock: 20 },
-    { id: 4, nombre: 'Artaziak', tipo: 'Herreminta', marca: 'Filarmónica', stock: 30 },
-    { id: 5, nombre: 'Krema', tipo: 'Higienea', marca: 'Magno Classic', stock: 75 }
-  ];
-
-  constructor(private alertController: AlertController) {}
+  editandoProducto: boolean = false;
+  productoSeleccionado: any = {};
+  productos: any[] = [];
   mobilaDa: Boolean = false;
 
+  constructor(private alertController: AlertController, private productoService: ProductoService) {}
+
   ngOnInit() {
-    this.mobilbista(); // Comprueba si es móvil al cargar
+    this.mobilbista();
+    this.cargarProductos();
   }
 
   @HostListener('window:resize', ['$event'])
   onResize() {
-    this.mobilbista(); 
+    this.mobilbista();
   }
 
   mobilbista() {
-    this.mobilaDa = window.innerWidth <= 768; // Determina si el ancho de la pantalla es menor o igual a 768px
+    this.mobilaDa = window.innerWidth <= 768;
   }
 
-  // Método para cambiar a modo edición
-  editarMaterial(material: any) {
-    this.editandoProducto = true;  // Activamos el modo de edición
-    this.productoSeleccionado = { ...material };  // Copiamos los datos del material seleccionado
+  cargarProductos() {
+    this.productoService.getProductos().subscribe(
+      (data) => {
+        this.productos = data;
+      },
+      (error) => {
+        console.error('Error al cargar productos:', error);
+      }
+    );
   }
 
-  // Método para solicitar la edición de un campo
-  async editarCampo(campo: string) {
-    const alert = await this.alertController.create({
-      header: `Aldatu ${campo}`,
-      inputs: [
-        {
-          name: 'Balore berria',
-          type: 'text',
-          placeholder: `Balore berri bat eremu honetan: ${campo}`,
-        },
-      ],
-      buttons: [
-        {
-          text: 'Kantzelatu',
-          role: 'cancel',
-        },
-        {
-          text: 'Konfirmatu',
-          handler: (data) => {
-            if (data.nuevoValor) {
-              this.productoSeleccionado[campo] = data.nuevoValor;
-            }
-          },
-        },
-      ],
-    });
-
-    await alert.present();
+  editarProducto(producto: any) {
+    this.editandoProducto = true;
+    this.productoSeleccionado = { ...producto };
   }
 
-  // Método para confirmar la edición
   async confirmarEdicion() {
     const alert = await this.alertController.create({
-      header: '¿Seguru zaude?',
-      message: 'Aldatuko dira baloreak',
+      header: '¿Estás seguro?',
+      message: 'Se actualizarán los valores del producto.',
       buttons: [
         {
-          text: 'Kantzelatu',
+          text: 'Cancelar',
           role: 'cancel',
         },
         {
-          text: 'Konfirmatu',
+          text: 'Confirmar',
           handler: () => {
-            // Guardamos los cambios realizados
-            const index = this.productos.findIndex(producto => producto.id === this.productoSeleccionado.id);
-            if (index !== -1) {
-              this.productos[index] = { ...this.productoSeleccionado };
-            }
-            this.editandoProducto = false;  // Salimos del modo de edición
+            this.productoService.actualizarProducto(this.productoSeleccionado).subscribe(
+              () => {
+                const index = this.productos.findIndex(producto => producto.id === this.productoSeleccionado.id);
+                if (index !== -1) {
+                  this.productos[index] = { ...this.productoSeleccionado };
+                }
+                this.editandoProducto = false;
+              },
+              (error) => {
+                console.error('Error al actualizar producto:', error);
+              }
+            );
           },
         },
       ],
@@ -97,8 +77,7 @@ export class ProductosPage implements OnInit {
     await alert.present();
   }
 
-  // Método para cancelar la edición
   cancelarEdicion() {
-    this.editandoProducto = false;  // Salimos del modo de edición sin guardar los cambios
+    this.editandoProducto = false;
   }
 }
