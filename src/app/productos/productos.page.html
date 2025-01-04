@@ -34,16 +34,17 @@
               <ion-label position="floating">Stock</ion-label>
               <ion-input [(ngModel)]="productoSeleccionado.stock" readonly></ion-input>
             </ion-item>
-            <ion-button expand="full" (click)="confirmarEdicion()">Confirmar</ion-button>
-            <ion-button expand="full" color="danger" (click)="cancelarEdicion()">Cancelar</ion-button>
+            <ion-button expand="full" (click)="confirmarEdicion()">Komfirmatu</ion-button>
+            <ion-button expand="full" color="danger" (click)="cancelarEdicion()">Kantzelatu</ion-button>
+            <ion-button expand="full" class="custom-blue-button" (click)="verDetalles(productoSeleccionado)">Informazio gehiago</ion-button>
           </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
 
     <!-- Fila de productos -->
-    <ion-row *ngFor="let producto of productos">
-      <ion-col size="12" size-md="6" size-lg="4">
+    <ion-row justify-content-center *ngFor="let producto of productos">
+      <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
         <ion-card (click)="editarProducto(producto)">
           <ion-card-header>
             <ion-card-title>{{ producto.izena || '-' }}</ion-card-title>
@@ -51,12 +52,43 @@
           <ion-card-content>
             <p><strong>ID:</strong> {{ producto.id || '-' }}</p>
             <p><strong>Izena:</strong> {{ producto.izena || '-' }}</p>
-            <p><strong>Marca:</strong> {{ producto.marka || '-' }}</p>
-            <p><strong>ID Categoría:</strong> {{ producto.id_kategoria || '-' }}</p>
+            <p><strong>Marka:</strong> {{ producto.marka || '-' }}</p>
+            <p><strong>ID Kategoria:</strong> {{ producto.id_kategoria || '-' }}</p>
             <p><strong>Stock:</strong> {{ producto.stock || '-' }}</p>
+            <p><strong>Sortze data:</strong> {{ producto.data?.sortze_data | date:'yyyy-MM-dd' || '-' }}</p>
+            <p><strong>Eguneratze data:</strong> {{ producto.data?.eguneratze_data | date:'yyyy-MM-dd' || '-' }}</p>
           </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <!-- Modal de detalles del producto -->
+<ion-modal [isOpen]="productoConInformacionSeleccionada" (didDismiss)="productoConInformacionSeleccionada = false">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Detalles del Producto</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="productoConInformacionSeleccionada = false">Cerrar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="modal-content">
+      <div class="card-container">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{ productoSeleccionado?.izena }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p><strong>Deskribapena:</strong> {{ productoSeleccionado?.deskribapena || '-' }}</p>
+            <p><strong>Marca:</strong> {{ productoSeleccionado?.marka || '-' }}</p>
+            <p><strong>Stock:</strong> {{ productoSeleccionado?.stock || '-' }}</p>
+            <p><strong>ID Kategoria:</strong> {{ productoSeleccionado?.id_kategoria || '-' }}</p>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>
 </ion-content>

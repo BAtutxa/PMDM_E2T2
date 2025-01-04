@@ -9,6 +9,7 @@ import { ProductoService } from '../services/productos.service';
 })
 export class ProductosPage implements OnInit {
   editandoProducto: boolean = false;
+  productoConInformacionSeleccionada: boolean = false;  // Variable para controlar el modal
   productoSeleccionado: any = {};
   productos: any[] = [];
   mobilaDa: Boolean = false;
@@ -40,6 +41,12 @@ export class ProductosPage implements OnInit {
     );
   }
 
+  // Función para ver los detalles del producto
+  verDetalles(producto: any) {
+    this.productoSeleccionado = { ...producto };  // Copiar el producto seleccionado
+    this.productoConInformacionSeleccionada = true;  // Abrir el modal
+  }
+
   editarProducto(producto: any) {
     this.editandoProducto = true;
     this.productoSeleccionado = { ...producto };
@@ -57,6 +64,10 @@ export class ProductosPage implements OnInit {
         {
           text: 'Confirmar',
           handler: () => {
+            const now = new Date().toISOString(); // Obtiene la fecha y hora en formato ISO
+            this.productoSeleccionado.data = this.productoSeleccionado.data || {};
+            this.productoSeleccionado.data.eguneratze_data = now;
+  
             this.productoService.actualizarProducto(this.productoSeleccionado).subscribe(
               () => {
                 const index = this.productos.findIndex(producto => producto.id === this.productoSeleccionado.id);
@@ -73,7 +84,7 @@ export class ProductosPage implements OnInit {
         },
       ],
     });
-
+  
     await alert.present();
   }
 
