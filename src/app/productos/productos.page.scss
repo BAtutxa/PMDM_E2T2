@@ -48,6 +48,13 @@ button {
     margin: 5px 0;
     transition: background-color 0.3s ease; /* Transición de color suave */
 }
+
+.modal-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
   
 button.orden-asc {
     background-color: blue;

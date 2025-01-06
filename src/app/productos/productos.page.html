@@ -5,134 +5,86 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-grid>
-    <!-- Buscador -->
-    <ion-searchbar
-      search-icon="search-circle"
-      placeholder="Buscar"
-      (ionInput)="aplicarFiltro($event)">
-    </ion-searchbar>
+  <!-- Buscador -->
+  <ion-searchbar
+    search-icon="search-circle"
+    placeholder="Buscar"
+    (ionInput)="aplicarFiltro($event)">
+  </ion-searchbar>
 
-    <!-- Fila de edición visible solo en modo edición y en vista móvil -->
-    <ion-row *ngIf="editandoProducto">
-      <ion-col size="12">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>Editar Producto</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <ion-item>
-              <ion-label position="floating">ID</ion-label>
-              <ion-input [(ngModel)]="productoSeleccionado.id" readonly></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Nombre</ion-label>
-              <ion-input [(ngModel)]="productoSeleccionado.izena"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Marca</ion-label>
-              <ion-input [(ngModel)]="productoSeleccionado.marka"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">ID Categoría</ion-label>
-              <ion-input [(ngModel)]="productoSeleccionado.id_kategoria"></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Stock</ion-label>
-              <ion-input [(ngModel)]="productoSeleccionado.stock" readonly></ion-input>
-            </ion-item>
-            <ion-button expand="full" (click)="confirmarEdicion()">Confirmar</ion-button>
-            <ion-button expand="full" color="danger" (click)="cancelarEdicion()">Cancelar</ion-button>
-            <ion-button expand="full" class="custom-blue-button" (click)="verDetalles(productoSeleccionado)">
-              Informacion adicional
-            </ion-button>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
+  <!-- Fila de edición visible solo en modo edición y en vista móvil -->
+  <ion-row *ngIf="editandoProducto">
+    <ion-col size="12">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Editar Producto</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item>
+            <ion-label position="floating">ID</ion-label>
+            <ion-input [(ngModel)]="productoSeleccionado.id" readonly></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input [(ngModel)]="productoSeleccionado.izena"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Marca</ion-label>
+            <ion-input [(ngModel)]="productoSeleccionado.marka"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">ID Categoría</ion-label>
+            <ion-input [(ngModel)]="productoSeleccionado.id_kategoria"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Stock</ion-label>
+            <ion-input [(ngModel)]="productoSeleccionado.stock" readonly></ion-input>
+          </ion-item>
+          <ion-button expand="full" (click)="confirmarEdicion()">Confirmar</ion-button>
+          <ion-button expand="full" color="danger" (click)="cancelarEdicion()">Cancelar</ion-button>
+          <ion-button expand="full" class="custom-blue-button" (click)="verDetalles(productoSeleccionado)">
+            Información adicional
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
 
-    <!-- Fila de productos -->
-    <ion-row>
-      <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>
-              <ion-row>
-                <ion-col>
-                  <button [ngClass]="getOrdenClass('id')" (click)="ordenarPor('id')">ID</button>
-                </ion-col>
-                <ion-col>
-                  <button [ngClass]="getOrdenClass('izena')" (click)="ordenarPor('izena')">Nombre</button>
-                </ion-col>
-                <ion-col>
-                  <button [ngClass]="getOrdenClass('marka')" (click)="ordenarPor('marka')">Marca</button>
-                </ion-col>
-                <ion-col>
-                  <button [ngClass]="getOrdenClass('id_kategoria')" (click)="ordenarPor('id_kategoria')">ID Categoría</button>
-                </ion-col>
-                <ion-col>
-                  <button [ngClass]="getOrdenClass('stock')" (click)="ordenarPor('stock')">Stock</button>
-                </ion-col>
-                <ion-col>
-                  <button [ngClass]="getOrdenClass('sortze_data')" (click)="ordenarPor('sortze_data')">Fecha de creación</button>
-                </ion-col>
-                <ion-col>
-                  <button [ngClass]="getOrdenClass('eguneratze_data')" (click)="ordenarPor('eguneratze_data')">Última actualización</button>
-                </ion-col>
-              </ion-row>
-            </ion-card-title>
-          </ion-card-header>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-
-    <ion-row justify-content-center *ngFor="let producto of productosFiltrados">
-      <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-        <ion-card (click)="editarProducto(producto)">
-          <ion-card-header>
-            <ion-card-title>{{ producto.izena || '-' }}</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <p><strong>ID:</strong> {{ producto.id || '-' }}</p>
-            <p><strong>Nombre:</strong> {{ producto.izena || '-' }}</p>
-            <p><strong>Marca:</strong> {{ producto.marka || '-' }}</p>
-            <p><strong>ID Categoría:</strong> {{ producto.id_kategoria || '-' }}</p>
-            <p><strong>Fecha de creación:</strong> {{ producto.data?.sortze_data | date:'yyyy-MM-dd' || '-' }}</p>
-            <p><strong>Última actualización:</strong> {{ producto.data?.eguneratze_data | date:'yyyy-MM-dd' || '-' }}</p>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
-  <!-- Modal de detalles del producto -->
-  <ion-modal [isOpen]="productoConInformacionSeleccionada" (didDismiss)="productoConInformacionSeleccionada = false">
-    <ng-container *ngTemplateOutlet="detalleProductoTemplate"></ng-container>
-  </ion-modal>
-
-  <ng-template #detalleProductoTemplate>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Detalles del Producto</ion-title>
-        <ion-buttons slot="end">
-          <ion-button (click)="productoConInformacionSeleccionada = false">Cerrar</ion-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content class="modal-content">
-      <div class="card-container">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>{{ productoSeleccionado?.izena }}</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <p><strong>Descripción:</strong> {{ productoSeleccionado?.deskribapena || '-' }}</p>
-            <p><strong>Marca:</strong> {{ productoSeleccionado?.marka || '-' }}</p>
-            <p><strong>Stock:</strong> {{ productoSeleccionado?.stock || '-' }}</p>
-            <p><strong>ID Categoría:</strong> {{ productoSeleccionado?.id_kategoria || '-' }}</p>
-          </ion-card-content>
-        </ion-card>
-      </div>
-    </ion-content>
-  </ng-template>
+  <!-- Fila de productos -->
+  <ion-row justify-content-center *ngFor="let producto of productosFiltrados">
+    <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
+      <ion-card (click)="editarProducto(producto)">
+        <ion-card-header>
+          <ion-card-title>{{ producto.izena || '-' }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p><strong>ID:</strong> {{ producto.id || '-' }}</p>
+          <p><strong>Nombre:</strong> {{ producto.izena || '-' }}</p>
+          <p><strong>Marca:</strong> {{ producto.marka || '-' }}</p>
+          <p><strong>ID Categoría:</strong> {{ producto.id_kategoria || '-' }}</p>
+          <p><strong>Fecha de creación:</strong> {{ producto.data?.sortze_data | date:'yyyy-MM-dd' || '-' }}</p>
+          <p><strong>Última actualización:</strong> {{ producto.data?.eguneratze_data | date:'yyyy-MM-dd' || '-' }}</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+<!-- Modal para ver detalles del producto -->
+<ion-modal [isOpen]="productoConInformacionSeleccionada" (ionModalDidDismiss)="cerrarModal()" (click)="cerrarModal()">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Detalles del Producto</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="cerrarModal()">Cerrar</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <div *ngIf="productoSeleccionado" (click)="$event.stopPropagation()">
+      <p><strong>Descripción:</strong> {{ productoSeleccionado.deskribapena || 'Descripción no disponible' }}</p>
+      <p><strong>Marca:</strong> {{ productoSeleccionado.marka || 'Marca no disponible' }}</p>
+      <p><strong>Stock:</strong> {{ productoSeleccionado.stock || 'Stock no disponible' }}</p>
+      <p><strong>ID Categoría:</strong> {{ productoSeleccionado.id_kategoria || 'ID no disponible' }}</p>
+    </div>
+  </ion-content>
+</ion-modal>
 </ion-content>
