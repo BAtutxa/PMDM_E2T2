@@ -22,6 +22,8 @@ export class ProductosPage implements OnInit {
   ordenActual: { columna: string, ascendente: boolean } = { columna: '', ascendente: true };
   productosPorPagina = 10;
   paginaActual = 1;
+  paginacionMaxima = 0;
+  Math: any;
 
   constructor(private alertController: AlertController, private productoService: ProductoService) {}
 
@@ -60,6 +62,7 @@ export class ProductosPage implements OnInit {
     this.moverVistaAlPrimerProducto();
   }
   
+  
   // Mueve la vista al primer producto
   moverVistaAlPrimerProducto() {
     if (this.content) {
@@ -67,6 +70,16 @@ export class ProductosPage implements OnInit {
       this.content.scrollToTop(500); // Ajusta el tiempo si es necesario
     }
   }
+
+  hacerPaginacion() {
+    this.paginacionMaxima = Math.ceil(this.productosFiltrados.length / this.productosPorPagina);
+    let paginacion = [];
+    for (let i = 1; i <= this.paginacionMaxima; i++) {
+      paginacion.push(i);
+    }
+    return paginacion;
+  }
+  
 
   verDetalles(producto: any) {
     console.log('Producto seleccionado:', producto);
@@ -122,23 +135,23 @@ export class ProductosPage implements OnInit {
     await alert.present();
   }
 
-cancelarEdicion() {
-  // Restaurar el producto seleccionado previamente
-  this.productoSeleccionado = { ...this.productoSeleccionadoAnterior };
-  this.editandoProducto = false;
+  cancelarEdicion() {
+    // Restaurar el producto seleccionado previamente
+    this.productoSeleccionado = { ...this.productoSeleccionadoAnterior };
+    this.editandoProducto = false;
 
-  // Si no estamos en vista móvil, volvemos a mostrar el producto seleccionado
-  if (this.content && this.productoSeleccionado.id) {
-    const productoIndex = this.productos.findIndex(p => p.id === this.productoSeleccionado.id);
-    if (productoIndex !== -1) {
-      // Mover la vista al producto seleccionado previamente
-      const productoElemento = document.getElementById(`producto-${this.productoSeleccionado.id}`);
-      if (productoElemento) {
-        productoElemento.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // Si no estamos en vista móvil, volvemos a mostrar el producto seleccionado
+    if (this.content && this.productoSeleccionado.id) {
+      const productoIndex = this.productos.findIndex(p => p.id === this.productoSeleccionado.id);
+      if (productoIndex !== -1) {
+        // Mover la vista al producto seleccionado previamente
+        const productoElemento = document.getElementById(`producto-${this.productoSeleccionado.id}`);
+        if (productoElemento) {
+          productoElemento.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
       }
     }
   }
-}
 
 
   aplicarFiltro(event: any) {
@@ -197,4 +210,4 @@ cancelarEdicion() {
     }
     return '';
   }
-}
+} 

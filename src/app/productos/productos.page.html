@@ -26,6 +26,15 @@
   </ion-item>
 </div>
 
+<!-- Paginación -->
+<ion-row>
+  <ion-col>
+    <ion-button *ngFor="let page of hacerPaginacion()" (click)="cambiarPagina(page)">
+      {{ page }}
+    </ion-button>
+  </ion-col>
+</ion-row>
+
   
   <!-- Filtro y ordenación de columnas -->
   <ion-row>
@@ -108,7 +117,7 @@
   </ion-row>
 
  <!-- Fila de productos -->
-<ion-row justify-content-center *ngFor="let producto of productosFiltrados | slice: (paginaActual - 1) * productosPorPagina : paginaActual * productosPorPagina">
+ <ion-row justify-content-center *ngFor="let producto of productosFiltrados | slice: (paginaActual - 1) * productosPorPagina : paginaActual * productosPorPagina">
   <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
     <ion-card *ngIf="productoSeleccionado?.id !== producto.id" (click)="editarProducto(producto)">
       <ion-card-header>
@@ -145,4 +154,4 @@
       </div>
     </ion-content>
   </ion-modal>
-</ion-content>
+</ion-content> 
