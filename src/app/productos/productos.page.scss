@@ -62,11 +62,29 @@ ion-col {
 }
 
 .producto-item {
-    top: 20%; /* Centra verticalmente */
-    left: 30px; /* Alinea a la izquierda */
-    transform: translateY(-50%); /* Ajusta para centrar verticalmente */
-    transition: top 0.3s ease, left 0.3s ease; /* Transición suave para el movimiento */
+    position: absolute;
+    top: 25%;
+    left: 20px; 
+    transform: none; 
+    transition: top 0.3s ease, left 0.3s ease;
     max-width: max-content;
 }
+
+.productos-por-pagina {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+}
+
+ion-select {
+    font-size: 18px; /* Aumenta el tamaño de la fuente */
+    width: 100%; /* Asegura que el selector se extienda al ancho completo */
+  }
+  
+  ion-label {
+    font-size: 14px; /* Ajusta el tamaño de la etiqueta */
+  }
+  
 
 

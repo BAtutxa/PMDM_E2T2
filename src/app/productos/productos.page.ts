@@ -60,7 +60,6 @@ export class ProductosPage implements OnInit {
     this.moverVistaAlPrimerProducto();
   }
   
-
   // Mueve la vista al primer producto
   moverVistaAlPrimerProducto() {
     if (this.content) {

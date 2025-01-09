@@ -13,16 +13,19 @@
 </ion-searchbar>
 
 <!-- Selector de productos por página -->
-<ion-item class="producto-item">
-  <ion-label size="small">Productos:</ion-label>
-  <ion-select [(ngModel)]="productosPorPagina" (ionChange)="cambiarPagina(1)" interface="popover" size="small">
-    <ion-select-option [value]="5">5</ion-select-option>
-    <ion-select-option [value]="10">10</ion-select-option>
-    <ion-select-option [value]="25">25</ion-select-option>
-    <ion-select-option [value]="50">50</ion-select-option>
-    <ion-select-option [value]="100">100</ion-select-option>
-  </ion-select>
-</ion-item>
+<div class="productos-por-pagina">
+  <ion-item class="producto-item">
+    <ion-label size="small">Productos:</ion-label>
+    <ion-select [(ngModel)]="productosPorPagina" interface="popover" size="small" (ionChange)="cambiarPagina(1)">
+      <ion-select-option [value]="5">5</ion-select-option>
+      <ion-select-option [value]="10">10</ion-select-option>
+      <ion-select-option [value]="25">25</ion-select-option>
+      <ion-select-option [value]="50">50</ion-select-option>
+      <ion-select-option [value]="100">100</ion-select-option>
+    </ion-select>
+  </ion-item>
+</div>
+
   
   <!-- Filtro y ordenación de columnas -->
   <ion-row>
