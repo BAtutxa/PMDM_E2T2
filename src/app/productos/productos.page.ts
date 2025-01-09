@@ -1,7 +1,8 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { ProductoService } from '../services/productos.service';
 import { firstValueFrom } from 'rxjs';
+import { IonContent } from '@ionic/angular';
 
 @Component({
   selector: 'app-productos',
@@ -9,14 +10,16 @@ import { firstValueFrom } from 'rxjs';
   styleUrls: ['./productos.page.scss'],
 })
 export class ProductosPage implements OnInit {
-  // Variables para el control de la vista
+  @ViewChild(IonContent, { static: false }) content: IonContent | undefined;
+
   editandoProducto: boolean = false;
-  productoConInformacionSeleccionada: boolean = false; // Controla si el modal está abierto
-  productoSeleccionado: any = {}; // Datos del producto seleccionado
-  productos: any[] = []; // Lista de todos los productos
-  productosFiltrados: any[] = []; // Lista de productos filtrados
-  mobilaDa: Boolean = false; // Para saber si estamos en vista móvil
-  ordenActual: { columna: string, ascendente: boolean } = { columna: '', ascendente: true }; // Control de ordenación
+  productoConInformacionSeleccionada: boolean = false;
+  productoSeleccionado: any = {};
+  productoSeleccionadoAnterior: any = null; // Variable para almacenar el producto seleccionado previamente
+  productos: any[] = [];
+  productosFiltrados: any[] = [];
+  mobilaDa: Boolean = false;
+  ordenActual: { columna: string, ascendente: boolean } = { columna: '', ascendente: true };
 
   constructor(private alertController: AlertController, private productoService: ProductoService) {}
 
@@ -25,74 +28,52 @@ export class ProductosPage implements OnInit {
     this.cargarProductos();
   }
 
-  // Escucha los cambios de tamaño de la ventana para adaptar la interfaz
   @HostListener('window:resize', ['$event'])
   onResize() {
     this.mobilbista();
   }
 
-  // Determina si estamos en vista móvil
   mobilbista() {
     this.mobilaDa = window.innerWidth <= 768;
   }
 
-  // Carga los productos desde el servicio
   async cargarProductos() {
     try {
       const data = await firstValueFrom(this.productoService.getProductos());
       this.productos = data;
-      this.productosFiltrados = [...this.productos]; // Inicializamos la lista filtrada con todos los productos
+      this.productosFiltrados = [...this.productos];
     } catch (error) {
       console.error('Error al cargar productos:', error);
     }
   }
 
-  aplicarFiltro(event: any) {
-    const texto = event.target.value.toLowerCase();
-    
-    if (texto.trim() === '') {
-      this.productosFiltrados = [...this.productos]; // Si no hay texto, mostramos todos los productos
-    } else {
-      this.productosFiltrados = this.productos.filter((producto) => {
-        const coincideIzena = producto.izena && producto.izena.toLowerCase().includes(texto);
-        const coincideMarka = producto.marka && producto.marka.toLowerCase().includes(texto);
-        const coincideId = producto.id && producto.id.toString().includes(texto); // Búsqueda por ID
-        const coincideIdKategoria = producto.id_kategoria && producto.id_kategoria.toString().includes(texto);
-  
-        // Comparar fechas (si existen en el formato adecuado)
-        const coincideFecha = producto.fecha && this.compararFechas(producto.fecha, texto);
-  
-        return coincideIzena || coincideMarka || coincideId || coincideIdKategoria || coincideFecha;
-      });
+  // Mueve la vista al primer producto
+  moverVistaAlPrimerProducto() {
+    if (this.content) {
+      // Desplazar la vista a la posición del primer producto
+      this.content.scrollToTop(500); // Ajusta el tiempo si es necesario
     }
   }
-  
-  compararFechas(fecha: string, texto: string): boolean {
-    // Convertir la fecha a minúsculas para comparación
-    const fechaNormalizada = fecha.toLowerCase();
-    return fechaNormalizada.includes(texto);
-  }
-  
 
-  // Muestra los detalles de un producto en el modal
   verDetalles(producto: any) {
-    console.log('Producto seleccionado:', producto); // Verificar si el producto es el correcto
+    console.log('Producto seleccionado:', producto);
     this.productoSeleccionado = { ...producto };
-    this.productoConInformacionSeleccionada = true; // Abre el modal
+    this.productoConInformacionSeleccionada = true;
   }
 
-  // Cierra el modal y restablece el estado del modal
   cerrarModal() {
     this.productoConInformacionSeleccionada = false;
   }
 
-  // Inicia la edición de un producto
   editarProducto(producto: any) {
+    this.productoSeleccionadoAnterior = { ...this.productoSeleccionado }; // Guardar el producto seleccionado previamente
     this.editandoProducto = true;
     this.productoSeleccionado = { ...producto };
+
+    // Mover la vista al primer producto
+    this.moverVistaAlPrimerProducto();
   }
 
-  // Confirma la edición del producto
   async confirmarEdicion() {
     const alert = await this.alertController.create({
       header: '¿Estás seguro?',
@@ -114,7 +95,7 @@ export class ProductosPage implements OnInit {
               const index = this.productos.findIndex(producto => producto.id === this.productoSeleccionado.id);
               if (index !== -1) {
                 this.productos[index] = { ...this.productoSeleccionado };
-                this.aplicarFiltro({ target: { value: '' } }); // Refrescamos la lista filtrada
+                this.aplicarFiltro({ target: { value: '' } });
               }
               this.editandoProducto = false;
             } catch (error) {
@@ -127,13 +108,49 @@ export class ProductosPage implements OnInit {
 
     await alert.present();
   }
+  
+cancelarEdicion() {
+  // Restaurar el producto seleccionado previamente
+  this.productoSeleccionado = { ...this.productoSeleccionadoAnterior };
+  this.editandoProducto = false;
 
-  // Cancela la edición de un producto
-  cancelarEdicion() {
-    this.editandoProducto = false;
+  // Si no estamos en vista móvil, volvemos a mostrar el producto seleccionado
+  if (this.content && this.productoSeleccionado.id) {
+    const productoIndex = this.productos.findIndex(p => p.id === this.productoSeleccionado.id);
+    if (productoIndex !== -1) {
+      // Mover la vista al producto seleccionado previamente
+      const productoElemento = document.getElementById(`producto-${this.productoSeleccionado.id}`);
+      if (productoElemento) {
+        productoElemento.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+  }
+}
+
+
+  aplicarFiltro(event: any) {
+    const texto = event.target.value.toLowerCase();
+    
+    if (texto.trim() === '') {
+      this.productosFiltrados = [...this.productos];
+    } else {
+      this.productosFiltrados = this.productos.filter((producto) => {
+        const coincideIzena = producto.izena && producto.izena.toLowerCase().includes(texto);
+        const coincideMarka = producto.marka && producto.marka.toLowerCase().includes(texto);
+        const coincideId = producto.id && producto.id.toString().includes(texto);
+        const coincideIdKategoria = producto.id_kategoria && producto.id_kategoria.toString().includes(texto);
+        const coincideFecha = producto.fecha && this.compararFechas(producto.fecha, texto);
+  
+        return coincideIzena || coincideMarka || coincideId || coincideIdKategoria || coincideFecha;
+      });
+    }
+  }
+  
+  compararFechas(fecha: string, texto: string): boolean {
+    const fechaNormalizada = fecha.toLowerCase();
+    return fechaNormalizada.includes(texto);
   }
 
-  // Ordena los productos por la columna seleccionada
   ordenarPor(columna: string) {
     if (this.ordenActual.columna === columna) {
       this.ordenActual.ascendente = !this.ordenActual.ascendente;
@@ -161,7 +178,6 @@ export class ProductosPage implements OnInit {
     });
   }
 
-  // Devuelve la clase CSS para el orden
   getOrdenClass(columna: string): string {
     if (this.ordenActual.columna === columna) {
       return this.ordenActual.ascendente ? 'orden-asc' : 'orden-desc';

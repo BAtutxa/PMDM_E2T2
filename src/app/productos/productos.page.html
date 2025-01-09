@@ -11,6 +11,8 @@
     placeholder="Buscar"
     (ionInput)="aplicarFiltro($event)">
   </ion-searchbar>
+
+  <!-- Filtro y ordenación de columnas -->
   <ion-row>
     <ion-col>
       <ion-item button (click)="ordenarPor('izena')">
@@ -44,15 +46,15 @@
     </ion-col>
     <ion-col>
       <ion-item button (click)="ordenarPor('id_kategoria')">
-        <ion-label>ID categoria</ion-label>
+        <ion-label>ID categoría</ion-label>
         <ion-icon [name]="ordenActual.columna === 'id_kategoria' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
       </ion-item>
     </ion-col>
   </ion-row>
 
   <hr>
-  
-  <!-- Fila de edición visible solo en modo edición y en vista móvil -->
+
+  <!-- Fila de edición visible solo en modo edición -->
   <ion-row *ngIf="editandoProducto">
     <ion-col size="12">
       <ion-card>
@@ -93,7 +95,7 @@
   <!-- Fila de productos -->
   <ion-row justify-content-center *ngFor="let producto of productosFiltrados">
     <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-      <ion-card (click)="editarProducto(producto)">
+      <ion-card *ngIf="productoSeleccionado?.id !== producto.id" (click)="editarProducto(producto)">
         <ion-card-header>
           <ion-card-title>{{ producto.izena || '-' }}</ion-card-title>
         </ion-card-header>
@@ -108,23 +110,24 @@
       </ion-card>
     </ion-col>
   </ion-row>
-<!-- Modal para ver detalles del producto -->
-<ion-modal [isOpen]="productoConInformacionSeleccionada" (ionModalDidDismiss)="cerrarModal()" (click)="cerrarModal()">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>Detalles del Producto</ion-title>
-      <ion-buttons slot="end">
-        <ion-button (click)="cerrarModal()">Cerrar</ion-button>
-      </ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content>
-    <div *ngIf="productoSeleccionado" (click)="$event.stopPropagation()">
-      <p><strong>Descripción:</strong> {{ productoSeleccionado.deskribapena || 'Descripción no disponible' }}</p>
-      <p><strong>Marca:</strong> {{ productoSeleccionado.marka || 'Marca no disponible' }}</p>
-      <p><strong>Stock:</strong> {{ productoSeleccionado.stock || 'Stock no disponible' }}</p>
-      <p><strong>Categoría:</strong> {{ productoSeleccionado.kategoria_izena || 'ID no disponible' }}</p>
-    </div>
-  </ion-content>
-</ion-modal>
+
+  <!-- Modal para ver detalles del producto -->
+  <ion-modal [isOpen]="productoConInformacionSeleccionada" (ionModalDidDismiss)="cerrarModal()" (click)="cerrarModal()">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Detalles del Producto</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="cerrarModal()">Cerrar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <div *ngIf="productoSeleccionado" (click)="$event.stopPropagation()">
+        <p><strong>Descripción:</strong> {{ productoSeleccionado.deskribapena || 'Descripción no disponible' }}</p>
+        <p><strong>Marca:</strong> {{ productoSeleccionado.marka || 'Marca no disponible' }}</p>
+        <p><strong>Stock:</strong> {{ productoSeleccionado.stock || 'Stock no disponible' }}</p>
+        <p><strong>Categoría:</strong> {{ productoSeleccionado.kategoria_izena || 'ID no disponible' }}</p>
+      </div>
+    </ion-content>
+  </ion-modal>
 </ion-content>
