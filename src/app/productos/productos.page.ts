@@ -20,6 +20,8 @@ export class ProductosPage implements OnInit {
   productosFiltrados: any[] = [];
   mobilaDa: Boolean = false;
   ordenActual: { columna: string, ascendente: boolean } = { columna: '', ascendente: true };
+  productosPorPagina = 10;
+  paginaActual = 1;
 
   constructor(private alertController: AlertController, private productoService: ProductoService) {}
 
@@ -44,6 +46,16 @@ export class ProductosPage implements OnInit {
       this.productosFiltrados = [...this.productos];
     } catch (error) {
       console.error('Error al cargar productos:', error);
+    }
+  }
+
+  cambiarPagina(pagina: number) {
+    if (pagina < 1) {
+      this.paginaActual = 1;
+    } else if (pagina > Math.ceil(this.productosFiltrados.length / this.productosPorPagina)) {
+      this.paginaActual = Math.ceil(this.productosFiltrados.length / this.productosPorPagina);
+    } else {
+      this.paginaActual = pagina;
     }
   }
 
@@ -108,7 +120,7 @@ export class ProductosPage implements OnInit {
 
     await alert.present();
   }
-  
+
 cancelarEdicion() {
   // Restaurar el producto seleccionado previamente
   this.productoSeleccionado = { ...this.productoSeleccionadoAnterior };

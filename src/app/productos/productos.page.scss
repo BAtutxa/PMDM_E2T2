@@ -61,3 +61,12 @@ ion-col {
     height: 100%;
 }
 
+.producto-item {
+    top: 20%; /* Centra verticalmente */
+    left: 30px; /* Alinea a la izquierda */
+    transform: translateY(-50%); /* Ajusta para centrar verticalmente */
+    transition: top 0.3s ease, left 0.3s ease; /* Transición suave para el movimiento */
+    max-width: max-content;
+}
+
+
