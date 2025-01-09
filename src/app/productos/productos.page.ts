@@ -57,7 +57,9 @@ export class ProductosPage implements OnInit {
     } else {
       this.paginaActual = pagina;
     }
+    this.moverVistaAlPrimerProducto();
   }
+  
 
   // Mueve la vista al primer producto
   moverVistaAlPrimerProducto() {

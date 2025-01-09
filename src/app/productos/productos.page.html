@@ -7,25 +7,23 @@
 <ion-content [fullscreen]="true">
   <!-- Buscador -->
   <ion-searchbar
-    search-icon="search-circle"
-    placeholder="Buscar"
-    (ionInput)="aplicarFiltro($event)">
-  </ion-searchbar>
+  search-icon="search-circle"
+  placeholder="Buscar"
+  (ionInput)="aplicarFiltro($event)">
+</ion-searchbar>
 
-  <!-- Selector de productos por página -->
-  <ion-item class="producto-item">
-    <ion-label size="small">Productos:</ion-label>
-    <ion-select [(ngModel)]="productosPorPagina" (ionChange)="cambiarPagina(1)" interface="popover" size="small">
-      <ion-select-option [value]="5">5</ion-select-option>
-      <ion-select-option [value]="10">10</ion-select-option>
-      <ion-select-option [value]="25">25</ion-select-option>
-      <ion-select-option [value]="50">50</ion-select-option>
-      <ion-select-option [value]="100">100</ion-select-option>
-    </ion-select>
-  </ion-item>
+<!-- Selector de productos por página -->
+<ion-item class="producto-item">
+  <ion-label size="small">Productos:</ion-label>
+  <ion-select [(ngModel)]="productosPorPagina" (ionChange)="cambiarPagina(1)" interface="popover" size="small">
+    <ion-select-option [value]="5">5</ion-select-option>
+    <ion-select-option [value]="10">10</ion-select-option>
+    <ion-select-option [value]="25">25</ion-select-option>
+    <ion-select-option [value]="50">50</ion-select-option>
+    <ion-select-option [value]="100">100</ion-select-option>
+  </ion-select>
+</ion-item>
   
-  
-
   <!-- Filtro y ordenación de columnas -->
   <ion-row>
     <ion-col>
@@ -106,24 +104,24 @@
     </ion-col>
   </ion-row>
 
-  <!-- Fila de productos -->
-  <ion-row justify-content-center *ngFor="let producto of productosFiltrados">
-    <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-      <ion-card *ngIf="productoSeleccionado?.id !== producto.id" (click)="editarProducto(producto)">
-        <ion-card-header>
-          <ion-card-title>{{ producto.izena || '-' }}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <p><strong>ID:</strong> {{ producto.id || '-' }}</p>
-          <p><strong>Nombre:</strong> {{ producto.izena || '-' }}</p>
-          <p><strong>Marca:</strong> {{ producto.marka || '-' }}</p>
-          <p><strong>ID Categoría:</strong> {{ producto.id_kategoria || '-' }}</p>
-          <p><strong>Fecha de creación:</strong> {{ producto.data?.sortze_data | date:'yyyy-MM-dd' }}</p>
-          <p><strong>Última actualización:</strong> {{ producto.data?.eguneratze_data ? (producto.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
+ <!-- Fila de productos -->
+<ion-row justify-content-center *ngFor="let producto of productosFiltrados | slice: (paginaActual - 1) * productosPorPagina : paginaActual * productosPorPagina">
+  <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
+    <ion-card *ngIf="productoSeleccionado?.id !== producto.id" (click)="editarProducto(producto)">
+      <ion-card-header>
+        <ion-card-title>{{ producto.izena || '-' }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>ID:</strong> {{ producto.id || '-' }}</p>
+        <p><strong>Nombre:</strong> {{ producto.izena || '-' }}</p>
+        <p><strong>Marca:</strong> {{ producto.marka || '-' }}</p>
+        <p><strong>ID Categoría:</strong> {{ producto.id_kategoria || '-' }}</p>
+        <p><strong>Fecha de creación:</strong> {{ producto.data?.sortze_data | date:'yyyy-MM-dd' }}</p>
+        <p><strong>Última actualización:</strong> {{ producto.data?.eguneratze_data ? (producto.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>
+      </ion-card-content>
+    </ion-card>
+  </ion-col>
+</ion-row>
 
   <!-- Modal para ver detalles del producto -->
   <ion-modal [isOpen]="productoConInformacionSeleccionada" (ionModalDidDismiss)="cerrarModal()" (click)="cerrarModal()">
