@@ -139,7 +139,7 @@ export class ProductosPage implements OnInit {
     // Restaurar el producto seleccionado previamente
     this.productoSeleccionado = { ...this.productoSeleccionadoAnterior };
     this.editandoProducto = false;
-
+  
     // Si no estamos en vista móvil, volvemos a mostrar el producto seleccionado
     if (this.content && this.productoSeleccionado.id) {
       const productoIndex = this.productos.findIndex(p => p.id === this.productoSeleccionado.id);
@@ -147,13 +147,28 @@ export class ProductosPage implements OnInit {
         // Mover la vista al producto seleccionado previamente
         const productoElemento = document.getElementById(`producto-${this.productoSeleccionado.id}`);
         if (productoElemento) {
-          productoElemento.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          // Detectar si estamos en un dispositivo móvil
+          const isMobile = window.innerWidth <= 768; // Ajusta el valor según tu necesidad
+  
+          // Si estamos en vista móvil, hacer un desplazamiento personalizado
+          if (isMobile) {
+            productoElemento.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  
+            // Usar requestAnimationFrame para un desplazamiento suave después de scrollIntoView
+            setTimeout(() => {
+              window.requestAnimationFrame(() => {
+                window.scrollBy(0, 300); // Desplazamiento hacia abajo
+              });
+            }, 300); // Ajustar el retraso según sea necesario
+          } else {
+            productoElemento.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
         }
       }
     }
   }
-
-
+  
+  
   aplicarFiltro(event: any) {
     const texto = event.target.value.toLowerCase();
     
