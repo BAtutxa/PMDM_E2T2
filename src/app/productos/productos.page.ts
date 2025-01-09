@@ -47,19 +47,32 @@ export class ProductosPage implements OnInit {
     }
   }
 
-  // Filtra los productos según la búsqueda
   aplicarFiltro(event: any) {
     const texto = event.target.value.toLowerCase();
+    
     if (texto.trim() === '') {
       this.productosFiltrados = [...this.productos]; // Si no hay texto, mostramos todos los productos
     } else {
-      this.productosFiltrados = this.productos.filter((producto) =>
-        (producto.izena && producto.izena.toLowerCase().includes(texto)) ||
-        (producto.marka && producto.marka.toLowerCase().includes(texto)) ||
-        (producto.id_kategoria && producto.id_kategoria.toString().includes(texto))
-      );
+      this.productosFiltrados = this.productos.filter((producto) => {
+        const coincideIzena = producto.izena && producto.izena.toLowerCase().includes(texto);
+        const coincideMarka = producto.marka && producto.marka.toLowerCase().includes(texto);
+        const coincideId = producto.id && producto.id.toString().includes(texto); // Búsqueda por ID
+        const coincideIdKategoria = producto.id_kategoria && producto.id_kategoria.toString().includes(texto);
+  
+        // Comparar fechas (si existen en el formato adecuado)
+        const coincideFecha = producto.fecha && this.compararFechas(producto.fecha, texto);
+  
+        return coincideIzena || coincideMarka || coincideId || coincideIdKategoria || coincideFecha;
+      });
     }
   }
+  
+  compararFechas(fecha: string, texto: string): boolean {
+    // Convertir la fecha a minúsculas para comparación
+    const fechaNormalizada = fecha.toLowerCase();
+    return fechaNormalizada.includes(texto);
+  }
+  
 
   // Muestra los detalles de un producto en el modal
   verDetalles(producto: any) {

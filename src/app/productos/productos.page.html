@@ -11,7 +11,47 @@
     placeholder="Buscar"
     (ionInput)="aplicarFiltro($event)">
   </ion-searchbar>
+  <ion-row>
+    <ion-col>
+      <ion-item button (click)="ordenarPor('izena')">
+        <ion-label>Nombre</ion-label>
+        <ion-icon [name]="ordenActual.columna === 'izena' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item button (click)="ordenarPor('marka')">
+        <ion-label>Marca</ion-label>
+        <ion-icon [name]="ordenActual.columna === 'marka' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item button (click)="ordenarPor('sortze_data')">
+        <ion-label>Fecha creación</ion-label>
+        <ion-icon [name]="ordenActual.columna === 'sortze_data' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item button (click)="ordenarPor('eguneratze_data')">
+        <ion-label>Fecha actualización</ion-label>
+        <ion-icon [name]="ordenActual.columna === 'eguneratze_data' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item button (click)="ordenarPor('id')">
+        <ion-label>ID</ion-label>
+        <ion-icon [name]="ordenActual.columna === 'id' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item button (click)="ordenarPor('id_kategoria')">
+        <ion-label>ID categoria</ion-label>
+        <ion-icon [name]="ordenActual.columna === 'id_kategoria' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
+      </ion-item>
+    </ion-col>
+  </ion-row>
 
+  <hr>
+  
   <!-- Fila de edición visible solo en modo edición y en vista móvil -->
   <ion-row *ngIf="editandoProducto">
     <ion-col size="12">
@@ -62,8 +102,8 @@
           <p><strong>Nombre:</strong> {{ producto.izena || '-' }}</p>
           <p><strong>Marca:</strong> {{ producto.marka || '-' }}</p>
           <p><strong>ID Categoría:</strong> {{ producto.id_kategoria || '-' }}</p>
-          <p><strong>Fecha de creación:</strong> {{ producto.data?.sortze_data | date:'yyyy-MM-dd' || '-' }}</p>
-          <p><strong>Última actualización:</strong> {{ producto.data?.eguneratze_data | date:'yyyy-MM-dd' || '-' }}</p>
+          <p><strong>Fecha de creación:</strong> {{ producto.data?.sortze_data | date:'yyyy-MM-dd' }}</p>
+          <p><strong>Última actualización:</strong> {{ producto.data?.eguneratze_data ? (producto.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>
         </ion-card-content>
       </ion-card>
     </ion-col>
@@ -83,7 +123,7 @@
       <p><strong>Descripción:</strong> {{ productoSeleccionado.deskribapena || 'Descripción no disponible' }}</p>
       <p><strong>Marca:</strong> {{ productoSeleccionado.marka || 'Marca no disponible' }}</p>
       <p><strong>Stock:</strong> {{ productoSeleccionado.stock || 'Stock no disponible' }}</p>
-      <p><strong>ID Categoría:</strong> {{ productoSeleccionado.id_kategoria || 'ID no disponible' }}</p>
+      <p><strong>Categoría:</strong> {{ productoSeleccionado.kategoria_izena || 'ID no disponible' }}</p>
     </div>
   </ion-content>
 </ion-modal>
