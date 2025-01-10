@@ -8,12 +8,14 @@ import { MaterialesPageRoutingModule } from './materiales-routing.module';
 
 import { MaterialesPage } from './materiales.page';
 
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MaterialesPageRoutingModule
+    MaterialesPageRoutingModule,
+    
   ],
   declarations: [MaterialesPage]
 })
