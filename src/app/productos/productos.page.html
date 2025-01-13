@@ -39,8 +39,14 @@
   <!-- Filtro y ordenación de columnas -->
   <ion-row>
     <ion-col>
+      <ion-item button (click)="ordenarPor('id')">
+        <ion-label>ID</ion-label>
+        <ion-icon [name]="ordenActual.columna === 'id' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
+      </ion-item>
+    </ion-col>
+    <ion-col>
       <ion-item button (click)="ordenarPor('izena')">
-        <ion-label>Nombre</ion-label>
+        <ion-label>Izena</ion-label>
         <ion-icon [name]="ordenActual.columna === 'izena' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
       </ion-item>
     </ion-col>
@@ -60,12 +66,6 @@
       <ion-item button (click)="ordenarPor('eguneratze_data')">
         <ion-label>Fecha actualización</ion-label>
         <ion-icon [name]="ordenActual.columna === 'eguneratze_data' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
-      </ion-item>
-    </ion-col>
-    <ion-col>
-      <ion-item button (click)="ordenarPor('id')">
-        <ion-label>ID</ion-label>
-        <ion-icon [name]="ordenActual.columna === 'id' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
       </ion-item>
     </ion-col>
     <ion-col>
@@ -151,6 +151,7 @@
         <p><strong>Marca:</strong> {{ productoSeleccionado.marka || 'Marca no disponible' }}</p>
         <p><strong>Stock:</strong> {{ productoSeleccionado.stock || 'Stock no disponible' }}</p>
         <p><strong>Categoría:</strong> {{ productoSeleccionado.kategoriak?.izena || 'Categoría no disponible' }}</p>
+        <!-- Tienes que poner informacion del historial cuando este -->
       </div>
     </ion-content>
   </ion-modal>

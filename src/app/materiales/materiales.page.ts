@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { IonContent } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
-import { MaterialService } from '../services/Materiales.service';
+import { MaterialService } from '../services/materiales.service';
 import { firstValueFrom } from 'rxjs';
 
 @Component({
@@ -48,7 +48,7 @@ export class MaterialesPage implements OnInit {
       this.materiales = data;
       this.materialesFiltrados = [...this.materiales];
     } catch (error) {
-      console.error('Error al cargar productos:', error);
+      console.error('Error al cargar materiales:', error);
     }
   }
 
@@ -60,10 +60,10 @@ export class MaterialesPage implements OnInit {
     } else {
       this.paginaActual = pagina;
     }
-    this.moverVistaAlPrimerProducto();
+    this.moverVistaAlPrimerMaterial();
   }
   
-  moverVistaAlPrimerProducto() {
+  moverVistaAlPrimerMaterial() {
     if (this.content) {
       this.content.scrollToTop(500); 
     }
@@ -79,9 +79,9 @@ export class MaterialesPage implements OnInit {
   }
   
 
-  verDetalles(producto: any) {
-    console.log('Producto seleccionado:', producto);
-    this.materialSeleccionado = { ...producto };
+  verDetalles(material: any) {
+    console.log('Producto seleccionado:', material);
+    this.materialSeleccionado = { ...material };
     this.MaterialConInformacionSeleccionada = true;
   }
 
@@ -89,19 +89,18 @@ export class MaterialesPage implements OnInit {
     this.MaterialConInformacionSeleccionada = false;
   }
 
-  editarProducto(producto: any) {
-    this.MaterialSeleccionadoAnterior = { ...this.materialSeleccionado }; // Guardar el producto seleccionado previamente
+  editarProducto(material: any) {
+    this.MaterialSeleccionadoAnterior = { ...this.materialSeleccionado }; 
     this.editandoMaterial = true;
-    this.materialSeleccionado = { ...producto };
+    this.materialSeleccionado = { ...material };
 
-    // Mover la vista al primer producto
-    this.moverVistaAlPrimerProducto();
+    this.moverVistaAlPrimerMaterial();
   }
 
   async confirmarEdicion() {
     const alert = await this.alertController.create({
       header: '¿Estás seguro?',
-      message: 'Se actualizarán los valores del producto.',
+      message: 'Se actualizarán los valores del material.',
       buttons: [
         {
           text: 'Cancelar',
@@ -116,14 +115,14 @@ export class MaterialesPage implements OnInit {
 
             try {
               await firstValueFrom(this.MaterialService.actualizarMaterial(this.materialSeleccionado));
-              const index = this.materiales.findIndex(producto => producto.id === this.materialSeleccionado.id);
+              const index = this.materiales.findIndex(material => material.id === this.materialSeleccionado.id);
               if (index !== -1) {
                 this.materiales[index] = { ...this.materialSeleccionado };
                 this.aplicarFiltro({ target: { value: '' } });
               }
               this.editandoMaterial = false;
             } catch (error) {
-              console.error('Error al actualizar producto:', error);
+              console.error('Error al actualizar material:', error);
             }
           },
         },
@@ -134,32 +133,28 @@ export class MaterialesPage implements OnInit {
   }
 
   cancelarEdicion() {
-    // Restaurar el producto seleccionado previamente
+
     this.materialSeleccionado = { ...this.MaterialSeleccionadoAnterior };
     this.editandoMaterial = false;
   
-    // Si no estamos en vista móvil, volvemos a mostrar el producto seleccionado
     if (this.content && this.materialSeleccionado.id) {
-      const productoIndex = this.materiales.findIndex(p => p.id === this.materialSeleccionado.id);
-      if (productoIndex !== -1) {
-        // Mover la vista al producto seleccionado previamente
-        const productoElemento = document.getElementById(`producto-${this.materialSeleccionado.id}`);
-        if (productoElemento) {
-          // Detectar si estamos en un dispositivo móvil
-          const isMobile = window.innerWidth <= 768; // Ajusta el valor según tu necesidad
+      const materialIndex = this.materiales.findIndex(p => p.id === this.materialSeleccionado.id);
+      if (materialIndex !== -1) {
+        const materialElemento = document.getElementById(`ficha-${this.materialSeleccionado.id}`);
+        if (materialElemento) {
+
+          const isMobile = window.innerWidth <= 768;
   
-          // Si estamos en vista móvil, hacer un desplazamiento personalizado
           if (isMobile) {
-            productoElemento.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  
-            // Usar requestAnimationFrame para un desplazamiento suave después de scrollIntoView
+            materialElemento.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
             setTimeout(() => {
               window.requestAnimationFrame(() => {
-                window.scrollBy(0, 300); // Desplazamiento hacia abajo
+                window.scrollBy(0, 300); 
               });
-            }, 300); // Ajustar el retraso según sea necesario
+            }, 300); 
           } else {
-            productoElemento.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            materialElemento.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }
         }
       }
@@ -173,14 +168,14 @@ export class MaterialesPage implements OnInit {
     if (texto.trim() === '') {
       this.materialesFiltrados = [...this.materiales];
     } else {
-      this.materialesFiltrados = this.materiales.filter((producto) => {
-        const coincideIzena = producto.izena && producto.izena.toLowerCase().includes(texto);
-        const coincideMarka = producto.marka && producto.marka.toLowerCase().includes(texto);
-        const coincideId = producto.id && producto.id.toString().includes(texto);
-        const coincideIdKategoria = producto.id_kategoria && producto.id_kategoria.toString().includes(texto);
-        const coincideFecha = producto.fecha && this.compararFechas(producto.fecha, texto);
+      this.materialesFiltrados = this.materiales.filter((material) => {
+        const coincideIzena = material.izena && material.izena.toLowerCase().includes(texto);
+        const coincideMarka = material.marka && material.marka.toLowerCase().includes(texto);
+        const coincideId = material.id && material.id.toString().includes(texto);
+        const coincideEtiqueta = material.etiketa && material.etiketa.toString().includes(texto);
+        const coincideFecha = material.fecha && this.compararFechas(material.fecha, texto);
   
-        return coincideIzena || coincideMarka || coincideId || coincideIdKategoria || coincideFecha;
+        return coincideIzena || coincideMarka || coincideId || coincideEtiqueta || coincideFecha;
       });
     }
   }

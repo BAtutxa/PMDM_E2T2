@@ -39,6 +39,12 @@
   <!-- Filtro y ordenación de columnas -->
   <ion-row>
     <ion-col>
+      <ion-item button (click)="ordenarPor('id')">
+        <ion-label>ID</ion-label>
+        <ion-icon [name]="ordenActual.columna === 'id' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
+      </ion-item>
+    </ion-col>
+    <ion-col>
       <ion-item button (click)="ordenarPor('izena')">
         <ion-label>Nombre</ion-label>
         <ion-icon [name]="ordenActual.columna === 'izena' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
@@ -62,12 +68,6 @@
         <ion-icon [name]="ordenActual.columna === 'eguneratze_data' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
       </ion-item>
     </ion-col>
-    <ion-col>
-      <ion-item button (click)="ordenarPor('id')">
-        <ion-label>ID</ion-label>
-        <ion-icon [name]="ordenActual.columna === 'id' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
-      </ion-item>
-    </ion-col>
   </ion-row>
 
   <hr>
@@ -89,9 +89,10 @@
             <ion-input [(ngModel)]="materialSeleccionado.izena"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label position="floating">Marca</ion-label>
+            <ion-label position="floating">Etiqueta</ion-label>
             <ion-input [(ngModel)]="materialSeleccionado.etiketa"></ion-input>
           </ion-item>
+          <!-- Tienes que poner informacion del historial cuando este -->
           <ion-button expand="full" (click)="confirmarEdicion()">Confirmar</ion-button>
           <ion-button expand="full" color="danger" (click)="cancelarEdicion()">Cancelar</ion-button>
           <ion-button expand="full" class="custom-blue-button" (click)="verDetalles(materialSeleccionado)">

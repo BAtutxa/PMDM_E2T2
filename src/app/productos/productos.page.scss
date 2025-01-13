@@ -21,6 +21,14 @@ button {
     height: 50px;           /* Altura uniforme */
 }
 
+.custom-red-button {
+    --background: #270000;  /* Color rojo oscuro */
+    --border-radius: 4px;   /* Ajusta el radio del borde */
+    --color: white;         /* Color del texto */
+    width: 100%;            /* Asegura que el botón azul también tenga un ancho uniforme */
+    height: 50px;           /* Altura uniforme */
+}
+
 .custom-blue-button:hover {
     --background: #0056b3;  /* Color azul más oscuro */
 }
