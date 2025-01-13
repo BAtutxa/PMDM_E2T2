@@ -150,7 +150,7 @@
         <p><strong>Descripción:</strong> {{ productoSeleccionado.deskribapena || 'Descripción no disponible' }}</p>
         <p><strong>Marca:</strong> {{ productoSeleccionado.marka || 'Marca no disponible' }}</p>
         <p><strong>Stock:</strong> {{ productoSeleccionado.stock || 'Stock no disponible' }}</p>
-        <p><strong>Categoría:</strong> {{ productoSeleccionado.kategoria_izena || 'ID no disponible' }}</p>
+        <p><strong>Categoría:</strong> {{ productoSeleccionado.kategoriak?.izena || 'Categoría no disponible' }}</p>
       </div>
     </ion-content>
   </ion-modal>
