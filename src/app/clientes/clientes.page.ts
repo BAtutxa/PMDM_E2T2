@@ -4,6 +4,7 @@ import {IonContent} from '@ionic/angular';
 import { firstValueFrom } from 'rxjs';
 import { ClientesService} from '../services/clientes.service';
 import { HostListener } from '@angular/core';
+import { IBezero } from '../interfaces/IEBezero';
  
 @Component({
   selector: 'app-clientes',
@@ -11,29 +12,28 @@ import { HostListener } from '@angular/core';
   styleUrls: ['../productos/productos.page.scss'],
 })
 export class ClientesPage implements OnInit {
+  @ViewChild(IonContent, { static: false }) content: IonContent | undefined;
 
- @ViewChild(IonContent, { static: false }) content: IonContent | undefined;
- 
-   editandoFicha: boolean = false;
-   clienteConInformacionSeleccionada: boolean = false;
-   fichaSeleccionada: any = {};
-   fichaSeleccionadaAnterior: any = null; 
-   fichas: any[] = [];
-   fichasFiltradas: any[] = [];
-   mobilaDa: Boolean = false;
-   ordenActual: { columna: string, ascendente: boolean } = { columna: '', ascendente: true };
-   FichasPorPagina = 10;
-   paginaActual = 1;
-   paginacionMaxima = 0;
-   Math: any;
- 
-   constructor(private alertController: AlertController, private ClientesService: ClientesService) {}
- 
-   ngOnInit() {
-     this.mobilbista();
-     this.cargarProductos();
-   }
- 
+  editandoFicha: boolean = false;
+  clienteConInformacionSeleccionada: boolean = false;
+  fichaSeleccionada: IBezero | any = {};
+  fichaSeleccionadaAnterior: IBezero | null = null;
+  fichas: IBezero[] = [];
+  fichasFiltradas: IBezero[] = [];
+  mobilaDa: boolean = false;
+  ordenActual: { columna: keyof IBezero, ascendente: boolean } = { columna: 'id', ascendente: true };
+  FichasPorPagina = 10;
+  paginaActual = 1;
+  paginacionMaxima = 0;
+  Math: any;
+
+  constructor(private alertController: AlertController, private ClientesService: ClientesService) {}
+
+  ngOnInit() {
+    this.mobilbista();
+    this.cargarProductos();
+  }
+
    @HostListener('window:resize', ['$event'])
    onResize() {
      this.mobilbista();
@@ -44,14 +44,15 @@ export class ClientesPage implements OnInit {
    }
  
    async cargarProductos() {
-     try {
-       const data = await firstValueFrom(this.ClientesService.getFichas());
-       this.fichas = data;
-       this.fichasFiltradas = [...this.fichas];
-     } catch (error) {
-       console.error('Error al cargar clientes:', error);
-     }
-   }
+    try {
+      const data: IBezero[] = await firstValueFrom(this.ClientesService.getFichas());
+      this.fichas = data;
+      this.fichasFiltradas = [...this.fichas];
+    } catch (error) {
+      console.error('Error al cargar clientes:', error);
+    }
+  }
+  
  
    cambiarPagina(pagina: number) {
      if (pagina < 1) {
@@ -86,13 +87,14 @@ export class ClientesPage implements OnInit {
      this.clienteConInformacionSeleccionada = false;
    }
  
-   editarProducto(ficha: any) {
-     this.fichaSeleccionadaAnterior = { ...this.fichaSeleccionada }; 
-     this.editandoFicha = true;
-     this.fichaSeleccionada = { ...ficha };
- 
-     this.moverVistaAlaPrimeraFicha();
-   }
+   editarProducto(ficha: IBezero) {
+    this.fichaSeleccionadaAnterior = { ...this.fichaSeleccionada }; 
+    this.editandoFicha = true;
+    this.fichaSeleccionada = { ...ficha };
+  
+    this.moverVistaAlaPrimeraFicha();
+  }
+  
  
    async confirmarEdicion() {
      const alert = await this.alertController.create({
@@ -160,55 +162,57 @@ export class ClientesPage implements OnInit {
    }
    
    aplicarFiltro(event: any) {
-     const texto = event.target.value.toLowerCase();
-     
-     if (texto.trim() === '') {
-       this.fichasFiltradas = [...this.fichas];
-     } else {
-       this.fichasFiltradas = this.fichas.filter((ficha) => {
-         const coincideIzena = ficha.izena && ficha.izena.toLowerCase().includes(texto);
-         const coincideAbizena = ficha.abizena && ficha.abizena.toLowerCase().includes(texto);
-         const coincideId = ficha.id && ficha.id.toString().includes(texto);
-         const coincideTelefonoa = ficha.telefonoa && ficha.telefonoa.toString().includes(texto);
-         const coincideAzala = ficha.azal_sentikorra && ficha.azal_sentikorra.toString().includes(texto);
-         const coincideFecha = ficha.fecha && this.compararFechas(ficha.fecha, texto);
-   
-         return coincideIzena || coincideAbizena || coincideId || coincideTelefonoa || coincideAzala || coincideFecha;
-       });
-     }
-   }
+    const texto = event.target.value.toLowerCase();
+  
+    if (texto.trim() === '') {
+      this.fichasFiltradas = [...this.fichas];
+    } else {
+      this.fichasFiltradas = this.fichas.filter((ficha: IBezero) => {
+        const coincideIzena = ficha.izena.toLowerCase().includes(texto);
+        const coincideAbizena = ficha.abizena.toLowerCase().includes(texto);
+        const coincideId = ficha.id.toString().includes(texto);
+        const coincideTelefonoa = ficha.telefonoa.toString().includes(texto);
+        const coincideAzala = ficha.azal_sentikorra.toString().includes(texto);
+        const coincideFecha = ficha.sortze_data.toISOString().includes(texto);
+  
+        return coincideIzena || coincideAbizena || coincideId || coincideTelefonoa || coincideAzala || coincideFecha;
+      });
+    }
+  }
+  
    
    compararFechas(fecha: string, texto: string): boolean {
      const fechaNormalizada = fecha.toLowerCase();
      return fechaNormalizada.includes(texto);
    }
  
-   ordenarPor(columna: string) {
-     if (this.ordenActual.columna === columna) {
-       this.ordenActual.ascendente = !this.ordenActual.ascendente;
-     } else {
-       this.ordenActual.columna = columna;
-       this.ordenActual.ascendente = true;
-     }
- 
-     this.fichasFiltradas.sort((a, b) => {
-       let valorA = a[columna];
-       let valorB = b[columna];
- 
-       if (columna === 'sortze_data' || columna === 'eguneratze_data') {
-         valorA = valorA ? new Date(valorA) : null;
-         valorB = valorB ? new Date(valorB) : null;
-       }
- 
-       if (valorA < valorB || valorA === null) {
-         return this.ordenActual.ascendente ? -1 : 1;
-       } else if (valorA > valorB || valorB === null) {
-         return this.ordenActual.ascendente ? 1 : -1;
-       } else {
-         return 0;
-       }
-     });
-   }
+   ordenarPor(columna: keyof IBezero) {
+    if (this.ordenActual.columna === columna) {
+      this.ordenActual.ascendente = !this.ordenActual.ascendente;
+    } else {
+      this.ordenActual.columna = columna;
+      this.ordenActual.ascendente = true;
+    }
+  
+    this.fichasFiltradas.sort((a, b) => {
+      let valorA = a[columna];
+      let valorB = b[columna];
+  
+      if (columna === 'sortze_data' || columna === 'eguneratze_data' || columna === 'ezabatze_data') {
+        valorA = (typeof valorA === 'string' || typeof valorA === 'number') ? new Date(valorA) : valorA;
+        valorB = (typeof valorB === 'string' || typeof valorB === 'number') ? new Date(valorB) : valorB;
+      }
+  
+      if (valorA < valorB || valorA === null) {
+        return this.ordenActual.ascendente ? -1 : 1;
+      } else if (valorA > valorB || valorB === null) {
+        return this.ordenActual.ascendente ? 1 : -1;
+      } else {
+        return 0;
+      }
+    });
+  }
+  
  
    getOrdenClass(columna: string): string {
      if (this.ordenActual.columna === columna) {

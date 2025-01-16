@@ -130,7 +130,7 @@
       <ion-card-content>
         <p><strong>ID:</strong> {{ ficha.id || '-' }}</p>
         <p><strong>Piel sensible:</strong> 
-          {{ ficha.azal_sentikorra === 'B' ? 'Sí' : ficha.azal_sentikorra === 'E' ? 'No' : '-' }}
+          {{ ficha.azal_sentikorra ? 'Sí' : 'No' }}
         </p>        
         <p><strong>Telefono:</strong> {{ ficha.telefonoa || '-' }}</p>
         <p><strong>Fecha de creación:</strong> {{ ficha.data?.sortze_data | date:'yyyy-MM-dd' }}</p>
