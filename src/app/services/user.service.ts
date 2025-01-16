@@ -2,13 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import {IEUser} from '../interfaces/IEUser';
 
 //interface tiene que tener los mismos nombres que los atributos de la tabla
-interface User {
-  username: string;
-  pasahitza: string;
-  rola: string;  
-}
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +14,8 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUserByUsername(username: string): Observable<User | null> {
-    return this.http.get<User>(`${this.apiUrl}erabiltzaileak/${username}`).pipe( 
+  getUserByUsername(username: string): Observable<IEUser | null> {
+    return this.http.get<IEUser>(`${this.apiUrl}erabiltzaileak/${username}`).pipe( 
       catchError(error => {
         console.error('Error al obtener el usuario:', error);
         return of(null);  
@@ -31,7 +27,7 @@ export class UserService {
   
     // Llama a la API para obtener los datos del usuario
     return this.getUserByUsername(username).pipe(
-      map((user: User | null) => {
+      map((user: IEUser | null) => {
         console.log('Datos del usuario obtenidos de la API:', user); 
 
         if (!user || !user.pasahitza) {
