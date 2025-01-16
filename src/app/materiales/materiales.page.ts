@@ -3,6 +3,7 @@ import { IonContent } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { MaterialService } from '../services/materiales.service';
 import { firstValueFrom } from 'rxjs';
+import { IEMaterialak } from '../interfaces/IEMaterialak';
 
 @Component({
   selector: 'app-materiales',
@@ -15,10 +16,10 @@ export class MaterialesPage implements OnInit {
 
   editandoMaterial: boolean = false;
   MaterialConInformacionSeleccionada: boolean = false;
-  materialSeleccionado: any = {};
-  MaterialSeleccionadoAnterior: any = null; 
-  materiales: any[] = [];
-  materialesFiltrados: any[] = [];
+  materialSeleccionado: IEMaterialak | any = {};
+  MaterialSeleccionadoAnterior:  IEMaterialak | null = null;
+  materiales: IEMaterialak[] = [];
+  materialesFiltrados: IEMaterialak [] = [];
   mobilaDa: Boolean = false;
   ordenActual: { columna: string, ascendente: boolean } = { columna: '', ascendente: true };
   materialesPorPagina = 10;
@@ -79,8 +80,8 @@ export class MaterialesPage implements OnInit {
   }
   
 
-  verDetalles(material: any) {
-    console.log('Producto seleccionado:', material);
+  verDetalles(material: IEMaterialak) {
+    console.log('Material seleccionado:', material);
     this.materialSeleccionado = { ...material };
     this.MaterialConInformacionSeleccionada = true;
   }
@@ -89,7 +90,7 @@ export class MaterialesPage implements OnInit {
     this.MaterialConInformacionSeleccionada = false;
   }
 
-  editarProducto(material: any) {
+  editarProducto(material: IEMaterialak) {
     this.MaterialSeleccionadoAnterior = { ...this.materialSeleccionado }; 
     this.editandoMaterial = true;
     this.materialSeleccionado = { ...material };
@@ -170,12 +171,11 @@ export class MaterialesPage implements OnInit {
     } else {
       this.materialesFiltrados = this.materiales.filter((material) => {
         const coincideIzena = material.izena && material.izena.toLowerCase().includes(texto);
-        const coincideMarka = material.marka && material.marka.toLowerCase().includes(texto);
         const coincideId = material.id && material.id.toString().includes(texto);
         const coincideEtiqueta = material.etiketa && material.etiketa.toString().includes(texto);
-        const coincideFecha = material.fecha && this.compararFechas(material.fecha, texto);
+        const coincideFecha = material.data && this.compararFechas(material.data, texto);
   
-        return coincideIzena || coincideMarka || coincideId || coincideEtiqueta || coincideFecha;
+        return coincideIzena ||  coincideId || coincideEtiqueta || coincideFecha;
       });
     }
   }
@@ -194,8 +194,8 @@ export class MaterialesPage implements OnInit {
     }
 
     this.materialesFiltrados.sort((a, b) => {
-      let valorA = a[columna];
-      let valorB = b[columna];
+      let valorA = (a as any)[columna];
+      let valorB = (b as any)[columna];
 
       if (columna === 'sortze_data' || columna === 'eguneratze_data') {
         valorA = valorA ? new Date(valorA) : null;
