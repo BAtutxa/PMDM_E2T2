@@ -3,6 +3,7 @@ import { AlertController } from '@ionic/angular';
 import { ProductoService } from '../services/productos.service';
 import { firstValueFrom } from 'rxjs';
 import { IonContent } from '@ionic/angular';
+import { IEProduktuak } from '../interfaces/IEProduktuak';
 
 @Component({
   selector: 'app-productos',
@@ -14,10 +15,10 @@ export class ProductosPage implements OnInit {
 
   editandoProducto: boolean = false;
   productoConInformacionSeleccionada: boolean = false;
-  productoSeleccionado: any = {};
-  productoSeleccionadoAnterior: any = null; // Variable para almacenar el producto seleccionado previamente
-  productos: any[] = [];
-  productosFiltrados: any[] = [];
+  productoSeleccionado: IEProduktuak | any = {};
+  productoSeleccionadoAnterior: IEProduktuak | null = null; // Variable para almacenar el producto seleccionado previamente
+  productos: IEProduktuak[] = [];
+  productosFiltrados: IEProduktuak[] = [];
   mobilaDa: Boolean = false;
   ordenActual: { columna: string, ascendente: boolean } = { columna: '', ascendente: true };
   productosPorPagina = 10;
@@ -81,7 +82,7 @@ export class ProductosPage implements OnInit {
   }
   
 
-  verDetalles(producto: any) {
+  verDetalles(producto: IEProduktuak) {
     console.log('Producto seleccionado:', producto);
     this.productoSeleccionado = { ...producto };
     this.productoConInformacionSeleccionada = true;
@@ -91,7 +92,7 @@ export class ProductosPage implements OnInit {
     this.productoConInformacionSeleccionada = false;
   }
 
-  editarProducto(producto: any) {
+  editarProducto(producto: IEProduktuak) {
     this.productoSeleccionadoAnterior = { ...this.productoSeleccionado }; // Guardar el producto seleccionado previamente
     this.editandoProducto = true;
     this.productoSeleccionado = { ...producto };
@@ -180,7 +181,7 @@ export class ProductosPage implements OnInit {
         const coincideMarka = producto.marka && producto.marka.toLowerCase().includes(texto);
         const coincideId = producto.id && producto.id.toString().includes(texto);
         const coincideIdKategoria = producto.id_kategoria && producto.id_kategoria.toString().includes(texto);
-        const coincideFecha = producto.fecha && this.compararFechas(producto.fecha, texto);
+        const coincideFecha = producto.data && this.compararFechas(producto.data, texto);
   
         return coincideIzena || coincideMarka || coincideId || coincideIdKategoria || coincideFecha;
       });
@@ -201,8 +202,8 @@ export class ProductosPage implements OnInit {
     }
 
     this.productosFiltrados.sort((a, b) => {
-      let valorA = a[columna];
-      let valorB = b[columna];
+      let valorA = (a as any) [columna];
+      let valorB = (b as any) [columna];
 
       if (columna === 'sortze_data' || columna === 'eguneratze_data') {
         valorA = valorA ? new Date(valorA) : null;
