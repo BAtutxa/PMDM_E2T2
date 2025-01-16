@@ -180,7 +180,7 @@ export class ProductosPage implements OnInit {
         const coincideIzena = producto.izena && producto.izena.toLowerCase().includes(texto);
         const coincideMarka = producto.marka && producto.marka.toLowerCase().includes(texto);
         const coincideId = producto.id && producto.id.toString().includes(texto);
-        const coincideIdKategoria = producto.id_kategoria && producto.id_kategoria.toString().includes(texto);
+        const coincideIdKategoria = producto.kategoriak.id && producto.kategoriak.id.toString().includes(texto);
         const coincideFecha = producto.data && this.compararFechas(producto.data, texto);
         return coincideIzena || coincideMarka || coincideId || coincideIdKategoria || coincideFecha;
       });

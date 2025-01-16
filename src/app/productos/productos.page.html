@@ -127,7 +127,7 @@
         <p><strong>ID:</strong> {{ producto.id || '-' }}</p>
         <p><strong>Nombre:</strong> {{ producto.izena || '-' }}</p>
         <p><strong>Marca:</strong> {{ producto.marka || '-' }}</p>
-        <p><strong>ID Categoría:</strong> {{ producto.id_kategoria || '-' }}</p>
+        <p><strong>ID Categoría:</strong> {{ producto.kategoriak.id || '-' }}</p>
         <p><strong>Fecha de creación:</strong> {{ producto.data?.sortze_data | date:'yyyy-MM-dd' }}</p>
         <p><strong>Última actualización:</strong> {{ producto.data?.eguneratze_data ? (producto.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>
       </ion-card-content>
