@@ -4,7 +4,6 @@ import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import {IEUser} from '../interfaces/IEUser';
 
-//interface tiene que tener los mismos nombres que los atributos de la tabla
 
 @Injectable({
   providedIn: 'root'

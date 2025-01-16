@@ -173,7 +173,7 @@ export class ClientesPage implements OnInit {
         const coincideId = ficha.id.toString().includes(texto);
         const coincideTelefonoa = ficha.telefonoa.toString().includes(texto);
         const coincideAzala = ficha.azal_sentikorra.toString().includes(texto);
-        const coincideFecha = ficha.sortze_data.toISOString().includes(texto);
+        const coincideFecha = ficha.data && this.compararFechas(ficha.data, texto);
   
         return coincideIzena || coincideAbizena || coincideId || coincideTelefonoa || coincideAzala || coincideFecha;
       });
@@ -181,10 +181,14 @@ export class ClientesPage implements OnInit {
   }
   
    
-   compararFechas(fecha: string, texto: string): boolean {
-     const fechaNormalizada = fecha.toLowerCase();
-     return fechaNormalizada.includes(texto);
-   }
+  compararFechas(fecha: any, texto: string): boolean {
+    if (fecha instanceof Date && !isNaN(fecha.getTime())) {
+      const fechaNormalizada = fecha.toISOString().toLowerCase();
+      return fechaNormalizada.includes(texto.toLowerCase());
+    } else {
+      return false;
+    }
+  }
  
    ordenarPor(columna: keyof IBezero) {
     if (this.ordenActual.columna === columna) {

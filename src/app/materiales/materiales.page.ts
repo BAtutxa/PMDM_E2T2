@@ -180,10 +180,15 @@ export class MaterialesPage implements OnInit {
     }
   }
   
-  compararFechas(fecha: string, texto: string): boolean {
-    const fechaNormalizada = fecha.toLowerCase();
-    return fechaNormalizada.includes(texto);
+  compararFechas(fecha: any, texto: string): boolean {
+    if (fecha instanceof Date && !isNaN(fecha.getTime())) {
+      const fechaNormalizada = fecha.toISOString().toLowerCase();
+      return fechaNormalizada.includes(texto.toLowerCase());
+    } else {
+      return false;
+    }
   }
+  
 
   ordenarPor(columna: string) {
     if (this.ordenActual.columna === columna) {

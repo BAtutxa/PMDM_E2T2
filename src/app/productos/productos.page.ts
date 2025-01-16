@@ -182,16 +182,21 @@ export class ProductosPage implements OnInit {
         const coincideId = producto.id && producto.id.toString().includes(texto);
         const coincideIdKategoria = producto.id_kategoria && producto.id_kategoria.toString().includes(texto);
         const coincideFecha = producto.data && this.compararFechas(producto.data, texto);
-  
         return coincideIzena || coincideMarka || coincideId || coincideIdKategoria || coincideFecha;
       });
     }
   }
   
-  compararFechas(fecha: string, texto: string): boolean {
-    const fechaNormalizada = fecha.toLowerCase();
-    return fechaNormalizada.includes(texto);
+  compararFechas(fecha: any, texto: string): boolean {
+    if (fecha instanceof Date && !isNaN(fecha.getTime())) {
+      const fechaNormalizada = fecha.toISOString().toLowerCase();
+      return fechaNormalizada.includes(texto.toLowerCase());
+    } else {
+      return false;
+    }
   }
+  
+  
 
   ordenarPor(columna: string) {
     if (this.ordenActual.columna === columna) {
