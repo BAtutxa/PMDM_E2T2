@@ -116,7 +116,10 @@ export class ProductosPage implements OnInit {
             const now = new Date().toISOString();
             this.productoSeleccionado.data = this.productoSeleccionado.data || {};
             this.productoSeleccionado.data.eguneratze_data = now;
-
+  
+            // Aquí imprimes el producto antes de enviarlo al backend
+            console.log('Producto a actualizar:', JSON.stringify(this.productoSeleccionado));
+  
             try {
               await firstValueFrom(this.productoService.actualizarProducto(this.productoSeleccionado));
               const index = this.productos.findIndex(producto => producto.id === this.productoSeleccionado.id);
@@ -132,9 +135,10 @@ export class ProductosPage implements OnInit {
         },
       ],
     });
-
+  
     await alert.present();
   }
+  
 
   cancelarEdicion() {
     // Restaurar el producto seleccionado previamente
