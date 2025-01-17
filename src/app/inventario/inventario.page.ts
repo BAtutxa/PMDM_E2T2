@@ -9,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class InventarioPage implements OnInit {
 
  public inventoryTitle: string = '';
-   public productLabel: string = '';
+  public productLabel: string = '';
    public materialLabel: string = '';
  
    constructor(private translateService: TranslateService) {

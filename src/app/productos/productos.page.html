@@ -1,8 +1,20 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Productos</ion-title>
+    <ion-title>{{ title }}</ion-title>
+    <ion-buttons slot="end">
+      <!-- Selector de idioma -->
+      <ion-button (click)="changeLanguage('eu')">
+        <img src="assets/icon/euskera.png" alt="Euskera" style="width: 24px; height: 24px; margin-right: 5px;"> Euskera
+      </ion-button>
+      
+      <ion-button (click)="changeLanguage('es')">
+        <img src="assets/icon/spain.png" alt="Castellano" style="width: 24px; height: 24px; margin-right: 5px;"> Castellano
+      </ion-button>
+      
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
+
 
 <ion-content [fullscreen]="true">
   <!-- Buscador -->
@@ -15,7 +27,7 @@
 <!-- Selector de productos por página -->
 <div class="productos-por-pagina">
   <ion-item class="producto-item">
-    <ion-label size="small">Productos:</ion-label>
+    <ion-label size="small">{{title}}:</ion-label>
     <ion-select [(ngModel)]="productosPorPagina" interface="popover" size="small" (ionChange)="cambiarPagina(1)">
       <ion-select-option [value]="5">5</ion-select-option>
       <ion-select-option [value]="10">10</ion-select-option>
@@ -46,31 +58,31 @@
     </ion-col>
     <ion-col>
       <ion-item button (click)="ordenarPor('izena')">
-        <ion-label>Izena</ion-label>
+        <ion-label>{{name}}</ion-label>
         <ion-icon [name]="ordenActual.columna === 'izena' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
       </ion-item>
     </ion-col>
     <ion-col>
       <ion-item button (click)="ordenarPor('marka')">
-        <ion-label>Marca</ion-label>
+        <ion-label>{{brand}}</ion-label>
         <ion-icon [name]="ordenActual.columna === 'marka' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
       </ion-item>
     </ion-col>
     <ion-col>
       <ion-item button (click)="ordenarPor('sortze_data')">
-        <ion-label>Fecha creación</ion-label>
+        <ion-label>{{cd}}</ion-label>
         <ion-icon [name]="ordenActual.columna === 'sortze_data' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
       </ion-item>
     </ion-col>
     <ion-col>
       <ion-item button (click)="ordenarPor('eguneratze_data')">
-        <ion-label>Fecha actualización</ion-label>
+        <ion-label>{{ud}}</ion-label>
         <ion-icon [name]="ordenActual.columna === 'eguneratze_data' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
       </ion-item>
     </ion-col>
     <ion-col>
       <ion-item button (click)="ordenarPor('id_kategoria')">
-        <ion-label>ID categoría</ion-label>
+        <ion-label>{{id_category}}</ion-label>
         <ion-icon [name]="ordenActual.columna === 'id_kategoria' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
       </ion-item>
     </ion-col>

@@ -4,6 +4,7 @@ import { ProductoService } from '../services/productos.service';
 import { firstValueFrom } from 'rxjs';
 import { IonContent } from '@ionic/angular';
 import { IEProduktuak } from '../interfaces/IEProduktuak';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-productos',
@@ -26,11 +27,22 @@ export class ProductosPage implements OnInit {
   paginacionMaxima = 0;
   Math: any;
 
-  constructor(private alertController: AlertController, private productoService: ProductoService) {}
+  //tradukzioa
+  title :string = ''
+  name :string = ''
+  brand :string = ''
+  id_category :string = ''
+  cd :string = ''
+  ud :string = ''
+
+  constructor(private alertController: AlertController, private productoService: ProductoService, private translateService: TranslateService) {}
 
   ngOnInit() {
     this.mobilbista();
     this.cargarProductos();
+    this.translateLabels();
+    this.translateService.setDefaultLang('es');
+    this.translateService.use('es');
   }
 
   @HostListener('window:resize', ['$event'])
@@ -62,12 +74,9 @@ export class ProductosPage implements OnInit {
     }
     this.moverVistaAlPrimerProducto();
   }
-  
-  
-  // Mueve la vista al primer producto
+
   moverVistaAlPrimerProducto() {
     if (this.content) {
-      // Desplazar la vista a la posición del primer producto
       this.content.scrollToTop(500); // Ajusta el tiempo si es necesario
     }
   }
@@ -80,7 +89,6 @@ export class ProductosPage implements OnInit {
     }
     return paginacion;
   }
-  
 
   verDetalles(producto: IEProduktuak) {
     console.log('Producto seleccionado:', producto);
@@ -96,8 +104,6 @@ export class ProductosPage implements OnInit {
     this.productoSeleccionadoAnterior = { ...this.productoSeleccionado }; // Guardar el producto seleccionado previamente
     this.editandoProducto = true;
     this.productoSeleccionado = { ...producto };
-
-    // Mover la vista al primer producto
     this.moverVistaAlPrimerProducto();
   }
 
@@ -116,10 +122,9 @@ export class ProductosPage implements OnInit {
             const now = new Date().toISOString();
             this.productoSeleccionado.data = this.productoSeleccionado.data || {};
             this.productoSeleccionado.data.eguneratze_data = now;
-  
-            // Aquí imprimes el producto antes de enviarlo al backend
+
             console.log('Producto a actualizar:', JSON.stringify(this.productoSeleccionado));
-  
+
             try {
               await firstValueFrom(this.productoService.actualizarProducto(this.productoSeleccionado));
               const index = this.productos.findIndex(producto => producto.id === this.productoSeleccionado.id);
@@ -135,36 +140,27 @@ export class ProductosPage implements OnInit {
         },
       ],
     });
-  
+
     await alert.present();
   }
-  
 
   cancelarEdicion() {
-    // Restaurar el producto seleccionado previamente
     this.productoSeleccionado = { ...this.productoSeleccionadoAnterior };
     this.editandoProducto = false;
-  
-    // Si no estamos en vista móvil, volvemos a mostrar el producto seleccionado
+
     if (this.content && this.productoSeleccionado.id) {
       const productoIndex = this.productos.findIndex(p => p.id === this.productoSeleccionado.id);
       if (productoIndex !== -1) {
-        // Mover la vista al producto seleccionado previamente
         const productoElemento = document.getElementById(`producto-${this.productoSeleccionado.id}`);
         if (productoElemento) {
-          // Detectar si estamos en un dispositivo móvil
-          const isMobile = window.innerWidth <= 768; // Ajusta el valor según tu necesidad
-  
-          // Si estamos en vista móvil, hacer un desplazamiento personalizado
+          const isMobile = window.innerWidth <= 768;
           if (isMobile) {
             productoElemento.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  
-            // Usar requestAnimationFrame para un desplazamiento suave después de scrollIntoView
             setTimeout(() => {
               window.requestAnimationFrame(() => {
-                window.scrollBy(0, 300); // Desplazamiento hacia abajo
+                window.scrollBy(0, 300);
               });
-            }, 300); // Ajustar el retraso según sea necesario
+            }, 300);
           } else {
             productoElemento.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }
@@ -172,8 +168,7 @@ export class ProductosPage implements OnInit {
       }
     }
   }
-  
-  
+
   aplicarFiltro(event: any) {
     const texto = event.target.value.toLowerCase();
     
@@ -190,7 +185,7 @@ export class ProductosPage implements OnInit {
       });
     }
   }
-  
+
   compararFechas(fecha: any, texto: string): boolean {
     if (fecha instanceof Date && !isNaN(fecha.getTime())) {
       const fechaNormalizada = fecha.toISOString().toLowerCase();
@@ -199,8 +194,6 @@ export class ProductosPage implements OnInit {
       return false;
     }
   }
-  
-  
 
   ordenarPor(columna: string) {
     if (this.ordenActual.columna === columna) {
@@ -235,4 +228,28 @@ export class ProductosPage implements OnInit {
     }
     return '';
   }
-} 
+
+  // Método para cargar las traducciones
+  translateLabels() {
+    this.translateService.get([
+      'PRODUCT.TITLE',
+      'PRODUCT.NAME',
+      'PRODUCT.BRAND',
+      'PRODUCT.ID_CATEGORY',
+      'PRODUCT.CD',
+      'PRODUCT.UD'
+    ]).subscribe((translations: { [key: string]: any; }) => {
+      this.title = translations['PRODUCT.TITLE'];
+      this.name = translations['PRODUCT.NAME'];
+      this.brand = translations['PRODUCT.BRAND'];
+      this.id_category = translations['PRODUCT.ID_CATEGORY'];
+      this.cd = translations['PRODUCT.CD'];
+      this.ud = translations['PRODUCT.UD'];
+    });
+  }
+
+  changeLanguage(lang: string) {
+    this.translateService.use(lang); // Cambiar el idioma
+    this.translateLabels(); // Recargar las traducciones
+  }
+}

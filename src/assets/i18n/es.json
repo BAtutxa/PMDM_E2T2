@@ -23,6 +23,14 @@
     "TITLE": "Inventario",
     "PRODUCT": "Productos",
     "MATERIAL": "Materiales"
+  },
+  "PRODUCT": {
+    "TITLE": "Productos",
+    "NAME": "Nombre",
+    "BRAND": "Marca",
+    "ID_CATEGORY": "ID categoria",
+    "CD": "Fecha creación",
+    "UD": "Fecha actualización"
   }
-  }
+}
   

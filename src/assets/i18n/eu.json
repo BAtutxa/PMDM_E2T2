@@ -23,5 +23,13 @@
     "TITLE": "Inbentarioa",
     "PRODUCT": "Produktuak",
     "MATERIAL": "Materialak"
+  },
+  "PRODUCT": {
+    "TITLE": "Productuak",
+    "NAME": "Izena",
+    "BRAND": "Marka",
+    "ID_KATEGORY": "ID kategoria",
+    "CD": "Sortze data",
+    "UD": "Eguneratze data"
   }
 }
