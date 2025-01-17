@@ -18,6 +18,11 @@
       "SERVICES": "Servicios",
       "TICKETS": "Tickets",
       "ADMINISTRATION": "Administración"
-    }
+    },
+    "INVENTORY": {
+    "TITLE": "Inventario",
+    "PRODUCT": "Productos",
+    "MATERIAL": "Materiales"
+  }
   }
   

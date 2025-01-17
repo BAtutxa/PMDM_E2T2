@@ -18,5 +18,10 @@
     "SERVICES": "Zerbitsuak",
     "TICKETS": "Ticket-ak",
     "ADMINISTRATION": "Administrazioa"
+  },
+  "INVENTORY": {
+    "TITLE": "Inbentarioa",
+    "PRODUCT": "Produktuak",
+    "MATERIAL": "Materialak"
   }
 }
