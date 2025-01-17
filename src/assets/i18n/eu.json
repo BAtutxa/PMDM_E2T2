@@ -9,5 +9,14 @@
       "INVALID_CREDENTIALS": "Egiaztagiri baliogabeak",
       "GENERIC_ERROR": "Saioa hastean errorea"
     }
+  },
+  "MENU": {
+    "TITLE": "Menu nagusia",
+    "INVENTORY": "Inbentarioa",
+    "APPOINTMENTS": "Hitzorduak",
+    "CUSTOMERS": "Bezeroak",
+    "SERVICES": "Zerbitsuak",
+    "TICKETS": "Ticket-ak",
+    "ADMINISTRATION": "Administrazioa"
   }
 }

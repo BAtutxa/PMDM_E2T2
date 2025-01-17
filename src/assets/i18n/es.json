@@ -9,6 +9,15 @@
         "INVALID_CREDENTIALS": "Credenciales inválidas",
         "GENERIC_ERROR": "Error al iniciar sesión"
       }
+    },
+    "MENU": {
+      "TITLE": "Menú principal",
+      "INVENTORY": "Inventario",
+      "APPOINTMENTS": "Citas",
+      "CUSTOMERS": "Clientes",
+      "SERVICES": "Servicios",
+      "TICKETS": "Tickets",
+      "ADMINISTRATION": "Administración"
     }
   }
   
