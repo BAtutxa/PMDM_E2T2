@@ -6,15 +6,36 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { FooterComponent } from './footer/footer.component'; 
-import { provideHttpClient } from '@angular/common/http';
+import { FooterComponent } from './footer/footer.component';
+
+import { provideHttpClient, HttpClient } from '@angular/common/http';
+
+// Importaciones para ngx-translate
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+// Factory para cargar archivos JSON de traducción
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json'); // Ruta a tus archivos JSON de traducción
+}
 
 @NgModule({
   declarations: [AppComponent, FooterComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: createTranslateLoader,
+        deps: [HttpClient], // Define HttpClient como dependencia
+      },
+    }),
+  ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    provideHttpClient() 
+    provideHttpClient(), // Configuración del cliente HTTP
   ],
   bootstrap: [AppComponent],
 })

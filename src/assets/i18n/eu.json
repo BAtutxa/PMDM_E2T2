@@ -1,0 +1,13 @@
+{
+  "LOGIN": {
+    "TITLE": "Hasi saioa",
+    "WELCOME": "Ongi etorri",
+    "NAME": "Izena",
+    "PASSWORD": "Pasahitza",
+    "SUBMIT": "Bidali",
+    "ERROR": {
+      "INVALID_CREDENTIALS": "Egiaztagiri baliogabeak",
+      "GENERIC_ERROR": "Saioa hastean errorea"
+    }
+  }
+}

@@ -1,6 +1,11 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Saioa hasi</ion-title>
+    <ion-title>{{ title }}</ion-title>
+    <ion-buttons slot="end">
+      <!-- Selector de idioma -->
+      <ion-button (click)="changeLanguage('eu')">🇪🇺 Euskera</ion-button>
+      <ion-button (click)="changeLanguage('es')">🇪🇸 Castellano</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -18,25 +23,31 @@
       <ion-col size="12" size-md="8" offset-md="2" size-lg="6" offset-lg="3">
         <ion-card class="login-card">
           <ion-card-header>
-            <ion-card-title>Ongi etorri</ion-card-title>
+            <ion-card-title>{{ welcomeMessage }}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
             <form (submit)="login()">
+              <!-- Campo de nombre -->
               <ion-item color="primary">
-                <ion-label position="floating">Izen abizenak</ion-label>
-                <ion-input type="string" [(ngModel)]="name" name="name" required></ion-input>
+                <ion-label position="floating">{{ nameLabel }}</ion-label>
+                <ion-input type="text" [(ngModel)]="name" name="name" required></ion-input>
               </ion-item>
 
+              <!-- Campo de contraseña -->
               <ion-item color="primary">
-                <ion-label position="floating">Pasahitza</ion-label>
+                <ion-label position="floating">{{ passwordLabel }}</ion-label>
                 <ion-input type="password" [(ngModel)]="password" name="password" required></ion-input>
               </ion-item>
 
+              <!-- Mensaje de error -->
               <ion-text color="danger" *ngIf="errorMessage">
                 <p>{{ errorMessage }}</p>
               </ion-text>
 
-              <ion-button expand="block" type="submit" color="primary" class="submit-button">Saioa hasi</ion-button>
+              <!-- Botón de envío -->
+              <ion-button expand="block" type="submit" color="primary" class="submit-button">
+                {{ submitLabel }}
+              </ion-button>
             </form>
           </ion-card-content>
         </ion-card>

@@ -1,0 +1,14 @@
+{
+    "LOGIN": {
+      "TITLE": "Iniciar sesión",
+      "WELCOME": "Bienvenido",
+      "NAME": "Nombre",
+      "PASSWORD": "Contraseña",
+      "SUBMIT": "Enviar",
+      "ERROR": {
+        "INVALID_CREDENTIALS": "Credenciales inválidas",
+        "GENERIC_ERROR": "Error al iniciar sesión"
+      }
+    }
+  }
+  
