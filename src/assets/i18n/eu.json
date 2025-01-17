@@ -25,11 +25,22 @@
     "MATERIAL": "Materialak"
   },
   "PRODUCT": {
-    "TITLE": "Productuak",
+    "TITLE": "Produktuak",
     "NAME": "Izena",
     "BRAND": "Marka",
-    "ID_KATEGORY": "ID kategoria",
+    "ID_CATEGORY": "ID kategoria",
     "CD": "Sortze data",
-    "UD": "Eguneratze data"
+    "UD": "Eguneratze data",
+    "EDIT": "Editatu",
+    "CONFIRM":"Konfirmatu",
+    "CANCEL":"Utzi",
+    "INFO": "Informazio adizioanala",
+    "SEARCH": "Bilatu"
+  },
+    "ALERT": {
+    "HEADER": "Zeguru zaude?",
+    "MESSAGE": "Produktuen balioak eguneratuko dira.",
+    "CANCEL": "Kantzelatu",
+    "CONFIRM": "Konfirmatu"
   }
 }

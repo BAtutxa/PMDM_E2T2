@@ -34,6 +34,11 @@ export class ProductosPage implements OnInit {
   id_category :string = ''
   cd :string = ''
   ud :string = ''
+  edit :string = ''
+  confirm:string = ''
+  cancel:string = ''
+  info :string = ''
+  search :string = ''
 
   constructor(private alertController: AlertController, private productoService: ProductoService, private translateService: TranslateService) {}
 
@@ -108,23 +113,25 @@ export class ProductosPage implements OnInit {
   }
 
   async confirmarEdicion() {
+    const translations = await this.translateService.get(['ALERT.HEADER', 'ALERT.MESSAGE', 'ALERT.CANCEL', 'ALERT.CONFIRM']).toPromise();
+  
     const alert = await this.alertController.create({
-      header: '¿Estás seguro?',
-      message: 'Se actualizarán los valores del producto.',
+      header: translations['ALERT.HEADER'],
+      message: translations['ALERT.MESSAGE'],
       buttons: [
         {
-          text: 'Cancelar',
+          text: translations['ALERT.CANCEL'],
           role: 'cancel',
         },
         {
-          text: 'Confirmar',
+          text: translations['ALERT.CONFIRM'],
           handler: async () => {
             const now = new Date().toISOString();
             this.productoSeleccionado.data = this.productoSeleccionado.data || {};
             this.productoSeleccionado.data.eguneratze_data = now;
-
+  
             console.log('Producto a actualizar:', JSON.stringify(this.productoSeleccionado));
-
+  
             try {
               await firstValueFrom(this.productoService.actualizarProducto(this.productoSeleccionado));
               const index = this.productos.findIndex(producto => producto.id === this.productoSeleccionado.id);
@@ -140,7 +147,7 @@ export class ProductosPage implements OnInit {
         },
       ],
     });
-
+  
     await alert.present();
   }
 
@@ -237,7 +244,12 @@ export class ProductosPage implements OnInit {
       'PRODUCT.BRAND',
       'PRODUCT.ID_CATEGORY',
       'PRODUCT.CD',
-      'PRODUCT.UD'
+      'PRODUCT.UD',
+      'PRODUCT.EDIT',
+      'PRODUCT.CONFIRM',
+      'PRODUCT.CANCEL',
+      'PRODUCT.INFO',
+      'PRODUCT.SEARCH'
     ]).subscribe((translations: { [key: string]: any; }) => {
       this.title = translations['PRODUCT.TITLE'];
       this.name = translations['PRODUCT.NAME'];
@@ -245,6 +257,11 @@ export class ProductosPage implements OnInit {
       this.id_category = translations['PRODUCT.ID_CATEGORY'];
       this.cd = translations['PRODUCT.CD'];
       this.ud = translations['PRODUCT.UD'];
+      this.confirm = translations['PRODUCT.EDIT'];
+      this.confirm = translations['PRODUCT.CONFIRM'];
+      this.cancel = translations['PRODUCT.CANCEL'];
+      this.info = translations['PRODUCT.INFO'];
+      this.search = translations['PRODUCT.SEARCH']
     });
   }
 

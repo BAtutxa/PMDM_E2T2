@@ -30,7 +30,18 @@
     "BRAND": "Marca",
     "ID_CATEGORY": "ID categoria",
     "CD": "Fecha creación",
-    "UD": "Fecha actualización"
+    "UD": "Fecha actualización",
+    "EDIT": "Editar",
+    "CONFIRM":"Confirmar",
+    "CANCEL":"Cancelar",
+    "INFO": "Información adicional",
+    "SEARCH": "Buscar"
+  },
+  "ALERT": {
+    "HEADER": "¿Estás seguro?",
+    "MESSAGE": "Se actualizarán los valores del producto.",
+    "CANCEL": "Cancelar",
+    "CONFIRM": "Confirmar"
   }
 }
   
