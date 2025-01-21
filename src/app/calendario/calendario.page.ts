@@ -1,11 +1,13 @@
-import { Component, OnInit,  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router'; // Importa Router
+import { CitaService } from '../services/cita.service';
 
 @Component({
   selector: 'app-calendario',
   templateUrl: './calendario.page.html',
   styleUrls: ['./calendario.page.scss'],
 })
-export class CalendarioPage {
+export class CalendarioPage implements OnInit {
   meses = [
     'Urtarrila', 'Otsaila', 'Martxoa', 'Apirila', 'Maiatza', 'Ekaina',
     'Uztaila', 'Abuztua', 'Iraila', 'Urria', 'Azaroa', 'Abendua',
@@ -20,10 +22,7 @@ export class CalendarioPage {
   grupoSeleccionado = '';
   citasSeleccionadas: string[] = [];
 
-  grupos = ['Talde_1', 'Talde_2', 'Talde_3', 'Talde_4', 'Talde_5'];
-  citas = ['Alejandro, ile mozketa', 'Oier, ile mozketa', 'Raúl, tintaketa', 'Luca, orrazketa'];
-
-  constructor() {
+  constructor(private router: Router, private citaService: CitaService) {
     this.generarCalendario();
   }
 
@@ -60,15 +59,38 @@ export class CalendarioPage {
   seleccionarDia(dia: number) {
     if (dia > 0) {
       this.diaSeleccionado = dia;
-
-      // Actualiza el grupo y las citas aleatoriamente
-      this.grupoSeleccionado = this.grupos[Math.floor(Math.random() * this.grupos.length)];
-      this.citasSeleccionadas = Array.from(
-        { length: Math.floor(Math.random() * 4) + 1 },
-        () => this.citas[Math.floor(Math.random() * this.citas.length)],
-      );
+      this.obtenerCitasDeFecha(dia);
     }
   }
-  ngOnInit() {
+
+  irACitas() {
+    if (this.diaSeleccionado) {
+      const fechaSeleccionada = `${this.anioActual}-${(this.mesActual + 1).toString().padStart(2, '0')}-${this.diaSeleccionado.toString().padStart(2, '0')}`;
+
+      // Pasa la fecha seleccionada como query parameter al navegar
+      this.router.navigate(['/citas'], { queryParams: { fecha: fechaSeleccionada } });
+    } else {
+      alert('Por favor selecciona una fecha');
+    }
   }
+
+  obtenerCitasDeFecha(dia: number) {
+    const fechaSeleccionada = `${this.anioActual}-${(this.mesActual + 1).toString().padStart(2, '0')}-${dia.toString().padStart(2, '0')}`;
+    
+    this.citaService.getCitasPorFecha(fechaSeleccionada).subscribe(citas => {
+      this.citasSeleccionadas = citas.map(cita => 
+        `${cita.hasiera_ordua} - ${cita.amaiera_ordua}: ${cita.deskribapena}`
+      );
+    }, error => {
+      console.error('Error al obtener citas:', error);
+      this.citasSeleccionadas = ['Error al cargar las citas'];
+    });
+  }
+
+  // Nueva función para navegar a 'gestionar-citas'
+  irAGestionarCitas() {
+    this.router.navigate(['/gestionar-citas']);
+  }
+
+  ngOnInit() {}
 }

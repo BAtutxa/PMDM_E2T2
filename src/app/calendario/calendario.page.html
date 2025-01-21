@@ -38,16 +38,25 @@
         <ion-label>Hitzorduak</ion-label>
         <ion-textarea [value]="citasSeleccionadas.join('\n')" readonly></ion-textarea>
       </ion-item>
-      
+
       <!-- Botones con 'x' y 'v' -->
       <div class="botones">
         <ion-button color="danger" fill="clear" routerLink="/menu">
           <ion-icon name="close"></ion-icon> <!-- 'x' icon -->
         </ion-button>
-        <ion-button color="success" fill="clear" routerLink="/citas">
+        <ion-button color="success" fill="clear" (click)="irACitas()">
           <ion-icon name="checkmark"></ion-icon> <!-- 'v' icon -->
         </ion-button>
       </div>
     </div>
   </div>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <!-- Nuevo botón cuadrado para gestionar citas -->
+    <ion-button expand="block" class="gestionar-citas-button" (click)="irAGestionarCitas()">
+      Hitzorduak Kudeatu
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

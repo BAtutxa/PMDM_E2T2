@@ -59,6 +59,14 @@ const routes: Routes = [
     path: 'clientes',
     loadChildren: () => import('./clientes/clientes.module').then( m => m.ClientesPageModule)
   },
+  {
+    path: 'confirmar-cita',
+    loadChildren: () => import('./confirmar-cita/confirmar-cita.module').then( m => m.ConfirmarCitaPageModule)
+  },
+  {
+    path: 'gestionar-citas',
+    loadChildren: () => import('./gestionar-citas/gestionar-citas.module').then( m => m.GestionarCitasPageModule)
+  },
 
 ];
 

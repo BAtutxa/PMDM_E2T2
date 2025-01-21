@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { FooterComponent } from './footer/footer.component'; 
 import { provideHttpClient } from '@angular/common/http';
 
+
 @NgModule({
   declarations: [AppComponent, FooterComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],

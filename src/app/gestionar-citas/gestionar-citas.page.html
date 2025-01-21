@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Gestionar Citas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <h1>Gestión de Citas</h1>
+
+    <!-- Mostrar la lista de citas -->
+    <div *ngIf="citas && citas.length > 0" class="citas-container">
+      <div *ngFor="let cita of citas" (click)="mostrarDetalles(cita)" class="cita-card">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>{{ cita.izena }} - {{ cita.data }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>{{ cita.hasiera_ordua }} - {{ cita.amaiera_ordua }}</p>
+            <p>{{ cita.deskribapena }}</p>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+
+    <!-- Mostrar detalles de la cita seleccionada -->
+    <div *ngIf="citaSeleccionada" class="detalles-cita">
+      <h2>Detalles de la Cita</h2>
+      <ion-item>
+        <ion-label>ID</ion-label>
+        <ion-input [(ngModel)]="citaSeleccionada.id" readonly></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Eserlekua</ion-label>
+        <ion-input [(ngModel)]="citaSeleccionada.eserlekua" readonly></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Data</ion-label>
+        <ion-input [(ngModel)]="citaSeleccionada.data" readonly></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Hasiera Ordua</ion-label>
+        <ion-input [(ngModel)]="citaSeleccionada.hasiera_ordua" readonly></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Amaiera Ordua</ion-label>
+        <ion-input [(ngModel)]="citaSeleccionada.amaiera_ordua" readonly></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Izena</ion-label>
+        <ion-input [(ngModel)]="citaSeleccionada.izena" readonly></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Telefonoa</ion-label>
+        <ion-input [(ngModel)]="citaSeleccionada.telefonoa" readonly></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Deskribapena</ion-label>
+        <ion-textarea [(ngModel)]="citaSeleccionada.deskribapena" readonly></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Etxekoa</ion-label>
+        <ion-input [(ngModel)]="citaSeleccionada.etxekoa" readonly></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Prezio Totala</ion-label>
+        <ion-input [(ngModel)]="citaSeleccionada.prezio_totala" readonly></ion-input>
+      </ion-item>
+    </div>
+
+  </div>
+</ion-content>
