@@ -81,10 +81,10 @@
       </ion-item>
     </ion-col>
     <ion-col>
-      <ion-item button (click)="ordenarPor('kategoriak.id')">
-        <ion-label>{{ id_category }}</ion-label>
-        <ion-icon [name]="ordenActual.columna === 'kategoriak.id' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
-      </ion-item>      
+      <ion-item button (click)="ordenarPor('id_kategoria')">
+        <ion-label>{{id_category}}</ion-label>
+        <ion-icon [name]="ordenActual.columna === 'id_kategoria' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
+      </ion-item>
     </ion-col>
   </ion-row>
 

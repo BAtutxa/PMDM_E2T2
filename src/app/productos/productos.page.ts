@@ -114,18 +114,18 @@ export class ProductosPage implements OnInit {
   }
 
   async confirmarEdicion() {
-    const translations = await this.translateService.get(['ALERT.HEADER', 'ALERT.MESSAGE', 'ALERT.CANCEL', 'ALERT.CONFIRM']).toPromise();
+    const translations = await this.translateService.get(['ALERTMATERIAL.HEADER', 'ALERTMATERIAL.MESSAGE', 'ALERTMATERIAL.CANCEL', 'ALERTMATERIAL.CONFIRM']).toPromise();
   
     const alert = await this.alertController.create({
-      header: translations['ALERT.HEADER'],
-      message: translations['ALERT.MESSAGE'],
+      header: translations['ALERTMATERIAL.HEADER'],
+      message: translations['ALERTMATERIAL.MESSAGE'],
       buttons: [
         {
-          text: translations['ALERT.CANCEL'],
+          text: translations['ALERTMATERIAL.CANCEL'],
           role: 'cancel',
         },
         {
-          text: translations['ALERT.CONFIRM'],
+          text: translations['ALERTMATERIAL.CONFIRM'],
           handler: async () => {
             const now = new Date().toISOString();
             this.productoSeleccionado.data = this.productoSeleccionado.data || {};
@@ -274,7 +274,7 @@ export class ProductosPage implements OnInit {
       this.id_category = translations['PRODUCT.ID_CATEGORY'];
       this.cd = translations['PRODUCT.CD'];
       this.ud = translations['PRODUCT.UD'];
-      this.confirm = translations['PRODUCT.EDIT'];
+      this.edit = translations['PRODUCT.EDIT'];
       this.confirm = translations['PRODUCT.CONFIRM'];
       this.cancel = translations['PRODUCT.CANCEL'];
       this.info = translations['PRODUCT.INFO'];

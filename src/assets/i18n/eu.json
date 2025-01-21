@@ -37,10 +37,19 @@
     "INFO": "Informazio adizioanala",
     "SEARCH": "Bilatu"
   },
-    "ALERT": {
+    "ALERTPRODUCT": {
     "HEADER": "Zeguru zaude?",
     "MESSAGE": "Produktuen balioak eguneratuko dira.",
-    "CANCEL": "Kantzelatu",
-    "CONFIRM": "Konfirmatu"
+    "CANCEL": "Utzi",
+    "CONFIRM": "Baieztatu"
+  },
+  "MATERIAL": {
+    "TITLE": "Materialak",
+    "LABEL": "Etiketa",
+    "HEADER": "Ziur zaude?",
+    "MESSAGE": "Materialaren balioak eguneratuko dira.",
+    "EDIT": "Materiala editatzen",
+    "DETAILS": "Materialaren xehetasunak",
+    "CLOSE": "Itxi"
   }
 }

@@ -4,6 +4,7 @@ import { AlertController } from '@ionic/angular';
 import { MaterialService } from '../services/materiales.service';
 import { firstValueFrom } from 'rxjs';
 import { IEMaterialak } from '../interfaces/IEMaterialak';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-materiales',
@@ -27,11 +28,28 @@ export class MaterialesPage implements OnInit {
   paginacionMaxima = 0;
   Math: any;
 
-  constructor(private alertController: AlertController, private MaterialService: MaterialService) {}
+  //tradukzioa
+  title!: string;
+  name!:  string;
+  search!:  string;
+  info!: string;
+  cancel!:  string;
+  confirm!:  string;
+  cd!:  string;
+  ud!:  string;
+  label!:  string;
+  editMaterial!: string;
+  details!: string;
+  close!: string;
+
+  constructor(private alertController: AlertController, private MaterialService: MaterialService, private translateService: TranslateService) {}
 
   ngOnInit() {
     this.mobilbista();
     this.cargarProductos();
+    this.translateLabels();
+    this.translateService.setDefaultLang('es');
+    this.translateService.use('es');
   }
 
   @HostListener('window:resize', ['$event'])
@@ -99,16 +117,17 @@ export class MaterialesPage implements OnInit {
   }
 
   async confirmarEdicion() {
+    const translations = await this.translateService.get(['MATERIAL.HEADER', 'MATERIAL.MESSAGE', 'PRODUCT.CANCEL', 'PRODUCT.CONFIRM']).toPromise();
     const alert = await this.alertController.create({
-      header: '¿Estás seguro?',
-      message: 'Se actualizarán los valores del material.',
+      header: translations['MATERIAL.HEADER'],
+      message:translations['MATERIAL.MESSAGE'],
       buttons: [
         {
-          text: 'Cancelar',
+          text: translations['PRODUCT.CANCEL'],
           role: 'cancel',
         },
         {
-          text: 'Confirmar',
+          text: translations['PRODUCT.CONFIRM'],
           handler: async () => {
             const now = new Date().toISOString();
             this.materialSeleccionado.data = this.materialSeleccionado.data || {};
@@ -122,6 +141,7 @@ export class MaterialesPage implements OnInit {
                 this.aplicarFiltro({ target: { value: '' } });
               }
               this.editandoMaterial = false;
+              window.location.reload();
             } catch (error) {
               console.error('Error al actualizar material:', error);
             }
@@ -197,6 +217,7 @@ export class MaterialesPage implements OnInit {
       this.ordenActual.columna = columna;
       this.ordenActual.ascendente = true;
     }
+    
 
     this.materialesFiltrados.sort((a, b) => {
       let valorA = (a as any)[columna];
@@ -222,5 +243,42 @@ export class MaterialesPage implements OnInit {
       return this.ordenActual.ascendente ? 'orden-asc' : 'orden-desc';
     }
     return '';
+  }
+   // Método para cargar las traducciones
+   translateLabels() {
+    this.translateService.get([
+      'MATERIAL.TITLE',
+      'MATERIAL.LABEL',
+      'MATERIAL.EDIT',
+      'MATERIAL.DETAILS',
+      'MATERIAL.CLOSE',
+      'PRODUCT.NAME',
+      'PRODUCT.CD',
+      'PRODUCT.UD',
+      'PRODUCT.EDIT',
+      'PRODUCT.CONFIRM',
+      'PRODUCT.CANCEL',
+      'PRODUCT.INFO',
+      'PRODUCT.SEARCH'
+
+    ]).subscribe((translations: { [key: string]: any; }) => {
+      this.title = translations['MATERIAL.TITLE'];
+      this.name = translations['PRODUCT.NAME'];
+      this.editMaterial= translations['MATERIAL.EDIT'];
+      this.close =translations['MATERIAL.CLOSE'];
+      this.details= translations['MATERIAL.DETAILS'];
+      this.label = translations['MATERIAL.LABEL'];
+      this.cd = translations['PRODUCT.CD'];
+      this.ud = translations['PRODUCT.UD'];
+      this.confirm = translations['PRODUCT.CONFIRM'];
+      this.cancel = translations['PRODUCT.CANCEL'];
+      this.info = translations['PRODUCT.INFO'];
+      this.search = translations['PRODUCT.SEARCH']
+    });
+  }
+
+  changeLanguage(lang: string) {
+    this.translateService.use(lang); // Cambiar el idioma
+    this.translateLabels(); // Recargar las traducciones
   }
 } 

@@ -37,11 +37,20 @@
     "INFO": "Información adicional",
     "SEARCH": "Buscar"
   },
-  "ALERT": {
+  "ALERTPRODUCT": {
     "HEADER": "¿Estás seguro?",
     "MESSAGE": "Se actualizarán los valores del producto.",
     "CANCEL": "Cancelar",
     "CONFIRM": "Confirmar"
+  },
+  "MATERIAL":{
+    "TITLE": "Materiales",
+    "LABEL":"Etiqueta",
+    "HEADER": "¿Estás seguro?",
+    "MESSAGE": "Se actualizarán los valores del material.",
+    "EDIT":"Editando Material",
+    "DETAILS":"Detalles del Material",
+    "CLOSE": "Cerrar"
   }
 }
   
