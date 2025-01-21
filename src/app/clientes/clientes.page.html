@@ -1,69 +1,142 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title>Bezeroak</ion-title>
+    <ion-title>Clientes</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <!-- Buscador -->
+  <ion-searchbar
+  search-icon="search-circle"
+  placeholder="Buscar"
+  (ionInput)="aplicarFiltro($event)">
+</ion-searchbar>
 
+<!-- Selector de productos por página -->
+<div class="productos-por-pagina">
+  <ion-item class="producto-item">
+    <ion-label size="small">Clientes:</ion-label>
+    <ion-select [(ngModel)]="FichasPorPagina" interface="popover" size="small" (ionChange)="cambiarPagina(1)">
+      <ion-select-option [value]="5">5</ion-select-option>
+      <ion-select-option [value]="10">10</ion-select-option>
+      <ion-select-option [value]="25">25</ion-select-option>
+      <ion-select-option [value]="50">50</ion-select-option>
+      <ion-select-option [value]="100">100</ion-select-option>
+    </ion-select>
+  </ion-item>
+</div>
 
-  <!-- Lista de pedidos -->
-  <ion-list>
-    <ion-item *ngFor="let pedido of pedidos" (click)="openFichaCliente(pedido)">
-      <ion-label>
-        <h3>Eguna: Gaur.</h3>
-        <h2>ID-a: {{ pedido.id }}</h2>
-        <p><strong>Bezeroa:</strong> {{ pedido.nombreCliente }}</p>
-        <p><strong>Enkargua:</strong> {{ pedido.servicio }}</p>
-        <p><strong>Ordua:</strong> {{ pedido.hora }}</p>
-        <p><strong>Prezioa:</strong> {{ pedido.precio }} €</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+<!-- Paginación -->
+<ion-row>
+  <ion-col>
+    <ion-button *ngFor="let page of hacerPaginacion()" (click)="cambiarPagina(page)">
+      {{ page }}
+    </ion-button>
+  </ion-col>
+</ion-row>
 
-  <!-- Modal para la ficha del cliente -->
-  <ion-modal [isOpen]="isModalOpen" (didDismiss)="closeFicha()">
-    <ng-template>
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>Bezeroaren fitxa</ion-title>
-          <ion-buttons slot="end">
-            <ion-button (click)="closeFicha()">Itxi</ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content>
-        <ion-card>
-          <img src="assets/Images/defecto.png" alt="Foto del Cliente">
-          <ion-card-header>
-            <ion-card-title>{{ fichaCliente?.nombreCliente }}</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <p><strong>ID:</strong> {{ fichaCliente?.id }}</p>
-            <p><strong>Pedido:</strong> {{ fichaCliente?.servicio }}</p>
-            <p><strong>Hora:</strong> {{ fichaCliente?.hora }}</p>
-            <p><strong>Precio:</strong> ${{ fichaCliente?.precio }}</p>
-            <p><strong>Comentarios:</strong> {{ fichaCliente?.comentarios }}</p>
-          </ion-card-content>
-        </ion-card>
-      </ion-content>
-    </ng-template>
-  </ion-modal>
+  
+  <!-- Filtro y ordenación de columnas -->
+  <ion-row>
+    <ion-col>
+      <ion-item button (click)="ordenarPor('id', 'eguneratze_data')">
+        <ion-label>ID</ion-label>
+        <ion-icon [name]="ordenActual.columna === 'id' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item button (click)="ordenarPor('izena', 'eguneratze_data')">
+        <ion-label>Nombre</ion-label>
+        <ion-icon [name]="ordenActual.columna === 'izena' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item button (click)="ordenarPor('abizena', 'eguneratze_data')">
+        <ion-label>Apellido</ion-label>
+        <ion-icon [name]="ordenActual.columna === 'abizena' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item button (click)="ordenarPor('id', 'eguneratze_data')">
+        <ion-label>Fecha creación</ion-label>
+        <ion-icon [name]="ordenActual.columna === 'id' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item button (click)="ordenarPor('id', 'sortze_data')">
+        <ion-label>Fecha actualización</ion-label>
+        <ion-icon [name]="ordenActual.columna === 'id' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item button (click)="ordenarPor('azal_sentikorra', 'eguneratze_data')">
+        <ion-label>Piel sensible</ion-label>
+        <ion-icon [name]="ordenActual.columna === 'azal_sentikorra' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+  
 
-  <!-- Footer con los botones de acción centrados -->
-  <ion-footer>
-    <ion-toolbar>
-      <ion-row class="ion-text-center" style="width: 100%; justify-content: center;">
-        <ion-col size="auto">
-          <ion-button (click)="crearCliente()">Sortu</ion-button>
-        </ion-col>
-        <ion-col size="auto">
-          <ion-button color="danger" (click)="borrarCliente()">Ezabatu</ion-button>
-        </ion-col>
-        <ion-col size="auto">
-          <ion-button color="warning" (click)="editarCliente()">Editatu</ion-button>
-        </ion-col>
-      </ion-row>
-    </ion-toolbar>
-  </ion-footer>
-</ion-content>
+  <hr>
+
+  <!-- Fila de edición visible solo en modo edición -->
+  <ion-row *ngIf="editandoFicha">
+    <ion-col size="12">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Editar Producto</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item>
+            <ion-label position="floating">ID</ion-label>
+            <ion-input [(ngModel)]="fichaSeleccionada.id" readonly></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input [(ngModel)]="fichaSeleccionada.izena"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Apellido</ion-label>
+            <ion-input [(ngModel)]="fichaSeleccionada.abizena"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Piel sensible</ion-label>
+            <ion-select [(ngModel)]="fichaSeleccionada.azal_sentikorra">
+              <ion-select-option value="B">Sí</ion-select-option>
+              <ion-select-option value="E">No</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Telefono</ion-label>
+            <ion-input [(ngModel)]="fichaSeleccionada.telefonoa"></ion-input>
+          </ion-item>
+          <!-- Tienes que poner informacion del historial cuando este -->
+          <ion-button expand="full" (click)="confirmarEdicion()">Confirmar</ion-button>
+          <ion-button expand="full" color="danger" (click)="cancelarEdicion()">Cancelar</ion-button>
+          <ion-button expand="full" class="custom-red-button" (click)="eliminarFicha(fichaSeleccionada)">
+            Borrar ficha
+          </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+ <!-- Fila de fichas -->
+ <ion-row justify-content-center *ngFor="let ficha of fichasFiltradas | slice: (paginaActual - 1) * FichasPorPagina : paginaActual * FichasPorPagina">
+  <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
+    <ion-card *ngIf="fichaSeleccionada?.id !== ficha.id" (click)="editarProducto(ficha)">
+      <ion-card-header>
+        <ion-card-title>{{ ficha.izena || '-' }} {{ficha.abizena || '-'}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>ID:</strong> {{ ficha.id || '-' }}</p>
+        <p><strong>Piel sensible:</strong> 
+          {{ ficha.azal_sentikorra ? 'Sí' : 'No' }}
+        </p>        
+        <p><strong>Telefono:</strong> {{ ficha.telefonoa || '-' }}</p>
+        <p><strong>Fecha de creación:</strong> {{ ficha.data?.sortze_data | date:'yyyy-MM-dd' }}</p>
+        <p><strong>Última actualización:</strong> {{ ficha.data?.eguneratze_data ? (ficha.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>
+      </ion-card-content>
+    </ion-card>
+  </ion-col>
+</ion-row>

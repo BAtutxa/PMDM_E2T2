@@ -1,0 +1,46 @@
+{
+  "LOGIN": {
+    "TITLE": "Hasi saioa",
+    "WELCOME": "Ongi etorri",
+    "NAME": "Izena",
+    "PASSWORD": "Pasahitza",
+    "SUBMIT": "Bidali",
+    "ERROR": {
+      "INVALID_CREDENTIALS": "Egiaztagiri baliogabeak",
+      "GENERIC_ERROR": "Saioa hastean errorea"
+    }
+  },
+  "MENU": {
+    "TITLE": "Menu nagusia",
+    "INVENTORY": "Inbentarioa",
+    "APPOINTMENTS": "Hitzorduak",
+    "CUSTOMERS": "Bezeroak",
+    "SERVICES": "Zerbitsuak",
+    "TICKETS": "Ticket-ak",
+    "ADMINISTRATION": "Administrazioa"
+  },
+  "INVENTORY": {
+    "TITLE": "Inbentarioa",
+    "PRODUCT": "Produktuak",
+    "MATERIAL": "Materialak"
+  },
+  "PRODUCT": {
+    "TITLE": "Produktuak",
+    "NAME": "Izena",
+    "BRAND": "Marka",
+    "ID_CATEGORY": "ID kategoria",
+    "CD": "Sortze data",
+    "UD": "Eguneratze data",
+    "EDIT": "Editatu",
+    "CONFIRM":"Konfirmatu",
+    "CANCEL":"Utzi",
+    "INFO": "Informazio adizioanala",
+    "SEARCH": "Bilatu"
+  },
+    "ALERT": {
+    "HEADER": "Zeguru zaude?",
+    "MESSAGE": "Produktuen balioak eguneratuko dira.",
+    "CANCEL": "Kantzelatu",
+    "CONFIRM": "Konfirmatu"
+  }
+}
