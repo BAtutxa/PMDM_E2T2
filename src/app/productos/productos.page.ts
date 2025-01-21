@@ -5,6 +5,7 @@ import { firstValueFrom } from 'rxjs';
 import { IonContent } from '@ionic/angular';
 import { IEProduktuak } from '../interfaces/IEProduktuak';
 import { TranslateService } from '@ngx-translate/core';
+import {ChangeDetectorRef }  from '@angular/core';
 
 @Component({
   selector: 'app-productos',
@@ -40,7 +41,7 @@ export class ProductosPage implements OnInit {
   info :string = ''
   search :string = ''
 
-  constructor(private alertController: AlertController, private productoService: ProductoService, private translateService: TranslateService) {}
+  constructor(private alertController: AlertController, private productoService: ProductoService, private translateService: TranslateService, private cdr:ChangeDetectorRef) {}
 
   ngOnInit() {
     this.mobilbista();
@@ -130,8 +131,6 @@ export class ProductosPage implements OnInit {
             this.productoSeleccionado.data = this.productoSeleccionado.data || {};
             this.productoSeleccionado.data.eguneratze_data = now;
   
-            console.log('Producto a actualizar:', JSON.stringify(this.productoSeleccionado));
-  
             try {
               await firstValueFrom(this.productoService.actualizarProducto(this.productoSeleccionado));
               const index = this.productos.findIndex(producto => producto.id === this.productoSeleccionado.id);
@@ -140,6 +139,9 @@ export class ProductosPage implements OnInit {
                 this.aplicarFiltro({ target: { value: '' } });
               }
               this.editandoProducto = false;
+              this.cdr.detectChanges();
+  
+              window.location.reload();
             } catch (error) {
               console.error('Error al actualizar producto:', error);
             }
@@ -150,6 +152,7 @@ export class ProductosPage implements OnInit {
   
     await alert.present();
   }
+  
 
   cancelarEdicion() {
     this.productoSeleccionado = { ...this.productoSeleccionadoAnterior };
