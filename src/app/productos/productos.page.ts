@@ -212,16 +212,16 @@ export class ProductosPage implements OnInit {
       this.ordenActual.columna = columna;
       this.ordenActual.ascendente = true;
     }
-
+  
     this.productosFiltrados.sort((a, b) => {
-      let valorA = (a as any) [columna];
-      let valorB = (b as any) [columna];
-
+      let valorA = this.obtenerValorPorColumna(a, columna);
+      let valorB = this.obtenerValorPorColumna(b, columna);
+  
       if (columna === 'sortze_data' || columna === 'eguneratze_data') {
         valorA = valorA ? new Date(valorA) : null;
         valorB = valorB ? new Date(valorB) : null;
       }
-
+  
       if (valorA < valorB || valorA === null) {
         return this.ordenActual.ascendente ? -1 : 1;
       } else if (valorA > valorB || valorB === null) {
@@ -231,6 +231,20 @@ export class ProductosPage implements OnInit {
       }
     });
   }
+  
+  private obtenerValorPorColumna(objeto: any, columna: string): any {
+    const propiedades = columna.split('.');  // Divide la columna por el punto (.)
+    let valor = objeto;
+  
+    propiedades.forEach((propiedad) => {
+      if (valor) {
+        valor = valor[propiedad];
+      }
+    });
+  
+    return valor;
+  }
+  
 
   getOrdenClass(columna: string): string {
     if (this.ordenActual.columna === columna) {

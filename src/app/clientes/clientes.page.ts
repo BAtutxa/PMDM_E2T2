@@ -5,6 +5,7 @@ import { firstValueFrom } from 'rxjs';
 import { ClientesService} from '../services/clientes.service';
 import { HostListener } from '@angular/core';
 import { IBezero } from '../interfaces/IEBezero';
+import { IData } from '../interfaces/IData';
  
 @Component({
   selector: 'app-clientes',
@@ -190,7 +191,7 @@ export class ClientesPage implements OnInit {
     }
   }
  
-   ordenarPor(columna: keyof IBezero) {
+  ordenarPor(columna: keyof IBezero, columnaData: keyof IData) {
     if (this.ordenActual.columna === columna) {
       this.ordenActual.ascendente = !this.ordenActual.ascendente;
     } else {
@@ -199,12 +200,13 @@ export class ClientesPage implements OnInit {
     }
   
     this.fichasFiltradas.sort((a, b) => {
-      let valorA = a[columna];
-      let valorB = b[columna];
+      let valorA = (a as any)[columna];
+      let valorB = (b as any)[columna];
   
-      if (columna === 'sortze_data' || columna === 'eguneratze_data' || columna === 'ezabatze_data') {
-        valorA = (typeof valorA === 'string' || typeof valorA === 'number') ? new Date(valorA) : valorA;
-        valorB = (typeof valorB === 'string' || typeof valorB === 'number') ? new Date(valorB) : valorB;
+      // Check if 'columna' refers to a date field within 'IData'
+      if (columnaData === 'sortze_data' || columnaData === 'eguneratze_data') {
+        valorA = valorA ? new Date(valorA) : null;
+        valorB = valorB ? new Date(valorB) : null;
       }
   
       if (valorA < valorB || valorA === null) {
