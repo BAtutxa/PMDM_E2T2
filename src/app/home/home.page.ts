@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { TranslateService } from '@ngx-translate/core';
+import {HizkuntzaService} from '../services/Hizkuntza.Service'
 
 @Component({
   selector: 'app-home',
@@ -13,7 +14,7 @@ export class HomePage {
   public password: string = '';
   errorMessage: string = ''; 
 
-  // Variables para almacenar los textos traducidos
+  //hizkuntza
   title!: string;
   welcomeMessage!:  string;
   nameLabel!:  string;
@@ -21,19 +22,20 @@ export class HomePage {
   submitLabel!:  string;
   errorInvalidCredentials!:  string;
   errorGeneric!:  string;
+  euskaraz : boolean = false;
 
   constructor(
     private router: Router,
     private userService: UserService,  
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private hizkuntzaService: HizkuntzaService
   ) {
-    // Establecer el idioma predeterminado
-    this.translateService.setDefaultLang('es');
-    this.translateService.use('es'); // Cambiar idioma predeterminado (puedes configurar según sea necesario)
+    this.translateService.setDefaultLang(this.hizkuntzaService.getHizkuntza());
+    this.translateService.use(this.hizkuntzaService.getHizkuntza()); 
   }
 
   ngOnInit() {
-    // Obtener las traducciones al inicializar el componente
+  
     this.translateService.get([
       'LOGIN.TITLE', 'LOGIN.WELCOME', 'LOGIN.NAME', 'LOGIN.PASSWORD', 'LOGIN.SUBMIT',
       'LOGIN.ERROR.INVALID_CREDENTIALS', 'LOGIN.ERROR.GENERIC_ERROR'
@@ -68,8 +70,8 @@ export class HomePage {
   }
 
   // Método para cambiar el idioma dinámicamente
-  changeLanguage(lang: string) {
-    this.translateService.use(lang);  // Cambia el idioma
-    this.ngOnInit();  // Re-carga las traducciones para reflejar el cambio de idioma
+  changeLanguage(language: string) {
+    this.hizkuntzaService.setHizkuntza(language);
+    localStorage.setItem('language', language); // Guardar el idioma seleccionado
   }
 }

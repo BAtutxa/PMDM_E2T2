@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { HizkuntzaService } from '../services/Hizkuntza.Service';
 
 @Component({
   selector: 'app-inventario',
@@ -12,10 +13,10 @@ export class InventarioPage implements OnInit {
   public productLabel: string = '';
    public materialLabel: string = '';
  
-   constructor(private translateService: TranslateService) {
-     // Establecer el idioma predeterminado
-     this.translateService.setDefaultLang('es');
-     this.translateService.use('es'); // Usar el idioma predeterminado
+   constructor(private translateService: TranslateService, private hizkuntzaService: HizkuntzaService) {
+
+     this.translateService.setDefaultLang(this.hizkuntzaService.getHizkuntza());
+     this.translateService.use(this.hizkuntzaService.getHizkuntza()); 
    }
  
    ngOnInit() {
