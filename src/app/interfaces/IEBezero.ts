@@ -5,6 +5,6 @@ export interface IBezero {
 	izena: string;
 	abizena: string;
 	telefonoa: number;
-    azal_sentikorra: boolean;
+    azal_sentikorra: string;
     data: IData;
 }

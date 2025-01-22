@@ -140,7 +140,6 @@ export class ProductosPage implements OnInit {
               }
               this.editandoProducto = false;
               this.cdr.detectChanges();
-  
               window.location.reload();
             } catch (error) {
               console.error('Error al actualizar producto:', error);
@@ -220,6 +219,11 @@ export class ProductosPage implements OnInit {
       if (columna === 'sortze_data' || columna === 'eguneratze_data') {
         valorA = valorA ? new Date(valorA) : null;
         valorB = valorB ? new Date(valorB) : null;
+      }
+
+      if (columna === 'id_kategoria') {
+        valorA = a.kategoriak ? a.kategoriak.id : null;
+        valorB = b.kategoriak ? b.kategoriak.id : null;
       }
   
       if (valorA < valorB || valorA === null) {
