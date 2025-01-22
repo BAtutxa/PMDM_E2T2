@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-gestionar-citas',
@@ -11,8 +12,13 @@ export class GestionarCitasPage implements OnInit {
 
   citas: any[] = [];
   citaSeleccionada: any = null;
+  modalAbierto = false; // Controlar si el modal está abierto o cerrado
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(
+    private http: HttpClient, 
+    private router: Router, 
+    private modalController: ModalController
+  ) {}
 
   ngOnInit() {
     // Obtener todas las citas desde la API
@@ -32,8 +38,26 @@ export class GestionarCitasPage implements OnInit {
     );
   }
 
-  // Método para mostrar los detalles de una cita
-  mostrarDetalles(cita: any) {
-    this.citaSeleccionada = cita;
+  // Método para abrir el modal con los detalles de la cita seleccionada
+  abrirModal(cita: any) {
+    this.citaSeleccionada = { ...cita }; // Hacer una copia de la cita para editarla
+    this.modalAbierto = true;
+  }
+
+  // Método para cerrar el modal
+  cerrarModal() {
+    this.modalAbierto = false;
+  }
+
+  // Método para confirmar los cambios (por ahora solo cierra el modal)
+  confirmarCambios() {
+    console.log('Cita confirmada:', this.citaSeleccionada);
+    this.cerrarModal();
+  }
+
+  // Método para cancelar los cambios y cerrar el modal
+  cancelarCambios() {
+    console.log('Cambios cancelados');
+    this.cerrarModal();
   }
 }

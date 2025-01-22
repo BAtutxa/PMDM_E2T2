@@ -7,15 +7,17 @@ import { Observable } from 'rxjs';
 })
 export class CitaService {
 
-  private apiUrl = 'http://localhost:8080/hitzorduak';  // Endpoint del backend
+  private apiUrl = 'http://localhost:8080/hitzorduak';
 
   constructor(private http: HttpClient) {}
 
   // INSERTAR CITA.
   createCita(citaData: any): Observable<any> {
+    console.log('JSON enviado al backend:', JSON.stringify(citaData, null, 2));
     const headers = { 'Content-Type': 'application/json' };
-    return this.http.post<any>(this.apiUrl, citaData, { headers });
+    return this.http.post<any>(`${this.apiUrl}/create`, citaData, { headers });
   }
+  
 
   // GET CITA POR FECHA.
   getCitasPorFecha(fecha: string): Observable<any[]> {
