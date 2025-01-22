@@ -140,7 +140,6 @@ export class ProductosPage implements OnInit {
               }
               this.editandoProducto = false;
               this.cdr.detectChanges();
-  
               window.location.reload();
             } catch (error) {
               console.error('Error al actualizar producto:', error);

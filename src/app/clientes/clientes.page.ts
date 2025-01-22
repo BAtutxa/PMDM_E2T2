@@ -121,6 +121,7 @@ export class ClientesPage implements OnInit {
                  this.aplicarFiltro({ target: { value: '' } });
                }
                this.editandoFicha = false;
+               window.location.reload();
              } catch (error) {
                console.error('Error al actualizar ficha:', error);
              }
@@ -190,24 +191,14 @@ export class ClientesPage implements OnInit {
       return false;
     }
   }
- 
-  ordenarPor(columna: keyof IBezero, columnaData: keyof IData) {
-    if (this.ordenActual.columna === columna) {
-      this.ordenActual.ascendente = !this.ordenActual.ascendente;
-    } else {
-      this.ordenActual.columna = columna;
-      this.ordenActual.ascendente = true;
-    }
-  
+
+  ordenarPorFecha(columna: keyof IData) {
     this.fichasFiltradas.sort((a, b) => {
       let valorA = (a as any)[columna];
       let valorB = (b as any)[columna];
   
-      // Check if 'columna' refers to a date field within 'IData'
-      if (columnaData === 'sortze_data' || columnaData === 'eguneratze_data') {
-        valorA = valorA ? new Date(valorA) : null;
-        valorB = valorB ? new Date(valorB) : null;
-      }
+      valorA = valorA ? new Date(valorA) : null;
+      valorB = valorB ? new Date(valorB) : null;
   
       if (valorA < valorB || valorA === null) {
         return this.ordenActual.ascendente ? -1 : 1;
@@ -220,6 +211,40 @@ export class ClientesPage implements OnInit {
   }
   
  
+  ordenarPor(columna: keyof IBezero) {
+    if (this.ordenActual.columna === columna) {
+      this.ordenActual.ascendente = !this.ordenActual.ascendente;
+    } else {
+      this.ordenActual.columna = columna;
+      this.ordenActual.ascendente = true;
+    }
+  
+    this.fichasFiltradas.sort((a, b) => {
+      let valorA = this.obtenerValorPorColumna(a, columna);
+      let valorB = this.obtenerValorPorColumna(b, columna);
+  
+      // Si la columna es de tipo string, convertir a minúsculas para una comparación insensible a mayúsculas
+      if (typeof valorA === 'string' && typeof valorB === 'string') {
+        valorA = valorA.toLowerCase();
+        valorB = valorB.toLowerCase();
+      }
+  
+      // Comparar valores
+      if (valorA < valorB || valorA === null) {
+        return this.ordenActual.ascendente ? -1 : 1;
+      } else if (valorA > valorB || valorB === null) {
+        return this.ordenActual.ascendente ? 1 : -1;
+      } else {
+        return 0;
+      }
+    });
+  }
+  
+  obtenerValorPorColumna(item: IBezero, columna: keyof IBezero) {
+    return item[columna];
+  }
+  
+
    getOrdenClass(columna: string): string {
      if (this.ordenActual.columna === columna) {
        return this.ordenActual.ascendente ? 'orden-asc' : 'orden-desc';

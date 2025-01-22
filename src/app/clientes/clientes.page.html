@@ -39,37 +39,37 @@
   <!-- Filtro y ordenación de columnas -->
   <ion-row>
     <ion-col>
-      <ion-item button (click)="ordenarPor('id', 'eguneratze_data')">
+      <ion-item button (click)="ordenarPor('id')">
         <ion-label>ID</ion-label>
         <ion-icon [name]="ordenActual.columna === 'id' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
       </ion-item>
     </ion-col>
     <ion-col>
-      <ion-item button (click)="ordenarPor('izena', 'eguneratze_data')">
+      <ion-item button (click)="ordenarPor('izena')">
         <ion-label>Nombre</ion-label>
         <ion-icon [name]="ordenActual.columna === 'izena' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
       </ion-item>
     </ion-col>
     <ion-col>
-      <ion-item button (click)="ordenarPor('abizena', 'eguneratze_data')">
+      <ion-item button (click)="ordenarPor('abizena')">
         <ion-label>Apellido</ion-label>
         <ion-icon [name]="ordenActual.columna === 'abizena' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
       </ion-item>
     </ion-col>
     <ion-col>
-      <ion-item button (click)="ordenarPor('id', 'eguneratze_data')">
+      <ion-item button (click)="ordenarPorFecha('eguneratze_data')">
         <ion-label>Fecha creación</ion-label>
         <ion-icon [name]="ordenActual.columna === 'id' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
       </ion-item>
     </ion-col>
     <ion-col>
-      <ion-item button (click)="ordenarPor('id', 'sortze_data')">
+      <ion-item button (click)="ordenarPorFecha('sortze_data')">
         <ion-label>Fecha actualización</ion-label>
         <ion-icon [name]="ordenActual.columna === 'id' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
       </ion-item>
     </ion-col>
     <ion-col>
-      <ion-item button (click)="ordenarPor('azal_sentikorra', 'eguneratze_data')">
+      <ion-item button (click)="ordenarPor('azal_sentikorra')">
         <ion-label>Piel sensible</ion-label>
         <ion-icon [name]="ordenActual.columna === 'azal_sentikorra' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
       </ion-item>
@@ -131,8 +131,9 @@
       <ion-card-content>
         <p><strong>ID:</strong> {{ ficha.id || '-' }}</p>
         <p><strong>Piel sensible:</strong> 
-          {{ ficha.azal_sentikorra ? 'Sí' : 'No' }}
-        </p>        
+          <span *ngIf="ficha.azal_sentikorra ==='B'">Sí</span>
+          <span *ngIf="ficha.azal_sentikorra ==='E'">No</span>
+        </p>              
         <p><strong>Telefono:</strong> {{ ficha.telefonoa || '-' }}</p>
         <p><strong>Fecha de creación:</strong> {{ ficha.data?.sortze_data | date:'yyyy-MM-dd' }}</p>
         <p><strong>Última actualización:</strong> {{ ficha.data?.eguneratze_data ? (ficha.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>
