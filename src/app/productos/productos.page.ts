@@ -220,6 +220,11 @@ export class ProductosPage implements OnInit {
         valorA = valorA ? new Date(valorA) : null;
         valorB = valorB ? new Date(valorB) : null;
       }
+
+      if (columna === 'id_kategoria') {
+        valorA = a.kategoriak ? a.kategoriak.id : null;
+        valorB = b.kategoriak ? b.kategoriak.id : null;
+      }
   
       if (valorA < valorB || valorA === null) {
         return this.ordenActual.ascendente ? -1 : 1;

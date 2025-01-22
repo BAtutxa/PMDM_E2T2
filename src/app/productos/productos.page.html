@@ -81,13 +81,19 @@
       </ion-item>
     </ion-col>
     <ion-col>
+      <ion-item button (click)="ordenarPor('stock')">
+        <ion-label>Stock</ion-label>
+        <ion-icon [name]="ordenActual.columna === 'stock' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
+      </ion-item>
+    </ion-col>
+    <ion-col>
       <ion-item button (click)="ordenarPor('id_kategoria')">
         <ion-label>{{id_category}}</ion-label>
         <ion-icon [name]="ordenActual.columna === 'id_kategoria' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
       </ion-item>
     </ion-col>
-  </ion-row>
 
+  </ion-row>
   <hr>
 
   <!-- Fila de edición visible solo en modo edición -->
@@ -96,6 +102,9 @@
       <ion-card>
         <ion-card-header>
           <ion-card-title>{{edit}}</ion-card-title>
+          <p class="lowStock" [ngClass]="{'stock-bajo': productoSeleccionado?.stock < productoSeleccionado?.alerta}">
+            Stock bajo, renueve el producto
+        </p>
         </ion-card-header>
         <ion-card-content>
           <ion-item>
@@ -134,12 +143,14 @@
     <ion-card *ngIf="productoSeleccionado?.id !== producto.id" (click)="editarProducto(producto)">
       <ion-card-header>
         <ion-card-title>{{ producto.izena || '-' }}</ion-card-title>
+        <p *ngIf="producto.stock < producto.stock_alerta" style="color: red; font-weight: bold;">Stock bajo, renueve el producto</p>
       </ion-card-header>
       <ion-card-content>
         <p><strong>ID:</strong> {{ producto.id || '-' }}</p>
         <p><strong>{{name}}:</strong> {{ producto.izena || '-' }}</p>
         <p><strong>{{brand}}:</strong> {{ producto.marka || '-' }}</p>
         <p><strong>{{id_category}}:</strong> {{ producto.kategoriak.id || '-' }}</p>
+        <p><strong>Stock:</strong> {{ producto.stock || '-' }}</p>
         <p><strong>{{cd}}:</strong> {{ producto.data?.sortze_data | date:'yyyy-MM-dd' }}</p>
         <p><strong>{{ud}}:</strong> {{ producto.data?.eguneratze_data ? (producto.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>
       </ion-card-content>
@@ -161,7 +172,7 @@
       <div *ngIf="productoSeleccionado" (click)="$event.stopPropagation()">
         <p><strong>Descripción:</strong> {{ productoSeleccionado.deskribapena || 'Descripción no disponible' }}</p>
         <p><strong>Marca:</strong> {{ productoSeleccionado.marka || 'Marca no disponible' }}</p>
-        <p><strong>Stock:</strong> {{ productoSeleccionado.stock || 'Stock no disponible' }}</p>
+        <p><strong>Stock alerta:</strong> {{ productoSeleccionado.stock_alerta || 'Stock no disponible' }}</p>
         <p><strong>Categoría:</strong> {{ productoSeleccionado.kategoriak?.izena || 'Categoría no disponible' }}</p>
         <!-- Tienes que poner informacion del historial cuando este -->
       </div>
