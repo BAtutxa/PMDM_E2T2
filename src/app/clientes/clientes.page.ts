@@ -29,7 +29,11 @@ export class ClientesPage implements OnInit {
   paginacionMaxima = 0;
   Math: any;
 
-  constructor(private alertController: AlertController, private ClientesService: ClientesService) {}
+  constructor(
+    private alertController: AlertController, 
+    private ClientesService: ClientesService, 
+  ) {}
+  
 
   ngOnInit() {
     this.mobilbista();
