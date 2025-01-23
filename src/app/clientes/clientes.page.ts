@@ -6,6 +6,8 @@ import { ClientesService} from '../services/clientes.service';
 import { HostListener } from '@angular/core';
 import { IBezero } from '../interfaces/IEBezero';
 import { IData } from '../interfaces/IData';
+import { ModalController } from '@ionic/angular';
+import { ModalFichaComponent } from '../modal-ficha-component/modal-ficha-component.component';
  
 @Component({
   selector: 'app-clientes',
@@ -29,7 +31,12 @@ export class ClientesPage implements OnInit {
   paginacionMaxima = 0;
   Math: any;
 
-  constructor(private alertController: AlertController, private ClientesService: ClientesService) {}
+  constructor(
+    private alertController: AlertController, 
+    private ClientesService: ClientesService, 
+    private modalController: ModalController 
+  ) {}
+  
 
   ngOnInit() {
     this.mobilbista();
@@ -44,6 +51,17 @@ export class ClientesPage implements OnInit {
    mobilbista() {
      this.mobilaDa = window.innerWidth <= 768;
    }
+
+   async openModal() {
+    const modal = await this.modalController.create({
+      component: ModalFichaComponent,
+    });
+    return await modal.present();
+  }
+
+   closeModal() {
+    this.modalController.dismiss();
+  }
  
    async cargarProductos() {
     try {
@@ -304,7 +322,40 @@ export class ClientesPage implements OnInit {
      return '';
    }
 
-   async crearFicha(){
-   
+   async crearFicha() {
+    const modal = await this.modalController.create({
+      component: ModalFichaComponent,
+    });
+  
+    await modal.present();
+  
+    const { data } = await modal.onDidDismiss();
+    if (data) {
+      console.log('Datos del modal:', data);
+      // Aquí puedes hacer lo que necesites con los datos, como llamar a tu servicio para crear la ficha
+      const now = new Date().toISOString();
+      this.fichaSeleccionada.data = this.fichaSeleccionada.data || {};
+      this.fichaSeleccionada.data.eguneratze_data = now;
+      this.fichaSeleccionada.data.sortze_data = now;
+  
+      if (data.pielSensible === 'B') {
+        this.fichaSeleccionada.azal_sentikorra = 'Sí';
+      } else if (data.pielSensible === 'E') {
+        this.fichaSeleccionada.azal_sentikorra = 'No';
+      }
+  
+      try {
+        await firstValueFrom(this.ClientesService.crearFicha(this.fichaSeleccionada));
+        const index = this.fichas.findIndex(ficha => ficha.id === this.fichaSeleccionada.id);
+        if (index !== -1) {
+          this.fichas[index] = { ...this.fichaSeleccionada };
+          this.aplicarFiltro({ target: { value: '' } });
+        }
+        this.editandoFicha = false;
+        window.location.reload();
+      } catch (error) {
+        console.error('Error al crear la ficha:', error);
+      }
+    }
   }
 }  
