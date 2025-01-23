@@ -21,4 +21,15 @@ export class ClientesService {
       .set('Accept', 'application/json'); 
     return this.http.put<IBezero>(`${this.baseUrl}/update`, ficha, { headers });
   }
+
+  eliminarFicha(ficha: IBezero){
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json')
+    .set('Accept', 'application/json'); 
+    return this.http.put<IBezero>(`${this.baseUrl}/delete`, ficha, { headers });
+  }
+
+  crearFicha(){
+
+  }
 }

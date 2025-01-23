@@ -81,8 +81,40 @@ export class ClientesPage implements OnInit {
      }
      return paginacion;
    }
-   eliminarFicha(ficha : any){
-    
+
+  async eliminarFicha(){
+    const alert = await this.alertController.create({
+      header: '¿Estás seguro?',
+      message: 'Se borrará la ficha.',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Confirmar',
+          handler: async () => {
+            const now = new Date().toISOString();
+            this.fichaSeleccionada.data = this.fichaSeleccionada.data || {};
+            this.fichaSeleccionada.data.ezabatze_data = now;
+
+            try {
+              await firstValueFrom(this.ClientesService.eliminarFicha(this.fichaSeleccionada));
+              const index = this.fichas.findIndex(ficha => ficha.id === this.fichaSeleccionada.id);
+              if (index !== -1) {
+                this.fichas[index] = { ...this.fichaSeleccionada };
+                this.aplicarFiltro({ target: { value: '' } });
+              }
+              this.editandoFicha = false;
+              window.location.reload();
+            } catch (error) {
+              console.error('Error al borrar ficha:', error);
+            }
+          },
+        },
+      ],
+    });
+    await alert.present();
    }
  
    cerrarModal() {
@@ -271,4 +303,8 @@ export class ClientesPage implements OnInit {
      }
      return '';
    }
+
+   async crearFicha(){
+   
+  }
 }  
