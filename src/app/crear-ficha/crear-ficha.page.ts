@@ -42,7 +42,7 @@ export class CrearFichaPage {
       console.error('Por favor, completa todos los campos obligatorios.');
       return;
     }
-
+  
     this.clientesService.crearFicha(this.ficha).subscribe({
       next: (response: IBezero) => {
         this.router.navigate(['/clientes']);

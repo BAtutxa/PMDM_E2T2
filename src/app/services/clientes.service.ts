@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { IBezero } from '../interfaces/IEBezero';
 
 @Injectable({
@@ -8,6 +8,7 @@ import { IBezero } from '../interfaces/IEBezero';
 })
 export class ClientesService {
   private baseUrl = 'http://localhost:8080/fitxak'; // URL del backend Spring Boot
+  private fichasSubject = new BehaviorSubject<IBezero[]>([]);
 
   constructor(private http: HttpClient) {}
 
@@ -29,7 +30,10 @@ export class ClientesService {
     return this.http.put<IBezero>(`${this.baseUrl}/delete`, ficha, { headers });
   }
 
-  crearFicha(){
-
+  crearFicha(ficha: IBezero){
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json')
+    .set('Accept', 'application/json'); 
+    return this.http.post<IBezero>(`${this.baseUrl}/create`, ficha, { headers });
   }
 }

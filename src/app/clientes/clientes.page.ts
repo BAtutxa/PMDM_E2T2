@@ -30,11 +30,10 @@ export class ClientesPage implements OnInit {
   Math: any;
 
   constructor(private alertController: AlertController, private ClientesService: ClientesService) {}
-  constructor(private alertController: AlertController, private ClientesService: ClientesService) {}
 
   ngOnInit() {
     this.mobilbista();
-    this.cargarProductos();
+    this.cargarClientes();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -46,7 +45,7 @@ export class ClientesPage implements OnInit {
     this.mobilaDa = window.innerWidth <= 768;
   }
 
-  async cargarProductos() {
+  async cargarClientes() {
     try {
       const data: IBezero[] = await firstValueFrom(this.ClientesService.getFichas());
       this.fichas = data;
