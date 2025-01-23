@@ -51,9 +51,11 @@ export class ClientesPage implements OnInit {
 
   async cargarClientes() {
     try {
-      const data: IBezero[] = await firstValueFrom(this.ClientesService.getFichas());
-      this.fichas = data;
-      this.fichasFiltradas = [...this.fichas];
+      // Nos suscribimos al BehaviorSubject para obtener los datos en tiempo real
+      this.ClientesService.fichas$.subscribe(fichas => {
+        this.fichas = fichas;
+        this.fichasFiltradas = [...this.fichas];
+      });
     } catch (error) {
       console.error('Error al cargar clientes:', error);
     }

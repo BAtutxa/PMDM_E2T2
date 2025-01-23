@@ -45,6 +45,7 @@ export class CrearFichaPage {
   
     this.clientesService.crearFicha(this.ficha).subscribe({
       next: (response: IBezero) => {
+        alert("Tu ficha ha sido creada.")
         this.router.navigate(['/clientes']);
       },
       error: (error: any) => {
