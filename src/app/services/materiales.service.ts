@@ -21,4 +21,13 @@ export class MaterialService {
       .set('Accept', 'application/json'); 
     return this.http.put<IEMaterialak>(`${this.baseUrl}/update`, material, { headers });
   }
+
+  crearMaterial(){
+
+  }
+
+  borrarMaterial(){
+    
+  }
+
 }

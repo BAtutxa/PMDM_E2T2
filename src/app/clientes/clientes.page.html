@@ -36,46 +36,69 @@
 </ion-row>
 
   
-  <!-- Filtro y ordenación de columnas -->
-  <ion-row>
-    <ion-col>
-      <ion-item button (click)="ordenarPor('id')">
-        <ion-label>ID</ion-label>
-        <ion-icon [name]="ordenActual.columna === 'id' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
-      </ion-item>
-    </ion-col>
-    <ion-col>
-      <ion-item button (click)="ordenarPor('izena')">
-        <ion-label>Nombre</ion-label>
-        <ion-icon [name]="ordenActual.columna === 'izena' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
-      </ion-item>
-    </ion-col>
-    <ion-col>
-      <ion-item button (click)="ordenarPor('abizena')">
-        <ion-label>Apellido</ion-label>
-        <ion-icon [name]="ordenActual.columna === 'abizena' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
-      </ion-item>
-    </ion-col>
-    <ion-col>
-      <ion-item button (click)="ordenarPorFecha('eguneratze_data')">
-        <ion-label>Fecha creación</ion-label>
-        <ion-icon [name]="ordenActual.columna === 'id' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
-      </ion-item>
-    </ion-col>
-    <ion-col>
-      <ion-item button (click)="ordenarPorFecha('sortze_data')">
-        <ion-label>Fecha actualización</ion-label>
-        <ion-icon [name]="ordenActual.columna === 'id' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
-      </ion-item>
-    </ion-col>
-    <ion-col>
-      <ion-item button (click)="ordenarPor('azal_sentikorra')">
-        <ion-label>Piel sensible</ion-label>
-        <ion-icon [name]="ordenActual.columna === 'azal_sentikorra' ? (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 'swap-vertical'"></ion-icon>
-      </ion-item>
-    </ion-col>
-  </ion-row>
-  
+<!-- Filtro y ordenación de columnas -->
+<ion-row>
+  <ion-col>
+    <ion-item button (click)="ordenarPor('id')">
+      <ion-label>ID</ion-label>
+      <ion-icon 
+        [name]="ordenActual.columna === 'id' ? 
+                 (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 
+                 'swap-vertical'">
+      </ion-icon>
+    </ion-item>
+  </ion-col>
+  <ion-col>
+    <ion-item button (click)="ordenarPor('izena')">
+      <ion-label>Nombre</ion-label>
+      <ion-icon 
+        [name]="ordenActual.columna === 'izena' ? 
+                 (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 
+                 'swap-vertical'">
+      </ion-icon>
+    </ion-item>
+  </ion-col>
+  <ion-col>
+    <ion-item button (click)="ordenarPor('abizena')">
+      <ion-label>Apellido</ion-label>
+      <ion-icon 
+        [name]="ordenActual.columna === 'abizena' ? 
+                 (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 
+                 'swap-vertical'">
+      </ion-icon>
+    </ion-item>
+  </ion-col>
+  <ion-col>
+    <ion-item button (click)="ordenarPorFecha('eguneratze_data')">
+      <ion-label>Fecha creación</ion-label>
+      <ion-icon 
+        [name]="ordenActualFecha.columna === 'eguneratze_data' ? 
+                 (ordenActualFecha.ascendente ? 'arrow-up' : 'arrow-down') : 
+                 'swap-vertical'">
+      </ion-icon>
+    </ion-item>
+  </ion-col>
+  <ion-col>
+    <ion-item button (click)="ordenarPorFecha('sortze_data')">
+      <ion-label>Fecha actualización</ion-label>
+      <ion-icon 
+        [name]="ordenActualFecha.columna === 'sortze_data' ? 
+                 (ordenActualFecha.ascendente ? 'arrow-up' : 'arrow-down') : 
+                 'swap-vertical'">
+      </ion-icon>
+    </ion-item>
+  </ion-col>
+  <ion-col>
+    <ion-item button (click)="ordenarPor('azal_sentikorra')">
+      <ion-label>Piel sensible</ion-label>
+      <ion-icon 
+        [name]="ordenActual.columna === 'azal_sentikorra' ? 
+                 (ordenActual.ascendente ? 'arrow-up' : 'arrow-down') : 
+                 'swap-vertical'">
+      </ion-icon>
+    </ion-item>
+  </ion-col>
+</ion-row>
 
   <hr>
 

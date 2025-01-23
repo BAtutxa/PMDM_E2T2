@@ -23,6 +23,7 @@ export class ClientesPage implements OnInit {
   fichasFiltradas: IBezero[] = [];
   mobilaDa: boolean = false;
   ordenActual: { columna: keyof IBezero, ascendente: boolean } = { columna: 'id', ascendente: true };
+  ordenActualFecha: {columna: keyof IData, ascendente: boolean } = { columna: 'ezabatze_data', ascendente: true}
   FichasPorPagina = 10;
   paginaActual = 1;
   paginacionMaxima = 0;
@@ -193,24 +194,43 @@ export class ClientesPage implements OnInit {
   }
 
   ordenarPorFecha(columna: keyof IData) {
-    this.fichasFiltradas.sort((a, b) => {
-      let valorA = (a as any)[columna];
-      let valorB = (b as any)[columna];
-  
-      valorA = valorA ? new Date(valorA) : null;
-      valorB = valorB ? new Date(valorB) : null;
-  
-      if (valorA < valorB || valorA === null) {
-        return this.ordenActual.ascendente ? -1 : 1;
-      } else if (valorA > valorB || valorB === null) {
-        return this.ordenActual.ascendente ? 1 : -1;
-      } else {
-        return 0;
-      }
-    });
+  // Actualizar estado de ordenación para las fechas
+  if (this.ordenActualFecha.columna === columna) {
+    this.ordenActualFecha.ascendente = !this.ordenActualFecha.ascendente;
+  } else {
+    this.ordenActualFecha.columna = columna;
+    this.ordenActualFecha.ascendente = true;
   }
+
+  // Ordenar las fichas
+  this.fichasFiltradas.sort((a, b) => {
+    // Acceso seguro a las propiedades anidadas
+    const valorA = a.data?.[columna] ? new Date(a.data[columna]) : null;
+    const valorB = b.data?.[columna] ? new Date(b.data[columna]) : null;
+
+    // Comparar valores considerando el orden ascendente/descendente
+    if (valorA === null && valorB === null) {
+      return 0; // Ambos valores son nulos, se consideran iguales
+    }
+    if (valorA === null) {
+      return this.ordenActualFecha.ascendente ? 1 : -1; // Nulos al final (ascendente) o al principio (descendente)
+    }
+    if (valorB === null) {
+      return this.ordenActualFecha.ascendente ? -1 : 1; // Nulos al final (ascendente) o al principio (descendente)
+    }
+
+    // Comparar valores válidos
+    if (valorA < valorB) {
+      return this.ordenActualFecha.ascendente ? -1 : 1;
+    } else if (valorA > valorB) {
+      return this.ordenActualFecha.ascendente ? 1 : -1;
+    } else {
+      return 0; // Fechas iguales
+    }
+  });
+}
+
   
- 
   ordenarPor(columna: keyof IBezero) {
     if (this.ordenActual.columna === columna) {
       this.ordenActual.ascendente = !this.ordenActual.ascendente;
