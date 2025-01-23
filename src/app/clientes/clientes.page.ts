@@ -30,6 +30,7 @@ export class ClientesPage implements OnInit {
   Math: any;
 
   constructor(private alertController: AlertController, private ClientesService: ClientesService) {}
+  constructor(private alertController: AlertController, private ClientesService: ClientesService) {}
 
   ngOnInit() {
     this.mobilbista();
