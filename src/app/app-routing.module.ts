@@ -67,7 +67,11 @@ const routes: Routes = [
   {
     path: 'gestionar-citas',
     loadChildren: () => import('./gestionar-citas/gestionar-citas.module').then( m => m.GestionarCitasPageModule)
+  },  {
+    path: 'crear-ficha',
+    loadChildren: () => import('./crear-ficha/crear-ficha.module').then( m => m.CrearFichaPageModule)
   },
+
 
 ];
 

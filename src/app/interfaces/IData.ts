@@ -1,5 +1,5 @@
 export interface IData{
-    sortze_data: Date;
-    eguneratze_data: Date;
-    ezabatze_data: Date;
+    sortze_data: Date |null;
+    eguneratze_data: Date|null;
+    ezabatze_data: Date |null;
 }

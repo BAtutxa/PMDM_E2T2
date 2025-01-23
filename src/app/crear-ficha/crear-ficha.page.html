@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Añadir ficha</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form (ngSubmit)="guardarFicha()">
+    <ion-list>
+      <!-- Nombre -->
+      <ion-item>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input [(ngModel)]="ficha.izena" name="izena" placeholder="Introduce un valor para nombre" required></ion-input>
+      </ion-item>
+
+      <!-- Apellido -->
+      <ion-item>
+        <ion-label position="floating">Apellido</ion-label>
+        <ion-input [(ngModel)]="ficha.abizena" name="abizena" placeholder="Introduce un valor para apellido" required></ion-input>
+      </ion-item>
+
+      <!-- Teléfono -->
+      <ion-item>
+        <ion-label position="floating">Teléfono</ion-label>
+        <ion-input [(ngModel)]="ficha.telefonoa" name="telefonoa" type="number" placeholder="Introduce un valor para teléfono" required></ion-input>
+      </ion-item>
+
+      <!-- Piel sensible -->
+      <ion-item>
+        <ion-label>Piel sensible</ion-label>
+        <ion-select [(ngModel)]="ficha.azal_sentikorra" name="azal_sentikorra" placeholder="Selecciona una opción" required>
+          <ion-select-option value="B">Sí</ion-select-option>
+          <ion-select-option value="E">No</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <!-- Botón para guardar -->
+      <ion-button expand="full" type="submit" color="primary">Guardar</ion-button>
+    </ion-list>
+  </form>
+</ion-content>

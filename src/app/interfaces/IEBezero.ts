@@ -1,10 +1,10 @@
 import { IData } from "./IData";
 
 export interface IBezero {
-    id: number;
+    id: number |null;
 	izena: string;
 	abizena: string;
-	telefonoa: number;
+	telefonoa: number |null;
     azal_sentikorra: string;
     data: IData;
 }
