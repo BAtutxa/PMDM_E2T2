@@ -14,7 +14,7 @@ export class CalendarioPage implements OnInit {
   ];
   diasSemana = ['A', 'A', 'A', 'O', 'O', 'L', 'I'];
   
-  anioActual: number = new Date().getFullYear();
+  anioActual: number = new Date().getFullYear(); //   anioActual: number = 1;
   mesActual: number = new Date().getMonth();
   diaSeleccionado: number | null = null;
 

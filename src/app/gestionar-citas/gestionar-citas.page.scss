@@ -1,48 +1,114 @@
+/* Perdón por la basura que es esto. */
+
+.content {
+  padding: 20px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.citas-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.cita-card {
+  width: 100%;
+  max-width: 350px;
+}
+
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-title {
+  font-weight: bold;
+}
+
+.modal-content {
+  padding: 20px;
+}
+
+.item {
+  margin-bottom: 15px;
+}
+
+.footer-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.confirmar-button,
+.cancelar-button {
+  width: 48%;
+}
+
+/* Colores de botones */
+ion-button.success {
+  background-color: #4CAF50;
+  color: white;
+}
+
+ion-button.danger {
+  background-color: #f44336;
+  color: white;
+}
+
 /* Estilos generales de la página */
 .page {
-    --background: #f0f0f0; /* Fondo de color claro */
-    padding: 20px;
-    font-family: 'Arial', sans-serif;
-  }
-  
-  h1 {
-    text-align: center;
-    font-size: 32px;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  /* Estilos para los botones */
-  .confirmar-button {
-    --background: #ffcc00; /* Amarillo */
-    --border-radius: 5px;
-    --color: white;
-  }
-  
-  .cancelar-button {
-    --background: #ff4444; /* Rojo */
-    --border-radius: 5px;
-    --color: white;
-  }
-  
-  /* Estilos del modal */
-  .modal-content {
-    --background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  ion-item {
-    margin-bottom: 10px;
-  }
-  
-  ion-footer {
-    text-align: center;
-  }
-  
-  ion-button {
-    width: 48%;
-    margin: 0 2%;
-  }
-  
+  --background: #f0f0f0; /* Fondo de color claro */
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+h1 {
+  text-align: center;
+  font-size: 32px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Estilos para los botones */
+.confirmar-button {
+  --background: #ffcc00; /* Amarillo */
+  --border-radius: 5px;
+  --color: white;
+}
+
+.cancelar-button {
+  --background: #ff4444; /* Rojo */
+  --border-radius: 5px;
+  --color: white;
+}
+
+/* Estilos del modal */
+.modal-content {
+  --background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+ion-item {
+  margin-bottom: 10px;
+}
+
+ion-footer {
+  text-align: center;
+}
+
+ion-button {
+  width: 48%;
+  margin: 0 2%;
+}
