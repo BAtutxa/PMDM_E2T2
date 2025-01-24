@@ -21,7 +21,6 @@ export class CitaService {
 
   // GET CITA POR FECHA.
   getCitasPorFecha(fecha: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/appointmentsByDate?date=${fecha}`);
+    return this.http.get<any[]>(`${this.apiUrl}/datarenHitzorduak?date=${fecha}`);
   }
-  
 }

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { LangileakService } from '../services/Langileak.service';  // Importar el servicio
 
 @Component({
   selector: 'app-citas',
@@ -12,12 +13,14 @@ import { NavController } from '@ionic/angular';
 export class CitasPage implements OnInit {
   citaForm: FormGroup;
   fechaSeleccionada: string = ''; // Variable para almacenar la fecha seleccionada
+  langileakList: any[] = []; // Lista para almacenar los Langileak
 
   constructor(
     private fb: FormBuilder,
     private alertCtrl: AlertController,
     private navCtrl: NavController,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private langileakService: LangileakService // Inyectar el servicio
   ) {
     this.citaForm = this.fb.group({
       nombre: ['', [Validators.required]],
@@ -26,39 +29,54 @@ export class CitasPage implements OnInit {
         '',
         [
           Validators.required,
-          Validators.pattern('^(?:[01]?[0-9]|2[0-3]):([0-5]?[0-9]):([0-5]?[0-9])$'),
+          Validators.pattern('^(?:[01]?[0-9]|2[0-3]):([0-5]?[0-9])$'),
         ],
-      ], // Validación para hora (ej: 14:30:00)
-      eslekua: ['', [Validators.required, Validators.pattern('^[0-9]+$')]], // Campo obligatorio, solo números
-      deskribapena: ['', [Validators.required]], // Campo obligatorio, texto
-      etxekoa: ['', [Validators.required]], // Campo obligatorio con las opciones 'K' o 'E'
+      ],
+      eslekua: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      deskribapena: ['', [Validators.required]],
+      etxekoa: ['', [Validators.required]],
       prezioa: [
         '',
         [Validators.required, Validators.pattern('^[0-9]+(.[0-9]{1,2})?$')],
-      ], // Campo obligatorio, precio con formato decimal
-      langilea: ['', [Validators.required]], // Campo obligatorio
+      ],
+      langilea: ['', [Validators.required]], // Campo obligatorio para Langilea
       horaFin: [
         '',
         [
           Validators.required,
-          Validators.pattern('^(?:[01]?[0-9]|2[0-3]):([0-5]?[0-9]):([0-5]?[0-9])$'),
+          Validators.pattern('^(?:[01]?[0-9]|2[0-3]):([0-5]?[0-9])$'),
         ],
-      ], // Campo obligatorio para la hora final
+      ],
     });
   }
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
-      this.fechaSeleccionada = params['fecha'] || 'Fecha no seleccionada'; // Asigna la fecha o un mensaje por defecto
-      console.log('Fecha recibida:', this.fechaSeleccionada); // Verifica la fecha recibida
+      this.fechaSeleccionada = params['fecha'] || 'Fecha no seleccionada';
+      console.log('Fecha recibida:', this.fechaSeleccionada);
     });
+
+    // Obtener los Langileak
+    this.langileakService.getAllLangileak().subscribe(
+      (data) => {
+        this.langileakList = data;
+        console.log('Langileak obtenidos:', this.langileakList);
+      },
+      (error) => {
+        console.error('Error al obtener Langileak:', error);
+      }
+    );
+  }
+
+  onLangileaChange(event: any) {
+    const langileaId = event.detail.value; // Obtener el ID del Langilea seleccionado
+    this.citaForm.patchValue({ langilea: langileaId }); // Establecer el ID en el formulario
   }
 
   async confirmarCita() {
     if (this.citaForm.valid) {
       const datos = this.citaForm.value;
 
-      // Redirigir a la página 'confirmar-cita' y pasar los datos como parámetros
       this.navCtrl.navigateForward(['/confirmar-cita'], {
         queryParams: {
           nombre: datos.nombre,
@@ -70,14 +88,12 @@ export class CitasPage implements OnInit {
           etxekoa: datos.etxekoa,
           prezioa: datos.prezioa,
           langilea: datos.langilea,
-          horaFin: datos.horaFin,  // Asegúrate de agregar 'horaFin' aquí
+          horaFin: datos.horaFin,
         },
       });
-      
     } else {
       let errorMessage = 'Por favor, rellena todos los campos correctamente.';
 
-      // Verifica qué campo tiene error
       if (this.citaForm.get('nombre')?.invalid) {
         errorMessage = 'El campo "Nombre" es obligatorio.';
       } else if (this.citaForm.get('telefono')?.invalid) {
