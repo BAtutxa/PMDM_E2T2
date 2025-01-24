@@ -8,10 +8,9 @@ import { IBezero } from '../interfaces/IEBezero';
 })
 export class ClientesService {
   private baseUrl = 'http://localhost:8080/fitxak'; // URL del backend Spring Boot
-  private fichasSubject = new BehaviorSubject<IBezero[]>([]); // Almacenar las fichas
+  private fichasSubject = new BehaviorSubject<IBezero[]>([]); 
 
   constructor(private http: HttpClient) {
-    // Al inicializar el servicio, cargamos las fichas para mantenerlas siempre actualizadas
     this.getFichas().subscribe(fichas => this.fichasSubject.next(fichas));
   }
 
@@ -25,7 +24,6 @@ export class ClientesService {
       .set('Accept', 'application/json');
     return this.http.put<IBezero>(`${this.baseUrl}/update`, ficha, { headers })
       .pipe(
-        // Después de actualizar, actualizamos el BehaviorSubject
         tap(() => this.getFichas().subscribe(fichas => this.fichasSubject.next(fichas)))
       );
   }
