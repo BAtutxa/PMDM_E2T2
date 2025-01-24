@@ -118,10 +118,6 @@ export class ClientesPage implements OnInit {
     await alert.present();
   }
 
-  cerrarModal() {
-    this.clienteConInformacionSeleccionada = false;
-  }
-
   editarProducto(ficha: IBezero) {
     this.fichaSeleccionadaAnterior = { ...this.fichaSeleccionada };
     this.editandoFicha = true;
