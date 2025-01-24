@@ -1,21 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Observable } from 'rxjs';
+import { ITrabajador } from '../interfaces/ITrabajador';
 
-// Definir una interfaz para los datos de Langileak
-interface Data {
-  sortze_data: string | null;
-  eguneratze_data: string | null;
-  ezabatze_data: string | null;
-}
-
-interface Langileak {
-  id: number;
-  izena: string;
-  kodea: string;
-  abizenak: string;
-  data: Data;
-}
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +12,23 @@ export class LangileakService {
 
   constructor(private http: HttpClient) {}
 
-  getAllLangileak(): Observable<Langileak[]> {
-    return this.http.get<Langileak[]>(this.apiUrl);
+  getAllLangileak(): Observable<ITrabajador[]> {
+    return this.http.get<ITrabajador[]>(this.apiUrl);
+  }
+
+  getLangileak(): Observable<ITrabajador[]> {
+     return this.http.get<ITrabajador[]>(`${this.apiUrl}/trueLangileak`);
+  }
+
+  agregarLangile(langile: ITrabajador): Observable<ITrabajador> {
+    return this.http.post<ITrabajador>(`${this.apiUrl}/create`, langile);
+  }
+
+  actualizarLangile(langile: ITrabajador): Observable<ITrabajador> {
+    return this.http.put<ITrabajador>(`${this.apiUrl}/update`, langile);
+  }
+
+  eliminarLangile(langile: ITrabajador): Observable<ITrabajador> {
+    return this.http.put<ITrabajador>(`${this.apiUrl}/delete`, langile);
   }
 }

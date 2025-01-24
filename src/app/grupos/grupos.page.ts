@@ -28,9 +28,6 @@ export class GruposPage implements OnInit {
     });
   }
 
-  crearGrupo() {
-  }
-
   editarGrupo(index: number) {
 
   }

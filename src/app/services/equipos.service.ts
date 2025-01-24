@@ -2,61 +2,65 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IEquipos } from '../interfaces/IEquipos';
+import { map } from 'rxjs/operators'; // Asegurarnos de importar map
 
 @Injectable({
   providedIn: 'root',
 })
 export class EquipoService {
-  private baseUrl = 'http://localhost:8080/taldeak'; // URL del backend Spring Boot
-  private fichasSubject = new BehaviorSubject<IEquipos[]>([]); // Almacenar las fichas
+  private baseUrl = 'http://localhost:8080/taldeak'; // URL del backend
 
-  // Observable que los componentes pueden suscribirse
-  grupos$ = this.fichasSubject.asObservable();
+  private gruposSubject = new BehaviorSubject<IEquipos[]>([]);
+  grupos$ = this.gruposSubject.asObservable();
 
   constructor(private http: HttpClient) {
-    // Al inicializar el servicio, cargar los grupos del backend
-    this.getGrupos().subscribe((grupos) => this.fichasSubject.next(grupos));
+    // Cargar grupos al inicializar el servicio
+    this.cargarGrupos();
   }
 
-  // Obtener todos los grupos del backend
-  getGrupos(): Observable<IEquipos[]> {
-    return this.http.get<IEquipos[]>(`${this.baseUrl}/talde`);
+  // Obtener todos los grupos no eliminados
+  cargarGrupos(): void {
+    this.http.get<IEquipos[]>(`${this.baseUrl}/talde`).subscribe({
+      next: (grupos) => this.gruposSubject.next(grupos),
+      error: (err) => console.error('Error al cargar grupos:', err),
+    });
   }
 
-//   actualizarGrupo(ficha: IEquipos): Observable<IEquipos> {
-//     const headers = new HttpHeaders()
-//       .set('Content-Type', 'application/json')
-//       .set('Accept', 'application/json');
-//     return this.http.put<IEquipos>(`${this.baseUrl}/update`, ficha, { headers })
-//       .pipe(
-//         // Después de actualizar, actualizamos el BehaviorSubject
-//         tap(() => this.getGrupos().subscribe(fichas => this.fichasSubject.next(fichas)))
-//       );
-//   }
+  // Obtener el siguiente ID disponible para un equipo como string
+  obtenerIDDisponible(): Observable<string> {
+    return this.http.get<IEquipos[]>(`${this.baseUrl}/talde`).pipe(
+      map((equipos) => {
+        // Si no hay equipos, el siguiente ID será "1"
+        if (equipos.length === 0) {
+          return '1';
+        }
 
-//   eliminarGrupo(ficha: IEquipos): Observable<void> {
-//     const headers = new HttpHeaders()
-//       .set('Content-Type', 'application/json')
-//       .set('Accept', 'application/json');
-//     return this.http.put<void>(`${this.baseUrl}/delete`, ficha, { headers })
-//       .pipe(
-//         // Después de eliminar, actualizamos el BehaviorSubject
-//         tap(() => this.getGrupos().subscribe(fichas => this.fichasSubject.next(fichas)))
-//       );
-//   }
+        // Buscar el id máximo y asignar el siguiente
+        const ids = equipos.map(equipo => parseInt(equipo.kodea, 10) ?? 0); // Convertimos 'kodea' a número
+        const maxId = Math.max(...ids);
 
-//   crearGrupo(ficha: IEquipos): Observable<IEquipos> {
-//     const headers = new HttpHeaders()
-//       .set('Content-Type', 'application/json')
-//       .set('Accept', 'application/json');
-//     return this.http.post<IEquipos>(`${this.baseUrl}/create`, ficha, { headers })
-//       .pipe(
-//         // Después de crear, actualizamos el BehaviorSubject
-//         tap(() => this.getGrupos().subscribe(fichas => this.fichasSubject.next(fichas)))
-//       );
-//   }
+        // Si maxId es NaN, devolver "1", de lo contrario, incrementar el valor máximo y convertir a string
+        return isNaN(maxId) ? '1' : (maxId + 1).toString();
+      })
+    );
+  }
 
-//   get fichas$(): Observable<IEquipos[]> {
-//     return this.fichasSubject.asObservable();
-//   }
+  cargarGruposEliminados(): Observable<IEquipos[]> {
+    return this.http.get<IEquipos[]>(`${this.baseUrl}/taldeEzabatuta`);
+  }
+
+  // Crear un nuevo grupo
+  agregarGrupo(grupo: IEquipos): Observable<IEquipos> {
+    return this.http.post<IEquipos>(`${this.baseUrl}/create`, grupo);
+  }
+
+  // Actualizar un grupo existente
+  actualizarGrupo(grupo: IEquipos): Observable<IEquipos> {
+    return this.http.put<IEquipos>(`${this.baseUrl}/update`, grupo);
+  }
+
+  // Marcar un grupo como eliminado
+  eliminarGrupo(grupo: IEquipos): Observable<IEquipos> {
+    return this.http.put<IEquipos>(`${this.baseUrl}/delete`, grupo);
+  }
 }
