@@ -44,8 +44,8 @@
       <ion-item>
         <ion-label position="floating">Etxekoa</ion-label>
         <ion-select formControlName="etxekoa">
-          <ion-select-option value="K">K</ion-select-option>
-          <ion-select-option value="E">E</ion-select-option>
+          <ion-select-option value="K">E</ion-select-option>
+          <ion-select-option value="E">B</ion-select-option>
         </ion-select>
       </ion-item>
 
@@ -56,8 +56,13 @@
 
       <ion-item>
         <ion-label position="floating">Langilea</ion-label>
-        <ion-input formControlName="langilea" type="text" placeholder="Langilea"></ion-input>
+        <ion-select formControlName="langilea" (ionChange)="onLangileaChange($event)">
+          <ion-select-option *ngFor="let langilea of langileakList" [value]="langilea.id">
+            {{ langilea.izena }} {{ langilea.abizenak }} ({{ langilea.kodea }})
+          </ion-select-option>
+        </ion-select>
       </ion-item>
+      
 
       <div class="button-container">
         <ion-button color="danger" (click)="descartarCita()">✖</ion-button>

@@ -19,13 +19,17 @@ export class ConfirmarCitaPage implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
-      this.citaData = params;
-      console.log('Datos recibidos en ngOnInit:', this.citaData);
-    });
+      this.citaData = { ...params };
 
-    this.route.queryParams.subscribe((params) => {
-      this.citaData = params;
-      console.log('Datos recibidos en ngOnInit:', this.citaData);
+      // Aseguramos que las horas estén en el formato correcto (hh:mm:ss)
+      if (this.citaData.hora && this.citaData.hora.match(/^\d{1,2}:\d{2}$/)) {
+        this.citaData.hora += ':00';
+      }
+      if (this.citaData.horaFin && this.citaData.horaFin.match(/^\d{1,2}:\d{2}$/)) {
+        this.citaData.horaFin += ':00';
+      }
+
+      console.log('Datos recibidos y formateados en ngOnInit:', this.citaData);
     });
   }
 
@@ -33,7 +37,7 @@ export class ConfirmarCitaPage implements OnInit {
     this.camposVacios = [];
 
     if (!this.citaData.eslekua) this.camposVacios.push('Eserlekua');
-    if (!this.citaData.langilea ) this.camposVacios.push('ID Langilea');
+    if (!this.citaData.langilea) this.camposVacios.push('ID Langilea');
     if (!this.citaData.fecha) this.camposVacios.push('Fecha');
     if (!this.citaData.hora) this.camposVacios.push('Hora de inicio');
     if (!this.citaData.horaFin) this.camposVacios.push('Hora de fin');
@@ -72,11 +76,6 @@ export class ConfirmarCitaPage implements OnInit {
         ezabatze_data: null,
       },
     };
-
-    console.log(
-      'JSON preparado para enviar:',
-      JSON.stringify(citaAdaptada, null, 2)
-    );
 
     console.log(
       'JSON preparado para enviar:',
