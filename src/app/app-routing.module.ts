@@ -71,6 +71,10 @@ const routes: Routes = [
     path: 'crear-ficha',
     loadChildren: () => import('./crear-ficha/crear-ficha.module').then( m => m.CrearFichaPageModule)
   },
+  {
+    path: 'tickets',
+    loadChildren: () => import('./tickets/tickets.module').then( m => m.TicketsPageModule)
+  },
 
 
 ];
