@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { EquipoService } from './../services/equipos.service';
 import { IEquipos } from './../interfaces/IEquipos';
 import { LangileakService } from '../services/Langileak.service';
-import { ITrabajador } from '../interfaces/ITrabajador';
+import { ITrabajador } from '../interfaces/ITrabajador'
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -12,18 +12,18 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./editar-grupo.page.scss'],
 })
 export class EditarGrupoPage implements OnInit {
-  ficha: IEquipos = {
-    langileak: [],
+  equipo: IEquipos = {
+    langileak: [], // Lista de trabajadores del grupo
     kodea: '',
     izena: '',
     data: {
       sortze_data: null,
       eguneratze_data: null,
-      ezabatze_data: null
+      ezabatze_data: null,
     },
-  };  // Inicialización de la propiedad ficha
-  trabajadores: ITrabajador[] = []; // Lista de trabajadores disponibles
-  grupoId: string | undefined; // ID del grupo desde la URL
+  };
+  trabajadores: ITrabajador[] = []; 
+  grupoId: string | undefined; 
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -41,55 +41,95 @@ export class EditarGrupoPage implements OnInit {
   cargarGrupo() {
     // Obtener el grupo a editar
     this.equipoService.grupos$.subscribe((grupos) => {
-      const grupo = grupos.find(g => g.kodea === this.grupoId);
+      const grupo = grupos.find((g) => g.kodea === this.grupoId);
       if (grupo) {
-        this.ficha = { ...grupo }; // Asignar los datos del grupo a 'ficha'
+        this.equipo = { ...grupo }; // Asignar los datos del grupo a 'equipo'
       }
     });
   }
 
   cargarTrabajadores() {
-    // Obtener los trabajadores
+    // Obtener los trabajadores disponibles
     this.langileakService.getAllLangileak().subscribe((trabajadores) => {
       this.trabajadores = trabajadores;
     });
   }
 
   editarGrupo() {
-    console.log('Grupo a editar:', this.ficha);
-    console.log('Trabajadores seleccionados:', this.ficha.langileak);
-  
+    console.log('Grupo a editar:', this.equipo);
+    console.log('Trabajadores seleccionados:', this.equipo.langileak);
+
     // Verificar si hay trabajadores seleccionados
-    if (!this.ficha.langileak || this.ficha.langileak.length === 0) {
+    if (!this.equipo.langileak || this.equipo.langileak.length === 0) {
       console.error('No se han seleccionado trabajadores.');
-      this.alertController.create({
-        header: 'Error',
-        message: 'Debes seleccionar al menos un trabajador.',
-        buttons: ['OK'],
-      }).then(alert => alert.present());
+      this.alertController
+        .create({
+          header: 'Error',
+          message: 'Debes seleccionar al menos un trabajador.',
+          buttons: ['OK'],
+        })
+        .then((alert) => alert.present());
       return;
     }
-  
-    // Enviar la información completa al backend
-    this.equipoService.actualizarGrupo(this.ficha).subscribe({
+
+    // Actualizar el grupo con los trabajadores seleccionados
+    this.equipoService.actualizarGrupo(this.equipo).subscribe({
       next: (grupoActualizado) => {
+        console.log('Datos enviados al backend:', this.equipo);
         console.log('Grupo actualizado:', grupoActualizado);
-  
-        this.alertController.create({
-          header: '¡Éxito!',
-          message: 'El grupo ha sido actualizado correctamente.',
-          buttons: ['OK'],
-        }).then(alert => alert.present());
+    
+        // Actualizar los trabajadores asignados al grupo (esto se hace en paralelo)
+        this.actualizarTrabajadores();
+    
+        // Mostrar la alerta de éxito
+        this.alertController
+          .create({
+            header: '¡Éxito!',
+            message: 'El grupo ha sido actualizado correctamente.',
+            buttons: ['OK'],
+          })
+          .then((alert) => {
+            alert.present();
+            // Recargar la página después de que el usuario haga clic en OK
+            alert.onDidDismiss().then(() => {
+              window.location.reload();
+            });
+          });
       },
-      error: (err) => {
+      error: (err: any) => {
         console.error('Error al actualizar el grupo:', err);
-  
-        this.alertController.create({
-          header: 'Error',
-          message: 'Hubo un error al actualizar el grupo.',
-          buttons: ['OK'],
-        }).then(alert => alert.present());
+    
+        this.alertController
+          .create({
+            header: 'Error',
+            message: 'Hubo un error al actualizar el grupo.',
+            buttons: ['OK'],
+          })
+          .then((alert) => alert.present());
       },
-    });
-  }  
+    });    
+  }
+
+  // Método para actualizar los trabajadores con el código de grupo
+  actualizarTrabajadores() {
+    // Para cada trabajador asignado al grupo, actualizamos su relación con el grupo
+    for (let trabajador of this.equipo.langileak) {
+      // Verificamos si la propiedad 'taldeak' está definida, si no, la eliminamos para no enviarla
+      delete trabajador.taldeak;
+
+      // Aseguramos que el 'kode' del trabajador coincida con 'kodea' del equipo
+      trabajador.kode = this.equipo.kodea;  // Establecer el código del trabajador como el código del grupo (codigo del equipo)
+
+      // Ahora el trabajador está correctamente relacionado con el grupo, se actualiza en el servicio
+      this.langileakService.actualizarLangile(trabajador).subscribe({
+        next: (trabajadorActualizado) => {
+          console.log('Trabajador actualizado:', trabajadorActualizado);
+        },
+        error: (err) => {
+          console.error('Error al actualizar el trabajador:', err);
+          console.log('Datos del equipo que se envían:', this.equipo);
+        },
+      });
+    }
+  }
 }

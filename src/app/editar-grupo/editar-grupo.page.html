@@ -11,7 +11,7 @@
       <ion-item>
         <ion-label position="floating">Nombre del Equipo</ion-label>
         <ion-input
-          [(ngModel)]="ficha.izena"
+          [(ngModel)]="equipo.izena"
           name="izena"
           placeholder="Introduce el nombre del equipo"
           required
@@ -20,10 +20,10 @@
 
       <!-- Seleccionar trabajadores -->
       <ion-item>
-        <ion-label>Trabajadores</ion-label>
+        <ion-label>Añadir Trabajadores</ion-label>
         <ion-select
           multiple="true"
-          [(ngModel)]="ficha.langileak"
+          [(ngModel)]="equipo.langileak"
           name="langileak"
           placeholder="Selecciona los trabajadores"
         >
