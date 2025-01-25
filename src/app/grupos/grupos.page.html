@@ -22,7 +22,7 @@
 
       <!-- Botones para editar/eliminar -->
       <ion-buttons slot="end">
-        <ion-button color="primary" (click)="editarGrupo(i)">Editatu</ion-button>
+        <ion-button color="primary" [routerLink]="['/editar-grupo', grupo.kodea]">Editatu</ion-button>        
         <ion-button color="danger" (click)="eliminarGrupo(grupo)">Ezabatu</ion-button>
       </ion-buttons>
     </ion-item>

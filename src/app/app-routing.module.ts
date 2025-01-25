@@ -67,7 +67,8 @@ const routes: Routes = [
   {
     path: 'gestionar-citas',
     loadChildren: () => import('./gestionar-citas/gestionar-citas.module').then( m => m.GestionarCitasPageModule)
-  },  {
+  },
+  {
     path: 'crear-ficha',
     loadChildren: () => import('./crear-ficha/crear-ficha.module').then( m => m.CrearFichaPageModule)
   },
@@ -79,7 +80,10 @@ const routes: Routes = [
     path: 'crear-grupos',
     loadChildren: () => import('./crear-grupos/crear-grupos.module').then( m => m.CrearGruposPageModule)
   },
-
+  {
+    path: 'editar-grupo/:kodea',  // Agrega el parámetro dinámico
+    loadChildren: () => import('./editar-grupo/editar-grupo.module').then( m => m.EditarGrupoPageModule)
+  },
 
 ];
 

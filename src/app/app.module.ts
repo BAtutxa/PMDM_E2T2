@@ -13,7 +13,6 @@ import { provideHttpClient, HttpClient } from '@angular/common/http';
 // Importaciones para ngx-translate
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { ModalFichaComponent } from './modal-ficha-component/modal-ficha-component.component';
 
 // Agregar FormsModule para que se reconozcan las directivas ngModel
 import { FormsModule } from '@angular/forms';
@@ -24,7 +23,7 @@ export function createTranslateLoader(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [AppComponent, FooterComponent, ModalFichaComponent],
+  declarations: [AppComponent, FooterComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
