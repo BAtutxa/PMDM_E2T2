@@ -102,36 +102,44 @@
       <ion-card>
         <ion-card-header>
           <ion-card-title>{{edit}}</ion-card-title>
-          <p class="lowStock" [ngClass]="{'stock-bajo': productoSeleccionado?.stock < productoSeleccionado?.alerta}">
-            Stock bajo, renueve el producto
-        </p>
         </ion-card-header>
         <ion-card-content>
+          <form #productoForm="ngForm" (ngSubmit)="confirmarEdicion()" novalidate>
           <ion-item>
             <ion-label position="floating">ID</ion-label>
-            <ion-input [(ngModel)]="productoSeleccionado.id" readonly></ion-input>
+            <ion-input [(ngModel)]="productoSeleccionado.id" name="id" #id="ngModel" readonly></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="floating">{{name}}</ion-label>
-            <ion-input [(ngModel)]="productoSeleccionado.izena"></ion-input>
+            <ion-input [(ngModel)]="productoSeleccionado.izena" name="izena" #izena="ngModel"></ion-input>
+            <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
+              El nombre es obligatorio.
+            </ion-note>
           </ion-item>
           <ion-item>
             <ion-label position="floating">{{brand}}</ion-label>
-            <ion-input [(ngModel)]="productoSeleccionado.marka"></ion-input>
+            <ion-input [(ngModel)]="productoSeleccionado.marka" name="marka" #marka="ngModel" required></ion-input>
+            <ion-note *ngIf="marka.invalid && marka.touched" color="danger">
+              La marca es obligatorio.
+            </ion-note>
           </ion-item>
           <ion-item>
             <ion-label position="floating">{{id_category}}</ion-label>
-            <ion-input [(ngModel)]="productoSeleccionado.kategoriak.id"></ion-input>
+            <ion-input [(ngModel)]="productoSeleccionado.kategoriak.id" name="categoria" #categoria="ngModel" required  pattern="^[0-9]*$"></ion-input>
+            <ion-note *ngIf="categoria.invalid && categoria.touched" color="danger">
+              El id de la categoria es obligatorio.
+            </ion-note>
           </ion-item>
           <ion-item>
             <ion-label position="floating">Stock</ion-label>
-            <ion-input [(ngModel)]="productoSeleccionado.stock" readonly></ion-input>
+            <ion-input [(ngModel)]="productoSeleccionado.stock" readonly name = "stock" #stock="ngModel"></ion-input>
           </ion-item>
-          <ion-button expand="full" (click)="confirmarEdicion()">{{confirm}}</ion-button>
+          <ion-button expand="full" (click)="confirmarEdicion()" type="submit" [disabled]="productoForm.invalid">{{confirm}}</ion-button>
           <ion-button expand="full" color="danger" (click)="cancelarEdicion()">{{cancel}}</ion-button>
           <ion-button expand="full" class="custom-blue-button" (click)="verDetalles(productoSeleccionado)">
             {{info}}
           </ion-button>
+        </form>
         </ion-card-content>
       </ion-card>
     </ion-col>

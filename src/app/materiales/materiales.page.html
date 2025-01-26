@@ -91,24 +91,32 @@
           <ion-card-title>{{editMaterial}}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
+          <form #materialForm="ngForm" (ngSubmit)="confirmarEdicion()" novalidate>
           <ion-item>
             <ion-label position="floating">ID</ion-label>
-            <ion-input [(ngModel)]="materialSeleccionado.id" readonly></ion-input>
+            <ion-input [(ngModel)]="materialSeleccionado.id" name="id" #id="ngModel" readonly></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="floating">{{name}}</ion-label>
-            <ion-input [(ngModel)]="materialSeleccionado.izena"></ion-input>
+            <ion-input [(ngModel)]="materialSeleccionado.izena" name="izena" #izena ="ngModel" required></ion-input>
+            <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
+              El nombre es obligatorio.
+            </ion-note>
           </ion-item>
           <ion-item>
             <ion-label position="floating">{{label}}</ion-label>
-            <ion-input [(ngModel)]="materialSeleccionado.etiketa"></ion-input>
+            <ion-input [(ngModel)]="materialSeleccionado.etiketa" name="etiketa"  #etiketa ="ngModel" required></ion-input>
+            <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
+              La etiqueta es obligatoria.
+            </ion-note>
           </ion-item>
           <!-- Tienes que poner informacion del historial cuando este -->
-          <ion-button expand="full" (click)="confirmarEdicion()">{{confirm}}</ion-button>
+          <ion-button expand="full" (click)="confirmarEdicion()"  type="submit" [disabled]="materialForm.invalid">{{confirm}}</ion-button>
           <ion-button expand="full" color="danger" (click)="cancelarEdicion()">{{cancel}}</ion-button>
           <ion-button expand="full" class="custom-blue-button" (click)="verDetalles(materialSeleccionado)">
             {{info}}
           </ion-button>
+        </form>
         </ion-card-content>
       </ion-card>
     </ion-col>
