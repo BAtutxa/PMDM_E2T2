@@ -16,16 +16,16 @@ export class GruposPage implements OnInit {
   grupos: IEquipos[] = [];
   ficha: IEquipos = { 
     langileak: [],
-    kodea: '',      // Inicializado con valor vacío
-    izena: '',      // Inicializado con valor vacío
+    kodea: '',     
+    izena: '',    
     data: {
       sortze_data: null,
       eguneratze_data: null,
       ezabatze_data: null
-    }        // Inicializado con objeto vacío
-  }; // Inicializamos con un objeto vacío que incluye todos los campos
-  trabajadores: ITrabajador[] = []; // Lista de trabajadores disponibles
-  grupoId: string | undefined; // Para almacenar el ID del grupo desde la URL
+    }        
+  }; 
+  trabajadores: ITrabajador[] = []; 
+  grupoId: string | undefined; 
 
   constructor(
     private equipoService: EquipoService,
@@ -48,7 +48,7 @@ export class GruposPage implements OnInit {
 
         const grupo = this.grupos.find(grupo => grupo.kodea === this.grupoId);
         if (grupo) {
-          this.ficha = { ...grupo }; // Asignamos los datos del grupo a 'ficha'
+          this.ficha = { ...grupo }; 
         } else {
           console.error('Grupo no encontrado con el ID:', this.grupoId);
         }
@@ -63,20 +63,6 @@ export class GruposPage implements OnInit {
     this.langileakService.getAllLangileak().subscribe(trabajadores => {
       this.trabajadores = trabajadores;
       console.log('Trabajadores disponibles:', this.trabajadores);
-    });
-  }
-
-  // Método para editar el grupo
-  editarGrupo() {
-    console.log('Grupo a editar:', this.ficha);
-    
-    this.equipoService.actualizarGrupo(this.ficha).subscribe({
-      next: (grupoActualizado) => {
-        console.log('Grupo actualizado:', grupoActualizado);
-      },
-      error: (err) => {
-        console.error('Error al actualizar el grupo:', err);
-      }
     });
   }
 
