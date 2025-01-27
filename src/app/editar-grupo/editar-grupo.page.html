@@ -7,6 +7,7 @@
 <ion-content>
   <form (ngSubmit)="editarGrupo()">
     <ion-list>
+      <form #grupoForm="ngForm" (ngSubmit)="editarGrupo()" novalidate>
       <!-- Nombre del equipo -->
       <ion-item>
         <ion-label position="floating">Nombre del Equipo</ion-label>
@@ -15,7 +16,11 @@
           name="izena"
           placeholder="Introduce el nombre del equipo"
           required
+          #izena = "ngModel"
         ></ion-input>
+        <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
+          El equipo debe contener un nombre.
+        </ion-note>
       </ion-item>
 
       <!-- Seleccionar trabajadores -->
@@ -25,21 +30,20 @@
           multiple="true"
           [(ngModel)]="equipo.langileak"
           name="langileak"
-          placeholder="Selecciona los trabajadores"
-        >
+          placeholder="Selecciona los trabajadores">
           <ion-select-option
             *ngFor="let trabajador of trabajadores"
-            [value]="trabajador"
-          >
+            [value]="trabajador">
             {{ trabajador.izena }} {{ trabajador.abizenak }}
           </ion-select-option>
         </ion-select>
       </ion-item>
 
       <!-- Botón para guardar -->
-      <ion-button expand="full" type="submit" color="primary">
+      <ion-button expand="full" type="submit" [disabled]="grupoForm.invalid" color="primary">
         Guardar Equipo
       </ion-button>
+    </form>
     </ion-list>
   </form>
 </ion-content>

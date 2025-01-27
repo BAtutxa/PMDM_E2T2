@@ -79,7 +79,11 @@ const routes: Routes = [
   {
     path: 'editar-grupo/:kodea',  // Agrega el parámetro dinámico
     loadChildren: () => import('./editar-grupo/editar-grupo.module').then( m => m.EditarGrupoPageModule)
+  },  {
+    path: 'langile',
+    loadChildren: () => import('./langile/langile.module').then( m => m.LangilePageModule)
   },
+
 
 ];
 

@@ -7,7 +7,7 @@
 <ion-content>
   <ion-list>
     <!-- Iterar sobre los grupos -->
-    <ion-item *ngFor="let grupo of grupos; let i = index" lines="full">
+    <ion-item *ngFor="let grupo of equipos; let i = index" lines="full">
       <ion-label>
         <h2>{{ grupo.izena }}</h2>
         <!-- Mostrar los integrantes del grupo -->
@@ -29,9 +29,14 @@
   </ion-list>
 
   <!-- Botón flotante para crear grupo -->
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed" class="fab-container">
     <ion-fab-button (click)="CrearEquipo()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
-  </ion-fab>  
+  
+    <ion-fab-button routerLink="/langile">
+      <ion-icon name="person-add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  
 </ion-content>

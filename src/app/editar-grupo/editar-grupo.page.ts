@@ -110,17 +110,11 @@ export class EditarGrupoPage implements OnInit {
     });    
   }
 
-  // Método para actualizar los trabajadores con el código de grupo
   actualizarTrabajadores() {
-    // Para cada trabajador asignado al grupo, actualizamos su relación con el grupo
     for (let trabajador of this.equipo.langileak) {
-      // Verificamos si la propiedad 'taldeak' está definida, si no, la eliminamos para no enviarla
-      delete trabajador.taldeak;
-
-      // Aseguramos que el 'kode' del trabajador coincida con 'kodea' del equipo
-      trabajador.kode = this.equipo.kodea;  // Establecer el código del trabajador como el código del grupo (codigo del equipo)
-
-      // Ahora el trabajador está correctamente relacionado con el grupo, se actualiza en el servicio
+      trabajador.kodea = this.equipo.kodea; 
+      console.log("Trabajador antes de actualizar:", trabajador);
+      
       this.langileakService.actualizarLangile(trabajador).subscribe({
         next: (trabajadorActualizado) => {
           console.log('Trabajador actualizado:', trabajadorActualizado);
@@ -131,5 +125,5 @@ export class EditarGrupoPage implements OnInit {
         },
       });
     }
-  }
+  }  
 }

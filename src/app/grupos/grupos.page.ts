@@ -13,7 +13,7 @@ import { ITrabajador } from '../interfaces/ITrabajador';
   styleUrls: ['./grupos.page.scss'],
 })
 export class GruposPage implements OnInit {
-  grupos: IEquipos[] = [];
+  equipos: IEquipos[] = [];
   equipo: IEquipos = { 
     langileak: [],
     kodea: '',     
@@ -43,10 +43,10 @@ export class GruposPage implements OnInit {
   cargarGrupos(): void {
     this.equipoService.grupos$.subscribe({
       next: (grupos) => {
-        this.grupos = grupos;
+        this.equipos = grupos;
         console.log('Grupos cargados:', grupos);
 
-        const grupo = this.grupos.find(grupo => grupo.kodea === this.grupoId);
+        const grupo = this.equipos.find(grupo => grupo.kodea === this.grupoId);
         if (grupo) {
           this.equipo = { ...grupo }; 
         } else {
@@ -83,7 +83,7 @@ export class GruposPage implements OnInit {
 
             try {
               await firstValueFrom(this.equipoService.eliminarGrupo(grupo));
-              this.grupos = this.grupos.filter((borrado) => borrado.kodea !== grupo.kodea);
+              this.equipos = this.equipos.filter((borrado) => borrado.kodea !== grupo.kodea);
             } catch (error) {
               console.error('Error al eliminar el grupo:', error);
             }

@@ -1,11 +1,9 @@
 import { IData } from "./IData";
 
 export  interface ITrabajador{
-    kode: string;
-    taldeak: any;
+    kodea: string;
     id: number |null,
     izena: string,
-    kodea : string,
     abizenak : string,
     data: IData,
 }
