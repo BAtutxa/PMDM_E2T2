@@ -31,13 +31,4 @@ export class LangileakService {
   eliminarLangile(langile: ITrabajador): Observable<ITrabajador> {
     return this.http.put<ITrabajador>(`${this.apiUrl}/delete`, langile);
   }
-  obtenerIDMaximo(): Observable<number> {
-    return this.http.get<string>(`${this.apiUrl}/max-kodea`).pipe( 
-      map((maxKodea: string) => {
-        const maxId = parseInt(maxKodea, 10) ?? 0;
-        return isNaN(maxId) ? 1 : maxId + 1; 
-      })
-    );
-  }
-  
 }

@@ -74,11 +74,8 @@ langileak: ITrabajador [] = []
   }
 
   crearLangile() {
-  const ahora = new Date();
+    const ahora = new Date();
 
-  this.langileakService.obtenerIDMaximo().subscribe((id) => {
-    // Asignar ID y fechas originales (como objetos Date)
-    this.langile.id = id;
     this.langile.data.sortze_data = ahora; // Asegúrate de que sea un objeto Date
     this.langile.data.eguneratze_data = ahora; // Asegúrate de que sea un objeto Date
     this.langile.data.ezabatze_data = null; // null también es aceptable
@@ -100,12 +97,12 @@ langileak: ITrabajador [] = []
       (response: any) => {
         console.log('Respuesta del backend:', response);
         alert('Trabajador creado con éxito');
+        window.location.reload();
       },
       (error: any) => {
         console.log('Error al crear el trabajador:', error);
         alert('Error al crear el trabajador');
       }
     );
-  });
-}
+  }
 }  
