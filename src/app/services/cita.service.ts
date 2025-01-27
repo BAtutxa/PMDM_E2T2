@@ -23,4 +23,16 @@ export class CitaService {
   getCitasPorFecha(fecha: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/datarenHitzorduak?date=${fecha}`);
   }
+
+
+  updateCita(citaData: any): Observable<any> {
+    console.log('JSON enviado para actualizar la cita:', JSON.stringify(citaData, null, 2));
+    const headers = { 'Content-Type': 'application/json' };
+    return this.http.put<any>(`${this.apiUrl}/update`, citaData, { headers });
+  }
+
+  deleteCita(id: number): Observable<any> {
+    console.log('Eliminando cita con ID:', id);
+    return this.http.delete<any>(`${this.apiUrl}/delete/${id}`);
+  }
 }
