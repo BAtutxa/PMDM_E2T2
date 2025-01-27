@@ -12,7 +12,7 @@ export class CalendarioPage implements OnInit {
     'Urtarrila', 'Otsaila', 'Martxoa', 'Apirila', 'Maiatza', 'Ekaina',
     'Uztaila', 'Abuztua', 'Iraila', 'Urria', 'Azaroa', 'Abendua',
   ];
-  diasSemana = ['I', 'A', 'A', 'A', 'O', 'O', 'L'];
+  diasSemana = ['Igandea', 'Astelehena', 'Asteartea', 'Asteazkena', 'Osteguna', 'Ostirala', 'Larunbata'];
   
   anioActual: number = new Date().getFullYear(); //   anioActual: number = 1;
   mesActual: number = new Date().getMonth();
