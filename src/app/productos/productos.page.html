@@ -111,7 +111,7 @@
           </ion-item>
           <ion-item>
             <ion-label position="floating">{{name}}</ion-label>
-            <ion-input [(ngModel)]="productoSeleccionado.izena" name="izena" #izena="ngModel"></ion-input>
+            <ion-input [(ngModel)]="productoSeleccionado.izena" name="izena" #izena="ngModel" required></ion-input>
             <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
               El nombre es obligatorio.
             </ion-note>
