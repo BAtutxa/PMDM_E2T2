@@ -77,10 +77,6 @@ const routes: Routes = [
     loadChildren: () => import('./tickets/tickets.module').then( m => m.TicketsPageModule)
   },
   {
-    path: 'crear-grupos',
-    loadChildren: () => import('./crear-grupos/crear-grupos.module').then( m => m.CrearGruposPageModule)
-  },
-  {
     path: 'editar-grupo/:kodea',  // Agrega el parámetro dinámico
     loadChildren: () => import('./editar-grupo/editar-grupo.module').then( m => m.EditarGrupoPageModule)
   },

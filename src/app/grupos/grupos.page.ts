@@ -14,7 +14,7 @@ import { ITrabajador } from '../interfaces/ITrabajador';
 })
 export class GruposPage implements OnInit {
   grupos: IEquipos[] = [];
-  ficha: IEquipos = { 
+  equipo: IEquipos = { 
     langileak: [],
     kodea: '',     
     izena: '',    
@@ -48,7 +48,7 @@ export class GruposPage implements OnInit {
 
         const grupo = this.grupos.find(grupo => grupo.kodea === this.grupoId);
         if (grupo) {
-          this.ficha = { ...grupo }; 
+          this.equipo = { ...grupo }; 
         } else {
           console.error('Grupo no encontrado con el ID:', this.grupoId);
         }
@@ -60,9 +60,8 @@ export class GruposPage implements OnInit {
   }
 
   cargarTrabajadores() {
-    this.langileakService.getAllLangileak().subscribe(trabajadores => {
+    this.langileakService.getLangileak().subscribe(trabajadores => {
       this.trabajadores = trabajadores;
-      console.log('Trabajadores disponibles:', this.trabajadores);
     });
   }
 
@@ -84,8 +83,7 @@ export class GruposPage implements OnInit {
 
             try {
               await firstValueFrom(this.equipoService.eliminarGrupo(grupo));
-              this.grupos = this.grupos.filter((g) => g.kodea !== grupo.kodea);
-              window.location.reload();
+              this.grupos = this.grupos.filter((borrado) => borrado.kodea !== grupo.kodea);
             } catch (error) {
               console.error('Error al eliminar el grupo:', error);
             }
@@ -95,4 +93,63 @@ export class GruposPage implements OnInit {
     });
     await alert.present();
   }
+
+  async CrearEquipo() {
+    const alert = await this.alertController.create({
+      header: 'Crear Nuevo Equipo',
+      message: 'Ingresa los detalles del nuevo equipo.',
+      inputs: [
+        {
+          name: 'nombre',
+          type: 'text',
+          placeholder: 'Nombre del equipo',
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Crear',
+          handler: async (data) => {
+            const ahora = new Date();
+            this.equipoService.obtenerIDDisponible().subscribe((nextKodea: string) => {
+              this.equipo.kodea = nextKodea;
+              this.equipo.izena = data.nombre;
+              this.equipo.data.eguneratze_data = ahora;
+              this.equipo.data.sortze_data = ahora;
+  
+              this.equipoService.agregarGrupo(this.equipo).subscribe(
+                async (response: any) => {
+                  const ondoAlerta = await this.alertController.create({
+                    header: 'Éxito',
+                    message: 'Nuevo equipo creado con éxito.',
+                    buttons: ['OK'],
+                  });
+  
+                  await ondoAlerta.present();
+                  ondoAlerta.onDidDismiss().then(() => {
+                    window.location.reload();
+                  });
+                },
+                async (error: any) => {
+                  console.error('Error al crear el equipo:', error);
+                  const errorAlert = await this.alertController.create({
+                    header: 'Error',
+                    message: 'Hubo un error al crear el equipo.',
+                    buttons: ['OK'],
+                  });
+  
+                  await errorAlert.present();
+                }
+              );
+            });
+          },
+        },
+      ],
+    });
+  
+    await alert.present();
+  }  
 }
