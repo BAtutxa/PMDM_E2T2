@@ -54,3 +54,74 @@ img {
   font-size: 2rem;
   margin-bottom: 20px;
 }
+
+//
+
+/* Iconos de los ítems */
+ion-icon {
+  font-size: 22px;
+  color: white;
+}
+
+/* Títulos del menú */
+ion-label {
+  font-size: 16px;
+  font-weight: 500;
+  color: white;;
+}
+
+/* Estilo del título del menú */
+ion-toolbar ion-title {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Fondo de la cabecera del menú */
+ion-toolbar {
+  --background: #1c345c;
+  --color: #fff;
+}
+
+/* Contenido principal */
+#main-content {
+  --background: #0d1a31;
+}
+
+
+/* Estilo de los ítems del menú */
+ion-item {
+  --background: #0d1a31 !important; /* Fondo del submenú */
+  --color: #ffffff !important; /* Texto blanco */
+  --inner-border-width: 0; /* Eliminar bordes */
+  --background-hover: #9eb9e7 !important; /* Fondo al pasar el mouse */
+}
+
+
+///////
+
+/* Eliminar el borde negro debajo del título */
+ion-toolbar {
+  --background: #1c345c !important; /* Azul oscuro */
+  --color: #ffffff;
+  border-bottom: none !important; /* Eliminar cualquier borde */
+  box-shadow: none !important; /* Evitar sombras */
+}
+
+/* Asegurar que el fondo del contenido del menú sea azul */
+ion-content{
+  //--background: #1c345c !important; /* Azul oscuro */
+}
+
+/* Asegurar que los ítems también tengan fondo azul */
+ion-item {
+  --background: #1c345c !important;
+  --color: #ffffff !important;
+  --inner-border-width: 0 !important;
+  --background-hover: #264a7e !important;
+}
+
+div.inner-scroll.scroll-y{
+  --background: #1c345c !important;
+}
+

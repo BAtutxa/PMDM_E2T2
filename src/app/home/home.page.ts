@@ -55,7 +55,7 @@ export class HomePage {
     this.userService.login(this.name, this.password).subscribe(
       (isAuthenticated) => {
         if (isAuthenticated) {
-          this.router.navigate(['/menu']); // Redirige al menú si la autenticación es exitosa
+          this.router.navigate(['/calendario']); // Redirige al menú si la autenticación es exitosa
         } else {
           // Asigna el mensaje de error traducido
           this.errorMessage = this.errorInvalidCredentials;
