@@ -63,7 +63,6 @@ ion-fab-button {
 .botones {
   display: flex;
   justify-content: space-between;
-  margin-top: 1rem;
 }
 
 .input-container {
@@ -92,4 +91,18 @@ ion-fab-button {
   border-color: var(--ion-color-primary);
   box-shadow: 0 0 0 2px var(--ion-color-primary-tint);
 }
+
+ion-header ion-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+ion-header ion-title ion-icon {
+  margin-left: 10px; 
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+
 

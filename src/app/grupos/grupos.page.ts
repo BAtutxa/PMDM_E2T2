@@ -40,6 +40,7 @@ export class GruposPage implements OnInit {
     },
   }; 
   mostrarEditor: boolean = false; 
+grupo: any;
 
   constructor(
     private equipoService: EquipoService,

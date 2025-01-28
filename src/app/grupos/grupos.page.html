@@ -1,6 +1,11 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title>Equipos</ion-title>
+    <ion-title>
+      Equipos
+      <ion-icon (click)="CrearEquipo()" name="add"></ion-icon>
+      <ion-icon routerLink="/langile" name="person-add"></ion-icon>
+      <ion-icon routerLink="/langile" name="timer"></ion-icon>
+    </ion-title>    
   </ion-toolbar>
 </ion-header>
 
@@ -33,19 +38,6 @@
         </ion-buttons>
       </ion-item>
     </ion-list>
-
-    <!-- Botón flotante para crear grupo -->
-    <ion-fab vertical="bottom" horizontal="center" slot="fixed" class="fab-container">
-      <ion-fab-button (click)="CrearEquipo()">
-        <ion-icon name="add"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button routerLink="/langile">
-        <ion-icon name="person-add"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button routerLink="/langile">
-        <ion-icon name="timer"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
   </div>
 
  <!-- Card para editar trabajador (visible al editar) -->
