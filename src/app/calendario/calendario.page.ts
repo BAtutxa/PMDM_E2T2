@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'; // Importa Router
+import { Component, OnInit } from '@angular/core'; 
+import { Router } from '@angular/router';
 import { CitaService } from '../services/cita.service';
 
 @Component({
@@ -21,6 +21,13 @@ export class CalendarioPage implements OnInit {
   diasMes: number[] = [];
   grupoSeleccionado = '';
   citasSeleccionadas: string[] = [];
+  
+  // Variable para enlazar con el ion-datetime
+  fechaSeleccionada: string = `${this.anioActual}-${(this.mesActual + 1).toString().padStart(2, '0')}-01`;
+
+  // Definir las fechas mínimas y máximas si es necesario
+  minFecha: string = `${this.anioActual - 1}-01-01`;
+  maxFecha: string = `${this.anioActual + 1}-12-31`;
 
   constructor(private router: Router, private citaService: CitaService) {
     this.generarCalendario();
@@ -63,14 +70,26 @@ export class CalendarioPage implements OnInit {
     }
   }
 
+  // Método para manejar el cambio de fecha
+onFechaChange(event: CustomEvent) {
+  const fecha = new Date(event.detail.value); // Extraemos la fecha desde el evento
+  this.anioActual = fecha.getFullYear();
+  this.mesActual = fecha.getMonth();
+  this.diaSeleccionado = fecha.getDate(); // Establecemos el día seleccionado
+
+  // Actualizamos el calendario con la nueva fecha seleccionada
+  this.obtenerCitasDeFecha(this.diaSeleccionado);
+}
+
+
   irACitas() {
-    if (this.diaSeleccionado) {
+    if (this.diaSeleccionado !== null) {
       const fechaSeleccionada = `${this.anioActual}-${(this.mesActual + 1).toString().padStart(2, '0')}-${this.diaSeleccionado.toString().padStart(2, '0')}`;
 
       // Pasa la fecha seleccionada como query parameter al navegar
       this.router.navigate(['/citas'], { queryParams: { fecha: fechaSeleccionada } });
     } else {
-      alert('Por favor selecciona una fecha');
+      alert('Por favor selecciona un día');
     }
   }
 

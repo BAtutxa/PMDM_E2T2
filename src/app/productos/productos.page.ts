@@ -5,7 +5,7 @@ import { firstValueFrom } from 'rxjs';
 import { IonContent } from '@ionic/angular';
 import { IEProduktuak } from '../interfaces/IEProduktuak';
 import { TranslateService } from '@ngx-translate/core';
-import {ChangeDetectorRef }  from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-productos',
@@ -18,30 +18,30 @@ export class ProductosPage implements OnInit {
   editandoProducto: boolean = false;
   productoConInformacionSeleccionada: boolean = false;
   productoSeleccionado: IEProduktuak | any = {};
-  productoSeleccionadoAnterior: IEProduktuak | null = null; // Variable para almacenar el producto seleccionado previamente
+  productoSeleccionadoAnterior: IEProduktuak | null = null;
   productos: IEProduktuak[] = [];
   productosFiltrados: IEProduktuak[] = [];
   mobilaDa: Boolean = false;
-  ordenActual: { columna: string, ascendente: boolean } = { columna: '', ascendente: true };
+  ordenActual: { columna: string, ascendente: boolean } = { columna: 'id', ascendente: true };
   productosPorPagina = 10;
   paginaActual = 1;
   paginacionMaxima = 0;
   Math: any;
 
   //tradukzioa
-  title :string = ''
-  name :string = ''
-  brand :string = ''
-  id_category :string = ''
-  cd :string = ''
-  ud :string = ''
-  edit :string = ''
-  confirm:string = ''
-  cancel:string = ''
-  info :string = ''
-  search :string = ''
+  title: string = ''
+  name: string = ''
+  brand: string = ''
+  id_category: string = ''
+  cd: string = ''
+  ud: string = ''
+  edit: string = ''
+  confirm: string = ''
+  cancel: string = ''
+  info: string = ''
+  search: string = ''
 
-  constructor(private alertController: AlertController, private productoService: ProductoService, private translateService: TranslateService, private cdr:ChangeDetectorRef) {}
+  constructor(private alertController: AlertController, private productoService: ProductoService, private translateService: TranslateService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.mobilbista();
@@ -83,7 +83,7 @@ export class ProductosPage implements OnInit {
 
   moverVistaAlPrimerProducto() {
     if (this.content) {
-      this.content.scrollToTop(500); // Ajusta el tiempo si es necesario
+      this.content.scrollToTop(500);
     }
   }
 
@@ -107,7 +107,7 @@ export class ProductosPage implements OnInit {
   }
 
   editarProducto(producto: IEProduktuak) {
-    this.productoSeleccionadoAnterior = { ...this.productoSeleccionado }; // Guardar el producto seleccionado previamente
+    this.productoSeleccionadoAnterior = { ...this.productoSeleccionado };
     this.editandoProducto = true;
     this.productoSeleccionado = { ...producto };
     this.moverVistaAlPrimerProducto();
@@ -115,7 +115,7 @@ export class ProductosPage implements OnInit {
 
   async confirmarEdicion() {
     const translations = await this.translateService.get(['ALERTMATERIAL.HEADER', 'ALERTMATERIAL.MESSAGE', 'ALERTMATERIAL.CANCEL', 'ALERTMATERIAL.CONFIRM']).toPromise();
-  
+
     const alert = await this.alertController.create({
       header: translations['ALERTMATERIAL.HEADER'],
       message: translations['ALERTMATERIAL.MESSAGE'],
@@ -130,7 +130,7 @@ export class ProductosPage implements OnInit {
             const now = new Date().toISOString();
             this.productoSeleccionado.data = this.productoSeleccionado.data || {};
             this.productoSeleccionado.data.eguneratze_data = now;
-  
+
             try {
               await firstValueFrom(this.productoService.actualizarProducto(this.productoSeleccionado));
               const index = this.productos.findIndex(producto => producto.id === this.productoSeleccionado.id);
@@ -148,10 +148,9 @@ export class ProductosPage implements OnInit {
         },
       ],
     });
-  
+
     await alert.present();
   }
-  
 
   cancelarEdicion() {
     this.productoSeleccionado = { ...this.productoSeleccionadoAnterior };
@@ -180,7 +179,7 @@ export class ProductosPage implements OnInit {
 
   aplicarFiltro(event: any) {
     const texto = event.target.value.toLowerCase();
-    
+
     if (texto.trim() === '') {
       this.productosFiltrados = [...this.productos];
     } else {
@@ -204,6 +203,7 @@ export class ProductosPage implements OnInit {
     }
   }
 
+  // Método para ordenar por columna y orden (ascendente/descendente)
   ordenarPor(columna: string) {
     if (this.ordenActual.columna === columna) {
       this.ordenActual.ascendente = !this.ordenActual.ascendente;
@@ -211,11 +211,11 @@ export class ProductosPage implements OnInit {
       this.ordenActual.columna = columna;
       this.ordenActual.ascendente = true;
     }
-  
+
     this.productosFiltrados.sort((a, b) => {
       let valorA = this.obtenerValorPorColumna(a, columna);
       let valorB = this.obtenerValorPorColumna(b, columna);
-  
+
       if (columna === 'sortze_data' || columna === 'eguneratze_data') {
         valorA = valorA ? new Date(valorA) : null;
         valorB = valorB ? new Date(valorB) : null;
@@ -225,7 +225,7 @@ export class ProductosPage implements OnInit {
         valorA = a.kategoriak ? a.kategoriak.id : null;
         valorB = b.kategoriak ? b.kategoriak.id : null;
       }
-  
+
       if (valorA < valorB || valorA === null) {
         return this.ordenActual.ascendente ? -1 : 1;
       } else if (valorA > valorB || valorB === null) {
@@ -235,20 +235,20 @@ export class ProductosPage implements OnInit {
       }
     });
   }
-  
+
+  // Método para obtener el valor de una columna
   private obtenerValorPorColumna(objeto: any, columna: string): any {
-    const propiedades = columna.split('.');  // Divide la columna por el punto (.)
+    const propiedades = columna.split('.');
     let valor = objeto;
-  
+
     propiedades.forEach((propiedad) => {
       if (valor) {
         valor = valor[propiedad];
       }
     });
-  
+
     return valor;
   }
-  
 
   getOrdenClass(columna: string): string {
     if (this.ordenActual.columna === columna) {
@@ -287,7 +287,7 @@ export class ProductosPage implements OnInit {
   }
 
   changeLanguage(lang: string) {
-    this.translateService.use(lang); // Cambiar el idioma
-    this.translateLabels(); // Recargar las traducciones
+    this.translateService.use(lang);
+    this.translateLabels();
   }
 }
