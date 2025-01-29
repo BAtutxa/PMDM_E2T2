@@ -43,3 +43,12 @@ ion-item {
   --inner-border-width: 0 !important; /* Eliminar bordes */
   --background-hover: #9eb9e7 ; /* Fondo al pasar el mouse */
 }
+
+//No tocar que es es para quitar lo negro feo!!!!!!!!!!!!!!!!!!!!!!!!!!
+ion-menu ion-list {
+  height: 100%; /* Asegura que la lista ocupe toda la altura disponible */
+  margin: 0; /* Elimina márgenes */
+  padding: 0; /* Elimina padding */
+  background-color: #1c345c !important;
+
+}
