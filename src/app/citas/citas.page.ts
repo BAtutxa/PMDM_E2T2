@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { LangileakService } from '../services/Langileak.service';  // Importar el servicio
+import { Route } from '@angular/router';
 
 @Component({
   selector: 'app-citas',
@@ -15,13 +15,15 @@ export class CitasPage implements OnInit {
   citaForm: FormGroup;
   fechaSeleccionada: string = ''; // Variable para almacenar la fecha seleccionada
   langileakList: any[] = []; // Lista para almacenar los Langileak
+  Router: any;
 
   constructor(
     private fb: FormBuilder,
     private alertCtrl: AlertController,
     private navCtrl: NavController,
     private route: ActivatedRoute,
-    private langileakService: LangileakService // Inyectar el servicio
+    private router: Router,
+    private langileakService: LangileakService
   ) {
     this.citaForm = this.fb.group({
       nombre: ['', [Validators.required]],
@@ -31,12 +33,7 @@ export class CitasPage implements OnInit {
         [
           Validators.required,
           Validators.pattern('^(?:[01]?[0-9]|2[0-3]):([0-5]?[0-9])$'),
-          Validators.pattern('^(?:[01]?[0-9]|2[0-3]):([0-5]?[0-9])$'),
         ],
-      ],
-      eslekua: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-      deskribapena: ['', [Validators.required]],
-      etxekoa: ['', [Validators.required]],
       ],
       eslekua: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
       deskribapena: ['', [Validators.required]],
@@ -46,41 +43,18 @@ export class CitasPage implements OnInit {
         [Validators.required, Validators.pattern('^[0-9]+(.[0-9]{1,2})?$')],
       ],
       langilea: ['', [Validators.required]], // Campo obligatorio para Langilea
-      ],
-      langilea: ['', [Validators.required]], // Campo obligatorio para Langilea
       horaFin: [
         '',
         [
           Validators.required,
           Validators.pattern('^(?:[01]?[0-9]|2[0-3]):([0-5]?[0-9])$'),
-          Validators.pattern('^(?:[01]?[0-9]|2[0-3]):([0-5]?[0-9])$'),
         ],
-      ],
       ],
     });
   }
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
-      this.fechaSeleccionada = params['fecha'] || 'Fecha no seleccionada';
-      console.log('Fecha recibida:', this.fechaSeleccionada);
-    });
-
-    // Obtener los Langileak
-    this.langileakService.getAllLangileak().subscribe(
-      (data) => {
-        this.langileakList = data;
-        console.log('Langileak obtenidos:', this.langileakList);
-      },
-      (error) => {
-        console.error('Error al obtener Langileak:', error);
-      }
-    );
-  }
-
-  onLangileaChange(event: any) {
-    const langileaId = event.detail.value; // Obtener el ID del Langilea seleccionado
-    this.citaForm.patchValue({ langilea: langileaId }); // Establecer el ID en el formulario
       this.fechaSeleccionada = params['fecha'] || 'Fecha no seleccionada';
       console.log('Fecha recibida:', this.fechaSeleccionada);
     });
@@ -117,7 +91,6 @@ export class CitasPage implements OnInit {
           etxekoa: datos.etxekoa,
           prezioa: datos.prezioa,
           langilea: datos.langilea,
-          horaFin: datos.horaFin,
           horaFin: datos.horaFin,
         },
       });

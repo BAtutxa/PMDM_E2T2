@@ -1,132 +1,71 @@
-<ion-content [fullscreen]="true">
-  <ion-menu contentId="main-content">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Menua</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content color="secondary">
-    <div color="secondary" class="menu-container">
-      <ion-list color="secondary">
-        <ion-item routerLink="/citas">
-          <ion-icon slot="start" name="calendar-outline"></ion-icon>
-          <ion-label>Hitzorduak</ion-label>
-        </ion-item>
-        <ion-item routerLink="/calendario">
-          <ion-icon slot="start" name="settings-outline"></ion-icon>
-          <ion-label>Egutegia</ion-label>
-        </ion-item>
-        <ion-item routerLink="/clientes">
-          <ion-icon slot="start" name="person-circle-outline"></ion-icon>
-          <ion-label>Bezeroak</ion-label>
-        </ion-item>
-        <ion-item routerLink="/servicios">
-          <ion-icon slot="start" name="settings-outline"></ion-icon>
-          <ion-label>Zerbitzuak</ion-label>
-        </ion-item>
-        <ion-item routerLink="/inventario">
-          <ion-icon slot="start" name="cube-outline"></ion-icon>
-          <ion-label>Inbentarioa</ion-label>
-        </ion-item>
-        <ion-item routerLink="/administracion">
-          <ion-icon slot="start" name="settings-outline"></ion-icon>
-          <ion-label>Administrazioa</ion-label>
-        </ion-item>
-        <ion-item routerLink="/tickets">
-          <ion-icon slot="start" name="settings-outline"></ion-icon>
-          <ion-label>Tickets-ak</ion-label>
-        </ion-item>
-      </ion-list>
-    </div>
-    </ion-content>
-  </ion-menu>
+<ion-content>
+  <div class="card-container">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Reservar Cita</ion-card-title>
+      </ion-card-header>
 
-  <!-- Header principal -->
-  <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>Hitzorduak</ion-title>
-    </ion-toolbar>
-  </ion-header>
+      <ion-card-content>
+        <div class="fecha-seleccionada">
+          <strong>Fecha seleccionada:</strong> {{ fechaSeleccionada }}
+        </div>
 
-    <!-- Contenido principal -->
-    <div class="ion-page" id="main-content">
-      <!-- Aquí puedes insertar el contenido dinámico de la página -->
-      <ion-content>
-        <p>Aquí va el contenido principal de la página.</p>
-      </ion-content>
-    </div>
- 
-    <ion-content>
-      <div class="card-container">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>Reservar Cita</ion-card-title>
-          </ion-card-header>
-    
-          <ion-card-content>
-            <div class="fecha-seleccionada">
-              <strong>Fecha seleccionada:</strong> {{ fechaSeleccionada }}
-            </div>
-    
-            <form [formGroup]="citaForm" (ngSubmit)="confirmarCita()" class="form-grid">
-              <div class="form-column">
-                <ion-item>
-                  <ion-label position="stacked">Izena</ion-label>
-                  <ion-input formControlName="nombre"></ion-input>
-                </ion-item>
-                <ion-item>
-                  <ion-label position="stacked">Telefonoa</ion-label>
-                  <ion-input formControlName="telefono" type="tel"></ion-input>
-                </ion-item>
-                <ion-item>
-                  <ion-label position="stacked">Hasiera ordua</ion-label>
-                  <ion-input formControlName="hora" type="time" placeholder="Ordua sartu (adb: 14:30)"></ion-input>
-                </ion-item>
-                <ion-item>
-                  <ion-label position="stacked">Amaiera ordua</ion-label>
-                  <ion-input formControlName="horaFin" type="time" placeholder="Ordua sartu (adb: 15:30)"></ion-input>
-                </ion-item>
-              </div>
-    
-              <div class="form-column">
-                <ion-item>
-                  <ion-label position="stacked">Eserlekua</ion-label>
-                  <ion-input formControlName="eslekua" type="number" placeholder="Eserlekua"></ion-input>
-                </ion-item>
-                <ion-item>
-                  <ion-label position="stacked">Deskribapena</ion-label>
-                  <ion-input formControlName="deskribapena" type="text" placeholder="Deskribapena"></ion-input>
-                </ion-item>
-                <ion-item>
-                  <ion-label position="stacked">Etxekoa</ion-label>
-                  <ion-select formControlName="etxekoa">
-                    <ion-select-option value="K">K</ion-select-option>
-                    <ion-select-option value="E">E</ion-select-option>
-                  </ion-select>
-                </ion-item>
-                <ion-item>
-                  <ion-label position="stacked">Prezioa (€)</ion-label>
-                  <ion-input formControlName="prezioa" type="number" placeholder="Prezioa"></ion-input>
-                </ion-item>
-                <ion-item>
-                  <ion-label position="stacked">Langilea</ion-label>
-                  <ion-select formControlName="langilea" (ionChange)="onLangileaChange($event)">
-                    <ion-select-option *ngFor="let langilea of langileakList" [value]="langilea.id">
-                      {{ langilea.izena }} {{ langilea.abizenak }} ({{ langilea.kodea }})
-                    </ion-select-option>
-                  </ion-select>
-                </ion-item>
-              </div>
-            </form>
-    
-            <div class="button-container">
-              <ion-button color="danger" (click)="descartarCita()">✖</ion-button>
-              <ion-button type="submit" color="success" (click)="confirmarCita()">✔</ion-button>
-            </div>
-          </ion-card-content>
-        </ion-card>
-      </div>
-    </ion-content>
+        <form [formGroup]="citaForm" (ngSubmit)="confirmarCita()" class="form-grid">
+          <div class="form-column">
+            <ion-item>
+              <ion-label position="stacked">Izena</ion-label>
+              <ion-input formControlName="nombre"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Telefonoa</ion-label>
+              <ion-input formControlName="telefono" type="tel"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Hasiera ordua</ion-label>
+              <ion-input formControlName="hora" type="time" placeholder="Ordua sartu (adb: 14:30)"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Amaiera ordua</ion-label>
+              <ion-input formControlName="horaFin" type="time" placeholder="Ordua sartu (adb: 15:30)"></ion-input>
+            </ion-item>
+          </div>
+
+          <div class="form-column">
+            <ion-item>
+              <ion-label position="stacked">Eserlekua</ion-label>
+              <ion-input formControlName="eslekua" type="number" placeholder="Eserlekua"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Deskribapena</ion-label>
+              <ion-input formControlName="deskribapena" type="text" placeholder="Deskribapena"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Etxekoa</ion-label>
+              <ion-select formControlName="etxekoa">
+                <ion-select-option value="K">K</ion-select-option>
+                <ion-select-option value="E">E</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Prezioa (€)</ion-label>
+              <ion-input formControlName="prezioa" type="number" placeholder="Prezioa"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Langilea</ion-label>
+              <ion-select formControlName="langilea" (ionChange)="onLangileaChange($event)">
+                <ion-select-option *ngFor="let langilea of langileakList" [value]="langilea.id">
+                  {{ langilea.izena }} {{ langilea.abizenak }} ({{ langilea.kodea }})
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </div>
+        </form>
+
+        <div class="button-container">
+          <ion-button color="danger" (click)="descartarCita()">✖</ion-button>
+          <ion-button type="submit" color="success" (click)="confirmarCita()">✔</ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
