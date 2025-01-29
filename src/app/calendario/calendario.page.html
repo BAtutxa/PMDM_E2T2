@@ -59,28 +59,17 @@
 
 <ion-content class="container">
   <div class="container">
-    <h1>Egutegia</h1>
-
-    <div class="calendar-header">
-      <ion-button fill="clear" (click)="cambiarMes(-1)">&#x25C0;</ion-button>
-      <span>{{ meses[mesActual] }} {{ anioActual }}</span>
-      <ion-button fill="clear" (click)="cambiarMes(1)">&#x25B6;</ion-button>
-    </div>
-
-    <div class="calendario-grid">
-      <div *ngFor="let dia of diasSemana" class="dia-header">
-        {{ dia }}
-      </div>
-      <div
-        *ngFor="let dia of diasMes; let i = index"
-        class="dia"
-        [class.seleccionado]="dia === diaSeleccionado"
-        (click)="seleccionarDia(dia)"
-        [attr.disabled]="dia === 0 ? true : null"
-      >
-        {{ dia !== 0 ? dia : '' }}
-      </div>
-    </div>
+    <ion-datetime
+      presentation="date"
+      [(ngModel)]="fechaSeleccionada"
+      display-format="DD MMM YYYY"
+      picker-format="DD MMM YYYY"
+      [min]="minFecha"
+      [max]="maxFecha"
+      (ionChange)="onFechaChange($event)"
+      show-default-time="false"
+    >
+    </ion-datetime>
 
     <div class="info">
       <ion-item>
@@ -89,27 +78,31 @@
       </ion-item>
       <ion-item>
         <ion-label>Hitzorduak</ion-label>
-        <ion-textarea [value]="citasSeleccionadas.join('\n')" readonly></ion-textarea>
+        <ion-textarea
+          [value]="citasSeleccionadas.join('\n')"
+          readonly
+        ></ion-textarea>
       </ion-item>
 
       <!-- Botones con 'x' y 'v' -->
       <div class="botones">
         <ion-button color="danger" fill="clear" routerLink="/menu">
-          <ion-icon name="close"></ion-icon> <!-- 'x' icon -->
+          <ion-icon name="close"></ion-icon>
+          <!-- 'x' icon -->
         </ion-button>
         <ion-button color="success" fill="clear" (click)="irACitas()">
-          <ion-icon name="checkmark"></ion-icon> <!-- 'v' icon -->
+          <ion-icon name="checkmark"></ion-icon>
+          <!-- 'v' icon -->
         </ion-button>
+
+        <ion-button
+      expand="block"
+      class="gestionar-citas-button"
+      (click)="irAGestionarCitas()"
+    >
+      Hitzorduak Kudeatu
+    </ion-button>
       </div>
     </div>
   </div>
 </ion-content>
-
-<ion-footer>
-  <ion-toolbar>
-    <!-- Nuevo botón cuadrado para gestionar citas -->
-    <ion-button expand="block" class="gestionar-citas-button" (click)="irAGestionarCitas()">
-      Hitzorduak Kudeatu
-    </ion-button>
-  </ion-toolbar>
-</ion-footer>

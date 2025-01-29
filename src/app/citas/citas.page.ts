@@ -1,7 +1,8 @@
+import { LangileakService } from 'src/app/services/Langileak.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { LangileakService } from '../services/Langileak.service';  // Importar el servicio
 
@@ -30,7 +31,12 @@ export class CitasPage implements OnInit {
         [
           Validators.required,
           Validators.pattern('^(?:[01]?[0-9]|2[0-3]):([0-5]?[0-9])$'),
+          Validators.pattern('^(?:[01]?[0-9]|2[0-3]):([0-5]?[0-9])$'),
         ],
+      ],
+      eslekua: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      deskribapena: ['', [Validators.required]],
+      etxekoa: ['', [Validators.required]],
       ],
       eslekua: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
       deskribapena: ['', [Validators.required]],
@@ -40,18 +46,41 @@ export class CitasPage implements OnInit {
         [Validators.required, Validators.pattern('^[0-9]+(.[0-9]{1,2})?$')],
       ],
       langilea: ['', [Validators.required]], // Campo obligatorio para Langilea
+      ],
+      langilea: ['', [Validators.required]], // Campo obligatorio para Langilea
       horaFin: [
         '',
         [
           Validators.required,
           Validators.pattern('^(?:[01]?[0-9]|2[0-3]):([0-5]?[0-9])$'),
+          Validators.pattern('^(?:[01]?[0-9]|2[0-3]):([0-5]?[0-9])$'),
         ],
+      ],
       ],
     });
   }
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
+      this.fechaSeleccionada = params['fecha'] || 'Fecha no seleccionada';
+      console.log('Fecha recibida:', this.fechaSeleccionada);
+    });
+
+    // Obtener los Langileak
+    this.langileakService.getAllLangileak().subscribe(
+      (data) => {
+        this.langileakList = data;
+        console.log('Langileak obtenidos:', this.langileakList);
+      },
+      (error) => {
+        console.error('Error al obtener Langileak:', error);
+      }
+    );
+  }
+
+  onLangileaChange(event: any) {
+    const langileaId = event.detail.value; // Obtener el ID del Langilea seleccionado
+    this.citaForm.patchValue({ langilea: langileaId }); // Establecer el ID en el formulario
       this.fechaSeleccionada = params['fecha'] || 'Fecha no seleccionada';
       console.log('Fecha recibida:', this.fechaSeleccionada);
     });
@@ -89,6 +118,7 @@ export class CitasPage implements OnInit {
           prezioa: datos.prezioa,
           langilea: datos.langilea,
           horaFin: datos.horaFin,
+          horaFin: datos.horaFin,
         },
       });
     } else {
@@ -111,7 +141,7 @@ export class CitasPage implements OnInit {
     }
   }
 
-  descartarCita() {
-    this.citaForm.reset();
-  }
+descartarCita() {
+  this.citaForm.reset();
+  this.router.navigate(['/calendario']);}
 }

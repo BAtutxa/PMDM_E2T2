@@ -1,143 +1,26 @@
 .container {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
   padding: 16px;
-  color:black;
-}
-
-h1 {
-  margin-bottom: 16px;
-}
-
-.calendar-header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 16px;
-}
-
-.calendar-header span {
-  margin: 0 8px;
-  font-weight: bold;
-}
-
-.dia-header {
-  text-align: center;
-  font-weight: bold;
-}
-
-.dia {
-  text-align: center;
-  padding: 12px;
-  margin: 4px;
-  cursor: pointer;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-  color:black;
-}
-
-.dia[disabled] {
-  color: #ccc;
-  pointer-events: none;
-}
-
-.dia.seleccionado {
-  background-color:  #7dcdb3;
-  color: black;
-}
-
-.info {
-  margin-top: 30px;
-  text-align: left;
-}
-
-ion-item {
-  margin-bottom: 16px;
-  padding: 12px;
-  background-color: #ccc;
-}
-
-
-ion-textarea {
-  height: 100%;
-  min-height: 120px;
-  padding: 12px;
-  resize: none;
-  overflow: hidden;
+  height: 100vh;
   box-sizing: border-box;
-}
-
-/* Añadir más espacio en la derecha de los elementos Taldea y Citas */
-ion-item ion-label {
-  margin-right: 16px;
-}
-
-/* Para pantallas pequeñas */
-@media (max-width: 576px) {
-  ion-item {
-    padding: 8px;
-  }
-
-  ion-textarea {
-    min-height: 100px;
-  }
-}
-
-/* Estilo para el calendario */
-.calendario-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-gap: 4px;
-  justify-items: center;
-  margin-top: 10px;
-}
-
-.dia {
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-}
-
-/* Para pantallas pequeñas */
-@media (max-width: 576px) {
-  .dia {
-    width: 32px;
-    height: 32px;
-    font-size: 14px;
-  }
-  .calendar-header span {
-    font-size: 14px;
-  }
-}
-
-/* Estilo para los botones */
-.botones {
-  display: flex;
-  justify-content: space-between;
   margin-top: 20px;
 }
 
-ion-button {
-  width: 60px;  /* Aumentamos el tamaño de los botones */
-  height: 60px;
-  border-radius: 50%;  /* Aseguramos que sean redondos */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 24px; /* Aumentamos el tamaño del icono */
-  --padding-start: 0;
-  --padding-end: 0;
-  --border-radius: 50%; /* Aseguramos que el borde sea redondeado */
-  background-color: #ccc;
+ion-datetime {
+  margin: 20px auto;
+  max-width: 400px;
+  width: 100%;
 }
 
-ion-icon {
-  font-size: 28px; /* Aumentamos el tamaño del icono */
+.info {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
 }
-
 //
 
 /* Estilo del título del menú */
