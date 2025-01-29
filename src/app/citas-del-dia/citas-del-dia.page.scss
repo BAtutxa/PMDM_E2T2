@@ -1,0 +1,33 @@
+/* Estilo global para la página de Citas */
+.container {
+  padding: 16px;
+}
+
+h1 {
+  color: black;  // Cambiar el color del título a negro
+  font-size: 24px;  // Tamaño de fuente adecuado
+  font-weight: bold;  // Negrita para mayor énfasis
+}
+
+ion-header ion-title {
+  color: black;  // Cambiar el color del título en la barra de navegación
+}
+
+/* Si necesitas ajustar más el diseño del título, puedes añadir estilos adicionales */
+ion-grid {
+  margin-top: 20px;
+}
+
+ion-col h3 {
+  font-size: 18px;
+  font-weight: normal;
+  color: black;  // Asegurarnos de que los subtítulos de las columnas también sean negros
+}
+
+ion-label {
+  color: black;  // Asegurar que las etiquetas de las citas también sean negras
+}
+
+ion-item {
+  padding: 8px 0;
+}

@@ -24,7 +24,7 @@ export class CitasPage implements OnInit {
   ) {
     this.citaForm = this.fb.group({
       nombre: ['', [Validators.required]],
-      telefono: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
+      telefono: ['', [Validators.pattern('^[0-9]+$')]], // Ya no es obligatorio
       hora: [
         '',
         [
@@ -33,12 +33,9 @@ export class CitasPage implements OnInit {
         ],
       ],
       eslekua: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-      deskribapena: ['', [Validators.required]],
+      deskribapena: [''], // Ya no es obligatorio
       etxekoa: ['', [Validators.required]],
-      prezioa: [
-        '',
-        [Validators.required, Validators.pattern('^[0-9]+(.[0-9]{1,2})?$')],
-      ],
+      prezioa: ['', [Validators.pattern('^[0-9]+(.[0-9]{1,2})?$')]], // Ya no es obligatorio
       langilea: ['', [Validators.required]], // Campo obligatorio para Langilea
       horaFin: [
         '',
@@ -96,8 +93,6 @@ export class CitasPage implements OnInit {
 
       if (this.citaForm.get('nombre')?.invalid) {
         errorMessage = 'El campo "Nombre" es obligatorio.';
-      } else if (this.citaForm.get('telefono')?.invalid) {
-        errorMessage = 'Por favor, ingresa un número de teléfono válido.';
       } else if (this.citaForm.get('hora')?.invalid) {
         errorMessage = 'Por favor, ingresa una hora válida (ejemplo: 14:30).';
       }

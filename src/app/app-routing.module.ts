@@ -1,7 +1,11 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { GestionarCitasPage } from './gestionar-citas/gestionar-citas.page';
 
 const routes: Routes = [
+
+  { path: 'gestionar-citas', component: GestionarCitasPage }, // Esto puede que sobre.
+  
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
@@ -79,9 +83,14 @@ const routes: Routes = [
   {
     path: 'editar-grupo/:kodea',  // Agrega el parámetro dinámico
     loadChildren: () => import('./editar-grupo/editar-grupo.module').then( m => m.EditarGrupoPageModule)
-  },  {
+  },
+  {
     path: 'langile',
     loadChildren: () => import('./langile/langile.module').then( m => m.LangilePageModule)
+  },
+  {
+    path: 'citas-del-dia',
+    loadChildren: () => import('./citas-del-dia/citas-del-dia.module').then( m => m.CitasDelDiaPageModule)
   },
 
 

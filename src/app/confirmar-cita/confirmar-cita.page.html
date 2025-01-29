@@ -14,7 +14,7 @@
       </ion-card-header>
       <ion-card-content>
         <p><strong>Nombre:</strong> {{ citaData.nombre }}</p>
-        <p><strong>Teléfono:</strong> {{ citaData.telefono }}</p>
+        <p><strong>Teléfono:</strong> {{ citaData.telefono || 'No proporcionado' }}</p>
         <p><strong>Fecha:</strong> {{ citaData.fecha }}</p>
         <p><strong>Hora de inicio:</strong> {{ citaData.hora }}</p>
         <p><strong>Hora de fin:</strong> {{ citaData.horaFin }}</p>
@@ -27,9 +27,9 @@
       </ion-card-header>
       <ion-card-content>
         <p><strong>Eserlekua:</strong> {{ citaData.eslekua }}</p>
-        <p><strong>Deskribapena:</strong> {{ citaData.deskribapena }}</p>
+        <p><strong>Deskribapena:</strong> {{ citaData.deskribapena || 'No proporcionado' }}</p>
         <p><strong>Etxekoa:</strong> {{ citaData.etxekoa }}</p>
-        <p><strong>Prezioa:</strong> {{ citaData.prezioa }} €</p>
+        <p><strong>Prezioa:</strong> {{ citaData.prezioa ? citaData.prezioa + ' €' : 'No especificado' }}</p>
         <p><strong>Langilea:</strong> {{ citaData.langilea }}</p>
       </ion-card-content>
     </ion-card>

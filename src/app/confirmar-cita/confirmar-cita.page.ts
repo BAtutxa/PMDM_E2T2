@@ -42,10 +42,6 @@ export class ConfirmarCitaPage implements OnInit {
     if (!this.citaData.hora) this.camposVacios.push('Hora de inicio');
     if (!this.citaData.horaFin) this.camposVacios.push('Hora de fin');
     if (!this.citaData.nombre) this.camposVacios.push('Nombre');
-    if (!this.citaData.telefono) this.camposVacios.push('Teléfono');
-    if (!this.citaData.deskribapena) this.camposVacios.push('Descripción');
-    if (!this.citaData.etxekoa) this.camposVacios.push('Etxekoa');
-    if (!this.citaData.prezioa) this.camposVacios.push('Precio total');
 
     console.log('Datos verificados para confirmación:', this.citaData);
 
@@ -57,6 +53,7 @@ export class ConfirmarCitaPage implements OnInit {
       console.error('Campos faltantes:', this.camposVacios);
       return;
     }
+
     const citaAdaptada = {
       eserlekua: this.citaData.eslekua,
       id_langilea: this.citaData.langilea,
@@ -66,10 +63,10 @@ export class ConfirmarCitaPage implements OnInit {
       hasiera_ordua_erreala: null,
       amaiera_ordua_erreala: null,
       izena: this.citaData.nombre,
-      telefonoa: this.citaData.telefono,
-      deskribapena: this.citaData.deskribapena,
+      telefonoa: this.citaData.telefono || null, // Campo opcional
+      deskribapena: this.citaData.deskribapena || null, // Campo opcional
       etxekoa: this.citaData.etxekoa,
-      prezio_totala: this.citaData.prezioa,
+      prezio_totala: this.citaData.prezioa || null, // Campo opcional
       dataSimple: {
         sortze_data: this.citaData.fechaCreacion || null,
         eguneratze_data: this.citaData.fechaActualizacion || null,

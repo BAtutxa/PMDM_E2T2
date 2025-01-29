@@ -55,24 +55,31 @@ export class CalendarioPage implements OnInit {
     this.diaSeleccionado = null;
     this.generarCalendario();
   }
+// CalendarioPage
 
-  seleccionarDia(dia: number) {
-    if (dia > 0) {
-      this.diaSeleccionado = dia;
-      this.obtenerCitasDeFecha(dia);
-    }
+seleccionarDia(dia: number) {
+  if (dia > 0) {
+    this.diaSeleccionado = dia;
+
+    // Crear la fecha seleccionada
+    const fechaSeleccionada = `${this.anioActual}-${(this.mesActual + 1).toString().padStart(2, '0')}-${this.diaSeleccionado.toString().padStart(2, '0')}`;
+
+    // Navegar a la página de 'citas-del-dia' pasando la fecha como parámetro
+    this.router.navigate(['/citas-del-dia'], { queryParams: { fecha: fechaSeleccionada } });
   }
+}
 
-  irACitas() {
-    if (this.diaSeleccionado) {
-      const fechaSeleccionada = `${this.anioActual}-${(this.mesActual + 1).toString().padStart(2, '0')}-${this.diaSeleccionado.toString().padStart(2, '0')}`;
 
-      // Pasa la fecha seleccionada como query parameter al navegar
-      this.router.navigate(['/citas'], { queryParams: { fecha: fechaSeleccionada } });
-    } else {
-      alert('Por favor selecciona una fecha');
-    }
+irACitas() {
+  if (this.diaSeleccionado) {
+    const fechaSeleccionada = `${this.anioActual}-${(this.mesActual + 1).toString().padStart(2, '0')}-${this.diaSeleccionado.toString().padStart(2, '0')}`;
+
+    // Pasa la fecha seleccionada como query parameter al navegar
+    this.router.navigate(['/citas'], { queryParams: { fecha: fechaSeleccionada } });
+  } else {
+    alert('Por favor selecciona una fecha');
   }
+}
 
   obtenerCitasDeFecha(dia: number) {
     const fechaSeleccionada = `${this.anioActual}-${(this.mesActual + 1).toString().padStart(2, '0')}-${dia.toString().padStart(2, '0')}`;
