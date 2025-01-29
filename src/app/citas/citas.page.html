@@ -5,8 +5,9 @@
         <ion-title>Menua</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content>
-      <ion-list>
+    <ion-content color="secondary">
+    <div color="secondary" class="menu-container">
+      <ion-list color="secondary">
         <ion-item routerLink="/citas">
           <ion-icon slot="start" name="calendar-outline"></ion-icon>
           <ion-label>Hitzorduak</ion-label>
@@ -36,6 +37,7 @@
           <ion-label>Tickets-ak</ion-label>
         </ion-item>
       </ion-list>
+    </div>
     </ion-content>
   </ion-menu>
 
@@ -57,69 +59,74 @@
       </ion-content>
     </div>
  
-<ion-content>
-  <div class="container">
-    <h1></h1>
-    <div class="fecha-seleccionada">
-      <strong>Fecha seleccionada:</strong> {{ fechaSeleccionada }}
-    </div>
-
-    <form [formGroup]="citaForm" (ngSubmit)="confirmarCita()">
-      <ion-item>
-        <ion-label position="floating">Izena</ion-label>
-        <ion-input formControlName="nombre"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Telefonoa</ion-label>
-        <ion-input formControlName="telefono" type="tel"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Hasiera ordua</ion-label>
-        <ion-input formControlName="hora" type="text" placeholder="Ordua sartu (adb: 14:30)"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Amaiera ordua</ion-label>
-        <ion-input formControlName="horaFin" type="text" placeholder="Ordua sartu (adb: 15:30)"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Eserlekua</ion-label>
-        <ion-input formControlName="eslekua" type="number" placeholder="Eserlekua"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Deskribapena</ion-label>
-        <ion-input formControlName="deskribapena" type="text" placeholder="Deskribapena"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Etxekoa</ion-label>
-        <ion-select formControlName="etxekoa">
-          <ion-select-option value="K">E</ion-select-option>
-          <ion-select-option value="E">B</ion-select-option>
-        </ion-select>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Prezioa (€)</ion-label>
-        <ion-input formControlName="prezioa" type="number" placeholder="Prezioa"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Langilea</ion-label>
-        <ion-select formControlName="langilea" (ionChange)="onLangileaChange($event)">
-          <ion-select-option *ngFor="let langilea of langileakList" [value]="langilea.id">
-            {{ langilea.izena }} {{ langilea.abizenak }} ({{ langilea.kodea }})
-          </ion-select-option>
-        </ion-select>
-      </ion-item>
-
-      <div class="button-container">
-        <ion-button routerLink="/calendario" color="danger" (click)="descartarCita()">✖</ion-button>
-        <ion-button type="submit" color="success">✔</ion-button>
+    <ion-content>
+      <div class="card-container">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Reservar Cita</ion-card-title>
+          </ion-card-header>
+    
+          <ion-card-content>
+            <div class="fecha-seleccionada">
+              <strong>Fecha seleccionada:</strong> {{ fechaSeleccionada }}
+            </div>
+    
+            <form [formGroup]="citaForm" (ngSubmit)="confirmarCita()" class="form-grid">
+              <div class="form-column">
+                <ion-item>
+                  <ion-label position="stacked">Izena</ion-label>
+                  <ion-input formControlName="nombre"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">Telefonoa</ion-label>
+                  <ion-input formControlName="telefono" type="tel"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">Hasiera ordua</ion-label>
+                  <ion-input formControlName="hora" type="time" placeholder="Ordua sartu (adb: 14:30)"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">Amaiera ordua</ion-label>
+                  <ion-input formControlName="horaFin" type="time" placeholder="Ordua sartu (adb: 15:30)"></ion-input>
+                </ion-item>
+              </div>
+    
+              <div class="form-column">
+                <ion-item>
+                  <ion-label position="stacked">Eserlekua</ion-label>
+                  <ion-input formControlName="eslekua" type="number" placeholder="Eserlekua"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">Deskribapena</ion-label>
+                  <ion-input formControlName="deskribapena" type="text" placeholder="Deskribapena"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">Etxekoa</ion-label>
+                  <ion-select formControlName="etxekoa">
+                    <ion-select-option value="K">K</ion-select-option>
+                    <ion-select-option value="E">E</ion-select-option>
+                  </ion-select>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">Prezioa (€)</ion-label>
+                  <ion-input formControlName="prezioa" type="number" placeholder="Prezioa"></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="stacked">Langilea</ion-label>
+                  <ion-select formControlName="langilea" (ionChange)="onLangileaChange($event)">
+                    <ion-select-option *ngFor="let langilea of langileakList" [value]="langilea.id">
+                      {{ langilea.izena }} {{ langilea.abizenak }} ({{ langilea.kodea }})
+                    </ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </div>
+            </form>
+    
+            <div class="button-container">
+              <ion-button color="danger" (click)="descartarCita()">✖</ion-button>
+              <ion-button type="submit" color="success" (click)="confirmarCita()">✔</ion-button>
+            </div>
+          </ion-card-content>
+        </ion-card>
       </div>
-    </form>
-  </div>
-</ion-content>
+    </ion-content>
