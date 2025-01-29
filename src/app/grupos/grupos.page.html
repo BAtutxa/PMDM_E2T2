@@ -1,42 +1,89 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title>Equipos</ion-title>
+    <ion-title>
+      Equipos
+      <ion-icon (click)="CrearEquipo()" name="add"></ion-icon>
+      <ion-icon routerLink="/langile" name="person-add"></ion-icon>
+      <ion-icon routerLink="/langile" name="timer"></ion-icon>
+    </ion-title>    
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <!-- Iterar sobre los grupos -->
-    <ion-item *ngFor="let grupo of equipos; let i = index" lines="full">
-      <ion-label>
-        <h2>{{ grupo.izena }}</h2>
-        <!-- Mostrar los integrantes del grupo -->
-        <div *ngFor="let trabajador of grupo.langileak">
-          <ion-chip color="primary">
-            <ion-label>
-              ID: {{ trabajador.id }} - {{ trabajador.izena }} {{ trabajador.abizenak }}
-            </ion-label>
-          </ion-chip>
+  <!-- Contenido principal (oculto al editar) -->
+  <div *ngIf="!mostrarEditor">
+    <ion-list>
+      <!-- Iterar sobre los grupos -->
+      <ion-item *ngFor="let grupo of equipos; let i = index" lines="full">
+        <ion-label>
+          <h2>{{ grupo.izena }}</h2>
+          <!-- Mostrar los integrantes del grupo -->
+          <div *ngFor="let trabajador of grupo.langileak">
+            <ion-chip color="primary" (click)="editarLangile(trabajador)">
+              <ion-label>
+                ID: {{ trabajador.id }} - {{ trabajador.izena }} {{ trabajador.abizenak }}
+              </ion-label>
+            </ion-chip>
+          </div>
+        </ion-label>
+
+        <!-- Botones para editar/eliminar -->
+        <ion-buttons slot="end">
+          <ion-button color="primary" [routerLink]="['/editar-grupo', grupo.kodea]">
+            Editatu
+          </ion-button>
+          <ion-button color="danger" (click)="eliminarGrupo(grupo)">
+            Ezabatu
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+    </ion-list>
+  </div>
+
+ <!-- Card para editar trabajador (visible al editar) -->
+<div *ngIf="mostrarEditor">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Editar Trabajador</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form #trabajadorForm="ngForm" (ngSubmit)="guardarCambios()">
+        <div class="input-container">
+          <ion-label class="input-label" color="primary">Nombre</ion-label>
+          <ion-input
+            class="custom-input"
+            [(ngModel)]="langileSeleccionado.izena"
+            name="izena"
+            #izena="ngModel"
+            required
+            placeholder="Introduce el nombre"
+          ></ion-input>
+          <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
+            El trabajador debe contener un nombre.
+          </ion-note>
         </div>
-      </ion-label>
 
-      <!-- Botones para editar/eliminar -->
-      <ion-buttons slot="end">
-        <ion-button color="primary" [routerLink]="['/editar-grupo', grupo.kodea]">Editatu</ion-button>        
-        <ion-button color="danger" (click)="eliminarGrupo(grupo)">Ezabatu</ion-button>
-      </ion-buttons>
-    </ion-item>
-  </ion-list>
+        <div class="input-container">
+          <ion-label class="input-label" color="primary">Apellido</ion-label>
+          <ion-input
+            class="custom-input"
+            [(ngModel)]="langileSeleccionado.abizenak"
+            name="abizenak"
+            #abizena="ngModel"
+            required
+            placeholder="Introduce el apellido"
+          ></ion-input>
+          <ion-note *ngIf="abizena.invalid && abizena.touched" color="danger">
+            El trabajador debe contener al menos un apellido.
+          </ion-note>
+        </div>
 
-  <!-- Botón flotante para crear grupo -->
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed" class="fab-container">
-    <ion-fab-button (click)="CrearEquipo()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  
-    <ion-fab-button routerLink="/langile">
-      <ion-icon name="person-add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-  
+        <div class="botones">
+          <ion-button color="medium" color="danger" (click)="cancelarEdicion()">Cancelar</ion-button>
+          <ion-button color="primary" type="submit"  [disabled]="trabajadorForm.invalid" >Guardar</ion-button>
+        </div>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</div>
 </ion-content>

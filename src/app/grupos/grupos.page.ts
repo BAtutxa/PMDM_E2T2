@@ -13,6 +13,7 @@ import { ITrabajador } from '../interfaces/ITrabajador';
   styleUrls: ['./grupos.page.scss'],
 })
 export class GruposPage implements OnInit {
+
   equipos: IEquipos[] = [];
   equipo: IEquipos = { 
     langileak: [],
@@ -26,6 +27,20 @@ export class GruposPage implements OnInit {
   }; 
   trabajadores: ITrabajador[] = []; 
   grupoId: string | undefined; 
+  
+  langileSeleccionado: ITrabajador = {
+    kodea: '',
+    id: null,
+    izena: '',
+    abizenak: '',
+    data: {
+      sortze_data: null,
+      eguneratze_data: null,
+      ezabatze_data: null,
+    },
+  }; 
+  mostrarEditor: boolean = false; 
+grupo: any;
 
   constructor(
     private equipoService: EquipoService,
@@ -40,6 +55,23 @@ export class GruposPage implements OnInit {
     this.cargarTrabajadores();
   }
 
+  editarLangile(trabajador: ITrabajador) {
+    this.langileSeleccionado = { ...trabajador }; // Clona el objeto seleccionado
+    this.mostrarEditor = true;
+  }
+  
+  guardarCambios() {
+    this.langileakService.actualizarLangile(this.langileSeleccionado).subscribe();
+    alert('Cambios guardados con éxito');
+    window.location.reload();
+    this.mostrarEditor = false;
+
+  }
+  
+  cancelarEdicion() {
+    this.mostrarEditor = false; 
+  }
+  
   cargarGrupos(): void {
     this.equipoService.grupos$.subscribe({
       next: (grupos) => {
