@@ -1,76 +1,121 @@
 <ion-content [fullscreen]="true">
+  <!-- Menu -->
+  <ion-menu contentId="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menua</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content color="primary">
+      <div color="primary" class="menu-container">
+        <ion-list color="primary">
+          <ion-item color="primary" routerLink="/gestionar-citas">
+            <ion-icon slot="start" name="calendar-outline"></ion-icon>
+            <ion-label>Hitzorduak</ion-label>
+          </ion-item>
+          <ion-item color="primary" routerLink="/calendario">
+            <ion-icon slot="start" name="calendar-outline"></ion-icon>
+            <ion-label>Egutegia</ion-label>
+          </ion-item>
+          <ion-item color="primary" routerLink="/clientes">
+            <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+            <ion-label>Bezeroak</ion-label>
+          </ion-item>
+          <ion-item color="primary" routerLink="/servicios">
+            <ion-icon slot="start" name="cut-outline"></ion-icon>
+            <ion-label>Zerbitzuak</ion-label>
+          </ion-item>
+          <ion-item color="primary" routerLink="/inventario">
+            <ion-icon slot="start" name="cube-outline"></ion-icon>
+            <ion-label>Inbentarioa</ion-label>
+          </ion-item>
+          <ion-item color="primary" routerLink="/administracion">
+            <ion-icon slot="start" name="settings-outline"></ion-icon>
+            <ion-label>Administrazioa</ion-label>
+          </ion-item>
+          <ion-item color="primary" routerLink="/tickets">
+            <ion-icon slot="start" name="document-text-outline"></ion-icon>
+            <ion-label>Tickets-ak</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-content>
+  </ion-menu>
+
+  <!-- Header principal -->
   <ion-header>
     <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
       <ion-title>Zerbitzuak</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <!-- Contenedor para los servicios -->
-  <div class="services-container">
-    <!-- Servicio: Corte de pelo -->
-    <ion-card class="service-card">
-      <img src="assets/Images/corte.png" alt="Corte de pelo">
-      <ion-card-header>
-        <ion-card-title>Ile mozketa</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        Mozketa moderno eta freskoa lortu.
-      </ion-card-content>
-    </ion-card>
+  <!-- Contenido principal -->
+  <div class="ion-page" id="main-content">
+    <ion-content>
+      <div class="services-container">
+        <ion-card class="service-card">
+          <img src="assets/Images/corte.png" alt="Corte de pelo">
+          <ion-card-header>
+            <ion-card-title>Ile mozketa</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Mozketa moderno eta freskoa lortu.
+          </ion-card-content>
+        </ion-card>
 
-    <!-- Servicio: Tinte de pelo -->
-    <ion-card class="service-card">
-      <img src="assets/Images/decolorado.jpg" alt="Tinte de pelo">
-      <ion-card-header>
-        <ion-card-title>Ile tindagaia</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        Aldatu zure "look"-a gehien gustatzen zaizun kutsuarekin.
-      </ion-card-content>
-    </ion-card>
+        <ion-card class="service-card">
+          <img src="assets/Images/decolorado.jpg" alt="Tinte de pelo">
+          <ion-card-header>
+            <ion-card-title>Ile tindagaia</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Aldatu zure "look"-a gehien gustatzen zaizun kutsuarekin.
+          </ion-card-content>
+        </ion-card>
 
-    <!-- Servicio: Peinado -->
-    <ion-card class="service-card">
-      <img src="assets/Images/peinado.jpg" alt="Peinado">
-      <ion-card-header>
-        <ion-card-title>Ile orrazketa</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        Orrazkera ikusgarria du edonorako.
-      </ion-card-content>
-    </ion-card>
+        <ion-card class="service-card">
+          <img src="assets/Images/peinado.jpg" alt="Peinado">
+          <ion-card-header>
+            <ion-card-title>Ile orrazketa</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Orrazkera ikusgarria du edonorako.
+          </ion-card-content>
+        </ion-card>
 
-    <ion-card class="service-card">
-      <img src="assets/Images/hidra.jpg" alt="Tratamiento hidratante">
-      <ion-card-header>
-        <ion-card-title>Ile-tratamendu hidratatzailea
-        </ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        Etxeko prezioa: 30€
-      </ion-card-content>
-    </ion-card>
+        <ion-card class="service-card">
+          <img src="assets/Images/hidra.jpg" alt="Tratamiento hidratante">
+          <ion-card-header>
+            <ion-card-title>Ile-tratamendu hidratatzailea</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Etxeko prezioa: 30€
+          </ion-card-content>
+        </ion-card>
 
-    <ion-card class="service-card">
-      <img src="assets/Images/alisado.jpg" alt="Tratamiento hidratante">
-      <ion-card-header>
-        <ion-card-title>Ilea lisatzea
-        </ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        Etxeko prezioa: 50€
-      </ion-card-content>
-    </ion-card>
+        <ion-card class="service-card">
+          <img src="assets/Images/alisado.jpg" alt="Tratamiento hidratante">
+          <ion-card-header>
+            <ion-card-title>Ilea lisatzea</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Etxeko prezioa: 50€
+          </ion-card-content>
+        </ion-card>
 
-    <ion-card class="service-card">
-      <img src="assets/Images/extensiones.jpg" alt="Tratamiento hidratante">
-      <ion-card-header>
-        <ion-card-title>Luzapenak
-        </ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        Etxeko prezioa:50€
-      </ion-card-content>
-    </ion-card>
+        <ion-card class="service-card">
+          <img src="assets/Images/extensiones.jpg" alt="Extensiones">
+          <ion-card-header>
+            <ion-card-title>Luzapenak</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            Etxeko prezioa: 50€
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </ion-content>
   </div>
 </ion-content>
