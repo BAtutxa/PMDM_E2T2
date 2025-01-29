@@ -150,10 +150,10 @@ ion-toolbar {
 
 /* Estilo de los ítems del menú */
 ion-item {
-  --background: #0d1a31 ; /* Fondo del submenú */
-  --color: #ffffff ; /* Texto blanco */
+  --color: black ; /* Texto blanco */
   --inner-border-width: 0; /* Eliminar bordes */
   --background-hover: #9eb9e7 ; /* Fondo al pasar el mouse */
+  border-bottom: 1px solid #ccc;
 }
 
 //

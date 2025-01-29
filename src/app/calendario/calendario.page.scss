@@ -16,11 +16,13 @@ ion-datetime {
 }
 
 .info {
-  margin-top: 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
   width: 100%;
   max-width: 600px;
   text-align: center;
 }
+
 //
 
 /* Estilo del título del menú */
@@ -38,17 +40,26 @@ ion-toolbar {
 
 /* Estilo de los ítems del menú */
 ion-item {
-  --background: #0d1a31 ; /* Fondo del submenú */
-  --color: #ffffff ; /* Texto blanco */
-  --inner-border-width: 0 !important; /* Eliminar bordes */
-  --background-hover: #9eb9e7 ; /* Fondo al pasar el mouse */
+  background-color: #1c345c !important;
+  --color: black;
+  --inner-border-width: 0 !important;
+  --background-hover: #9eb9e7;
+  border-bottom: 1px solid #ccc;
+  
+}
+
+.menu-container ion-item {
+  --min-height: 80px; /* Ajusta el valor según necesites */
 }
 
 //No tocar que es es para quitar lo negro feo!!!!!!!!!!!!!!!!!!!!!!!!!!
 ion-menu ion-list {
-  height: 100%; /* Asegura que la lista ocupe toda la altura disponible */
-  margin: 0; /* Elimina márgenes */
-  padding: 0; /* Elimina padding */
+  height: 100%;
+  margin: 0;
+  padding: 0;
   background-color: #1c345c !important;
+}
 
+.botones {
+  margin-top: 20px;
 }
