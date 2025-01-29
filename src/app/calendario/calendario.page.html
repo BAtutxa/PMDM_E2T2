@@ -8,7 +8,7 @@
     <ion-content color="secondary">
       <div color= "secondary" class="menu-container">
         <ion-list color="secondary">
-          <ion-item routerLink="/citas">
+          <ion-item routerLink="/gestionar-citas">
             <ion-icon slot="start" name="calendar-outline"></ion-icon>
             <ion-label>Hitzorduak</ion-label>
           </ion-item>
@@ -88,22 +88,7 @@
 
       <!-- Botones con 'x' y 'v' -->
       <div class="botones">
-        <ion-button color="danger" fill="clear" routerLink="/menu">
-          <ion-icon name="close"></ion-icon>
-          <!-- 'x' icon -->
-        </ion-button>
-        <ion-button color="success" fill="clear" (click)="irACitas()">
-          <ion-icon name="checkmark"></ion-icon>
-          <!-- 'v' icon -->
-        </ion-button>
-
-        <ion-button
-      expand="block"
-      class="gestionar-citas-button"
-      (click)="irAGestionarCitas()"
-    >
-      Hitzorduak Kudeatu
-    </ion-button>
+        <ion-button expand="block" (click)="irACitas()">Añadir cita</ion-button>
       </div>
     </div>
   </div>
