@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController } from '@ionic/angular';
 import { Router } from '@angular/router';
-
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-menu-header',
