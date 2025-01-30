@@ -10,7 +10,7 @@ import { IData } from '../interfaces/IData';
 @Component({
   selector: 'app-clientes',
   templateUrl: './clientes.page.html',
-  styleUrls: ['../clientes/clientes.page.scss'],
+  styleUrls: ['../productos/productos.page.scss'],
 })
 export class ClientesPage implements OnInit {
   @ViewChild(IonContent, { static: false }) content: IonContent | undefined;
@@ -166,6 +166,15 @@ export class ClientesPage implements OnInit {
     this.editandoFicha = false;
   }
 
+  
+  private compararFechas(fecha: IData, texto: string): boolean {
+    if (!fecha || !fecha.toString()) return false;
+  
+    const fechaStr = fecha.toString().toLowerCase(); // Convertir la fecha a string
+    return fechaStr.includes(texto);
+  }
+
+
   aplicarFiltro(event: any) {
     const texto = event.target.value.toLowerCase();
 
@@ -185,67 +194,53 @@ export class ClientesPage implements OnInit {
     }
   }
 
-  compararFechas(data: IData, texto: string): boolean {
-    const fechaNormalizada = new Date(data.sortze_data || '').toISOString().toLowerCase();
-    return fechaNormalizada.includes(texto.toLowerCase());
-  }
-
-  ordenarPor(columna: keyof IBezero) {
-    if (this.ordenActual.columna === columna) {
-      this.ordenActual.ascendente = !this.ordenActual.ascendente;
-    } else {
-      this.ordenActual.columna = columna;
-      this.ordenActual.ascendente = true;
+   ordenarPor(columna: string) {
+    if (this.ordenActual.columna !== columna) {
+      this.ordenActual.columna = columna as keyof IBezero;
     }
   
     this.fichasFiltradas.sort((a, b) => {
-      const valorA = this.obtenerValorPorColumna(a, columna);
-      const valorB = this.obtenerValorPorColumna(b, columna);
+      let valorA = this.obtenerValorPorColumna(a, columna);
+      let valorB = this.obtenerValorPorColumna(b, columna);
   
-      // Handle null or undefined values by placing them at the end or beginning
-      if (valorA === null || valorA === undefined) return this.ordenActual.ascendente ? 1 : -1;
-      if (valorB === null || valorB === undefined) return this.ordenActual.ascendente ? -1 : 1;
-  
-      // Compare strings using localeCompare for case-insensitive comparison
-      if (typeof valorA === 'string' && typeof valorB === 'string') {
-        return this.ordenActual.ascendente
-          ? valorA.localeCompare(valorB)
-          : valorB.localeCompare(valorA);
+      if (columna === 'sortze_data' || columna === 'eguneratze_data') {
+        valorA = valorA ? new Date(valorA) : null;
+        valorB = valorB ? new Date(valorB) : null;
       }
   
-      // Compare numbers or other data types
-      if (valorA < valorB) return this.ordenActual.ascendente ? -1 : 1;
-      if (valorA > valorB) return this.ordenActual.ascendente ? 1 : -1;
+      if (valorA === null) return this.ordenActual.ascendente ? 1 : -1;
+      if (valorB === null) return this.ordenActual.ascendente ? -1 : 1;
   
-      return 0; // If values are equal
+      return this.ordenActual.ascendente 
+        ? valorA > valorB ? 1 : valorA < valorB ? -1 : 0 
+        : valorA > valorB ? -1 : valorA < valorB ? 1 : 0;
     });
   }
   
 
-  obtenerValorPorColumna(item: IBezero, columna: keyof IBezero) {
-    return item[columna];
+  cambiarOrden(event: any) {
+    this.ordenActual.ascendente = event.detail.value === true || event.detail.value === "true";
+  
+    if (this.ordenActual.columna) {
+      setTimeout(() => { 
+        this.ordenarPor(this.ordenActual.columna); 
+      }, 0);
+    }
   }
-
-  ordenarPorFecha(columna: keyof IData) {
-    this.ordenActualFecha.ascendente = this.ordenActualFecha.columna === columna ? !this.ordenActualFecha.ascendente : true;
-    this.ordenActualFecha.columna = columna;
-
-    this.fichasFiltradas.sort((a, b) => {
-      const valorA = a.data?.[columna] ? new Date(a.data[columna]!) : null;
-      const valorB = b.data?.[columna] ? new Date(b.data[columna]!) : null;
-
-      if (valorA && valorB) {
-        return this.ordenActualFecha.ascendente ? valorA.getTime() - valorB.getTime() : valorB.getTime() - valorA.getTime();
+  
+  private obtenerValorPorColumna(objeto: IBezero, columna: string): any {
+    const propiedades = columna.split('.');
+    let valor: any = objeto;
+  
+    for (const propiedad of propiedades) {
+      if (valor && typeof valor === 'object' && propiedad in valor) {
+        valor = valor[propiedad as keyof typeof valor];
+      } else {
+        return null;
       }
-      return valorA ? -1 : 1;
-    });
+    }
+  
+    return valor;
   }
 
-  getOrdenClass(columna: string): string {
-    return this.ordenActual.columna === columna
-      ? this.ordenActual.ascendente
-        ? 'orden-asc'
-        : 'orden-desc'
-      : '';
-  }
 }
