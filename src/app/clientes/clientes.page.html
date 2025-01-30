@@ -1,8 +1,24 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-title>Clientes</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true">
+<app-menu-header></app-menu-header>
+  
+  <!-- Header principal -->
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Bezeroak</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+      <!-- Contenido principal -->
+      <div color= "secondary" class="ion-page" id="main-content">
+        <!-- Aquí puedes insertar el contenido dinámico de la página -->
+        <ion-content>
+          <p>Aquí va el contenido principal de la página.</p>
+        </ion-content>
+      </div>
+   
 
 <ion-content [fullscreen]="true">
   <!-- Buscador -->

@@ -5,6 +5,7 @@ ion-content {
   align-items: center;
   text-align: center;
   flex-direction: column;
+  height: 100%;
 }
 
 /* Imagen responsiva */
@@ -13,7 +14,6 @@ ion-content {
   max-width: 200px;
   height: auto;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   margin-bottom: 20px;
 }
 
@@ -24,7 +24,6 @@ ion-content {
   margin: 0 auto;
   padding: 10px;
   border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Título centrado */
@@ -50,8 +49,50 @@ ion-item {
 /* Filas con espaciado */
 .image-row {
   margin-bottom: 30px;
+  margin-top: 30px;
 }
 
 .form-row {
   margin-top: 10px;
+}
+
+/* Responsive styles */
+@media (max-width: 767px) {
+  .login-image {
+    max-width: 150px; /* Reduce la imagen en pantallas más pequeñas */
+  }
+
+  .login-card {
+    width: 90%; /* Aumenta el ancho del formulario en pantallas pequeñas */
+  }
+
+  ion-card-title {
+    font-size: 1.2rem; /* Reduce el tamaño de la fuente del título */
+  }
+
+  .submit-button {
+    padding: 12px; /* Aumenta el padding del botón */
+  }
+}
+
+/* Ajustes para pantallas medianas */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .login-card {
+    width: 80%; /* Ancho del formulario más pequeño en pantallas medianas */
+  }
+
+  .login-image {
+    max-width: 180px; /* Ajusta el tamaño de la imagen */
+  }
+}
+
+/* Ajustes para pantallas grandes */
+@media (min-width: 1024px) {
+  .login-card {
+    width: 60%; /* Ancho del formulario más grande en pantallas grandes */
+  }
+
+  .login-image {
+    max-width: 200px; /* Imagen más grande */
+  }
 }

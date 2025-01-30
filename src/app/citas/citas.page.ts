@@ -1,9 +1,10 @@
+import { LangileakService } from 'src/app/services/Langileak.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { LangileakService } from '../services/Langileak.service';  // Importar el servicio
+import { Route } from '@angular/router';
 
 @Component({
   selector: 'app-citas',
@@ -14,13 +15,15 @@ export class CitasPage implements OnInit {
   citaForm: FormGroup;
   fechaSeleccionada: string = ''; // Variable para almacenar la fecha seleccionada
   langileakList: any[] = []; // Lista para almacenar los Langileak
+  Router: any;
 
   constructor(
     private fb: FormBuilder,
     private alertCtrl: AlertController,
     private navCtrl: NavController,
     private route: ActivatedRoute,
-    private langileakService: LangileakService // Inyectar el servicio
+    private router: Router,
+    private langileakService: LangileakService
   ) {
     this.citaForm = this.fb.group({
       nombre: ['', [Validators.required]],
@@ -106,7 +109,7 @@ export class CitasPage implements OnInit {
     }
   }
 
-  descartarCita() {
-    this.citaForm.reset();
-  }
+descartarCita() {
+  this.citaForm.reset();
+  this.router.navigate(['/calendario']);}
 }

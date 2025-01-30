@@ -18,5 +18,118 @@
 .modal-footer {
   display: flex;
   justify-content: space-between;
-  padding: 15px;
 }
+
+.confirmar-button,
+.cancelar-button {
+  width: 48%;
+}
+
+/* Colores de botones */
+ion-button.success {
+  background-color: #4CAF50;
+  color: white;
+}
+
+ion-button.danger {
+  background-color: #f44336;
+  color: white;
+}
+
+/* Estilos generales de la página */
+.page {
+  --background: #f0f0f0; /* Fondo de color claro */
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+h1 {
+  text-align: center;
+  font-size: 32px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Estilos para los botones */
+.confirmar-button {
+  --background: #ffcc00; /* Amarillo */
+  --border-radius: 5px;
+  --color: white;
+}
+
+.cancelar-button {
+  --background: #ff4444; /* Rojo */
+  --border-radius: 5px;
+  --color: white;
+}
+
+/* Estilos del modal */
+.modal-content {
+  --background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+ion-item {
+  margin-bottom: 10px;
+}
+
+ion-footer {
+  text-align: center;
+}
+
+ion-button {
+  width: 48%;
+  margin: 0 2%;
+}
+
+
+//Menu
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 16px;
+  height: 100vh;
+  box-sizing: border-box;
+  margin-top: 20px;
+}
+
+ion-toolbar ion-title {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+ion-toolbar {
+  --background: #1c345c;
+  --color: #fff;
+}
+
+ion-item {
+  background-color: #1c345c !important;
+  --color: black;
+  --inner-border-width: 0 !important;
+  --background-hover: #9eb9e7;
+  border-bottom: 1px solid #ccc;
+}
+
+.menu-container ion-item {
+  --min-height: 80px;
+}
+
+ion-menu ion-list {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #1c345c !important;
+}
+
+.botones {
+  margin-top: 20px;
+}
+                                                                                                             
+
+

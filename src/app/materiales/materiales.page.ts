@@ -12,32 +12,31 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['../productos/productos.page.scss'],
 })
 export class MaterialesPage implements OnInit {
-
   @ViewChild(IonContent, { static: false }) content: IonContent | undefined;
 
   editandoMaterial: boolean = false;
   MaterialConInformacionSeleccionada: boolean = false;
   materialSeleccionado: IEMaterialak | any = {};
-  MaterialSeleccionadoAnterior:  IEMaterialak | null = null;
+  MaterialSeleccionadoAnterior: IEMaterialak | null = null;
   materiales: IEMaterialak[] = [];
-  materialesFiltrados: IEMaterialak [] = [];
+  materialesFiltrados: IEMaterialak[] = [];
   mobilaDa: Boolean = false;
-  ordenActual: { columna: string, ascendente: boolean } = { columna: '', ascendente: true };
+  ordenActual: { columna: string, ascendente: boolean } = { columna: 'id', ascendente: true };
   materialesPorPagina = 10;
   paginaActual = 1;
   paginacionMaxima = 0;
   Math: any;
 
-  //tradukzioa
+  // Traducciones
   title!: string;
-  name!:  string;
-  search!:  string;
+  name!: string;
+  search!: string;
   info!: string;
-  cancel!:  string;
-  confirm!:  string;
-  cd!:  string;
-  ud!:  string;
-  label!:  string;
+  cancel!: string;
+  confirm!: string;
+  cd!: string;
+  ud!: string;
+  label!: string;
   editMaterial!: string;
   details!: string;
   close!: string;
@@ -46,7 +45,7 @@ export class MaterialesPage implements OnInit {
 
   ngOnInit() {
     this.mobilbista();
-    this.cargarProductos();
+    this.cargarMateriales();
     this.translateLabels();
     this.translateService.setDefaultLang('es');
     this.translateService.use('es');
@@ -61,7 +60,7 @@ export class MaterialesPage implements OnInit {
     this.mobilaDa = window.innerWidth <= 768;
   }
 
-  async cargarProductos() {
+  async cargarMateriales() {
     try {
       const data = await firstValueFrom(this.MaterialService.getMateriales());
       this.materiales = data;
@@ -96,7 +95,6 @@ export class MaterialesPage implements OnInit {
     }
     return paginacion;
   }
-  
 
   verDetalles(material: IEMaterialak) {
     console.log('Material seleccionado:', material);
@@ -108,7 +106,7 @@ export class MaterialesPage implements OnInit {
     this.MaterialConInformacionSeleccionada = false;
   }
 
-  editarProducto(material: IEMaterialak) {
+  editarMaterial(material: IEMaterialak) {
     this.MaterialSeleccionadoAnterior = { ...this.materialSeleccionado }; 
     this.editandoMaterial = true;
     this.materialSeleccionado = { ...material };
@@ -120,7 +118,7 @@ export class MaterialesPage implements OnInit {
     const translations = await this.translateService.get(['MATERIAL.HEADER', 'MATERIAL.MESSAGE', 'PRODUCT.CANCEL', 'PRODUCT.CONFIRM']).toPromise();
     const alert = await this.alertController.create({
       header: translations['MATERIAL.HEADER'],
-      message:translations['MATERIAL.MESSAGE'],
+      message: translations['MATERIAL.MESSAGE'],
       buttons: [
         {
           text: translations['PRODUCT.CANCEL'],
@@ -154,7 +152,6 @@ export class MaterialesPage implements OnInit {
   }
 
   cancelarEdicion() {
-
     this.materialSeleccionado = { ...this.MaterialSeleccionadoAnterior };
     this.editandoMaterial = false;
   
@@ -163,25 +160,11 @@ export class MaterialesPage implements OnInit {
       if (materialIndex !== -1) {
         const materialElemento = document.getElementById(`ficha-${this.materialSeleccionado.id}`);
         if (materialElemento) {
-
-          const isMobile = window.innerWidth <= 768;
-  
-          if (isMobile) {
-            materialElemento.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-            setTimeout(() => {
-              window.requestAnimationFrame(() => {
-                window.scrollBy(0, 300); 
-              });
-            }, 300); 
-          } else {
-            materialElemento.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
+          materialElemento.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
       }
     }
   }
-  
   
   aplicarFiltro(event: any) {
     const texto = event.target.value.toLowerCase();
@@ -217,17 +200,21 @@ export class MaterialesPage implements OnInit {
       this.ordenActual.columna = columna;
       this.ordenActual.ascendente = true;
     }
-    
-
+  
     this.materialesFiltrados.sort((a, b) => {
       let valorA = (a as any)[columna];
       let valorB = (b as any)[columna];
-
+  
+      if (columna === 'id') {
+        valorA = Number(valorA);
+        valorB = Number(valorB);
+      }
+  
       if (columna === 'sortze_data' || columna === 'eguneratze_data') {
         valorA = valorA ? new Date(valorA) : null;
         valorB = valorB ? new Date(valorB) : null;
       }
-
+  
       if (valorA < valorB || valorA === null) {
         return this.ordenActual.ascendente ? -1 : 1;
       } else if (valorA > valorB || valorB === null) {
@@ -244,6 +231,7 @@ export class MaterialesPage implements OnInit {
     }
     return '';
   }
+
    // Método para cargar las traducciones
    translateLabels() {
     this.translateService.get([
@@ -260,13 +248,12 @@ export class MaterialesPage implements OnInit {
       'PRODUCT.CANCEL',
       'PRODUCT.INFO',
       'PRODUCT.SEARCH'
-
     ]).subscribe((translations: { [key: string]: any; }) => {
       this.title = translations['MATERIAL.TITLE'];
       this.name = translations['PRODUCT.NAME'];
-      this.editMaterial= translations['MATERIAL.EDIT'];
-      this.close =translations['MATERIAL.CLOSE'];
-      this.details= translations['MATERIAL.DETAILS'];
+      this.editMaterial = translations['MATERIAL.EDIT'];
+      this.close = translations['MATERIAL.CLOSE'];
+      this.details = translations['MATERIAL.DETAILS'];
       this.label = translations['MATERIAL.LABEL'];
       this.cd = translations['PRODUCT.CD'];
       this.ud = translations['PRODUCT.UD'];
@@ -278,7 +265,7 @@ export class MaterialesPage implements OnInit {
   }
 
   changeLanguage(lang: string) {
-    this.translateService.use(lang); // Cambiar el idioma
-    this.translateLabels(); // Recargar las traducciones
+    this.translateService.use(lang);
+    this.translateLabels();
   }
-} 
+}

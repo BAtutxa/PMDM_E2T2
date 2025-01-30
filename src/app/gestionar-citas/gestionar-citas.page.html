@@ -1,116 +1,106 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Gestionar Citas</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-app>
+  <app-menu-header></app-menu-header>
+  <!-- Página principal con contenido -->
+  <ion-content id="main-content">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Gestionar Citas</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
-<ion-content>
-  <div class="container">
-    <h1>Gestión de Citas</h1>
+    <div class="container">
+      <h1>Gestión de Citas</h1>
 
-    <!-- Mostrar la lista de citas -->
-    <div *ngIf="citas && citas.length > 0" class="citas-container">
-      <div *ngFor="let cita of citas" (click)="abrirModal(cita)" class="cita-card">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title>{{ cita.izena }} - {{ cita.data }}</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <p>ID-a: {{ cita.hasiera_ordua }} - {{ cita.amaiera_ordua }}</p>
-            <p>Eserlekua: {{ cita.eserlekua }}</p>
-          </ion-card-content>
-        </ion-card>
+      <!-- Mostrar citas -->
+      <div *ngIf="citas && citas.length > 0" class="citas-container">
+        <div *ngFor="let cita of citas" (click)="abrirModal(cita)" class="cita-card">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>{{ cita.izena }} - {{ cita.data }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p>{{ cita.hasiera_ordua }} - {{ cita.amaiera_ordua }}</p>
+              <p>{{ cita.deskribapena }}</p>
+            </ion-card-content>
+          </ion-card>
+        </div>
       </div>
-    </div>
 
-    <ion-modal [isOpen]="modalAbierto" (ionModalDidDismiss)="cerrarModal()">
-      <ng-template>
-        <ion-header>
-          <ion-toolbar color="primary">
-            <ion-title>Detalles de la Cita</ion-title>
-            <ion-buttons slot="end">
-              <ion-button (click)="cerrarModal()">Cerrar</ion-button>
-            </ion-buttons>
-          </ion-toolbar>
-        </ion-header>
-    
-        <ion-modal [isOpen]="modalAbierto" (ionModalDidDismiss)="cerrarModal()">
-          <ng-template>
-            <ion-header>
-              <ion-toolbar color="primary">
-                <ion-title>Detalles de la Cita</ion-title>
-                <ion-buttons slot="end">
-                  <ion-button (click)="cerrarModal()">Cerrar</ion-button>
-                </ion-buttons>
-              </ion-toolbar>
-            </ion-header>
-        
-            <ion-content class="modal-content">
-              <div class="modal-wrapper">
-                <div class="modal-section">
-                  <h2>Información Básica</h2>
-                  <ion-item>
-                    <ion-label position="stacked">ID</ion-label>
-                    <ion-input [(ngModel)]="citaSeleccionada.id"></ion-input>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label position="stacked">Nombre</ion-label>
-                    <ion-input [(ngModel)]="citaSeleccionada.izena"></ion-input>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label position="stacked">Teléfono</ion-label>
-                    <ion-input [(ngModel)]="citaSeleccionada.telefonoa"></ion-input>
-                  </ion-item>
-                </div>
-        
-                <div class="modal-section">
-                  <h2>Detalles de la Cita</h2>
-                  <ion-item>
-                    <ion-label position="stacked">Fecha</ion-label>
-                    <ion-input [(ngModel)]="citaSeleccionada.data"></ion-input>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label position="stacked">Hora de Inicio</ion-label>
-                    <ion-input [(ngModel)]="citaSeleccionada.hasiera_ordua"></ion-input>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label position="stacked">Hora de Fin</ion-label>
-                    <ion-input [(ngModel)]="citaSeleccionada.amaiera_ordua"></ion-input>
-                  </ion-item>
-                </div>
-        
-                <div class="modal-section">
-                  <h2>Ubicación y Costos</h2>
-                  <ion-item>
-                    <ion-label position="stacked">Eserlekua</ion-label>
-                    <ion-input [(ngModel)]="citaSeleccionada.eserlekua"></ion-input>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label position="stacked">Precio Total</ion-label>
-                    <ion-input [(ngModel)]="citaSeleccionada.prezio_totala"></ion-input>
-                  </ion-item>
-                </div>
-        
-                <div class="modal-section">
-                  <h2>Notas Adicionales</h2>
-                  <ion-item>
-                    <ion-label position="stacked">Descripción</ion-label>
-                    <ion-textarea [(ngModel)]="citaSeleccionada.deskribapena"></ion-textarea>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label position="stacked">Etxekoa</ion-label>
-                    <ion-input [(ngModel)]="citaSeleccionada.etxekoa"></ion-input>
-                  </ion-item>
-                </div>
-              </div>
-            </ion-content>
-        
+      <!-- Modal -->
+      <ion-modal [isOpen]="modalAbierto" (ionModalDidDismiss)="cerrarModal()">
+        <ng-template>
+          <ion-header>
+            <ion-toolbar color="primary">
+              <ion-title>Detalles de la Cita</ion-title>
+              <ion-buttons slot="end">
+                <ion-button (click)="cerrarModal()">X</ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+
+          <ion-content class="modal-content">
+            <ion-item>
+              <ion-label>ID</ion-label>
+              <ion-input [(ngModel)]="citaSeleccionada.id"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Eserlekua</ion-label>
+              <ion-input [(ngModel)]="citaSeleccionada.eserlekua"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Data</ion-label>
+              <ion-input [(ngModel)]="citaSeleccionada.data"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Hasiera Ordua</ion-label>
+              <ion-input [(ngModel)]="citaSeleccionada.hasiera_ordua"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Amaiera Ordua</ion-label>
+              <ion-input [(ngModel)]="citaSeleccionada.amaiera_ordua"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Izena</ion-label>
+              <ion-input [(ngModel)]="citaSeleccionada.izena"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Telefonoa</ion-label>
+              <ion-input [(ngModel)]="citaSeleccionada.telefonoa"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Deskribapena</ion-label>
+              <ion-textarea [(ngModel)]="citaSeleccionada.deskribapena"></ion-textarea>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Etxekoa</ion-label>
+              <ion-input [(ngModel)]="citaSeleccionada.etxekoa"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Prezio Totala</ion-label>
+              <ion-input [(ngModel)]="citaSeleccionada.prezio_totala"></ion-input>
+            </ion-item>
+
             <ion-footer>
-              <div class="modal-footer">
+              <ion-buttons>
                 <ion-button class="confirmar-button" (click)="confirmarCambios()">Confirmar</ion-button>
                 <ion-button class="cancelar-button" (click)="cancelarCambios()">Cancelar</ion-button>
-              </div>
+              </ion-buttons>
             </ion-footer>
-          </ng-template>
-        </ion-modal>
-    
+          </ion-content>
+        </ng-template>
+      </ion-modal>
+    </div>
+  </ion-content>
+</ion-app>

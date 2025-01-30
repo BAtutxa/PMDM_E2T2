@@ -1,38 +1,22 @@
 <ion-app>
+<app-menu-header></app-menu-header>
+
   <div class="page-wrapper">
-    <ion-content [fullscreen]="true">
+    <ion-content [fullscreen]="true" id="main-content">
       <ion-header>
         <ion-toolbar color="primary">
-          <ion-title>{{ inventoryTitle }}</ion-title>
-          <ion-buttons slot="end">
-            <!-- Selector de idioma -->
-            <ion-button (click)="changeLanguage('eu')">
-              <img src="assets/icon/euskera.png" alt="Euskera" style="width: 24px; height: 24px; margin-right: 5px;"> Euskera
-            </ion-button>
-            
-            <ion-button (click)="changeLanguage('es')">
-              <img src="assets/icon/spain.png" alt="Castellano" style="width: 24px; height: 24px; margin-right: 5px;"> Castellano
-            </ion-button>
-            
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
           </ion-buttons>
+          <ion-title>{{ inventoryTitle }}</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-grid class="container">
-        <!-- Imagen centrada -->
-        <ion-row>
-          <ion-col size="12" class="ion-text-center">
-            <ion-img src="assets/Images/inventario.webp" alt="Imagen" class="top-image"></ion-img>
-          </ion-col>
-        </ion-row>
-
-        <!-- Título centrado -->
         <ion-row>
           <ion-col size="12" class="ion-text-center">
             <h1 class="main-title">{{inventoryTitle}}</h1>
           </ion-col>
         </ion-row>
-
-        <!-- Botones -->
         <ion-row class="buttons-row">
           <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
             <ion-button shape="round" [routerLink]="'/productos'">{{productLabel}}</ion-button>

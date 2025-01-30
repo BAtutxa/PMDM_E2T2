@@ -1,23 +1,54 @@
+ion-content {
+  --background: #1c345c; /* Fondo principal */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Ocupar toda la altura de la pantalla */
+}
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
 .container {
-    padding: 16px;
-    text-align: center;
-  }
-  
-  ion-card {
-    margin-bottom: 20px;
-  }
-  
-  h2 {
-    margin-bottom: 20px;
-  }
-  
-  ion-button {
-    margin-top: 20px;
-    width: 45%;
-    margin-right: 5%;
-  }
-  
-  ion-button:last-child {
-    margin-right: 0;
-  }
-  
+  padding: 16px;
+}
+
+ion-card {
+  width: 100%;
+  max-width: 800px;
+  --background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+/* Centrar el título del ion-card */
+ion-card-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Centrar los botones */
+ion-button {
+  margin-top: 20px;
+  width: 45%;
+  margin-right: 5%;
+}
+
+ion-button:last-child {
+  margin-right: 0;
+}

@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import {map, Observable } from 'rxjs';
 import { ITrabajador } from '../interfaces/ITrabajador';
 
-
 @Injectable({
   providedIn: 'root',
 })

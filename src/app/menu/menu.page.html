@@ -1,63 +1,60 @@
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar color="primary">
-      <ion-title size="large">{{ menuTitle }}</ion-title>
+  <!-- Componente del menú -->
+  <ion-menu contentId="main-content">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menua</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item routerLink="/citas">
+          <ion-icon slot="start" name="calendar-outline"></ion-icon>
+          <ion-label>Hitzorduak</ion-label>
+        </ion-item>
+        <ion-item routerLink="/clientes">
+          <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+          <ion-label>Bezeroak</ion-label>
+        </ion-item>
+        <ion-item routerLink="/servicios">
+          <ion-icon slot="start" name="settings-outline"></ion-icon>
+          <ion-label>Zerbitzuak</ion-label>
+        </ion-item>
+        <ion-item routerLink="/inventario">
+          <ion-icon slot="start" name="cube-outline"></ion-icon>
+          <ion-label>Inbentarioa</ion-label>
+        </ion-item>
+        <ion-item routerLink="/administracion">
+          <ion-icon slot="start" name="settings-outline"></ion-icon>
+          <ion-label>Administrazioa</ion-label>
+        </ion-item>
+        <ion-item routerLink="/tickets">
+          <ion-icon slot="start" name="settings-outline"></ion-icon>
+          <ion-label>Tickets-ak</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <!-- Header principal -->
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Hitzorduak</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-grid class="container">
-    
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>{{ menuTitle }}</ion-title>
-    <ion-buttons slot="end">
-      <!-- Selector de idioma -->
-      <ion-button (click)="changeLanguage('eu')">
-        <img src="assets/icon/euskera.png" alt="Euskera" style="width: 24px; height: 24px; margin-right: 5px;"> Euskera
-      </ion-button>
-      
-      <ion-button (click)="changeLanguage('es')">
-        <img src="assets/icon/spain.png" alt="Castellano" style="width: 24px; height: 24px; margin-right: 5px;"> Castellano
-      </ion-button>
-      
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
-    <!-- Imagen centrada -->
-    <ion-row>
-      <ion-col size="12" class="ion-text-center">
-        <ion-img src="assets/Images/cortarPelo.jpg" alt="Imagen" class="top-image"></ion-img>
-      </ion-col>
-    </ion-row>
-
-    <!-- Título centrado -->
-    <ion-row>
-      <ion-col size="12" class="ion-text-center">
-        <h1 class="main-title">{{ menuTitle }}</h1>
-      </ion-col>
-    </ion-row>
-
-    <!-- Botones -->
-    <ion-row class="buttons-row">
-      <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-        <ion-button shape="round" [routerLink]="'/inventario'">{{ inventoryLabel }}</ion-button>
-      </ion-col>
-      <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-        <ion-button shape="round" [routerLink]="'/calendario'">{{ appointmentsLabel }}</ion-button>
-      </ion-col>
-      <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-        <ion-button shape="round" [routerLink]="'/clientes'">{{ customersLabel }}</ion-button>
-      </ion-col>
-      <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-        <ion-button shape="round" [routerLink]="'/servicios'">{{ servicesLabel }}</ion-button>
-      </ion-col>
-      <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-        <ion-button shape="round" [routerLink]="'/tickets'">{{ ticketsLabel }}</ion-button>
-      </ion-col>
-      <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-        <ion-button shape="round" [routerLink]="'/administracion'">{{ administrationLabel }}</ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <!-- Contenido principal -->
+  <div class="ion-page" id="main-content">
+    <!-- Aquí puedes insertar el contenido dinámico de la página -->
+    <ion-content>
+      <p>Aquí va el contenido principal de la página.</p>
+    </ion-content>
+  </div>
 </ion-content>
+
+
+   
+

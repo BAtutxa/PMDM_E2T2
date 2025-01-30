@@ -1,65 +1,47 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Calendario</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-app>
+<app-menu-header></app-menu-header>
 
-<ion-content>
-  <div class="container">
-    <h1>Egutegia</h1>
+  <!-- Contenido principal -->
+  <div class="ion-page" id="main-content">
+    <!-- Header principal -->
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Egutegia</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
-    <div class="calendar-header">
-      <ion-button fill="clear" (click)="cambiarMes(-1)">&#x25C0;</ion-button>
-      <span>{{ meses[mesActual] }} {{ anioActual }}</span>
-      <ion-button fill="clear" (click)="cambiarMes(1)">&#x25B6;</ion-button>
-    </div>
+    <ion-content>
+      <div class="container">
+        <ion-datetime
+          presentation="date"
+          [(ngModel)]="fechaSeleccionada"
+          display-format="DD MMM YYYY"
+          picker-format="DD MMM YYYY"
+          [min]="minFecha"
+          [max]="maxFecha"
+          (ionChange)="onFechaChange($event)"
+          show-default-time="false">
+        </ion-datetime>
 
-    <div class="calendario-grid">
-      <div *ngFor="let dia of diasSemana" class="dia-header">
-        {{ dia }}
+        <div class="info">
+          <ion-item>
+            <ion-label>Taldea</ion-label>
+            <ion-input [value]="grupoSeleccionado" readonly></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Hitzorduak</ion-label>
+            <ion-textarea [value]="citasSeleccionadas.join('\n')" readonly></ion-textarea>
+          </ion-item>
+
+          <!-- Botón para añadir cita -->
+          <div class="botones">
+            <ion-button expand="block" (click)="irACitas()">Añadir cita</ion-button>
+          </div>
+        </div>
       </div>
-      <div
-        *ngFor="let dia of diasMes; let i = index"
-        class="dia"
-        [class.seleccionado]="dia === diaSeleccionado"
-        (click)="seleccionarDia(dia)"
-        [attr.disabled]="dia === 0 ? true : null"
-      >
-        {{ dia !== 0 ? dia : '' }}
-      </div>
-    </div>
-
-    <div class="info">
-      <ion-item>
-        <ion-label>Taldea</ion-label>
-        <ion-input [value]="grupoSeleccionado" readonly></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Hitzorduak</ion-label>
-        <ion-textarea [value]="citasSeleccionadas.join('\n')" readonly></ion-textarea>
-      </ion-item>
-
-      <!-- Botones con 'x' y 'v' -->
-      <div class="botones">
-        <ion-button color="danger" fill="clear" routerLink="/menu">
-          <ion-icon name="close"></ion-icon> <!-- 'x' icon -->
-        </ion-button>
-        <ion-button color="success" fill="clear" (click)="irACitas()">
-          <ion-icon name="checkmark"></ion-icon> <!-- 'v' icon -->
-        </ion-button>
-      </div>
-    </div>
+    </ion-content>
   </div>
-</ion-content>
-
-<ion-footer>
-  <ion-toolbar>
-    <!-- Nuevo botón cuadrado para gestionar citas -->
-    <ion-button expand="block" class="gestionar-citas-button" (click)="irAGestionarCitas()">
-      Hitzorduak Kudeatu
-    </ion-button>
-  </ion-toolbar>
-</ion-footer>
-
-
-<!-- return.Resposentity.http://localhost:8100/citas?fecha-->
+</ion-app>

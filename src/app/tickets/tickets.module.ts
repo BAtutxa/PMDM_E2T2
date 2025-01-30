@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { TicketsPageRoutingModule } from './tickets-routing.module';
 
 import { TicketsPage } from './tickets.page';
+import { NireKonponenteakModule } from "../nire-konponenteak/nire-konponenteak.module";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TicketsPageRoutingModule
-  ],
+    TicketsPageRoutingModule,
+    NireKonponenteakModule
+],
   declarations: [TicketsPage]
 })
 export class TicketsPageModule {}
