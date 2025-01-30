@@ -1,38 +1,38 @@
-<ion-content [fullscreen]="true">
+<ion-app>
   <ion-menu contentId="main-content">
     <ion-header>
       <ion-toolbar>
         <ion-title>Menua</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content color="secondary">
-      <div color= "secondary" class="menu-container">
-        <ion-list color="secondary">
-          <ion-item routerLink="/gestionar-citas">
+    <ion-content color="primary">
+      <div class="menu-container">
+        <ion-list>
+          <ion-item color="primary" routerLink="/gestionar-citas">
             <ion-icon slot="start" name="calendar-outline"></ion-icon>
             <ion-label>Hitzorduak</ion-label>
           </ion-item>
-          <ion-item routerLink="/calendario">
-            <ion-icon slot="start" name="settings-outline"></ion-icon>
+          <ion-item color="primary" routerLink="/calendario">
+            <ion-icon slot="start" name="calendar-outline"></ion-icon>
             <ion-label>Egutegia</ion-label>
           </ion-item>
-          <ion-item routerLink="/clientes">
+          <ion-item color="primary" routerLink="/clientes">
             <ion-icon slot="start" name="person-circle-outline"></ion-icon>
             <ion-label>Bezeroak</ion-label>
           </ion-item>
-          <ion-item routerLink="/servicios">
+          <ion-item color="primary" routerLink="/servicios">
             <ion-icon slot="start" name="settings-outline"></ion-icon>
             <ion-label>Zerbitzuak</ion-label>
           </ion-item>
-          <ion-item routerLink="/inventario">
+          <ion-item color="primary" routerLink="/inventario">
             <ion-icon slot="start" name="cube-outline"></ion-icon>
             <ion-label>Inbentarioa</ion-label>
           </ion-item>
-          <ion-item routerLink="/administracion">
+          <ion-item color="primary" routerLink="/administracion">
             <ion-icon slot="start" name="settings-outline"></ion-icon>
             <ion-label>Administrazioa</ion-label>
           </ion-item>
-          <ion-item routerLink="/tickets">
+          <ion-item color="primary" routerLink="/tickets">
             <ion-icon slot="start" name="settings-outline"></ion-icon>
             <ion-label>Tickets-ak</ion-label>
           </ion-item>
@@ -41,55 +41,47 @@
     </ion-content>
   </ion-menu>
 
-  <!-- Header principal -->
-  <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>Egutegia</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- Contenido principal -->
+  <div class="ion-page" id="main-content">
+    <!-- Header principal -->
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Egutegia</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
-    <!-- Contenido principal -->
-    <div class="ion-page" id="main-content">
-      <!-- Aquí puedes insertar el contenido dinámico de la página -->
-      <ion-content>
-        <p>Aquí va el contenido principal de la página.</p>
-      </ion-content>
-    </div>
+    <ion-content>
+      <div class="container">
+        <ion-datetime
+          presentation="date"
+          [(ngModel)]="fechaSeleccionada"
+          display-format="DD MMM YYYY"
+          picker-format="DD MMM YYYY"
+          [min]="minFecha"
+          [max]="maxFecha"
+          (ionChange)="onFechaChange($event)"
+          show-default-time="false">
+        </ion-datetime>
 
-<ion-content class="container">
-  <div class="container">
-    <ion-datetime
-      presentation="date"
-      [(ngModel)]="fechaSeleccionada"
-      display-format="DD MMM YYYY"
-      picker-format="DD MMM YYYY"
-      [min]="minFecha"
-      [max]="maxFecha"
-      (ionChange)="onFechaChange($event)"
-      show-default-time="false"
-    >
-    </ion-datetime>
+        <div class="info">
+          <ion-item>
+            <ion-label>Taldea</ion-label>
+            <ion-input [value]="grupoSeleccionado" readonly></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label>Hitzorduak</ion-label>
+            <ion-textarea [value]="citasSeleccionadas.join('\n')" readonly></ion-textarea>
+          </ion-item>
 
-    <div class="info">
-      <ion-item>
-        <ion-label>Taldea</ion-label>
-        <ion-input [value]="grupoSeleccionado" readonly></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>Hitzorduak</ion-label>
-        <ion-textarea
-          [value]="citasSeleccionadas.join('\n')"
-          readonly
-        ></ion-textarea>
-      </ion-item>
-
-      <!-- Botones con 'x' y 'v' -->
-      <div class="botones">
-        <ion-button expand="block" (click)="irACitas()">Añadir cita</ion-button>
+          <!-- Botón para añadir cita -->
+          <div class="botones">
+            <ion-button expand="block" (click)="irACitas()">Añadir cita</ion-button>
+          </div>
+        </div>
       </div>
-    </div>
+    </ion-content>
   </div>
-</ion-content>
+</ion-app>
