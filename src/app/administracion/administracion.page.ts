@@ -7,6 +7,7 @@ import { UserService } from '../services/user.service';
   selector: 'app-administracion',
   templateUrl: './administracion.page.html',
   styleUrls: ['./administracion.page.scss'],
+  standalone: false,
 })
 export class AdministracionPage implements OnInit {
 

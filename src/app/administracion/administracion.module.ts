@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { AdministracionPageRoutingModule } from './administracion-routing.module';
 
 import { AdministracionPage } from './administracion.page';
+import { NireKonponenteakModule } from '../nire-konponenteak/nire-konponenteak.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AdministracionPageRoutingModule
+    AdministracionPageRoutingModule,
+    NireKonponenteakModule
   ],
   declarations: [AdministracionPage]
 })
