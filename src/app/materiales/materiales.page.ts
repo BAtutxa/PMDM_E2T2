@@ -97,7 +97,6 @@ export class MaterialesPage implements OnInit {
   }
 
   verDetalles(material: IEMaterialak) {
-    console.log('Material seleccionado:', material);
     this.materialSeleccionado = { ...material };
     this.MaterialConInformacionSeleccionada = true;
   }

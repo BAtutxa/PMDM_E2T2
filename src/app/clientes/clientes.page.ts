@@ -194,7 +194,7 @@ export class ClientesPage implements OnInit {
     }
   }
 
-   ordenarPor(columna: string) {
+  ordenarPor(columna: string) {
     if (this.ordenActual.columna !== columna) {
       this.ordenActual.columna = columna as keyof IBezero;
     }
@@ -203,7 +203,8 @@ export class ClientesPage implements OnInit {
       let valorA = this.obtenerValorPorColumna(a, columna);
       let valorB = this.obtenerValorPorColumna(b, columna);
   
-      if (columna === 'sortze_data' || columna === 'eguneratze_data') {
+      // Convertir valores a fecha si la columna es de tipo fecha
+      if (columna === 'sortze_data' || columna === 'eguneratze_data' || columna === 'data') {
         valorA = valorA ? new Date(valorA) : null;
         valorB = valorB ? new Date(valorB) : null;
       }
@@ -211,13 +212,13 @@ export class ClientesPage implements OnInit {
       if (valorA === null) return this.ordenActual.ascendente ? 1 : -1;
       if (valorB === null) return this.ordenActual.ascendente ? -1 : 1;
   
+      // Comparar correctamente los valores numéricos o de fecha
       return this.ordenActual.ascendente 
-        ? valorA > valorB ? 1 : valorA < valorB ? -1 : 0 
-        : valorA > valorB ? -1 : valorA < valorB ? 1 : 0;
+        ? (valorA > valorB ? 1 : valorA < valorB ? -1 : 0) 
+        : (valorA > valorB ? -1 : valorA < valorB ? 1 : 0);
     });
   }
   
-
   cambiarOrden(event: any) {
     this.ordenActual.ascendente = event.detail.value === true || event.detail.value === "true";
   
@@ -242,5 +243,4 @@ export class ClientesPage implements OnInit {
   
     return valor;
   }
-
 }

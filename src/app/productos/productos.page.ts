@@ -23,6 +23,7 @@ export class ProductosPage implements OnInit {
   productosFiltrados: IEProduktuak[] = [];
   mobilaDa: Boolean = false;
   ordenActual: { columna: string, ascendente: boolean } = { columna: 'id', ascendente: true };
+  ordenAnterior: { columna: string, ascendente: boolean } = { columna: 'id', ascendente: true };
   productosPorPagina = 10;
   paginaActual = 1;
   paginacionMaxima = 0;
@@ -33,6 +34,7 @@ export class ProductosPage implements OnInit {
   name: string = ''
   brand: string = ''
   id_category: string = ''
+  name_category : string = ''
   cd: string = ''
   ud: string = ''
   edit: string = ''
@@ -41,7 +43,7 @@ export class ProductosPage implements OnInit {
   info: string = ''
   search: string = ''
 
-  constructor(private alertController: AlertController, private productoService: ProductoService, private translateService: TranslateService, private cdr: ChangeDetectorRef) {}
+  constructor(private alertController: AlertController, private productoService: ProductoService, private translateService: TranslateService) {}
 
   ngOnInit() {
     this.mobilbista();
@@ -97,7 +99,6 @@ export class ProductosPage implements OnInit {
   }
 
   verDetalles(producto: IEProduktuak) {
-    console.log('Producto seleccionado:', producto);
     this.productoSeleccionado = { ...producto };
     this.productoConInformacionSeleccionada = true;
   }
@@ -139,7 +140,6 @@ export class ProductosPage implements OnInit {
                 this.aplicarFiltro({ target: { value: '' } });
               }
               this.editandoProducto = false;
-              this.cdr.detectChanges();
               window.location.reload();
             } catch (error) {
               console.error('Error al actualizar producto:', error);
@@ -203,59 +203,65 @@ export class ProductosPage implements OnInit {
     }
   }
 
-  // Método para ordenar por columna y orden (ascendente/descendente)
-  ordenarPor(columna: string) {
-    if (this.ordenActual.columna === columna) {
-      this.ordenActual.ascendente = !this.ordenActual.ascendente;
+// Método para ordenar los productos según la columna seleccionada
+ordenarPor(columna: string) {
+  // Si la columna seleccionada es diferente, actualizamos la columna
+  if (this.ordenActual.columna !== columna) {
+    this.ordenActual.columna = columna;
+    this.ordenActual.ascendente = true;  // Reseteamos a ascendente cuando cambiamos de columna
+  }
+
+  // Ordenamos los productos según la columna seleccionada y el valor ascendente/descendente
+  this.productosFiltrados.sort((a, b) => {
+    let valorA = this.obtenerValorPorColumna(a, columna);
+    let valorB = this.obtenerValorPorColumna(b, columna);
+
+    // Convertimos las fechas a Date si la columna es de tipo fecha
+    if (columna === 'sortze_data' || columna === 'eguneratze_data' || columna === 'data') {
+      valorA = valorA ? new Date(valorA) : null;
+      valorB = valorB ? new Date(valorB) : null;
+    }
+
+    // Si uno de los valores es null, lo ponemos en el orden correspondiente según 'ascendente'
+    if (valorA === null) return this.ordenActual.ascendente ? 1 : -1;
+    if (valorB === null) return this.ordenActual.ascendente ? -1 : 1;
+
+    // Comparamos los valores y aplicamos la lógica ascendente o descendente
+    return this.ordenActual.ascendente
+      ? (valorA > valorB ? 1 : valorA < valorB ? -1 : 0)
+      : (valorA > valorB ? -1 : valorA < valorB ? 1 : 0);
+  });
+}
+
+// Método para cambiar el orden de ascendente/descendente cuando el usuario lo seleccione
+cambiarOrden(event: any) {
+  // Asignamos el valor de ascendente basándonos en la selección
+  this.ordenActual.ascendente = event.detail.value === true || event.detail.value === "true";
+
+  // Si ya hay una columna seleccionada, ordenamos de nuevo
+  if (this.ordenActual.columna) {
+    setTimeout(() => {
+      this.ordenarPor(this.ordenActual.columna);
+    }, 0);
+  }
+}
+
+// Método para obtener el valor de una columna, soportando columnas anidadas como 'kategoriak.id'
+private obtenerValorPorColumna(objeto: any, columna: string): any {
+  const propiedades = columna.split('.'); // Soporta columnas anidadas como 'kategoriak.id'
+  let valor: any = objeto;
+
+  for (const propiedad of propiedades) {
+    if (valor && typeof valor === 'object' && propiedad in valor) {
+      valor = valor[propiedad]; // Accede a la propiedad
     } else {
-      this.ordenActual.columna = columna;
-      this.ordenActual.ascendente = true;
+      return null; // Retorna null si no existe la propiedad
     }
-
-    this.productosFiltrados.sort((a, b) => {
-      let valorA = this.obtenerValorPorColumna(a, columna);
-      let valorB = this.obtenerValorPorColumna(b, columna);
-
-      if (columna === 'sortze_data' || columna === 'eguneratze_data') {
-        valorA = valorA ? new Date(valorA) : null;
-        valorB = valorB ? new Date(valorB) : null;
-      }
-
-      if (columna === 'id_kategoria') {
-        valorA = a.kategoriak ? a.kategoriak.id : null;
-        valorB = b.kategoriak ? b.kategoriak.id : null;
-      }
-
-      if (valorA < valorB || valorA === null) {
-        return this.ordenActual.ascendente ? -1 : 1;
-      } else if (valorA > valorB || valorB === null) {
-        return this.ordenActual.ascendente ? 1 : -1;
-      } else {
-        return 0;
-      }
-    });
   }
 
-  // Método para obtener el valor de una columna
-  private obtenerValorPorColumna(objeto: any, columna: string): any {
-    const propiedades = columna.split('.');
-    let valor = objeto;
+  return valor;
+}
 
-    propiedades.forEach((propiedad) => {
-      if (valor) {
-        valor = valor[propiedad];
-      }
-    });
-
-    return valor;
-  }
-
-  getOrdenClass(columna: string): string {
-    if (this.ordenActual.columna === columna) {
-      return this.ordenActual.ascendente ? 'orden-asc' : 'orden-desc';
-    }
-    return '';
-  }
 
   // Método para cargar las traducciones
   translateLabels() {
@@ -264,6 +270,8 @@ export class ProductosPage implements OnInit {
       'PRODUCT.NAME',
       'PRODUCT.BRAND',
       'PRODUCT.ID_CATEGORY',
+      'PRODUCT.CATEGORY_NAME',
+      'PRODUCT.ID_NAME',
       'PRODUCT.CD',
       'PRODUCT.UD',
       'PRODUCT.EDIT',
@@ -276,6 +284,7 @@ export class ProductosPage implements OnInit {
       this.name = translations['PRODUCT.NAME'];
       this.brand = translations['PRODUCT.BRAND'];
       this.id_category = translations['PRODUCT.ID_CATEGORY'];
+      this.name_category = translations ['PRODUCT.CATEGORY_NAME']
       this.cd = translations['PRODUCT.CD'];
       this.ud = translations['PRODUCT.UD'];
       this.edit = translations['PRODUCT.EDIT'];

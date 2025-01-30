@@ -29,6 +29,7 @@
     "NAME": "Nombre",
     "BRAND": "Marca",
     "ID_CATEGORY": "ID categoria",
+    "CATEGORY_NAME": "Nombre categoria",
     "CD": "Fecha creación",
     "UD": "Fecha actualización",
     "EDIT": "Editar",

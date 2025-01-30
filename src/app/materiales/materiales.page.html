@@ -51,6 +51,9 @@
       <ion-select [(ngModel)]="ordenActual.ascendente" interface="popover" (ionChange)="ordenarPor(ordenActual.columna)">
         <ion-select-option value="true">{{ 'Ascendente' }}</ion-select-option>
         <ion-select-option value="false">{{ 'Descendente' }}</ion-select-option>
+        <ion-label slot="start">
+          {{ ordenActual.ascendente === true ? 'Ascendente' : 'Descendente' }}
+        </ion-label>
       </ion-select>
     </ion-item>
   </div>
