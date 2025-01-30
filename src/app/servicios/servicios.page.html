@@ -1,43 +1,65 @@
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar color="primary" >
-      <ion-title size="large">Zerbitsuak</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Servicios</ion-title>
+  </ion-toolbar>
+</ion-header>
 
-  <!-- Contenedor para los servicios -->
-  <div class="services-container">
-    <!-- Servicio: Corte de pelo -->
-    <ion-card class="service-card">
-      <img src="assets/Images/corte.png" alt="Corte de pelo">
-      <ion-card-header>
-        <ion-card-title>Ile mozketa</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        Mozketa moderno eta freskoa lortu.
-      </ion-card-content>
-    </ion-card>
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let servicio of zerbitzuak">
+      <ion-label>
+        <h2>{{ servicio.izena }}</h2>
+        <p>Etxeko prezioa: {{ servicio.etxeko_prezioa }} €</p>
+        <p>Kanpoko prezioa: {{ servicio.kanpoko_prezioa }} €</p>
+      </ion-label>
+      
+      <!-- Botón para editar el servicio -->
+      <ion-button (click)="editarServicio(servicio)" color="primary" fill="clear" slot="end">
+        <ion-icon name="create"></ion-icon> Editar
+      </ion-button>
 
-    <!-- Servicio: Tinte de pelo -->
-    <ion-card class="service-card">
-      <img src="assets/Images/decolorado.jpg" alt="Tinte de pelo">
-      <ion-card-header>
-        <ion-card-title>Ile tindagaia</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        Aldatu zure "look"-a gehien gustatzen zaizun kutsuarekin.
-      </ion-card-content>
-    </ion-card>
+      <!-- Botón para eliminar el servicio -->
+      <ion-button (click)="eliminarServicio(servicio.id ?? 0)" color="danger" fill="clear" slot="end">
+        <ion-icon name="trash"></ion-icon> Eliminar
+      </ion-button>
+    </ion-item>
+  </ion-list>
 
-    <!-- Servicio: Peinado -->
-    <ion-card class="service-card">
-      <img src="assets/Images/peinado.jpg" alt="Peinado">
-      <ion-card-header>
-        <ion-card-title>Ile orrazketa</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        Orrazkera ikusgarria du edonorako.
-      </ion-card-content>
-    </ion-card>
-  </div>
+  <!-- Botón para abrir el panel de agregar nuevo servicio en la parte central-baja (este se desactivará cuando se edita un servicio) -->
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button *ngIf="!panelNuevoServicio" (click)="abrirPanelNuevoServicio()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- Panel de insertar nuevo servicio -->
+  <ion-modal [isOpen]="panelNuevoServicio" (ionModalDidDismiss)="cerrarPanelNuevoServicio()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>{{ nuevoServicio.id ? 'Editar Servicio' : 'Nuevo Servicio' }}</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cerrarPanelNuevoServicio()">Cerrar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-item>
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input [(ngModel)]="nuevoServicio.izena"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Etxeko Prezioa</ion-label>
+          <ion-input type="number" [(ngModel)]="nuevoServicio.etxeko_prezioa"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Kanpoko Prezioa</ion-label>
+          <ion-input type="number" [(ngModel)]="nuevoServicio.kanpoko_prezioa"></ion-input>
+        </ion-item>
+        <ion-footer>
+          <ion-button expand="full" (click)="guardarServicio()">Guardar Servicio</ion-button>
+        </ion-footer>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 </ion-content>
