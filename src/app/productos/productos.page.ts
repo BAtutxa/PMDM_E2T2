@@ -84,6 +84,7 @@ export class ProductosPage implements OnInit {
   }
 
   moverVistaAlPrimerProducto() {
+    
     if (this.content) {
       this.content.scrollToTop(500);
     }
@@ -203,7 +204,6 @@ export class ProductosPage implements OnInit {
     }
   }
 
-// Método para ordenar los productos según la columna seleccionada
 ordenarPor(columna: string) {
   // Si la columna seleccionada es diferente, actualizamos la columna
   if (this.ordenActual.columna !== columna) {
@@ -211,12 +211,10 @@ ordenarPor(columna: string) {
     this.ordenActual.ascendente = true;  // Reseteamos a ascendente cuando cambiamos de columna
   }
 
-  // Ordenamos los productos según la columna seleccionada y el valor ascendente/descendente
   this.productosFiltrados.sort((a, b) => {
     let valorA = this.obtenerValorPorColumna(a, columna);
     let valorB = this.obtenerValorPorColumna(b, columna);
 
-    // Convertimos las fechas a Date si la columna es de tipo fecha
     if (columna === 'sortze_data' || columna === 'eguneratze_data' || columna === 'data') {
       valorA = valorA ? new Date(valorA) : null;
       valorB = valorB ? new Date(valorB) : null;
@@ -233,7 +231,6 @@ ordenarPor(columna: string) {
   });
 }
 
-// Método para cambiar el orden de ascendente/descendente cuando el usuario lo seleccione
 cambiarOrden(event: any) {
   // Asignamos el valor de ascendente basándonos en la selección
   this.ordenActual.ascendente = event.detail.value === true || event.detail.value === "true";
@@ -246,7 +243,6 @@ cambiarOrden(event: any) {
   }
 }
 
-// Método para obtener el valor de una columna, soportando columnas anidadas como 'kategoriak.id'
 private obtenerValorPorColumna(objeto: any, columna: string): any {
   const propiedades = columna.split('.'); // Soporta columnas anidadas como 'kategoriak.id'
   let valor: any = objeto;
@@ -262,8 +258,6 @@ private obtenerValorPorColumna(objeto: any, columna: string): any {
   return valor;
 }
 
-
-  // Método para cargar las traducciones
   translateLabels() {
     this.translateService.get([
       'PRODUCT.TITLE',
