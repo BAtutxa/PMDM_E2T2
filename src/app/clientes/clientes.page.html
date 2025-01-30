@@ -13,7 +13,7 @@
 
   <!-- Contenido principal -->
   <div color="secondary" class="ion-page" id="main-content">
-    <p>Aquí va el contenido principal de la página.</p>
+    <p >Aquí va el contenido principal de la página.</p>
   </div>
 
   <!-- Buscador -->
@@ -111,7 +111,7 @@
                 El teléfono debe contener un máximo de 9 números.
               </ion-note>
             </ion-item>
-            <ion-button expand="full" type="submit" [disabled]="fichaForm.invalid">Confirmar</ion-button>
+            <ion-button color = "tertiary" expand="full" type="submit" [disabled]="fichaForm.invalid">Confirmar</ion-button>
             <ion-button expand="full" color="danger" type="button" (click)="cancelarEdicion()">Cancelar</ion-button>
             <ion-button expand="full" class="custom-red-button" type="button" (click)="eliminarFicha()">Borrar ficha</ion-button>
           </form>

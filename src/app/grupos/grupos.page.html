@@ -19,7 +19,7 @@
           <h2>{{ grupo.izena }}</h2>
           <!-- Mostrar los integrantes del grupo -->
           <div *ngFor="let trabajador of grupo.langileak">
-            <ion-chip color="primary" (click)="editarLangile(trabajador)">
+            <ion-chip color="secondary" (click)="editarLangile(trabajador)">
               <ion-label>
                 ID: {{ trabajador.id }} - {{ trabajador.izena }} {{ trabajador.abizenak }}
               </ion-label>
@@ -29,7 +29,7 @@
 
         <!-- Botones para editar/eliminar -->
         <ion-buttons slot="end">
-          <ion-button color="primary" [routerLink]="['/editar-grupo', grupo.kodea]">
+          <ion-button color="tertiary" [routerLink]="['/editar-grupo', grupo.kodea]">
             Editatu
           </ion-button>
           <ion-button color="danger" (click)="eliminarGrupo(grupo)">
@@ -44,12 +44,12 @@
 <div *ngIf="mostrarEditor">
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Editar Trabajador</ion-card-title>
+      <ion-card-title color = "terciary">Editar Trabajador</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <form #trabajadorForm="ngForm" (ngSubmit)="guardarCambios()">
         <div class="input-container">
-          <ion-label class="input-label" color="primary">Nombre</ion-label>
+          <ion-label class="input-label" color="terciary">Nombre</ion-label>
           <ion-input
             class="custom-input"
             [(ngModel)]="langileSeleccionado.izena"
@@ -64,7 +64,7 @@
         </div>
 
         <div class="input-container">
-          <ion-label class="input-label" color="primary">Apellido</ion-label>
+          <ion-label class="input-label" color="terciary">Apellido</ion-label>
           <ion-input
             class="custom-input"
             [(ngModel)]="langileSeleccionado.abizenak"

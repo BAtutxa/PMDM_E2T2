@@ -104,7 +104,7 @@
             </ion-note>
           </ion-item>
           <!-- Tienes que poner informacion del historial cuando este -->
-          <ion-button expand="full" (click)="confirmarEdicion()"  type="submit" [disabled]="productoForm.invalid">{{confirm}}</ion-button>
+          <ion-button color="tertiary" expand="full" (click)="confirmarEdicion()"  type="submit" [disabled]="productoForm.invalid">{{confirm}}</ion-button>
           <ion-button expand="full" color="danger" (click)="cancelarEdicion()">{{cancel}}</ion-button>
           <ion-button expand="full" class="custom-blue-button" (click)="verDetalles(productoSeleccionado)">
             {{info}}

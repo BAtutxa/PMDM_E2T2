@@ -23,7 +23,8 @@
           [min]="minFecha"
           [max]="maxFecha"
           (ionChange)="onFechaChange($event)"
-          show-default-time="false">
+          show-default-time="false"
+          color="tertiary">
         </ion-datetime>
 
         <div class="info">
@@ -36,12 +37,24 @@
             <ion-textarea [value]="citasSeleccionadas.join('\n')" readonly></ion-textarea>
           </ion-item>
 
-          <!-- Botón para añadir cita -->
-          <div class="botones">
-            <ion-button expand="block" (click)="irACitas()">Añadir cita</ion-button>
-          </div>
-        </div>
+      <!-- Botones con 'x' y 'v' -->
+      <div class="botones">
+        <ion-button color="danger" fill="clear" routerLink="/menu">
+          <ion-icon name="close"></ion-icon> <!-- 'x' icon -->
+        </ion-button>
+        <ion-button color="success" fill="clear" (click)="irACitas()">
+          <ion-icon name="checkmark"></ion-icon> <!-- 'v' icon -->
+        </ion-button>
       </div>
-    </ion-content>
+    </div>
   </div>
-</ion-app>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <!-- Nuevo botón cuadrado para gestionar citas -->
+    <ion-button expand="block" class="gestionar-citas-button" (click)="irAGestionarCitas()">
+      Hitzorduak Kudeatu
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
