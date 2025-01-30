@@ -16,7 +16,6 @@ ion-content {
 
 .container {
   padding: 16px;
-  text-align: center;
 }
 
 ion-card {
@@ -35,10 +34,12 @@ ion-card-title {
   font-weight: bold;
   color: #333;
   margin-bottom: 16px;
+  text-align: center;
 }
 
 h2 {
   margin-bottom: 20px;
+  text-align: center;
 }
 
 /* Centrar los botones */
