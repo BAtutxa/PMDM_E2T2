@@ -10,7 +10,7 @@ import { IData } from '../interfaces/IData';
 @Component({
   selector: 'app-clientes',
   templateUrl: './clientes.page.html',
-  styleUrls: ['../productos/productos.page.scss'],
+  styleUrls: ['../clientes/clientes.page.scss'],
 })
 export class ClientesPage implements OnInit {
   @ViewChild(IonContent, { static: false }) content: IonContent | undefined;

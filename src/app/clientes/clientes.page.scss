@@ -8,16 +8,19 @@
     height: 100vh;
     box-sizing: border-box;
     margin-top: 20px;
+    --background: #1c345c !important;
 }
 
 ion-toolbar ion-title {
     font-size: 20px;
     font-weight: bold;
     text-transform: uppercase;
+    margin: 0%;
+    padding: 0%;
 }
 
 ion-toolbar {
-    --background: #1c345c;
+    --background: #1c345c !important;
     --color: #fff;
 }
 
@@ -35,11 +38,173 @@ ion-item {
 
 ion-menu ion-list {
     height: 100%;
-    margin: 0;
-    padding: 0;
+    margin: 0%;
+    padding: 0%;
     background-color: #1c345c !important;
 }
 
 .botones {
-    margin-top: 20px;
+    margin-top: 100px;
 }
+
+//
+.content-2 {
+    padding: 20px;
+  }
+  
+  .title-2 {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .citas-container-2 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  
+  .cita-card-2 {
+    width: 100%;
+    max-width: 350px;
+  }
+  
+  .card-2 {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+  }
+  
+  .card-2:hover {
+    transform: translateY(-5px);
+  }
+  
+  .card-title-2 {
+    font-weight: bold;
+  }
+  
+  .modal-content-2 {
+    padding: 20px;
+  }
+  
+  .item-2 {
+    margin-bottom: 15px;
+  }
+  
+  .footer-buttons-2 {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .confirmar-button-2,
+  .cancelar-button-2 {
+    width: 48%;
+  }
+  
+  /* Colores de botones */
+  ion-button.success-2 {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  ion-button.danger-2 {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  /* Estilos generales de la página */
+  .page-2 {
+    --background: #f0f0f0; /* Fondo de color claro */
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  h1-2 {
+    text-align: center;
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilos para los botones */
+  .confirmar-button-2 {
+    --background: #ffcc00; /* Amarillo */
+    --border-radius: 5px;
+    --color: white;
+  }
+  
+  .cancelar-button-2 {
+    --background: #ff4444; /* Rojo */
+    --border-radius: 5px;
+    --color: white;
+  }
+  
+  /* Estilos del modal */
+  .modal-content-2 {
+    --background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  ion-item-2 {
+    margin-bottom: 10px;
+  }
+  
+  ion-footer-2 {
+    text-align: center;
+  }
+  
+  ion-button-2 {
+    width: 48%;
+    margin: 0 2%;
+  }
+  
+  //
+  .unique-menu-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 16px;
+    height: 100vh;
+    box-sizing: border-box;
+    margin-top: 20px;
+  }
+  
+  ion-toolbar ion-title {
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0%;
+    padding: 0%;
+  }
+  
+  ion-toolbar {
+    --background: #1c345c;
+    --color: #fff;
+    margin: 0%;
+    padding: 0%;
+  }
+  
+  ion-item {
+    background-color: #1c345c !important;
+    --color: black;
+    --inner-border-width: 0 !important;
+    --background-hover: #9eb9e7;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .unique-menu-container ion-item {
+    --min-height: 80px;
+  }
+  
+  ion-menu ion-list {
+    height: 100%;
+    margin: 0%;
+    padding: 0%;
+    background-color: #1c345c !important;
+  }
+
+  
