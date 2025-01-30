@@ -6,6 +6,7 @@ import { CitaService } from '../services/cita.service';
   selector: 'app-calendario',
   templateUrl: './calendario.page.html',
   styleUrls: ['./calendario.page.scss'],
+  standalone: false,
 
 })
 export class CalendarioPage implements OnInit {

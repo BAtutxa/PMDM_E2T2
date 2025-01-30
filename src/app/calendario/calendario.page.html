@@ -1,45 +1,5 @@
 <ion-app>
-  <ion-menu contentId="main-content">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Menua</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content color="primary">
-      <div class="menu-container">
-        <ion-list>
-          <ion-item color="primary" routerLink="/gestionar-citas">
-            <ion-icon slot="start" name="calendar-outline"></ion-icon>
-            <ion-label>Hitzorduak</ion-label>
-          </ion-item>
-          <ion-item color="primary" routerLink="/calendario">
-            <ion-icon slot="start" name="calendar-outline"></ion-icon>
-            <ion-label>Egutegia</ion-label>
-          </ion-item>
-          <ion-item color="primary" routerLink="/clientes">
-            <ion-icon slot="start" name="person-circle-outline"></ion-icon>
-            <ion-label>Bezeroak</ion-label>
-          </ion-item>
-          <ion-item color="primary" routerLink="/servicios">
-            <ion-icon slot="start" name="settings-outline"></ion-icon>
-            <ion-label>Zerbitzuak</ion-label>
-          </ion-item>
-          <ion-item color="primary" routerLink="/inventario">
-            <ion-icon slot="start" name="cube-outline"></ion-icon>
-            <ion-label>Inbentarioa</ion-label>
-          </ion-item>
-          <ion-item color="primary" routerLink="/administracion">
-            <ion-icon slot="start" name="settings-outline"></ion-icon>
-            <ion-label>Administrazioa</ion-label>
-          </ion-item>
-          <ion-item color="primary" routerLink="/tickets">
-            <ion-icon slot="start" name="settings-outline"></ion-icon>
-            <ion-label>Tickets-ak</ion-label>
-          </ion-item>
-        </ion-list>
-      </div>
-    </ion-content>
-  </ion-menu>
+<app-menu-header></app-menu-header>
 
   <!-- Contenido principal -->
   <div class="ion-page" id="main-content">
