@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { MenuHeaderComponent } from './menu-header/menu-header.component';
 
-
-
 @NgModule({
   declarations: [MenuHeaderComponent],
   imports: [
