@@ -1,7 +1,7 @@
 <ion-app>
   <ion-menu contentId="main-content">
     <ion-header>
-      <ion-toolbar>
+      <ion-toolbar color="primary">
         <ion-title>Menua</ion-title>
       </ion-toolbar>
     </ion-header>
@@ -21,7 +21,7 @@
             <ion-label>Bezeroak</ion-label>
           </ion-item>
           <ion-item color="primary" routerLink="/servicios">
-            <ion-icon slot="start" name="cut-outline"></ion-icon>
+            <ion-icon slot="start" name="settings-outline"></ion-icon>
             <ion-label>Zerbitzuak</ion-label>
           </ion-item>
           <ion-item color="primary" routerLink="/inventario">
@@ -33,7 +33,7 @@
             <ion-label>Administrazioa</ion-label>
           </ion-item>
           <ion-item color="primary" routerLink="/tickets">
-            <ion-icon slot="start" name="document-text-outline"></ion-icon>
+            <ion-icon slot="start" name="settings-outline"></ion-icon>
             <ion-label>Tickets-ak</ion-label>
           </ion-item>
         </ion-list>
@@ -41,17 +41,14 @@
     </ion-content>
   </ion-menu>
 
-  <div class="page-wrapper">
-    <ion-content [fullscreen]="true" id="main-content">
+    <ion-content id="main-content">
       <ion-header>
         <ion-toolbar color="primary">
           <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
           <ion-title>Tickets</ion-title>
-          <ion-buttons slot="end"> </ion-buttons>
         </ion-toolbar>
       </ion-header>
     </ion-content>
-  </div>
 </ion-app>
