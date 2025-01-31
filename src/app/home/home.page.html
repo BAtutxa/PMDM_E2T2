@@ -40,7 +40,25 @@
               <!-- Campo de contraseña -->
               <ion-item color="primary">
                 <ion-label position="floating">{{ passwordLabel }}</ion-label>
-                <ion-input type="text" [(ngModel)]="password" name="password" required></ion-input>
+                <ion-input 
+                  [type]="pasahitzaIkusi ? 'text' : 'password'" 
+                  [(ngModel)]="password" 
+                  name="password" 
+                  required>
+                  <ion-icon 
+                    slot="start" 
+                    *ngIf="!pasahitzaIkusi" 
+                    name="eye-outline" 
+                    (click)="togglePasswordVisibility()">
+                  </ion-icon>
+                  
+                  <ion-icon 
+                    slot="start" 
+                    *ngIf="pasahitzaIkusi" 
+                    name="eye-off-outline" 
+                    (click)="togglePasswordVisibility()">
+                  </ion-icon>
+                </ion-input>
               </ion-item>
 
               <!-- Mensaje de error -->

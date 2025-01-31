@@ -109,10 +109,5 @@ onFechaChange(event: CustomEvent) {
     });
   }
 
-  // Nueva función para navegar a 'gestionar-citas'
-  irAGestionarCitas() {
-    this.router.navigate(['/gestionar-citas']);
-  }
-
   ngOnInit() {}
 }

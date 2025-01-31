@@ -22,45 +22,37 @@ export class UserService {
   }
   login(username: string, password: string): Observable<boolean> {
   
-    // Llama a la API para obtener los datos del usuario
+
     return this.getUserByUsername(username).pipe(
       map((user: IEUser | null) => {
-        console.log('Datos del usuario obtenidos de la API:', user); 
 
         if (!user || !user.pasahitza) {
-          console.error('No se encontró el usuario o la contraseña');
           return false;
         }
   
-        // Recorta y registra las contraseñas para depuración
         const trimmedPassword = password.trim();
         const storedPassword = user.pasahitza.trim();
   
   
-        // Realiza la comparación de contraseñas
         if (storedPassword === trimmedPassword) {
-          console.log('¡Inicio de sesión exitoso!');
-          this.setIzenaEtaPasahitza(user.username, user.pasahitza); // Almacena las credenciales si el inicio de sesión es exitoso
-          return true;  // Inicio de sesión exitoso
+          this.setIzenaEtaPasahitza(user.username, user.pasahitza); 
+          return true;  
         } else {
-          return false;  // Inicio de sesión fallido
+          return false;  
         }
       }),
       catchError((error) => {
-        console.error('Error durante la autenticación:', error); // Registra cualquier error durante el proceso de autenticación
-        return of(false);  // Retorna false en caso de error
+        console.error('Error durante la autenticación:', error); 
+        return of(false); 
       })
     );
   }
   
-  
-  // Guardar las credenciales en el localStorage
   setIzenaEtaPasahitza(name: string, password: string): void {
     localStorage.setItem('username', name);
     localStorage.setItem('password', password);
   }
 
-  // Obtener las credenciales desde el localStorage
   getIzenaEtaPasahitza() {
     return {
       name: localStorage.getItem('username') || '', 

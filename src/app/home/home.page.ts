@@ -13,6 +13,7 @@ export class HomePage {
   public name: string = '';
   public password: string = '';
   errorMessage: string = ''; 
+  pasahitzaIkusi: boolean = false;
 
   //hizkuntza
   title!: string;
@@ -49,6 +50,11 @@ export class HomePage {
       this.errorGeneric = translations['LOGIN.ERROR.GENERIC_ERROR'];
     });
   }
+
+  togglePasswordVisibility() {
+    this.pasahitzaIkusi = !this.pasahitzaIkusi;
+  }
+
 
   // Método de inicio de sesión
   login() {
