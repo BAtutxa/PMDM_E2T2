@@ -27,6 +27,7 @@ export class CitasDelDiaPage implements OnInit {
       }
     });
   }
+  
 
   obtenerCitasPorFecha(fecha: string) {
     this.citaService.getCitasPorFecha(fecha).subscribe(
