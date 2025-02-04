@@ -92,8 +92,6 @@ const routes: Routes = [
     path: 'citas-del-dia',
     loadChildren: () => import('./citas-del-dia/citas-del-dia.module').then( m => m.CitasDelDiaPageModule)
   },
-
-
 ];
 
 @NgModule({
