@@ -30,6 +30,7 @@ export class ClientesPage implements OnInit {
   paginacionMaxima = 0;
   Math: any;
   esHistorial:Boolean = false;
+  acabaDeBorrar: boolean = false;
 
   constructor(
     private alertController: AlertController, 
@@ -46,9 +47,15 @@ export class ClientesPage implements OnInit {
   }
 
   ngOnDestroy() {
-    this.historialService.resetEsHistorial();
-    console.log('Se ha restablecido esHistorial a false');
+    if (this.acabaDeBorrar) {
+      console.log('Ficha eliminada, no se restablece esHistorial.');
+    } else {
+      // Solo restablecer esHistorial si no ha habido eliminación
+      this.historialService.resetEsHistorial();
+      console.log('Se ha restablecido esHistorial a false');
+    }
   }
+  
 
   @HostListener('window:resize', ['$event'])
   onResize() {
@@ -134,6 +141,75 @@ export class ClientesPage implements OnInit {
     });
     await alert.present();
   }
+
+  async trueEliminarFicha() {
+    const alert = await this.alertController.create({
+      header: '¿Estás seguro?',
+      message: 'Se borrará definitivamente la ficha y no se podrá recuperar.',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Confirmar',
+          handler: async () => {
+            try {
+              await firstValueFrom(this.ClientesService.eliminarFicha(this.fichaSeleccionada));
+  
+              this.fichas = this.fichas.filter(ficha => ficha.id !== this.fichaSeleccionada.id);
+              this.acabaDeBorrar = true; 
+              this.editandoFicha = false;
+            } catch (error) {
+              console.error('Error al borrar ficha:', error);
+            }
+          },
+        },
+      ],
+    });
+  
+    await alert.present();
+  }
+
+  async restaurarFicha() {
+    const alert = await this.alertController.create({
+      header: '¿Estás seguro?',
+      message: 'Se restaurará la ficha.',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Confirmar',
+          handler: async () => {
+            const now = new Date();
+            this.fichaSeleccionada.data = this.fichaSeleccionada.data || {};
+            this.fichaSeleccionada.data.ezabatze_data = null; 
+            this.fichaSeleccionada.data.eguneratze_data = now; 
+  
+            try {
+              const fichaRestaurada = await firstValueFrom(this.ClientesService.actualizarFicha(this.fichaSeleccionada));
+              
+              const index = this.fichas.findIndex(ficha => ficha.id === fichaRestaurada.id);
+              if (index !== -1) {
+                this.fichas[index] = fichaRestaurada;
+              }
+  
+              this.acabaDeBorrar = true;
+              this.editandoFicha = false;
+          
+            } catch (error) {
+              console.error('Error al restaurar ficha:', error);
+            }
+          },
+        },
+      ],
+    });
+  
+    await alert.present();
+  }
+  
 
   editarProducto(ficha: IBezero) {
     this.fichaSeleccionadaAnterior = { ...this.fichaSeleccionada };

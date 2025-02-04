@@ -26,35 +26,49 @@ export class ClientesService {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json');
-    return this.http.put<IBezero>(`${this.baseUrl}/update`, ficha, { headers })
-      .pipe(
-        tap(() => this.getFichas().subscribe(fichas => this.fichasSubject.next(fichas)))
-      );
+    
+    return this.http.put<IBezero>(`${this.baseUrl}/update`, ficha, { headers }).pipe(
+      tap((fichaActualizada) => {
+        // Aquí actualizamos la lista de fichas
+        const fichasActualizadas = this.fichasSubject.getValue().map(f =>
+          f.id === fichaActualizada.id ? fichaActualizada : f  // Reemplazamos la ficha restaurada
+        );
+        this.fichasSubject.next(fichasActualizadas);  // Emitimos la nueva lista
+      })
+    );
   }
-
+  
   eliminarFicha(ficha: IBezero): Observable<void> {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json');
     return this.http.put<void>(`${this.baseUrl}/delete`, ficha, { headers })
       .pipe(
-        // Después de eliminar, actualizamos el BehaviorSubject
         tap(() => this.getFichas().subscribe(fichas => this.fichasSubject.next(fichas)))
       );
   }
 
+  trueEliminarFicha(ficha: IBezero): Observable<void> {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Accept', 'application/json');
+      return this.http.delete<void>(`${this.baseUrl}/trueDelete/${ficha.id}`)
+      .pipe(
+        tap(() => this.getFichas().subscribe(fichas => this.fichasSubject.next(fichas)))
+      );
+  }
+
+  
   crearFicha(ficha: IBezero): Observable<IBezero> {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json');
     return this.http.post<IBezero>(`${this.baseUrl}/create`, ficha, { headers })
       .pipe(
-        // Después de crear, actualizamos el BehaviorSubject
         tap(() => this.getFichas().subscribe(fichas => this.fichasSubject.next(fichas)))
       );
   }
 
-  // Método para que los componentes puedan suscribirse a las fichas
   get fichas$(): Observable<IBezero[]> {
     return this.fichasSubject.asObservable();
   }

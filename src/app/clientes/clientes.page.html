@@ -45,8 +45,9 @@
         <ion-select-option value="id">{{ 'ID' }}</ion-select-option>
         <ion-select-option value="izena">Nombre</ion-select-option>
         <ion-select-option value="abizena">Apellido</ion-select-option>
-        <ion-select-option value="sortze_data">Fecha de creación</ion-select-option>
-        <ion-select-option value="eguneratze_data">Fecha de actualización</ion-select-option>
+        <ion-select-option *ngIf="!esHistorial" value="sortze_data">Fecha de creación</ion-select-option>
+        <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">Fecha de actualización</ion-select-option>
+        <ion-select-option *ngIf="esHistorial" value="ezabatze_data">Fecha de borrado</ion-select-option>
       </ion-select>
 
       <ion-select [(ngModel)]="ordenActual.ascendente" interface="popover" (ionChange)="cambiarOrden($event)">
@@ -113,7 +114,18 @@
             </ion-item>
             <ion-button color = "tertiary" expand="full" type="submit" [disabled]="fichaForm.invalid">Confirmar</ion-button>
             <ion-button expand="full" color="danger" type="button" (click)="cancelarEdicion()">Cancelar</ion-button>
-            <ion-button expand="full" class="custom-red-button" type="button" (click)="eliminarFicha()">Borrar ficha</ion-button>
+            <ion-button *ngIf="!esHistorial" expand="full" class="custom-red-button" type="button" (click)="eliminarFicha()">
+              Borrar ficha
+            </ion-button>
+            
+            <ion-button *ngIf="esHistorial" expand="full" class="custom-gray-button" type="button" (click)="trueEliminarFicha()">
+              Confirmar borrado
+            </ion-button>
+            
+            <ion-button *ngIf="esHistorial" expand="full" class="custom-purple-button" type="button" (click)="restaurarFicha()">
+              Restaurar ficha
+            </ion-button>
+            
           </form>
         </ion-card-content>
       </ion-card>
@@ -121,7 +133,7 @@
   </ion-row>
 
   <!-- Botón para añadir fichas -->
-  <ion-row>
+  <ion-row *ngIf= "!esHistorial">
     <ion-col size="12" class="ion-text-center">
       <ion-button color="primary" expand="block" [routerLink]="'/crear-ficha'">Añadir ficha
         <ion-icon name="add-circle-outline"></ion-icon>
@@ -144,9 +156,12 @@
             <span *ngIf="ficha.azal_sentikorra === ''">Desconocido</span>
           </p>               
           <p><strong>Teléfono:</strong> {{ ficha.telefonoa || '-' }}</p>
-          <p><strong>Fecha de creación:</strong> {{ ficha.data?.sortze_data | date:'yyyy-MM-dd' }}</p>
-          <p><strong>Última actualización:</strong> 
+          <p *ngIf="!esHistorial"><strong>Fecha de creación:</strong> {{ ficha.data?.sortze_data | date:'yyyy-MM-dd' }}</p>
+          <p *ngIf="!esHistorial"><strong>Última actualización:</strong> 
             {{ ficha.data?.eguneratze_data ? (ficha.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}
+          </p>
+          <p *ngIf="esHistorial"><strong>Fecha de eliminación:</strong> 
+            {{ ficha.data?.ezabatze_data ? (ficha.data.ezabatze_data | date:'yyyy-MM-dd') : '-' }}
           </p>
         </ion-card-content>
       </ion-card>
