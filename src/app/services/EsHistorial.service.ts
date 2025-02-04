@@ -5,19 +5,27 @@ import { Injectable } from '@angular/core';
 })
 export class EsHistorialService {
 
-  private esHistorial: boolean = false;  
+  private esHistorial: boolean = false;
 
-  constructor() { }
+  constructor() {
+    const storedHistorial = localStorage.getItem('esHistorial');
+    if (storedHistorial) {
+      this.esHistorial = JSON.parse(storedHistorial);  
+    }
+  }
+
   getEsHistorial(): boolean {
     return this.esHistorial;
   }
 
   setEsHistorial(value: boolean): void {
     this.esHistorial = value;
+    localStorage.setItem('esHistorial', JSON.stringify(value));
   }
 
   resetEsHistorial(): void {
-    this.esHistorial = false;  
-    console.log('esHistorial ha sido restablecido a false');
+    this.esHistorial = false;
+    localStorage.setItem('esHistorial', JSON.stringify(false));  
+
   }
 }
