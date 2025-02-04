@@ -1,48 +1,81 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-title>Añadir ficha</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <form #fichaForm="ngForm" (ngSubmit)="guardarFicha()">
-    <ion-list>
-      <ion-item>
-        <ion-label position="floating">Nombre</ion-label>
-        <ion-input [(ngModel)]="ficha.izena" name="izena" placeholder="Introduce un valor para nombre" required></ion-input>
-      </ion-item>
+  <div class="card-container">
+    <form #fichaForm="ngForm" (ngSubmit)="guardarFicha()">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Ficha Personal</ion-card-title>
+        </ion-card-header>
 
-      <ion-item>
-        <ion-label position="floating">Apellido</ion-label>
-        <ion-input [(ngModel)]="ficha.abizena" name="abizena" placeholder="Introduce un valor para apellido" required></ion-input>
-      </ion-item>
+        <ion-card-content>
+          <ion-list>
+            <!-- Nombre Input -->
+            <ion-item>
+              <ion-label position="stacked">Nombre</ion-label>
+              <ion-input
+                [(ngModel)]="ficha.izena"
+                name="izena"
+                placeholder="Introduce un valor para nombre"
+                required
+              ></ion-input>
+            </ion-item>
 
-      <ion-item>
-        <ion-label position="floating">Teléfono</ion-label>
-        <ion-input
-          [(ngModel)]="ficha.telefonoa"
-          name="telefonoa"
-          type="tel"
-          placeholder="Introduce un valor para teléfono"
-          required
-          #telefonoa="ngModel"
-          maxlength="9">
-        </ion-input>
-        <ion-note *ngIf="telefonoa.invalid && telefonoa.touched" color="danger">
-          El teléfono debe tener un máximo de 9 números.
-        </ion-note>
-      </ion-item>
-      
+            <!-- Apellido Input -->
+            <ion-item>
+              <ion-label position="stacked">Apellido</ion-label>
+              <ion-input
+                [(ngModel)]="ficha.abizena"
+                name="abizena"
+                placeholder="Introduce un valor para apellido"
+                required
+              ></ion-input>
+            </ion-item>
 
-      <ion-item>
-        <ion-label>Piel sensible</ion-label>
-        <ion-select [(ngModel)]="ficha.azal_sentikorra" name="azal_sentikorra" placeholder="Selecciona una opción" required>
-          <ion-select-option value="B">Sí</ion-select-option>
-          <ion-select-option value="E">No</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <!-- Botón para guardar -->
-      <ion-button expand="full" type="submit" color="tertiary" type="submit" [disabled]="fichaForm.invalid">Guardar</ion-button>
-    </ion-list>
-  </form>
+            <!-- Teléfono Input -->
+            <ion-item>
+              <ion-label position="stacked">Teléfono</ion-label>
+              <ion-input
+                [(ngModel)]="ficha.telefonoa"
+                name="telefonoa"
+                type="tel"
+                placeholder="Introduce un valor para teléfono"
+                required
+                #telefonoa="ngModel"
+                maxlength="9"
+              >
+              </ion-input>
+              <ion-note
+                *ngIf="telefonoa.invalid && telefonoa.touched"
+                color="danger"
+              >
+                El teléfono debe tener un máximo de 9 números.
+              </ion-note>
+            </ion-item>
+
+            <!-- Piel Sensible Select -->
+            <ion-item>
+              <ion-label>Piel sensible</ion-label>
+              <ion-select
+                [(ngModel)]="ficha.azal_sentikorra"
+                name="azal_sentikorra"
+                placeholder="Selecciona una opción"
+                required
+              >
+                <ion-select-option value="B">Sí</ion-select-option>
+                <ion-select-option value="E">No</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+
+          <!-- Save Button -->
+          <ion-button
+            expand="full"
+            type="submit"
+            color="tertiary"
+            [disabled]="fichaForm.invalid"
+            >Guardar</ion-button
+          >
+        </ion-card-content>
+      </ion-card>
+    </form>
+  </div>
 </ion-content>

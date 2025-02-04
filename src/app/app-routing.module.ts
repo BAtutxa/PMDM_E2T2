@@ -91,7 +91,11 @@ const routes: Routes = [
   {
     path: 'citas-del-dia',
     loadChildren: () => import('./citas-del-dia/citas-del-dia.module').then( m => m.CitasDelDiaPageModule)
+  },  {
+    path: 'historiala',
+    loadChildren: () => import('./historiala/historiala.module').then( m => m.HistorialaPageModule)
   },
+
 ];
 
 @NgModule({
