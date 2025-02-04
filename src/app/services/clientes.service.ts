@@ -18,6 +18,10 @@ export class ClientesService {
     return this.http.get<IBezero[]>(`${this.baseUrl}/fitxakGuztiak`);
   }
 
+  getFichasDelete(): Observable<IBezero[]> {
+    return this.http.get<IBezero[]>(`${this.baseUrl}/fitxakEzabatuta`);
+  }
+
   actualizarFicha(ficha: IBezero): Observable<IBezero> {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')

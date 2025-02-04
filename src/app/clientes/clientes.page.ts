@@ -6,6 +6,7 @@ import { ClientesService } from '../services/clientes.service';
 import { HostListener } from '@angular/core';
 import { IBezero } from '../interfaces/IEBezero';
 import { IData } from '../interfaces/IData';
+import { EsHistorialService } from '../services/EsHistorial.service';
 
 @Component({
   selector: 'app-clientes',
@@ -28,16 +29,25 @@ export class ClientesPage implements OnInit {
   paginaActual = 1;
   paginacionMaxima = 0;
   Math: any;
+  esHistorial:Boolean = false;
 
   constructor(
     private alertController: AlertController, 
     private ClientesService: ClientesService, 
+    private historialService : EsHistorialService,
   ) {}
   
 
   ngOnInit() {
+    this.esHistorial = this.historialService.getEsHistorial();
+    console.log(this.esHistorial);
     this.mobilbista();
     this.cargarClientes();
+  }
+
+  ngOnDestroy() {
+    this.historialService.resetEsHistorial();
+    console.log('Se ha restablecido esHistorial a false');
   }
 
   @HostListener('window:resize', ['$event'])
@@ -51,15 +61,22 @@ export class ClientesPage implements OnInit {
 
   async cargarClientes() {
     try {
-      // Nos suscribimos al BehaviorSubject para obtener los datos en tiempo real
-      this.ClientesService.fichas$.subscribe(fichas => {
-        this.fichas = fichas;
-        this.fichasFiltradas = [...this.fichas];
-      });
+      if (this.esHistorial) {
+        this.ClientesService.getFichasDelete().subscribe(fichas => {
+          this.fichas = fichas;
+          this.fichasFiltradas = [...this.fichas];
+        });
+      } else {
+        this.ClientesService.fichas$.subscribe(fichas => {
+          this.fichas = fichas;
+          this.fichasFiltradas = [...this.fichas];
+        });
+      }
     } catch (error) {
       console.error('Error al cargar clientes:', error);
     }
   }
+  
 
   cambiarPagina(pagina: number) {
     if (pagina < 1) {

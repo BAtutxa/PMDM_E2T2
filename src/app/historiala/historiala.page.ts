@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { EsHistorialService } from '../services/EsHistorial.service';  // Asegúrate de importar correctamente el servicio
 
 @Component({
   selector: 'app-historiala',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistorialaPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private historialService: EsHistorialService
+  ) { }
 
   ngOnInit() {
+  }
+
+  cambiarAClientes() {
+    this.historialService.setEsHistorial(true);  
+    this.router.navigate(['/clientes']); 
   }
 
 }
