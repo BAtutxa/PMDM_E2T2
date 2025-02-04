@@ -1,58 +1,168 @@
+/* General */
 ion-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    flex-direction: column;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  padding-bottom: 80px; /* Espacio para el footer */
+  overflow-y: auto; /* Permite el desplazamiento */
+  position: relative;
+  height: 100%; /* Ocupa todo el espacio */
+}
 
-  .container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  ion-grid {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  ion-row {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px; /* Espaciado entre filas */
-  }
-  
-  .buttons-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px; /* Espaciado entre botones */
-  }
-  
-  ion-button {
-    width: 100%;
-    max-width: 200px; /* Tamaño máximo del botón */
-    margin: 10px auto;
-  }
-  .main-title{
-    color:black;
-  }
-  img {
-    width: 100%;
-    max-width: 300px; 
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    margin-bottom: 20px;
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .main-title {
-    font-size: 2rem;
-    margin-bottom: 20px;
-  }
-//
-  
+/* Contenedores */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+/* Grid y Filas */
+ion-grid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+ion-row {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px; /* Espaciado entre filas */
+}
+
+.buttons-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px; /* Espaciado entre botones */
+}
+
+/* Botones */
+ion-button {
+  position: relative;
+  overflow: hidden; /* Evita que la imagen sobresalga */
+  width: 100%;
+  max-width: 280px; /* Aumentar el ancho máximo */
+  height: 200px; /* Aumentar la altura */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 16px; /* Bordes más redondeados */
+  font-weight: bold;
+  font-size: 22px; /* Tamaño de letra más grande */
+  color: white;
+  text-transform: uppercase;
+  margin: 15px auto;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0;
+}
+
+/* Imagen de fondo en los botones */
+.button-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  opacity: 0.4;
+  z-index: 1;
+  object-fit: cover;
+}
+
+/* Imagen detrás del texto en los botones */
+ion-button img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-width: max-content;
+  width: 200%;
+  height: 120%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  opacity: 0.4;
+  z-index: 1;
+}
+
+ion-button span {
+  position: relative;
+  z-index: 2;
+  color: #ffffff;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Título Principal */
+.main-title {
+  font-size: 2rem;
+  color: black;
+  margin-bottom: 20px;
+}
+
+/* Footer */
+.footer {
+  background-color: #7dcdb3;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  font-size: 14px;
+  z-index: 10;
+  left: 0; /* Asegura que el footer ocupe toda la anchura */
+}
+
+/* Página */
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+app-footer {
+  position: relative; /* Mantiene el footer al final */
+}
+
+/* Menú */
+ion-toolbar {
+  --background: #1c345c;
+  --color: #fff;
+}
+
+ion-toolbar ion-title {
+  font-size: 20px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+ion-item {
+  background-color: #1c345c !important;
+  --color: black;
+  --inner-border-width: 0 !important;
+  --background-hover: #9eb9e7;
+  border-bottom: 1px solid #ccc;
+}
+
+.menu-container ion-item {
+  --min-height: 80px;
+}
+
+ion-menu ion-list {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #1c345c !important;
+}
+
+/* Ajuste de Botones */
+.botones {
+  margin-top: 20px;
+}

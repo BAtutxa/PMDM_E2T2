@@ -12,29 +12,30 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button> <!-- Botón de menú -->
         </ion-buttons>
-        <ion-title ><strong>ADMINISTRAZIOA</strong></ion-title>
+        <ion-title><strong>ADMINISTRAZIOA</strong></ion-title>
       </ion-toolbar>
     </ion-header>
 
-    <!-- Contenido principal -->
+    <!-- Contenedor de botones -->
     <ion-grid class="container">
-      <!-- Imagen centrada -->
-      <ion-row>
-        <ion-col size="12" class="ion-text-center">
-          <ion-img src="assets/Images/administracion-de-empresas.webp" alt="Imagen" class="top-image"></ion-img>
-        </ion-col>
-      </ion-row>
-
-      <!-- Botones -->
       <ion-row class="buttons-row">
         <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-          <ion-button shape="round" [routerLink]="'/stock'">"Stock"-a</ion-button>
+          <ion-button shape="" [routerLink]="'/stock'" class="custom-button">
+            <img src="assets/Images/stock.png" alt="Stock" class="button-icon" />
+            <span>"Stock"-a</span>
+          </ion-button>
         </ion-col>
         <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-          <ion-button shape="round" [routerLink]="'/grupos'">Taldeak</ion-button>
+          <ion-button shape="" [routerLink]="'/grupos'" class="custom-button">
+            <img src="assets/Images/grupo.jpg" alt="Taldeak" class="button-icon" />
+            <span>Taldeak</span>
+          </ion-button>
         </ion-col>
         <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-          <ion-button shape="round" [routerLink]="'/informes'">Txostenak</ion-button>
+          <ion-button shape="" [routerLink]="'/informes'" class="custom-button">
+            <img src="assets/Images/informe.png" alt="Txostenak" class="button-icon" />
+            <span>Txostenak</span>
+          </ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
