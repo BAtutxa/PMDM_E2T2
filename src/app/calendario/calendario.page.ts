@@ -74,27 +74,24 @@ export class CalendarioPage implements OnInit {
   }
 
   // Método para manejar el cambio de fecha
-onFechaChange(event: CustomEvent) {
-  const fecha = new Date(event.detail.value); // Extraemos la fecha desde el evento
-  this.anioActual = fecha.getFullYear();
-  this.mesActual = fecha.getMonth();
-  this.diaSeleccionado = fecha.getDate(); // Establecemos el día seleccionado
-
-  // Actualizamos el calendario con la nueva fecha seleccionada
-  this.obtenerCitasDeFecha(this.diaSeleccionado);
-}
+  onFechaChange(event: CustomEvent) {
+    const fecha = new Date(event.detail.value);
+    const fechaSeleccionada = `${fecha.getFullYear()}-${(fecha.getMonth() + 1).toString().padStart(2, '0')}-${fecha.getDate().toString().padStart(2, '0')}`;
+  
+    this.router.navigate(['/citas-del-dia'], { queryParams: { fecha: fechaSeleccionada } });
+  }
+  
 
 
   irACitas() {
     if (this.diaSeleccionado !== null) {
       const fechaSeleccionada = `${this.anioActual}-${(this.mesActual + 1).toString().padStart(2, '0')}-${this.diaSeleccionado.toString().padStart(2, '0')}`;
-
-      // Pasa la fecha seleccionada como query parameter al navegar
-      this.router.navigate(['/citas'], { queryParams: { fecha: fechaSeleccionada } });
+      this.router.navigate(['/citas-del-dia'], { queryParams: { fecha: fechaSeleccionada } });
     } else {
       alert('Por favor selecciona un día');
     }
   }
+  
 
   obtenerCitasDeFecha(dia: number) {
     const fechaSeleccionada = `${this.anioActual}-${(this.mesActual + 1).toString().padStart(2, '0')}-${dia.toString().padStart(2, '0')}`;
