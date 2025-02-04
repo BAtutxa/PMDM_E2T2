@@ -16,10 +16,6 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'menu',
-    loadChildren: () => import('./menu/menu.module').then( m => m.MenuPageModule)
-  },
-  {
     path: 'citas',
     loadChildren: () => import('./citas/citas.module').then( m => m.CitasPageModule)
   },
@@ -91,7 +87,8 @@ const routes: Routes = [
   {
     path: 'citas-del-dia',
     loadChildren: () => import('./citas-del-dia/citas-del-dia.module').then( m => m.CitasDelDiaPageModule)
-  },  {
+  },
+  {
     path: 'historiala',
     loadChildren: () => import('./historiala/historiala.module').then( m => m.HistorialaPageModule)
   },
