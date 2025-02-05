@@ -4,8 +4,8 @@
       Equipos
       <ion-icon (click)="CrearEquipo()" name="add"></ion-icon>
       <ion-icon routerLink="/langile" name="person-add"></ion-icon>
-      <ion-icon routerLink="/calendario" name="timer"></ion-icon>
-    </ion-title>    
+<!-- Añadimos un evento de click para evitar que el menú se cierre -->
+<ion-icon (click)="goToCalendario($event)" name="timer"></ion-icon>    </ion-title>    
   </ion-toolbar>
 </ion-header>
 

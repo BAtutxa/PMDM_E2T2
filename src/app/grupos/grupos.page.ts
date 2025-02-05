@@ -6,6 +6,9 @@ import { AlertController } from '@ionic/angular';
 import { firstValueFrom } from 'rxjs';
 import { LangileakService } from '../services/Langileak.service';
 import { ITrabajador } from '../interfaces/ITrabajador';
+import { Router } from '@angular/router';
+import { MenuController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-grupos',
@@ -43,11 +46,19 @@ export class GruposPage implements OnInit {
 grupo: any;
 
   constructor(
+    private router: Router, 
+    private menuCtrl: MenuController,
     private equipoService: EquipoService,
     private alertController: AlertController,
     private langileakService: LangileakService,
     private activatedRoute: ActivatedRoute
   ) {}
+
+  goToCalendario(event: Event) {
+    event.stopPropagation(); // Previene que el menú se cierre
+    this.router.navigate(['/calendario']); // Navega manualmente al calendario
+    this.menuCtrl.open(); // Abre el menú si es necesario
+  }
 
   ngOnInit(): void {
     this.grupoId = this.activatedRoute.snapshot.paramMap.get('kodea')!;
