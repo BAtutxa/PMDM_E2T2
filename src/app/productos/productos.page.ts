@@ -125,6 +125,10 @@ export class ProductosPage implements OnInit {
         {
           text: translations['UTZI'],
           role: 'cancel',
+          handler: () => {
+            // Cerrar el modal o el card inmediatamente al hacer click en "cancelar"
+            this.productoConInformacionSeleccionada = false;
+          }
         },
         {
           text: translations['KONFIRMATU'],
