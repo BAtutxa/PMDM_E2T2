@@ -13,7 +13,7 @@
         </ion-toolbar>
       </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" *ngIf="!mobilaDa">
   <!-- Buscador -->
   <ion-searchbar
     search-icon="search-circle"
@@ -115,39 +115,39 @@
   </ion-row>
 
   <!-- Fila de productos -->
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12">
-        <table class="custom-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>{{name}}</th>
-              <th>{{brand}}</th>
-              <th>Stock</th>
-              <th>{{cd}}</th>
-              <th>{{ud}}</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let producto of productosFiltrados | slice: (paginaActual - 1) * productosPorPagina : paginaActual * productosPorPagina">
-              <td>{{ producto.id || '-' }}</td>
-              <td>{{ producto.izena || '-' }}</td>
-              <td>{{ producto.marka || '-' }}</td>
-              <td>{{ producto.stock || '-' }}</td>
-              <td>{{ producto.data?.sortze_data | date:'yyyy-MM-dd' }}</td>
-              <td>{{ producto.data?.eguneratze_data ? (producto.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</td>
-              <td>
-                <ion-button color="primary" (click)="editarProducto(producto)">{{ edit }}</ion-button>
-                <ion-button color="secondary" (click)="verDetalles(producto)">{{ info }}</ion-button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+ <ion-grid>
+  <ion-row>
+    <ion-col size="12">
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>IZENA</th>
+            <th>MARKA</th>
+            <th>STOCK</th>
+            <th>SORTZE-DATA</th>
+            <th>EGUNERATZE-DATA</th>
+            <th>EKINTZAK</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let producto of productosFiltrados | slice: (paginaActual - 1) * productosPorPagina : paginaActual * productosPorPagina">
+            <td>{{ producto.id || '-' }}</td>
+            <td>{{ producto.izena || '-' }}</td>
+            <td>{{ producto.marka || '-' }}</td>
+            <td>{{ producto.stock || '-' }}</td>
+            <td>{{ producto.data?.sortze_data | date:'yyyy-MM-dd' }}</td>
+            <td>{{ producto.data?.eguneratze_data ? (producto.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</td>
+            <td>
+              <ion-button color="primary" (click)="editarProducto(producto)">EDITATU</ion-button>
+              <ion-button color="secondary" (click)="verDetalles(producto)">INFO</ion-button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ion-col>
+  </ion-row>
+</ion-grid>
 
   <!-- Modal para ver detalles del producto -->
   <ion-modal [isOpen]="productoConInformacionSeleccionada" (ionModalDidDismiss)="cerrarModal()" (click)="cerrarModal()">
@@ -174,4 +174,22 @@
     </ion-content>
   </ion-modal>
 </ion-content>
+
+<!-- 📌 CARDS: SOLO EN MÓVILES -->
+<ion-content [fullscreen]="true" *ngIf="mobilaDa">
+  <ion-card *ngFor="let producto of productosFiltrados">
+    <ion-card-header>
+      <ion-card-title>{{ producto.izena || '-' }}</ion-card-title>
+      <ion-card-subtitle>{{ producto.marka || '-' }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p><strong>Stock:</strong> {{ producto.stock || '-' }}</p>
+      <p><strong>Sortze-data:</strong> {{ producto.data?.sortze_data | date:'yyyy-MM-dd' }}</p>
+      <p><strong>Eguneratze-data:</strong> {{ producto.data?.eguneratze_data | date:'yyyy-MM-dd' }}</p>
+      <ion-button color="primary" (click)="editarProducto(producto)">{{ edit }}</ion-button>
+      <ion-button color="secondary" (click)="verDetalles(producto)">{{ info }}</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
 </ion-app>
