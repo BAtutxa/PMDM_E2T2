@@ -68,12 +68,12 @@ export class ConfirmarCitaPage implements OnInit {
       etxekoa: this.citaData.etxekoa,
       prezio_totala: this.citaData.prezioa || null, // Campo opcional
       dataSimple: {
-        sortze_data: this.citaData.fechaCreacion || null,
-        eguneratze_data: this.citaData.fechaActualizacion || null,
+        sortze_data: this.citaData.sortze_data || new Date(new Date().setDate(new Date().getDate() - 1)).toISOString().split('T')[0],
+        eguneratze_data: this.citaData.eguneratze_data || new Date(new Date().setDate(new Date().getDate() - 1)).toISOString().split('T')[0],
         ezabatze_data: null,
       },
     };
-
+    
     console.log(
       'JSON preparado para enviar:',
       JSON.stringify(citaAdaptada, null, 2)
@@ -82,7 +82,7 @@ export class ConfirmarCitaPage implements OnInit {
     this.citaService.createCita(citaAdaptada).subscribe(
       (response) => {
         console.log('Cita guardada con éxito:', response);
-        this.router.navigate(['/agradecimiento']);
+        this.router.navigate(['/calendario']);
       },
       (error) => {
         console.error('Error al guardar la cita:', error);
@@ -96,6 +96,6 @@ export class ConfirmarCitaPage implements OnInit {
   }
 
   descartar() {
-    this.router.navigate(['/citas']);
+    this.router.navigate(['/gestionar-citas']);
   }
 }

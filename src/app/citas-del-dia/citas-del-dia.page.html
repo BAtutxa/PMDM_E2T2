@@ -30,7 +30,6 @@
                 <p><strong>Fecha:</strong> {{ cita.data }}</p>
                 <p><strong>Hora Real de Inicio:</strong> {{ cita.hasiera_ordua_erreala || 'No Disponible' }}</p>
                 <p><strong>Hora Real de Fin:</strong> {{ cita.amaiera_ordua_erreala || 'No Disponible' }}</p>
-                <p><strong>Data Simple:</strong> {{ cita.dataSimple || 'No Disponible' }}</p>
               </ion-label>
             </ion-item>
           </ion-list>
@@ -39,11 +38,3 @@
     </ion-grid>
   </div>
 </ion-content>
-
-<ion-footer>
-  <ion-toolbar>
-    <ion-button expand="block" routerLink="/menu">
-      Volver al Menú
-    </ion-button>
-  </ion-toolbar>
-</ion-footer>

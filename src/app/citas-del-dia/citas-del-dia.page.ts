@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { CitaService } from '../services/cita.service';
 
 @Component({
@@ -15,7 +14,6 @@ export class CitasDelDiaPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private http: HttpClient,
     private citaService: CitaService
   ) {}
 

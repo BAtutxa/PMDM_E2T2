@@ -1,3 +1,12 @@
-ion-fab-button, ion-fab-button:active, ion-fab-button:hover {
-  --background: #399376!important;
+ion-fab-button {
+  position: fixed; 
+  right: 16px; 
+  bottom: 16px; 
+  z-index: 999; 
+  --background: #399376 !important; /* El color de fondo al hacer hover o cuando está activo */
+}
+
+ion-fab-button:active,
+ion-fab-button:hover {
+  --background: var(--ion-color-primary) !important;
 }
