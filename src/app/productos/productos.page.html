@@ -115,23 +115,39 @@
   </ion-row>
 
   <!-- Fila de productos -->
-  <ion-row justify-content-center *ngFor="let producto of productosFiltrados | slice: (paginaActual - 1) * productosPorPagina : paginaActual * productosPorPagina">
-    <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-      <ion-card *ngIf="productoSeleccionado.id !== producto.id" (click)="editarProducto(producto)">
-        <ion-card-header>
-          <ion-card-title>{{ producto.izena || '-' }}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <p><strong>ID:</strong> {{ producto.id || '-' }}</p>
-          <p><strong>{{name}}:</strong> {{ producto.izena || '-' }}</p>
-          <p><strong>{{brand}}:</strong> {{ producto.marka || '-' }}</p> 
-          <p><strong>Stock:</strong> {{ producto.stock || '-' }}</p> 
-          <p><strong>{{cd}}:</strong> {{ producto.data?.sortze_data | date:'yyyy-MM-dd' }}</p>
-         <p><strong>{{ud}}:</strong> {{ producto.data?.eguneratze_data ? (producto.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>{{name}}</th>
+              <th>{{brand}}</th>
+              <th>Stock</th>
+              <th>{{cd}}</th>
+              <th>{{ud}}</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let producto of productosFiltrados | slice: (paginaActual - 1) * productosPorPagina : paginaActual * productosPorPagina">
+              <td>{{ producto.id || '-' }}</td>
+              <td>{{ producto.izena || '-' }}</td>
+              <td>{{ producto.marka || '-' }}</td>
+              <td>{{ producto.stock || '-' }}</td>
+              <td>{{ producto.data?.sortze_data | date:'yyyy-MM-dd' }}</td>
+              <td>{{ producto.data?.eguneratze_data ? (producto.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</td>
+              <td>
+                <ion-button color="primary" (click)="editarProducto(producto)">{{ edit }}</ion-button>
+                <ion-button color="secondary" (click)="verDetalles(producto)">{{ info }}</ion-button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
   <!-- Modal para ver detalles del producto -->
   <ion-modal [isOpen]="productoConInformacionSeleccionada" (ionModalDidDismiss)="cerrarModal()" (click)="cerrarModal()">
