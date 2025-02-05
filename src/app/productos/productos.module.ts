@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { ProductosPageRoutingModule } from './productos-routing.module';
 
 import { ProductosPage } from './productos.page';
+import { NireKonponenteakModule } from '../nire-konponenteak/nire-konponenteak.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ProductosPageRoutingModule
+    ProductosPageRoutingModule,
+    NireKonponenteakModule
   ],
   declarations: [ProductosPage]
 })

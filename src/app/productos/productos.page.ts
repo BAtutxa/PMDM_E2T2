@@ -116,31 +116,42 @@ export class ProductosPage implements OnInit {
   }
 
   async confirmarEdicion() {
-    const translations = await this.translateService.get(['ALERTMATERIAL.HEADER', 'ALERTMATERIAL.MESSAGE', 'ALERTMATERIAL.CANCEL', 'ALERTMATERIAL.CONFIRM']).toPromise();
-
+    const translations = await this.translateService.get(['Aldaketak egin nahi dira', 'Aldaketak konfirmatu nahi dituzu?', 'UTZI', 'KONFIRMATU']).toPromise();
+  
     const alert = await this.alertController.create({
-      header: translations['ALERTMATERIAL.HEADER'],
-      message: translations['ALERTMATERIAL.MESSAGE'],
+      header: translations['Aldaketak egin nahi dira'],
+      message: translations['Aldaketak konfirmatu nahi dituzu?'],
       buttons: [
         {
-          text: translations['ALERTMATERIAL.CANCEL'],
+          text: translations['UTZI'],
           role: 'cancel',
+          handler: () => {
+            // Cerrar el modal o el card inmediatamente al hacer click en "cancelar"
+            this.productoConInformacionSeleccionada = false;
+          }
         },
         {
-          text: translations['ALERTMATERIAL.CONFIRM'],
+          text: translations['KONFIRMATU'],
           handler: async () => {
             const now = new Date().toISOString();
             this.productoSeleccionado.data = this.productoSeleccionado.data || {};
             this.productoSeleccionado.data.eguneratze_data = now;
-
+  
             try {
+              // Actualizamos el producto
               await firstValueFrom(this.productoService.actualizarProducto(this.productoSeleccionado));
+  
+              // Actualizamos el producto en la lista
               const index = this.productos.findIndex(producto => producto.id === this.productoSeleccionado.id);
               if (index !== -1) {
                 this.productos[index] = { ...this.productoSeleccionado };
                 this.aplicarFiltro({ target: { value: '' } });
               }
-              this.editandoProducto = false;
+  
+              // Cierra el modal o el card
+              this.productoConInformacionSeleccionada = false; // Asegúrate de cerrar el modal
+  
+              // Opcionalmente recarga la página (si necesario)
               window.location.reload();
             } catch (error) {
               console.error('Error al actualizar producto:', error);
@@ -149,10 +160,9 @@ export class ProductosPage implements OnInit {
         },
       ],
     });
-
+  
     await alert.present();
   }
-
   cancelarEdicion() {
     this.productoSeleccionado = { ...this.productoSeleccionadoAnterior };
     this.editandoProducto = false;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CitaService } from '../services/cita.service';
+import { ToastController } from '@ionic/angular'; // Importa IonToastController
 
 @Component({
   selector: 'app-confirmar-cita',
@@ -14,7 +15,8 @@ export class ConfirmarCitaPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private citaService: CitaService
+    private citaService: CitaService,
+    private toastController: ToastController // Inyecta IonToastController
   ) {}
 
   ngOnInit() {
@@ -33,6 +35,16 @@ export class ConfirmarCitaPage implements OnInit {
     });
   }
 
+  // Función para mostrar un mensaje de toast
+  async mostrarToast(mensaje: string, duracion: number = 2000) {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      duration: duracion,
+      position: 'top', // Puedes elegir entre 'top', 'bottom' o 'middle'
+    });
+    toast.present();
+  }
+
   confirmar() {
     this.camposVacios = [];
 
@@ -46,11 +58,10 @@ export class ConfirmarCitaPage implements OnInit {
     console.log('Datos verificados para confirmación:', this.citaData);
 
     if (this.camposVacios.length > 0) {
-      alert(
-        'Los siguientes campos no están completos: ' +
-          this.camposVacios.join(', ')
+      this.mostrarToast(
+        'Los siguientes campos no están completos: ' + this.camposVacios.join(', '),
+        3000
       );
-      console.error('Campos faltantes:', this.camposVacios);
       return;
     }
 
@@ -82,14 +93,14 @@ export class ConfirmarCitaPage implements OnInit {
     this.citaService.createCita(citaAdaptada).subscribe(
       (response) => {
         console.log('Cita guardada con éxito:', response);
+        this.mostrarToast('Cita guardada con éxito', 2000);
         this.router.navigate(['/calendario']);
       },
       (error) => {
         console.error('Error al guardar la cita:', error);
-        alert(
-          `Error al guardar la cita: ${
-            error.error.message || 'Inténtelo de nuevo.'
-          }`
+        this.mostrarToast(
+          `Error al guardar la cita: ${error.error.message || 'Inténtelo de nuevo.'}`,
+          3000
         );
       }
     );
