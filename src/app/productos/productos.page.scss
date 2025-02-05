@@ -146,7 +146,7 @@ ion-menu {
   }
   
   .custom-table th {
-    background-color: #3271dd;
+    background-color: #399376;
     color: white;
   }
   
@@ -159,3 +159,60 @@ ion-menu {
     cursor: pointer;
   }
   
+  ion-card {
+    margin-bottom: 15px; /* Espacio entre tarjetas */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    padding: 10px; /* Espaciado interno */
+  }
+  
+  //estilo card info
+
+/* Eliminar fondo blanco del modal */
+ion-modal {
+  --background: transparent; /* Fondo transparente */
+  --box-shadow: none; /* Eliminar sombra del modal */
+}
+
+/* Fondo opaco detrás de la tarjeta */
+ion-modal::part(overlay) {
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro y con opacidad */
+}
+
+/* Ajustar el ion-card dentro del modal */
+.info-card {
+  background-color: white; /* Fondo blanco para la tarjeta */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  padding: 20px; /* Espaciado interno de la tarjeta */
+  max-width: 500px; /* Max ancho para la tarjeta */
+  margin: 0 auto; /* Centrar la tarjeta */
+  position: relative; /* Para posicionar la X */
+}
+
+//cerrar info card
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Fondo oscuro semitransparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* Ajustes del card */
+.info-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+}
+
+
