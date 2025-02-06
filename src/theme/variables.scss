@@ -13,18 +13,40 @@
   ion-content {
     --background: #ffffff;
   }
+  
+  ion-content.dark {
+    --background: #717171;
+  }
+  
+  
   ion-grid {
     display: block;
     overflow-x: auto; /* Permite scroll horizontal */
     white-space: nowrap; /* Mantiene las filas en línea */
   }
 
-  .backdrop, .alert-backdrop {
+.backdrop, .alert-backdrop {
     backdrop-filter: none !important;
     opacity: 1 !important;
-  }
-  .alert input:focus {
+}
+.alert input:focus {
     backdrop-filter: none !important;
-  }
-  
+}
+
+/* Modo oscuro */
+body.dark {
+  --background: #222;
+  --color: #fff;
+  --ion-background-color: #222;
+  --ion-text-color: #fff;
+}
+
+/* Modo claro */
+body {
+  --background: #fff;
+  --color: #000;
+  --ion-background-color: #fff;
+  --ion-text-color: #000;
+}
+
    

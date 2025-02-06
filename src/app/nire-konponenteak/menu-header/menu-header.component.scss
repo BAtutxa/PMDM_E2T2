@@ -34,7 +34,11 @@ ion-menu {
     --color: #fff;
   }
   
-  /* Botones */
-  .botones {
+.botones {
     margin-top: 20px;
-  }
+}
+
+ion-item {
+  cursor: pointer;
+}
+
