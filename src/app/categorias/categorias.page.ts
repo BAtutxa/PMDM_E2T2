@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
-import { AlertController, IonContent } from '@ionic/angular';
+import { AlertController, IonContent, LoadingController } from '@ionic/angular';
 import { IKategoria } from '../interfaces/IKategoria';
 import { IData } from '../interfaces/IData';
 import { KategoriaService } from '../services/Kategoria.Service';
@@ -30,11 +30,15 @@ export class CategoriasPage implements OnInit {
   Math: any;
   esHistorial:Boolean = false;
   acabaDeBorrar: boolean = false;
+  loading: any;
+  isLoading: boolean = true; // Añadir al principio de tu clase
+
 
   constructor(
     private alertController: AlertController, 
     private kategoriaService: KategoriaService, 
     private historialService : EsHistorialService,
+    private loadingController :LoadingController
   ) {}
   
 
@@ -42,7 +46,7 @@ export class CategoriasPage implements OnInit {
     this.esHistorial = this.historialService.getEsHistorial();
     console.log(this.esHistorial);
     this.mobilbista();
-    this.cargarClientes();
+    this.cargarCategorias();
   }
 
   ngOnDestroy() {
@@ -64,21 +68,39 @@ export class CategoriasPage implements OnInit {
     this.mobilaDa = window.innerWidth <= 768;
   }
 
-  async cargarClientes() {
+   // Método para cargar las categorías
+   async cargarCategorias() {
     try {
+      // Muestra el loading mientras se cargan las categorías
+      this.loading = await this.loadingController.create({
+        message: 'Cargando categorías...',
+        spinner: 'crescent',
+      });
+      await this.loading.present();
+  
+      // Establece isLoading a true antes de cargar los datos
+      this.isLoading = true;
+  
+      // Carga las categorías de acuerdo al historial
       if (this.esHistorial) {
         this.kategoriaService.getCategoriasDelete().subscribe(categorias => {
           this.categorias = categorias;
           this.categoriasFiltradas = [...this.categorias];
+          this.loading.dismiss(); // Cierra el loading cuando los datos se carguen
+          this.isLoading = false; // Establece isLoading a false cuando se terminen de cargar los datos
         });
       } else {
         this.kategoriaService.fichas$.subscribe(fichas => {
           this.categorias = fichas;
           this.categoriasFiltradas = [...this.categorias];
+          this.loading.dismiss(); // Cierra el loading cuando los datos se carguen
+          this.isLoading = false; // Establece isLoading a false cuando se terminen de cargar los datos
         });
       }
     } catch (error) {
-      console.error('Error al cargar clientes:', error);
+      console.error('Error al cargar categorías:', error);
+      this.loading.dismiss(); // Asegúrate de cerrar el loading si ocurre un error
+      this.isLoading = false; // Asegura que isLoading sea falso si hay un error
     }
   }
   

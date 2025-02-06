@@ -1,40 +1,37 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Citas del Día</ion-title>
+    <ion-title>Citas del día</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div class="container">
-    <h1>Hitzorduak - {{ fechaSeleccionada }}</h1>
+    <h1>Citas - {{ fechaSeleccionada }}</h1>
 
     <!-- Botón para ir a la página de citas con la fecha seleccionada -->
     <ion-button expand="block" (click)="irACitas()">Reservar</ion-button>
 
-    <!-- Grid de citas, 5 columnas -->
+    <!-- Tabla de citas -->
     <ion-grid>
       <ion-row>
-        <ion-col size="12" size-md="2" *ngFor="let columna of [1, 2, 3, 4, 5]">
-          <h3>Eserlekua: {{ columna }}</h3>
-          <ion-list>
-            <ion-item *ngFor="let cita of getCitasPorEserlekuaOrdenadas(columna)">
-              <ion-label>
-                <h2>{{ cita.izena }}</h2>
-                <p><strong>Hora de inicio:</strong> {{ cita.hasiera_ordua }} </p>
-                <p><strong>Hora de fin:</strong> {{ cita.amaiera_ordua }}</p>
-                <p><strong>Teléfono:</strong> {{ cita.telefonoa }}</p>
-                <p><strong>Descripción:</strong> {{ cita.deskribapena }}</p>
-                <p><strong>Precio Total:</strong> {{ cita.prezio_totala }} €</p>
-                <p><strong>Etxekoa:</strong> {{ cita.etxekoa }}</p>
-                <p><strong>ID del Trabajador:</strong> {{ cita.id_langilea }}</p>
-                <p><strong>Fecha:</strong> {{ cita.data }}</p>
-                <p><strong>Hora Real de Inicio:</strong> {{ cita.hasiera_ordua_erreala || 'No Disponible' }}</p>
-                <p><strong>Hora Real de Fin:</strong> {{ cita.amaiera_ordua_erreala || 'No Disponible' }}</p>
-              </ion-label>
-            </ion-item>
-          </ion-list>
-        </ion-col>
+        <!-- Encabezados de la tabla -->
+        <ion-col size="2"><strong>Asiento</strong></ion-col>
+        <ion-col size="2"><strong>Nombre</strong></ion-col>
+        <ion-col size="2"><strong>Hora de Inicio</strong></ion-col>
+        <ion-col size="2"><strong>Hora de Fin</strong></ion-col>
+        <ion-col size="2"><strong>Teléfono</strong></ion-col>
+        <ion-col size="2"><strong>Descripción</strong></ion-col>
       </ion-row>
+
+      <!-- Fila por cada cita -->
+      <ion-row *ngFor="let cita of citas">
+        <ion-col size="2">{{ cita.eserlekua }}</ion-col>
+        <ion-col size="2">{{ cita.izena || '' }}</ion-col>
+        <ion-col size="2">{{ cita.hasiera_ordua || ' ' }}</ion-col>
+        <ion-col size="2">{{ cita.amaiera_ordua || ' ' }}</ion-col>
+        <ion-col size="2">{{ cita.telefonoa || ' ' }}</ion-col>
+        <ion-col size="2">{{ cita.deskribapena || ' ' }}</ion-col>
+      </ion-row>      
     </ion-grid>
   </div>
 </ion-content>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { Router } from '@angular/router';
 import { EsHistorialService } from '../services/EsHistorial.service';  // Asegúrate de importar correctamente el servicio
 import { MenuController } from '@ionic/angular';
@@ -16,17 +16,20 @@ export class HistorialaPage{
     private historialService: EsHistorialService
   ) { }
 
-  cambiarAClientes(event: Event) {
-    event.stopPropagation(); // Previene que el menú se cierre
-    this.historialService.setEsHistorial(true);  
-    this.router.navigate(['/clientes']); 
-    this.menuCtrl.open(); // Abre el menú si es necesario
+    cambiarAClientes(event: Event) {
+      this.historialService.setEsHistorial(true);  
+      this.router.navigate(['/clientes']).then(() => {
+          window.location.reload(); // Recarga la página
+      });
+      this.menuCtrl.open(); // Abre el menú si es necesario
   }
 
   cambiarACategorias(event: Event) {
-    event.stopPropagation();
-    this.historialService.setEsHistorial(true);  
-    this.router.navigate(['/categorias']); 
-    this.menuCtrl.open();
+      this.historialService.setEsHistorial(true);  
+      this.router.navigate(['/categorias']).then(() => {
+          window.location.reload(); // Recarga la página
+      });
+      this.menuCtrl.open();
   }
+
 }
