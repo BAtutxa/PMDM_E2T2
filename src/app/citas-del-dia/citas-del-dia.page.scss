@@ -56,3 +56,15 @@ ion-button {
   display: block;
   margin: auto;
 }
+
+/* Estilo para los encabezados de la tabla */
+.encabezado-tabla {
+  background-color: #1c345c;  /* Color de fondo, puedes cambiarlo */
+  color: white;               /* Cambiar color de las letras a blanco */
+  text-align: center;         /* Centrar el texto */
+  font-weight: bold;          /* Asegura que el texto esté en negrita */
+}
+
+.encabezado-tabla strong {
+  color: white;  /* Asegura que el texto dentro de <strong> sea blanco */
+}

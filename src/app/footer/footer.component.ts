@@ -32,7 +32,7 @@ export class FooterComponent implements OnInit {
 
   logoutAgertu() {
     const url = this.router.url;
-    this.logOutAgertu = url === '/calendario';  
+    this.logOutAgertu = url === '';  
   }
 
   ngOnInit() {

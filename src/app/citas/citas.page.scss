@@ -124,14 +124,14 @@ ion-button {
 /* Iconos de los ítems */
 ion-icon {
   font-size: 22px;
-  color: white;
+  color: black;
 }
 
 /* Títulos del menú */
 ion-label {
   font-size: 16px;
   font-weight: 500;
-  color: white;;
+  color: black;
 }
 
 /* Estilo del título del menú */
@@ -149,9 +149,9 @@ ion-toolbar {
 
 /* Estilo de los ítems del menú */
 ion-item {
-  --color: black ; /* Texto blanco */
+  --color: black; /* Texto blanco */
   --inner-border-width: 0; /* Eliminar bordes */
-  --background-hover: #9eb9e7 ; /* Fondo al pasar el mouse */
+  --background-hover: #9eb9e7; /* Fondo al pasar el mouse */
   border-bottom: 1px solid #ccc;
 }
 
@@ -202,7 +202,6 @@ ion-header {
   --background: #1c345c !important; /* Color de fondo de la barra superior */
   --color: #fff !important; /* Letras blancas en la barra */
 }
-
 
 //
 
@@ -267,7 +266,6 @@ ion-button {
   width: 48%;
 }
 
-
 @media (max-width: 768px) {
   .form-column {
     flex: 1 1 100%;
@@ -328,6 +326,10 @@ ion-button {
     justify-content: space-around;
   }
 }
- ion-input, ion-label, ion-select-option, ion-select {
-  color:ghostwhite !important
- }
+
+ion-input,
+ion-label,
+ion-select-option,
+ion-select {
+  color: black !important;
+}
