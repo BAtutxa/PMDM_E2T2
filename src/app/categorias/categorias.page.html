@@ -1,5 +1,4 @@
 <ion-content [fullscreen]="true">
-  <app-menu-header></app-menu-header>
   
   <!-- Header principal -->
   <ion-header>
@@ -7,7 +6,7 @@
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title>Bezeroak</ion-title>
+      <ion-title>Kategoriak</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -26,8 +25,8 @@
   <!-- Selector de productos por página -->
   <div class="productos-por-pagina">
     <ion-item class="producto-item">
-      <ion-label size="small">Clientes:</ion-label>
-      <ion-select [(ngModel)]="FichasPorPagina" interface="popover" size="small" (ionChange)="cambiarPagina(1)">
+      <ion-label size="small">Kategoriak:</ion-label>
+      <ion-select [(ngModel)]="categoriasPorPagina" interface="popover" size="small" (ionChange)="cambiarPagina(1)">
         <ion-select-option [value]="5">5</ion-select-option>
         <ion-select-option [value]="10">10</ion-select-option>
         <ion-select-option [value]="25">25</ion-select-option>
@@ -44,7 +43,6 @@
       <ion-select [(ngModel)]="ordenActual.columna" interface="popover" (ionChange)="ordenarPor(ordenActual.columna)">
         <ion-select-option value="id">{{ 'ID' }}</ion-select-option>
         <ion-select-option value="izena">Nombre</ion-select-option>
-        <ion-select-option value="abizena">Apellido</ion-select-option>
         <ion-select-option *ngIf="!esHistorial" value="sortze_data">Fecha de creación</ion-select-option>
         <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">Fecha de actualización</ion-select-option>
         <ion-select-option *ngIf="esHistorial" value="ezabatze_data">Fecha de borrado</ion-select-option>
@@ -76,54 +74,31 @@
           <ion-card-title>Editar Producto</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-          <form #fichaForm="ngForm" (ngSubmit)="confirmarEdicion()" novalidate>
+          <form #categoriaForm="ngForm" (ngSubmit)="confirmarEdicion()" novalidate>
             <ion-item>
               <ion-label position="floating">ID</ion-label>
-              <ion-input [(ngModel)]="fichaSeleccionada.id" name="id" readonly></ion-input>
+              <ion-input [(ngModel)]="categoriaSeleccionada.id" name="id" readonly></ion-input>
             </ion-item>
             <ion-item>
               <ion-label position="floating">Nombre</ion-label>
-              <ion-input [(ngModel)]="fichaSeleccionada.izena" name="izena" #izena="ngModel" required>
+              <ion-input [(ngModel)]="categoriaSeleccionada.izena" name="izena" #izena="ngModel" required>
               </ion-input>
               <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
                 El nombre es obligatorio.
               </ion-note>
             </ion-item>
-            <ion-item>
-              <ion-label position="floating">Apellido</ion-label>
-              <ion-input [(ngModel)]="fichaSeleccionada.abizena" name="abizena" #abizena="ngModel" required>
-              </ion-input>
-              <ion-note *ngIf="abizena.invalid && abizena.touched" color="danger">
-                El apellido es obligatorio.
-              </ion-note>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Piel sensible</ion-label>
-              <ion-select [(ngModel)]="fichaSeleccionada.azal_sentikorra" name="azal_sentikorra" required>
-                <ion-select-option value="B">Sí</ion-select-option>
-                <ion-select-option value="E">No</ion-select-option>
-              </ion-select>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">Teléfono</ion-label>
-              <ion-input [(ngModel)]="fichaSeleccionada.telefonoa" name="telefonoa" #telefonoa="ngModel" maxlength="9" pattern="^[0-9]*$">
-              </ion-input>
-              <ion-note *ngIf="telefonoa.invalid && telefonoa.touched" color="danger">
-                El teléfono debe contener un máximo de 9 números.
-              </ion-note>
-            </ion-item>
-            <ion-button color = "tertiary" expand="full" type="submit" [disabled]="fichaForm.invalid">Confirmar</ion-button>
+            <ion-button color = "tertiary" expand="full" type="submit" [disabled]="categoriaForm.invalid">Confirmar</ion-button>
             <ion-button expand="full" color="danger" type="button" (click)="cancelarEdicion()">Cancelar</ion-button>
-            <ion-button *ngIf="!esHistorial" expand="full" class="custom-red-button" type="button" (click)="eliminarFicha()">
-              Borrar ficha
+            <ion-button *ngIf="!esHistorial" expand="full" class="custom-red-button" type="button" (click)="eliminarCategoria()">
+              Borrar categoría
             </ion-button>
             
-            <ion-button *ngIf="esHistorial" expand="full" class="custom-gray-button" type="button" (click)="trueEliminarFicha()">
+            <ion-button *ngIf="esHistorial" expand="full" class="custom-gray-button" type="button" (click)="trueEliminarCategoria()">
               Confirmar borrado
             </ion-button>
             
-            <ion-button *ngIf="esHistorial" expand="full" class="custom-purple-button" type="button" (click)="restaurarFicha()">
-              Restaurar ficha
+            <ion-button *ngIf="esHistorial" expand="full" class="custom-purple-button" type="button" (click)="restaurarCategoria()">
+              Restaurar categoría
             </ion-button>
             
           </form>
@@ -135,27 +110,21 @@
   <!-- Botón para añadir fichas -->
   <ion-row *ngIf= "!esHistorial">
     <ion-col size="12" class="ion-text-center">
-      <ion-button color="primary" expand="block" [routerLink]="'/crear-ficha'">Añadir ficha
+      <ion-button color="primary" expand="block" [routerLink]="'/crear'">Añadir categoria
         <ion-icon name="add-circle-outline"></ion-icon>
       </ion-button>
     </ion-col>
   </ion-row>
 
   <!-- Fila de fichas -->
-  <ion-row justify-content-center *ngFor="let ficha of fichasFiltradas | slice: (paginaActual - 1) * FichasPorPagina : paginaActual * FichasPorPagina">
+  <ion-row justify-content-center *ngFor="let ficha of categoriasFiltradas | slice: (paginaActual - 1) * categoriasPorPagina : paginaActual * categoriasPorPagina">
     <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-      <ion-card *ngIf="fichaSeleccionada?.id !== ficha.id" (click)="editarProducto(ficha)">
+      <ion-card *ngIf="categoriaSeleccionada?.id !== ficha.id" (click)="editarProducto(ficha)">
         <ion-card-header>
-          <ion-card-title>{{ ficha.izena || '-' }} {{ ficha.abizena || '-' }}</ion-card-title>
+          <ion-card-title>{{ ficha.izena || '-' }}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-          <p><strong>ID:</strong> {{ ficha.id || '-' }}</p>
-          <p><strong>Piel sensible:</strong> 
-            <span *ngIf="ficha.azal_sentikorra === 'B'">Sí</span>
-            <span *ngIf="ficha.azal_sentikorra === 'E'">No</span>
-            <span *ngIf="ficha.azal_sentikorra === ''">Desconocido</span>
-          </p>               
-          <p><strong>Teléfono:</strong> {{ ficha.telefonoa || '-' }}</p>
+          <p><strong>ID:</strong> {{ ficha.id || '-' }}</p>             
           <p *ngIf="!esHistorial"><strong>Fecha de creación:</strong> {{ ficha.data.sortze_data | date:'yyyy-MM-dd' }}</p>
           <p *ngIf="!esHistorial"><strong>Última actualización:</strong> 
             {{ ficha.data.eguneratze_data ? (ficha.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}

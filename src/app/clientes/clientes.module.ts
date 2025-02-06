@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { ClientesPage } from './clientes.page';
 import { NireKonponenteakModule } from "../nire-konponenteak/nire-konponenteak.module";
 
+
 @NgModule({
   imports: [
     CommonModule,

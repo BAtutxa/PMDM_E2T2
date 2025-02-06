@@ -117,8 +117,8 @@
           <p><strong>ID:</strong> {{ material.id || '-' }}</p>
           <p><strong>{{name}}:</strong> {{ material.izena || '-' }}</p>
           <p><strong>{{label}}:</strong> {{ material.etiketa || '-' }}</p>
-          <p><strong>{{cd}}:</strong> {{ material.data?.sortze_data | date:'yyyy-MM-dd' }}</p>
-          <p><strong>{{ud}}:</strong> {{ material.data?.eguneratze_data ? (material.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>
+          <p><strong>{{cd}}:</strong> {{ material.data.sortze_data | date:'yyyy-MM-dd' }}</p>
+          <p><strong>{{ud}}:</strong> {{ material.data.eguneratze_data ? (material.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>
         </ion-card-content>
       </ion-card>
     </ion-col>

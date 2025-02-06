@@ -1,11 +1,12 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, viewChild } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { ProductoService } from '../services/productos.service';
 import { firstValueFrom } from 'rxjs';
 import { IonContent } from '@ionic/angular';
 import { IEProduktuak } from '../interfaces/IEProduktuak';
 import { TranslateService } from '@ngx-translate/core';
-import { ChangeDetectorRef } from '@angular/core';
+import { KategoriaService } from '../services/Kategoria.Service';
+import { IKategoria } from '../interfaces/IKategoria';
 
 @Component({
   selector: 'app-productos',
@@ -13,7 +14,8 @@ import { ChangeDetectorRef } from '@angular/core';
   styleUrls: ['./productos.page.scss'],
 })
 export class ProductosPage implements OnInit {
-  @ViewChild(IonContent, { static: false }) content: IonContent | undefined;
+
+  readonly content = viewChild(IonContent);
 
   editandoProducto: boolean = false;
   productoConInformacionSeleccionada: boolean = false;
@@ -28,6 +30,7 @@ export class ProductosPage implements OnInit {
   paginaActual = 1;
   paginacionMaxima = 0;
   Math: any;
+  categorias: IKategoria [] = [];
 
   //tradukzioa
   title: string = ''
@@ -42,21 +45,41 @@ export class ProductosPage implements OnInit {
   cancel: string = ''
   info: string = ''
   search: string = ''
+  esHistorial: any;
 
-  constructor(private alertController: AlertController, private productoService: ProductoService, private translateService: TranslateService) {}
+  constructor(private alertController: AlertController, private productoService: ProductoService, private translateService: TranslateService, private kategoriakService: KategoriaService) {}
 
   ngOnInit() {
     this.mobilbista();
     this.cargarProductos();
+    this.cargarCategorias();
     this.translateLabels();
     this.translateService.setDefaultLang('es');
     this.translateService.use('es');
   }
 
+
+  cargarCategorias() {
+    this.kategoriakService.getCategorias().subscribe(
+      (categorias) => {
+        this.categorias = categorias;  // Asignamos las categorías obtenidas al array 'categorias'
+      },
+      (error) => {
+        console.error('Error al cargar las categorías', error);  // Manejo de errores
+      }
+    );
+  }
+
+
   @HostListener('window:resize', ['$event'])
   onResize() {
     this.mobilbista();
   }
+
+  isEvenColumn(index: number): boolean {
+    return index % 2 === 0; // Devuelve true para columnas pares, false para columnas impares
+  }
+  
 
   mobilbista() {
     this.mobilaDa = window.innerWidth <= 768;
@@ -85,8 +108,9 @@ export class ProductosPage implements OnInit {
 
   moverVistaAlPrimerProducto() {
     
-    if (this.content) {
-      this.content.scrollToTop(500);
+    const content = this.content();
+    if (content) {
+      content.scrollToTop(500);
     }
   }
 
@@ -167,7 +191,7 @@ export class ProductosPage implements OnInit {
     this.productoSeleccionado = { ...this.productoSeleccionadoAnterior };
     this.editandoProducto = false;
 
-    if (this.content && this.productoSeleccionado.id) {
+    if (this.content() && this.productoSeleccionado.id) {
       const productoIndex = this.productos.findIndex(p => p.id === this.productoSeleccionado.id);
       if (productoIndex !== -1) {
         const productoElemento = document.getElementById(`producto-${this.productoSeleccionado.id}`);

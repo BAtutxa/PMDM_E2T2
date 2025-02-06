@@ -1,0 +1,36 @@
+<ion-content>
+  <div class="card-container">
+    <form #fichaForm="ngForm" (ngSubmit)="guardarCategoria()">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Categoria a crear</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-list>
+            <!-- Nombre Input -->
+            <ion-item>
+              <ion-label position="stacked">Nombre</ion-label>
+              <ion-input
+                [(ngModel)]="categoria.izena"
+                name="izena"
+                placeholder="Introduce un valor para nombre"
+                required
+              ></ion-input>
+            </ion-item>
+
+          </ion-list>
+
+          <!-- Save Button -->
+          <ion-button
+            expand="full"
+            type="submit"
+            color="tertiary"
+            [disabled]="fichaForm.invalid"
+            >Guardar</ion-button
+          >
+        </ion-card-content>
+      </ion-card>
+    </form>
+  </div>
+</ion-content>

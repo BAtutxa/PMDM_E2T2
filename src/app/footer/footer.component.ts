@@ -17,7 +17,7 @@ export class FooterComponent implements OnInit {
   bueltatubotoiaAgertu() {
     const url = this.router.url;
     this.agertuBueltatu = (url == '/productos' || url == '/grupos' || url == '/crear-ficha' || url =='/informes' || url == '/stock' || url == '/materiales'
-      || url.startsWith('/citas-del-dia') || url.startsWith('/citas')
+      || url.startsWith('/citas-del-dia') || url.startsWith('/citas') || url== '/categorias' ||url.startsWith('/crear')
     );
   }
   
