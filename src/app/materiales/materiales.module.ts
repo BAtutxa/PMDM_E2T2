@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { MaterialesPageRoutingModule } from './materiales-routing.module';
 
 import { MaterialesPage } from './materiales.page';
+import { NireKonponenteakModule } from '../nire-konponenteak/nire-konponenteak.module';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { MaterialesPage } from './materiales.page';
     FormsModule,
     IonicModule,
     MaterialesPageRoutingModule,
+    NireKonponenteakModule
     
   ],
   declarations: [MaterialesPage]

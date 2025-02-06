@@ -1,20 +1,19 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>{{ title }}</ion-title>
-    <ion-buttons slot="end">
-      <!-- Selector de idioma -->
-      <ion-button (click)="changeLanguage('eu')">
-        <img src="assets/icon/euskera.png" alt="Euskera" style="width: 24px; height: 24px; margin-right: 5px;"> Euskera
-      </ion-button>
-      
-      <ion-button (click)="changeLanguage('es')">
-        <img src="assets/icon/spain.png" alt="Castellano" style="width: 24px; height: 24px; margin-right: 5px;"> Castellano
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<ion-app>
+  <app-menu-header></app-menu-header>
+  
+    <!-- Contenido principal -->
+    <ion-app class="ion-page" id="main-content">
+      <!-- Header principal -->
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <ion-title>Materialak</ion-title>
+        </ion-toolbar>
+      </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" *ngIf="!mobilaDa">
   <!-- Buscador -->
   <ion-searchbar
     search-icon="search-circle"
@@ -124,6 +123,7 @@
     </ion-col>
   </ion-row>
 
+
   <!-- Modal para ver detalles del material -->
   <ion-modal [isOpen]="MaterialConInformacionSeleccionada" (ionModalDidDismiss)="cerrarModal()" (click)="cerrarModal()">
     <ion-header>
@@ -144,3 +144,4 @@
     </ion-content>
   </ion-modal>
 </ion-content>
+</ion-app>
