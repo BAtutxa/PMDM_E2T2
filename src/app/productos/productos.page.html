@@ -111,6 +111,9 @@
           <ion-button expand="full" class="custom-blue-button" (click)="verDetalles(productoSeleccionado)">
             INFO
           </ion-button>
+          <ion-button *ngIf="esProfe" expand="full"  class="custom-red-button" (click)="eliminarProducto()">
+            Borrar producto
+          </ion-button>
         </form>
         </ion-card-content>
       </ion-card>
@@ -286,6 +289,9 @@
           <ion-button expand="full" color="danger" (click)="cancelarEdicion()">UTZI</ion-button>
           <ion-button expand="full" class="custom-blue-button" (click)="verDetalles(productoSeleccionado)">
             INFO
+          </ion-button>
+          <ion-button *ngIf="esProfe" expand="full" class="custom-red-button" (click)="eliminarProducto()">
+            Borrar producto
           </ion-button>
         </form>
       </ion-card-content>

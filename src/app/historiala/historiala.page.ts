@@ -21,7 +21,8 @@ export class HistorialaPage{
       this.router.navigate(['/clientes']).then(() => {
           window.location.reload(); // Recarga la página
       });
-      this.menuCtrl.open(); // Abre el menú si es necesario
+      this.menuCtrl.open();
+      this.router.navigate(['/clientes'], { queryParams: { desdeHistorial: 'true' } });
   }
 
   cambiarACategorias(event: Event) {
@@ -30,6 +31,7 @@ export class HistorialaPage{
           window.location.reload(); // Recarga la página
       });
       this.menuCtrl.open();
+      this.router.navigate(['/categorias'], { queryParams: { desdeHistorial: 'true' } });
   }
-
+  
 }

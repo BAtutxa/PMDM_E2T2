@@ -7,6 +7,7 @@ import { HostListener } from '@angular/core';
 import { IBezero } from '../interfaces/IEBezero';
 import { IData } from '../interfaces/IData';
 import { EsHistorialService } from '../services/EsHistorial.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-clientes',
@@ -29,21 +30,27 @@ export class ClientesPage implements OnInit {
   paginaActual = 1;
   paginacionMaxima = 0;
   Math: any;
-  esHistorial:Boolean = false;
+  esHistorial:boolean = false;
   acabaDeBorrar: boolean = false;
   loading: any;
+  
 
   constructor(
     private alertController: AlertController, 
     private ClientesService: ClientesService, 
     private historialService : EsHistorialService,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private route: ActivatedRoute,
   ) {}
   
 
   ngOnInit() {
-    this.esHistorial = this.historialService.getEsHistorial();
-    console.log(this.esHistorial);
+    // Leer el parámetro "desdeHistorial" de la URL
+    this.route.queryParams.subscribe(params => {
+      this.esHistorial = params['desdeHistorial'] === 'true';
+      this.historialService.setEsHistorial(this.esHistorial);
+      console.log("Historial:", this.esHistorial);
+    });
     this.mobilbista();
     this.cargarClientes();
   }
@@ -52,7 +59,6 @@ export class ClientesPage implements OnInit {
     if (this.acabaDeBorrar) {
       console.log('Ficha eliminada, no se restablece esHistorial.');
     } else {
-      // Solo restablecer esHistorial si no ha habido eliminación
       this.historialService.resetEsHistorial();
       console.log('Se ha restablecido esHistorial a false');
     }
@@ -137,7 +143,7 @@ export class ClientesPage implements OnInit {
             this.fichaSeleccionada.data.ezabatze_data = now;
 
             try {
-              await firstValueFrom(this.ClientesService.eliminarFicha(this.fichaSeleccionada));
+              await firstValueFrom(this.ClientesService.actualizarFicha(this.fichaSeleccionada));
               const index = this.fichas.findIndex(ficha => ficha.id === this.fichaSeleccionada.id);
               if (index !== -1) {
                 this.fichas[index] = { ...this.fichaSeleccionada };

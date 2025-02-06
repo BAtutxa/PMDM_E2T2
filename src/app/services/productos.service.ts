@@ -32,28 +32,31 @@ export class ProductoService {
   }
 
   // Crear un nuevo producto
-  crearProducto(producto: IEProduktuak): Observable<any> {
+  crearProducto(producto: IEProduktuak): Observable<IEProduktuak> {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json');
-    return this.http.post(`${this.baseUrl}/create`, producto, { headers });
+    return this.http.post<IEProduktuak>(`${this.baseUrl}/create`, producto, { headers });
   }
 
   // Actualizar un producto
-  actualizarProducto(producto: IEProduktuak): Observable<any> {
+  actualizarProducto(producto: IEProduktuak): Observable<IEProduktuak> {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json');
-    return this.http.put(`${this.baseUrl}/update`, producto, { headers });
+    return this.http.put<IEProduktuak>(`${this.baseUrl}/update`, producto, { headers });
   }
 
   // Eliminar un producto (soft delete)
-  eliminarProducto(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/delete/${id}`);
+  eliminarProducto(producto: number): Observable<IEProduktuak> {
+    const headers = new HttpHeaders()
+    .set('Content-Type', 'application/json')
+    .set('Accept', 'application/json');
+  return this.http.put<IEProduktuak>(`${this.baseUrl}/update`, producto, { headers });
   }
 
   // Eliminar un producto permanentemente (hard delete)
-  eliminarProductoPermanente(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/hard-delete/${id}`);
+  eliminarProductoPermanente(id: number): Observable<IEProduktuak> {
+    return this.http.delete<IEProduktuak>(`${this.baseUrl}/hard-delete/${id}`);
   }
 }

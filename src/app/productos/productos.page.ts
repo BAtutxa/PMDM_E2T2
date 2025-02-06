@@ -106,7 +106,7 @@ export class ProductosPage implements OnInit {
 
   async cargarProductos() {
     try {
-      const data = await firstValueFrom(this.productoService.getProductos());
+      const data = await firstValueFrom(this.productoService.getProductosActivos());
       this.productos = data;
       this.productosFiltrados = [...this.productos];
     } catch (error) {
@@ -309,6 +309,41 @@ private obtenerValorPorColumna(objeto: any, columna: string): any {
   }
 
   return valor;
+}
+
+async eliminarProducto() {
+  const alert = await this.alertController.create({
+    header: '¿Estás seguro?',
+    message: 'Se borrará el producto.',
+    buttons: [
+      {
+        text: 'Cancelar',
+        role: 'cancel',
+      },
+      {
+        text: 'Confirmar',
+        handler: async () => {
+          const now = new Date();
+          this.productoSeleccionado.data = this.productoSeleccionado.data || {};
+          this.productoSeleccionado.data.ezabatze_data = now;
+
+          try {
+            await firstValueFrom(this.productoService.actualizarProducto(this.productoSeleccionado));
+            const index = this.productos.findIndex(producto => producto.id === this.productoSeleccionado.id);
+            if (index !== -1) {
+              this.productos[index] = { ...this.productoSeleccionado };
+              this.aplicarFiltro({ target: { value: '' } });
+            }
+            this.editandoProducto = false;
+            window.location.reload();
+          } catch (error) {
+            console.error('Error al borrar producto:', error);
+          }
+        },
+      },
+    ],
+  });
+  await alert.present();
 }
 
   translateLabels() {
