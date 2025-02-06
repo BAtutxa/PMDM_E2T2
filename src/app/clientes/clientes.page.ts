@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { IonContent } from '@ionic/angular';
 import { firstValueFrom } from 'rxjs';
 import { ClientesService } from '../services/clientes.service';
@@ -31,11 +31,13 @@ export class ClientesPage implements OnInit {
   Math: any;
   esHistorial:Boolean = false;
   acabaDeBorrar: boolean = false;
+  loading: any;
 
   constructor(
     private alertController: AlertController, 
     private ClientesService: ClientesService, 
     private historialService : EsHistorialService,
+    private loadingController: LoadingController
   ) {}
   
 
@@ -68,21 +70,32 @@ export class ClientesPage implements OnInit {
 
   async cargarClientes() {
     try {
+      // Muestra el loading mientras se cargan los clientes
+      this.loading = await this.loadingController.create({
+        message: 'Cargando clientes...',
+        spinner: 'crescent',
+      });
+      await this.loading.present();
+  
       if (this.esHistorial) {
         this.ClientesService.getFichasDelete().subscribe(fichas => {
           this.fichas = fichas;
           this.fichasFiltradas = [...this.fichas];
+          this.loading.dismiss(); // Cierra el loading cuando los datos se carguen
         });
       } else {
         this.ClientesService.fichas$.subscribe(fichas => {
           this.fichas = fichas;
           this.fichasFiltradas = [...this.fichas];
+          this.loading.dismiss(); // Cierra el loading cuando los datos se carguen
         });
       }
     } catch (error) {
       console.error('Error al cargar clientes:', error);
+      this.loading.dismiss(); // Asegúrate de cerrar el loading si ocurre un error
     }
   }
+  
   
 
   cambiarPagina(pagina: number) {

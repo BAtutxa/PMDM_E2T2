@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { EsHistorialService } from 'src/app/services/EsHistorial.service';
 
 @Component({
   selector: 'app-menu-header',
@@ -8,7 +7,7 @@ import { EsHistorialService } from 'src/app/services/EsHistorial.service';
 })
 export class MenuHeaderComponent  implements OnInit {
 
-  constructor(historialService:EsHistorialService) { }
+  constructor() { }
 
   ngOnInit() {}
 
