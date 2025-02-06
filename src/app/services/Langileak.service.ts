@@ -16,8 +16,13 @@ export class LangileakService {
   }
 
   getLangileak(): Observable<ITrabajador[]> {
-     return this.http.get<ITrabajador[]>(`${this.apiUrl}/trueLangileak`);
+     return this.http.get<ITrabajador[]>(`${this.apiUrl}/aktiboak`);
   }
+
+  getEzabatuLangileak(): Observable<ITrabajador[]> {
+    return this.http.get<ITrabajador[]>(`${this.apiUrl}/ezabatuta`);
+ }
+
 
   agregarLangile(langile: ITrabajador): Observable<ITrabajador> {
     return this.http.post<ITrabajador>(`${this.apiUrl}/create`, langile);

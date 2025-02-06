@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { Route } from '@angular/router';
 
 @Component({
   selector: 'app-citas',
@@ -57,7 +56,7 @@ export class CitasPage implements OnInit {
     });
 
     // Obtener los Langileak
-    this.langileakService.getAllLangileak().subscribe(
+    this.langileakService.getLangileak().subscribe(
       (data) => {
         this.langileakList = data;
         console.log('Langileak obtenidos:', this.langileakList);
@@ -76,7 +75,18 @@ export class CitasPage implements OnInit {
   async confirmarCita() {
     if (this.citaForm.valid) {
       const datos = this.citaForm.value;
-
+  
+      // Verificar que el campo 'eslekua' no sea mayor a 5
+      if (datos.eslekua > 5) {
+        const alert = await this.alertCtrl.create({
+          header: 'Error',
+          message: 'El campo "Eslekua" debe ser menor o igual a 5.',
+          buttons: ['OK'],
+        });
+        await alert.present();
+        return; // Detener la ejecución si hay un error
+      }
+  
       this.navCtrl.navigateForward(['/confirmar-cita'], {
         queryParams: {
           nombre: datos.nombre,
@@ -93,13 +103,13 @@ export class CitasPage implements OnInit {
       });
     } else {
       let errorMessage = 'Por favor, rellena todos los campos correctamente.';
-
+  
       if (this.citaForm.get('nombre')?.invalid) {
         errorMessage = 'El campo "Nombre" es obligatorio.';
       } else if (this.citaForm.get('hora')?.invalid) {
         errorMessage = 'Por favor, ingresa una hora válida (ejemplo: 14:30).';
       }
-
+  
       const alert = await this.alertCtrl.create({
         header: 'Error',
         message: errorMessage,
@@ -108,7 +118,7 @@ export class CitasPage implements OnInit {
       await alert.present();
     }
   }
-
+  
 descartarCita() {
   this.citaForm.reset();
   this.router.navigate(['/calendario']);}
