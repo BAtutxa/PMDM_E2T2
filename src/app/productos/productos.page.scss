@@ -2,14 +2,10 @@ button {
   background-color: grey;
   color: white;
   border: none;
-  padding: 10px;
   cursor: pointer;
   text-align: center;
-  margin: 5px 0;
   transition: background-color 0.3s ease;
   width: 100%;
-  height: 50px; 
-  box-sizing: border-box;
 }
 
 
@@ -52,7 +48,7 @@ button {
 
 
 ion-card {
-  margin: 0 auto; 
+  margin: auto; 
   width: 300px; 
 }
 
@@ -171,6 +167,16 @@ ion-label {
   border-bottom: none; /* Eliminar la línea inferior en la última fila */
 }
 
+//card info
+.card-modal {
+  padding: 20px;
+  border-radius: 20px;
+  margin: 20px;
+  text-align: left;
+  transition: transform 0.2s ease-in-out;
+  max-width: 500px;
+  margin: auto;
+}
 
 
 
