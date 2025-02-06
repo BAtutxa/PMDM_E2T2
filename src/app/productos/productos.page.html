@@ -237,6 +237,14 @@
     </ion-col>
   </ion-row>
 
+  <ion-row *ngIf= "esProfe">
+    <ion-col size="12" class="ion-text-center">
+      <ion-button color="primary" expand="block" [routerLink]="'/crear-ficha'">Añadir producto
+        <ion-icon name="add-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
   <!-- Fila de edición visible solo en modo edición -->
 <ion-row *ngIf="editandoProducto">
   <ion-col size="12">

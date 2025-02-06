@@ -9,9 +9,8 @@ import {IEUser} from '../interfaces/IEUser';
   providedIn: 'root'
 })
 export class UserService {
-  private apiUrl: string = 'http://localhost:8080/'; 
-  esProfe: Boolean = false;
 
+  private apiUrl: string = 'http://localhost:8080/'; 
 
   constructor(private http: HttpClient) { }
 
@@ -38,6 +37,7 @@ export class UserService {
   
         if (storedPassword === trimmedPassword) {
           this.setIzenaEtaPasahitza(user.username, user.pasahitza); 
+          this.setRola(user.rola);
           return true;  
         } else {
           return false;  
@@ -48,6 +48,10 @@ export class UserService {
         return of(false); 
       })
     );
+  }
+  
+  setRola(rola: string) {
+    localStorage.setItem('rola', rola)
   }
   
   setIzenaEtaPasahitza(name: string, password: string): void {
@@ -62,11 +66,7 @@ export class UserService {
     };
   }
 
-  getEsProfe(){
-    return this.esProfe;
-  }
-
-  setEsProfe(bool: Boolean){
-    this.esProfe = bool;
+  getRola() {
+    return {rola: localStorage.getItem('rola') || '', };
   }
 }

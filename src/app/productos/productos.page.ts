@@ -69,7 +69,13 @@ export class ProductosPage implements OnInit {
   }
 
   VerSiEsProfe(){
-    this.esProfe = this.userService.getEsProfe();
+    const rola = this.userService.getRola().rola;
+   
+    if(rola === 'IR'){
+      this.esProfe = true;
+    }else{
+      this.esProfe = false;
+    }
   }
 
   cargarCategorias() {

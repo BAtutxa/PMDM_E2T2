@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-menu-header',
@@ -7,8 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuHeaderComponent  implements OnInit {
 
-  constructor() { }
+  esProfe: Boolean = false;
+  constructor(private userService:UserService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.mirarPrivilegios();
 
+  }
+
+  mirarPrivilegios(){
+    const rol = this.userService.getRola().rola;
+    if(rol === 'IR'){
+      this.esProfe = true;
+    }else{
+      this.esProfe = false;
+    }
+  }
 }
