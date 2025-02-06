@@ -26,6 +26,14 @@ export class CitasDelDiaPage implements OnInit {
     });
   }
   
+  addCita(citaNueva: any) {
+    // Añadir la nueva cita al array de citas
+    this.citas.push(citaNueva);
+  
+    // Ordenar las citas por la hora de inicio (si es necesario)
+    this.citas.sort((a, b) => a.hasiera_ordua < b.hasiera_ordua ? -1 : 1);
+  }
+  
 
   obtenerCitasPorFecha(fecha: string) {
     this.citaService.getCitasPorFecha(fecha).subscribe(

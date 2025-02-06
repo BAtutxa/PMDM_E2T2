@@ -4,30 +4,55 @@
 }
 
 h1 {
-  color: black;  // Cambiar el color del título a negro
-  font-size: 24px;  // Tamaño de fuente adecuado
-  font-weight: bold;  // Negrita para mayor énfasis
+  color: black;
+  font-size: 24px;
+  font-weight: bold;
 }
 
 ion-header ion-title {
-  color: black;  // Cambiar el color del título en la barra de navegación
+  color: white;
 }
 
-/* Si necesitas ajustar más el diseño del título, puedes añadir estilos adicionales */
+/* Ajuste para la cuadrícula */
 ion-grid {
   margin-top: 20px;
 }
 
+/* Estilos para las columnas */
+ion-col {
+  padding: 8px;
+  border-left: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+}
+
+/* Asegurarse de que no haya borde en la última columna de cada fila */
+ion-col:last-child {
+  border-right: 1px solid #ccc;
+}
+
+/* Asegurar que las cabeceras y las celdas tengan bordes y espacios */
+ion-row {
+  border-bottom: 1px solid #ccc;
+}
+
+/* Estilos para los subtítulos de cada columna */
 ion-col h3 {
   font-size: 18px;
   font-weight: normal;
-  color: black;  // Asegurarnos de que los subtítulos de las columnas también sean negros
+  color: black;
+  margin-bottom: 8px;
 }
 
 ion-label {
-  color: black;  // Asegurar que las etiquetas de las citas también sean negras
+  color: black;
 }
 
 ion-item {
   padding: 8px 0;
+}
+
+ion-button {
+  width: 50%;
+  display: block;
+  margin: auto;
 }
