@@ -10,6 +10,8 @@ import {IEUser} from '../interfaces/IEUser';
 })
 export class UserService {
   private apiUrl: string = 'http://localhost:8080/'; 
+  esProfe: Boolean = false;
+
 
   constructor(private http: HttpClient) { }
 
@@ -58,5 +60,13 @@ export class UserService {
       name: localStorage.getItem('username') || '', 
       password: localStorage.getItem('password') || ''  
     };
+  }
+
+  getEsProfe(){
+    return this.esProfe;
+  }
+
+  setEsProfe(bool: Boolean){
+    this.esProfe = bool;
   }
 }
