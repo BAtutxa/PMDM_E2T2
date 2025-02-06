@@ -7,6 +7,7 @@ import { IEProduktuak } from '../interfaces/IEProduktuak';
 import { TranslateService } from '@ngx-translate/core';
 import { KategoriaService } from '../services/Kategoria.Service';
 import { IKategoria } from '../interfaces/IKategoria';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-productos',
@@ -45,19 +46,31 @@ export class ProductosPage implements OnInit {
   cancel: string = ''
   info: string = ''
   search: string = ''
-  esHistorial: any;
+  esHistorial: Boolean = false;
+  esProfe: Boolean = false;
 
-  constructor(private alertController: AlertController, private productoService: ProductoService, private translateService: TranslateService, private kategoriakService: KategoriaService) {}
+  constructor(
+    private alertController: AlertController, 
+    private productoService: ProductoService, 
+    private translateService: TranslateService, 
+    private kategoriakService: KategoriaService,
+    private userService:UserService
+  ) {}
 
   ngOnInit() {
+    this.VerSiEsProfe();
     this.mobilbista();
     this.cargarProductos();
     this.cargarCategorias();
     this.translateLabels();
+
     this.translateService.setDefaultLang('es');
     this.translateService.use('es');
   }
 
+  VerSiEsProfe(){
+    this.esProfe = this.userService.getEsProfe();
+  }
 
   cargarCategorias() {
     this.kategoriakService.getCategorias().subscribe(
@@ -76,13 +89,13 @@ export class ProductosPage implements OnInit {
     this.mobilbista();
   }
 
-  isEvenColumn(index: number): boolean {
+  par(index: number): boolean {
     return index % 2 === 0; // Devuelve true para columnas pares, false para columnas impares
   }
   
 
   mobilbista() {
-    this.mobilaDa = window.innerWidth <= 768;
+    this.mobilaDa = window.innerWidth <= 1200;
   }
 
   async cargarProductos() {

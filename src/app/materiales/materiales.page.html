@@ -150,12 +150,149 @@
       </ion-toolbar>
     </ion-header>
     <ion-content>
-      <div *ngIf="materialSeleccionado" (click)="$event.stopPropagation()">
+      <div class="card-modal" *ngIf="materialSeleccionado" (click)="$event.stopPropagation()">
         <p><strong>{{ info }}:</strong> {{ materialSeleccionado.deskribapena || '-' }}</p>
         <p><strong>{{ name }}:</strong> {{ materialSeleccionado.izena || '-' }}</p>
         <p><strong>{{ label }}:</strong> {{ materialSeleccionado.etiketa || '-' }}</p>
         <p><strong>{{ cd }}:</strong> {{ materialSeleccionado.data?.sortze_data || '-' }}</p>
         <p><strong>{{ ud }}:</strong> {{ materialSeleccionado.data?.eguneratze_data || '-' }}</p>
+      </div>
+    </ion-content>
+  </ion-modal>  
+</ion-content>
+
+<!--MOVIL-->
+
+<ion-content [fullscreen]="true" *ngIf="mobilaDa">
+  <!-- Buscador -->
+  <ion-searchbar
+    search-icon="search-circle"
+    [placeholder]="search"
+    (ionInput)="aplicarFiltro($event)">
+  </ion-searchbar>
+
+  <!-- Selector de productos por página -->
+  <div class="productosPorPagina">
+    <ion-item class="producto-item">
+      <ion-label size="small">{{title}}:</ion-label>
+      <ion-select [(ngModel)]="materialesPorPagina" interface="popover" size="small" (ionChange)="cambiarPagina(1)">
+        <ion-select-option [value]="5">5</ion-select-option>
+        <ion-select-option [value]="10">10</ion-select-option>
+        <ion-select-option [value]="25">25</ion-select-option>
+        <ion-select-option [value]="50">50</ion-select-option>
+        <ion-select-option [value]="100">100</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
+
+  <div class="ordenacion-filtros">
+    <ion-item>
+      <ion-label>{{ 'Ordenar por:' }}</ion-label>
+      <ion-select [(ngModel)]="ordenActual.columna" interface="popover" (ionChange)="ordenarPor(ordenActual.columna)">
+        <ion-select-option value="id">{{ 'ID' }}</ion-select-option>
+        <ion-select-option value="izena">{{ name }}</ion-select-option>
+        <ion-select-option value="etiketa">{{ label }}</ion-select-option>
+        <ion-select-option value="sortze_data">{{ cd }}</ion-select-option>
+        <ion-select-option value="eguneratze_data">{{ ud }}</ion-select-option>
+      </ion-select>
+  
+      <ion-label>{{ 'Ordenar: ' }}</ion-label>
+      <ion-select [(ngModel)]="ordenActual.ascendente" interface="popover" (ionChange)="ordenarPor(ordenActual.columna)">
+        <ion-select-option value="true">{{ 'Ascendente' }}</ion-select-option>
+        <ion-select-option value="false">{{ 'Descendente' }}</ion-select-option>
+        <ion-label slot="start">
+          {{ ordenActual.ascendente === true ? 'Ascendente' : 'Descendente' }}
+        </ion-label>
+      </ion-select>     
+    </ion-item>
+  </div>
+  
+  <!-- Paginación -->
+  <ion-row>
+    <ion-col>
+      <ion-button *ngFor="let page of hacerPaginacion()" (click)="cambiarPagina(page)">
+        {{ page }}
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <!-- Fila de edición visible solo en modo edición -->
+  <ion-row *ngIf="editandoMaterial">
+    <ion-col size="12">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{editMaterial}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <form #materialForm="ngForm" (ngSubmit)="confirmarEdicion()" novalidate>
+          <ion-item>
+            <ion-label position="floating">ID</ion-label>
+            <ion-input [(ngModel)]="materialSeleccionado.id" name="id" #id="ngModel" readonly></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">{{name}}</ion-label>
+            <ion-input [(ngModel)]="materialSeleccionado.izena" name="izena" #izena ="ngModel" required></ion-input>
+            <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
+              El nombre es obligatorio.
+            </ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">{{label}}</ion-label>
+            <ion-input [(ngModel)]="materialSeleccionado.etiketa" name="etiketa"  #etiketa ="ngModel" required></ion-input>
+            <ion-note *ngIf="etiketa.invalid && etiketa.touched" color="danger">
+              La etiqueta es obligatoria.
+            </ion-note>
+          </ion-item>
+          <!-- Tienes que poner informacion del historial cuando este -->
+          <ion-button expand="full" (click)="confirmarEdicion()"  type="submit" [disabled]="materialForm.invalid">{{confirm}}</ion-button>
+          <ion-button expand="full" color="danger" (click)="cancelarEdicion()">{{cancel}}</ion-button>
+          <ion-button expand="full" class="custom-blue-button" (click)="verDetalles(materialSeleccionado)">
+            {{info}}
+          </ion-button>
+        </form>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+
+<!--Fila de materiales-->
+  <ion-row justify-content-center *ngFor="let material of materialesFiltrados | slice: (paginaActual - 1) * materialesPorPagina : paginaActual * materialesPorPagina">
+    <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
+      <ion-card *ngIf="materialSeleccionado.id !== material.id" (click)="editarMaterial(material)">
+        <ion-card-header>
+          <ion-card-title>{{ material.izena || '-' }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p><strong>ID:</strong> {{ material.id || '-' }}</p>
+          <p><strong>Etiketa:</strong> {{ material.etiketa || '-' }}</p>
+          <p><strong>Sorte Data:</strong> {{ material.data.sortze_data | date:'yyyy-MM-dd' }}</p>
+          <p><strong>Eguneratze Data:</strong> {{ material.data.eguneratze_data ? (material.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>
+          <ion-button color="primary" (click)="editarMaterial(material)">EDITATU</ion-button>
+          <ion-button color="primary" (click)="verDetalles(material)">INFO</ion-button>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  
+
+  <!-- Modal para ver detalles del producto -->
+  <ion-modal [isOpen]="MaterialConInformacionSeleccionada" (ionModalDidDismiss)="cerrarModal()" (click)="cerrarModal()">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>{{ details }}</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="cerrarModal()">{{ close }}</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <div *ngIf="materialSeleccionado" (click)="$event.stopPropagation()" class="card-modal">
+        <p><strong>{{ info }}:</strong> {{ materialSeleccionado.deskribapena || '-' }}</p>
+        <p><strong>{{ name }}:</strong> {{ materialSeleccionado.izena || '-' }}</p>
+        <p><strong>{{ label }}:</strong> {{ materialSeleccionado.etiketa || '-' }}</p>
+        <p><strong>Stock alerta:</strong> {{ materialSeleccionado.stock_alerta || '-' }}</p>
+        <p><strong>{{ cd }}:</strong> {{ materialSeleccionado.data?.sortze_data ? (materialSeleccionado.data.sortze_data | date:'yyyy-MM-dd') : '-' }}</p>
+        <p><strong>{{ ud }}:</strong> {{ materialSeleccionado.data?.eguneratze_data ? (materialSeleccionado.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>
       </div>
     </ion-content>
   </ion-modal>

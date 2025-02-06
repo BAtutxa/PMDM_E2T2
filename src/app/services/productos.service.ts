@@ -56,22 +56,3 @@ export class ProductoService {
     return this.http.delete(`${this.baseUrl}/hard-delete/${id}`);
   }
 }
-
-
-
-
-/**
-
-GET: http://localhost:8080/produktuak/produktuGuztiak
-GET: http://localhost:8080/produktuak/produktuGuztiak/1
-GET: http://localhost:8080/produktuak/aktiboak
-GET: http://localhost:8080/produktuak/ezabatuta
-
-POST: http://localhost:8080/produktuak/create
-
-PUT: http://localhost:8080/produktuak/update
-
-DELETE: http://localhost:8080/produktuak/delete/1
-DELETE: http://localhost:8080/produktuak/hard-delete/1
-
- */
