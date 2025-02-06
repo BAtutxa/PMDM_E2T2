@@ -1,17 +1,17 @@
 import { IData } from "./IData";
 
 export interface IEProduktuak {
-    id: number;
+    id: number | null;
     izena: string;
-    deskribapena: string;
+    deskribapena: string | null;
     kategoriak: {  
-      id: number;
+      id: number | null;
       izena: string;
       data: IData;
     };
     marka: string;
-    stock: number;
-    stock_alerta: number;
+    stock: number | null;
+    stock_alerta: number | null;
     data: IData;
   }
   

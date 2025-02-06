@@ -1,0 +1,105 @@
+<ion-content>
+  <div class="card-container">
+    <form #productoForm="ngForm" (ngSubmit)="guardarProducto()">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Crear producto</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-list>
+            <!-- Nombre Input -->
+            <ion-item>
+              <ion-label position="stacked">Nombre</ion-label>
+              <ion-input
+                [(ngModel)]="producto.izena"
+                name="izena"
+                placeholder="Introduce un valor para nombre"
+                required
+              ></ion-input>
+            </ion-item>
+
+            <!-- Marca Input -->
+            <ion-item>
+              <ion-label position="stacked">Marca</ion-label>
+              <ion-input
+                [(ngModel)]="producto.marka"
+                name="marka"
+                placeholder="Introduce un valor para marca"
+                required
+              ></ion-input>
+              <ion-note *ngIf="productoForm.controls['marka']?.invalid && productoForm.controls['marka']?.touched" color="danger">
+                La marca es requerida.
+              </ion-note>
+            </ion-item>
+
+            <!-- Descripción Input -->
+            <ion-item>
+              <ion-label position="stacked">Descripción</ion-label>
+              <ion-input
+                [(ngModel)]="producto.deskribapena"
+                name="deskribapena"
+                placeholder="Introduce un valor para descripción"
+                #deskribapena="ngModel"
+              >
+              </ion-input>
+            </ion-item>
+
+            <!-- Stock Input -->
+            <ion-item>
+              <ion-label position="stacked">Stock</ion-label>
+              <ion-input
+                [(ngModel)]="producto.stock"
+                name="stock"
+                placeholder="Introduce un valor para stock"
+                #stock="ngModel"
+                required
+              ></ion-input>
+              <ion-note *ngIf="productoForm.controls['stock']?.invalid && productoForm.controls['stock']?.touched" color="danger">
+                El stock es requerido.
+              </ion-note>
+            </ion-item>
+
+            <!-- Stock alerta Input -->
+            <ion-item>
+              <ion-label position="stacked">Alerta del stock</ion-label>
+              <ion-input
+                [(ngModel)]="producto.stock_alerta"
+                name="stock_alerta"
+                placeholder="Introduce un valor para la alerta del stock"
+                #stock_alerta="ngModel"
+                required
+              ></ion-input>
+              <ion-note *ngIf="productoForm.controls['stock_alerta']?.invalid && productoForm.controls['stock_alerta']?.touched" color="danger">
+                La alerta de stock es requerida.
+              </ion-note>
+            </ion-item>
+
+            <!-- Categoría Select -->
+            <ion-item>
+              <ion-label>Categoría</ion-label>
+              <ion-select [(ngModel)]="producto.kategoriak.id" name="kategoriak" placeholder="Selecciona una categoría" required>
+                <ion-select-option *ngFor="let categoria of categorias" [value]="categoria.id">
+                  {{ categoria.izena }}
+                </ion-select-option>
+              </ion-select>
+              <ion-note *ngIf="productoForm.controls['kategoriak']?.invalid && productoForm.controls['kategoriak']?.touched" color="danger">
+                La categoría es requerida.
+              </ion-note>
+            </ion-item>
+            
+            <!-- Save Button -->
+            <ion-button
+              expand="full"
+              type="submit"
+              color="tertiary"
+              [disabled]="productoForm.invalid"
+            >
+              Guardar
+            </ion-button>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </form>
+  </div>
+</ion-content>

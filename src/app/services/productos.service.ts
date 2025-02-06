@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { IEProduktuak } from '../interfaces/IEProduktuak';
 
 @Injectable({
   providedIn: 'root'
@@ -11,27 +12,27 @@ export class ProductoService {
   constructor(private http: HttpClient) {}
 
   // Obtener todos los productos
-  getProductos(): Observable<any[]> {
+  getProductos(): Observable<IEProduktuak[]> {
     return this.http.get<any[]>(`${this.baseUrl}/produktuGuztiak`);
   }
 
   // Obtener un producto por ID
-  getProductoById(id: number): Observable<any> {
+  getProductoById(id: number): Observable<IEProduktuak> {
     return this.http.get<any>(`${this.baseUrl}/produktuGuztiak/${id}`);
   }
 
   // Obtener productos activos (no eliminados)
-  getProductosActivos(): Observable<any[]> {
+  getProductosActivos(): Observable<IEProduktuak[]> {
     return this.http.get<any[]>(`${this.baseUrl}/aktiboak`);
   }
 
   // Obtener productos eliminados
-  getProductosEliminados(): Observable<any[]> {
+  getProductosEliminados(): Observable<IEProduktuak[]> {
     return this.http.get<any[]>(`${this.baseUrl}/ezabatuta`);
   }
 
   // Crear un nuevo producto
-  crearProducto(producto: any): Observable<any> {
+  crearProducto(producto: IEProduktuak): Observable<any> {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json');
@@ -39,7 +40,7 @@ export class ProductoService {
   }
 
   // Actualizar un producto
-  actualizarProducto(producto: any): Observable<any> {
+  actualizarProducto(producto: IEProduktuak): Observable<any> {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json');
