@@ -10,6 +10,8 @@ import { CitaService } from '../services/cita.service';
 export class CitasDelDiaPage implements OnInit {
   citas: any[] = [];
   fechaSeleccionada: string | null = null;
+  ordenAscendente: boolean = true; // Definir si el orden es ascendente o descendente
+
 
   constructor(
     private route: ActivatedRoute,
@@ -39,7 +41,7 @@ export class CitasDelDiaPage implements OnInit {
     this.citaService.getCitasPorFecha(fecha).subscribe(
       (data) => {
         this.citas = data;
-        console.log('Citas obtenidas:', this.citas);
+        this.ordenarCitasPorAsiento();  // Llamar a la función de ordenar cuando se obtienen las citas
       },
       (error) => {
         console.error('Error al obtener las citas:', error);
@@ -48,10 +50,21 @@ export class CitasDelDiaPage implements OnInit {
     );
   }
 
-  getCitasPorEserlekuaOrdenadas(eserlekua: number) {
-    return this.citas
-      .filter(cita => cita.eserlekua === eserlekua)
-      .sort((a, b) => (a.hasiera_ordua < b.hasiera_ordua ? -1 : 1));
+  // Función para ordenar las citas por número de asiento
+  ordenarCitasPorAsiento() {
+    this.citas.sort((a, b) => {
+      if (this.ordenAscendente) {
+        return a.eserlekua - b.eserlekua; // Ascendente
+      } else {
+        return b.eserlekua - a.eserlekua; // Descendente
+      }
+    });
+  }
+
+  // Función para cambiar el orden ascendente/descendente
+  cambiarOrden() {
+    this.ordenAscendente = !this.ordenAscendente;  // Cambiar el estado de orden
+    this.ordenarCitasPorAsiento();  // Aplicar el nuevo orden
   }
 
   irACitas() {
