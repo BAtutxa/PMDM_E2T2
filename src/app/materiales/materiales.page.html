@@ -1,20 +1,19 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>{{ title }}</ion-title>
-    <ion-buttons slot="end">
-      <!-- Selector de idioma -->
-      <ion-button (click)="changeLanguage('eu')">
-        <img src="assets/icon/euskera.png" alt="Euskera" style="width: 24px; height: 24px; margin-right: 5px;"> Euskera
-      </ion-button>
-      
-      <ion-button (click)="changeLanguage('es')">
-        <img src="assets/icon/spain.png" alt="Castellano" style="width: 24px; height: 24px; margin-right: 5px;"> Castellano
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<ion-app>
+  <app-menu-header></app-menu-header>
+  
+    <!-- Contenido principal -->
+    <ion-app class="ion-page" id="main-content">
+      <!-- Header principal -->
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <ion-title>Materialak</ion-title>
+        </ion-toolbar>
+      </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" *ngIf="!mobilaDa">
   <!-- Buscador -->
   <ion-searchbar
     search-icon="search-circle"
@@ -107,40 +106,58 @@
   </ion-row>
 
   <!-- Fila de materiales -->
-  <ion-row justify-content-center *ngFor="let material of materialesFiltrados | slice: (paginaActual - 1) * materialesPorPagina : paginaActual * materialesPorPagina">
-    <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-      <ion-card *ngIf="materialSeleccionado?.id !== material.id" (click)="editarMaterial(material)">
-        <ion-card-header>
-          <ion-card-title>{{ material.izena || '-' }}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <p><strong>ID:</strong> {{ material.id || '-' }}</p>
-          <p><strong>{{name}}:</strong> {{ material.izena || '-' }}</p>
-          <p><strong>{{label}}:</strong> {{ material.etiketa || '-' }}</p>
-          <p><strong>{{cd}}:</strong> {{ material.data.sortze_data | date:'yyyy-MM-dd' }}</p>
-          <p><strong>{{ud}}:</strong> {{ material.data.eguneratze_data ? (material.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <table class="custom-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>IZENA</th>
+              <th>ETIKETA</th>
+              <th>SORTZE-DATA</th>
+              <th>EGUNERATZE-DATA</th>
+              <th>EKINTZAK</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let material of materialesFiltrados | slice: (paginaActual - 1) * materialesPorPagina : paginaActual * materialesPorPagina">
+              <td>{{ material.id || '-' }}</td>
+              <td>{{ material.izena || '-' }}</td>
+              <td>{{ material.etiketa || '-' }}</td>
+              <td>{{ material.data.sortze_data | date:'yyyy-MM-dd' }}</td>
+              <td>{{ material.data.eguneratze_data ? (material.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</td>
+              <td>
+                <ion-button color="primary" (click)="editarMaterial(material)">EDITATU</ion-button>
+                <ion-button color="primary" (click)="verDetalles(material)">INFO</ion-button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 
   <!-- Modal para ver detalles del material -->
   <ion-modal [isOpen]="MaterialConInformacionSeleccionada" (ionModalDidDismiss)="cerrarModal()" (click)="cerrarModal()">
     <ion-header>
       <ion-toolbar>
-        <ion-title>{{details}}</ion-title>
+        <ion-title>{{ info }}</ion-title>
         <ion-buttons slot="end">
-          <ion-button (click)="cerrarModal()">{{close}}</ion-button>
+          <ion-button (click)="cerrarModal()">{{ cancel }}</ion-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
     <ion-content>
       <div *ngIf="materialSeleccionado" (click)="$event.stopPropagation()">
-        <p><strong>Descripción:</strong> {{ materialSeleccionado.deskribapena || 'Descripción no disponible' }}</p>
-        <p><strong>Nombre:</strong> {{ materialSeleccionado.izena || 'Nombre no disponible' }}</p>
-        <p><strong>Etiqueta:</strong> {{ materialSeleccionado.etiketa || 'Etiqueta no disponible' }}</p>
-        <!-- Información del historial cuando esté disponible -->
+        <p><strong>{{ info }}:</strong> {{ materialSeleccionado.deskribapena || '-' }}</p>
+        <p><strong>{{ name }}:</strong> {{ materialSeleccionado.izena || '-' }}</p>
+        <p><strong>{{ label }}:</strong> {{ materialSeleccionado.etiketa || '-' }}</p>
+        <p><strong>{{ cd }}:</strong> {{ materialSeleccionado.data?.sortze_data || '-' }}</p>
+        <p><strong>{{ ud }}:</strong> {{ materialSeleccionado.data?.eguneratze_data || '-' }}</p>
       </div>
     </ion-content>
   </ion-modal>
 </ion-content>
+</ion-app>

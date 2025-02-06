@@ -9,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-materiales',
   templateUrl: './materiales.page.html',
-  styleUrls: ['../productos/productos.page.scss'],
+  styleUrls: ['./materiales.page.scss'],
 })
 export class MaterialesPage implements OnInit {
   @ViewChild(IonContent, { static: false }) content: IonContent | undefined;
