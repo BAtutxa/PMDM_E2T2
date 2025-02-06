@@ -1,5 +1,5 @@
 <ion-app>
-<app-menu-header></app-menu-header>
+  <app-menu-header></app-menu-header>
 
   <!-- Contenido principal -->
   <div class="ion-page" id="main-content">
@@ -15,6 +15,8 @@
 
     <ion-content>
       <div class="container">
+        <ion-label>Selecciona un dia: </ion-label>
+
         <ion-datetime
           presentation="date"
           [(ngModel)]="fechaSeleccionada"
@@ -24,28 +26,10 @@
           [max]="maxFecha"
           (ionChange)="onFechaChange($event)"
           show-default-time="false"
-          color="tertiary">
+          color="tertiary"
+        >
         </ion-datetime>
-
-        <div class="info">
-          <ion-item>
-            <ion-label>Taldea</ion-label>
-            <ion-input [value]="grupoSeleccionado" readonly></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label>Hitzorduak</ion-label>
-            <ion-textarea [value]="citasSeleccionadas.join('\n')" readonly></ion-textarea>
-          </ion-item>
-
-      <!-- Botones con 'x' y 'v' -->
-      <div class="botones">
-        <ion-button color="danger" fill="clear" routerLink="/menu">
-          <ion-icon name="close"></ion-icon> <!-- 'x' icon -->
-        </ion-button>
-        <ion-button color="success" fill="clear" (click)="irACitas()">
-          <ion-icon name="checkmark"></ion-icon> <!-- 'v' icon -->
-        </ion-button>
       </div>
-    </div>
-  </div>
-</ion-content>
+    </ion-content>
+  </div></ion-app
+>
