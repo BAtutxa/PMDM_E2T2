@@ -1,52 +1,57 @@
-// src/theme/variables.scss
+/* src/theme/variables.scss */
+
 :root {
-    --ion-color-primary: #1c345c; 
-    --ion-color-primary-rgb: 50, 205, 50;
-    --ion-color-primary-contrast: #ffffff;
-    --ion-color-primary-contrast-rgb: 255, 255, 255;
-    --ion-color-primary-shade: #1c345c;
-    --ion-color-primary-tint: #1c345c;
-    --ion-color-secondary: #031027; 
-    --ion-color-tertiary: #41a367;
-  }
-
-  ion-content {
-    --background: #ffffff;
-  }
-  
-  ion-content.dark {
-    --background: #717171;
-  }
-  
-  
-  ion-grid {
-    display: block;
-    overflow-x: auto; /* Permite scroll horizontal */
-    white-space: nowrap; /* Mantiene las filas en línea */
-  }
-
-.backdrop, .alert-backdrop {
-    backdrop-filter: none !important;
-    opacity: 1 !important;
-}
-.alert input:focus {
-    backdrop-filter: none !important;
+  --ion-color-primary: #1c345c;
+  --ion-color-primary-rgb: 50, 205, 50;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #1c345c;
+  --ion-color-primary-tint: #1c345c;
+  --ion-color-secondary: #031027; 
+  --ion-color-tertiary: #41a367;
 }
 
-/* Modo oscuro */
-body.dark {
-  --background: #222;
-  --color: #fff;
-  --ion-background-color: #222;
-  --ion-text-color: #fff;
-}
-
-/* Modo claro */
 body {
-  --background: #fff;
-  --color: #000;
-  --ion-background-color: #fff;
-  --ion-text-color: #000;
+--ion-background-color: #ffffff;
+--ion-text-color: #000000; 
+--ion-toolbar-background: #ffffff; 
+--ion-toolbar-color: #000000;  
 }
 
-   
+body.dark {
+--ion-background-color: #121212;   /* Fondo oscuro */
+--ion-text-color: #ffffff;          /* Texto claro */
+--ion-toolbar-background: #333333;  /* Fondo de la barra de herramientas */
+--ion-toolbar-color: #ffffff;       /* Color del texto de la barra de herramientas */
+--ion-item-background: #1e1e1e;     /* Fondo oscuro para los items */
+}
+
+ion-content {
+--background: var(--ion-background-color);
+--color: var(--ion-text-color);
+}
+
+ion-menu.dark {
+--background: #1e1e1e; /* Fondo oscuro del menú */
+--color: #ffffff;      /* Texto blanco */
+}
+
+ion-item.dark {
+--background: #2d2d2d; /* Fondo oscuro para los items */
+--color: #ffffff;      /* Texto blanco en los items */
+}
+
+ion-toolbar.dark {
+--background: #333333; /* Fondo oscuro de la barra de herramientas */
+--color: #ffffff;      /* Texto blanco */
+}
+
+ion-header.dark {
+--background: #333333; /* Fondo oscuro del encabezado */
+--color: #ffffff;      /* Texto blanco en el encabezado */
+}
+
+ion-card.dark {
+--background: #1e1e1e; /* Fondo oscuro de los cards */
+--color: #ffffff;      /* Texto blanco en los cards */
+}
