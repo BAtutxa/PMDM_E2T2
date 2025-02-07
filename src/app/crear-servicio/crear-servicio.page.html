@@ -1,0 +1,80 @@
+<ion-content>
+  <div class="card-container">
+    <form #servicioForm="ngForm" (ngSubmit)="guardarServicio()">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Nuevo servicio</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-list>
+            <!-- Nombre Input -->
+            <ion-item>
+              <ion-label position="stacked">Nombre</ion-label>
+              <ion-input
+                [(ngModel)]="servicio.izena"
+                name="izena"
+                placeholder="Introduce un valor para nombre"
+                #izena = ngModel
+                required
+              ></ion-input>
+              <ion-note
+              *ngIf="izena.invalid && izena.touched"
+              color="danger"
+            >
+              El nombre es requerido
+            </ion-note>
+            </ion-item>
+
+            <!-- Apellido Input -->
+            <ion-item>
+              <ion-label position="stacked">Kanpoko prezioa</ion-label>
+              <ion-input
+                [(ngModel)]="servicio.kanpoko_prezioa"
+                name="kanpoko_prezioa"
+                placeholder="Introduce un valor para el precio de fuera"
+                #kanpoko_prezioa = ngModel
+                required
+              ></ion-input>
+              <ion-note
+              *ngIf="etxeko_prezioa.invalid && etxeko_prezioa.touched"
+              color="danger"
+            >
+            El precio de casa es obligatorio
+            </ion-note>
+            </ion-item>
+
+            <!-- Teléfono Input -->
+            <ion-item>
+              <ion-label position="stacked">Etxeko prezioa</ion-label>
+              <ion-input
+                [(ngModel)]="servicio.etxeko_prezioa"
+                name="etxeko_prezioa"
+                placeholder="Introduce un valor para el precio de casa"
+                #etxeko_prezioa = ngModel
+                required
+              >
+              </ion-input>
+              <ion-note
+                *ngIf="etxeko_prezioa.invalid && etxeko_prezioa.touched"
+                color="danger"
+              >
+                El precio de fuera es obligatorio
+              </ion-note>
+            </ion-item>
+
+          </ion-list>
+
+          <!-- Save Button -->
+          <ion-button
+            expand="full"
+            type="submit"
+            color="tertiary"
+            [disabled]="servicioForm.invalid"
+            >Guardar</ion-button
+          >
+        </ion-card-content>
+      </ion-card>
+    </form>
+  </div>
+</ion-content>
