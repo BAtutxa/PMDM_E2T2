@@ -1,6 +1,5 @@
-/* src/theme/variables.scss */
-
 :root {
+  /* 🎨 Colores principales */
   --ion-color-primary: #1c345c;
   --ion-color-primary-rgb: 50, 205, 50;
   --ion-color-primary-contrast: #ffffff;
@@ -9,49 +8,46 @@
   --ion-color-primary-tint: #1c345c;
   --ion-color-secondary: #031027; 
   --ion-color-tertiary: #41a367;
+
+  /* 🌞 Modo claro (por defecto) */
+  --ion-background-color: #ffffff;
+  --ion-text-color: #000000;
+  --ion-toolbar-background: #ffffff;
+  --ion-toolbar-color: #000000;
+  --ion-item-background: #f8f8f8;
+  --ion-card-background: #ffffff;
 }
 
-body {
---ion-background-color: #ffffff;
---ion-text-color: #000000; 
---ion-toolbar-background: #ffffff; 
---ion-toolbar-color: #000000;  
+/* 🌙 Modo oscuro */
+.dark {
+  --ion-background-color: #121212;  /* Fondo oscuro general */
+  --ion-text-color: #ffffff;        /* Texto claro */
+  --ion-toolbar-background: #333333; /* Fondo barra herramientas */
+  --ion-toolbar-color: #ffffff;      /* Texto barra herramientas */
+  --ion-item-background: #1e1e1e;    /* Fondo oscuro para los items */
+  --ion-card-background: #1e1e1e;    /* Fondo oscuro para las tarjetas */
+
+  /* Menú lateral */
+  --ion-menu-background: #1e1e1e;
+  --ion-menu-color: #ffffff;
+
+  /* Datetime */
+  --ion-datetime-background: #1e1e1e !important;
 }
 
-body.dark {
---ion-background-color: #121212;   /* Fondo oscuro */
---ion-text-color: #ffffff;          /* Texto claro */
---ion-toolbar-background: #333333;  /* Fondo de la barra de herramientas */
---ion-toolbar-color: #ffffff;       /* Color del texto de la barra de herramientas */
---ion-item-background: #1e1e1e;     /* Fondo oscuro para los items */
+/* 🖌️ Aplicar los colores a los componentes */
+ion-content,
+ion-menu,
+ion-item,
+ion-toolbar,
+ion-header,
+ion-card,
+ion-datetime {
+  --background: var(--ion-background-color);
+  --color: var(--ion-text-color);
 }
 
-ion-content {
---background: var(--ion-background-color);
---color: var(--ion-text-color);
-}
-
-ion-menu.dark {
---background: #1e1e1e; /* Fondo oscuro del menú */
---color: #ffffff;      /* Texto blanco */
-}
-
-ion-item.dark {
---background: #2d2d2d; /* Fondo oscuro para los items */
---color: #ffffff;      /* Texto blanco en los items */
-}
-
-ion-toolbar.dark {
---background: #333333; /* Fondo oscuro de la barra de herramientas */
---color: #ffffff;      /* Texto blanco */
-}
-
-ion-header.dark {
---background: #333333; /* Fondo oscuro del encabezado */
---color: #ffffff;      /* Texto blanco en el encabezado */
-}
-
-ion-card.dark {
---background: #1e1e1e; /* Fondo oscuro de los cards */
---color: #ffffff;      /* Texto blanco en los cards */
+/* 🎴 Asegurar que los títulos en las cards sean blancos en modo oscuro */
+.dark ion-card-title {
+  --color: #ffffff;
 }
