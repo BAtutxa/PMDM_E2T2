@@ -43,59 +43,59 @@
 
           <ion-content class="modal-content">
             <ion-item>
-              <ion-label>ID:</ion-label>
+              <ion-label position="stacked">ID:</ion-label>
               <ion-input [(ngModel)]="citaSeleccionada.id"></ion-input>
             </ion-item>
 
             <ion-item>
-              <ion-label>Eserlekua: </ion-label>
+              <ion-label position="stacked">Eserlekua: </ion-label>
               <ion-input [(ngModel)]="citaSeleccionada.eserlekua"></ion-input>
             </ion-item>
 
             <ion-item>
-              <ion-label>Data: </ion-label>
+              <ion-label position="stacked">Data: </ion-label>
               <ion-input [(ngModel)]="citaSeleccionada.data"></ion-input>
             </ion-item>
 
             <ion-item>
-              <ion-label>Hasiera Ordu: </ion-label>
+              <ion-label position="stacked">Hasiera Ordu: </ion-label>
               <ion-input [(ngModel)]="citaSeleccionada.hasiera_ordua"></ion-input>
             </ion-item>
 
             <ion-item>
-              <ion-label>Amaiera Ordua: </ion-label>
+              <ion-label position="stacked">Amaiera Ordua: </ion-label>
               <ion-input [(ngModel)]="citaSeleccionada.amaiera_ordua"></ion-input>
             </ion-item>
 
             <ion-item>
-              <ion-label>Izena: </ion-label>
+              <ion-label position="stacked">Izena: </ion-label>
               <ion-input [(ngModel)]="citaSeleccionada.izena"></ion-input>
             </ion-item>
 
             <ion-item>
-              <ion-label>Telefonoa: </ion-label>
+              <ion-label position="stacked">Telefonoa: </ion-label>
               <ion-input [(ngModel)]="citaSeleccionada.telefonoa"></ion-input>
             </ion-item>
 
             <ion-item>
-              <ion-label>Deskribapena: </ion-label>
+              <ion-label position="stacked">Deskribapena: </ion-label>
               <ion-input [(ngModel)]="citaSeleccionada.deskribapena"></ion-input>
             </ion-item>
 
             <ion-item>
-              <ion-label>Etxekoa: </ion-label>
+              <ion-label position="stacked">Etxekoa: </ion-label>
               <ion-input [(ngModel)]="etxekoa"></ion-input>
             </ion-item>
             
             <ion-item>
-              <ion-label>Prezio Totala: </ion-label>
+              <ion-label position="stacked">Prezio Totala: </ion-label>
               <ion-input [(ngModel)]="citaSeleccionada.prezio_totala"></ion-input>
             </ion-item>
 
             <ion-footer>
               <ion-buttons>
                 <ion-button style="--background: var(--ion-color-tertiary); --color: white;" (click)="confirmarCambios()">Confirmar</ion-button>
-                <ion-button style="--background: var(--ion-color-danger); --color: white;"(click)="cancelarCambios()">Cancelar</ion-button>
+                <ion-button style="--background: var(--ion-color-danger); --color: white;"(click)="cancelarCambios()">Borrar</ion-button>
                 <ion-button style="--background: var(--ion-color-warning); --color: white;" (click)="imprimirTicket()">Imprimir Ticket</ion-button>
               </ion-buttons>
             </ion-footer>
