@@ -176,7 +176,8 @@
               <td [ngClass]="{'custom-white-column': par(3), 'custom-tertiary-column': !par(3)}">{{ producto.stock || '-' }}</td>
               <td [ngClass]="{'custom-white-column': par(3), 'custom-tertiary-column': !par(4)}" style="color: black;">{{ producto.kategoriak.izena || '-' }}</td>  
               <td [ngClass]="{'custom-white-column': par(4), 'custom-tertiary-column': !par(5)}">{{ producto.data.sortze_data | date:'yyyy-MM-dd' }}</td>
-              <td [ngClass]="{'custom-white-column': par(5), 'custom-tertiary-column': !par(8)}" style="color: black;">{{ producto.data.eguneratze_data ? (producto.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</td>
+              <td *ngIf="!esHistorial" [ngClass]="{'custom-white-column': par(5), 'custom-tertiary-column': !par(8)}" style="color: black;">{{ producto.data.eguneratze_data ? (producto.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</td>
+              <td *ngIf="esHistorial" [ngClass]="{'custom-white-column': par(5), 'custom-tertiary-column': !par(8)}" style="color: black;">{{ producto.data.ezabatze_data ? (producto.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</td>
               <td [ngClass]="{'custom-white-column': par(6), 'custom-tertiary-column': !par(7)}">
                 <ion-button color="primary" (click)="editarProducto(producto)">EDITATU</ion-button>
               </td>

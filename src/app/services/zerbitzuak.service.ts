@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Zerbitzuak } from '../interfaces/IZerbitzuak';
+import { IZerbitzuak } from '../interfaces/IZerbitzuak';
 
 @Injectable({
   providedIn: 'root'
@@ -12,16 +12,16 @@ export class ZerbitzuakService {
 
   constructor(private http: HttpClient) { }
 
-  getZerbitzuak(): Observable<Zerbitzuak[]> {
-    return this.http.get<Zerbitzuak[]>(`${this.apiUrl}/zerbitzuGuztiak`);
+  getZerbitzuak(): Observable<IZerbitzuak[]> {
+    return this.http.get<IZerbitzuak[]>(`${this.apiUrl}/aktiboak`);
   }
 
-  saveZerbitzuak(zerbitzuak: Zerbitzuak): Observable<Zerbitzuak> {
-    return this.http.post<Zerbitzuak>(`${this.apiUrl}/save`, zerbitzuak);
+  saveZerbitzuak(zerbitzuak: IZerbitzuak): Observable<IZerbitzuak> {
+    return this.http.post<IZerbitzuak>(`${this.apiUrl}/save`, zerbitzuak);
   }
 
-  updateZerbitzuak(zerbitzuak: Zerbitzuak): Observable<Zerbitzuak> {
-    return this.http.put<Zerbitzuak>(`${this.apiUrl}/update`, zerbitzuak);
+  updateZerbitzuak(zerbitzuak: IZerbitzuak): Observable<IZerbitzuak> {
+    return this.http.put<IZerbitzuak>(`${this.apiUrl}/update`, zerbitzuak);
   }
 
   deleteZerbitzuak(id: number): Observable<void> {

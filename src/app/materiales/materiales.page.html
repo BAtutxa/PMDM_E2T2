@@ -43,8 +43,9 @@
         <ion-select-option value="id">{{ 'ID' }}</ion-select-option>
         <ion-select-option value="izena">{{ name }}</ion-select-option>
         <ion-select-option value="etiketa">{{ label }}</ion-select-option>
-        <ion-select-option value="sortze_data">{{ cd }}</ion-select-option>
-        <ion-select-option value="eguneratze_data">{{ ud }}</ion-select-option>
+        <ion-select-option *ngIf="!esHistorial" value="sortze_data">Sortze data</ion-select-option>
+        <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">Eguneratze data</ion-select-option>
+        <ion-select-option *ngIf="esHistorial" value="ezabatze_data">Ezabatze data</ion-select-option>
       </ion-select>
 
       <ion-select [(ngModel)]="ordenActual.ascendente" interface="popover" (ionChange)="ordenarPor(ordenActual.columna)">
@@ -177,8 +178,9 @@
         <ion-select-option value="id">{{ 'ID' }}</ion-select-option>
         <ion-select-option value="izena">{{ name }}</ion-select-option>
         <ion-select-option value="etiketa">{{ label }}</ion-select-option>
-        <ion-select-option value="sortze_data">{{ cd }}</ion-select-option>
-        <ion-select-option value="eguneratze_data">{{ ud }}</ion-select-option>
+        <ion-select-option *ngIf="!esHistorial" value="sortze_data">Sortze data</ion-select-option>
+        <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">Eguneratze data</ion-select-option>
+        <ion-select-option *ngIf="esHistorial" value="ezabatze_data">Ezabatze data</ion-select-option>
       </ion-select>
   
       <ion-label>{{ 'Ordenar: ' }}</ion-label>
