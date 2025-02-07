@@ -269,7 +269,7 @@ export class MaterialesPage implements OnInit {
                 this.aplicarFiltro({ target: { value: '' } });
               }
               this.editandoMaterial = false;
-              //window.location.reload();
+              window.location.reload();
             } catch (error) {
               console.error('Error al borrar el material:', error);
             }
