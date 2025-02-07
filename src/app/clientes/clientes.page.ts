@@ -63,8 +63,11 @@ export class ClientesPage implements OnInit {
       console.log('Se ha restablecido esHistorial a false');
     }
   }
-  
 
+  par(index: number): boolean {
+    return index % 2 === 0; // Devuelve true para columnas pares, false para columnas impares
+  }
+  
   @HostListener('window:resize', ['$event'])
   onResize() {
     this.mobilbista();
@@ -230,7 +233,7 @@ export class ClientesPage implements OnInit {
   }
   
 
-  editarProducto(ficha: IBezero) {
+  editarFicha(ficha: IBezero) {
     this.fichaSeleccionadaAnterior = { ...this.fichaSeleccionada };
     this.editandoFicha = true;
     this.fichaSeleccionada = { ...ficha };
