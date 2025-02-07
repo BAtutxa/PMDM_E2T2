@@ -1,11 +1,11 @@
 :root {
   /* 🎨 Colores principales */
   --ion-color-primary: #1c345c;
-  --ion-color-primary-rgb: 50, 205, 50;
+  --ion-color-primary-rgb: 28, 52, 92; /* Corregido */
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #1c345c;
-  --ion-color-primary-tint: #1c345c;
+  --ion-color-primary-shade: #172a4b;
+  --ion-color-primary-tint: #254273;
   --ion-color-secondary: #031027; 
   --ion-color-tertiary: #41a367;
 
@@ -58,34 +58,21 @@ ion-card-title {
   color: var(--ion-text-color);
 }
 
+.dark td{
+  --color: white;
+  background-color: #1e1e1e;
+  color: #ffffff
+}
+
 /* ✍ Ajustar inputs, labels y selects para que sean visibles en modo oscuro */
 .dark ion-input,
 .dark ion-label,
 .dark ion-select-option,
 .dark ion-select,
-.dark ion-text {
-  color: white;
-}
-
-.dark ion-label {
-  --color: white;  /* Forzar color blanco en modo oscuro */
-  color: white !important;
-}
-
-.dark ion-item {
-  --color: white;
-}
-
-.dark ion-item ion-label {
-  --color: white;
-  color: white !important;
-}
-
-.dark ion-input {
-  --color: white;
-  color: white !important;
-}
-
+.dark ion-text,
+.dark ion-item,
+.dark ion-item ion-label,
+.dark ion-input,
 .dark h1{
   --color: white;
   color: white !important;
