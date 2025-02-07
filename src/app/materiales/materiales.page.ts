@@ -1,3 +1,4 @@
+import { UserService } from './../services/user.service';
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { IonContent } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
@@ -12,6 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./materiales.page.scss'],
 })
 export class MaterialesPage implements OnInit {
+
   @ViewChild(IonContent, { static: false }) content: IonContent | undefined;
 
   editandoMaterial: boolean = false;
@@ -26,6 +28,9 @@ export class MaterialesPage implements OnInit {
   paginaActual = 1;
   paginacionMaxima = 0;
   Math: any;
+  esProfe :boolean = false;
+  esHistorial :boolean = false;
+
 
   // Traducciones
   title!: string;
@@ -40,15 +45,31 @@ export class MaterialesPage implements OnInit {
   editMaterial!: string;
   details!: string;
   close!: string;
+  acabaDeBorrar: boolean = false;
 
-  constructor(private alertController: AlertController, private MaterialService: MaterialService, private translateService: TranslateService) {}
+  constructor(private alertController: AlertController, 
+    private MaterialService: MaterialService, 
+    private translateService: TranslateService,
+    private userService: UserService
+  ) {}
 
   ngOnInit() {
+    this.VerSiEsProfe();
     this.mobilbista();
     this.cargarMateriales();
     this.translateLabels();
     this.translateService.setDefaultLang('es');
     this.translateService.use('es');
+  }
+
+  VerSiEsProfe(){
+    const rola = this.userService.getRola().rola;
+   
+    if(rola === 'IR'){
+      this.esProfe = true;
+    }else{
+      this.esProfe = false;
+    }
   }
 
   @HostListener('window:resize', ['$event'])
@@ -62,9 +83,15 @@ export class MaterialesPage implements OnInit {
 
   async cargarMateriales() {
     try {
-      const data = await firstValueFrom(this.MaterialService.getMateriales());
-      this.materiales = data;
-      this.materialesFiltrados = [...this.materiales];
+      if(!this.esHistorial){
+        const data = await firstValueFrom(this.MaterialService.getMateriales());
+        this.materiales = data;
+        this.materialesFiltrados = [...this.materiales];
+      }else{
+        const data = await firstValueFrom(this.MaterialService.getMaterialesBorrados());
+        this.materiales = data;
+        this.materialesFiltrados = [...this.materiales];
+      }
     } catch (error) {
       console.error('Error al cargar materiales:', error);
     }
@@ -96,14 +123,6 @@ export class MaterialesPage implements OnInit {
     return paginacion;
   }
 
-  verDetalles(material: IEMaterialak) {
-    this.materialSeleccionado = { ...material };
-    this.MaterialConInformacionSeleccionada = true;
-  }
-
-  cerrarModal() {
-    this.MaterialConInformacionSeleccionada = false;
-  }
 
   editarMaterial(material: IEMaterialak) {
     this.MaterialSeleccionadoAnterior = { ...this.materialSeleccionado }; 
@@ -222,6 +241,72 @@ export class MaterialesPage implements OnInit {
         return 0;
       }
     });
+  }
+
+  async eliminarMaterial() {
+    const alert = await this.alertController.create({
+      header: '¿Estás seguro?',
+      message: 'Se borrará el material.',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Confirmar',
+          handler: async () => {
+            const now = new Date();
+            this.materialSeleccionado.data = this.materialSeleccionado.data || {};
+            this.materialSeleccionado.data.ezabatze_data = now;
+  
+            try {
+              console.log('Material antes de actualizar:', this.materialSeleccionado);
+              await firstValueFrom(this.MaterialService.actualizarMaterial(this.materialSeleccionado));
+              const index = this.materiales.findIndex(producto => producto.id === this.materialSeleccionado.id);
+              if (index !== -1) {
+                this.materiales[index] = { ...this.materialSeleccionado };
+                console.log('Material actualizado en la lista:', this.materiales[index]);
+                this.aplicarFiltro({ target: { value: '' } });
+              }
+              this.editandoMaterial = false;
+              //window.location.reload();
+            } catch (error) {
+              console.error('Error al borrar el material:', error);
+            }
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
+
+  async trueEliminarMaterial() {
+    const alert = await this.alertController.create({
+      header: '¿Estás seguro?',
+      message: 'Se borrará definitivamente el material y no se podrá recuperar.',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Confirmar',
+          handler: async () => {
+            try {
+              await firstValueFrom(this.MaterialService.trueEliminarMaterial(this.materialSeleccionado));
+  
+              this.materiales = this.materiales.filter(ficha => ficha.id !== this.materialSeleccionado.id);
+              this.acabaDeBorrar = true; 
+              this.editandoMaterial = false;
+            } catch (error) {
+              console.error('Error al borrar material:', error);
+            }
+          },
+        },
+      ],
+    });
+  
+    await alert.present();
   }
 
   getOrdenClass(columna: string): string {
