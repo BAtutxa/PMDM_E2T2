@@ -49,7 +49,8 @@ ion-datetime {
 
 /* 🎴 Asegurar que los títulos en las cards sean correctos en ambos modos */
 ion-card-title {
-  --color: var(--ion-text-color);
+  --color: white;
+  color: white !important;
 }
 
 /* 🔳 Tarjetas en modo oscuro */
