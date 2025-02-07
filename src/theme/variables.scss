@@ -20,19 +20,19 @@
 
 /* 🌙 Modo oscuro */
 .dark {
-  --ion-background-color: #121212;  /* Fondo oscuro general */
-  --ion-text-color: #ffffff;        /* Texto claro */
+  --ion-background-color: #121212;   /* Fondo oscuro general */
+  --ion-text-color: #ffffff;         /* Texto claro */
   --ion-toolbar-background: #333333; /* Fondo barra herramientas */
   --ion-toolbar-color: #ffffff;      /* Texto barra herramientas */
   --ion-item-background: #1e1e1e;    /* Fondo oscuro para los items */
-  --ion-card-background: #1e1e1e;    /* Fondo oscuro para las tarjetas */
+  --ion-card-background: #000000;    /* Fondo oscuro para las tarjetas */
 
   /* Menú lateral */
   --ion-menu-background: #1e1e1e;
   --ion-menu-color: #ffffff;
 
   /* Datetime */
-  --ion-datetime-background: #1e1e1e !important;
+  --ion-datetime-background: #1e1e1e;
 }
 
 /* 🖌️ Aplicar los colores a los componentes */
@@ -47,7 +47,41 @@ ion-datetime {
   --color: var(--ion-text-color);
 }
 
-/* 🎴 Asegurar que los títulos en las cards sean blancos en modo oscuro */
-.dark ion-card-title {
-  --color: #ffffff;
+/* 🎴 Asegurar que los títulos en las cards sean correctos en ambos modos */
+ion-card-title {
+  --color: var(--ion-text-color);
+}
+
+/* 🔳 Tarjetas en modo oscuro */
+.dark ion-card {
+  background-color: var(--ion-card-background);
+  color: var(--ion-text-color);
+}
+
+/* ✍ Ajustar inputs, labels y selects para que sean visibles en modo oscuro */
+.dark ion-input,
+.dark ion-label,
+.dark ion-select-option,
+.dark ion-select,
+.dark ion-text {
+  color: white;
+}
+
+.dark ion-label {
+  --color: white;  /* Forzar color blanco en modo oscuro */
+  color: white !important;
+}
+
+.dark ion-item {
+  --color: white;
+}
+
+.dark ion-item ion-label {
+  --color: white;
+  color: white !important;
+}
+
+.dark ion-input {
+  --color: white;
+  color: white !important;
 }
