@@ -17,7 +17,7 @@ export class ZerbitzuakService {
   }
 
   saveZerbitzuak(zerbitzuak: IZerbitzuak): Observable<IZerbitzuak> {
-    return this.http.post<IZerbitzuak>(`${this.apiUrl}/save`, zerbitzuak);
+    return this.http.post<IZerbitzuak>(`${this.apiUrl}/insert`, zerbitzuak);
   }
 
   updateZerbitzuak(zerbitzuak: IZerbitzuak): Observable<IZerbitzuak> {

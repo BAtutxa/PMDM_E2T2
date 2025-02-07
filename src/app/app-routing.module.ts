@@ -101,6 +101,10 @@ const routes: Routes = [
   {
     path: 'crearmaterial',
     loadChildren: () => import('./crearmaterial/crearmaterial.module').then( m => m.CrearmaterialPageModule)
+  },
+  {
+    path: 'crear-servicio',
+    loadChildren: () => import('./crear-servicio/crear-servicio.module').then( m => m.CrearServicioPageModule)
   }
 
 ];
