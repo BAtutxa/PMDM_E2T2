@@ -97,6 +97,10 @@ const routes: Routes = [
   {
     path: 'crear-productos',
     loadChildren: () => import('./crear-productos/crear-productos.module').then( m => m.CrearProductosPageModule)
+  },
+  {
+    path: 'crearmaterial',
+    loadChildren: () => import('./crearmaterial/crearmaterial.module').then( m => m.CrearmaterialPageModule)
   }
 
 ];

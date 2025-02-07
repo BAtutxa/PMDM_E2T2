@@ -94,14 +94,22 @@
             </ion-note>
           </ion-item>
           <!-- Tienes que poner informacion del historial cuando este -->
-          <ion-button expand="full" (click)="confirmarEdicion()"  type="submit" [disabled]="materialForm.invalid">{{confirm}}</ion-button>
+          <ion-button expand="full" color="tertiary" (click)="confirmarEdicion()"  type="submit" [disabled]="materialForm.invalid">{{confirm}}</ion-button>
           <ion-button expand="full" color="danger" (click)="cancelarEdicion()">{{cancel}}</ion-button>
-          <ion-button expand="full" class="custom-blue-button" (click)="verDetalles(materialSeleccionado)">
-            {{info}}
+          <ion-button *ngIf="esProfe" expand="full" class="custom-red-button" (click)="eliminarMaterial()">
+            Borrar material
           </ion-button>
         </form>
         </ion-card-content>
       </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf= "esProfe">
+    <ion-col size="12" class="ion-text-center">
+      <ion-button color="primary" expand="block" [routerLink]="'/crearmaterial'">Añadir material
+        <ion-icon name="add-circle-outline"></ion-icon>
+      </ion-button>
     </ion-col>
   </ion-row>
 
@@ -129,7 +137,6 @@
               <td>{{ material.data.eguneratze_data ? (material.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</td>
               <td>
                 <ion-button color="primary" (click)="editarMaterial(material)">EDITATU</ion-button>
-                <ion-button color="primary" (click)="verDetalles(material)">INFO</ion-button>
               </td>
             </tr>
           </tbody>
@@ -137,28 +144,6 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
-
-  <!-- Modal para ver detalles del material -->
-  <ion-modal [isOpen]="MaterialConInformacionSeleccionada" (ionModalDidDismiss)="cerrarModal()" (click)="cerrarModal()">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>{{ info }}</ion-title>
-        <ion-buttons slot="end">
-          <ion-button (click)="cerrarModal()">{{ cancel }}</ion-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content>
-      <div class="card-modal" *ngIf="materialSeleccionado" (click)="$event.stopPropagation()">
-        <p><strong>{{ info }}:</strong> {{ materialSeleccionado.deskribapena || '-' }}</p>
-        <p><strong>{{ name }}:</strong> {{ materialSeleccionado.izena || '-' }}</p>
-        <p><strong>{{ label }}:</strong> {{ materialSeleccionado.etiketa || '-' }}</p>
-        <p><strong>{{ cd }}:</strong> {{ materialSeleccionado.data?.sortze_data || '-' }}</p>
-        <p><strong>{{ ud }}:</strong> {{ materialSeleccionado.data?.eguneratze_data || '-' }}</p>
-      </div>
-    </ion-content>
-  </ion-modal>  
 </ion-content>
 
 <!--MOVIL-->
@@ -246,12 +231,20 @@
           <!-- Tienes que poner informacion del historial cuando este -->
           <ion-button expand="full" (click)="confirmarEdicion()"  type="submit" [disabled]="materialForm.invalid">{{confirm}}</ion-button>
           <ion-button expand="full" color="danger" (click)="cancelarEdicion()">{{cancel}}</ion-button>
-          <ion-button expand="full" class="custom-blue-button" (click)="verDetalles(materialSeleccionado)">
-            {{info}}
+          <ion-button *ngIf="esProfe" expand="full" class="custom-red-button" (click)="eliminarMaterial()">
+            Borrar material
           </ion-button>
         </form>
         </ion-card-content>
       </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row *ngIf= "esProfe">
+    <ion-col size="12" class="ion-text-center">
+      <ion-button color="primary" expand="block" [routerLink]="'/crearmaterial'">Añadir material
+        <ion-icon name="add-circle-outline"></ion-icon>
+      </ion-button>
     </ion-col>
   </ion-row>
 
@@ -267,34 +260,10 @@
           <p><strong>Etiketa:</strong> {{ material.etiketa || '-' }}</p>
           <p><strong>Sorte Data:</strong> {{ material.data.sortze_data | date:'yyyy-MM-dd' }}</p>
           <p><strong>Eguneratze Data:</strong> {{ material.data.eguneratze_data ? (material.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>
-          <ion-button color="primary" (click)="editarMaterial(material)">EDITATU</ion-button>
-          <ion-button color="primary" (click)="verDetalles(material)">INFO</ion-button>
+          <ion-button color="tertiary" (click)="editarMaterial(material)">EDITATU</ion-button>
         </ion-card-content>
       </ion-card>
     </ion-col>
   </ion-row>
-  
-
-  <!-- Modal para ver detalles del producto -->
-  <ion-modal [isOpen]="MaterialConInformacionSeleccionada" (ionModalDidDismiss)="cerrarModal()" (click)="cerrarModal()">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>{{ details }}</ion-title>
-        <ion-buttons slot="end">
-          <ion-button (click)="cerrarModal()">{{ close }}</ion-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content>
-      <div *ngIf="materialSeleccionado" (click)="$event.stopPropagation()" class="card-modal">
-        <p><strong>{{ info }}:</strong> {{ materialSeleccionado.deskribapena || '-' }}</p>
-        <p><strong>{{ name }}:</strong> {{ materialSeleccionado.izena || '-' }}</p>
-        <p><strong>{{ label }}:</strong> {{ materialSeleccionado.etiketa || '-' }}</p>
-        <p><strong>Stock alerta:</strong> {{ materialSeleccionado.stock_alerta || '-' }}</p>
-        <p><strong>{{ cd }}:</strong> {{ materialSeleccionado.data?.sortze_data ? (materialSeleccionado.data.sortze_data | date:'yyyy-MM-dd') : '-' }}</p>
-        <p><strong>{{ ud }}:</strong> {{ materialSeleccionado.data?.eguneratze_data ? (materialSeleccionado.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>
-      </div>
-    </ion-content>
-  </ion-modal>
 </ion-content>
 </ion-app>
