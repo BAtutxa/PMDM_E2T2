@@ -294,7 +294,8 @@
 
   <ion-row>
     <ion-col class="ion-text-center">
-      <ion-button color="primary" expand="block" [routerLink]="'/crear-ficha'">Añadir ficha</ion-button>
+      <ion-button *ngIf="!esHistorial" color="primary" expand="block" [routerLink]="'/crear-ficha'">Añadir ficha <ion-icon name="add-circle-outline"></ion-icon></ion-button>
+      
     </ion-col>
   </ion-row>
 

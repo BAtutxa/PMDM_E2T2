@@ -9,7 +9,7 @@
   <ion-grid class="container">
     <ion-row class="buttons-row">
       <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-        <ion-button (click)="cambiarAClientes($event)" class="custom-button">
+        <ion-button (click)="cambiarAClientes()" class="custom-button">
           <img src="assets/Images/client.png" alt="Bezeroak" class="button-icon" />
           <span>Bezero-fitxak</span>
         </ion-button>
@@ -27,13 +27,13 @@
         </ion-button>
       </ion-col>
       <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-        <ion-button shape="" href="calendario" class="custom-button">
+        <ion-button shape="" href="gestionar-citas" class="custom-button">
           <img src="assets/Images/citas.jpg" alt="Hitzorduak" class="button-icon" />
           <span>Hitzorduak</span>
         </ion-button>
       </ion-col>
       <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-        <ion-button shape="" [routerLink]="'/productos'" class="custom-button">
+        <ion-button shape=""  (click)="cambiarAProductos()"  class="custom-button">
           <img src="assets/Images/productos.png" alt="Produktuak" class="button-icon" />
           <span>Produktuak</span>
         </ion-button>
@@ -51,7 +51,7 @@
         </ion-button>
       </ion-col>
       <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-        <ion-button shape="" (click)="cambiarACategorias($event)"  class="custom-button">
+        <ion-button shape="" (click)="cambiarACategorias()"  class="custom-button">
           <img src="assets/Images/inventario.webp" alt="Kategoriak" class="button-icon" />
           <span>Kategoriak</span>
         </ion-button>

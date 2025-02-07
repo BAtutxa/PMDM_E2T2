@@ -16,7 +16,7 @@ export class HistorialaPage{
     private historialService: EsHistorialService
   ) { }
 
-    cambiarAClientes(event: Event) {
+    cambiarAClientes() {
       this.historialService.setEsHistorial(true);  
       this.router.navigate(['/clientes']).then(() => {
           window.location.reload(); // Recarga la página
@@ -25,13 +25,22 @@ export class HistorialaPage{
       this.router.navigate(['/clientes'], { queryParams: { desdeHistorial: 'true' } });
   }
 
-  cambiarACategorias(event: Event) {
+  cambiarACategorias() {
       this.historialService.setEsHistorial(true);  
       this.router.navigate(['/categorias']).then(() => {
           window.location.reload(); // Recarga la página
       });
       this.menuCtrl.open();
       this.router.navigate(['/categorias'], { queryParams: { desdeHistorial: 'true' } });
+  }
+
+  cambiarAProductos(){
+    this.historialService.setEsHistorial(true);  
+    this.router.navigate(['/productos']).then(() => {
+        window.location.reload(); // Recarga la página
+    });
+    this.menuCtrl.open();
+    this.router.navigate(['/productos'], { queryParams: { desdeHistorial: 'true' } });
   }
   
 }

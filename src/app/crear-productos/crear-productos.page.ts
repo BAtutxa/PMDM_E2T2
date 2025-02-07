@@ -3,29 +3,7 @@ import { ProductoService } from '../services/productos.service';
 import { KategoriaService } from '../services/Kategoria.Service';
 import { IKategoria } from '../interfaces/IKategoria';
 import { Router } from '@angular/router';
-
-export interface IEProduktuak {
-  id: number | null;
-  izena: string;
-  deskribapena: string | null;
-  kategoriak: {
-    id: number | null;
-    izena: string;
-    data: {
-      sortze_data: Date | null; 
-      eguneratze_data: Date | null;
-      ezabatze_data: Date | null;
-    };
-  };
-  marka: string;
-  stock: number | null;
-  stock_alerta: number | null;
-  data: {
-    sortze_data: Date | null; 
-    eguneratze_data: Date | null;
-    ezabatze_data: Date | null;
-  };
-}
+import { IEProduktuak } from '../interfaces/IEProduktuak';
 
 @Component({
   selector: 'app-crear-productos',
@@ -56,12 +34,18 @@ export class CrearProductosPage implements OnInit {
     },
   };
 
-  categorias: IKategoria[] = []; // Guardará las categorías cargadas desde el backend
+  categorias: IKategoria[] = [];  
+  productos: IEProduktuak[] = [];  // Almacena la lista reactiva de productos
 
-  constructor(private productoService: ProductoService, private router: Router, private kategoriaService :KategoriaService) {}
+  constructor(
+    private productoService: ProductoService,
+    private router: Router,
+    private kategoriaService: KategoriaService
+  ) {}
 
   ngOnInit() {
     this.cargarCategorias();
+    this.suscribirseAProductos(); // ✅ Se suscribe a cambios en la lista de productos
   }
 
   cargarCategorias() {
@@ -75,6 +59,17 @@ export class CrearProductosPage implements OnInit {
     });
   }
 
+  suscribirseAProductos() {
+    this.productoService.productos$.subscribe({
+      next: (productos: IEProduktuak[]) => {
+        this.productos = productos;  // ✅ Se actualiza la lista local cuando cambia el servicio
+      },
+      error: (error: any) => {
+        console.error('Error al suscribirse a productos:', error);
+      }
+    });
+  }
+
   guardarProducto() {
     if (!this.producto.izena || !this.producto.marka || !this.producto.kategoriak.id || !this.producto.stock || !this.producto.stock_alerta) {
       console.error('Por favor, completa todos los campos obligatorios.');
@@ -82,9 +77,14 @@ export class CrearProductosPage implements OnInit {
     }
 
     this.productoService.crearProducto(this.producto).subscribe({
-      next: (response: IEProduktuak) => {
+      next: (nuevoProducto: IEProduktuak) => {
         alert("Tu producto ha sido creado.");
-        this.router.navigate(['/productos']);
+        this.producto = {  // ✅ Resetea el formulario tras la creación
+          id: null, izena: '', marka: '', deskribapena: null, stock: null, stock_alerta: null,
+          kategoriak: { id: null, izena: '', data: { sortze_data: new Date(), eguneratze_data: new Date(), ezabatze_data: null } },
+          data: { sortze_data: new Date(), eguneratze_data: new Date(), ezabatze_data: null }
+        };
+        window.location.reload();
       },
       error: (error: any) => {
         console.error('Error al crear el producto:', error);

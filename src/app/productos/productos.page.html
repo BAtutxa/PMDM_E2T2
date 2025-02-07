@@ -135,9 +135,17 @@
           <!-- Tienes que poner informacion del historial cuando este -->
           <ion-button color="tertiary" expand="full" (click)="confirmarEdicion()"  type="submit" [disabled]="productoForm.invalid">KONFIRMATU</ion-button>
           <ion-button expand="full" color="danger" (click)="cancelarEdicion()">UTZI</ion-button>
-          <ion-button *ngIf="esProfe" expand="full"  class="custom-red-button" (click)="eliminarProducto()">
+          <ion-button *ngIf="esProfe && !esHistorial" expand="full"  class="custom-red-button" (click)="eliminarProducto()">
             Borrar producto
           </ion-button>
+          <ion-button *ngIf="esHistorial" expand="full" class="custom-gray-button" type="button" (click)="confirmarBorrado()">
+            Confirmar borrado
+          </ion-button>
+          
+          <ion-button *ngIf="esHistorial" expand="full" class="custom-purple-button" type="button" (click)="restaurarProducto()">
+            Restaurar ficha
+          </ion-button>
+
         </form>
         </ion-card-content>
       </ion-card>
@@ -146,7 +154,7 @@
 
   <ion-row *ngIf= "esProfe">
     <ion-col size="12" class="ion-text-center">
-      <ion-button color="primary" expand="block" [routerLink]="'/crear-productos'">Añadir producto
+      <ion-button *ngIf="!esHistorial && esProfe" color="primary" expand="block" [routerLink]="'/crear-productos'">Añadir producto
         <ion-icon name="add-circle-outline"></ion-icon>
       </ion-button>
     </ion-col>
@@ -163,8 +171,9 @@
               <th>MARKA</th>
               <th>STOCK</th>
               <th>KATEGORIA</th>
-              <th>SORTZE-DATA</th>
-              <th>EGUNERATZE-DATA</th>
+              <th>SORTZE DATA</th>
+              <th *ngIf="!esHistorial">EGUNERATZE DATA</th>
+              <th *ngIf="esHistorial">EZABATZE DATA</th>
               <th>EKINTZAK</th>
             </tr>
           </thead>
@@ -219,6 +228,7 @@
         <ion-select-option value="izena">{{ name }}</ion-select-option>
         <ion-select-option value="marka">{{ brand }}</ion-select-option>
         <ion-select-option value="stock">Stock</ion-select-option>
+        <ion-select-option value="kategoriak.izena">Kategoria</ion-select-option>
         <ion-select-option value="sortze_data">{{ cd }}</ion-select-option>
         <ion-select-option value="eguneratze_data">{{ ud }}</ion-select-option>
       </ion-select>
@@ -246,7 +256,7 @@
 
   <ion-row *ngIf= "esProfe">
     <ion-col size="12" class="ion-text-center">
-      <ion-button color="primary" expand="block" [routerLink]="'/crear-productos'">Añadir producto
+      <ion-button  *ngIf="!esHistorial && esProfe"  color="primary" expand="block" [routerLink]="'/crear-productos'">Añadir producto
         <ion-icon name="add-circle-outline"></ion-icon>
       </ion-button>
     </ion-col>
@@ -319,9 +329,17 @@
           <!-- Tienes que poner informacion del historial cuando este -->
           <ion-button color="tertiary" expand="full" (click)="confirmarEdicion()" type="submit" [disabled]="productoForm.invalid">KONFIRMATU</ion-button>
           <ion-button expand="full" color="danger" (click)="cancelarEdicion()">UTZI</ion-button>
-          <ion-button *ngIf="esProfe" expand="full" class="custom-red-button" (click)="eliminarProducto()">
+          <ion-button *ngIf="esProfe && !esHistorial" expand="full" class="custom-red-button" (click)="eliminarProducto()">
             Borrar producto
           </ion-button>
+          <ion-button *ngIf="esHistorial" expand="full" class="custom-gray-button" type="button" (click)="confirmarBorrado()">
+            Confirmar borrado
+          </ion-button>
+          
+          <ion-button *ngIf="esHistorial" expand="full" class="custom-purple-button" type="button" (click)="restaurarProducto()">
+            Restaurar ficha
+          </ion-button>
+
         </form>
       </ion-card-content>
     </ion-card>

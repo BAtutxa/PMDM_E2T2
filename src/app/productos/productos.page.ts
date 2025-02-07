@@ -8,6 +8,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { KategoriaService } from '../services/Kategoria.Service';
 import { IKategoria } from '../interfaces/IKategoria';
 import { UserService } from '../services/user.service';
+import { EsHistorialService } from '../services/EsHistorial.service';
+import { ActivatedRoute, Route } from '@angular/router';
 
 @Component({
   selector: 'app-productos',
@@ -46,26 +48,44 @@ export class ProductosPage implements OnInit {
   cancel: string = ''
   info: string = ''
   search: string = ''
-  esHistorial: Boolean = false;
+  esHistorial: boolean = false;
   esProfe: Boolean = false;
+  acabaDeBorrar: Boolean = false;
 
   constructor(
     private alertController: AlertController, 
     private productoService: ProductoService, 
     private translateService: TranslateService, 
     private kategoriakService: KategoriaService,
-    private userService:UserService
+    private userService:UserService,
+    private historialService : EsHistorialService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
+    // Leer el parámetro "desdeHistorial" de la URL
+    this.route.queryParams.subscribe(params => {
+      this.esHistorial = params['desdeHistorial'] === 'true';
+      this.historialService.setEsHistorial(this.esHistorial);
+      console.log("Historial:", this.esHistorial);
+    });
     this.VerSiEsProfe();
     this.mobilbista();
     this.cargarProductos();
     this.cargarCategorias();
     this.translateLabels();
-
     this.translateService.setDefaultLang('es');
     this.translateService.use('es');
+
+  }
+
+  ngOnDestroy() {
+    if (this.acabaDeBorrar) {
+      console.log('Ficha eliminada, no se restablece esHistorial.');
+    } else {
+      this.historialService.resetEsHistorial();
+      console.log('Se ha restablecido esHistorial a false');
+    }
   }
 
   VerSiEsProfe(){
@@ -106,9 +126,16 @@ export class ProductosPage implements OnInit {
 
   async cargarProductos() {
     try {
-      const data = await firstValueFrom(this.productoService.getProductosActivos());
+      if(this.esHistorial){
+        const data = await firstValueFrom(this.productoService.getProductosEliminados());
       this.productos = data;
       this.productosFiltrados = [...this.productos];
+      }else{
+        const data = await firstValueFrom(this.productoService.getProductosActivos());
+        this.productos = data;
+        this.productosFiltrados = [...this.productos];
+      }
+      
     } catch (error) {
       console.error('Error al cargar productos:', error);
     }
@@ -337,6 +364,103 @@ async eliminarProducto() {
   });
   await alert.present();
 }
+
+async confirmarBorrado() {
+  const alert = await this.alertController.create({
+    header: '¿Estás seguro?',
+    message: 'Se borrará definitivamente el producto y no se podrá recuperar.',
+    buttons: [
+      {
+        text: 'Cancelar',
+        role: 'cancel',
+      },
+      {
+        text: 'Confirmar',
+        handler: async () => {
+          try {
+            // 1. Eliminar el producto permanentemente
+            await firstValueFrom(this.productoService.eliminarProductoPermanente(this.productoSeleccionado.id));
+
+            // 2. Actualizar la lista de productos eliminando el producto eliminado
+            this.productos = this.productos.filter(producto => producto.id !== this.productoSeleccionado.id);
+            this.acabaDeBorrar = true;
+            this.editandoProducto = false;
+
+            // 3. Mostrar alerta de éxito después de la eliminación
+            const successAlert = await this.alertController.create({
+              header: 'Producto Eliminado',
+              message: 'El producto ha sido borrado correctamente.',
+              buttons: [
+                {
+                  text: 'OK',
+                  handler: () => {
+                    // Recargar la página cuando se presione OK
+                    window.location.reload();
+                  },
+                },
+              ],
+            });
+
+            // Mostrar la alerta de éxito
+            await successAlert.present();
+
+          } catch (error) {
+            console.error('Error al borrar producto:', error);
+            // Si ocurre un error, podemos mostrar una alerta de error si lo deseamos
+            const errorAlert = await this.alertController.create({
+              header: 'Error',
+              message: 'Hubo un error al intentar eliminar el producto. Por favor, inténtalo de nuevo.',
+              buttons: ['OK'],
+            });
+            await errorAlert.present();
+          }
+        },
+      },
+    ],
+  });
+
+  await alert.present();
+}
+
+  async restaurarProducto(){
+    const alert = await this.alertController.create({
+      header: '¿Estás seguro?',
+      message: 'Se restaurará el producto.',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Confirmar',
+          handler: async () => {
+            const now = new Date();
+            this.productoSeleccionado.data = this.productoSeleccionado.data || {};
+            this.productoSeleccionado.data.ezabatze_data = null; 
+            this.productoSeleccionado.data.eguneratze_data = now; 
+  
+            try {
+              const productoRestaurado = await firstValueFrom(this.productoService.actualizarProducto(this.productoSeleccionado));
+              
+              const index = this.productos.findIndex(producto => producto.id === productoRestaurado.id);
+              if (index !== -1) {
+                this.productos[index] = productoRestaurado;
+              }
+  
+              this.acabaDeBorrar = true;
+              this.editandoProducto = false;
+              window.location.reload();
+          
+            } catch (error) {
+              console.error('Error al restaurar producto:', error);
+            }
+          },
+        },
+      ],
+    });
+  
+    await alert.present();
+  }
 
   translateLabels() {
     this.translateService.get([
