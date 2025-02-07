@@ -142,14 +142,6 @@ export class ProductosPage implements OnInit {
     return paginacion;
   }
 
-  verDetalles(producto: IEProduktuak) {
-    this.productoSeleccionado = { ...producto };
-    this.productoConInformacionSeleccionada = true;
-  }
-
-  cerrarModal() {
-    this.productoConInformacionSeleccionada = false;
-  }
 
   editarProducto(producto: IEProduktuak) {
     this.productoSeleccionadoAnterior = { ...this.productoSeleccionado };

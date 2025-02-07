@@ -105,12 +105,36 @@
               La categoría es obligatoria.
             </ion-note>            
           </ion-item>
+          <ion-item>
+            <ion-label position="floating">Stock</ion-label>
+            <ion-input 
+              [(ngModel)]="productoSeleccionado.stock" 
+              name="stock" 
+              #stock="ngModel" 
+              required
+              [disabled]="!esProfe">
+            </ion-input>
+            <ion-note *ngIf="stock.invalid && stock.touched" color="danger">
+              El stock es obligatorio.
+            </ion-note>
+          </ion-item>
+          
+          <ion-item>
+            <ion-label position="floating">Stock Alerta</ion-label>
+            <ion-input 
+              [(ngModel)]="productoSeleccionado.stock_alerta" 
+              name="stock_alerta" 
+              #stock_alerta="ngModel" 
+              required
+              [disabled]="!esProfe">
+            </ion-input>
+            <ion-note *ngIf="stock_alerta.invalid && stock_alerta.touched" color="danger">
+              La alerta de stock es obligatoria.
+            </ion-note>
+          </ion-item>          
           <!-- Tienes que poner informacion del historial cuando este -->
           <ion-button color="tertiary" expand="full" (click)="confirmarEdicion()"  type="submit" [disabled]="productoForm.invalid">KONFIRMATU</ion-button>
           <ion-button expand="full" color="danger" (click)="cancelarEdicion()">UTZI</ion-button>
-          <ion-button expand="full" class="custom-blue-button" (click)="verDetalles(productoSeleccionado)">
-            INFO
-          </ion-button>
           <ion-button *ngIf="esProfe" expand="full"  class="custom-red-button" (click)="eliminarProducto()">
             Borrar producto
           </ion-button>
@@ -155,7 +179,6 @@
               <td [ngClass]="{'custom-white-column': par(5), 'custom-tertiary-column': !par(8)}" style="color: black;">{{ producto.data.eguneratze_data ? (producto.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</td>
               <td [ngClass]="{'custom-white-column': par(6), 'custom-tertiary-column': !par(7)}">
                 <ion-button color="primary" (click)="editarProducto(producto)">EDITATU</ion-button>
-                <ion-button color="primary" (click)="verDetalles(producto)">INFO</ion-button>
               </td>
             </tr>
           </tbody>
@@ -163,26 +186,6 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
-  <!-- Modal para ver detalles del producto -->
-  <ion-modal [isOpen]="productoConInformacionSeleccionada" (ionModalDidDismiss)="cerrarModal()">
-    <div class="modal-overlay" (click)="cerrarModal()">
-      <ion-card class="info-card" color="tertiary" *ngIf="productoSeleccionado" (click)="$event.stopPropagation()">
-        <ion-card-header>
-          <ion-card-title>PRODUKTUAREN INFORMAZIOA</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <p><strong>INFORMAZIOA:</strong> {{ productoSeleccionado.deskribapena || '-' }}</p>
-          <p><strong>IZENA:</strong> {{ productoSeleccionado.izena || '-'  }}</p>
-          <p><strong>MARKA:</strong> {{ productoSeleccionado.marka || '-'  }}</p>
-          <p><strong>KATEGORIA:</strong> {{ productoSeleccionado.kategoriak && productoSeleccionado.kategoriak.izena ? productoSeleccionado.kategoriak.izena : '-' }}</p>
-          <p><strong>STOCK ALERTA:</strong> {{ productoSeleccionado.stock_alerta || '-'  }}</p>
-          <p><strong>SORTZE-DATA:</strong> {{ productoSeleccionado.data?.eguneratze_data || '-'  }}</p>
-          <p><strong>EGUNERATZE-DATA:</strong> {{ productoSeleccionado.data?.sortze_data || '-'  }}</p>
-        </ion-card-content>
-      </ion-card>
-    </div>
-  </ion-modal>
 </ion-content>
 
 <ion-content [fullscreen]="true" *ngIf="mobilaDa">
@@ -284,12 +287,37 @@
               La categoría es obligatoria.
             </ion-note>            
           </ion-item>
+          <ion-item>
+            <ion-label position="floating">Stock</ion-label>
+            <ion-input 
+              [(ngModel)]="productoSeleccionado.stock" 
+              name="stock" 
+              #stock="ngModel" 
+              required
+              [disabled]="!esProfe">
+            </ion-input>
+            <ion-note *ngIf="stock.invalid && stock.touched" color="danger">
+              El stock es obligatorio.
+            </ion-note>
+          </ion-item>
+          
+          <ion-item>
+            <ion-label position="floating">Stock Alerta</ion-label>
+            <ion-input 
+              [(ngModel)]="productoSeleccionado.stock_alerta" 
+              name="stock_alerta" 
+              #stock_alerta="ngModel" 
+              required
+              [disabled]="!esProfe">
+            </ion-input>
+            <ion-note *ngIf="stock_alerta.invalid && stock_alerta.touched" color="danger">
+              La alerta de stock es obligatoria.
+            </ion-note>
+          </ion-item>        
+          
           <!-- Tienes que poner informacion del historial cuando este -->
           <ion-button color="tertiary" expand="full" (click)="confirmarEdicion()" type="submit" [disabled]="productoForm.invalid">KONFIRMATU</ion-button>
           <ion-button expand="full" color="danger" (click)="cancelarEdicion()">UTZI</ion-button>
-          <ion-button expand="full" class="custom-blue-button" (click)="verDetalles(productoSeleccionado)">
-            INFO
-          </ion-button>
           <ion-button *ngIf="esProfe" expand="full" class="custom-red-button" (click)="eliminarProducto()">
             Borrar producto
           </ion-button>
@@ -320,30 +348,6 @@
     </ion-col>
   </ion-row>
 
-  <!-- Modal para ver detalles del producto -->
-  <ion-modal [isOpen]="productoConInformacionSeleccionada" (ionModalDidDismiss)="cerrarModal()" (click)="cerrarModal()">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>{{info}}</ion-title>
-        <ion-buttons slot="end">
-          <ion-button (click)="cerrarModal()">{{cancel}}</ion-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content>
-      <div *ngIf="productoSeleccionado" (click)="$event.stopPropagation()">
-        <p><strong>{{info}}:</strong> {{ productoSeleccionado.deskribapena || '-' }}</p>
-        <p><strong>{{name}}:</strong> {{ productoSeleccionado.izena || '-'  }}</p>
-        <p><strong>{{brand}}:</strong> {{ productoSeleccionado.marka || '-'  }}</p>
-        <p><strong>{{id_category}}:</strong> {{ productoSeleccionado.kategoriak && productoSeleccionado.kategoriak.izena ? productoSeleccionado.kategoriak.izena : '-' }}</p>
-        <p><strong>Stock alerta:</strong> {{ productoSeleccionado.stock_alerta || '-'  }}</p>
-        <p><strong>{{cd}}:</strong> {{ productoSeleccionado.data?.eguneratze_data || '-'  }}</p>
-        <p><strong>{{ud}}:</strong> {{ productoSeleccionado.data?.sortze_data || '-'  }}</p>
-       
-        <!-- Información del historial cuando esté disponible -->
-      </div>
-    </ion-content>
-  </ion-modal>
 </ion-content>
 
 </ion-app>
