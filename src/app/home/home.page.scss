@@ -59,40 +59,58 @@ ion-item {
 /* Responsive styles */
 @media (max-width: 767px) {
   .login-image {
-    max-width: 150px; /* Reduce la imagen en pantallas más pequeñas */
+    max-width: 150px;
   }
-
   .login-card {
-    width: 90%; /* Aumenta el ancho del formulario en pantallas pequeñas */
+    width: 90%;
   }
-
   ion-card-title {
-    font-size: 1.2rem; /* Reduce el tamaño de la fuente del título */
+    font-size: 1.2rem;
   }
-
   .submit-button {
-    padding: 12px; /* Aumenta el padding del botón */
+    padding: 12px;
   }
 }
 
-/* Ajustes para pantallas medianas */
 @media (min-width: 768px) and (max-width: 1023px) {
   .login-card {
-    width: 80%; /* Ancho del formulario más pequeño en pantallas medianas */
+    width: 80%;
   }
-
   .login-image {
-    max-width: 180px; /* Ajusta el tamaño de la imagen */
+    max-width: 180px;
   }
 }
 
-/* Ajustes para pantallas grandes */
 @media (min-width: 1024px) {
   .login-card {
-    width: 60%; /* Ancho del formulario más grande en pantallas grandes */
+    width: 60%;
   }
-
   .login-image {
-    max-width: 200px; /* Imagen más grande */
+    max-width: 200px;
   }
+}
+
+/* Personaliza el fondo del input para que sea transparente o del mismo color que el fondo */
+ion-item[color="primary"] {
+  --background: transparent;  /* Esto hace el fondo transparente */
+  --border-color: transparent;  /* Esto elimina el borde */
+}
+
+/* Si quieres que el texto del input se vea mejor sobre el fondo */
+ion-input {
+  --color: white;  /* Cambia el color del texto dentro del input */
+}
+
+/* Estilo para inputs con autocompletado */
+ion-input:-webkit-autofill {
+  background: transparent !important;  /* Fondo transparente cuando se autocompleta */
+  border-color: transparent !important; /* Elimina el borde */
+  color: white !important;  /* Color del texto */
+  box-shadow: none !important;  /* Elimina cualquier sombra */
+}
+
+/* Si es necesario, también puedes aplicar esto para los ion-items */
+ion-item[color="primary"]:-webkit-autofill {
+  background: transparent !important; /* Fondo transparente en ion-item */
+  border-color: transparent !important; /* Elimina el borde */
 }
