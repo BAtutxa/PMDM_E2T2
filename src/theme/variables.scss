@@ -49,8 +49,8 @@ ion-datetime {
 
 /* 🎴 Asegurar que los títulos en las cards sean correctos en ambos modos */
 ion-card-title {
-  --color: white;
-  color: white !important;
+  --color: var(--ion-text-color);
+  color: var(--ion-text-color) !important;
 }
 
 /* 🔳 Tarjetas en modo oscuro */
@@ -59,13 +59,19 @@ ion-card-title {
   color: var(--ion-text-color);
 }
 
-.dark td{
-  --color: white;
+/* 🔲 Estilos de tablas en modo oscuro */
+.dark .custom-table td,
+.dark .custom-table th {
   background-color: #1e1e1e;
-  color: #ffffff
+  color: #ffffff !important; /* Para asegurar que el texto sea blanco */
 }
 
-/* ✍ Ajustar inputs, labels y selects para que sean visibles en modo oscuro */
+.dark .custom-table th {
+  background-color: var(--ion-color-primary); /* Para que el encabezado de la tabla siga el color primario */
+  color: #ffffff;
+}
+
+/* ✍ Ajustar inputs, labels, selects, items y encabezados en modo oscuro */
 .dark ion-input,
 .dark ion-label,
 .dark ion-select-option,
@@ -74,7 +80,15 @@ ion-card-title {
 .dark ion-item,
 .dark ion-item ion-label,
 .dark ion-input,
-.dark h1{
+.dark h1,
+.dark .custom-table td {
   --color: white;
   color: white !important;
 }
+
+/* Estilo para celdas de tabla */
+.dark .custom-table td {
+  color: white !important;
+  background-color: #1e1e1e; /* Fondo oscuro para las celdas */
+}
+
