@@ -24,6 +24,9 @@
     "ADMINISTRATION": "Administracion",
     "LOGOUT": "Cerrar sesion"
   },
+  "CALENDAR": {
+    "SELECT_DAY": "Selecciona un día"
+  },
 
   "INVENTORY": {
     "TITLE": "Inventario",

@@ -23,6 +23,9 @@
     "ADMINISTRATION": "Administrazioa",
     "LOGOUT": "Sesioa itxi"
   },
+  "CALENDAR": {
+    "SELECT_DAY": "Hautatu egun bat"
+  },
   "INVENTORY": {
     "TITLE": "Inbentarioa",
     "PRODUCT": "Produktuak",
