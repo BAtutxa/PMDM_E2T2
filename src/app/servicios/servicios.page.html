@@ -41,11 +41,11 @@
       <ion-select [(ngModel)]="ordenActual.columna" interface="popover" (ionChange)="ordenarPor(ordenActual.columna)">
         <ion-select-option value="id">{{ 'ID' }}</ion-select-option>
         <ion-select-option value="izena">{{ name }}</ion-select-option>
-        <ion-select-option value="etxeko_prezioa">Etxeko prezioa</ion-select-option>
-        <ion-select-option value="kanpoko_prezioa">kanpoko_prezioa prezioa</ion-select-option>
-        <ion-select-option *ngIf="!esHistorial" value="kanpoko_prezioa">Kanpoko prezioa</ion-select-option>
-        <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">eguneratze_data</ion-select-option>
-        <ion-select-option *ngIf="esHistorial" value="eguneratze_data">Ezabatze_data</ion-select-option>
+        <ion-select-option value="etxeko_prezioa">Precio de casa</ion-select-option>
+        <ion-select-option value="kanpoko_prezioa">Precio de fuera</ion-select-option>
+        <ion-select-option *ngIf="!esHistorial" value="kanpoko_prezioa">Precio de fuera</ion-select-option>
+        <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">Fecha de actualización</ion-select-option>
+        <ion-select-option *ngIf="esHistorial" value="eguneratze_data">Fecha de borrado</ion-select-option>
       </ion-select>
   
       <ion-label>{{ 'Ordenar: ' }}</ion-label>
@@ -74,7 +74,7 @@
     <ion-col size="12">
       <ion-card>
         <ion-card-header>
-          <ion-card-title>EDITATU</ion-card-title>
+          <ion-card-title>EDITAR</ion-card-title>
         </ion-card-header>
         <ion-card-content>
           <form #productoForm="ngForm" (ngSubmit)="confirmarEdicion()" novalidate>
@@ -83,21 +83,21 @@
             <ion-input [(ngModel)]="servicioSeleccionado.id" name="id" #id="ngModel" readonly></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label position="floating">IZENA</ion-label>
+            <ion-label position="floating">NOMBRE</ion-label>
             <ion-input [(ngModel)]="servicioSeleccionado.izena" name="izena" #izena ="ngModel" required></ion-input>
             <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
               El nombre es obligatorio.
             </ion-note>
           </ion-item>
           <ion-item>
-            <ion-label position="floating">Etxeko prezioa</ion-label>
+            <ion-label position="floating">Precio de casa</ion-label>
             <ion-input [(ngModel)]="servicioSeleccionado.etxeko_prezioa" name="etxeko_prezioa" #etxeko_prezioa="ngModel" required></ion-input>
             <ion-note *ngIf="etxeko_prezioa.invalid && etxeko_prezioa.touched" color="danger">
               El precio es obligatorio.
             </ion-note>
           </ion-item>          
           <ion-item>
-            <ion-label position="floating">kanpoko prezioa</ion-label>
+            <ion-label position="floating">Precio de fuera</ion-label>
             <ion-input 
               [(ngModel)]="servicioSeleccionado.kanpoko_prezioa" 
               name="kanpoko_prezioa" 
@@ -111,8 +111,8 @@
           </ion-item>
            
           <!-- Tienes que poner informacion del historial cuando este -->
-          <ion-button color="tertiary" expand="full" (click)="confirmarEdicion()"  type="submit" [disabled]="productoForm.invalid">KONFIRMATU</ion-button>
-          <ion-button expand="full" color="danger" (click)="cancelarEdicion()">UTZI</ion-button>
+          <ion-button color="tertiary" expand="full" (click)="confirmarEdicion()"  type="submit" [disabled]="productoForm.invalid">CONFIRMAR</ion-button>
+          <ion-button expand="full" color="danger" (click)="cancelarEdicion()">DEJAR</ion-button>
           <ion-button *ngIf="esProfe" expand="full"  class="custom-red-button" (click)="eliminarProducto()">
             Borrar producto
           </ion-button>
@@ -137,12 +137,12 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th>IZENA</th>
-              <th>ETXEKO PREZIOA</th>
-              <th>KANPOKO PREZIOA</th>
-              <th>SORTZE-DATA</th>
-              <th>EGUNERATZE-DATA</th>
-              <th>EKINTZAK</th>
+              <th>NOMBRE</th>
+              <th>PRECIO DE CASA</th>
+              <th>KPRECIO DE FUERA</th>
+              <th>FECHA DE CREACIÓN</th>
+              <th>FECHA DE ACTUALIZACIÓN</th>
+              <th>ACTIVIDADES</th>
             </tr>
           </thead>
           <tbody>
@@ -193,11 +193,11 @@
       <ion-select [(ngModel)]="ordenActual.columna" interface="popover" (ionChange)="ordenarPor(ordenActual.columna)">
         <ion-select-option value="id">{{ 'ID' }}</ion-select-option>
         <ion-select-option value="izena">{{ name }}</ion-select-option>
-        <ion-select-option value="etxeko_prezioa">Etxeko prezioa</ion-select-option>
-        <ion-select-option value="kanpoko_prezioa">kanpoko_prezioa prezioa</ion-select-option>
-        <ion-select-option *ngIf="!esHistorial" value="kanpoko_prezioa">Kanpoko prezioa</ion-select-option>
-        <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">eguneratze_data</ion-select-option>
-        <ion-select-option *ngIf="esHistorial" value="eguneratze_data">Ezabatze_data</ion-select-option>
+        <ion-select-option value="etxeko_prezioa">Precio de casa</ion-select-option>
+        <ion-select-option value="kanpoko_prezioa">Precio de fuera</ion-select-option>
+        <ion-select-option *ngIf="!esHistorial" value="kanpoko_prezioa">Precio de fuera</ion-select-option>
+        <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">Fecha de actualización</ion-select-option>
+        <ion-select-option *ngIf="esHistorial" value="eguneratze_data">Fecha de borrado</ion-select-option>
       </ion-select>
   
       <ion-label>{{ 'Ordenar: ' }}</ion-label>
@@ -234,7 +234,7 @@
     <ion-col size="12">
       <ion-card>
         <ion-card-header>
-          <ion-card-title>EDITATU</ion-card-title>
+          <ion-card-title>EDITAR</ion-card-title>
         </ion-card-header>
         <ion-card-content>
           <form #productoForm="ngForm" (ngSubmit)="confirmarEdicion()" novalidate>
@@ -243,21 +243,21 @@
             <ion-input [(ngModel)]="servicioSeleccionado.id" name="id" #id="ngModel" readonly></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label position="floating">IZENA</ion-label>
+            <ion-label position="floating">NOMBRE</ion-label>
             <ion-input [(ngModel)]="servicioSeleccionado.izena" name="izena" #izena ="ngModel" required></ion-input>
             <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
               El nombre es obligatorio.
             </ion-note>
           </ion-item>
           <ion-item>
-            <ion-label position="floating">Etxeko prezioa</ion-label>
+            <ion-label position="floating">Precio de casa</ion-label>
             <ion-input [(ngModel)]="servicioSeleccionado.etxeko_prezioa" name="etxeko_prezioa" #etxeko_prezioa="ngModel" required></ion-input>
             <ion-note *ngIf="etxeko_prezioa.invalid && etxeko_prezioa.touched" color="danger">
               El precio es obligatorio.
             </ion-note>
           </ion-item>          
           <ion-item>
-            <ion-label position="floating">kanpoko prezioa</ion-label>
+            <ion-label position="floating">Precio de fuera</ion-label>
             <ion-input 
               [(ngModel)]="servicioSeleccionado.kanpoko_prezioa" 
               name="kanpoko_prezioa" 
@@ -271,8 +271,8 @@
           </ion-item>      
             
             <!-- Tienes que poner informacion del historial cuando este -->
-            <ion-button color="tertiary" expand="full" (click)="confirmarEdicion()" type="submit" [disabled]="productoForm.invalid">KONFIRMATU</ion-button>
-            <ion-button expand="full" color="danger" (click)="cancelarEdicion()">UTZI</ion-button>
+            <ion-button color="tertiary" expand="full" (click)="confirmarEdicion()" type="submit" [disabled]="productoForm.invalid">CONFIRMAR</ion-button>
+            <ion-button expand="full" color="danger" (click)="cancelarEdicion()">DEJAR</ion-button>
             <ion-button *ngIf="esProfe" expand="full" class="custom-red-button" (click)="eliminarProducto()">
               Borrar producto
             </ion-button>
@@ -293,8 +293,8 @@
         <ion-card-content>
           <p><strong>ID:</strong> {{ servicio.id || '-' }}</p>
           <p><strong>{{name}}:</strong> {{ servicio.izena || '-' }}</p>
-          <p><strong>Etxeko prezioa:</strong> {{ servicio.etxeko_prezioa || '-' }}</p> 
-          <p><strong>Kanpoko prezioa:</strong> {{ servicio.kanpoko_prezioa || '-' }}</p> 
+          <p><strong>Precio de casa:</strong> {{ servicio.etxeko_prezioa || '-' }}</p> 
+          <p><strong>Precio de fuera:</strong> {{ servicio.kanpoko_prezioa || '-' }}</p> 
           <p><strong>{{cd}}:</strong> {{ servicio.data.sortze_data | date:'yyyy-MM-dd' }}</p>
          <p *ngIf="!esHistorial"><strong>{{ud}}:</strong> {{ servicio.data.eguneratze_data ? (servicio.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>
          <p *ngIf="esHistorial"><strong>{{ud}}:</strong> {{ servicio.data.ezabatze_data ? (servicio.data.ezabatze_data | date:'yyyy-MM-dd') : '-' }}</p>
