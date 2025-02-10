@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { TranslateService } from '@ngx-translate/core';
-import {HizkuntzaService} from '../services/Hizkuntza.Service'
+import { HizkuntzaService } from '../services/hizkuntza.service';
 
 @Component({
   selector: 'app-home',
@@ -77,7 +77,28 @@ export class HomePage {
 
   // Método para cambiar el idioma dinámicamente
   changeLanguage(language: string) {
+    console.log('Cambiando idioma a:', language);
     this.hizkuntzaService.setHizkuntza(language);
-    localStorage.setItem('language', language); // Guardar el idioma seleccionado
+    this.translateService.use(language);
+    localStorage.setItem('language', language);
+    
+    // Volver a cargar los textos traducidos para que se reflejen en la UI
+    this.loadTranslations();
+  }
+  
+  // Nueva función para recargar las traducciones después de cambiar el idioma
+  loadTranslations() {
+    this.translateService.get([
+      'LOGIN.TITLE', 'LOGIN.WELCOME', 'LOGIN.NAME', 'LOGIN.PASSWORD', 'LOGIN.SUBMIT',
+      'LOGIN.ERROR.INVALID_CREDENTIALS', 'LOGIN.ERROR.GENERIC_ERROR'
+    ]).subscribe((translations) => {
+      this.title = translations['LOGIN.TITLE'];
+      this.welcomeMessage = translations['LOGIN.WELCOME'];
+      this.nameLabel = translations['LOGIN.NAME'];
+      this.passwordLabel = translations['LOGIN.PASSWORD'];
+      this.submitLabel = translations['LOGIN.SUBMIT'];
+      this.errorInvalidCredentials = translations['LOGIN.ERROR.INVALID_CREDENTIALS'];
+      this.errorGeneric = translations['LOGIN.ERROR.GENERIC_ERROR'];
+    });
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { HizkuntzaService } from '../services/Hizkuntza.Service';
+import { HizkuntzaService } from '../services/hizkuntza.service';
 
 @Component({
   selector: 'app-inventario',

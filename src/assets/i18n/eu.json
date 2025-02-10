@@ -1,6 +1,6 @@
 {
   "LOGIN": {
-    "TITLE": "Hasi saioa",
+    "TITLE": "Saioa hasi",
     "WELCOME": "Ongi etorri",
     "NAME": "Izena",
     "PASSWORD": "Pasahitza",
@@ -11,13 +11,17 @@
     }
   },
   "MENU": {
-    "TITLE": "Menu nagusia",
+    "TITLE": "Menu",
+    "CALENDAR":"Egutegia",
     "INVENTORY": "Inbentarioa",
     "APPOINTMENTS": "Hitzorduak",
-    "CUSTOMERS": "Bezeroak",
-    "SERVICES": "Zerbitsuak",
+    "CLIENTS": "Bezeroak",
+    "SERVICES": "Zerbitzuak",
     "TICKETS": "Ticket-ak",
-    "ADMINISTRATION": "Administrazioa"
+    "LIGHT_MODE":"Modu argia",
+    "DARK_MODE":"Modu iluna",
+    "ADMINISTRATION": "Administrazioa",
+    "LOGOUT": "Sesioa itxi"
   },
   "INVENTORY": {
     "TITLE": "Inbentarioa",
@@ -29,16 +33,16 @@
     "NAME": "Izena",
     "BRAND": "Marka",
     "ID_CATEGORY": "ID kategoria",
-    "CATEGORY_NAME": "Izen kategoria",
+    "CATEGORY_NAME": "Kategoria izena",
     "CD": "Sortze data",
     "UD": "Eguneratze data",
     "EDIT": "Editatu",
-    "CONFIRM":"Konfirmatu",
-    "CANCEL":"Utzi",
-    "INFO": "Informazio adizioanala",
+    "CONFIRM": "Konfirmatu",
+    "CANCEL": "Utzi",
+    "INFO": "Informazio gehigarria",
     "SEARCH": "Bilatu"
   },
-    "ALERTPRODUCT": {
+  "ALERTPRODUCT": {
     "HEADER": "Zeguru zaude?",
     "MESSAGE": "Produktuen balioak eguneratuko dira.",
     "CANCEL": "Utzi",

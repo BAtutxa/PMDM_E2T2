@@ -5,12 +5,14 @@ import { TranslateService } from '@ngx-translate/core';
   providedIn: 'root',
 })
 export class HizkuntzaService {
-  constructor(private translateService: TranslateService) {}
+  constructor(private translateService: TranslateService) {
+    const savedLang = this.getHizkuntza(); // Cargar idioma guardado
+    this.translateService.use(savedLang);
+  }
 
   setHizkuntza(lang: string): void {
-    this.translateService.setDefaultLang(lang);
     this.translateService.use(lang);
-    localStorage.setItem('language', lang); 
+    localStorage.setItem('language', lang);
   }
 
   getHizkuntza(): string {
