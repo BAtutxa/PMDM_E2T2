@@ -9,13 +9,16 @@ import { GestionarCitasPageRoutingModule } from './gestionar-citas-routing.modul
 import { GestionarCitasPage } from './gestionar-citas.page';
 import { NireKonponenteakModule } from "../nire-konponenteak/nire-konponenteak.module";
 
+import { TranslateModule } from '@ngx-translate/core';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     GestionarCitasPageRoutingModule,
-    NireKonponenteakModule
+    NireKonponenteakModule,
+    TranslateModule
 ],
   declarations: [GestionarCitasPage]
 })

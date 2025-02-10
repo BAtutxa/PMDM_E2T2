@@ -12,14 +12,14 @@
   },
   "MENU": {
     "TITLE": "Menu",
-    "CALENDAR":"Egutegia",
+    "CALENDAR": "Egutegia",
     "INVENTORY": "Inbentarioa",
     "APPOINTMENTS": "Hitzorduak",
     "CLIENTS": "Bezeroak",
     "SERVICES": "Zerbitzuak",
     "TICKETS": "Ticket-ak",
-    "LIGHT_MODE":"Modu argia",
-    "DARK_MODE":"Modu iluna",
+    "LIGHT_MODE": "Modu argia",
+    "DARK_MODE": "Modu iluna",
     "ADMINISTRATION": "Administrazioa",
     "LOGOUT": "Sesioa itxi"
   },
@@ -59,5 +59,69 @@
     "EDIT": "Materiala editatzen",
     "DETAILS": "Materialaren xehetasunak",
     "CLOSE": "Itxi"
-  }
+  },
+  "APPOINTMENTS": {
+    "TITLE": "Eguneko hitzorduak",
+    "LABEL": "Hitzorduak",
+    "RESERVE": "Erreserbatu",
+    "ORDER_BY_SEAT": "Ordenatu eserlekua arabera",
+    "ASCENDING": "Igoera",
+    "DESCENDING": "Jaitsiera",
+    "SEAT": "Eserleku",
+    "NAME": "Izena",
+    "START_TIME": "Hasiera ordua",
+    "END_TIME": "Amaiera ordua",
+    "PHONE": "Telefonoa",
+    "DESCRIPTION": "Deskribapena"
+  },
+  "RESERVAR_CITA": {
+    "TITLE": "Hitzordua erreserbatu",
+    "SELECTED_DATE": "Hautatutako data:",
+    "NAME": "Izena",
+    "PHONE": "Telefonoa",
+    "START_TIME": "Hasiera ordua",
+    "END_TIME": "Amaiera ordua",
+    "SEAT": "Eserleku",
+    "DESCRIPTION": "Deskribapena",
+    "FROM_HOME": "Etxetik",
+    "PRICE": "Prezioa (€)",
+    "WORKER": "Langilea",
+    "CONFIRM": "Baieztatu",
+    "CANCEL": "Ezabatu"
+  },
+  "CITA_DETALLES": {
+    "TITLE": "Hitzorduaren xehetasunak",
+    "GENERAL_INFO": "Informazio Orokorra",
+    "NAME": "Izena",
+    "PHONE": "Telefonoa",
+    "DATE": "Data",
+    "START_TIME": "Hasiera ordua",
+    "END_TIME": "Amaiera ordua",
+    "ADDITIONAL_DETAILS": "Xehetasun Gehigarriak",
+    "SEAT": "Eserleku",
+    "DESCRIPTION": "Deskribapena",
+    "FROM_HOME": "Etxetik",
+    "PRICE": "Prezioa",
+    "WORKER": "Langilea",
+    "CONFIRM": "Baieztatu",
+    "CANCEL": "Ezabatu"
+  },
+    "GESTION_CITAS": {
+      "ID":"ID",
+      "TITLE": "Hitzorduak Kudeatu",
+      "DETAILS_TITLE": "Hitzorduen Xehetasunak",
+      "NAME": "Izena",
+      "PHONE": "Telefonoa",
+      "DATE": "Data",
+      "START_TIME": "Hasiera ordua",
+      "END_TIME": "Amaiera ordua",
+      "SEAT": "Eserleku",
+      "DESCRIPTION": "Deskribapena",
+      "FROM_HOME": "Etxetik",
+      "TOTAL_PRICE": "Prezioa Orokorra",
+      "CONFIRM": "Baieztatu",
+      "DELETE": "Ezabatu",
+      "PRINT_TICKET": "Ticket-a Inprimatu"
+    }
+  
 }

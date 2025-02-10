@@ -10,17 +10,17 @@
       "GENERIC_ERROR": "Error al iniciar sesión"
     }
   },
-  
+
   "MENU": {
     "TITLE": "Menu",
-    "CALENDAR":"Calendario",
+    "CALENDAR": "Calendario",
     "INVENTORY": "Inventario",
     "APPOINTMENTS": "Citas",
     "CLIENTS": "Clientes",
     "SERVICES": "Servicios",
     "TICKETS": "Ticket",
-    "LIGHT_MODE":"Modo claro",
-    "DARK_MODE":"Modo oscuro",
+    "LIGHT_MODE": "Modo claro",
+    "DARK_MODE": "Modo oscuro",
     "ADMINISTRATION": "Administracion",
     "LOGOUT": "Cerrar sesion"
   },
@@ -61,5 +61,69 @@
     "EDIT": "Editando material",
     "DETAILS": "Detalles del material",
     "CLOSE": "Cerrar"
-  }
+  },
+  "APPOINTMENTS": {
+    "TITLE": "Citas del día",
+    "LABEL": "Citas",
+    "RESERVE": "Reservar",
+    "ORDER_BY_SEAT": "Ordenar por Asiento",
+    "ASCENDING": "Ascendente",
+    "DESCENDING": "Descendente",
+    "SEAT": "Asiento",
+    "NAME": "Nombre",
+    "START_TIME": "Hora de Inicio",
+    "END_TIME": "Hora de Fin",
+    "PHONE": "Teléfono",
+    "DESCRIPTION": "Descripción"
+  },
+  "RESERVAR_CITA": {
+    "TITLE": "Reservar Cita",
+    "SELECTED_DATE": "Fecha seleccionada:",
+    "NAME": "Nombre",
+    "PHONE": "Teléfono",
+    "START_TIME": "Hora de inicio",
+    "END_TIME": "Hora de fin",
+    "SEAT": "Asiento",
+    "DESCRIPTION": "Descripción",
+    "FROM_HOME": "De casa",
+    "PRICE": "Precio (€)",
+    "WORKER": "Trabajador",
+    "CONFIRM": "Confirmar",
+    "CANCEL": "Cancelar"
+  },
+  "CITA_DETALLES": {
+    "TITLE": "Detalles de la Cita",
+    "GENERAL_INFO": "Información General",
+    "NAME": "Nombre",
+    "PHONE": "Teléfono",
+    "DATE": "Fecha",
+    "START_TIME": "Hora de inicio",
+    "END_TIME": "Hora de fin",
+    "ADDITIONAL_DETAILS": "Detalles Adicionales",
+    "SEAT": "Asiento",
+    "DESCRIPTION": "Descripción",
+    "FROM_HOME": "De casa",
+    "PRICE": "Precio",
+    "WORKER": "Trabajador",
+    "CONFIRM": "Confirmar",
+    "CANCEL": "Descartar"
+  },
+    "GESTION_CITAS": {
+      "ID":"ID",
+      "TITLE": "Gestionar Citas",
+      "DETAILS_TITLE": "Detalles de la Cita",
+      "NAME": "Nombre",
+      "PHONE": "Teléfono",
+      "DATE": "Fecha",
+      "START_TIME": "Hora de inicio",
+      "END_TIME": "Hora de fin",
+      "SEAT": "Asiento",
+      "DESCRIPTION": "Descripción",
+      "FROM_HOME": "De casa",
+      "TOTAL_PRICE": "Precio Total",
+      "CONFIRM": "Confirmar",
+      "DELETE": "Borrar",
+      "PRINT_TICKET": "Imprimir Ticket"
+    }
+  
 }

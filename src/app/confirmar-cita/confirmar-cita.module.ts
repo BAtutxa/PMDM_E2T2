@@ -8,12 +8,15 @@ import { ConfirmarCitaPageRoutingModule } from './confirmar-cita-routing.module'
 
 import { ConfirmarCitaPage } from './confirmar-cita.page';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ConfirmarCitaPageRoutingModule
+    ConfirmarCitaPageRoutingModule,
+    TranslateModule
   ],
   declarations: [ConfirmarCitaPage]
 })

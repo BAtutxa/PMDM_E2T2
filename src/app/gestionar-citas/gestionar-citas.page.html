@@ -7,12 +7,12 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>Gestionar Citas</ion-title>
+        <ion-title>{{ 'GESTION_CITAS.TITLE' | translate }}</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <div class="container">
-      <h1>Gestión de Citas</h1>
+      <h1>{{ 'GESTION_CITAS.TITLE' | translate }}</h1>
 
       <!-- Mostrar citas -->
       <div *ngIf="citas && citas.length > 0" class="citas-container">
@@ -34,7 +34,7 @@
         <ng-template>
           <ion-header>
             <ion-toolbar color="primary">
-              <ion-title>Detalles de la Cita</ion-title>
+              <ion-title>{{ 'GESTION_CITAS.DETAILS_TITLE' | translate }}</ion-title>
               <ion-buttons slot="end">
                 <ion-button (click)="cerrarModal()">X</ion-button>
               </ion-buttons>
@@ -43,60 +43,60 @@
 
           <ion-content class="modal-content">
             <ion-item>
-              <ion-label position="stacked">ID:</ion-label>
+              <ion-label position="stacked">{{ 'GESTION_CITAS.ID' | translate }}:</ion-label>
               <ion-input [(ngModel)]="citaSeleccionada.id"></ion-input>
             </ion-item>
 
             <ion-item>
-              <ion-label position="stacked">Asiento: </ion-label>
+              <ion-label position="stacked">{{ 'GESTION_CITAS.SEAT' | translate }}: </ion-label>
               <ion-input [(ngModel)]="citaSeleccionada.eserlekua"></ion-input>
             </ion-item>
 
             <ion-item>
-              <ion-label position="stacked">Fecha: </ion-label>
+              <ion-label position="stacked">{{ 'GESTION_CITAS.DATE' | translate }}: </ion-label>
               <ion-input [(ngModel)]="citaSeleccionada.data"></ion-input>
             </ion-item>
 
             <ion-item>
-              <ion-label position="stacked">Hora de inicio: </ion-label>
+              <ion-label position="stacked">{{ 'GESTION_CITAS.START_TIME' | translate }}: </ion-label>
               <ion-input [(ngModel)]="citaSeleccionada.hasiera_ordua"></ion-input>
             </ion-item>
 
             <ion-item>
-              <ion-label position="stacked">Hora de fin: </ion-label>
+              <ion-label position="stacked">{{ 'GESTION_CITAS.END_TIME' | translate }}: </ion-label>
               <ion-input [(ngModel)]="citaSeleccionada.amaiera_ordua"></ion-input>
             </ion-item>
 
             <ion-item>
-              <ion-label position="stacked">Nombre: </ion-label>
+              <ion-label position="stacked">{{ 'GESTION_CITAS.NAME' | translate }}: </ion-label>
               <ion-input [(ngModel)]="citaSeleccionada.izena"></ion-input>
             </ion-item>
 
             <ion-item>
-              <ion-label position="stacked">Teléfono: </ion-label>
+              <ion-label position="stacked">{{ 'GESTION_CITAS.PHONE' | translate }}: </ion-label>
               <ion-input [(ngModel)]="citaSeleccionada.telefonoa"></ion-input>
             </ion-item>
 
             <ion-item>
-              <ion-label position="stacked">Descripción: </ion-label>
+              <ion-label position="stacked">{{ 'GESTION_CITAS.DESCRIPTION' | translate }}: </ion-label>
               <ion-input [(ngModel)]="citaSeleccionada.deskribapena"></ion-input>
             </ion-item>
 
             <ion-item>
-              <ion-label position="stacked">De casa: </ion-label>
+              <ion-label position="stacked">{{ 'GESTION_CITAS.FROM_HOME' | translate }}: </ion-label>
               <ion-input [(ngModel)]="etxekoa"></ion-input>
             </ion-item>
             
             <ion-item>
-              <ion-label position="stacked">Precio Total: </ion-label>
+              <ion-label position="stacked">{{ 'GESTION_CITAS.TOTAL_PRICE' | translate }}: </ion-label>
               <ion-input [(ngModel)]="citaSeleccionada.prezio_totala"></ion-input>
             </ion-item>
 
             <ion-footer>
               <ion-buttons>
-                <ion-button style="--background: var(--ion-color-tertiary); --color: white;" (click)="confirmarCambios()">Confirmar</ion-button>
-                <ion-button style="--background: var(--ion-color-danger); --color: white;"(click)="cancelarCambios()">Borrar</ion-button>
-                <ion-button style="--background: var(--ion-color-warning); --color: white;" (click)="imprimirTicket()">Imprimir Ticket</ion-button>
+                <ion-button style="--background: var(--ion-color-tertiary); --color: white;" (click)="confirmarCambios()">{{ 'GESTION_CITAS.CONFIRM' | translate }}</ion-button>
+                <ion-button style="--background: var(--ion-color-danger); --color: white;" (click)="cancelarCambios()">{{ 'GESTION_CITAS.DELETE' | translate }}</ion-button>
+                <ion-button style="--background: var(--ion-color-warning); --color: white;" (click)="imprimirTicket()">{{ 'GESTION_CITAS.PRINT_TICKET' | translate }}</ion-button>
               </ion-buttons>
             </ion-footer>
           </ion-content>
