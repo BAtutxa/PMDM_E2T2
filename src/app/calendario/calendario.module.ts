@@ -8,6 +8,8 @@ import { CalendarioPageRoutingModule } from './calendario-routing.module';
 
 import { CalendarioPage } from './calendario.page';
 import { NireKonponenteakModule } from '../nire-konponenteak/nire-konponenteak.module';
+import { TranslateModule } from '@ngx-translate/core';
+
 
 @NgModule({
   imports: [
@@ -15,7 +17,8 @@ import { NireKonponenteakModule } from '../nire-konponenteak/nire-konponenteak.m
     FormsModule,
     IonicModule,
     CalendarioPageRoutingModule,
-    NireKonponenteakModule
+    NireKonponenteakModule,
+    TranslateModule
   ],
   declarations: [CalendarioPage]
 })

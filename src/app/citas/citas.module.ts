@@ -10,6 +10,9 @@ import { CitasPage } from './citas.page';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { TranslateModule } from '@ngx-translate/core';
+
+
 @NgModule({
   imports: [
     CommonModule,
@@ -17,6 +20,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule, // ¡Asegúrate de incluir esto!
     IonicModule,
     CitasPageRoutingModule,
+    TranslateModule
   ],
   declarations: [CitasPage],
 })

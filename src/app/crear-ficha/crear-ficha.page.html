@@ -10,7 +10,7 @@
           <ion-list>
             <!-- Nombre Input -->
             <ion-item>
-              <ion-label position="stacked">Nombre</ion-label>
+              <ion-label position="stacked">{{'CREAR_CITA.NAME'| translate}}</ion-label>
               <ion-input
                 [(ngModel)]="ficha.izena"
                 name="izena"
@@ -21,7 +21,7 @@
 
             <!-- Apellido Input -->
             <ion-item>
-              <ion-label position="stacked">Apellido</ion-label>
+              <ion-label position="stacked">{{'CREAR_CITA.SURNAME'|translate}}</ion-label>
               <ion-input
                 [(ngModel)]="ficha.abizena"
                 name="abizena"
@@ -32,7 +32,7 @@
 
             <!-- Teléfono Input -->
             <ion-item>
-              <ion-label position="stacked">Teléfono</ion-label>
+              <ion-label position="stacked">{{'CREAR_CITA.TELEFONO'|translate}}</ion-label>
               <ion-input
                 [(ngModel)]="ficha.telefonoa"
                 name="telefonoa"
@@ -53,15 +53,15 @@
 
             <!-- Piel Sensible Select -->
             <ion-item>
-              <ion-label>Piel sensible</ion-label>
+              <ion-label>{{'CREAR_CITA.PIEL_SENSIBLE'|translate}}</ion-label>
               <ion-select
                 [(ngModel)]="ficha.azal_sentikorra"
                 name="azal_sentikorra"
                 placeholder="Selecciona una opción"
                 required
               >
-                <ion-select-option value="B">Sí</ion-select-option>
-                <ion-select-option value="E">No</ion-select-option>
+                <ion-select-option value="B">{{'CREAR_CITA.SI'|translate}}</ion-select-option>
+                <ion-select-option value="E">{{'CREAR_CITA.NO'|translate}}</ion-select-option>
               </ion-select>
             </ion-item>
           </ion-list>
@@ -72,7 +72,7 @@
             type="submit"
             color="tertiary"
             [disabled]="fichaForm.invalid"
-            >Guardar</ion-button
+            >{{'CREAR_CITA.GUARDAR'|translate}}</ion-button
           >
         </ion-card-content>
       </ion-card>

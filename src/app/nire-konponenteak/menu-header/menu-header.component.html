@@ -4,7 +4,7 @@
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button> <!-- Botón para abrir el menú -->
       </ion-buttons>
-      <ion-title>Menu</ion-title>
+      <ion-title>{{ 'MENU.TITLE' | translate }}</ion-title> <!-- Traducir el título del menú -->
     </ion-toolbar>
   </ion-header>
 
@@ -13,43 +13,43 @@
       <ion-list>
         <ion-item color="primary" href="/gestionar-citas">
           <ion-icon slot="start" name="calendar-number-outline"></ion-icon>
-          <ion-label>Citas</ion-label>
+          <ion-label>{{ 'MENU.APPOINTMENTS' | translate }}</ion-label> <!-- Traducir 'Citas' -->
         </ion-item>
         <ion-item color="primary" href="/calendario">
           <ion-icon slot="start" name="calendar-outline"></ion-icon>
-          <ion-label>Calendario</ion-label>
+          <ion-label>{{ 'MENU.CALENDAR' | translate }}</ion-label> <!-- Traducir 'Calendario' -->
         </ion-item>
         <ion-item color="primary" href="/clientes">
           <ion-icon slot="start" name="person-circle-outline"></ion-icon>
-          <ion-label>Clientes</ion-label>
+          <ion-label>{{ 'MENU.CLIENTS' | translate }}</ion-label> <!-- Traducir 'Clientes' -->
         </ion-item>
         <ion-item color="primary" href="/servicios">
           <ion-icon slot="start" name="cut-outline"></ion-icon>
-          <ion-label>Servicios</ion-label>
+          <ion-label>{{ 'MENU.SERVICES' | translate }}</ion-label> <!-- Traducir 'Servicios' -->
         </ion-item>
         <ion-item color="primary" href="/inventario">
           <ion-icon slot="start" name="cube-outline"></ion-icon>
-          <ion-label>Inventario</ion-label>
+          <ion-label>{{ 'MENU.INVENTORY' | translate }}</ion-label> <!-- Traducir 'Inventario' -->
         </ion-item>
         <ion-item *ngIf="esProfe" color="primary" href="/administracion">
           <ion-icon slot="start" name="build-outline"></ion-icon>
-          <ion-label>Administración</ion-label>
+          <ion-label>{{ 'MENU.ADMINISTRATION' | translate }}</ion-label> <!-- Traducir 'Administración' -->
         </ion-item>
         <ion-item color="primary" href="/tickets">
           <ion-icon slot="start" name="documents-outline"></ion-icon>
-          <ion-label>Tickets</ion-label>
+          <ion-label>{{ 'MENU.TICKETS' | translate }}</ion-label> <!-- Traducir 'Tickets' -->
         </ion-item>
         <ion-item *ngIf="modoOscuro" color="primary" (click)="ponerModoOscuro()">
           <ion-icon slot="start" name="moon-outline"></ion-icon>
-          <ion-label>Modo oscuro</ion-label>
+          <ion-label>{{ 'MENU.DARK_MODE' | translate }}</ion-label> <!-- Traducir 'Modo oscuro' -->
         </ion-item>   
-         <ion-item *ngIf="!modoOscuro" color="primary" (click)="ponerModoOscuro()">
+        <ion-item *ngIf="!modoOscuro" color="primary" (click)="ponerModoOscuro()">
           <ion-icon slot="start" name="sunny-outline"></ion-icon>
-          <ion-label>Modo claro</ion-label>
-        </ion-item>              
+          <ion-label>{{ 'MENU.LIGHT_MODE' | translate }}</ion-label> <!-- Traducir 'Modo claro' -->
+        </ion-item>               
         <ion-item color="primary" href="/home">
           <ion-icon slot="start" name="exit-outline"></ion-icon>
-          <ion-label>Cerrar sesión</ion-label>
+          <ion-label>{{ 'MENU.LOGOUT' | translate }}</ion-label> <!-- Traducir 'Cerrar sesión' -->
         </ion-item>
       </ion-list>
     </div>

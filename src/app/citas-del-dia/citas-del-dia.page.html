@@ -1,48 +1,80 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Citas del día</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-app>
+  <div>
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>{{ 'APPOINTMENTS.TITLE' | translate }}</ion-title> <!-- Traducción del título -->
+      </ion-toolbar>
+    </ion-header>
 
-<ion-content>
-  <div class="container">
-    <ion-row class="titulo-reservar">
-        <h1>Citas - {{ fechaSeleccionada }}</h1>
-        <!-- Botón para ir a la página de citas con la fecha seleccionada -->
-        <ion-button color="tertiary" expand="block" (click)="irACitas()">Reservar</ion-button>
+    <ion-content *ngIf="!mobilaDa" [fullscreen]="true">
+      <div class="container">
+        <ion-row class="titulo-reservar">
+          <h1>{{ 'APPOINTMENTS.LABEL' | translate }} - {{ fechaSeleccionada }}</h1> <!-- Traducción del encabezado -->
+          <ion-button color="tertiary" expand="block" (click)="irACitas()">
+            {{ 'APPOINTMENTS.RESERVE' | translate }} <!-- Traducción del botón -->
+          </ion-button>
+        </ion-row>
 
-    </ion-row>
+        <ion-item>
+          <ion-label>{{ 'APPOINTMENTS.ORDER_BY_SEAT' | translate }}</ion-label> <!-- Traducción de la opción de ordenar -->
+          <ion-select [(ngModel)]="ordenAscendente" (ionChange)="cambiarOrden()">
+            <ion-select-option [value]="true">{{ 'APPOINTMENTS.ASCENDING' | translate }}</ion-select-option> <!-- Traducción de la opción Ascendente -->
+            <ion-select-option [value]="false">{{ 'APPOINTMENTS.DESCENDING' | translate }}</ion-select-option> <!-- Traducción de la opción Descendente -->
+          </ion-select>
+        </ion-item>
 
-    <ion-item>
-      <ion-label>Ordenar por Asiento</ion-label>
-      <ion-select [(ngModel)]="ordenAscendente" (ionChange)="cambiarOrden()">
-        <ion-select-option [value]="true">Ascendente</ion-select-option>
-        <ion-select-option [value]="false">Descendente</ion-select-option>
-      </ion-select>
-    </ion-item>
-    
+        <ion-grid>
+          <ion-row class="encabezado-tabla">
+            <ion-col size="2"><strong>{{ 'APPOINTMENTS.SEAT' | translate }}</strong></ion-col> <!-- Traducción de encabezados -->
+            <ion-col size="2"><strong>{{ 'APPOINTMENTS.NAME' | translate }}</strong></ion-col>
+            <ion-col size="2"><strong>{{ 'APPOINTMENTS.START_TIME' | translate }}</strong></ion-col>
+            <ion-col size="2"><strong>{{ 'APPOINTMENTS.END_TIME' | translate }}</strong></ion-col>
+            <ion-col size="2"><strong>{{ 'APPOINTMENTS.PHONE' | translate }}</strong></ion-col>
+            <ion-col size="2"><strong>{{ 'APPOINTMENTS.DESCRIPTION' | translate }}</strong></ion-col>
+          </ion-row>
 
-    <!-- Tabla de citas -->
-    <ion-grid>
-      <ion-row class="encabezado-tabla">
-        <!-- Encabezados de la tabla -->
-        <ion-col size="2"><strong>Asiento</strong></ion-col>
-        <ion-col size="2"><strong>Nombre</strong></ion-col>
-        <ion-col size="2"><strong>Hora de Inicio</strong></ion-col>
-        <ion-col size="2"><strong>Hora de Fin</strong></ion-col>
-        <ion-col size="2"><strong>Teléfono</strong></ion-col>
-        <ion-col size="2"><strong>Descripción</strong></ion-col>
-      </ion-row>
+          <ion-row *ngFor="let cita of citas">
+            <ion-col size="2">{{ cita.eserlekua }}</ion-col>
+            <ion-col size="2">{{ cita.izena || '' }}</ion-col>
+            <ion-col size="2">{{ cita.hasiera_ordua || ' ' }}</ion-col>
+            <ion-col size="2">{{ cita.amaiera_ordua || ' ' }}</ion-col>
+            <ion-col size="2">{{ cita.telefonoa || ' ' }}</ion-col>
+            <ion-col size="2">{{ cita.deskribapena || ' ' }}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-content>
 
-      <!-- Fila por cada cita -->
-      <ion-row *ngFor="let cita of citas">
-        <ion-col size="2">{{ cita.eserlekua }}</ion-col>
-        <ion-col size="2">{{ cita.izena || '' }}</ion-col>
-        <ion-col size="2">{{ cita.hasiera_ordua || ' ' }}</ion-col>
-        <ion-col size="2">{{ cita.amaiera_ordua || ' ' }}</ion-col>
-        <ion-col size="2">{{ cita.telefonoa || ' ' }}</ion-col>
-        <ion-col size="2">{{ cita.deskribapena || ' ' }}</ion-col>
-      </ion-row>      
-    </ion-grid>
+    <div *ngIf="mobilaDa">
+      <div class="container">
+        <ion-row class="titulo-reservar">
+          <h1>{{ 'APPOINTMENTS.LABEL' | translate }} - {{ fechaSeleccionada }}</h1> <!-- Traducción del encabezado -->
+          <ion-button color="tertiary" expand="block" (click)="irACitas()">
+            {{ 'APPOINTMENTS.RESERVE' | translate }} <!-- Traducción del botón -->
+          </ion-button>
+        </ion-row>
+
+        <ion-item>
+          <ion-label>{{ 'APPOINTMENTS.ORDER_BY_SEAT' | translate }}</ion-label> <!-- Traducción de la opción de ordenar -->
+          <ion-select [(ngModel)]="ordenAscendente" (ionChange)="cambiarOrden()">
+            <ion-select-option [value]="true">{{ 'APPOINTMENTS.ASCENDING' | translate }}</ion-select-option> <!-- Traducción de la opción Ascendente -->
+            <ion-select-option [value]="false">{{ 'APPOINTMENTS.DESCENDING' | translate }}</ion-select-option> <!-- Traducción de la opción Descendente -->
+          </ion-select>
+        </ion-item>
+      </div>
+
+      <ion-card *ngFor="let cita of citas">
+        <ion-card-header>
+          <ion-card-title>{{ 'APPOINTMENTS.SEAT' | translate }}: {{ cita.eserlekua }}</ion-card-title> <!-- Traducción del título -->
+        </ion-card-header>
+        <ion-card-content>
+          <p><strong>{{ 'APPOINTMENTS.NAME' | translate }}:</strong> {{ cita.izena || 'Sin nombre' }}</p> <!-- Traducción de los detalles -->
+          <p><strong>{{ 'APPOINTMENTS.START_TIME' | translate }}:</strong> {{ cita.hasiera_ordua || 'Sin hora' }}</p>
+          <p><strong>{{ 'APPOINTMENTS.END_TIME' | translate }}:</strong> {{ cita.amaiera_ordua || 'Sin hora' }}</p>
+          <p><strong>{{ 'APPOINTMENTS.PHONE' | translate }}:</strong> {{ cita.telefonoa || 'No disponible' }}</p>
+          <p><strong>{{ 'APPOINTMENTS.DESCRIPTION' | translate }}:</strong> {{ cita.deskribapena || 'Sin descripción' }}</p>
+        </ion-card-content>
+      </ion-card>
+    </div>
   </div>
-</ion-content>
+</ion-app>

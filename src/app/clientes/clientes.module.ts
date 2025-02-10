@@ -5,6 +5,7 @@ import { ClientesPageRoutingModule } from './clientes-routing.module';
 import { FormsModule } from '@angular/forms';
 import { ClientesPage } from './clientes.page';
 import { NireKonponenteakModule } from "../nire-konponenteak/nire-konponenteak.module";
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { NireKonponenteakModule } from "../nire-konponenteak/nire-konponenteak.m
     IonicModule,
     ClientesPageRoutingModule,
     FormsModule,
-    NireKonponenteakModule
+    NireKonponenteakModule,
+    TranslateModule
 ],
   declarations: [ClientesPage]
 })

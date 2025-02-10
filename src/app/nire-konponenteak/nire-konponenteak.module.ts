@@ -3,10 +3,15 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { MenuHeaderComponent } from './menu-header/menu-header.component';
 
+// Importa TranslateModule
+import { TranslateModule } from '@ngx-translate/core';
+
 @NgModule({
   declarations: [MenuHeaderComponent],
   imports: [
-    CommonModule, IonicModule
+    CommonModule,
+    IonicModule,
+    TranslateModule // Asegúrate de importar TranslateModule aquí
   ],
   exports: [MenuHeaderComponent]
 })

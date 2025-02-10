@@ -8,12 +8,15 @@ import { CitasDelDiaPageRoutingModule } from './citas-del-dia-routing.module';
 
 import { CitasDelDiaPage } from './citas-del-dia.page';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CitasDelDiaPageRoutingModule
+    CitasDelDiaPageRoutingModule,
+    TranslateModule
   ],
   declarations: [CitasDelDiaPage]
 })

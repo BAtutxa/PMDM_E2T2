@@ -1,57 +1,176 @@
 {
-    "LOGIN": {
-      "TITLE": "Iniciar sesión",
-      "WELCOME": "Bienvenido",
-      "NAME": "Nombre",
-      "PASSWORD": "Contraseña",
-      "SUBMIT": "Enviar",
-      "ERROR": {
-        "INVALID_CREDENTIALS": "Credenciales inválidas",
-        "GENERIC_ERROR": "Error al iniciar sesión"
-      }
-    },
-    "MENU": {
-      "TITLE": "Menú principal",
-      "INVENTORY": "Inventario",
-      "APPOINTMENTS": "Citas",
-      "CUSTOMERS": "Clientes",
-      "SERVICES": "Servicios",
-      "TICKETS": "Tickets",
-      "ADMINISTRATION": "Administración"
-    },
-    "INVENTORY": {
+  "LOGIN": {
+    "TITLE": "Iniciar sesión",
+    "WELCOME": "Bienvenido",
+    "NAME": "Nombre",
+    "PASSWORD": "Contraseña",
+    "SUBMIT": "Enviar",
+    "ERROR": {
+      "INVALID_CREDENTIALS": "Credenciales inválidas",
+      "GENERIC_ERROR": "Error al iniciar sesión"
+    }
+  },
+
+  "MENU": {
+    "TITLE": "Menú",
+    "CALENDAR": "Calendario",
+    "INVENTORY": "Inventario",
+    "APPOINTMENTS": "Citas",
+    "CLIENTS": "Clientes",
+    "SERVICES": "Servicios",
+    "TICKETS": "Ticket",
+    "LIGHT_MODE": "Modo claro",
+    "DARK_MODE": "Modo oscuro",
+    "ADMINISTRATION": "Administración",
+    "LOGOUT": "Cerrar sesión"
+  },
+
+  "CALENDAR": {
+    "SELECT_DAY": "Selecciona un día"
+  },
+
+  "INVENTORY": {
     "TITLE": "Inventario",
     "PRODUCT": "Productos",
     "MATERIAL": "Materiales"
   },
+
   "PRODUCT": {
     "TITLE": "Productos",
     "NAME": "Nombre",
     "BRAND": "Marca",
-    "ID_CATEGORY": "ID categoria",
-    "CATEGORY_NAME": "Nombre categoria",
+    "ID_CATEGORY": "ID categoría",
+    "CATEGORY_NAME": "Nombre categoría",
     "CD": "Fecha creación",
     "UD": "Fecha actualización",
     "EDIT": "Editar",
-    "CONFIRM":"Confirmar",
-    "CANCEL":"Cancelar",
+    "CONFIRM": "Confirmar",
+    "CANCEL": "Cancelar",
     "INFO": "Información adicional",
     "SEARCH": "Buscar"
   },
+
   "ALERTPRODUCT": {
     "HEADER": "¿Estás seguro?",
     "MESSAGE": "Se actualizarán los valores del producto.",
     "CANCEL": "Cancelar",
     "CONFIRM": "Confirmar"
   },
-  "MATERIAL":{
+
+  "MATERIAL": {
     "TITLE": "Materiales",
-    "LABEL":"Etiqueta",
+    "LABEL": "Etiqueta",
     "HEADER": "¿Estás seguro?",
     "MESSAGE": "Se actualizarán los valores del material.",
-    "EDIT":"Editando Material",
-    "DETAILS":"Detalles del Material",
+    "EDIT": "Editando material",
+    "DETAILS": "Detalles del material",
     "CLOSE": "Cerrar"
+  },
+
+  "APPOINTMENTS": {
+    "TITLE": "Citas del día",
+    "LABEL": "Citas",
+    "RESERVE": "Reservar",
+    "ORDER_BY_SEAT": "Ordenar por asiento",
+    "ASCENDING": "Ascendente",
+    "DESCENDING": "Descendente",
+    "SEAT": "Asiento",
+    "NAME": "Nombre",
+    "START_TIME": "Hora de inicio",
+    "END_TIME": "Hora de fin",
+    "PHONE": "Teléfono",
+    "DESCRIPTION": "Descripción"
+  },
+
+  "RESERVAR_CITA": {
+    "TITLE": "Reservar Cita",
+    "SELECTED_DATE": "Fecha seleccionada:",
+    "NAME": "Nombre",
+    "PHONE": "Teléfono",
+    "START_TIME": "Hora de inicio",
+    "END_TIME": "Hora de fin",
+    "SEAT": "Asiento",
+    "DESCRIPTION": "Descripción",
+    "FROM_HOME": "De casa",
+    "PRICE": "Precio (€)",
+    "WORKER": "Trabajador",
+    "CONFIRM": "Confirmar",
+    "CANCEL": "Cancelar"
+  },
+
+  "CITA_DETALLES": {
+    "TITLE": "Detalles de la Cita",
+    "GENERAL_INFO": "Información General",
+    "NAME": "Nombre",
+    "PHONE": "Teléfono",
+    "DATE": "Fecha",
+    "START_TIME": "Hora de inicio",
+    "END_TIME": "Hora de fin",
+    "ADDITIONAL_DETAILS": "Detalles Adicionales",
+    "SEAT": "Asiento",
+    "DESCRIPTION": "Descripción",
+    "FROM_HOME": "De casa",
+    "PRICE": "Precio",
+    "WORKER": "Trabajador",
+    "CONFIRM": "Confirmar",
+    "CANCEL": "Descartar"
+  },
+
+  "GESTION_CITAS": {
+    "ID": "ID",
+    "TITLE": "Gestionar Citas",
+    "DETAILS_TITLE": "Detalles de la Cita",
+    "NAME": "Nombre",
+    "PHONE": "Teléfono",
+    "DATE": "Fecha",
+    "START_TIME": "Hora de inicio",
+    "END_TIME": "Hora de fin",
+    "SEAT": "Asiento",
+    "DESCRIPTION": "Descripción",
+    "FROM_HOME": "De casa",
+    "TOTAL_PRICE": "Precio Total",
+    "CONFIRM": "Confirmar",
+    "DELETE": "Borrar",
+    "PRINT_TICKET": "Imprimir Ticket"
+  },
+  "CLIENTES": {
+    "TITLE": "Clientes",
+    "CLIENTES": "Clientes",
+    "ID": "ID",
+    "NOMBRE": "Nombre",
+    "APELLIDO": "Apellido",
+    "PIEL_SENSIBLE": "Piel sensible",
+    "SI": "Sí",
+    "NO": "No",
+    "DESCONOCIDO": "Desconocido",
+    "TELEFONO": "Teléfono",
+    "FECHA_CREACION": "Fecha de creación",
+    "FECHA_ACTUALIZACION": "Fecha de actualización",
+    "FECHA_BORRADO": "Fecha de borrado",
+    "EDITAR_CITA": "Editar cita",
+    "CONFIRMAR": "Confirmar",
+    "CANCELAR": "Cancelar",
+    "BORRAR_FICHA": "Borrar ficha",
+    "CONFIRMAR_BORRADO": "Confirmar borrado",
+    "RESTAURAR_FICHA": "Restaurar ficha",
+    "AÑADIR_FICHA": "Añadir ficha",
+    "CLIENTES_PORPAGINA": "Clientes por página",
+    "CREACION": "Fecha de creación",
+    "ULTIMA_ACTUALIZACION": "Última actualización",
+    "FECHA_ELIMINACION": "Fecha de eliminación del cliente",
+    "ACCIONES": "Acciones",
+    "NOMBRE_OBLIGATORIO": "El nombre es obligatorio.",
+    "APELLIDO_OBLIGATORIO": "El apellido es obligatorio.",
+    "TELEFONO_NUEVE": "El teléfono debe contener un máximo de 9 números.",
+    "EDITAR_FICHA": "Editar ficha"
+  },
+  "BUSCADOR": {
+    "PLACEHOLDER": "Buscar"
+  },
+  "PAGINACION": {
+    "PAGINACION": "Paginación"
+  },
+  "ERRORS": {
+    "TELEFONO_MAXIMO": "El teléfono debe contener un máximo de 9 números."
   }
 }
-  

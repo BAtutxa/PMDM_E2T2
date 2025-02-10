@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CitaService } from '../services/cita.service';
 
@@ -7,17 +7,23 @@ import { CitaService } from '../services/cita.service';
   templateUrl: './citas-del-dia.page.html',
   styleUrls: ['./citas-del-dia.page.scss'],
 })
-export class CitasDelDiaPage implements OnInit {
+export class CitasDelDiaPage implements OnInit, AfterViewInit {
   citas: any[] = [];
   fechaSeleccionada: string | null = null;
-  ordenAscendente: boolean = true; // Definir si el orden es ascendente o descendente
-
+  ordenAscendente: boolean = true;
+  mobilaDa: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private citaService: CitaService
   ) {}
+
+  // Detectar cambios en el tamaño de la pantalla
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.mobilaDa = window.innerWidth <= 768;
+  }
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
@@ -27,21 +33,24 @@ export class CitasDelDiaPage implements OnInit {
       }
     });
   }
-  
+
+  // Asegurar que se ejecuta después de renderizar la vista
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.onResize();
+    }, 100); // Pequeño retraso para evitar errores de detección
+  }
+
   addCita(citaNueva: any) {
-    // Añadir la nueva cita al array de citas
     this.citas.push(citaNueva);
-  
-    // Ordenar las citas por la hora de inicio (si es necesario)
     this.citas.sort((a, b) => a.hasiera_ordua < b.hasiera_ordua ? -1 : 1);
   }
-  
 
   obtenerCitasPorFecha(fecha: string) {
     this.citaService.getCitasPorFecha(fecha).subscribe(
       (data) => {
         this.citas = data;
-        this.ordenarCitasPorAsiento();  // Llamar a la función de ordenar cuando se obtienen las citas
+        this.ordenarCitasPorAsiento();
       },
       (error) => {
         console.error('Error al obtener las citas:', error);
@@ -50,21 +59,15 @@ export class CitasDelDiaPage implements OnInit {
     );
   }
 
-  // Función para ordenar las citas por número de asiento
   ordenarCitasPorAsiento() {
     this.citas.sort((a, b) => {
-      if (this.ordenAscendente) {
-        return a.eserlekua - b.eserlekua; // Ascendente
-      } else {
-        return b.eserlekua - a.eserlekua; // Descendente
-      }
+      return this.ordenAscendente ? a.eserlekua - b.eserlekua : b.eserlekua - a.eserlekua;
     });
   }
 
-  // Función para cambiar el orden ascendente/descendente
   cambiarOrden() {
-    this.ordenAscendente = !this.ordenAscendente;  // Cambiar el estado de orden
-    this.ordenarCitasPorAsiento();  // Aplicar el nuevo orden
+    this.ordenAscendente = !this.ordenAscendente;
+    this.ordenarCitasPorAsiento();
   }
 
   irACitas() {
