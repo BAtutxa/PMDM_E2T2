@@ -1,48 +1,90 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Citas del día</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-app>
+  <div>
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Citas del día</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
-<ion-content>
-  <div class="container">
-    <ion-row class="titulo-reservar">
-        <h1>Citas - {{ fechaSeleccionada }}</h1>
-        <!-- Botón para ir a la página de citas con la fecha seleccionada -->
-        <ion-button color="tertiary" expand="block" (click)="irACitas()">Reservar</ion-button>
+    <ion-content *ngIf="!mobilaDa" [fullscreen]="true">
+      <div class="container">
+        <ion-row class="titulo-reservar">
+          <h1>Citas - {{ fechaSeleccionada }}</h1>
+          <ion-button color="tertiary" expand="block" (click)="irACitas()"
+            >Reservar</ion-button
+          >
+        </ion-row>
 
-    </ion-row>
+        <ion-item>
+          <ion-label>Ordenar por Asiento</ion-label>
+          <ion-select
+            [(ngModel)]="ordenAscendente"
+            (ionChange)="cambiarOrden()"
+          >
+            <ion-select-option [value]="true">Ascendente</ion-select-option>
+            <ion-select-option [value]="false">Descendente</ion-select-option>
+          </ion-select>
+        </ion-item>
 
-    <ion-item>
-      <ion-label>Ordenar por Asiento</ion-label>
-      <ion-select [(ngModel)]="ordenAscendente" (ionChange)="cambiarOrden()">
-        <ion-select-option [value]="true">Ascendente</ion-select-option>
-        <ion-select-option [value]="false">Descendente</ion-select-option>
-      </ion-select>
-    </ion-item>
-    
+        <ion-grid>
+          <ion-row class="encabezado-tabla">
+            <ion-col size="2"><strong>Asiento</strong></ion-col>
+            <ion-col size="2"><strong>Nombre</strong></ion-col>
+            <ion-col size="2"><strong>Hora de Inicio</strong></ion-col>
+            <ion-col size="2"><strong>Hora de Fin</strong></ion-col>
+            <ion-col size="2"><strong>Teléfono</strong></ion-col>
+            <ion-col size="2"><strong>Descripción</strong></ion-col>
+          </ion-row>
 
-    <!-- Tabla de citas -->
-    <ion-grid>
-      <ion-row class="encabezado-tabla">
-        <!-- Encabezados de la tabla -->
-        <ion-col size="2"><strong>Asiento</strong></ion-col>
-        <ion-col size="2"><strong>Nombre</strong></ion-col>
-        <ion-col size="2"><strong>Hora de Inicio</strong></ion-col>
-        <ion-col size="2"><strong>Hora de Fin</strong></ion-col>
-        <ion-col size="2"><strong>Teléfono</strong></ion-col>
-        <ion-col size="2"><strong>Descripción</strong></ion-col>
-      </ion-row>
+          <ion-row *ngFor="let cita of citas">
+            <ion-col size="2">{{ cita.eserlekua }}</ion-col>
+            <ion-col size="2">{{ cita.izena || '' }}</ion-col>
+            <ion-col size="2">{{ cita.hasiera_ordua || ' ' }}</ion-col>
+            <ion-col size="2">{{ cita.amaiera_ordua || ' ' }}</ion-col>
+            <ion-col size="2">{{ cita.telefonoa || ' ' }}</ion-col>
+            <ion-col size="2">{{ cita.deskribapena || ' ' }}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ion-content>
 
-      <!-- Fila por cada cita -->
-      <ion-row *ngFor="let cita of citas">
-        <ion-col size="2">{{ cita.eserlekua }}</ion-col>
-        <ion-col size="2">{{ cita.izena || '' }}</ion-col>
-        <ion-col size="2">{{ cita.hasiera_ordua || ' ' }}</ion-col>
-        <ion-col size="2">{{ cita.amaiera_ordua || ' ' }}</ion-col>
-        <ion-col size="2">{{ cita.telefonoa || ' ' }}</ion-col>
-        <ion-col size="2">{{ cita.deskribapena || ' ' }}</ion-col>
-      </ion-row>      
-    </ion-grid>
+    <div *ngIf="mobilaDa">
+      <div class="container">
+        <ion-row class="titulo-reservar">
+          <h1>Citas - {{ fechaSeleccionada }}</h1>
+          <ion-button color="tertiary" expand="block" (click)="irACitas()"
+            >Reservar</ion-button
+          >
+        </ion-row>
+
+        <ion-item>
+          <ion-label>Ordenar por Asiento</ion-label>
+          <ion-select
+            [(ngModel)]="ordenAscendente"
+            (ionChange)="cambiarOrden()"
+          >
+            <ion-select-option [value]="true">Ascendente</ion-select-option>
+            <ion-select-option [value]="false">Descendente</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+
+      <ion-card *ngFor="let cita of citas">
+        <ion-card-header>
+          <ion-card-title>Asiento: {{ cita.eserlekua }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p><strong>Nombre:</strong> {{ cita.izena || 'Sin nombre' }}</p>
+          <p><strong>Inicio:</strong> {{ cita.hasiera_ordua || 'Sin hora' }}</p>
+          <p><strong>Fin:</strong> {{ cita.amaiera_ordua || 'Sin hora' }}</p>
+          <p>
+            <strong>Teléfono:</strong> {{ cita.telefonoa || 'No disponible' }}
+          </p>
+          <p>
+            <strong>Descripción:</strong> {{ cita.deskribapena || 'Sindescripción' }}
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </div>
   </div>
-</ion-content>
+</ion-app>
