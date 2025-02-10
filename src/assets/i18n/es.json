@@ -10,15 +10,21 @@
       "GENERIC_ERROR": "Error al iniciar sesión"
     }
   },
+  
   "MENU": {
-    "TITLE": "Menú principal",
+    "TITLE": "Menu",
+    "CALENDAR":"Calendario",
     "INVENTORY": "Inventario",
     "APPOINTMENTS": "Citas",
-    "CUSTOMERS": "Clientes",
+    "CLIENTS": "Clientes",
     "SERVICES": "Servicios",
-    "TICKETS": "Tickets",
-    "ADMINISTRATION": "Administración"
+    "TICKETS": "Ticket",
+    "LIGHT_MODE":"Modo claro",
+    "DARK_MODE":"Modo oscuro",
+    "ADMINISTRATION": "Administracion",
+    "LOGOUT": "Cerrar sesion"
   },
+
   "INVENTORY": {
     "TITLE": "Inventario",
     "PRODUCT": "Productos",
