@@ -1,37 +1,56 @@
 <ion-app>
   <app-menu-header></app-menu-header>
-  
-    <div class="page-wrapper">
-      <ion-content [fullscreen]="true" id="main-content">
-        <ion-header>
-          <ion-toolbar color="primary">
-            <ion-buttons slot="start">
-              <ion-menu-button></ion-menu-button>
-            </ion-buttons>
-            <ion-title>{{ inventoryTitle }}</ion-title>
-          </ion-toolbar>
-        </ion-header>
-        <ion-grid class="container">
-          <ion-row>
-            <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-              <ion-button shape="" href="/productos" class="custom-button">
-                <div class="button-content">
-                  <img src="assets/Images/productos.png" alt="ProductosImg" class="button-bg" />
-                  <span>{{productLabel}}</span>
-                </div>
-              </ion-button>
-            </ion-col>
-            <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-              <ion-button shape="" href="/materiales" class="custom-button">
-                <div class="button-content">
-                  <img src="assets/Images/materiales.png" alt="MaterialesImg" class="button-bg" />
-                  <span>{{materialLabel}}</span>
-                </div>
-              </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-content>
-    </div>
-  </ion-app>
-  
+
+  <div class="page-wrapper">
+    <ion-content [fullscreen]="true" id="main-content">
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <ion-title>{{ inventoryTitle }}</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      
+      <ion-grid class="container">
+        <ion-row>
+          <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
+            <ion-button shape="" href="/productos" class="custom-button">
+              <div class="button-content">
+                <img src="assets/Images/productos.png" alt="ProductosImg" class="button-bg" />
+                <span>{{ productLabel }}</span>
+              </div>
+            </ion-button>
+          </ion-col>
+          
+          <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
+            <ion-button shape="" href="/materiales" class="custom-button">
+              <div class="button-content">
+                <img src="assets/Images/materiales.png" alt="MaterialesImg" class="button-bg" />
+                <span>{{ materialLabel }}</span>
+              </div>
+            </ion-button>
+          </ion-col>
+          
+          <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
+            <ion-button shape="" href="/material-maileguak" class="custom-button">
+              <div class="button-content">
+                <img src="assets/Images/mailegua.jpg" alt="Prestacion Materiales" class="button-bg" />
+                <span>Material maileguak</span>
+              </div>
+            </ion-button>
+          </ion-col>
+
+          <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
+            <ion-button shape="" href="/produktu-mugimenduak" class="custom-button">
+              <div class="button-content">
+                <img src="assets/Images/productoMovimientos.jpg" alt="Prestacion Materiales" class="button-bg" />
+                <span>Produktu mugimenduak</span>
+              </div>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-content>
+  </div>
+</ion-app>
