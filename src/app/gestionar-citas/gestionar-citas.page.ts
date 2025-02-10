@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, AfterViewInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CitaService } from '../services/cita.service';
 import { jsPDF } from "jspdf";
 import { ITrabajador } from "../interfaces/ITrabajador";
-import { LangileakService } from '../services/Langileak.service'; 
+import { LangileakService } from '../services/Langileak.service';
 
 @Component({
   selector: 'app-gestionar-citas',
@@ -15,7 +15,8 @@ export class GestionarCitasPage implements OnInit {
   citas: any[] = [];
   citaSeleccionada: any = null;
   modalAbierto = false;
-  trabajadores: ITrabajador [] = [];
+  trabajadores: ITrabajador[] = [];
+  mobilaDa: boolean = false; // Variable que controla si estamos en dispositivo móvil
 
   constructor(
     private http: HttpClient,
@@ -23,7 +24,14 @@ export class GestionarCitasPage implements OnInit {
     private langileakService: LangileakService,
   ) {}
 
+  // Detectar cambios en el tamaño de la pantalla
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.mobilaDa = window.innerWidth <= 768;  // Establecer mobilaDa como true si el ancho es menor a 768px
+  }
+
   ngOnInit() {
+    this.onResize();  // Actualizar mobilaDa al cargar la página
     this.obtenerCitas();
   }
 
