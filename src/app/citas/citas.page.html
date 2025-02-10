@@ -13,45 +13,45 @@
         <form [formGroup]="citaForm" (ngSubmit)="confirmarCita()" class="form-grid">
           <div class="form-column">
             <ion-item>
-              <ion-label position="stacked">Izena</ion-label>
+              <ion-label position="stacked">Nombre</ion-label>
               <ion-input formControlName="nombre" placeholder="Izena"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label position="stacked">Telefonoa</ion-label>
+              <ion-label position="stacked">Telefono</ion-label>
               <ion-input formControlName="telefono" type="tel" placeholder="603701067"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label position="stacked">Hasiera ordua</ion-label>
+              <ion-label position="stacked">Hora de inicio</ion-label>
               <ion-input formControlName="hora" type="time" placeholder="Ordua sartu (adb: 14:30)"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label position="stacked">Amaiera ordua</ion-label>
+              <ion-label position="stacked">Hora de fin</ion-label>
               <ion-input formControlName="horaFin" type="time" placeholder="Ordua sartu (adb: 15:30)"></ion-input>
             </ion-item>
           </div>
 
           <div class="form-column">
             <ion-item>
-              <ion-label position="stacked">Eserlekua</ion-label>
+              <ion-label position="stacked">Asiento</ion-label>
               <ion-input formControlName="eslekua" type="number" placeholder="Eserlekua"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label position="stacked">Deskribapena</ion-label>
+              <ion-label position="stacked">Descripción</ion-label>
               <ion-input formControlName="deskribapena" type="text" placeholder="Deskribapena"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label position="stacked">Etxekoa</ion-label>
+              <ion-label position="stacked">De casa</ion-label>
               <ion-select formControlName="etxekoa">
-                <ion-select-option value="K">Ez</ion-select-option>
-                <ion-select-option value="E">Bai</ion-select-option>
+                <ion-select-option value="K">No</ion-select-option>
+                <ion-select-option value="E">Si</ion-select-option>
               </ion-select>
             </ion-item>
             <ion-item>
-              <ion-label position="stacked">Prezioa (€)</ion-label>
+              <ion-label position="stacked">Precio (€)</ion-label>
               <ion-input formControlName="prezioa" type="number" placeholder="Prezioa"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label position="stacked">Langilea</ion-label>
+              <ion-label position="stacked">Trabajador</ion-label>
               <ion-select formControlName="langilea" (ionChange)="onLangileaChange($event)">
                 <ion-select-option *ngFor="let langilea of langileakList" [value]="langilea.id">
                   {{ langilea.izena }} {{ langilea.abizenak }} ({{ langilea.kodea }})

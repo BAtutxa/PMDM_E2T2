@@ -6,7 +6,7 @@
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title>Kategoriak</ion-title>
+      <ion-title>Categoria</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -25,7 +25,7 @@
   <!-- Selector de productos por página -->
   <div class="productos-por-pagina">
     <ion-item class="producto-item">
-      <ion-label size="small">Kategoriak:</ion-label>
+      <ion-label size="small">Categorias:</ion-label>
       <ion-select [(ngModel)]="categoriasPorPagina" interface="popover" size="small" (ionChange)="cambiarPagina(1)">
         <ion-select-option [value]="5">5</ion-select-option>
         <ion-select-option [value]="10">10</ion-select-option>
@@ -43,14 +43,14 @@
       <ion-select [(ngModel)]="ordenActual.columna" interface="popover" (ionChange)="ordenarPor(ordenActual.columna)">
         <ion-select-option value="id">{{ 'ID' }}</ion-select-option>
         <ion-select-option value="izena">Izena</ion-select-option>
-        <ion-select-option *ngIf="!esHistorial" value="sortze_data">Sortze data</ion-select-option>
-        <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">Eguneratze-data</ion-select-option>
-        <ion-select-option *ngIf="esHistorial" value="ezabatze_data">Ezabatze data</ion-select-option>
+        <ion-select-option *ngIf="!esHistorial" value="sortze_data">Fecha de creación</ion-select-option>
+        <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">Fecha de actualización</ion-select-option>
+        <ion-select-option *ngIf="esHistorial" value="ezabatze_data">Fecha de borrado</ion-select-option>
       </ion-select>
 
       <ion-select [(ngModel)]="ordenActual.ascendente" interface="popover" (ionChange)="cambiarOrden($event)">
-        <ion-select-option [value]="true">Gorakorra</ion-select-option>
-        <ion-select-option [value]="false">Beherakorra</ion-select-option>
+        <ion-select-option [value]="true">Ascendente</ion-select-option>
+        <ion-select-option [value]="false">Descendente</ion-select-option>
       </ion-select>
     </ion-item>
   </div>
@@ -71,7 +71,7 @@
     <ion-col size="12">
       <ion-card>
         <ion-card-header>
-          <ion-card-title>Produktua editatu</ion-card-title>
+          <ion-card-title>Editar productos</ion-card-title>
         </ion-card-header>
         <ion-card-content>
           <form #categoriaForm="ngForm" (ngSubmit)="confirmarEdicion()" novalidate>
@@ -84,13 +84,13 @@
               <ion-input [(ngModel)]="categoriaSeleccionada.izena" name="izena" #izena="ngModel" required>
               </ion-input>
               <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
-                Izena derrigorrezkoa da.
+                El nombre es obligatorio.
               </ion-note>
             </ion-item>
             <ion-button color = "tertiary" expand="full" type="submit" [disabled]="categoriaForm.invalid">Confirmar</ion-button>
             <ion-button expand="full" color="danger" type="button" (click)="cancelarEdicion()">Cancelar</ion-button>
             <ion-button *ngIf="!esHistorial" expand="full" class="custom-red-button" type="button" (click)="eliminarCategoria()">
-              Kategoria ezabatu
+              Borrar categoria
             </ion-button>
             
             <ion-button *ngIf="esHistorial" expand="full" class="custom-gray-button" type="button" (click)="trueEliminarCategoria()">
