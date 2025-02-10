@@ -121,7 +121,8 @@
     "TOTAL_PRICE": "Prezioa Orokorra",
     "CONFIRM": "Baieztatu",
     "DELETE": "Ezabatu",
-    "PRINT_TICKET": "Ticket-a Inprimatu"
+    "PRINT_TICKET": "Ticket-a Inprimatu",
+    "SERVICE": "Zerbitzuak"
   },
     "CREAR_CITA": {
       "NAME": "Izena",
