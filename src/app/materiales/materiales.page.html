@@ -9,7 +9,7 @@
           <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
-          <ion-title>Materialak</ion-title>
+          <ion-title>Materiales</ion-title>
         </ion-toolbar>
       </ion-header>
 
@@ -43,9 +43,9 @@
         <ion-select-option value="id">{{ 'ID' }}</ion-select-option>
         <ion-select-option value="izena">{{ name }}</ion-select-option>
         <ion-select-option value="etiketa">{{ label }}</ion-select-option>
-        <ion-select-option *ngIf="!esHistorial" value="sortze_data">Sortze data</ion-select-option>
-        <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">Eguneratze data</ion-select-option>
-        <ion-select-option *ngIf="esHistorial" value="ezabatze_data">Ezabatze data</ion-select-option>
+        <ion-select-option *ngIf="!esHistorial" value="sortze_data">Fecha de creación</ion-select-option>
+        <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">Fecha de actualización</ion-select-option>
+        <ion-select-option *ngIf="esHistorial" value="ezabatze_data">Fecha de borrado</ion-select-option>
       </ion-select>
 
       <ion-select [(ngModel)]="ordenActual.ascendente" interface="popover" (ionChange)="ordenarPor(ordenActual.columna)">
@@ -122,11 +122,11 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th>IZENA</th>
-              <th>ETIKETA</th>
-              <th>SORTZE-DATA</th>
-              <th>EGUNERATZE-DATA</th>
-              <th>EKINTZAK</th>
+              <th>NOMBRE</th>
+              <th>ETIQUETA</th>
+              <th>FECHA DE CREACIÓN</th>
+              <th>FECHA DE ACTUALIZACIÓN</th>
+              <th>ACTIVIDADES</th>
             </tr>
           </thead>
           <tbody>
@@ -178,9 +178,9 @@
         <ion-select-option value="id">{{ 'ID' }}</ion-select-option>
         <ion-select-option value="izena">{{ name }}</ion-select-option>
         <ion-select-option value="etiketa">{{ label }}</ion-select-option>
-        <ion-select-option *ngIf="!esHistorial" value="sortze_data">Sortze data</ion-select-option>
-        <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">Eguneratze data</ion-select-option>
-        <ion-select-option *ngIf="esHistorial" value="ezabatze_data">Ezabatze data</ion-select-option>
+        <ion-select-option *ngIf="!esHistorial" value="sortze_data">Fecha de creación</ion-select-option>
+        <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">Fecha de actualización</ion-select-option>
+        <ion-select-option *ngIf="esHistorial" value="ezabatze_data">Fecha de borrado</ion-select-option>
       </ion-select>
   
       <ion-label>{{ 'Ordenar: ' }}</ion-label>
@@ -259,10 +259,10 @@
         </ion-card-header>
         <ion-card-content>
           <p><strong>ID:</strong> {{ material.id || '-' }}</p>
-          <p><strong>Etiketa:</strong> {{ material.etiketa || '-' }}</p>
-          <p><strong>Sorte Data:</strong> {{ material.data.sortze_data | date:'yyyy-MM-dd' }}</p>
-          <p><strong>Eguneratze Data:</strong> {{ material.data.eguneratze_data ? (material.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>
-          <ion-button color="tertiary" (click)="editarMaterial(material)">EDITATU</ion-button>
+          <p><strong>Etiqueta:</strong> {{ material.etiketa || '-' }}</p>
+          <p><strong>Fecha de creación:</strong> {{ material.data.sortze_data | date:'yyyy-MM-dd' }}</p>
+          <p><strong>Fecha de actualización:</strong> {{ material.data.eguneratze_data ? (material.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>
+          <ion-button color="tertiary" (click)="editarMaterial(material)">EDITAR</ion-button>
         </ion-card-content>
       </ion-card>
     </ion-col>

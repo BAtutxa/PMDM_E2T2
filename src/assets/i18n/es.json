@@ -1,25 +1,25 @@
 {
-    "LOGIN": {
-      "TITLE": "Iniciar sesión",
-      "WELCOME": "Bienvenido",
-      "NAME": "Nombre",
-      "PASSWORD": "Contraseña",
-      "SUBMIT": "Enviar",
-      "ERROR": {
-        "INVALID_CREDENTIALS": "Credenciales inválidas",
-        "GENERIC_ERROR": "Error al iniciar sesión"
-      }
-    },
-    "MENU": {
-      "TITLE": "Menú principal",
-      "INVENTORY": "Inventario",
-      "APPOINTMENTS": "Citas",
-      "CUSTOMERS": "Clientes",
-      "SERVICES": "Servicios",
-      "TICKETS": "Tickets",
-      "ADMINISTRATION": "Administración"
-    },
-    "INVENTORY": {
+  "LOGIN": {
+    "TITLE": "Iniciar sesión",
+    "WELCOME": "Bienvenido",
+    "NAME": "Nombre",
+    "PASSWORD": "Contraseña",
+    "SUBMIT": "Enviar",
+    "ERROR": {
+      "INVALID_CREDENTIALS": "Credenciales inválidas",
+      "GENERIC_ERROR": "Error al iniciar sesión"
+    }
+  },
+  "MENU": {
+    "TITLE": "Menú principal",
+    "INVENTORY": "Inventario",
+    "APPOINTMENTS": "Citas",
+    "CUSTOMERS": "Clientes",
+    "SERVICES": "Servicios",
+    "TICKETS": "Tickets",
+    "ADMINISTRATION": "Administración"
+  },
+  "INVENTORY": {
     "TITLE": "Inventario",
     "PRODUCT": "Productos",
     "MATERIAL": "Materiales"
@@ -28,13 +28,13 @@
     "TITLE": "Productos",
     "NAME": "Nombre",
     "BRAND": "Marca",
-    "ID_CATEGORY": "ID categoria",
-    "CATEGORY_NAME": "Nombre categoria",
+    "ID_CATEGORY": "ID categoría",
+    "CATEGORY_NAME": "Nombre categoría",
     "CD": "Fecha creación",
     "UD": "Fecha actualización",
     "EDIT": "Editar",
-    "CONFIRM":"Confirmar",
-    "CANCEL":"Cancelar",
+    "CONFIRM": "Confirmar",
+    "CANCEL": "Cancelar",
     "INFO": "Información adicional",
     "SEARCH": "Buscar"
   },
@@ -44,14 +44,13 @@
     "CANCEL": "Cancelar",
     "CONFIRM": "Confirmar"
   },
-  "MATERIAL":{
+  "MATERIAL": {
     "TITLE": "Materiales",
-    "LABEL":"Etiqueta",
+    "LABEL": "Etiqueta",
     "HEADER": "¿Estás seguro?",
     "MESSAGE": "Se actualizarán los valores del material.",
-    "EDIT":"Editando Material",
-    "DETAILS":"Detalles del Material",
+    "EDIT": "Editando material",
+    "DETAILS": "Detalles del material",
     "CLOSE": "Cerrar"
   }
 }
-  

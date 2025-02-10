@@ -105,6 +105,14 @@ const routes: Routes = [
   {
     path: 'crear-servicio',
     loadChildren: () => import('./crear-servicio/crear-servicio.module').then( m => m.CrearServicioPageModule)
+  },
+  {
+    path: 'material-maileguak',
+    loadChildren: () => import('./material-maileguak/material-maileguak.module').then( m => m.MaterialMaileguakPageModule)
+  },
+  {
+    path: 'produktu-mugimenduak',
+    loadChildren: () => import('./produktu-mugimenduak/produktu-mugimenduak.module').then( m => m.ProduktuMugimenduakPageModule)
   }
 
 ];

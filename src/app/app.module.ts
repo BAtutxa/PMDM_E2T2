@@ -7,6 +7,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FooterComponent } from './footer/footer.component';
+import { HizkuntzaService } from './services/hizkuntza.service';
 
 import { provideHttpClient, HttpClient } from '@angular/common/http';
 
@@ -37,7 +38,7 @@ export function createTranslateLoader(http: HttpClient) {
       },
     }),
   ],
-  providers: [
+  providers: [HizkuntzaService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideHttpClient(), // Configuración del cliente HTTP
   ],

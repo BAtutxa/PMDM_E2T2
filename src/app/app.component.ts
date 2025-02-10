@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { HizkuntzaService } from './services/hizkuntza.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -7,8 +9,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   
-  constructor() {
-    this.loadDarkMode();
+  constructor(private hizkuntzaService: HizkuntzaService, private translateService: TranslateService) {
+    const lang = this.hizkuntzaService.getHizkuntza();
+    console.log('Idioma cargado al inicio:', lang);
+    this.translateService.setDefaultLang(lang);
+    this.translateService.use(lang);
+  }
+
+  toggleLanguage() {
+    const newLang = this.hizkuntzaService.getHizkuntza() === 'es' ? 'eu' : 'es';
+    this.hizkuntzaService.setHizkuntza(newLang);
   }
 
   loadDarkMode() {

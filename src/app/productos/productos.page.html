@@ -9,7 +9,7 @@
           <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
-          <ion-title>Produktuak</ion-title>
+          <ion-title>Productos</ion-title>
         </ion-toolbar>
       </ion-header>
 
@@ -43,7 +43,7 @@
         <ion-select-option value="izena">{{ name }}</ion-select-option>
         <ion-select-option value="marka">{{ brand }}</ion-select-option>
         <ion-select-option value="stock">Stock</ion-select-option>
-        <ion-select-option value="kategoriak.izena">Kategoria</ion-select-option>
+        <ion-select-option value="kategoriak.izena">Categoria</ion-select-option>
         <ion-select-option value="sortze_data">{{ cd }}</ion-select-option>
         <ion-select-option value="eguneratze_data">{{ ud }}</ion-select-option>
       </ion-select>
@@ -74,7 +74,7 @@
     <ion-col size="12">
       <ion-card>
         <ion-card-header>
-          <ion-card-title>EDITATU</ion-card-title>
+          <ion-card-title>EDITAR</ion-card-title>
         </ion-card-header>
         <ion-card-content>
           <form #productoForm="ngForm" (ngSubmit)="confirmarEdicion()" novalidate>
@@ -83,21 +83,21 @@
             <ion-input [(ngModel)]="productoSeleccionado.id" name="id" #id="ngModel" readonly></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label position="floating">IZENA</ion-label>
+            <ion-label position="floating">NOMBRE</ion-label>
             <ion-input [(ngModel)]="productoSeleccionado.izena" name="izena" #izena ="ngModel" required></ion-input>
             <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
               El nombre es obligatorio.
             </ion-note>
           </ion-item>
           <ion-item>
-            <ion-label position="floating">MARKA</ion-label>
+            <ion-label position="floating">MARCA</ion-label>
             <ion-input [(ngModel)]="productoSeleccionado.marka" name="marka" #marka="ngModel" required></ion-input>
             <ion-note *ngIf="marka.invalid && marka.touched" color="danger">
               La marca es obligatoria.
             </ion-note>
           </ion-item>          
           <ion-item>
-            <ion-label position="floating">KATEGORIA</ion-label>
+            <ion-label position="floating">CATEGORIA</ion-label>
             <ion-select [(ngModel)]="productoSeleccionado.kategoriak.id" name="kategoriak" required>
               <ion-select-option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.izena }}</ion-select-option>
             </ion-select>
@@ -133,7 +133,7 @@
             </ion-note>
           </ion-item>          
           <!-- Tienes que poner informacion del historial cuando este -->
-          <ion-button color="tertiary" expand="full" (click)="confirmarEdicion()"  type="submit" [disabled]="productoForm.invalid">KONFIRMATU</ion-button>
+          <ion-button color="tertiary" expand="full" (click)="confirmarEdicion()"  type="submit" [disabled]="productoForm.invalid">CONFIRMAR</ion-button>
           <ion-button expand="full" color="danger" (click)="cancelarEdicion()">UTZI</ion-button>
           <ion-button *ngIf="esProfe && !esHistorial" expand="full"  class="custom-red-button" (click)="eliminarProducto()">
             Borrar producto
@@ -167,14 +167,14 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th>IZENA</th>
-              <th>MARKA</th>
+              <th>NOMBRE</th>
+              <th>MARCA</th>
               <th>STOCK</th>
-              <th>KATEGORIA</th>
-              <th>SORTZE DATA</th>
-              <th *ngIf="!esHistorial">EGUNERATZE DATA</th>
-              <th *ngIf="esHistorial">EZABATZE DATA</th>
-              <th>EKINTZAK</th>
+              <th>CATEGORIA</th>
+              <th>FECHA DE CREACIÓN</th>
+              <th *ngIf="!esHistorial">FECHA DE ACTUALIZACIÓN</th>
+              <th *ngIf="esHistorial">FECHA DE BORRADO</th>
+              <th>ACTIVIDADES</th>
             </tr>
           </thead>
           <tbody>
@@ -188,7 +188,7 @@
               <td *ngIf="!esHistorial" [ngClass]="{'custom-white-column': par(5), 'custom-tertiary-column': !par(8)}" style="color: black;">{{ producto.data.eguneratze_data ? (producto.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</td>
               <td *ngIf="esHistorial" [ngClass]="{'custom-white-column': par(5), 'custom-tertiary-column': !par(8)}" style="color: black;">{{ producto.data.ezabatze_data ? (producto.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</td>
               <td [ngClass]="{'custom-white-column': par(6), 'custom-tertiary-column': !par(7)}">
-                <ion-button color="primary" (click)="editarProducto(producto)">EDITATU</ion-button>
+                <ion-button color="primary" (click)="editarProducto(producto)">EDITAR</ion-button>
               </td>
             </tr>
           </tbody>
@@ -228,7 +228,7 @@
         <ion-select-option value="izena">{{ name }}</ion-select-option>
         <ion-select-option value="marka">{{ brand }}</ion-select-option>
         <ion-select-option value="stock">Stock</ion-select-option>
-        <ion-select-option value="kategoriak.izena">Kategoria</ion-select-option>
+        <ion-select-option value="kategoriak.izena">Categoria</ion-select-option>
         <ion-select-option value="sortze_data">{{ cd }}</ion-select-option>
         <ion-select-option value="eguneratze_data">{{ ud }}</ion-select-option>
       </ion-select>
@@ -267,7 +267,7 @@
   <ion-col size="12">
     <ion-card>
       <ion-card-header>
-        <ion-card-title>EDITATU</ion-card-title>
+        <ion-card-title>EDITAR</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <form #productoForm="ngForm" (ngSubmit)="confirmarEdicion()" novalidate>
@@ -276,21 +276,21 @@
             <ion-input [(ngModel)]="productoSeleccionado.id" name="id" #id="ngModel" readonly></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label position="floating">IZENA</ion-label>
+            <ion-label position="floating">NOMBRE</ion-label>
             <ion-input [(ngModel)]="productoSeleccionado.izena" name="izena" #izena="ngModel" required></ion-input>
             <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
               El nombre es obligatorio.
             </ion-note>
           </ion-item>
           <ion-item>
-            <ion-label position="floating">MARKA</ion-label>
+            <ion-label position="floating">MARCA</ion-label>
             <ion-input [(ngModel)]="productoSeleccionado.marka" name="marka" #marka="ngModel" required></ion-input>
             <ion-note *ngIf="marka.invalid && marka.touched" color="danger">
               La marca es obligatoria.
             </ion-note>
           </ion-item>          
           <ion-item>
-            <ion-label position="floating">KATEGORIA</ion-label>
+            <ion-label position="floating">CATEGORIA</ion-label>
             <ion-select [(ngModel)]="productoSeleccionado.kategoriak.id" name="kategoriak" required>
               <ion-select-option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.izena }}</ion-select-option>
             </ion-select>
@@ -327,7 +327,7 @@
           </ion-item>        
           
           <!-- Tienes que poner informacion del historial cuando este -->
-          <ion-button color="tertiary" expand="full" (click)="confirmarEdicion()" type="submit" [disabled]="productoForm.invalid">KONFIRMATU</ion-button>
+          <ion-button color="tertiary" expand="full" (click)="confirmarEdicion()" type="submit" [disabled]="productoForm.invalid">CONFIRMAR</ion-button>
           <ion-button expand="full" color="danger" (click)="cancelarEdicion()">UTZI</ion-button>
           <ion-button *ngIf="esProfe && !esHistorial" expand="full" class="custom-red-button" (click)="eliminarProducto()">
             Borrar producto
@@ -359,7 +359,7 @@
           <p><strong>{{name}}:</strong> {{ producto.izena || '-' }}</p>
           <p><strong>{{brand}}:</strong> {{ producto.marka || '-' }}</p> 
           <p><strong>Stock:</strong> {{ producto.stock || '-' }}</p> 
-          <p><strong>Izen kategoria:</strong> {{ producto.kategoriak.izena || '-' }}</p> 
+          <p><strong>Nombre de categoria:</strong> {{ producto.kategoriak.izena || '-' }}</p> 
           <p><strong>{{cd}}:</strong> {{ producto.data.sortze_data | date:'yyyy-MM-dd' }}</p>
          <p><strong>{{ud}}:</strong> {{ producto.data.eguneratze_data ? (producto.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>
         </ion-card-content>
