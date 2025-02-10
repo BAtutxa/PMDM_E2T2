@@ -132,5 +132,45 @@
     "CONFIRM": "Confirmar",
     "DELETE": "Borrar",
     "PRINT_TICKET": "Imprimir Ticket"
+  },
+  "CLIENTES": {
+    "TITLE": "Clientes",
+    "CLIENTES": "Clientes",
+    "ID": "ID",
+    "NOMBRE": "Nombre",
+    "APELLIDO": "Apellido",
+    "PIEL_SENSIBLE": "Piel sensible",
+    "SI": "Sí",
+    "NO": "No",
+    "DESCONOCIDO": "Desconocido",
+    "TELEFONO": "Teléfono",
+    "FECHA_CREACION": "Fecha de creación",
+    "FECHA_ACTUALIZACION": "Fecha de actualización",
+    "FECHA_BORRADO": "Fecha de borrado",
+    "EDITAR_CITA": "Editar cita",
+    "CONFIRMAR": "Confirmar",
+    "CANCELAR": "Cancelar",
+    "BORRAR_FICHA": "Borrar ficha",
+    "CONFIRMAR_BORRADO": "Confirmar borrado",
+    "RESTAURAR_FICHA": "Restaurar ficha",
+    "AÑADIR_FICHA": "Añadir ficha",
+    "CLIENTES_PORPAGINA": "Clientes por página",
+    "CREACION": "Fecha de creación",
+    "ULTIMA_ACTUALIZACION": "Última actualización",
+    "FECHA_ELIMINACION": "Fecha de eliminación del cliente",
+    "ACCIONES": "Acciones",
+    "NOMBRE_OBLIGATORIO": "El nombre es obligatorio.",
+    "APELLIDO_OBLIGATORIO": "El apellido es obligatorio.",
+    "TELEFONO_NUEVE": "El teléfono debe contener un máximo de 9 números.",
+    "EDITAR_FICHA": "Editar ficha"
+  },
+  "BUSCADOR": {
+    "PLACEHOLDER": "Buscar"
+  },
+  "PAGINACION": {
+    "PAGINACION": "Paginación"
+  },
+  "ERRORS": {
+    "TELEFONO_MAXIMO": "El teléfono debe contener un máximo de 9 números."
   }
 }

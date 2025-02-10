@@ -123,7 +123,6 @@
     "DELETE": "Ezabatu",
     "PRINT_TICKET": "Ticket-a Inprimatu"
   },
-
     "CREAR_CITA": {
       "NAME": "Izena",
       "SURNAME": "Abizena",
@@ -132,6 +131,45 @@
       "SI": "Bai",
       "NO": "Ez",
       "GUARDAR": "Gorde"
+  },
+  "CLIENTES": {
+    "TITLE": "Bezeroak",
+    "CLIENTES": "Bezeroak",
+    "ID": "ID",
+    "NOMBRE": "Izena",
+    "APELLIDO": "Abizena",
+    "PIEL_SENSIBLE": "Azal sentikorra",
+    "SI": "Bai",
+    "NO": "Ez",
+    "DESCONOCIDO": "Ezezaguna",
+    "TELEFONO": "Telefonoa",
+    "FECHA_CREACION": "Sortze data",
+    "FECHA_ACTUALIZACION": "Eguneratze-data",
+    "FECHA_BORRADO": "Ezabatze-data",
+    "EDITAR_CITA": "Editatu hitzordua",
+    "CONFIRMAR": "Baieztatu",
+    "CANCELAR": "Kantzelatu",
+    "BORRAR_FICHA": "Ezabatu fitxa",
+    "CONFIRMAR_BORRADO": "Berretsi ezabaketa",
+    "RESTAURAR_FICHA": "Leheneratu fitxa",
+    "AÑADIR_FICHA": "Gehitu fitxa",
+    "CLIENTES_PORPAGINA": "Bezeroak orri bakoitzeko",
+    "CREACION": "Sortze data",
+    "ULTIMA_ACTUALIZACION": "Azken eguneratzea",
+    "FECHA_ELIMINACION": "Bezeroaren ezabatze-data",
+    "ACCIONES": "Ekintzak",
+    "NOMBRE_OBLIGATORIO": "Izena derrigorrezkoa da.",
+    "APELLIDO_OBLIGATORIO": "Abizena derrigorrezkoa da.",
+    "TELEFONO_NUEVE": "Telefonoak gehienez 9 zenbaki izan behar ditu.",
+    "EDITAR_FICHA": "Fitxa editatu"
+  },
+  "BUSCADOR": {
+    "PLACEHOLDER": "Bilatu"
+  },
+  "PAGINACION": {
+    "PAGINACION": "Orrikatzea"
+  },
+  "ERRORS": {
+    "TELEFONO_MAXIMO": "Telefonoak gehienez 9 zenbaki izan behar ditu."
   }
-  
 }
