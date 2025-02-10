@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { IonContent } from '@ionic/angular';
 import { firstValueFrom } from 'rxjs';
 import { ClientesService } from '../services/clientes.service';
-import { HostListener } from '@angular/core';
 import { IBezero } from '../interfaces/IEBezero';
 import { IData } from '../interfaces/IData';
 import { EsHistorialService } from '../services/EsHistorial.service';
@@ -29,20 +28,17 @@ export class ClientesPage implements OnInit {
   FichasPorPagina = 10;
   paginaActual = 1;
   paginacionMaxima = 0;
-  Math: any;
-  esHistorial:boolean = false;
+  esHistorial: boolean = false;
   acabaDeBorrar: boolean = false;
   loading: any;
-  
 
   constructor(
     private alertController: AlertController, 
     private ClientesService: ClientesService, 
-    private historialService : EsHistorialService,
+    private historialService: EsHistorialService,
     private loadingController: LoadingController,
     private route: ActivatedRoute,
   ) {}
-  
 
   ngOnInit() {
     // Leer el parámetro "desdeHistorial" de la URL
@@ -65,7 +61,7 @@ export class ClientesPage implements OnInit {
   }
 
   par(index: number): boolean {
-    return index % 2 === 0; // Devuelve true para columnas pares, false para columnas impares
+    return index % 2 === 0;
   }
   
   @HostListener('window:resize', ['$event'])
@@ -104,8 +100,6 @@ export class ClientesPage implements OnInit {
       this.loading.dismiss(); // Asegúrate de cerrar el loading si ocurre un error
     }
   }
-  
-  
 
   cambiarPagina(pagina: number) {
     if (pagina < 1) {
@@ -153,7 +147,6 @@ export class ClientesPage implements OnInit {
                 this.aplicarFiltro({ target: { value: '' } });
               }
               this.editandoFicha = false;
-              window.location.reload();
             } catch (error) {
               console.error('Error al borrar ficha:', error);
             }
@@ -220,7 +213,6 @@ export class ClientesPage implements OnInit {
   
               this.acabaDeBorrar = true;
               this.editandoFicha = false;
-          
             } catch (error) {
               console.error('Error al restaurar ficha:', error);
             }
@@ -231,7 +223,6 @@ export class ClientesPage implements OnInit {
   
     await alert.present();
   }
-  
 
   editarFicha(ficha: IBezero) {
     this.fichaSeleccionadaAnterior = { ...this.fichaSeleccionada };
@@ -264,7 +255,6 @@ export class ClientesPage implements OnInit {
                 this.aplicarFiltro({ target: { value: '' } });
               }
               this.editandoFicha = false;
-              window.location.reload();
             } catch (error) {
               console.error('Error al actualizar ficha:', error);
             }
@@ -281,14 +271,12 @@ export class ClientesPage implements OnInit {
     this.editandoFicha = false;
   }
 
-  
   private compararFechas(fecha: IData, texto: string): boolean {
     if (!fecha || !fecha.toString()) return false;
   
     const fechaStr = fecha.toString().toLowerCase(); // Convertir la fecha a string
     return fechaStr.includes(texto);
   }
-
 
   aplicarFiltro(event: any) {
     const texto = event.target.value.toLowerCase();
@@ -318,7 +306,6 @@ export class ClientesPage implements OnInit {
       let valorA = this.obtenerValorPorColumna(a, columna);
       let valorB = this.obtenerValorPorColumna(b, columna);
   
-      // Convertir valores a fecha si la columna es de tipo fecha
       if (columna === 'sortze_data' || columna === 'eguneratze_data' || columna === 'data') {
         valorA = valorA ? new Date(valorA) : null;
         valorB = valorB ? new Date(valorB) : null;
@@ -327,7 +314,6 @@ export class ClientesPage implements OnInit {
       if (valorA === null) return this.ordenActual.ascendente ? 1 : -1;
       if (valorB === null) return this.ordenActual.ascendente ? -1 : 1;
   
-      // Comparar correctamente los valores numéricos o de fecha
       return this.ordenActual.ascendente 
         ? (valorA > valorB ? 1 : valorA < valorB ? -1 : 0) 
         : (valorA > valorB ? -1 : valorA < valorB ? 1 : 0);
