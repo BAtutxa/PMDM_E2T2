@@ -2,36 +2,36 @@
   <div class="center-container">
     <ion-card>
       <div class="container">
-        <h2>Detalles de la Cita</h2>
+        <h2>{{ 'CITA_DETALLES.TITLE' | translate }}</h2>
         
         <ion-card>
           <ion-card-header>
-            <ion-card-title>Información General</ion-card-title>
+            <ion-card-title>{{ 'CITA_DETALLES.GENERAL_INFO' | translate }}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            <p><strong>Nombre:</strong> {{ citaData.nombre }}</p>
-            <p><strong>Teléfono:</strong> {{ citaData.telefono }}</p>
-            <p><strong>Fecha:</strong> {{ citaData.fecha }}</p>
-            <p><strong>Hora de inicio:</strong> {{ citaData.hora }}</p>
-            <p><strong>Hora de fin:</strong> {{ citaData.horaFin }}</p>
+            <p><strong>{{ 'CITA_DETALLES.NAME' | translate }}:</strong> {{ citaData.nombre }}</p>
+            <p><strong>{{ 'CITA_DETALLES.PHONE' | translate }}:</strong> {{ citaData.telefono }}</p>
+            <p><strong>{{ 'CITA_DETALLES.DATE' | translate }}:</strong> {{ citaData.fecha }}</p>
+            <p><strong>{{ 'CITA_DETALLES.START_TIME' | translate }}:</strong> {{ citaData.hora }}</p>
+            <p><strong>{{ 'CITA_DETALLES.END_TIME' | translate }}:</strong> {{ citaData.horaFin }}</p>
           </ion-card-content>
         </ion-card>
 
         <ion-card>
           <ion-card-header>
-            <ion-card-title>Detalles Adicionales</ion-card-title>
+            <ion-card-title>{{ 'CITA_DETALLES.ADDITIONAL_DETAILS' | translate }}</ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            <p><strong>Asiento:</strong> {{ citaData.eslekua }}</p>
-            <p><strong>Descripción:</strong> {{ citaData.deskribapena }}</p>
-            <p><strong>De casa:</strong> {{ citaData.etxekoa }}</p>
-            <p><strong>Precio:</strong> {{ citaData.prezioa }} €</p>
-            <p><strong>Trabajador:</strong> {{ citaData.langilea }}</p>
+            <p><strong>{{ 'CITA_DETALLES.SEAT' | translate }}:</strong> {{ citaData.eslekua }}</p>
+            <p><strong>{{ 'CITA_DETALLES.DESCRIPTION' | translate }}:</strong> {{ citaData.deskribapena }}</p>
+            <p><strong>{{ 'CITA_DETALLES.FROM_HOME' | translate }}:</strong> {{ citaData.etxekoa }}</p>
+            <p><strong>{{ 'CITA_DETALLES.PRICE' | translate }}:</strong> {{ citaData.prezioa }} €</p>
+            <p><strong>{{ 'CITA_DETALLES.WORKER' | translate }}:</strong> {{ citaData.langilea }}</p>
           </ion-card-content>
         </ion-card>
 
-        <ion-button color="success" (click)="confirmar()">Confirmar</ion-button>
-        <ion-button color="danger" (click)="descartar()">Descartar</ion-button>
+        <ion-button color="success" (click)="confirmar()">{{ 'CITA_DETALLES.CONFIRM' | translate }}</ion-button>
+        <ion-button color="danger" (click)="descartar()">{{ 'CITA_DETALLES.CANCEL' | translate }}</ion-button>
       </div>
     </ion-card>
   </div>
