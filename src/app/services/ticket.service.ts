@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, tap, throwError } from 'rxjs';
 import { ITicket } from '../interfaces/ITicket';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TicketService {
-  private baseUrl = 'http://localhost:8080/api/ticket_lerroak'; // URL del backend Spring Boot
-  private ticketSubject = new BehaviorSubject<ITicket[]>([]); // Estado reactivo
+  private baseUrl = 'http://localhost:8080/api/ticket_lerroak'; 
+  private ticketSubject = new BehaviorSubject<ITicket[]>([]);
 
   constructor(private http: HttpClient) {
     this.getTicketActivos().subscribe(tickets => this.ticketSubject.next(tickets));
@@ -40,17 +40,21 @@ export class TicketService {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json');
-    return this.http.put<ITicket>(`${this.baseUrl}/update`, ticket, { headers })
-      .pipe(
-        tap(ticketActualizado => {
-          const ticketsActualizados = this.ticketSubject.getValue().map(p =>
-            p.id === ticketActualizado.id ? ticketActualizado : p
-          );
-          this.ticketSubject.next(ticketsActualizados);
-        })
-      );
+  
+    return this.http.put(`${this.baseUrl}/update`, ticket, { headers, responseType: 'text' }).pipe(
+      map((response: any) => {
+        // Si la respuesta es un texto, puedes convertirla a un formato adecuado o simplemente devolverlo
+        console.log(response);  // Aquí verás el mensaje del servidor
+        return ticket;  // Aquí devuelves el ticket sin intentar hacer un parseo de JSON
+      }),
+      catchError(error => {
+        console.error('Error al actualizar el ticket:', error);
+        return throwError(error); // Re-lanza el error
+      })
+    );
   }
-
+  
+  
   eliminarticket(ticket: ITicket): Observable<void> {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')

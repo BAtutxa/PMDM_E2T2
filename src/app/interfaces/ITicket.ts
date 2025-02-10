@@ -16,8 +16,8 @@ export interface ITicket{
             amaiera_ordua_erreala: null |Time,
             izena: string,
             telefonoa: string,
-            deskribapena: "Algo",
-            etxekoa: "E",
+            deskribapena: string,
+            etxekoa: string,
             prezio_totala: 12.00,
             dataSimple: IData
         },

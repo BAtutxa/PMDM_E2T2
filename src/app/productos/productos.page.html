@@ -45,7 +45,8 @@
         <ion-select-option value="stock">Stock</ion-select-option>
         <ion-select-option value="kategoriak.izena">Categoria</ion-select-option>
         <ion-select-option value="sortze_data">{{ cd }}</ion-select-option>
-        <ion-select-option value="eguneratze_data">{{ ud }}</ion-select-option>
+        <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">{{ ud }}</ion-select-option>
+        <ion-select-option  *ngIf="esHistorial" value="ezabatze_data">{{ ud }}</ion-select-option>
       </ion-select>
   
       <ion-label>{{ 'Ordenar: ' }}</ion-label>
@@ -230,7 +231,8 @@
         <ion-select-option value="stock">Stock</ion-select-option>
         <ion-select-option value="kategoriak.izena">Categoria</ion-select-option>
         <ion-select-option value="sortze_data">{{ cd }}</ion-select-option>
-        <ion-select-option value="eguneratze_data">{{ ud }}</ion-select-option>
+        <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">{{ ud }}</ion-select-option>
+        <ion-select-option  *ngIf="esHistorial" value="ezabatze_data">{{ ud }}</ion-select-option>
       </ion-select>
   
       <ion-label>{{ 'Ordenar: ' }}</ion-label>
