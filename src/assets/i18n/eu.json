@@ -106,22 +106,32 @@
     "CONFIRM": "Baieztatu",
     "CANCEL": "Ezabatu"
   },
-    "GESTION_CITAS": {
-      "ID":"ID",
-      "TITLE": "Hitzorduak Kudeatu",
-      "DETAILS_TITLE": "Hitzorduen Xehetasunak",
+  "GESTION_CITAS": {
+    "ID": "ID",
+    "TITLE": "Hitzorduak Kudeatu",
+    "DETAILS_TITLE": "Hitzorduen Xehetasunak",
+    "NAME": "Izena",
+    "PHONE": "Telefonoa",
+    "DATE": "Data",
+    "START_TIME": "Hasiera ordua",
+    "END_TIME": "Amaiera ordua",
+    "SEAT": "Eserleku",
+    "DESCRIPTION": "Deskribapena",
+    "FROM_HOME": "Etxetik",
+    "TOTAL_PRICE": "Prezioa Orokorra",
+    "CONFIRM": "Baieztatu",
+    "DELETE": "Ezabatu",
+    "PRINT_TICKET": "Ticket-a Inprimatu"
+  },
+
+    "CREAR_CITA": {
       "NAME": "Izena",
-      "PHONE": "Telefonoa",
-      "DATE": "Data",
-      "START_TIME": "Hasiera ordua",
-      "END_TIME": "Amaiera ordua",
-      "SEAT": "Eserleku",
-      "DESCRIPTION": "Deskribapena",
-      "FROM_HOME": "Etxetik",
-      "TOTAL_PRICE": "Prezioa Orokorra",
-      "CONFIRM": "Baieztatu",
-      "DELETE": "Ezabatu",
-      "PRINT_TICKET": "Ticket-a Inprimatu"
-    }
+      "SURNAME": "Abizena",
+      "TELEFONO": "Telefonoa",
+      "PIEL_SENSIBLE": "Azal sentikorra",
+      "SI": "Bai",
+      "NO": "Ez",
+      "GUARDAR": "Gorde"
+  }
   
 }

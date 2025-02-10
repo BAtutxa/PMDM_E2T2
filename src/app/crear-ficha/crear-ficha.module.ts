@@ -7,13 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { CrearFichaPageRoutingModule } from './crear-ficha-routing.module';
 
 import { CrearFichaPage } from './crear-ficha.page';
+import { TranslateModule } from '@ngx-translate/core';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CrearFichaPageRoutingModule
+    CrearFichaPageRoutingModule,
+    TranslateModule
   ],
   declarations: [CrearFichaPage]
 })

@@ -12,7 +12,7 @@
   },
 
   "MENU": {
-    "TITLE": "Menu",
+    "TITLE": "Menú",
     "CALENDAR": "Calendario",
     "INVENTORY": "Inventario",
     "APPOINTMENTS": "Citas",
@@ -21,9 +21,10 @@
     "TICKETS": "Ticket",
     "LIGHT_MODE": "Modo claro",
     "DARK_MODE": "Modo oscuro",
-    "ADMINISTRATION": "Administracion",
-    "LOGOUT": "Cerrar sesion"
+    "ADMINISTRATION": "Administración",
+    "LOGOUT": "Cerrar sesión"
   },
+
   "CALENDAR": {
     "SELECT_DAY": "Selecciona un día"
   },
@@ -33,6 +34,7 @@
     "PRODUCT": "Productos",
     "MATERIAL": "Materiales"
   },
+
   "PRODUCT": {
     "TITLE": "Productos",
     "NAME": "Nombre",
@@ -47,12 +49,14 @@
     "INFO": "Información adicional",
     "SEARCH": "Buscar"
   },
+
   "ALERTPRODUCT": {
     "HEADER": "¿Estás seguro?",
     "MESSAGE": "Se actualizarán los valores del producto.",
     "CANCEL": "Cancelar",
     "CONFIRM": "Confirmar"
   },
+
   "MATERIAL": {
     "TITLE": "Materiales",
     "LABEL": "Etiqueta",
@@ -62,20 +66,22 @@
     "DETAILS": "Detalles del material",
     "CLOSE": "Cerrar"
   },
+
   "APPOINTMENTS": {
     "TITLE": "Citas del día",
     "LABEL": "Citas",
     "RESERVE": "Reservar",
-    "ORDER_BY_SEAT": "Ordenar por Asiento",
+    "ORDER_BY_SEAT": "Ordenar por asiento",
     "ASCENDING": "Ascendente",
     "DESCENDING": "Descendente",
     "SEAT": "Asiento",
     "NAME": "Nombre",
-    "START_TIME": "Hora de Inicio",
-    "END_TIME": "Hora de Fin",
+    "START_TIME": "Hora de inicio",
+    "END_TIME": "Hora de fin",
     "PHONE": "Teléfono",
     "DESCRIPTION": "Descripción"
   },
+
   "RESERVAR_CITA": {
     "TITLE": "Reservar Cita",
     "SELECTED_DATE": "Fecha seleccionada:",
@@ -91,6 +97,7 @@
     "CONFIRM": "Confirmar",
     "CANCEL": "Cancelar"
   },
+
   "CITA_DETALLES": {
     "TITLE": "Detalles de la Cita",
     "GENERAL_INFO": "Información General",
@@ -108,22 +115,22 @@
     "CONFIRM": "Confirmar",
     "CANCEL": "Descartar"
   },
-    "GESTION_CITAS": {
-      "ID":"ID",
-      "TITLE": "Gestionar Citas",
-      "DETAILS_TITLE": "Detalles de la Cita",
-      "NAME": "Nombre",
-      "PHONE": "Teléfono",
-      "DATE": "Fecha",
-      "START_TIME": "Hora de inicio",
-      "END_TIME": "Hora de fin",
-      "SEAT": "Asiento",
-      "DESCRIPTION": "Descripción",
-      "FROM_HOME": "De casa",
-      "TOTAL_PRICE": "Precio Total",
-      "CONFIRM": "Confirmar",
-      "DELETE": "Borrar",
-      "PRINT_TICKET": "Imprimir Ticket"
-    }
-  
+
+  "GESTION_CITAS": {
+    "ID": "ID",
+    "TITLE": "Gestionar Citas",
+    "DETAILS_TITLE": "Detalles de la Cita",
+    "NAME": "Nombre",
+    "PHONE": "Teléfono",
+    "DATE": "Fecha",
+    "START_TIME": "Hora de inicio",
+    "END_TIME": "Hora de fin",
+    "SEAT": "Asiento",
+    "DESCRIPTION": "Descripción",
+    "FROM_HOME": "De casa",
+    "TOTAL_PRICE": "Precio Total",
+    "CONFIRM": "Confirmar",
+    "DELETE": "Borrar",
+    "PRINT_TICKET": "Imprimir Ticket"
+  }
 }
