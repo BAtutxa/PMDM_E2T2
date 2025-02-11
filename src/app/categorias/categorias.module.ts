@@ -10,12 +10,15 @@ import { CategoriasPage } from './categorias.page';
 
 import { TranslateModule } from '@ngx-translate/core';
 
+import { NireKonponenteakModule } from '../nire-konponenteak/nire-konponenteak.module';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     TranslateModule,
+    NireKonponenteakModule,
     CategoriasPageRoutingModule,
   ],
   declarations: [CategoriasPage],
