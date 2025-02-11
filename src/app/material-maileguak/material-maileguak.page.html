@@ -103,17 +103,17 @@
 
             <ion-item>
               <ion-label position="floating">Fecha Inicio</ion-label>
-              <ion-input [(ngModel)]="IMaileguSeleccionado.hasieraData" name="hasiera_Data" #hasiera_Data="ngModel" required></ion-input>
+              <ion-input [(ngModel)]="IMaileguSeleccionado.hasieraData" name="hasiera_Data" #hasiera_Data="ngModel" required type="date"></ion-input>
               <ion-note *ngIf="hasiera_Data.invalid && hasiera_Data.touched" color="danger">
-                La fecha de inicio es obligatoria.
+              La fecha de inicio es obligatoria.
               </ion-note>
             </ion-item>
 
             <ion-item>
               <ion-label position="floating">Fecha Fin</ion-label>
-              <ion-input [(ngModel)]="IMaileguSeleccionado.amaieraData" name="amaiera_Data" #amaiera_Data="ngModel" required></ion-input>
+              <ion-input [(ngModel)]="IMaileguSeleccionado.amaieraData" name="amaiera_Data" #amaiera_Data="ngModel" required type="date"></ion-input>
               <ion-note *ngIf="amaiera_Data.invalid && amaiera_Data.touched" color="danger">
-                La fecha de final es obligatoria.
+              La fecha de final es obligatoria.
               </ion-note>
             </ion-item>
 
@@ -127,7 +127,6 @@
       </ion-card>
     </ion-col>
   </ion-row>
-
 
   <ion-row *ngIf= "esProfe">
     <ion-col size="12" class="ion-text-center">
@@ -268,17 +267,17 @@
 
             <ion-item>
               <ion-label position="floating">Fecha Inicio</ion-label>
-              <ion-input [(ngModel)]="IMaileguSeleccionado.hasieraData" name="hasiera_Data" #hasiera_Data="ngModel" required></ion-input>
+              <ion-input [(ngModel)]="IMaileguSeleccionado.hasieraData" name="hasiera_Data" #hasiera_Data="ngModel" required type="date"></ion-input>
               <ion-note *ngIf="hasiera_Data.invalid && hasiera_Data.touched" color="danger">
-                La fecha de inicio es obligatoria.
+              La fecha de inicio es obligatoria.
               </ion-note>
             </ion-item>
 
             <ion-item>
               <ion-label position="floating">Fecha Fin</ion-label>
-              <ion-input [(ngModel)]="IMaileguSeleccionado.amaieraData" name="amaiera_Data" #amaiera_Data="ngModel" required></ion-input>
+              <ion-input [(ngModel)]="IMaileguSeleccionado.amaieraData" name="amaiera_Data" #amaiera_Data="ngModel" required type="date"></ion-input>
               <ion-note *ngIf="amaiera_Data.invalid && amaiera_Data.touched" color="danger">
-                La fecha de final es obligatoria.
+              La fecha de final es obligatoria.
               </ion-note>
             </ion-item>
 
@@ -292,7 +291,7 @@
       </ion-card>
     </ion-col>
   </ion-row>
-  
+
   <ion-row *ngIf= "esProfe">
     <ion-col size="12" class="ion-text-center">
       <ion-button color="primary" expand="block" [routerLink]="'/crearmaterial'">Añadir prestamo
@@ -315,7 +314,6 @@
           <p><strong>Eguneratze Data:</strong> {{ mailegu.data.eguneratze_data ? (mailegu.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>
           <p><strong>Hasiera Data:</strong> {{ mailegu.hasieraData| date:'yyyy-MM-dd' }}</p>
           <p><strong>Amaiera Data:</strong> {{ mailegu.amaieraData ? (mailegu.amaieraData | date:'yyyy-MM-dd') : '-' }}</p>
-          <ion-button color="tertiary" (click)="editarIMailegu(mailegu)">EDITATU</ion-button>
         </ion-card-content>
       </ion-card>
     </ion-col>

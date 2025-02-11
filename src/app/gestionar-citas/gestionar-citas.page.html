@@ -91,6 +91,15 @@
               <ion-label position="stacked">{{ 'GESTION_CITAS.TOTAL_PRICE' | translate }}: </ion-label>
               <ion-input [(ngModel)]="citaSeleccionada.prezio_totala"></ion-input>
             </ion-item>
+            
+            <ion-item>
+              <ion-label position="stacked">{{ 'GESTION_CITAS.SERVICE' | translate }}</ion-label>
+              <ion-select formControlName="zerbitzuak" (ionChange)="servicioChange($event)">
+                <ion-select-option *ngFor="let servicio of listaServicios" [value]="servicio.id">
+                  {{ servicio.izena }}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
 
             <ion-footer>
               <ion-buttons>
@@ -195,6 +204,16 @@
               <ion-label position="stacked">{{ 'GESTION_CITAS.TOTAL_PRICE' | translate }}: </ion-label>
               <ion-input [(ngModel)]="citaSeleccionada.prezio_totala"></ion-input>
             </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">{{ 'GESTION_CITAS.SERVICE' | translate }}</ion-label>
+              <ion-select formControlName="zerbitzuak" (ionChange)="servicioChange($event)">
+                <ion-select-option *ngFor="let servicio of listaServicios" [value]="servicio.id">
+                  {{ servicio.izena }}
+                </ion-select-option>
+              </ion-select>
+            </ion-item>
+
 
             <ion-footer>
               <ion-buttons>

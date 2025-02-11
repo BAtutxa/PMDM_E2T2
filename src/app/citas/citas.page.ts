@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { ITrabajador } from '../interfaces/ITrabajador';
 
 @Component({
   selector: 'app-citas',
@@ -13,8 +14,7 @@ import { NavController } from '@ionic/angular';
 export class CitasPage implements OnInit {
   citaForm: FormGroup;
   fechaSeleccionada: string = ''; // Variable para almacenar la fecha seleccionada
-  langileakList: any[] = []; // Lista para almacenar los Langileak
-  Router: any;
+  langileakList: ITrabajador[] = []; // Lista para almacenar los Langileak
 
   constructor(
     private fb: FormBuilder,

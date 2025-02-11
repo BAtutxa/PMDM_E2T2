@@ -94,6 +94,7 @@
     "FROM_HOME": "De casa",
     "PRICE": "Precio (€)",
     "WORKER": "Trabajador",
+    "SERVICE": "Servicio",
     "CONFIRM": "Confirmar",
     "CANCEL": "Cancelar"
   },
@@ -131,7 +132,8 @@
     "TOTAL_PRICE": "Precio Total",
     "CONFIRM": "Confirmar",
     "DELETE": "Borrar",
-    "PRINT_TICKET": "Imprimir Ticket"
+    "PRINT_TICKET": "Imprimir Ticket",
+    "SERVICE": "Servicio"
   },
   "CLIENTES": {
     "BORRAR": "BORRAR",

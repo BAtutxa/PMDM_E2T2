@@ -1,9 +1,17 @@
-import { Component, HostListener, OnInit, AfterViewInit } from '@angular/core';
+import { Component, HostListener, OnInit} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CitaService } from '../services/cita.service';
 import { jsPDF } from "jspdf";
 import { ITrabajador } from "../interfaces/ITrabajador";
 import { LangileakService } from '../services/Langileak.service';
+import { TicketService } from '../services/ticket.service';
+import { ITicket } from '../interfaces/ITicket';
+import { IZerbitzuak } from '../interfaces/IZerbitzuak';
+import { ZerbitzuakService } from '../services/zerbitzuak.service';
+import { AlertController } from '@ionic/angular';
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-gestionar-citas',
@@ -16,12 +24,19 @@ export class GestionarCitasPage implements OnInit {
   citaSeleccionada: any = null;
   modalAbierto = false;
   trabajadores: ITrabajador[] = [];
-  mobilaDa: boolean = false; // Variable que controla si estamos en dispositivo móvil
-
+  listaServicios: IZerbitzuak[] = [];
+  mobilaDa: boolean = false; 
+  servicioSeleccionado: number | null = null;  // Variable para almacenar el servicio seleccionado
+  
   constructor(
     private http: HttpClient,
     private citaService: CitaService,
     private langileakService: LangileakService,
+    private ticketService : TicketService,
+    private serviciosService : ZerbitzuakService,
+    private alertController : AlertController,
+    private router : Router,
+    private cdRef: ChangeDetectorRef
   ) {}
 
   // Detectar cambios en el tamaño de la pantalla
@@ -33,6 +48,16 @@ export class GestionarCitasPage implements OnInit {
   ngOnInit() {
     this.onResize();  // Actualizar mobilaDa al cargar la página
     this.obtenerCitas();
+    
+    // Obtener los servicios disponibles
+    this.serviciosService.getZerbitzuak().subscribe(data => {
+      console.log("Servicios obtenidos:", data);
+      this.listaServicios = data;
+    });
+  }
+
+  servicioChange(event: any) {
+    this.servicioSeleccionado = event.detail.value;  // Asignamos el valor del servicio seleccionado
   }
 
   get etxekoa() {
@@ -56,12 +81,13 @@ export class GestionarCitasPage implements OnInit {
   }
 
   abrirModal(cita: any) {
-    this.citaSeleccionada = { ...cita }; // Hacer una copia de la cita para editarla
+    this.citaSeleccionada = { ...cita };  // Hacer una copia de la cita para editarla
     this.modalAbierto = true;
   }
 
   cerrarModal() {
     this.modalAbierto = false;
+    this.cdRef.detectChanges();
   }
 
   // Método para confirmar los cambios (actualizar la cita)
@@ -99,7 +125,7 @@ export class GestionarCitasPage implements OnInit {
           console.log('Cita eliminada exitosamente:', response);
           // Eliminar la cita de la lista en la interfaz
           this.citas = this.citas.filter(cita => cita.id !== this.citaSeleccionada.id);
-          this.cerrarModal(); // Cerrar el modal después de la eliminación
+          this.cerrarModal();
         },
         (error) => {
           console.error('Error al eliminar la cita:', error);
@@ -128,98 +154,147 @@ export class GestionarCitasPage implements OnInit {
     // Devolver el nombre completo del trabajador
     return `${trabajador.izena} ${trabajador.abizenak}`;
   }
-  
 
+  async mostrarAlerta(message: string) {
+    const alert = await this.alertController.create({
+      header: 'Aviso',
+      message: message,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
+  getServicioById(id: number): Observable<IZerbitzuak> {
+    return this.http.get<IZerbitzuak>(`http://localhost:8080/zerbitzuak/${id}`);
+  }
+  
   imprimirTicket() {
     let listaCitas: any[] = [];
-    
+  
+    // Ahora cargamos las citas después de obtener los servicios
     this.http.get<any[]>('http://localhost:8080/hitzorduak/hitzorduakGuztiak').subscribe(
       (data) => {
         listaCitas = data;
         console.log('Citas obtenidas:', listaCitas);
+  
+        // Buscar la cita seleccionada
+        const citaSeleccionada = listaCitas.find(cita => cita.id === this.citaSeleccionada.id);
+        console.log("Cita a enviar:", JSON.stringify(citaSeleccionada, null, 2));
+  
+        if (!citaSeleccionada) {
+          console.error("Cita seleccionada no encontrada en la lista de citas.");
+          return;
+        }
+  
+        // Verificamos si el servicio está seleccionado
+        if (!this.servicioSeleccionado) {
+          this.mostrarAlerta('Por favor, selecciona un servicio antes de generar el ticket.');
+          return;
+        }
+  
+        // Verificar si todos los campos requeridos tienen valores válidos
+        if (!citaSeleccionada.id_langilea || !citaSeleccionada.izena || !citaSeleccionada.telefonoa) {
+          this.mostrarAlerta('Todos los campos de la cita deben ser completados antes de generar el ticket.');
+          return;
+        }
+  
+        // Obtener el servicio asociado a la cita
+        this.getServicioById(this.servicioSeleccionado).subscribe(
+          (servicio) => {
+            console.log("Servicio obtenido:", servicio);
+  
+            // Obtener el trabajador asociado a la cita
+            this.langileakService.getLangileak().subscribe(
+              (trabajadores: ITrabajador[]) => {
+                console.log("Trabajadores obtenidos:", trabajadores);
+                this.trabajadores = trabajadores;
+  
+                // Buscar el nombre del trabajador
+                const trabajadorNombre = this.obtenerTrabajadorPorId(citaSeleccionada.id_langilea);
+                if (trabajadorNombre === 'Trabajador no encontrado') {
+                  console.error("No se pudo obtener el nombre del trabajador.");
+                  return;
+                }
+  
+                // Ahora creamos el nuevo ticket
+                const nuevoTicket: ITicket = {
+                  id: null,
+                  zerbitzuak: {
+                    id: servicio.id,
+                    izena: servicio.izena,
+                    etxeko_prezioa: servicio.etxeko_prezioa,
+                    kanpoko_prezioa: servicio.kanpoko_prezioa,
+                    data: servicio.data
+                  },
+                  hitzorduak: {
+                    id: citaSeleccionada.id,
+                    eserlekua: citaSeleccionada.eserlekua,
+                    id_langilea: citaSeleccionada.id_langilea,
+                    data: citaSeleccionada.data,
+                    hasiera_ordua: citaSeleccionada.hasiera_ordua,
+                    amaiera_ordua: citaSeleccionada.amaiera_ordua,
+                    hasiera_ordua_erreala: null,
+                    amaiera_ordua_erreala: null,
+                    izena: citaSeleccionada.izena,
+                    telefonoa: citaSeleccionada.telefonoa,
+                    deskribapena: citaSeleccionada.deskribapena,
+                    etxekoa: citaSeleccionada.etxekoa,
+                    prezio_totala: citaSeleccionada.prezio_totala,
+                    dataSimple: {
+                      sortze_data: new Date(),
+                      eguneratze_data: new Date(),
+                      ezabatze_data: null
+                    }
+                  },
+                  data: {
+                    sortze_data: new Date(),
+                    eguneratze_data: new Date(),
+                    ezabatze_data: null
+                  },
+                  prezioa: citaSeleccionada.prezio_totala
+                };
+  
+                console.log('Nuevo ticket:', nuevoTicket);
+  
+                // Crear PDF
+                const doc = new jsPDF();
+                doc.text(`Ticket de Cita`, 10, 10);
+                doc.text(`Nombre: ${nuevoTicket.hitzorduak.izena}`, 10, 20);
+                doc.text(`Telefono: ${nuevoTicket.hitzorduak.telefonoa}`, 10, 30);
+                doc.text(`Servicio: ${nuevoTicket.zerbitzuak.izena}`, 10, 40);
+                doc.text(`Trabajador: ${trabajadorNombre}`, 10, 50);
+                doc.text(`Fecha: ${nuevoTicket.hitzorduak.data}`, 10, 60);
+                doc.text(`Hora: ${nuevoTicket.hitzorduak.hasiera_ordua} - ${nuevoTicket.hitzorduak.amaiera_ordua}`, 10, 70);
+                doc.save('ticket-cita.pdf');
+  
+                this.ticketService.crearTicket(nuevoTicket).subscribe(
+                  (response: any) => {
+                    console.log("Ticket guardado correctamente");
+                    this.cerrarModal();
+                    this.router.navigate(['/tickets']).then(() => {
+                      window.location.reload(); // Recarga la página solo después de llegar a /tickets
+                    });
+
+                  },
+                  (error) => {
+                    console.error("Error al guardar el ticket:", error);
+                  }
+                );      
+                    
+              },
+              (error) => {
+                console.error('Error al obtener los trabajadores:', error);
+              }
+            );
+          },
+          (error) => {
+            console.error('Error al obtener el servicio:', error);
+          }
+        );
       },
       (error) => {
         console.error('Error al obtener las citas:', error);
       }
     );
-
-    this.langileakService.getLangileak().subscribe(
-      (trabajadores: ITrabajador[]) => {
-        console.log("Trabajadores obtenidos:", trabajadores); 
-    
-        this.trabajadores = trabajadores; 
-        console.log("Cita id langile:" + this.citaSeleccionada.id_langilea);
-        const citaSeleccionada = listaCitas.find(cita => cita.id === this.citaSeleccionada.id);
-    
-        if (citaSeleccionada) {
-          this.citaSeleccionada.id_langilea = citaSeleccionada.id_langilea;
-        } else {
-          console.error("Cita seleccionada no encontrada en la lista de citas.");
-          return;
-        }
-    
-        const trabajadorNombre = this.obtenerTrabajadorPorId(this.citaSeleccionada.id_langilea);
-    
-        if (trabajadorNombre === 'Trabajador no encontrado') {
-          console.error("No se pudo obtener el nombre del trabajador.");
-          return;
-        }
-    
-        const doc = new jsPDF();
-    
-        doc.setProperties({
-          title: 'Ticket',
-          subject: 'Ticket FP San Jorge',
-          author: 'FP San Jorge',
-        });
-    
-        const logoUrl = '../assets/Images/IMP_Logotipoa.png'; 
-        const pageWidth = doc.internal.pageSize.width;
-        const pageHeight = doc.internal.pageSize.height;
-    
-        const logoWidth = 60;  
-        const logoHeight = 60; 
-        const xPos = pageWidth - logoWidth - 10; 
-        const yPos = 30;  
-        doc.addImage(logoUrl, 'PNG', xPos, yPos, logoWidth, logoHeight); 
-  
-        doc.setFont("helvetica", "bold");
-        doc.setFontSize(20); 
-        doc.setTextColor(0, 102, 204);  
-        doc.text("TICKET FP SAN JORGE", 20, 30); 
-    
-        const direccion = "Dirección: Pajares Kalea, 34, 48980 Santurtzi, Bizkaia";
-        const telefono = "Teléfono: 944 00 49 30";
-        
-        doc.setFontSize(12);  
-        doc.setTextColor(169, 169, 169);  
-        doc.text(direccion, 20, 40);  
-        doc.text(telefono, 20, 50);  
-        
-        doc.setFont("helvetica", "normal");
-        doc.setFontSize(10);  
-        doc.setTextColor(0, 0, 0);  
-    
-        const ticketData = [
-          `Hora: ${citaSeleccionada.hasiera_ordua} - ${citaSeleccionada.amaiera_ordua}`,
-          `Descripción: ${citaSeleccionada.deskribapena || 'No hay descripción'}`,
-          `Precio total: ${citaSeleccionada.prezio_totala}€`,
-          `Trabajador: ${trabajadorNombre}`
-        ];
-        
-        let yPosition = 60; 
-        const lineHeight = 8;
-    
-        ticketData.forEach((item, index) => {
-          doc.text(`- ${item}`, 20, yPosition); 
-          yPosition += lineHeight; 
-        });
-    
-        doc.save(`Ticket de ${citaSeleccionada.izena}.pdf`);
-      },
-      (error) => {
-        console.error("Error al obtener los trabajadores:", error);
-      }
-    );
-  }    
-}
+  }
+}  

@@ -11,6 +11,8 @@ import { NireKonponenteakModule } from "../nire-konponenteak/nire-konponenteak.m
 
 import { TranslateModule } from '@ngx-translate/core';
 
+import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -18,6 +20,7 @@ import { TranslateModule } from '@ngx-translate/core';
     IonicModule,
     GestionarCitasPageRoutingModule,
     NireKonponenteakModule,
+    ReactiveFormsModule,
     TranslateModule
 ],
   declarations: [GestionarCitasPage]
