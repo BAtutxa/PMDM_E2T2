@@ -208,5 +208,15 @@
     "PRICE_REQUIRED": "El precio es obligatorio",
     "ASCENDING": "Ascendente",
     "DESCENDING": "Descendente"
+  },
+  "CREAR_SERVICIO":{
+    "TITLE":"Nuevo servicio",
+    "NAME": "Nombre",
+    "PRECIO_FUERA":"Precio de fuera",
+    "PRECIO_CASA":"Precio de casa",
+    "GUARDAR":"Guardar",
+    "NOMBRE_REQUIRED":"El nombre es obligatorio. ",
+    "PRECIO_CASA_OBLIGATORIO":"El precio de casa es obligatorio. ",
+    "PRECIO_FUERA_OBLIGATORIO":"El precio de fuera es obligatorio"
   }
 }

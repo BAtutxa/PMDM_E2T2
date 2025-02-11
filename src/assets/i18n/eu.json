@@ -197,5 +197,15 @@
     "PRICE_REQUIRED": "Prezioa beharrezkoa da",
     "ASCENDING": "Igoera",
     "DESCENDING": "Jaitsiera"
+  },
+  "CREAR_SERVICIO":{
+    "TITLE":"Zerbitzu berria",
+    "NAME": "Izena",
+    "PRECIO_FUERA":"Kanpoko prezioa",
+    "PRECIO_CASA":"Etxeko prezioa",
+    "GUARDAR":"Gorde",
+    "NOMBRE_REQUIRED":"Izena derrigorrezkoa da. ",
+    "PRECIO_CASA_OBLIGATORIO":"Etxeko prezioa derrigorrezkoa da. ",
+    "PRECIO_FUERA_OBLIGATORIO":"Kanpoko mprezioa derrigorrezkoa da. "
   }
 }
