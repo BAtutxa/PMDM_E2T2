@@ -289,5 +289,43 @@
     "FECHA_BORRADO": "Ezabatze Data",
     "CREATION_DATE": "Sortze Data",
     "UPDATE_DATE": "Eguneratze Data"
+  },
+  "MATERIAL_MAILEGUAK": {
+    "TITLE": "Material Maileguak",
+    "SEARCH": "Bilatu",
+    "ORDENAR_POR": "Ordenatu honela",
+    "ID": "ID",
+    "LANGILE_IZENA": "Langilearen Izena",
+    "MATERIAL_IZENA": "Materialaren Izena",
+    "HASIERA_DATA": "Hasiera Data",
+    "AMAIERA_DATA": "Amaiera Data",
+    "SORTZE_DATA": "Sortze Data",
+    "EGUNERATZE_DATA": "Eguneratze Data",
+    "EKINTZAK": "Ekintzak",
+    "CONFIRMAR": "Konfirmazioa",
+    "CANCELAR": "Ezeztatu",
+    "EDITAR": "Editatu",
+    "BORRAR_PRESTAMO": "Mailegua ezabatu",
+    "ANADIR_PRESTAMO": "Mailegu bat gehitu",
+    "EDICION_TITULO": "Editatu Mailegua",
+    "FECHA_INICIO": "Hasiera Data",
+    "FECHA_FIN": "Amaiera Data",
+    "FECHA_INICIO_OBLIGATORIA": "Hasiera data derrigorrezkoa da",
+    "FECHA_FIN_OBLIGATORIA": "Amaiera data derrigorrezkoa da",
+    "LANGILE_IZENA_OBLIGATORIO": "Langilearen izena derrigorrezkoa da",
+    "MATERIAL_IZENA_OBLIGATORIO": "Materialaren izena derrigorrezkoa da",
+    "EZABATZE_DATA": "Ezabatze Data",
+    "ASCENDENTE": "Gorakorra",
+    "DESCENDENTE": "Beherakorra",
+    "ORDENA": "Orrialdeko perstamo-kopurua"
+  },
+  "CREAR_MATERIAL": {
+    "NUEVO_MATERIAL": "Material Berria Sortu",
+    "NOMBRE": "Izena",
+    "NOMBRE_OBLIGATORIO": "Izena derrigorrezkoa da",
+    "ETIKETA": "Etiketa",
+    "INTRODUCE_ETIKETA": "Sartu etiketa bat",
+    "ETIKETA_OBLIGATORIA": "Etiketa derrigorrezkoa da",
+    "GUARDAR": "Gorde"
   }
 }

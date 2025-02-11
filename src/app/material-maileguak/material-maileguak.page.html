@@ -1,5 +1,4 @@
 <ion-app>
-  
     <!-- Contenido principal -->
     <ion-app class="ion-page" id="main-content">
       <!-- Header principal -->
@@ -8,213 +7,216 @@
           <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
-          <ion-title>Material maileguak</ion-title>
+          <ion-title>{{ 'MATERIAL_MAILEGUAK.TITLE' | translate }}</ion-title>
         </ion-toolbar>
       </ion-header>
 
 <ion-content [fullscreen]="true" *ngIf="!mobilaDa">
   <!-- Buscador -->
-  <ion-searchbar
-    search-icon="search-circle"
-    [placeholder]="search"
-    (ionInput)="aplicarFiltro($event)">
-  </ion-searchbar>
+<ion-searchbar
+search-icon="search-circle"
+[placeholder]="'MATERIAL_MAILEGUAK.SEARCH' | translate"
+(ionInput)="aplicarFiltro($event)">
+</ion-searchbar>
 
-  <!-- Selector de materiales por página -->
-  <div class="productos-por-pagina">
-    <ion-item class="producto-item">
-      <ion-label size="small">{{title}}:</ion-label>
-      <ion-select [(ngModel)]="maileguakPorPagina" interface="popover" size="small" (ionChange)="cambiarPagina(1)">
-        <ion-select-option [value]="5">5</ion-select-option>
-        <ion-select-option [value]="10">10</ion-select-option>
-        <ion-select-option [value]="25">25</ion-select-option>
-        <ion-select-option [value]="50">50</ion-select-option>
-        <ion-select-option [value]="100">100</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </div>
+<!-- Selector de materiales por página -->
+<div class="productos-por-pagina">
+<ion-item class="producto-item">
+  <ion-label size="small">{{ 'MATERIAL_MAILEGUAK.ORDENA' | translate }}:</ion-label>
+  <ion-select [(ngModel)]="maileguakPorPagina" interface="popover" size="small" (ionChange)="cambiarPagina(1)">
+    <ion-select-option [value]="5">5</ion-select-option>
+    <ion-select-option [value]="10">10</ion-select-option>
+    <ion-select-option [value]="25">25</ion-select-option>
+    <ion-select-option [value]="50">50</ion-select-option>
+    <ion-select-option [value]="100">100</ion-select-option>
+  </ion-select>
+</ion-item>
+</div>
 
-  <!-- Filtros de ordenación -->
-  <div class="ordenacion-filtros">
-    <ion-item>
-      <ion-label>{{ 'Ordenar por:' }}</ion-label>
-      <ion-select [(ngModel)]="ordenActual.columna" interface="popover" (ionChange)="ordenarPor(ordenActual.columna)">
-        <ion-select-option value="id">{{ 'ID' }}</ion-select-option>
-        <ion-select-option value="mailegu.Langile.izena">Langile izena</ion-select-option>
-        <ion-select-option value="mailegu.materiala.izena">Material izena</ion-select-option>
-        <ion-select-option *ngIf="!esHistorial" value="sortze_data">Sortze data</ion-select-option>
-        <ion-select-option value="hasieraData">Hasiera data</ion-select-option>
-        <ion-select-option value="amaieraData">Amaiera data</ion-select-option>
-        <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">Eguneratze data</ion-select-option>
-        <ion-select-option *ngIf="esHistorial" value="ezabatze_data">Ezabatze data</ion-select-option>
-      </ion-select>
-      <ion-select [(ngModel)]="ordenActual.ascendente" interface="popover" (ionChange)="ordenarPor(ordenActual.columna)">
-        <ion-select-option value="true">{{ 'Ascendente' }}</ion-select-option>
-        <ion-select-option value="false">{{ 'Descendente' }}</ion-select-option>
-        <ion-label slot="start">
-          {{ ordenActual.ascendente === true ? 'Ascendente' : 'Descendente' }}
-        </ion-label>
-      </ion-select>
-    </ion-item>
-  </div>
+<!-- Filtros de ordenación -->
+<div class="ordenacion-filtros">
+<ion-item>
+  <ion-label>{{ 'MATERIAL_MAILEGUAK.ORDENAR_POR' | translate }}</ion-label>
+  <ion-select [(ngModel)]="ordenActual.columna" interface="popover" (ionChange)="ordenarPor(ordenActual.columna)">
+    <ion-select-option value="id">{{ 'MATERIAL_MAILEGUAK.ID' | translate }}</ion-select-option>
+    <ion-select-option value="mailegu.Langile.izena">{{ 'MATERIAL_MAILEGUAK.LANGILE_IZENA' | translate }}</ion-select-option>
+    <ion-select-option value="mailegu.materiala.izena">{{ 'MATERIAL_MAILEGUAK.MATERIAL_IZENA' | translate }}</ion-select-option>
+    <ion-select-option *ngIf="!esHistorial" value="sortze_data">{{ 'MATERIAL_MAILEGUAK.SORTZE_DATA' | translate }}</ion-select-option>
+    <ion-select-option value="hasieraData">{{ 'MATERIAL_MAILEGUAK.HASIERA_DATA' | translate }}</ion-select-option>
+    <ion-select-option value="amaieraData">{{ 'MATERIAL_MAILEGUAK.AMAIERA_DATA' | translate }}</ion-select-option>
+    <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">{{ 'MATERIAL_MAILEGUAK.EGUNERATZE_DATA' | translate }}</ion-select-option>
+    <ion-select-option *ngIf="esHistorial" value="ezabatze_data">{{ 'MATERIAL_MAILEGUAK.EZABATZE_DATA' | translate }}</ion-select-option>
+  </ion-select>
+
+  <ion-select [(ngModel)]="ordenActual.ascendente" interface="popover" (ionChange)="ordenarPor(ordenActual.columna)">
+    <ion-select-option value="true">{{ 'MATERIAL_MAILEGUAK.ASCENDENTE' | translate }}</ion-select-option>
+    <ion-select-option value="false">{{ 'MATERIAL_MAILEGUAK.DESCENDENTE' | translate }}</ion-select-option>
+    <ion-label slot="start">
+      {{ ordenActual.ascendente === true ? ('MATERIAL_MAILEGUAK.ASCENDENTE' | translate) : ('MATERIAL_MAILEGUAK.DESCENDENTE' | translate) }}
+    </ion-label>
+  </ion-select>
+</ion-item>
+</div>
 
   <!-- Paginación -->
+<ion-row>
+  <ion-col>
+    <ion-button *ngFor="let page of hacerPaginacion()" (click)="cambiarPagina(page)">
+      {{ page }}
+    </ion-button>
+  </ion-col>
+</ion-row>
+
+<!-- Fila de edición visible solo en modo edición -->
+<ion-row *ngIf="editandoIMailegu">
+  <ion-col size="12">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{ 'MATERIAL_MAILEGUAK.EDITAR_MAILEGU' | translate }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <form #materialForm="ngForm" (ngSubmit)="confirmarEdicion()" novalidate>
+          <ion-item>
+            <ion-label position="floating">{{ 'MATERIAL_MAILEGUAK.ID' | translate }}</ion-label>
+            <ion-input [(ngModel)]="IMaileguSeleccionado.id" name="id" #id="ngModel" readonly></ion-input>
+          </ion-item>
+
+          <!-- Selección de Material -->
+          <ion-item>
+            <ion-label position="floating">{{ 'MATERIAL_MAILEGUAK.MATERIAL' | translate }}</ion-label>
+            <ion-select [(ngModel)]="IMaileguSeleccionado.materiala.id" name="materiala" required>
+              <ion-select-option *ngFor="let material of materiales" [value]="material.id">
+                {{ material.izena }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <!-- Selección de Trabajador -->
+          <ion-item>
+            <ion-label position="floating">{{ 'MATERIAL_MAILEGUAK.TRABAJADOR' | translate }}</ion-label>
+            <ion-select [(ngModel)]="IMaileguSeleccionado.langilea.id" name="langilea" required>
+              <ion-select-option *ngFor="let trabajador of trabajadores" [value]="trabajador.id">
+                {{ trabajador.izena }} {{ trabajador.abizenak }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">{{ 'MATERIAL_MAILEGUAK.FECHA_INICIO' | translate }}</ion-label>
+            <ion-input [(ngModel)]="IMaileguSeleccionado.hasieraData" name="hasiera_Data" #hasiera_Data="ngModel" required type="date"></ion-input>
+            <ion-note *ngIf="hasiera_Data.invalid && hasiera_Data.touched" color="danger">
+              {{ 'MATERIAL_MAILEGUAK.FECHA_INICIO_OBLIGATORIA' | translate }}
+            </ion-note>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">{{ 'MATERIAL_MAILEGUAK.FECHA_FIN' | translate }}</ion-label>
+            <ion-input [(ngModel)]="IMaileguSeleccionado.amaieraData" name="amaiera_Data" #amaiera_Data="ngModel" required type="date"></ion-input>
+            <ion-note *ngIf="amaiera_Data.invalid && amaiera_Data.touched" color="danger">
+              {{ 'MATERIAL_MAILEGUAK.FECHA_FIN_OBLIGATORIA' | translate }}
+            </ion-note>
+          </ion-item>
+
+          <ion-button expand="full" color="tertiary" type="submit" [disabled]="materialForm.invalid">{{ 'MATERIAL_MAILEGUAK.CONFIRMAR' | translate }}</ion-button>
+          <ion-button expand="full" color="danger" (click)="cancelarEdicion()">{{ 'MATERIAL_MAILEGUAK.CANCELAR' | translate }}</ion-button>
+          <ion-button *ngIf="esProfe" expand="full" class="custom-red-button" (click)="eliminarIMailegu()">
+            {{ 'MATERIAL_MAILEGUAK.BORRAR_PRESTAMO' | translate }}
+          </ion-button>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </ion-col>
+</ion-row>
+
+
+<ion-row *ngIf="esProfe">
+  <ion-col size="12" class="ion-text-center">
+    <ion-button color="primary" expand="block" [routerLink]="'/crearmaterial'">{{ 'MATERIAL_MAILEGUAK.ANADIR_PRESTAMO' | translate }}
+      <ion-icon name="add-circle-outline"></ion-icon>
+    </ion-button>
+  </ion-col>
+</ion-row>
+
+<!-- Fila de materiales -->
+<ion-grid>
   <ion-row>
-    <ion-col>
-      <ion-button *ngFor="let page of hacerPaginacion()" (click)="cambiarPagina(page)">
-        {{ page }}
-      </ion-button>
-    </ion-col>
-  </ion-row>
-
-  <!-- Fila de edición visible solo en modo edición -->
-  <ion-row *ngIf="editandoIMailegu">
     <ion-col size="12">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>{{editIMailegu}}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <form #materialForm="ngForm" (ngSubmit)="confirmarEdicion()" novalidate>
-            <ion-item>
-              <ion-label position="floating">ID</ion-label>
-              <ion-input [(ngModel)]="IMaileguSeleccionado.id" name="id" #id="ngModel" readonly></ion-input>
-            </ion-item>
-
-            <!-- Selección de Material -->
-            <ion-item>
-              <ion-label position="floating">Material</ion-label>
-              <ion-select [(ngModel)]="IMaileguSeleccionado.materiala.id" name="materiala" required>
-                <ion-select-option *ngFor="let material of materiales" [value]="material.id">
-                  {{ material.izena }}
-                </ion-select-option>
-              </ion-select>
-            </ion-item>
-
-            <!-- Selección de Trabajador -->
-            <ion-item>
-              <ion-label position="floating">Trabajador</ion-label>
-              <ion-select [(ngModel)]="IMaileguSeleccionado.langilea.id" name="langilea" required>
-                <ion-select-option *ngFor="let trabajador of trabajadores" [value]="trabajador.id">
-                  {{ trabajador.izena }} {{ trabajador.abizenak }}
-                </ion-select-option>
-              </ion-select>
-            </ion-item>
-
-            <ion-item>
-              <ion-label position="floating">Fecha Inicio</ion-label>
-              <ion-input [(ngModel)]="IMaileguSeleccionado.hasieraData" name="hasiera_Data" #hasiera_Data="ngModel" required type="date"></ion-input>
-              <ion-note *ngIf="hasiera_Data.invalid && hasiera_Data.touched" color="danger">
-              La fecha de inicio es obligatoria.
-              </ion-note>
-            </ion-item>
-
-            <ion-item>
-              <ion-label position="floating">Fecha Fin</ion-label>
-              <ion-input [(ngModel)]="IMaileguSeleccionado.amaieraData" name="amaiera_Data" #amaiera_Data="ngModel" required type="date"></ion-input>
-              <ion-note *ngIf="amaiera_Data.invalid && amaiera_Data.touched" color="danger">
-              La fecha de final es obligatoria.
-              </ion-note>
-            </ion-item>
-
-            <ion-button expand="full" color="tertiary" type="submit" [disabled]="materialForm.invalid">{{confirm}}</ion-button>
-            <ion-button expand="full" color="danger" (click)="cancelarEdicion()">{{cancel}}</ion-button>
-            <ion-button *ngIf="esProfe" expand="full" class="custom-red-button" (click)="eliminarIMailegu()">
-              Borrar préstamo
-            </ion-button>
-          </form>
-        </ion-card-content>
-      </ion-card>
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>{{ 'MATERIAL_MAILEGUAK.ID' | translate }}</th>
+            <th>{{ 'MATERIAL_MAILEGUAK.LANGILE_IZENA' | translate }}</th>
+            <th>{{ 'MATERIAL_MAILEGUAK.MATERIAL_IZENA' | translate }}</th>
+            <th>{{ 'MATERIAL_MAILEGUAK.HASIERA_DATA' | translate }}</th>
+            <th>{{ 'MATERIAL_MAILEGUAK.AMAIERA_DATA' | translate }}</th>
+            <th>{{ 'MATERIAL_MAILEGUAK.SORTZE_DATA' | translate }}</th>
+            <th>{{ 'MATERIAL_MAILEGUAK.EGUNERATZE_DATA' | translate }}</th>
+            <th>{{ 'MATERIAL_MAILEGUAK.EKINTZAK' | translate }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let mailegu of maileguakFiltrados | slice: (paginaActual - 1) * maileguakPorPagina : paginaActual * maileguakPorPagina">
+            <td>{{ mailegu.id || '-' }}</td>
+            <td>{{ mailegu.langilea.izena || '-' }}</td>
+            <td>{{ mailegu.materiala.izena }}</td>
+            <td>{{ mailegu.hasieraData ? (mailegu.hasieraData | date:'yyyy-MM-dd') : '-' }}</td>
+            <td>{{ mailegu.amaieraData ? (mailegu.amaieraData | date:'yyyy-MM-dd') : '-' }}</td>
+            <td>{{ mailegu.data.sortze_data ? (mailegu.data.sortze_data | date:'yyyy-MM-dd') : '-' }}</td>
+            <td>{{ mailegu.data.eguneratze_data ? (mailegu.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</td>
+            <td>
+              <ion-button color="primary" (click)="editarIMailegu(mailegu)">{{ 'MATERIAL_MAILEGUAK.EDITAR' | translate }}</ion-button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </ion-col>
   </ion-row>
-
-  <ion-row *ngIf= "esProfe">
-    <ion-col size="12" class="ion-text-center">
-      <ion-button color="primary" expand="block" [routerLink]="'/crearmaterial'">Añadir prestamo
-        <ion-icon name="add-circle-outline"></ion-icon>
-      </ion-button>
-    </ion-col>
-  </ion-row>
-
-  <!-- Fila de materiales -->
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12">
-        <table class="custom-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>LANGILE IZENA</th>
-              <th>MATERIAL IZENA</th>
-              <th>HASIERA-DATA</th>
-              <th>AMAIERA-DATA</th>
-              <th>SORTZE-DATA</th>
-              <th>EGUNERATZE-DATA</th>
-              <th>EKINTZAK</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let mailegu of maileguakFiltrados | slice: (paginaActual - 1) * maileguakPorPagina : paginaActual * maileguakPorPagina">
-              <td>{{ mailegu.id || '-' }}</td>
-              <td>{{ mailegu.langilea.izena || '-' }}</td>
-              <td>{{ mailegu.materiala.izena }}</td>
-              <td>{{ mailegu.hasieraData ? (mailegu.hasieraData | date:'yyyy-MM-dd') : '-' }}</td>
-              <td>{{ mailegu.amaieraData ? (mailegu.amaieraData | date:'yyyy-MM-dd') : '-' }}</td>
-              <td>{{ mailegu.data.sortze_data ? (mailegu.data.sortze_data | date:'yyyy-MM-dd') : '-' }}</td>
-              <td>{{ mailegu.data.eguneratze_data ? (mailegu.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</td>
-              <td>
-                <ion-button color="primary" (click)="editarIMailegu(mailegu)">EDITATU</ion-button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+</ion-grid>
 </ion-content>
 
 <!--MOVIL-->
 
 <ion-content [fullscreen]="true" *ngIf="mobilaDa">
   <!-- Buscador -->
-  <ion-searchbar
-    search-icon="search-circle"
-    [placeholder]="search"
-    (ionInput)="aplicarFiltro($event)">
-  </ion-searchbar>
+<ion-searchbar
+search-icon="search-circle"
+[placeholder]="'MATERIAL_MAILEGUAK.BUSCAR' | translate"
+(ionInput)="aplicarFiltro($event)">
+</ion-searchbar>
 
-  <!-- Selector de productos por página -->
-  <div class="productosPorPagina">
-    <ion-item class="producto-item">
-      <ion-label size="small">{{title}}:</ion-label>
-      <ion-select [(ngModel)]="maileguakPorPagina" interface="popover" size="small" (ionChange)="cambiarPagina(1)">
-        <ion-select-option [value]="5">5</ion-select-option>
-        <ion-select-option [value]="10">10</ion-select-option>
-        <ion-select-option [value]="25">25</ion-select-option>
-        <ion-select-option [value]="50">50</ion-select-option>
-        <ion-select-option [value]="100">100</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </div>
+<!-- Selector de productos por página -->
+<div class="productosPorPagina">
+<ion-item class="producto-item">
+  <ion-label size="small">{{ 'MATERIAL_MAILEGUAK.ORDENA' | translate }}:</ion-label>
+  <ion-select [(ngModel)]="maileguakPorPagina" interface="popover" size="small" (ionChange)="cambiarPagina(1)">
+    <ion-select-option [value]="5">5</ion-select-option>
+    <ion-select-option [value]="10">10</ion-select-option>
+    <ion-select-option [value]="25">25</ion-select-option>
+    <ion-select-option [value]="50">50</ion-select-option>
+    <ion-select-option [value]="100">100</ion-select-option>
+  </ion-select>
+</ion-item>
+</div>
+
 
   <div class="ordenacion-filtros">
     <ion-item>
-      <ion-label>{{ 'Ordenar por:' }}</ion-label>
+      <ion-label>{{ 'MATERIAL_MAILEGUAK.ORDENAR_POR' | translate }}</ion-label>
       <ion-select [(ngModel)]="ordenActual.columna" interface="popover" (ionChange)="ordenarPor(ordenActual.columna)">
-        <ion-select-option value="id">{{ 'ID' }}</ion-select-option>
-        <ion-select-option value="mailegu.Langile.izena">Langile izena</ion-select-option>
-        <ion-select-option value="mailegu.materiala.izena">Material izena</ion-select-option>
-        <ion-select-option value="hasieraData">Hasiera data</ion-select-option>
-        <ion-select-option value="amaieraData">Amaiera data</ion-select-option>
-        <ion-select-option *ngIf="!esHistorial" value="sortze_data">Sortze data</ion-select-option>
-        <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">Eguneratze data</ion-select-option>
-        <ion-select-option *ngIf="esHistorial" value="ezabatze_data">Ezabatze data</ion-select-option>
+        <ion-select-option value="id">{{ 'MATERIAL_MAILEGUAK.ID' | translate }}</ion-select-option>
+        <ion-select-option value="mailegu.Langile.izena">{{ 'MATERIAL_MAILEGUAK.LANGILE_IZENA' | translate }}</ion-select-option>
+        <ion-select-option value="mailegu.materiala.izena">{{ 'MATERIAL_MAILEGUAK.MATERIAL_IZENA' | translate }}</ion-select-option>
+        <ion-select-option value="hasieraData">{{ 'MATERIAL_MAILEGUAK.HASIERRA_DATA' | translate }}</ion-select-option>
+        <ion-select-option value="amaieraData">{{ 'MATERIAL_MAILEGUAK.AMAIERA_DATA' | translate }}</ion-select-option>
+        <ion-select-option *ngIf="!esHistorial" value="sortze_data">{{ 'MATERIAL_MAILEGUAK.SORTZE_DATA' | translate }}</ion-select-option>
+        <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">{{ 'MATERIAL_MAILEGUAK.EGUNERATZE_DATA' | translate }}</ion-select-option>
+        <ion-select-option *ngIf="esHistorial" value="ezabatze_data">{{ 'MATERIAL_MAILEGUAK.EZABATZE_DATA' | translate }}</ion-select-option>
       </ion-select>
   
       <ion-label>{{ 'Ordenar: ' }}</ion-label>
       <ion-select [(ngModel)]="ordenActual.ascendente" interface="popover" (ionChange)="ordenarPor(ordenActual.columna)">
-        <ion-select-option value="true">{{ 'Ascendente' }}</ion-select-option>
-        <ion-select-option value="false">{{ 'Descendente' }}</ion-select-option>
+        <ion-select-option value="true">{{ 'MATERIAL_MAILEGUAK.ASCENDENTE' | translate }}</ion-select-option>
+        <ion-select-option value="false">{{ 'MATERIAL_MAILEGUAK.DESCENDENTE' | translate }}</ion-select-option>
         <ion-label slot="start">
           {{ ordenActual.ascendente === true ? 'Ascendente' : 'Descendente' }}
         </ion-label>
@@ -223,100 +225,101 @@
   </div>
   
   <!-- Paginación -->
-  <ion-row>
-    <ion-col>
-      <ion-button *ngFor="let page of hacerPaginacion()" (click)="cambiarPagina(page)">
-        {{ page }}
-      </ion-button>
-    </ion-col>
-  </ion-row>
+<ion-row>
+  <ion-col>
+    <ion-button *ngFor="let page of hacerPaginacion()" (click)="cambiarPagina(page)">
+      {{ page }}
+    </ion-button>
+  </ion-col>
+</ion-row>
 
-  <!-- Fila de edición visible solo en modo edición -->
-  <ion-row *ngIf="editandoIMailegu">
-    <ion-col size="12">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>{{editIMailegu}}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <form #materialForm="ngForm" (ngSubmit)="confirmarEdicion()" novalidate>
-            <ion-item>
-              <ion-label position="floating">ID</ion-label>
-              <ion-input [(ngModel)]="IMaileguSeleccionado.id" name="id" #id="ngModel" readonly></ion-input>
-            </ion-item>
+<!-- Fila de edición visible solo en modo edición -->
+<ion-row *ngIf="editandoIMailegu">
+  <ion-col size="12">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{ 'MATERIAL_MAILEGUAK.EDICION_TITULO' | translate }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <form #materialForm="ngForm" (ngSubmit)="confirmarEdicion()" novalidate>
+          <ion-item>
+            <ion-label position="floating">{{ 'MATERIAL_MAILEGUAK.ID' | translate }}</ion-label>
+            <ion-input [(ngModel)]="IMaileguSeleccionado.id" name="id" #id="ngModel" readonly></ion-input>
+          </ion-item>
 
-            <!-- Selección de Material -->
-            <ion-item>
-              <ion-label position="floating">Material</ion-label>
-              <ion-select [(ngModel)]="IMaileguSeleccionado.materiala.id" name="materiala" required>
-                <ion-select-option *ngFor="let material of materiales" [value]="material.id">
-                  {{ material.izena }}
-                </ion-select-option>
-              </ion-select>
-            </ion-item>
+          <!-- Selección de Material -->
+          <ion-item>
+            <ion-label position="floating">{{ 'MATERIAL_MAILEGUAK.MATERIAL' | translate }}</ion-label>
+            <ion-select [(ngModel)]="IMaileguSeleccionado.materiala.id" name="materiala" required>
+              <ion-select-option *ngFor="let material of materiales" [value]="material.id">
+                {{ material.izena }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
 
-            <!-- Selección de Trabajador -->
-            <ion-item>
-              <ion-label position="floating">Trabajador</ion-label>
-              <ion-select [(ngModel)]="IMaileguSeleccionado.langilea.id" name="langilea" required>
-                <ion-select-option *ngFor="let trabajador of trabajadores" [value]="trabajador.id">
-                  {{ trabajador.izena }} {{ trabajador.abizenak }}
-                </ion-select-option>
-              </ion-select>
-            </ion-item>
+          <!-- Selección de Trabajador -->
+          <ion-item>
+            <ion-label position="floating">{{ 'MATERIAL_MAILEGUAK.TRABAJADOR' | translate }}</ion-label>
+            <ion-select [(ngModel)]="IMaileguSeleccionado.langilea.id" name="langilea" required>
+              <ion-select-option *ngFor="let trabajador of trabajadores" [value]="trabajador.id">
+                {{ trabajador.izena }} {{ trabajador.abizenak }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
 
-            <ion-item>
-              <ion-label position="floating">Fecha Inicio</ion-label>
-              <ion-input [(ngModel)]="IMaileguSeleccionado.hasieraData" name="hasiera_Data" #hasiera_Data="ngModel" required type="date"></ion-input>
-              <ion-note *ngIf="hasiera_Data.invalid && hasiera_Data.touched" color="danger">
-              La fecha de inicio es obligatoria.
-              </ion-note>
-            </ion-item>
+          <ion-item>
+            <ion-label position="floating">{{ 'MATERIAL_MAILEGUAK.FECHA_INICIO' | translate }}</ion-label>
+            <ion-input [(ngModel)]="IMaileguSeleccionado.hasieraData" name="hasiera_Data" #hasiera_Data="ngModel" required type="date"></ion-input>
+            <ion-note *ngIf="hasiera_Data.invalid && hasiera_Data.touched" color="danger">
+              {{ 'MATERIAL_MAILEGUAK.FECHA_INICIO_OBLIGATORIA' | translate }}
+            </ion-note>
+          </ion-item>
 
-            <ion-item>
-              <ion-label position="floating">Fecha Fin</ion-label>
-              <ion-input [(ngModel)]="IMaileguSeleccionado.amaieraData" name="amaiera_Data" #amaiera_Data="ngModel" required type="date"></ion-input>
-              <ion-note *ngIf="amaiera_Data.invalid && amaiera_Data.touched" color="danger">
-              La fecha de final es obligatoria.
-              </ion-note>
-            </ion-item>
+          <ion-item>
+            <ion-label position="floating">{{ 'MATERIAL_MAILEGUAK.FECHA_FIN' | translate }}</ion-label>
+            <ion-input [(ngModel)]="IMaileguSeleccionado.amaieraData" name="amaiera_Data" #amaiera_Data="ngModel" required type="date"></ion-input>
+            <ion-note *ngIf="amaiera_Data.invalid && amaiera_Data.touched" color="danger">
+              {{ 'MATERIAL_MAILEGUAK.FECHA_FIN_OBLIGATORIA' | translate }}
+            </ion-note>
+          </ion-item>
 
-            <ion-button expand="full" color="tertiary" type="submit" [disabled]="materialForm.invalid">{{confirm}}</ion-button>
-            <ion-button expand="full" color="danger" (click)="cancelarEdicion()">{{cancel}}</ion-button>
-            <ion-button *ngIf="esProfe" expand="full" class="custom-red-button" (click)="eliminarIMailegu()">
-              Borrar préstamo
-            </ion-button>
-          </form>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
+          <ion-button expand="full" color="tertiary" type="submit" [disabled]="materialForm.invalid">{{ 'MATERIAL_MAILEGUAK.CONFIRMAR' | translate }}</ion-button>
+          <ion-button expand="full" color="danger" (click)="cancelarEdicion()">{{ 'MATERIAL_MAILEGUAK.CANCELAR' | translate }}</ion-button>
+          <ion-button *ngIf="esProfe" expand="full" class="custom-red-button" (click)="eliminarIMailegu()">
+            {{ 'MATERIAL_MAILEGUAK.BORRAR_PRESTAMO' | translate }}
+          </ion-button>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </ion-col>
+</ion-row>
 
-  <ion-row *ngIf= "esProfe">
-    <ion-col size="12" class="ion-text-center">
-      <ion-button color="primary" expand="block" [routerLink]="'/crearmaterial'">Añadir prestamo
-        <ion-icon name="add-circle-outline"></ion-icon>
-      </ion-button>
-    </ion-col>
-  </ion-row>
 
-<!--Fila de materiales-->
-  <ion-row justify-content-center *ngFor="let mailegu of maileguakFiltrados | slice: (paginaActual - 1) * maileguakPorPagina : paginaActual * maileguakPorPagina">
-    <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-      <ion-card *ngIf="IMaileguSeleccionado.id !== mailegu.id" (click)="editarIMailegu(mailegu)">
-        <ion-card-header>
-          <ion-card-title>{{ mailegu.materiala.izena || '-' }}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <p><strong>ID:</strong> {{ mailegu.id || '-' }}</p>
-          <p><strong>Langile izena:</strong> {{ mailegu.langilea.izena || '-' }}</p>
-          <p><strong>Sortze Data:</strong> {{ mailegu.hasieraData| date:'yyyy-MM-dd' }}</p>
-          <p><strong>Eguneratze Data:</strong> {{ mailegu.data.eguneratze_data ? (mailegu.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>
-          <p><strong>Hasiera Data:</strong> {{ mailegu.hasieraData| date:'yyyy-MM-dd' }}</p>
-          <p><strong>Amaiera Data:</strong> {{ mailegu.amaieraData ? (mailegu.amaieraData | date:'yyyy-MM-dd') : '-' }}</p>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
+<ion-row *ngIf="esProfe">
+  <ion-col size="12" class="ion-text-center">
+    <ion-button color="primary" expand="block" [routerLink]="'/crearmaterial'">{{ 'MATERIAL_MAILEGUAK.ANADIR_PRESTAMO' | translate }}
+      <ion-icon name="add-circle-outline"></ion-icon>
+    </ion-button>
+  </ion-col>
+</ion-row>
+
+<!-- Fila de materiales -->
+<ion-row justify-content-center *ngFor="let mailegu of maileguakFiltrados | slice: (paginaActual - 1) * maileguakPorPagina : paginaActual * maileguakPorPagina">
+  <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
+    <ion-card *ngIf="IMaileguSeleccionado.id !== mailegu.id" (click)="editarIMailegu(mailegu)">
+      <ion-card-header>
+        <ion-card-title>{{ mailegu.materiala.izena || '-' }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>{{ 'MATERIAL_MAILEGUAK.ID' | translate }}:</strong> {{ mailegu.id || '-' }}</p>
+        <p><strong>{{ 'MATERIAL_MAILEGUAK.LANGILE_IZENA' | translate }}:</strong> {{ mailegu.langilea.izena || '-' }}</p>
+        <p><strong>{{ 'MATERIAL_MAILEGUAK.SORTZE_DATA' | translate }}:</strong> {{ mailegu.hasieraData | date:'yyyy-MM-dd' }}</p>
+        <p><strong>{{ 'MATERIAL_MAILEGUAK.EGUNERATZE_DATA' | translate }}:</strong> {{ mailegu.data.eguneratze_data ? (mailegu.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>
+        <p><strong>{{ 'MATERIAL_MAILEGUAK.HASIERA_DATA' | translate }}:</strong> {{ mailegu.hasieraData | date:'yyyy-MM-dd' }}</p>
+        <p><strong>{{ 'MATERIAL_MAILEGUAK.AMAIERA_DATA' | translate }}:</strong> {{ mailegu.amaieraData ? (mailegu.amaieraData | date:'yyyy-MM-dd') : '-' }}</p>
+      </ion-card-content>
+    </ion-card>
+  </ion-col>
+</ion-row>
 </ion-content>
 </ion-app>

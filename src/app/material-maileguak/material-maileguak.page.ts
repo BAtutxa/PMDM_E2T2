@@ -68,7 +68,7 @@ export class MaterialMaileguakPage implements OnInit {
      this.cargarTrabajadores();
      this.translateLabels();
      this.translateService.setDefaultLang('es');
-     this.translateService.use('es');
+     this.translateService.use('eu');
    }
  
    VerSiEsProfe(){

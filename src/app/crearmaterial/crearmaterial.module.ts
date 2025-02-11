@@ -8,12 +8,15 @@ import { CrearmaterialPageRoutingModule } from './crearmaterial-routing.module';
 
 import { CrearmaterialPage } from './crearmaterial.page';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CrearmaterialPageRoutingModule
+    CrearmaterialPageRoutingModule,
+    TranslateModule
   ],
   declarations: [CrearmaterialPage]
 })

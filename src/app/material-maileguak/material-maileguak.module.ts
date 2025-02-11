@@ -7,13 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { MaterialMaileguakPageRoutingModule } from './material-maileguak-routing.module';
 
 import { MaterialMaileguakPage } from './material-maileguak.page';
+import { TranslateModule } from '@ngx-translate/core';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MaterialMaileguakPageRoutingModule
+    MaterialMaileguakPageRoutingModule,
+    TranslateModule
   ],
   declarations: [MaterialMaileguakPage]
 })
