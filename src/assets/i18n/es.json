@@ -332,5 +332,34 @@
     "GRUPOS": "Grupos",
     "INFORMES": "Informes",
     "HISTORIAL_BORRADO": "Historial de Borrado"
+  },
+  "CATEGORIA": {
+    "TITULO": "Categoría",
+    "CONTENIDO": "Aquí va el contenido principal de la página.",
+    "BUSCAR": "Buscar",
+    "CATEGORIAS": "Categorías",
+    "ORDENAR_POR": "Ordenar por",
+    "ID": "ID",
+    "IZENA": "Nombre",
+    "FECHA_CREACION": "Fecha de creación",
+    "FECHA_ACTUALIZACION": "Fecha de actualización",
+    "FECHA_BORRADO": "Fecha de borrado",
+    "ASCENDENTE": "Ascendente",
+    "DESCENDENTE": "Descendente",
+    "IZENA_OBLIGATORIO": "El nombre es obligatorio.",
+    "CONFIRMAR": "Confirmar",
+    "CANCELAR": "Cancelar",
+    "BORRAR": "Borrar categoría",
+    "CONFIRMAR_BORRADO": "Confirmar borrado",
+    "RESTAURAR": "Restaurar categoría",
+    "ANADIR_CATEGORIA": "Añadir categoría",
+    "ULTIMA_ACTUALIZACION": "Última actualización",
+    "FECHA_ELIMINACION": "Fecha de eliminación"
+  },
+  "CREAR_CATEGORIA": {
+    "TITULO": "Categoría a crear",
+    "NOMBRE": "Nombre",
+    "INTRODUCE_NOMBRE": "Introduce un valor para nombre",
+    "GUARDAR": "Guardar"
   }
 }

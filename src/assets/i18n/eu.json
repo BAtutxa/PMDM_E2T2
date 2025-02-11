@@ -334,5 +334,34 @@
     "GRUPOS": "Taldeak",
     "INFORMES": "Txostenak",
     "HISTORIAL_BORRADO": "Ezabatzeen Historia"
+  },
+  "CATEGORIA": {
+    "TITULO": "Kategoria",
+    "CONTENIDO": "Hemen joango da orrialdearen eduki nagusia.",
+    "BUSCAR": "Bilatu",
+    "CATEGORIAS": "Kategoriak orrialdeko",
+    "ORDENAR_POR": "Ordenatu honela",
+    "ID": "ID",
+    "IZENA": "Izena",
+    "FECHA_CREACION": "Sortze-data",
+    "FECHA_ACTUALIZACION": "Eguneratze-data",
+    "FECHA_BORRADO": "Ezabatze-data",
+    "ASCENDENTE": "Gorakorra",
+    "DESCENDENTE": "Beherakorra",
+    "IZENA_OBLIGATORIO": "Izena derrigorrezkoa da.",
+    "CONFIRMAR": "Konfirmatu",
+    "CANCELAR": "Ezeztatu",
+    "BORRAR": "Ezabatu",
+    "CONFIRMAR_BORRADO": "Ezabatzea baieztatu",
+    "RESTAURAR": "Kategoria berreskuratu",
+    "ANADIR_CATEGORIA": "Kategoriak gehitu",
+    "ULTIMA_ACTUALIZACION": "Azken eguneraketa",
+    "FECHA_ELIMINACION": "Ezabatze-data"
+  },
+  "CREAR_CATEGORIA": {
+    "TITULO": "Sortu beharreko kategoria",
+    "NOMBRE": "Izena",
+    "INTRODUCE_NOMBRE": "Sartu izenaren balioa",
+    "GUARDAR": "Gorde"
   }
 }

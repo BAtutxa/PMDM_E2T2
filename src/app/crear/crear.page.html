@@ -3,18 +3,18 @@
     <form #fichaForm="ngForm" (ngSubmit)="guardarCategoria()">
       <ion-card>
         <ion-card-header>
-          <ion-card-title>Categoria a crear</ion-card-title>
+          <ion-card-title>{{ 'CREAR_CATEGORIA.TITULO' | translate }}</ion-card-title>
         </ion-card-header>
 
         <ion-card-content>
           <ion-list>
             <!-- Nombre Input -->
             <ion-item>
-              <ion-label position="stacked">Nombre</ion-label>
+              <ion-label position="stacked">{{ 'CREAR_CATEGORIA.NOMBRE' | translate }}</ion-label>
               <ion-input
                 [(ngModel)]="categoria.izena"
                 name="izena"
-                placeholder="Introduce un valor para nombre"
+                placeholder="{{ 'CREAR_CATEGORIA.INTRODUCE_NOMBRE' | translate }}"
                 required
               ></ion-input>
             </ion-item>
@@ -27,7 +27,7 @@
             type="submit"
             color="tertiary"
             [disabled]="fichaForm.invalid"
-            >Guardar</ion-button
+            >{{ 'CREAR_CATEGORIA.GUARDAR' | translate }}</ion-button
           >
         </ion-card-content>
       </ion-card>

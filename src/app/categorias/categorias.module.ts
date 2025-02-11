@@ -8,13 +8,16 @@ import { CategoriasPageRoutingModule } from './categorias-routing.module';
 
 import { CategoriasPage } from './categorias.page';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
     CategoriasPageRoutingModule,
   ],
-  declarations: [CategoriasPage]
+  declarations: [CategoriasPage],
 })
 export class CategoriasPageModule {}

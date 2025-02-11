@@ -6,26 +6,26 @@
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title>Categoria</ion-title>
+      <ion-title>{{ 'CATEGORIA.TITULO' | translate }}</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <!-- Contenido principal -->
   <div color="secondary" class="ion-page" id="main-content">
-    <p >Aquí va el contenido principal de la página.</p>
+    <p>{{ 'CATEGORIA.CONTENIDO' | translate }}</p>
   </div>
 
   <!-- Buscador -->
   <ion-searchbar
     search-icon="search-circle"
-    placeholder="Buscar"
+    placeholder="{{ 'CATEGORIA.BUSCAR' | translate }}"
     (ionInput)="aplicarFiltro($event)">
   </ion-searchbar>
 
   <!-- Selector de productos por página -->
   <div class="productos-por-pagina">
     <ion-item class="producto-item">
-      <ion-label size="small">Categorias:</ion-label>
+      <ion-label size="small">{{ 'CATEGORIA.CATEGORIAS' | translate }}:</ion-label>
       <ion-select [(ngModel)]="categoriasPorPagina" interface="popover" size="small" (ionChange)="cambiarPagina(1)">
         <ion-select-option [value]="5">5</ion-select-option>
         <ion-select-option [value]="10">10</ion-select-option>
@@ -39,18 +39,18 @@
   <!-- Filtros de ordenación -->
   <div class="ordenacion-filtros">
     <ion-item>
-      <ion-label>{{ 'Ordenar por' }}</ion-label>
+      <ion-label>{{ 'CATEGORIA.ORDENAR_POR' | translate }}</ion-label>
       <ion-select [(ngModel)]="ordenActual.columna" interface="popover" (ionChange)="ordenarPor(ordenActual.columna)">
-        <ion-select-option value="id">{{ 'ID' }}</ion-select-option>
-        <ion-select-option value="izena">Izena</ion-select-option>
-        <ion-select-option *ngIf="!esHistorial" value="sortze_data">Fecha de creación</ion-select-option>
-        <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">Fecha de actualización</ion-select-option>
-        <ion-select-option *ngIf="esHistorial" value="ezabatze_data">Fecha de borrado</ion-select-option>
+        <ion-select-option value="id">{{ 'CATEGORIA.ID' | translate }}</ion-select-option>
+        <ion-select-option value="izena">{{ 'CATEGORIA.IZENA' | translate }}</ion-select-option>
+        <ion-select-option *ngIf="!esHistorial" value="sortze_data">{{ 'CATEGORIA.FECHA_CREACION' | translate }}</ion-select-option>
+        <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">{{ 'CATEGORIA.FECHA_ACTUALIZACION' | translate }}</ion-select-option>
+        <ion-select-option *ngIf="esHistorial" value="ezabatze_data">{{ 'CATEGORIA.FECHA_BORRADO' | translate }}</ion-select-option>
       </ion-select>
 
       <ion-select [(ngModel)]="ordenActual.ascendente" interface="popover" (ionChange)="cambiarOrden($event)">
-        <ion-select-option [value]="true">Ascendente</ion-select-option>
-        <ion-select-option [value]="false">Descendente</ion-select-option>
+        <ion-select-option [value]="true">{{ 'CATEGORIA.ASCENDENTE' | translate }}</ion-select-option>
+        <ion-select-option [value]="false">{{ 'CATEGORIA.DESCENDENTE' | translate }}</ion-select-option>
       </ion-select>
     </ion-item>
   </div>
@@ -71,34 +71,34 @@
     <ion-col size="12">
       <ion-card>
         <ion-card-header>
-          <ion-card-title>Editar productos</ion-card-title>
+          <ion-card-title>{{ 'CATEGORIA.EDITAR_PRODUCTO' | translate }}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
           <form #categoriaForm="ngForm" (ngSubmit)="confirmarEdicion()" novalidate>
             <ion-item>
-              <ion-label position="floating">ID</ion-label>
+              <ion-label position="floating">{{ 'CATEGORIA.ID' | translate }}</ion-label>
               <ion-input [(ngModel)]="categoriaSeleccionada.id" name="id" readonly></ion-input>
             </ion-item>
             <ion-item>
-              <ion-label position="floating">Izena</ion-label>
+              <ion-label position="floating">{{ 'CATEGORIA.IZENA' | translate }}</ion-label>
               <ion-input [(ngModel)]="categoriaSeleccionada.izena" name="izena" #izena="ngModel" required>
               </ion-input>
               <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
-                El nombre es obligatorio.
+                {{ 'CATEGORIA.IZENA_OBLIGATORIO' | translate }}
               </ion-note>
             </ion-item>
-            <ion-button color = "tertiary" expand="full" type="submit" [disabled]="categoriaForm.invalid">Confirmar</ion-button>
-            <ion-button expand="full" color="danger" type="button" (click)="cancelarEdicion()">Cancelar</ion-button>
+            <ion-button color="tertiary" expand="full" type="submit" [disabled]="categoriaForm.invalid">{{ 'CATEGORIA.CONFIRMAR' | translate }}</ion-button>
+            <ion-button expand="full" color="danger" type="button" (click)="cancelarEdicion()">{{ 'CATEGORIA.CANCELAR' | translate }}</ion-button>
             <ion-button *ngIf="!esHistorial" expand="full" class="custom-red-button" type="button" (click)="eliminarCategoria()">
-              Borrar categoria
+              {{ 'CATEGORIA.BORRAR' | translate }}
             </ion-button>
             
             <ion-button *ngIf="esHistorial" expand="full" class="custom-gray-button" type="button" (click)="trueEliminarCategoria()">
-              Confirmar borrado
+              {{ 'CATEGORIA.CONFIRMAR_BORRADO' | translate }}
             </ion-button>
             
             <ion-button *ngIf="esHistorial" expand="full" class="custom-purple-button" type="button" (click)="restaurarCategoria()">
-              Restaurar categoría
+              {{ 'CATEGORIA.RESTAURAR' | translate }}
             </ion-button>
             
           </form>
@@ -108,9 +108,9 @@
   </ion-row>
 
   <!-- Botón para añadir fichas -->
-  <ion-row *ngIf= "!esHistorial">
+  <ion-row *ngIf="!esHistorial">
     <ion-col size="12" class="ion-text-center">
-      <ion-button color="primary" expand="block" [routerLink]="'/crear'">Añadir categoria
+      <ion-button color="primary" expand="block" [routerLink]="'/crear'">{{ 'CATEGORIA.ANADIR_CATEGORIA' | translate }}
         <ion-icon name="add-circle-outline"></ion-icon>
       </ion-button>
     </ion-col>
@@ -124,12 +124,12 @@
           <ion-card-title>{{ ficha.izena || '-' }}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-          <p><strong>ID:</strong> {{ ficha.id || '-' }}</p>             
-          <p *ngIf="!esHistorial"><strong>Fecha de creación:</strong> {{ ficha.data.sortze_data | date:'yyyy-MM-dd' }}</p>
-          <p *ngIf="!esHistorial"><strong>Última actualización:</strong> 
+          <p><strong>{{ 'CATEGORIA.ID' | translate }}:</strong> {{ ficha.id || '-' }}</p>             
+          <p *ngIf="!esHistorial"><strong>{{ 'CATEGORIA.FECHA_CREACION' | translate }}:</strong> {{ ficha.data.sortze_data | date:'yyyy-MM-dd' }}</p>
+          <p *ngIf="!esHistorial"><strong>{{ 'CATEGORIA.ULTIMA_ACTUALIZACION' | translate }}:</strong> 
             {{ ficha.data.eguneratze_data ? (ficha.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}
           </p>
-          <p *ngIf="esHistorial"><strong>Fecha de eliminación:</strong> 
+          <p *ngIf="esHistorial"><strong>{{ 'CATEGORIA.FECHA_ELIMINACION' | translate }}:</strong> 
             {{ ficha.data.ezabatze_data ? (ficha.data.ezabatze_data | date:'yyyy-MM-dd') : '-' }}
           </p>
         </ion-card-content>
