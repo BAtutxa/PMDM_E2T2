@@ -11,7 +11,8 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [
     CommonModule,
     IonicModule,
-    TranslateModule // Asegúrate de importar TranslateModule aquí
+    TranslateModule,
+    TranslateModule.forChild()
   ],
   exports: [MenuHeaderComponent]
 })

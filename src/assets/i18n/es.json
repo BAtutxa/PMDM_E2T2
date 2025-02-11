@@ -35,21 +35,6 @@
     "MATERIAL": "Materiales"
   },
 
-  "PRODUCT": {
-    "TITLE": "Productos",
-    "NAME": "Nombre",
-    "BRAND": "Marca",
-    "ID_CATEGORY": "ID categoría",
-    "CATEGORY_NAME": "Nombre categoría",
-    "CD": "Fecha creación",
-    "UD": "Fecha actualización",
-    "EDIT": "Editar",
-    "CONFIRM": "Confirmar",
-    "CANCEL": "Cancelar",
-    "INFO": "Información adicional",
-    "SEARCH": "Buscar"
-  },
-
   "ALERTPRODUCT": {
     "HEADER": "¿Estás seguro?",
     "MESSAGE": "Se actualizarán los valores del producto.",
@@ -222,5 +207,57 @@
   "INVENTARIO":{
     "PROD_MUGIMENDUAK":"Movimiento de productos",
     "MATERIAL_MAILEGU":"Prestamo de material"
-  }
+  },
+    "PRODUCTOS": {
+      "TITLE": "Productos",
+      "SEARCH": "Buscar productos",
+      "ORDER_BY": "Ordenar por",
+      "ID": "ID",
+      "NAME": "Nombre",
+      "BRAND": "Marca",
+      "STOCK": "Stock",
+      "CATEGORY": "Categoría",
+      "CREATION_DATE": "Fecha de creación",
+      "UPDATE_DATE": "Fecha de actualización",
+      "DELETION_DATE": "Fecha de eliminación",
+      "ASCENDING": "Ascendente",
+      "DESCENDING": "Descendente",
+      "PAGE": "Página",
+      "EDIT": "Editar producto",
+      "ADD": "Añadir producto",
+      "CONFIRM": "Confirmar",
+      "CANCEL": "Cancelar",
+      "DELETE": "Eliminar",
+      "CONFIRM_DELETE": "Confirmar eliminación",
+      "RESTORE": "Restaurar producto",
+      "NAME_REQUIRED": "El nombre es obligatorio",
+      "BRAND_REQUIRED": "La marca es obligatoria",
+      "CATEGORY_REQUIRED": "La categoría es obligatoria",
+      "STOCK_REQUIRED": "El stock es obligatorio",
+      "STOCK_ALERT_REQUIRED": "La alerta de stock es obligatoria",
+      "EDIT_TITLE": "Editar Producto",
+      "PAGINATION_TITLE": "Número de productos por página",
+      "SORT_BY":"Ordenar por:",
+      "CATEGORY_NAME":"Categoria: ",
+      "CREATED_DATE":"Fecha de creacion",
+      "UPDATED_DATE":"Fecha de actualizacion",
+      "STOCK_ALERT":"Alerta de stock",
+      "ACTIVITIES": "Acciones"
+    },
+      "CREAR_PRODUCTO": {
+        "TITLE": "Crear producto",
+        "NOMBRE": "Nombre",
+        "MARCA": "Marca",
+        "MARCA_REQUIRED": "La marca es requerida.",
+        "DESCRIPCION": "Descripción",
+        "STOCK": "Stock",
+        "STOCK_REQUIRED": "El stock es requerido.",
+        "STOCK_ALERTA": "Alerta del stock",
+        "ALERTA_REQUIRED": "La alerta de stock es requerida.",
+        "CATEGORIA": "Categoría",
+        "CATEGORIA_REQUIRED": "La categoría es requerida.",
+        "GUARDAR": "Guardar"
+    }
+    
+  
 }

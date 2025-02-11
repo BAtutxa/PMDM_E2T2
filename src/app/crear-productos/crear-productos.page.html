@@ -3,14 +3,14 @@
     <form #productoForm="ngForm" (ngSubmit)="guardarProducto()">
       <ion-card>
         <ion-card-header>
-          <ion-card-title>Crear producto</ion-card-title>
+          <ion-card-title>{{ 'CREAR_PRODUCTO.TITLE' | translate }}</ion-card-title>
         </ion-card-header>
 
         <ion-card-content>
           <ion-list>
             <!-- Nombre Input -->
             <ion-item>
-              <ion-label position="stacked">Nombre</ion-label>
+              <ion-label position="stacked">{{ 'CREAR_PRODUCTO.NOMBRE' | translate }}</ion-label>
               <ion-input
                 [(ngModel)]="producto.izena"
                 name="izena"
@@ -21,7 +21,7 @@
 
             <!-- Marca Input -->
             <ion-item>
-              <ion-label position="stacked">Marca</ion-label>
+              <ion-label position="stacked">{{ 'CREAR_PRODUCTO.MARCA' | translate }}</ion-label>
               <ion-input
                 [(ngModel)]="producto.marka"
                 name="marka"
@@ -29,13 +29,13 @@
                 required
               ></ion-input>
               <ion-note *ngIf="productoForm.controls['marka']?.invalid && productoForm.controls['marka']?.touched" color="danger">
-                La marca es requerida.
+                {{ 'CREAR_PRODUCTO.MARCA_REQUIRED' | translate }}
               </ion-note>
             </ion-item>
 
             <!-- Descripción Input -->
             <ion-item>
-              <ion-label position="stacked">Descripción</ion-label>
+              <ion-label position="stacked">{{ 'CREAR_PRODUCTO.DESCRIPCION' | translate }}</ion-label>
               <ion-input
                 [(ngModel)]="producto.deskribapena"
                 name="deskribapena"
@@ -47,7 +47,7 @@
 
             <!-- Stock Input -->
             <ion-item>
-              <ion-label position="stacked">Stock</ion-label>
+              <ion-label position="stacked">Stock{{ 'CREAR_PRODUCTO.STOCK' | translate }}</ion-label>
               <ion-input
                 [(ngModel)]="producto.stock"
                 name="stock"
@@ -56,13 +56,13 @@
                 required
               ></ion-input>
               <ion-note *ngIf="productoForm.controls['stock']?.invalid && productoForm.controls['stock']?.touched" color="danger">
-                El stock es requerido.
+                {{ 'CREAR_PRODUCTO.STOCK_REQUIRED' | translate }}
               </ion-note>
             </ion-item>
 
             <!-- Stock alerta Input -->
             <ion-item>
-              <ion-label position="stacked">Alerta del stock</ion-label>
+              <ion-label position="stacked">{{ 'CREAR_PRODUCTO.STOCK_ALERTA' | translate }}</ion-label>
               <ion-input
                 [(ngModel)]="producto.stock_alerta"
                 name="stock_alerta"
@@ -71,20 +71,20 @@
                 required
               ></ion-input>
               <ion-note *ngIf="productoForm.controls['stock_alerta']?.invalid && productoForm.controls['stock_alerta']?.touched" color="danger">
-                La alerta de stock es requerida.
+                {{ 'CREAR_PRODUCTO.ALERTA_REQUIRED' | translate }}
               </ion-note>
             </ion-item>
 
             <!-- Categoría Select -->
             <ion-item>
-              <ion-label>Categoría</ion-label>
+              <ion-label>{{ 'CREAR_PRODUCTO.CATEGORIA' | translate }}</ion-label>
               <ion-select [(ngModel)]="producto.kategoriak.id" name="kategoriak" placeholder="Selecciona una categoría" required>
                 <ion-select-option *ngFor="let categoria of categorias" [value]="categoria.id">
                   {{ categoria.izena }}
                 </ion-select-option>
               </ion-select>
               <ion-note *ngIf="productoForm.controls['kategoriak']?.invalid && productoForm.controls['kategoriak']?.touched" color="danger">
-                La categoría es requerida.
+                {{ 'CREAR_PRODUCTO.CATEGORIA_REQUIRED' | translate }}
               </ion-note>
             </ion-item>
             
@@ -95,7 +95,7 @@
               color="tertiary"
               [disabled]="productoForm.invalid"
             >
-              Guardar
+              {{ 'CREAR_PRODUCTO.GUARDAR' | translate }}
             </ion-button>
           </ion-list>
         </ion-card-content>

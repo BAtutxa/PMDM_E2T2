@@ -8,6 +8,8 @@ import { ProductosPageRoutingModule } from './productos-routing.module';
 
 import { ProductosPage } from './productos.page';
 import { NireKonponenteakModule } from '../nire-konponenteak/nire-konponenteak.module';
+import { TranslateModule } from '@ngx-translate/core';
+
 
 @NgModule({
   imports: [
@@ -15,7 +17,9 @@ import { NireKonponenteakModule } from '../nire-konponenteak/nire-konponenteak.m
     FormsModule,
     IonicModule,
     ProductosPageRoutingModule,
-    NireKonponenteakModule
+    NireKonponenteakModule,
+    TranslateModule,
+    TranslateModule.forChild()
   ],
   declarations: [ProductosPage]
 })

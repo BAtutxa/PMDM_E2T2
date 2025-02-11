@@ -8,12 +8,16 @@ import { CrearProductosPageRoutingModule } from './crear-productos-routing.modul
 
 import { CrearProductosPage } from './crear-productos.page';
 
+import { TranslateModule } from '@ngx-translate/core';
+
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CrearProductosPageRoutingModule
+    CrearProductosPageRoutingModule,
+    TranslateModule
   ],
   declarations: [CrearProductosPage]
 })

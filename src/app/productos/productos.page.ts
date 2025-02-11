@@ -75,7 +75,8 @@ export class ProductosPage implements OnInit {
     this.cargarCategorias();
     this.translateLabels();
     this.translateService.setDefaultLang('es');
-    this.translateService.use('es');
+    this.translateService.use('eu');
+    
 
   }
 

@@ -1,374 +1,387 @@
 <ion-app>
   <app-menu-header></app-menu-header>
-  
-    <!-- Contenido principal -->
-    <ion-app class="ion-page" id="main-content">
-      <!-- Header principal -->
-      <ion-header>
-        <ion-toolbar color="primary">
-          <ion-buttons slot="start">
-            <ion-menu-button></ion-menu-button>
-          </ion-buttons>
-          <ion-title>Productos</ion-title>
-        </ion-toolbar>
-      </ion-header>
 
-<ion-content [fullscreen]="true" *ngIf="!mobilaDa">
-  <!-- Buscador -->
-  <ion-searchbar
-    search-icon="search-circle"
-    [placeholder]="search"
-    (ionInput)="aplicarFiltro($event)">
-  </ion-searchbar>
+  <!-- Contenido principal -->
+  <ion-app class="ion-page" id="main-content">
+    <!-- Header principal -->
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>{{ 'PRODUCTOS.TITLE' | translate }}</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
-  <!-- Selector de productos por página -->
-  <div class="productosPorPagina">
-    <ion-item class="producto-item">
-      <ion-label size="small">{{title}}:</ion-label>
-      <ion-select [(ngModel)]="productosPorPagina" interface="popover" size="small" (ionChange)="cambiarPagina(1)">
-        <ion-select-option [value]="5">5</ion-select-option>
-        <ion-select-option [value]="10">10</ion-select-option>
-        <ion-select-option [value]="25">25</ion-select-option>
-        <ion-select-option [value]="50">50</ion-select-option>
-        <ion-select-option [value]="100">100</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </div>
+    <ion-content [fullscreen]="true" *ngIf="!mobilaDa">
+      <!-- Buscador -->
+      <ion-searchbar search-icon="search-circle" [placeholder]="'PRODUCTOS.SEARCH' | translate"
+        (ionInput)="aplicarFiltro($event)">
+      </ion-searchbar>
 
-  <div class="ordenacion-filtros">
-    <ion-item>
-      <ion-label>{{ 'Ordenar por:' }}</ion-label>
-      <ion-select [(ngModel)]="ordenActual.columna" interface="popover" (ionChange)="ordenarPor(ordenActual.columna)">
-        <ion-select-option value="id">{{ 'ID' }}</ion-select-option>
-        <ion-select-option value="izena">{{ name }}</ion-select-option>
-        <ion-select-option value="marka">{{ brand }}</ion-select-option>
-        <ion-select-option value="stock">Stock</ion-select-option>
-        <ion-select-option value="kategoriak.izena">Categoria</ion-select-option>
-        <ion-select-option value="sortze_data">{{ cd }}</ion-select-option>
-        <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">{{ ud }}</ion-select-option>
-        <ion-select-option  *ngIf="esHistorial" value="ezabatze_data">{{ ud }}</ion-select-option>
-      </ion-select>
-  
-      <ion-label>{{ 'Ordenar: ' }}</ion-label>
-      <ion-select [(ngModel)]="ordenActual.ascendente" interface="popover" (ionChange)="cambiarOrden($event)">
-        <!-- Agregar un placeholder que cambia dependiendo del valor de ascendente -->
-        <ion-select-option value="true">{{ 'Ascendente' }}</ion-select-option>
-        <ion-select-option value="false">{{ 'Descendente' }}</ion-select-option>
-        <ion-label slot="start">
-          {{ ordenActual.ascendente === true ? 'Ascendente' : 'Descendente' }}
-        </ion-label>
-      </ion-select>      
-    </ion-item>
-  </div>
-  
-  <!-- Paginación -->
-  <ion-row>
-    <ion-col>
-      <ion-button *ngFor="let page of hacerPaginacion()" (click)="cambiarPagina(page)">
-        {{ page }}
-      </ion-button>
-    </ion-col>
-  </ion-row>
+      <!-- Selector de productos por página -->
+      <div class="ordenacion-filtros">
+        <ion-item>
+          <ion-label>{{ 'PRODUCTOS.ORDER_BY' | translate }}</ion-label>
+          <ion-select [(ngModel)]="ordenActual.columna" interface="popover"
+            (ionChange)="ordenarPor(ordenActual.columna)">
+            <ion-select-option value="id">{{ 'PRODUCTOS.ID' | translate }}</ion-select-option>
+            <ion-select-option value="izena">{{ 'PRODUCTOS.NAME' | translate }}</ion-select-option>
+            <ion-select-option value="marka">{{ 'PRODUCTOS.BRAND' | translate }}</ion-select-option>
+            <ion-select-option value="stock">{{ 'PRODUCTOS.STOCK' | translate }}</ion-select-option>
+            <ion-select-option value="kategoriak.izena">{{ 'PRODUCTOS.CATEGORY' | translate }}</ion-select-option>
+            <ion-select-option value="sortze_data">{{ 'PRODUCTOS.CREATION_DATE' | translate }}</ion-select-option>
+            <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">{{ 'PRODUCTOS.UPDATE_DATE' | translate
+              }}</ion-select-option>
+            <ion-select-option *ngIf="esHistorial" value="ezabatze_data">{{ 'PRODUCTOS.DELETION_DATE' | translate
+              }}</ion-select-option>
+          </ion-select>
 
-  <!-- Fila de edición visible solo en modo edición -->
-  <ion-row *ngIf="editandoProducto">
-    <ion-col size="12">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>EDITAR</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <form #productoForm="ngForm" (ngSubmit)="confirmarEdicion()" novalidate>
-          <ion-item>
-            <ion-label position="floating">ID</ion-label>
-            <ion-input [(ngModel)]="productoSeleccionado.id" name="id" #id="ngModel" readonly></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">NOMBRE</ion-label>
-            <ion-input [(ngModel)]="productoSeleccionado.izena" name="izena" #izena ="ngModel" required></ion-input>
-            <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
-              El nombre es obligatorio.
-            </ion-note>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">MARCA</ion-label>
-            <ion-input [(ngModel)]="productoSeleccionado.marka" name="marka" #marka="ngModel" required></ion-input>
-            <ion-note *ngIf="marka.invalid && marka.touched" color="danger">
-              La marca es obligatoria.
-            </ion-note>
-          </ion-item>          
-          <ion-item>
-            <ion-label position="floating">CATEGORIA</ion-label>
-            <ion-select [(ngModel)]="productoSeleccionado.kategoriak.id" name="kategoriak" required>
-              <ion-select-option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.izena }}</ion-select-option>
-            </ion-select>
-            <ion-note *ngIf="productoSeleccionado.kategoriak.id === '' || productoSeleccionado.kategoriak.id === null" color="danger">
-              La categoría es obligatoria.
-            </ion-note>            
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Stock</ion-label>
-            <ion-input 
-              [(ngModel)]="productoSeleccionado.stock" 
-              name="stock" 
-              #stock="ngModel" 
-              required
-              [disabled]="!esProfe">
-            </ion-input>
-            <ion-note *ngIf="stock.invalid && stock.touched" color="danger">
-              El stock es obligatorio.
-            </ion-note>
-          </ion-item>
-          
-          <ion-item>
-            <ion-label position="floating">Stock Alerta</ion-label>
-            <ion-input 
-              [(ngModel)]="productoSeleccionado.stock_alerta" 
-              name="stock_alerta" 
-              #stock_alerta="ngModel" 
-              required
-              [disabled]="!esProfe">
-            </ion-input>
-            <ion-note *ngIf="stock_alerta.invalid && stock_alerta.touched" color="danger">
-              La alerta de stock es obligatoria.
-            </ion-note>
-          </ion-item>          
-          <!-- Tienes que poner informacion del historial cuando este -->
-          <ion-button color="tertiary" expand="full" (click)="confirmarEdicion()"  type="submit" [disabled]="productoForm.invalid">CONFIRMAR</ion-button>
-          <ion-button expand="full" color="danger" (click)="cancelarEdicion()">UTZI</ion-button>
-          <ion-button *ngIf="esProfe && !esHistorial" expand="full"  class="custom-red-button" (click)="eliminarProducto()">
-            Borrar producto
+          <ion-label>{{ 'PRODUCTOS.SORT_BY' | translate }}</ion-label>
+          <ion-select [(ngModel)]="ordenActual.ascendente" interface="popover" (ionChange)="cambiarOrden($event)">
+            <!-- Agregar un placeholder que cambia dependiendo del valor de ascendente -->
+            <ion-select-option value="true">{{ 'PRODUCTOS.ASCENDING' | translate }}</ion-select-option>
+            <ion-select-option value="false">{{ 'PRODUCTOS.DESCENDING' | translate }}</ion-select-option>
+            <ion-label slot="start">
+              {{ ordenActual.ascendente === true ? ('PRODUCTOS.ASCENDING' | translate) : ('PRODUCTOS.DESCENDING' |
+              translate) }}
+            </ion-label>
+          </ion-select>
+        </ion-item>
+      </div>
+
+      <!-- Paginación -->
+      <ion-row>
+        <ion-col>
+          <ion-button *ngFor="let page of hacerPaginacion()" (click)="cambiarPagina(page)">
+            {{ 'PRODUCTOS.PAGE' | translate }} {{ page }}
           </ion-button>
-          <ion-button *ngIf="esHistorial" expand="full" class="custom-gray-button" type="button" (click)="confirmarBorrado()">
-            Confirmar borrado
+        </ion-col>
+      </ion-row>
+
+
+      <!-- Fila de edición visible solo en modo edición -->
+      <ion-row *ngIf="editandoProducto">
+        <ion-col size="12">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>{{ 'PRODUCTOS.EDIT' | translate }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <form #productoForm="ngForm" (ngSubmit)="confirmarEdicion()" novalidate>
+                <ion-item>
+                  <ion-label position="floating">{{ 'PRODUCTOS.ID' | translate }}</ion-label>
+                  <ion-input [(ngModel)]="productoSeleccionado.id" name="id" #id="ngModel" readonly></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">{{ 'PRODUCTOS.NAME' | translate }}</ion-label>
+                  <ion-input [(ngModel)]="productoSeleccionado.izena" name="izena" #izena="ngModel"
+                    required></ion-input>
+                  <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
+                    {{ 'PRODUCTOS.NAME_REQUIRED' | translate }}
+                  </ion-note>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">{{ 'PRODUCTOS.BRAND' | translate }}</ion-label>
+                  <ion-input [(ngModel)]="productoSeleccionado.marka" name="marka" #marka="ngModel"
+                    required></ion-input>
+                  <ion-note *ngIf="marka.invalid && marka.touched" color="danger">
+                    {{ 'PRODUCTOS.BRAND_REQUIRED' | translate }}
+                  </ion-note>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">{{ 'PRODUCTOS.CATEGORY' | translate }}</ion-label>
+                  <ion-select [(ngModel)]="productoSeleccionado.kategoriak.id" name="kategoriak" required>
+                    <ion-select-option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.izena
+                      }}</ion-select-option>
+                  </ion-select>
+                  <ion-note
+                    *ngIf="productoSeleccionado.kategoriak.id === '' || productoSeleccionado.kategoriak.id === null"
+                    color="danger">
+                    {{ 'PRODUCTOS.CATEGORY_REQUIRED' | translate }}
+                  </ion-note>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">{{ 'PRODUCTOS.STOCK' | translate }}</ion-label>
+                  <ion-input [(ngModel)]="productoSeleccionado.stock" name="stock" #stock="ngModel" required
+                    [disabled]="!esProfe">
+                  </ion-input>
+                  <ion-note *ngIf="stock.invalid && stock.touched" color="danger">
+                    {{ 'PRODUCTOS.STOCK_REQUIRED' | translate }}
+                  </ion-note>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">{{ 'PRODUCTOS.STOCK_ALERT' | translate }}</ion-label>
+                  <ion-input [(ngModel)]="productoSeleccionado.stock_alerta" name="stock_alerta" #stock_alerta="ngModel"
+                    required [disabled]="!esProfe">
+                  </ion-input>
+                  <ion-note *ngIf="stock_alerta.invalid && stock_alerta.touched" color="danger">
+                    {{ 'PRODUCTOS.STOCK_ALERT_REQUIRED' | translate }}
+                  </ion-note>
+                </ion-item>
+                <!-- Tienes que poner informacion del historial cuando este -->
+                <ion-button color="tertiary" expand="full" (click)="confirmarEdicion()" type="submit"
+                  [disabled]="productoForm.invalid">{{ 'PRODUCTOS.CONFIRM' | translate }}</ion-button>
+                <ion-button expand="full" color="danger" (click)="cancelarEdicion()">{{ 'PRODUCTOS.CANCEL' | translate
+                  }}</ion-button>
+                <ion-button *ngIf="esProfe && !esHistorial" expand="full" class="custom-red-button"
+                  (click)="eliminarProducto()">
+                  {{ 'PRODUCTOS.DELETE' | translate }}
+                </ion-button>
+                <ion-button *ngIf="esHistorial" expand="full" class="custom-gray-button" type="button"
+                  (click)="confirmarBorrado()">
+                  {{ 'PRODUCTOS.CONFIRM_DELETE' | translate }}
+                </ion-button>
+
+                <ion-button *ngIf="esHistorial" expand="full" class="custom-purple-button" type="button"
+                  (click)="restaurarProducto()">
+                  {{ 'PRODUCTOS.RESTORE' | translate }}
+                </ion-button>
+
+              </form>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="esProfe">
+        <ion-col size="12" class="ion-text-center">
+          <ion-button *ngIf="!esHistorial && esProfe" color="primary" expand="block"
+            [routerLink]="'/crear-productos'">{{ 'PRODUCTOS.ADD' | translate }}
+            <ion-icon name="add-circle-outline"></ion-icon>
           </ion-button>
-          
-          <ion-button *ngIf="esHistorial" expand="full" class="custom-purple-button" type="button" (click)="restaurarProducto()">
-            Restaurar ficha
+        </ion-col>
+      </ion-row>
+
+      <!-- Fila de productos -->
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <table class="custom-table">
+              <thead>
+                <tr>
+                  <th>{{ 'PRODUCTOS.ID' | translate }}</th>
+                  <th>{{ 'PRODUCTOS.NAME' | translate }}</th>
+                  <th>{{ 'PRODUCTOS.BRAND' | translate }}</th>
+                  <th>{{ 'PRODUCTOS.STOCK' | translate }}</th>
+                  <th>{{ 'PRODUCTOS.CATEGORY' | translate }}</th>
+                  <th>{{ 'PRODUCTOS.CREATION_DATE' | translate }}</th>
+                  <th *ngIf="!esHistorial">{{ 'PRODUCTOS.UPDATE_DATE' | translate }}</th>
+                  <th *ngIf="esHistorial">{{ 'PRODUCTOS.DELETION_DATE' | translate }}</th>
+                  <th>{{ 'PRODUCTOS.ACTIVITIES' | translate }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let producto of productosFiltrados | slice: (paginaActual - 1) * productosPorPagina : paginaActual * productosPorPagina">
+                  <td [ngClass]="{'custom-white-column': par(0), 'custom-tertiary-column': !par(0)}">{{ producto.id ||
+                    '-' }}</td>
+                  <td [ngClass]="{'custom-white-column': par(1), 'custom-tertiary-column': !par(1)}">{{ producto.izena
+                    || '-' }}</td>
+                  <td [ngClass]="{'custom-white-column': par(2), 'custom-tertiary-column': !par(2)}">{{ producto.marka
+                    || '-' }}</td>
+                  <td [ngClass]="{'custom-white-column': par(3), 'custom-tertiary-column': !par(3)}">{{ producto.stock
+                    || '-' }}</td>
+                  <td [ngClass]="{'custom-white-column': par(3), 'custom-tertiary-column': !par(4)}"
+                    style="color: black;">{{ producto.kategoriak.izena || '-' }}</td>
+                  <td [ngClass]="{'custom-white-column': par(4), 'custom-tertiary-column': !par(5)}">{{
+                    producto.data.sortze_data | date:'yyyy-MM-dd' }}</td>
+                  <td *ngIf="!esHistorial"
+                    [ngClass]="{'custom-white-column': par(5), 'custom-tertiary-column': !par(8)}"
+                    style="color: black;">{{ producto.data.eguneratze_data ? (producto.data.eguneratze_data |
+                    date:'yyyy-MM-dd') : '-' }}</td>
+                  <td *ngIf="esHistorial" [ngClass]="{'custom-white-column': par(5), 'custom-tertiary-column': !par(8)}"
+                    style="color: black;">{{ producto.data.ezabatze_data ? (producto.data.eguneratze_data |
+                    date:'yyyy-MM-dd') : '-' }}</td>
+                  <td [ngClass]="{'custom-white-column': par(6), 'custom-tertiary-column': !par(7)}">
+                    <ion-button color="primary" (click)="editarProducto(producto)">{{ 'PRODUCTOS.EDIT' | translate
+                      }}</ion-button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-content>
+
+    <ion-content [fullscreen]="true" *ngIf="mobilaDa">
+      <!-- Buscador -->
+      <ion-searchbar search-icon="search-circle" [placeholder]="search" (ionInput)="aplicarFiltro($event)">
+      </ion-searchbar>
+
+      <!-- Selector de productos por página -->
+      <div class="productosPorPagina">
+        <ion-item class="producto-item">
+          <ion-label size="small">{{ 'PRODUCTOS.PAGINATION_TITLE' | translate }}:</ion-label>
+          <ion-select [(ngModel)]="productosPorPagina" interface="popover" size="small" (ionChange)="cambiarPagina(1)">
+            <ion-select-option [value]="5">5</ion-select-option>
+            <ion-select-option [value]="10">10</ion-select-option>
+            <ion-select-option [value]="25">25</ion-select-option>
+            <ion-select-option [value]="50">50</ion-select-option>
+            <ion-select-option [value]="100">100</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+
+      <div class="ordenacion-filtros">
+        <ion-item>
+          <ion-label>{{ 'PRODUCTOS.SORT_BY' | translate }}</ion-label>
+          <ion-select [(ngModel)]="ordenActual.columna" interface="popover"
+            (ionChange)="ordenarPor(ordenActual.columna)">
+            <ion-select-option value="id">{{ 'PRODUCTOS.ID' | translate }}</ion-select-option>
+            <ion-select-option value="izena">{{ 'PRODUCTOS.NAME' | translate }}</ion-select-option>
+            <ion-select-option value="marka">{{ 'PRODUCTOS.BRAND' | translate }}</ion-select-option>
+            <ion-select-option value="stock">{{ 'PRODUCTOS.STOCK' | translate }}</ion-select-option>
+            <ion-select-option value="kategoriak.izena">{{ 'PRODUCTOS.CATEGORY' | translate }}</ion-select-option>
+            <ion-select-option value="sortze_data">{{ 'PRODUCTOS.CREATION_DATE' | translate }}</ion-select-option>
+            <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">{{ 'PRODUCTOS.UPDATE_DATE' | translate
+              }}</ion-select-option>
+            <ion-select-option *ngIf="esHistorial" value="ezabatze_data">{{ 'PRODUCTOS.DELETION_DATE' | translate
+              }}</ion-select-option>
+          </ion-select>
+
+          <ion-label>{{ 'Ordenar: ' }}</ion-label>
+          <ion-select [(ngModel)]="ordenActual.ascendente" interface="popover" (ionChange)="cambiarOrden($event)">
+            <!-- Agregar un placeholder que cambia dependiendo del valor de ascendente -->
+            <ion-select-option value="true">{{ 'PRODUCTOS.ASCENDING' | translate }}</ion-select-option>
+            <ion-select-option value="false">{{ 'PRODUCTOS.DESCENDING' | translate }}</ion-select-option>
+            <ion-label slot="start">
+              {{ ordenActual.ascendente === true ? 'Ascendente' : 'Descendente' }}
+            </ion-label>
+          </ion-select>
+        </ion-item>
+      </div>
+
+      <!-- Paginación -->
+      <ion-row>
+        <ion-col>
+          <ion-button *ngFor="let page of hacerPaginacion()" (click)="cambiarPagina(page)">
+            {{ page }}
           </ion-button>
+        </ion-col>
+      </ion-row>
 
-        </form>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
-
-  <ion-row *ngIf= "esProfe">
-    <ion-col size="12" class="ion-text-center">
-      <ion-button *ngIf="!esHistorial && esProfe" color="primary" expand="block" [routerLink]="'/crear-productos'">Añadir producto
-        <ion-icon name="add-circle-outline"></ion-icon>
-      </ion-button>
-    </ion-col>
-  </ion-row>
-<!-- Fila de productos -->
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12">
-        <table class="custom-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>NOMBRE</th>
-              <th>MARCA</th>
-              <th>STOCK</th>
-              <th>CATEGORIA</th>
-              <th>FECHA DE CREACIÓN</th>
-              <th *ngIf="!esHistorial">FECHA DE ACTUALIZACIÓN</th>
-              <th *ngIf="esHistorial">FECHA DE BORRADO</th>
-              <th>ACTIVIDADES</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let producto of productosFiltrados | slice: (paginaActual - 1) * productosPorPagina : paginaActual * productosPorPagina">
-              <td [ngClass]="{'custom-white-column': par(0), 'custom-tertiary-column': !par(0)}">{{ producto.id || '-' }}</td>
-              <td [ngClass]="{'custom-white-column': par(1), 'custom-tertiary-column': !par(1)}">{{ producto.izena || '-' }}</td>
-              <td [ngClass]="{'custom-white-column': par(2), 'custom-tertiary-column': !par(2)}">{{ producto.marka || '-' }}</td>
-              <td [ngClass]="{'custom-white-column': par(3), 'custom-tertiary-column': !par(3)}">{{ producto.stock || '-' }}</td>
-              <td [ngClass]="{'custom-white-column': par(3), 'custom-tertiary-column': !par(4)}" style="color: black;">{{ producto.kategoriak.izena || '-' }}</td>  
-              <td [ngClass]="{'custom-white-column': par(4), 'custom-tertiary-column': !par(5)}">{{ producto.data.sortze_data | date:'yyyy-MM-dd' }}</td>
-              <td *ngIf="!esHistorial" [ngClass]="{'custom-white-column': par(5), 'custom-tertiary-column': !par(8)}" style="color: black;">{{ producto.data.eguneratze_data ? (producto.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</td>
-              <td *ngIf="esHistorial" [ngClass]="{'custom-white-column': par(5), 'custom-tertiary-column': !par(8)}" style="color: black;">{{ producto.data.ezabatze_data ? (producto.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</td>
-              <td [ngClass]="{'custom-white-column': par(6), 'custom-tertiary-column': !par(7)}">
-                <ion-button color="primary" (click)="editarProducto(producto)">EDITAR</ion-button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-content>
-
-<ion-content [fullscreen]="true" *ngIf="mobilaDa">
-  <!-- Buscador -->
-  <ion-searchbar
-    search-icon="search-circle"
-    [placeholder]="search"
-    (ionInput)="aplicarFiltro($event)">
-  </ion-searchbar>
-
-  <!-- Selector de productos por página -->
-  <div class="productosPorPagina">
-    <ion-item class="producto-item">
-      <ion-label size="small">{{title}}:</ion-label>
-      <ion-select [(ngModel)]="productosPorPagina" interface="popover" size="small" (ionChange)="cambiarPagina(1)">
-        <ion-select-option [value]="5">5</ion-select-option>
-        <ion-select-option [value]="10">10</ion-select-option>
-        <ion-select-option [value]="25">25</ion-select-option>
-        <ion-select-option [value]="50">50</ion-select-option>
-        <ion-select-option [value]="100">100</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </div>
-
-  <div class="ordenacion-filtros">
-    <ion-item>
-      <ion-label>{{ 'Ordenar por:' }}</ion-label>
-      <ion-select [(ngModel)]="ordenActual.columna" interface="popover" (ionChange)="ordenarPor(ordenActual.columna)">
-        <ion-select-option value="id">{{ 'ID' }}</ion-select-option>
-        <ion-select-option value="izena">{{ name }}</ion-select-option>
-        <ion-select-option value="marka">{{ brand }}</ion-select-option>
-        <ion-select-option value="stock">Stock</ion-select-option>
-        <ion-select-option value="kategoriak.izena">Categoria</ion-select-option>
-        <ion-select-option value="sortze_data">{{ cd }}</ion-select-option>
-        <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">{{ ud }}</ion-select-option>
-        <ion-select-option  *ngIf="esHistorial" value="ezabatze_data">{{ ud }}</ion-select-option>
-      </ion-select>
-  
-      <ion-label>{{ 'Ordenar: ' }}</ion-label>
-      <ion-select [(ngModel)]="ordenActual.ascendente" interface="popover" (ionChange)="cambiarOrden($event)">
-        <!-- Agregar un placeholder que cambia dependiendo del valor de ascendente -->
-        <ion-select-option value="true">{{ 'Ascendente' }}</ion-select-option>
-        <ion-select-option value="false">{{ 'Descendente' }}</ion-select-option>
-        <ion-label slot="start">
-          {{ ordenActual.ascendente === true ? 'Ascendente' : 'Descendente' }}
-        </ion-label>
-      </ion-select>      
-    </ion-item>
-  </div>
-  
-  <!-- Paginación -->
-  <ion-row>
-    <ion-col>
-      <ion-button *ngFor="let page of hacerPaginacion()" (click)="cambiarPagina(page)">
-        {{ page }}
-      </ion-button>
-    </ion-col>
-  </ion-row>
-
-  <ion-row *ngIf= "esProfe">
-    <ion-col size="12" class="ion-text-center">
-      <ion-button  *ngIf="!esHistorial && esProfe"  color="primary" expand="block" [routerLink]="'/crear-productos'">Añadir producto
-        <ion-icon name="add-circle-outline"></ion-icon>
-      </ion-button>
-    </ion-col>
-  </ion-row>
-
-  <!-- Fila de edición visible solo en modo edición -->
-<ion-row *ngIf="editandoProducto">
-  <ion-col size="12">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>EDITAR</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <form #productoForm="ngForm" (ngSubmit)="confirmarEdicion()" novalidate>
-          <ion-item>
-            <ion-label position="floating">ID</ion-label>
-            <ion-input [(ngModel)]="productoSeleccionado.id" name="id" #id="ngModel" readonly></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">NOMBRE</ion-label>
-            <ion-input [(ngModel)]="productoSeleccionado.izena" name="izena" #izena="ngModel" required></ion-input>
-            <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
-              El nombre es obligatorio.
-            </ion-note>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">MARCA</ion-label>
-            <ion-input [(ngModel)]="productoSeleccionado.marka" name="marka" #marka="ngModel" required></ion-input>
-            <ion-note *ngIf="marka.invalid && marka.touched" color="danger">
-              La marca es obligatoria.
-            </ion-note>
-          </ion-item>          
-          <ion-item>
-            <ion-label position="floating">CATEGORIA</ion-label>
-            <ion-select [(ngModel)]="productoSeleccionado.kategoriak.id" name="kategoriak" required>
-              <ion-select-option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.izena }}</ion-select-option>
-            </ion-select>
-            <ion-note *ngIf="productoSeleccionado.kategoriak.id === '' || productoSeleccionado.kategoriak.id === null" color="danger">
-              La categoría es obligatoria.
-            </ion-note>            
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Stock</ion-label>
-            <ion-input 
-              [(ngModel)]="productoSeleccionado.stock" 
-              name="stock" 
-              #stock="ngModel" 
-              required
-              [disabled]="!esProfe">
-            </ion-input>
-            <ion-note *ngIf="stock.invalid && stock.touched" color="danger">
-              El stock es obligatorio.
-            </ion-note>
-          </ion-item>
-          
-          <ion-item>
-            <ion-label position="floating">Stock Alerta</ion-label>
-            <ion-input 
-              [(ngModel)]="productoSeleccionado.stock_alerta" 
-              name="stock_alerta" 
-              #stock_alerta="ngModel" 
-              required
-              [disabled]="!esProfe">
-            </ion-input>
-            <ion-note *ngIf="stock_alerta.invalid && stock_alerta.touched" color="danger">
-              La alerta de stock es obligatoria.
-            </ion-note>
-          </ion-item>        
-          
-          <!-- Tienes que poner informacion del historial cuando este -->
-          <ion-button color="tertiary" expand="full" (click)="confirmarEdicion()" type="submit" [disabled]="productoForm.invalid">CONFIRMAR</ion-button>
-          <ion-button expand="full" color="danger" (click)="cancelarEdicion()">UTZI</ion-button>
-          <ion-button *ngIf="esProfe && !esHistorial" expand="full" class="custom-red-button" (click)="eliminarProducto()">
-            Borrar producto
+      <ion-row *ngIf="esProfe">
+        <ion-col size="12" class="ion-text-center">
+          <ion-button *ngIf="!esHistorial && esProfe" color="primary" expand="block"
+            [routerLink]="'/crear-productos'">Añadir producto
+            <ion-icon name="add-circle-outline"></ion-icon>
           </ion-button>
-          <ion-button *ngIf="esHistorial" expand="full" class="custom-gray-button" type="button" (click)="confirmarBorrado()">
-            Confirmar borrado
-          </ion-button>
-          
-          <ion-button *ngIf="esHistorial" expand="full" class="custom-purple-button" type="button" (click)="restaurarProducto()">
-            Restaurar ficha
-          </ion-button>
+        </ion-col>
+      </ion-row>
 
-        </form>
-      </ion-card-content>
-    </ion-card>
-  </ion-col>
-</ion-row>
+      <!-- Fila de edición visible solo en modo edición -->
+      <ion-row *ngIf="editandoProducto">
+        <ion-col size="12">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>{{ 'PRODUCTOS.EDIT_TITLE' | translate }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <form #productoForm="ngForm" (ngSubmit)="confirmarEdicion()" novalidate>
+                <ion-item>
+                  <ion-label position="floating">{{ 'PRODUCTOS.ID' | translate }}</ion-label>
+                  <ion-input [(ngModel)]="productoSeleccionado.id" name="id" #id="ngModel" readonly></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">{{ 'PRODUCTOS.NAME' | translate }}</ion-label>
+                  <ion-input [(ngModel)]="productoSeleccionado.izena" name="izena" #izena="ngModel"
+                    required></ion-input>
+                  <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
+                    {{ 'PRODUCTOS.NAME_REQUIRED' | translate }}
+                  </ion-note>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">{{ 'PRODUCTOS.BRAND' | translate }}</ion-label>
+                  <ion-input [(ngModel)]="productoSeleccionado.marka" name="marka" #marka="ngModel"
+                    required></ion-input>
+                  <ion-note *ngIf="marka.invalid && marka.touched" color="danger">
+                    {{ 'PRODUCTOS.BRAND_REQUIRED' | translate }}
+                  </ion-note>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">{{ 'PRODUCTOS.CATEGORY' | translate }}</ion-label>
+                  <ion-select [(ngModel)]="productoSeleccionado.kategoriak.id" name="kategoriak" required>
+                    <ion-select-option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.izena
+                      }}</ion-select-option>
+                  </ion-select>
+                  <ion-note
+                    *ngIf="productoSeleccionado.kategoriak.id === '' || productoSeleccionado.kategoriak.id === null"
+                    color="danger">
+                    {{ 'PRODUCTOS.CATEGORY_REQUIRED' | translate }}
+                  </ion-note>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">{{ 'PRODUCTOS.STOCK' | translate }}</ion-label>
+                  <ion-input [(ngModel)]="productoSeleccionado.stock" name="stock" #stock="ngModel" required
+                    [disabled]="!esProfe">
+                  </ion-input>
+                  <ion-note *ngIf="stock.invalid && stock.touched" color="danger">
+                    {{ 'PRODUCTOS.STOCK_REQUIRED' | translate }}
+                  </ion-note>
+                </ion-item>
 
+                <ion-item>
+                  <ion-label position="floating">{{ 'PRODUCTOS.STOCK_ALERT' | translate }}</ion-label>
+                  <ion-input [(ngModel)]="productoSeleccionado.stock_alerta" name="stock_alerta" #stock_alerta="ngModel"
+                    required [disabled]="!esProfe">
+                  </ion-input>
+                  <ion-note *ngIf="stock_alerta.invalid && stock_alerta.touched" color="danger">
+                    {{ 'PRODUCTOS.STOCK_ALERT_REQUIRED' | translate }}
+                  </ion-note>
+                </ion-item>
 
-  <!-- Fila de productos -->
-  <ion-row justify-content-center *ngFor="let producto of productosFiltrados | slice: (paginaActual - 1) * productosPorPagina : paginaActual * productosPorPagina">
-    <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-      <ion-card *ngIf="productoSeleccionado.id !== producto.id" (click)="editarProducto(producto)">
-        <ion-card-header>
-          <ion-card-title>{{ producto.izena || '-' }}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <p><strong>ID:</strong> {{ producto.id || '-' }}</p>
-          <p><strong>{{name}}:</strong> {{ producto.izena || '-' }}</p>
-          <p><strong>{{brand}}:</strong> {{ producto.marka || '-' }}</p> 
-          <p><strong>Stock:</strong> {{ producto.stock || '-' }}</p> 
-          <p><strong>Nombre de categoria:</strong> {{ producto.kategoriak.izena || '-' }}</p> 
-          <p><strong>{{cd}}:</strong> {{ producto.data.sortze_data | date:'yyyy-MM-dd' }}</p>
-         <p><strong>{{ud}}:</strong> {{ producto.data.eguneratze_data ? (producto.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
+                <!-- Tienes que poner informacion del historial cuando este -->
+                <ion-button color="tertiary" expand="full" (click)="confirmarEdicion()" type="submit"
+                  [disabled]="productoForm.invalid">{{ 'PRODUCTOS.CONFIRM' | translate }}</ion-button>
+                <ion-button expand="full" color="danger" (click)="cancelarEdicion()">{{ 'PRODUCTOS.CANCEL' | translate
+                  }}</ion-button>
+                <ion-button *ngIf="esProfe && !esHistorial" expand="full" class="custom-red-button"
+                  (click)="eliminarProducto()">
+                  {{ 'PRODUCTOS.DELETE' | translate }}
+                </ion-button>
+                <ion-button *ngIf="esHistorial" expand="full" class="custom-gray-button" type="button"
+                  (click)="confirmarBorrado()">
+                  {{ 'PRODUCTOS.CONFIRM_DELETE' | translate }}
+                </ion-button>
 
-</ion-content>
+                <ion-button *ngIf="esHistorial" expand="full" class="custom-purple-button" type="button"
+                  (click)="restaurarProducto()">
+                  {{ 'PRODUCTOS.RESTORE' | translate }}
+                </ion-button>
 
-</ion-app>
+              </form>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <!-- Fila de productos -->
+      <ion-row justify-content-center
+        *ngFor="let producto of productosFiltrados | slice: (paginaActual - 1) * productosPorPagina : paginaActual * productosPorPagina">
+        <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
+          <ion-card *ngIf="productoSeleccionado.id !== producto.id" (click)="editarProducto(producto)">
+            <ion-card-header>
+              <ion-card-title>{{ producto.izena || '-' }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p><strong>{{ 'PRODUCTOS.ID' | translate }}:</strong> {{ producto.id || '-' }}</p>
+              <p><strong>{{ 'PRODUCTOS.NAME' | translate }}:</strong> {{ producto.izena || '-' }}</p>
+              <p><strong>{{ 'PRODUCTOS.BRAND' | translate }}:</strong> {{ producto.marka || '-' }}</p>
+              <p><strong>{{ 'PRODUCTOS.STOCK' | translate }}:</strong> {{ producto.stock || '-' }}</p>
+              <p><strong>{{ 'PRODUCTOS.CATEGORY_NAME' | translate }}:</strong> {{ producto.kategoriak.izena || '-' }}
+              </p>
+              <p><strong>{{ 'PRODUCTOS.CREATED_DATE' | translate }}:</strong> {{ producto.data.sortze_data |
+                date:'yyyy-MM-dd' }}</p>
+              <p><strong>{{ 'PRODUCTOS.UPDATED_DATE' | translate }}:</strong> {{ producto.data.eguneratze_data ?
+                (producto.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+    </ion-content>
+
+  </ion-app>

@@ -65,8 +65,8 @@
     "LABEL": "Hitzorduak",
     "RESERVE": "Erreserbatu",
     "ORDER_BY_SEAT": "Ordenatu eserlekua arabera",
-    "ASCENDING": "Igoera",
-    "DESCENDING": "Jaitsiera",
+    "ASCENDING": "Gorakorra",
+    "DESCENDING": "Beherakorra",
     "SEAT": "Eserleku",
     "NAME": "Izena",
     "START_TIME": "Hasiera ordua",
@@ -195,8 +195,8 @@
     "DELETE": "Ezabatu",
     "NAME_REQUIRED": "Izena beharrezkoa da",
     "PRICE_REQUIRED": "Prezioa beharrezkoa da",
-    "ASCENDING": "Igoera",
-    "DESCENDING": "Jaitsiera"
+    "ASCENDING": "Gorakorra",
+    "DESCENDING": "Beherakorra"
   },
   "CREAR_SERVICIO":{
     "TITLE":"Zerbitzu berria",
@@ -208,8 +208,60 @@
     "PRECIO_CASA_OBLIGATORIO":"Etxeko prezioa derrigorrezkoa da. ",
     "PRECIO_FUERA_OBLIGATORIO":"Kanpoko mprezioa derrigorrezkoa da. "
   },
-  "INVENTRAIO":{
+  "INVENTARIO":{
     "PROD_MUGIMENDUAK":"Produktu mugimenduak",
     "MATERIAL_MAILEGU":"Material maileguak"
-  }
+  },
+    "PRODUCTOS": {
+      "TITLE": "Produktuak",
+      "SEARCH": "Bilatu produktuak",
+      "ORDER_BY": "Ordenatu",
+      "ID": "ID",
+      "NAME": "Izena",
+      "BRAND": "Marka",
+      "STOCK": "Stock",
+      "CATEGORY": "Kategoria",
+      "CREATION_DATE": "Sortze data",
+      "UPDATE_DATE": "Eguneratze data",
+      "DELETION_DATE": "Ezabatze data",
+      "ASCENDING": "Gorakorra",
+      "DESCENDING": "Beherakorra",
+      "PAGE": "Orri",
+      "EDIT": "Editatu produktua",
+      "ADD": "Gehitu produktua",
+      "CONFIRM": "Berretsi",
+      "CANCEL": "Ezeztatu",
+      "DELETE": "Ezabatu",
+      "CONFIRM_DELETE": "Berretsi ezabaketa",
+      "RESTORE": "Berriztatu produktua",
+      "NAME_REQUIRED": "Izena beharrezkoa da",
+      "BRAND_REQUIRED": "Marka beharrezkoa da",
+      "CATEGORY_REQUIRED": "Kategoria beharrezkoa da",
+      "STOCK_REQUIRED": "Stock-a beharrezkoa da",
+      "STOCK_ALERT_REQUIRED": "Stock alerta beharrezkoa da",
+      "EDIT_TITLE": "Produktua Editatu",
+      "PAGINATION_TITLE": "Produktuen kopurua orri bakoitzean",
+      "SORT_BY":"Ordenatu honen arabera:",
+      "CATEGORY_NAME":"Kategoria: ",
+      "CREATED_DATE":"Sorrera-data",
+      "UPDATED_DATE":"Eguneratze-data",
+      "STOCK_ALERT":"Stock alerta",
+      "ACTIVITIES": "Ekintzak"
+    },
+      "CREAR_PRODUCTO": {
+        "TITLE": "Produktu sortu",
+        "NOMBRE": "Izena",
+        "MARCA": "Marka",
+        "MARCA_REQUIRED": "Marka beharrezkoa da.",
+        "DESCRIPCION": "Deskribapena",
+        "STOCK": "Stock",
+        "STOCK_REQUIRED": "Stock-a beharrezkoa da.",
+        "STOCK_ALERTA": "Stock alerta",
+        "ALERTA_REQUIRED": "Stock alertaren beharra dago.",
+        "CATEGORIA": "Kategoria",
+        "CATEGORIA_REQUIRED": "Kategoria beharrezkoa da.",
+        "GUARDAR": "Gorde"
+      }
+    
+  
 }
