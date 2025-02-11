@@ -113,6 +113,10 @@ const routes: Routes = [
   {
     path: 'produktu-mugimenduak',
     loadChildren: () => import('./produktu-mugimenduak/produktu-mugimenduak.module').then( m => m.ProduktuMugimenduakPageModule)
+  },
+  {
+    path: 'kolore-historialak',
+    loadChildren: () => import('./kolore-historialak/kolore-historialak.module').then( m => m.KoloreHistorialakPageModule)
   }
 
 ];

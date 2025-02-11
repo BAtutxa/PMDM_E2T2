@@ -101,4 +101,10 @@ export class HomePage {
       this.errorGeneric = translations['LOGIN.ERROR.GENERIC_ERROR'];
     });
   }
+
+  goToA1() {
+    this.router.navigate(['/kolore-historialak']);
+  }
+
+
 }
