@@ -285,5 +285,81 @@
     "FECHA_BORRADO": "Fecha de borrado",
     "CREATION_DATE": "Fecha de creación",
     "UPDATE_DATE": "Fecha de actualización"
+  },
+
+  "MATERIAL_MAILEGUAK": {
+    "TITLE": "Préstamos de Material",
+    "SEARCH": "Buscar",
+    "ORDENAR_POR": "Ordenar por",
+    "ID": "ID",
+    "LANGILE_IZENA": "Nombre del Trabajador",
+    "MATERIAL_IZENA": "Nombre del Material",
+    "HASIERA_DATA": "Fecha de Inicio",
+    "AMAIERA_DATA": "Fecha de Fin",
+    "SORTZE_DATA": "Fecha de Registro",
+    "EGUNERATZE_DATA": "Fecha de Actualización",
+    "EKINTZAK": "Acciones",
+    "CONFIRMAR": "Confirmar",
+    "CANCELAR": "Cancelar",
+    "EDITAR": "Editar",
+    "BORRAR_PRESTAMO": "Eliminar Préstamo",
+    "ANADIR_PRESTAMO": "Añadir Préstamo",
+    "EDICION_TITULO": "Editar Préstamo",
+    "FECHA_INICIO": "Fecha de Inicio",
+    "FECHA_FIN": "Fecha de Fin",
+    "FECHA_INICIO_OBLIGATORIA": "La fecha de inicio es obligatoria",
+    "FECHA_FIN_OBLIGATORIA": "La fecha de fin es obligatoria",
+    "LANGILE_IZENA_OBLIGATORIO": "El nombre del trabajador es obligatorio",
+    "MATERIAL_IZENA_OBLIGATORIO": "El nombre del material es obligatorio",
+    "EZABATZE_DATA": "Fecha de Eliminación",
+    "ASCENDENTE": "Ascendente",
+    "DESCENDENTE": "Descendente",
+    "ORDENA": "Numero de prestamos por pagina"
+  },
+  "CREAR_MATERIAL": {
+    "NUEVO_MATERIAL": "Crear Nuevo Material",
+    "NOMBRE": "Nombre",
+    "NOMBRE_OBLIGATORIO": "El nombre es obligatorio",
+    "ETIKETA": "Etiqueta",
+    "INTRODUCE_ETIKETA": "Introduce una etiqueta",
+    "ETIKETA_OBLIGATORIA": "La etiqueta es obligatoria",
+    "GUARDAR": "Guardar"
+  },
+
+  "ADMINISTRACION": {
+    "TITULO": "Administración",
+    "CATEGORIAS": "Categorías",
+    "GRUPOS": "Grupos",
+    "INFORMES": "Informes",
+    "HISTORIAL_BORRADO": "Historial de Borrado"
+  },
+  "CATEGORIA": {
+    "TITULO": "Categoría",
+    "CONTENIDO": "Aquí va el contenido principal de la página.",
+    "BUSCAR": "Buscar",
+    "CATEGORIAS": "Categorías",
+    "ORDENAR_POR": "Ordenar por",
+    "ID": "ID",
+    "IZENA": "Nombre",
+    "FECHA_CREACION": "Fecha de creación",
+    "FECHA_ACTUALIZACION": "Fecha de actualización",
+    "FECHA_BORRADO": "Fecha de borrado",
+    "ASCENDENTE": "Ascendente",
+    "DESCENDENTE": "Descendente",
+    "IZENA_OBLIGATORIO": "El nombre es obligatorio.",
+    "CONFIRMAR": "Confirmar",
+    "CANCELAR": "Cancelar",
+    "BORRAR": "Borrar categoría",
+    "CONFIRMAR_BORRADO": "Confirmar borrado",
+    "RESTAURAR": "Restaurar categoría",
+    "ANADIR_CATEGORIA": "Añadir categoría",
+    "ULTIMA_ACTUALIZACION": "Última actualización",
+    "FECHA_ELIMINACION": "Fecha de eliminación"
+  },
+  "CREAR_CATEGORIA": {
+    "TITULO": "Categoría a crear",
+    "NOMBRE": "Nombre",
+    "INTRODUCE_NOMBRE": "Introduce un valor para nombre",
+    "GUARDAR": "Guardar"
   }
 }

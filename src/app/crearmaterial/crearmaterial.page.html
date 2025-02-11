@@ -3,14 +3,14 @@
     <form #materialForm="ngForm" (ngSubmit)="guardarMaterial()">
       <ion-card>
         <ion-card-header>
-          <ion-card-title>Nuevo material</ion-card-title>
+          <ion-card-title>{{ 'CREAR_MATERIAL.NUEVO_MATERIAL' | translate }}</ion-card-title>
         </ion-card-header>
 
         <ion-card-content>
           <ion-list>
                  <!-- Nombre Input -->
                  <ion-item>
-                  <ion-label position="stacked">Nombre</ion-label>
+                  <ion-label position="stacked">{{ 'CREAR_MATERIAL.NOMBRE' | translate }}</ion-label>
                   <ion-input
                     [(ngModel)]="material.izena"
                     name="izena"
@@ -18,22 +18,22 @@
                     required
                   ></ion-input>
                   <ion-note color="danger" *ngIf="!material.izena">
-                    El nombre es obligatorio.
+                    {{ 'CREAR_MATERIAL.NOMBRE_OBLIGATORIO' | translate }}
                   </ion-note>
                   
                 </ion-item>
     
                 <!-- Etiketa Input -->
                 <ion-item>
-                  <ion-label position="stacked">Etiqueta</ion-label>
+                  <ion-label position="stacked">{{ 'CREAR_MATERIAL.ETIKETA' | translate }}</ion-label>
                   <ion-input
                     [(ngModel)]="material.etiketa"
                     name="etiketa"
-                    placeholder="Introduce un valor para etiqueta"
+                    placeholder="{{ 'CREAR_MATERIAL.INTRODUCE_ETIKETA' | translate }}"
                     required
                   ></ion-input>
                   <ion-note color="danger" *ngIf="!material.etiketa" color="danger">
-                    La etiqueta es obligatoria.
+                    {{ 'CREAR_MATERIAL.ETIKETA_OBLIGATORIA' | translate }}
                   </ion-note>
                 </ion-item>
           </ion-list>
@@ -44,8 +44,8 @@
             type="submit"
             color="tertiary"
             [disabled]="materialForm.invalid"
-            >Guardar</ion-button>
-        </ion-card-content>
+            >{{ 'CREAR_MATERIAL.GUARDAR' | translate }}</ion-button>
+          </ion-card-content>
       </ion-card>
     </form>
   </div>
