@@ -1,308 +1,338 @@
 <ion-app>
   <app-menu-header></app-menu-header>
-  
-    <!-- Contenido principal -->
-    <ion-app class="ion-page" id="main-content">
-      <!-- Header principal -->
-      <ion-header>
-        <ion-toolbar color="primary">
-          <ion-buttons slot="start">
-            <ion-menu-button></ion-menu-button>
-          </ion-buttons>
-          <ion-title>Servicios</ion-title>
-        </ion-toolbar>
-      </ion-header>
 
-<ion-content [fullscreen]="true" *ngIf="!mobilaDa">
-  <!-- Buscador -->
-  <ion-searchbar
-    search-icon="search-circle"
-    [placeholder]="search"
-    (ionInput)="aplicarFiltro($event)">
-  </ion-searchbar>
+  <!-- Contenido principal -->
+  <ion-app class="ion-page" id="main-content">
+    <!-- Header principal -->
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>{{ 'SERVICIOS.TITLE' | translate }}</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
-  <!-- Selector de productos por página -->
-  <div class="productosPorPagina">
-    <ion-item class="producto-item">
-      <ion-label size="small">{{title}}:</ion-label>
-      <ion-select [(ngModel)]="ServiciosPorPagina" interface="popover" size="small" (ionChange)="cambiarPagina(1)">
-        <ion-select-option [value]="5">5</ion-select-option>
-        <ion-select-option [value]="10">10</ion-select-option>
-        <ion-select-option [value]="25">25</ion-select-option>
-        <ion-select-option [value]="50">50</ion-select-option>
-        <ion-select-option [value]="100">100</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </div>
+    <ion-content [fullscreen]="true" *ngIf="!mobilaDa">
+      <!-- Buscador -->
+      <ion-searchbar search-icon="search-circle" [placeholder]="'SERVICIOS.SEARCH' | translate"
+        (ionInput)="aplicarFiltro($event)">
+      </ion-searchbar>
 
-  <div class="ordenacion-filtros">
-    <ion-item>
-      <ion-label>{{ 'Ordenar por:' }}</ion-label>
-      <ion-select [(ngModel)]="ordenActual.columna" interface="popover" (ionChange)="ordenarPor(ordenActual.columna)">
-        <ion-select-option value="id">{{ 'ID' }}</ion-select-option>
-        <ion-select-option value="izena">{{ name }}</ion-select-option>
-        <ion-select-option value="etxeko_prezioa">Precio de casa</ion-select-option>
-        <ion-select-option value="kanpoko_prezioa">Precio de fuera</ion-select-option>
-        <ion-select-option *ngIf="!esHistorial" value="kanpoko_prezioa">Precio de fuera</ion-select-option>
-        <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">Fecha de actualización</ion-select-option>
-        <ion-select-option *ngIf="esHistorial" value="eguneratze_data">Fecha de borrado</ion-select-option>
-      </ion-select>
-  
-      <ion-label>{{ 'Ordenar: ' }}</ion-label>
-      <ion-select [(ngModel)]="ordenActual.ascendente" interface="popover" (ionChange)="cambiarOrden($event)">
-        <!-- Agregar un placeholder que cambia dependiendo del valor de ascendente -->
-        <ion-select-option value="true">{{ 'Ascendente' }}</ion-select-option>
-        <ion-select-option value="false">{{ 'Descendente' }}</ion-select-option>
-        <ion-label slot="start">
-          {{ ordenActual.ascendente === true ? 'Ascendente' : 'Descendente' }}
-        </ion-label>
-      </ion-select>      
-    </ion-item>
-  </div>
-  
-  <!-- Paginación -->
-  <ion-row>
-    <ion-col>
-      <ion-button *ngFor="let page of hacerPaginacion()" (click)="cambiarPagina(page)">
-        {{ page }}
-      </ion-button>
-    </ion-col>
-  </ion-row>
+      <!-- Selector de productos por página -->
+      <div class="productosPorPagina">
+        <ion-item class="producto-item">
+          <ion-label>{{ 'SERVICIOS.PRODUCTS_PER_PAGE' | translate }}:</ion-label>
+          <ion-select [(ngModel)]="ServiciosPorPagina" interface="popover" (ionChange)="cambiarPagina(1)">
+            <ion-select-option [value]="5">5</ion-select-option>
+            <ion-select-option [value]="10">10</ion-select-option>
+            <ion-select-option [value]="25">25</ion-select-option>
+            <ion-select-option [value]="50">50</ion-select-option>
+            <ion-select-option [value]="100">100</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
 
-  <!-- Fila de edición visible solo en modo edición -->
-  <ion-row *ngIf="editandoServicio">
-    <ion-col size="12">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>EDITAR</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <form #productoForm="ngForm" (ngSubmit)="confirmarEdicion()" novalidate>
-          <ion-item>
-            <ion-label position="floating">ID</ion-label>
-            <ion-input [(ngModel)]="servicioSeleccionado.id" name="id" #id="ngModel" readonly></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">NOMBRE</ion-label>
-            <ion-input [(ngModel)]="servicioSeleccionado.izena" name="izena" #izena ="ngModel" required></ion-input>
-            <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
-              El nombre es obligatorio.
-            </ion-note>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Precio de casa</ion-label>
-            <ion-input [(ngModel)]="servicioSeleccionado.etxeko_prezioa" name="etxeko_prezioa" #etxeko_prezioa="ngModel" required></ion-input>
-            <ion-note *ngIf="etxeko_prezioa.invalid && etxeko_prezioa.touched" color="danger">
-              El precio es obligatorio.
-            </ion-note>
-          </ion-item>          
-          <ion-item>
-            <ion-label position="floating">Precio de fuera</ion-label>
-            <ion-input 
-              [(ngModel)]="servicioSeleccionado.kanpoko_prezioa" 
-              name="kanpoko_prezioa" 
-              #kanpoko_prezioa="ngModel" 
-              required
-              [disabled]="!esProfe">
-            </ion-input>
-            <ion-note *ngIf="kanpoko_prezioa.invalid && kanpoko_prezioa.touched" color="danger">
-              El precio es obligatorio.
-            </ion-note>
-          </ion-item>
-           
-          <!-- Tienes que poner informacion del historial cuando este -->
-          <ion-button color="tertiary" expand="full" (click)="confirmarEdicion()"  type="submit" [disabled]="productoForm.invalid">CONFIRMAR</ion-button>
-          <ion-button expand="full" color="danger" (click)="cancelarEdicion()">DEJAR</ion-button>
-          <ion-button *ngIf="esProfe" expand="full"  class="custom-red-button" (click)="eliminarProducto()">
-            Borrar producto
+      <!-- Ordenación y filtros -->
+      <div class="ordenacion-filtros">
+        <ion-item>
+          <ion-label>{{ 'SERVICIOS.SORT_BY' | translate }}</ion-label>
+          <ion-select [(ngModel)]="ordenActual.columna" interface="popover"
+            (ionChange)="ordenarPor(ordenActual.columna)">
+            <ion-select-option value="id">{{ 'SERVICIOS.ID' | translate }}</ion-select-option>
+            <ion-select-option value="izena">{{ 'SERVICIOS.NAME' | translate }}</ion-select-option>
+            <ion-select-option value="etxeko_prezioa">{{ 'SERVICIOS.PRICE_HOME' | translate }}</ion-select-option>
+            <ion-select-option value="kanpoko_prezioa">{{ 'SERVICIOS.PRICE_AWAY' | translate }}</ion-select-option>
+            <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">
+              {{ 'SERVICIOS.UPDATE_DATE' | translate }}
+            </ion-select-option>
+            <ion-select-option *ngIf="esHistorial" value="eguneratze_data">
+              {{ 'SERVICIOS.DELETE_DATE' | translate }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>{{ 'SERVICIOS.ORDER' | translate }}</ion-label>
+          <ion-select [(ngModel)]="ordenActual.ascendente" interface="popover" (ionChange)="cambiarOrden($event)">
+            <ion-select-option [value]="true">{{ 'SERVICIOS.ASCENDING' | translate }}</ion-select-option>
+            <ion-select-option [value]="false">{{ 'SERVICIOS.DESCENDING' | translate }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+
+
+      <!-- Paginación -->
+      <ion-row>
+        <ion-col>
+          <ion-button *ngFor="let page of hacerPaginacion()" (click)="cambiarPagina(page)">
+            {{ page }}
           </ion-button>
-        </form>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
+        </ion-col>
+      </ion-row>
 
-  <ion-row *ngIf= "esProfe">
-    <ion-col size="12" class="ion-text-center">
-      <ion-button color="primary" expand="block" [routerLink]="'/crear-servicio'">Añadir servicio
-        <ion-icon name="add-circle-outline"></ion-icon>
-      </ion-button>
-    </ion-col>
-  </ion-row>
-<!-- Fila de productos -->
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12">
-        <table class="custom-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>NOMBRE</th>
-              <th>PRECIO DE CASA</th>
-              <th>KPRECIO DE FUERA</th>
-              <th>FECHA DE CREACIÓN</th>
-              <th>FECHA DE ACTUALIZACIÓN</th>
-              <th>ACTIVIDADES</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let servicio of serviciosFiltrados | slice: (paginaActual - 1) * ServiciosPorPagina : paginaActual * ServiciosPorPagina">
-              <td [ngClass]="{'custom-white-column': par(0), 'custom-tertiary-column': !par(0)}">{{ servicio.id || '-' }}</td>
-              <td [ngClass]="{'custom-white-column': par(1), 'custom-tertiary-column': !par(1)}">{{ servicio.izena || '-' }}</td>
-              <td [ngClass]="{'custom-white-column': par(2), 'custom-tertiary-column': !par(2)}">{{ servicio.etxeko_prezioa || '-' }}</td>
-              <td [ngClass]="{'custom-white-column': par(3), 'custom-tertiary-column': !par(3)}">{{ servicio.kanpoko_prezioa || '-' }}</td>
-              <td *ngIf="esHistorial" [ngClass]="{'custom-white-column': par(4), 'custom-tertiary-column': !par(4)}"> {{ servicio.data.ezabatze_data | date:'yyyy-MM-dd' }}</td>
-              <td *ngIf="!esHistorial" [ngClass]="{'custom-white-column': par(4), 'custom-tertiary-column': !par(4)}"> {{ servicio.data.sortze_data | date:'yyyy-MM-dd' }}</td>
-              <td [ngClass]="{'custom-white-column': par(5), 'custom-tertiary-column': !par(5)}" style="color: black;">{{ servicio.data.eguneratze_data ? (servicio.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</td>
-              <td [ngClass]="{'custom-white-column': par(6), 'custom-tertiary-column': !par(6)}">
-                <ion-button color="primary" (click)="editarProducto(servicio)">EDITATU</ion-button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-content>
+      <!-- Fila de edición visible solo en modo edición -->
+      <ion-row *ngIf="editandoServicio">
+        <ion-col size="12">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>{{ 'SERVICIOS.EDIT' | translate }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <form #productoForm="ngForm" (ngSubmit)="confirmarEdicion()" novalidate>
+                <ion-item>
+                  <ion-label position="floating">{{ 'SERVICIOS.ID' | translate }}</ion-label>
+                  <ion-input [(ngModel)]="servicioSeleccionado.id" name="id" #id="ngModel" readonly></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">{{ 'SERVICIOS.NAME' | translate }}</ion-label>
+                  <ion-input [(ngModel)]="servicioSeleccionado.izena" name="izena" #izena="ngModel"
+                    required></ion-input>
+                  <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
+                    {{ 'SERVICIOS.NAME_REQUIRED' | translate }}
+                  </ion-note>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">{{ 'SERVICIOS.PRICE_HOME' | translate }}</ion-label>
+                  <ion-input [(ngModel)]="servicioSeleccionado.etxeko_prezioa" name="etxeko_prezioa"
+                    #etxeko_prezioa="ngModel" required></ion-input>
+                  <ion-note *ngIf="etxeko_prezioa.invalid && etxeko_prezioa.touched" color="danger">
+                    {{ 'SERVICIOS.PRICE_REQUIRED' | translate }}
+                  </ion-note>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">{{ 'SERVICIOS.PRICE_AWAY' | translate }}</ion-label>
+                  <ion-input [(ngModel)]="servicioSeleccionado.kanpoko_prezioa" name="kanpoko_prezioa"
+                    #kanpoko_prezioa="ngModel" required [disabled]="!esProfe">
+                  </ion-input>
+                  <ion-note *ngIf="kanpoko_prezioa.invalid && kanpoko_prezioa.touched" color="danger">
+                    {{ 'SERVICIOS.PRICE_REQUIRED' | translate }}
+                  </ion-note>
+                </ion-item>
 
-<ion-content [fullscreen]="true" *ngIf="mobilaDa">
-  <!-- Buscador -->
-  <ion-searchbar
-    search-icon="search-circle"
-    [placeholder]="search"
-    (ionInput)="aplicarFiltro($event)">
-  </ion-searchbar>
+                <!-- Tienes que poner informacion del historial cuando este -->
+                <ion-button color="tertiary" expand="full" (click)="confirmarEdicion()" type="submit"
+                  [disabled]="productoForm.invalid">
+                  {{ 'SERVICIOS.CONFIRM' | translate }}
+                </ion-button>
+                <ion-button expand="full" color="danger" (click)="cancelarEdicion()">
+                  {{ 'SERVICIOS.CANCEL' | translate }}
+                </ion-button>
+                <ion-button *ngIf="esProfe" expand="full" class="custom-red-button" (click)="eliminarProducto()">
+                  {{ 'SERVICIOS.DELETE_PRODUCT' | translate }}
+                </ion-button>
+              </form>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
 
-  <!-- Selector de productos por página -->
-  <div class="productosPorPagina">
-    <ion-item class="producto-item">
-      <ion-label size="small">{{title}}:</ion-label>
-      <ion-select [(ngModel)]="ServiciosPorPagina" interface="popover" size="small" (ionChange)="cambiarPagina(1)">
-        <ion-select-option [value]="5">5</ion-select-option>
-        <ion-select-option [value]="10">10</ion-select-option>
-        <ion-select-option [value]="25">25</ion-select-option>
-        <ion-select-option [value]="50">50</ion-select-option>
-        <ion-select-option [value]="100">100</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </div>
+      <ion-row *ngIf="esProfe">
+        <ion-col size="12" class="ion-text-center">
+          <ion-button color="primary" expand="block" [routerLink]="'/crear-servicio'">
+            {{ 'SERVICIOS.ADD_SERVICE' | translate }}
+            <ion-icon name="add-circle-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
 
-  <div class="ordenacion-filtros">
-    <ion-item>
-      <ion-label>{{ 'Ordenar por:' }}</ion-label>
-      <ion-select [(ngModel)]="ordenActual.columna" interface="popover" (ionChange)="ordenarPor(ordenActual.columna)">
-        <ion-select-option value="id">{{ 'ID' }}</ion-select-option>
-        <ion-select-option value="izena">{{ name }}</ion-select-option>
-        <ion-select-option value="etxeko_prezioa">Precio de casa</ion-select-option>
-        <ion-select-option value="kanpoko_prezioa">Precio de fuera</ion-select-option>
-        <ion-select-option *ngIf="!esHistorial" value="kanpoko_prezioa">Precio de fuera</ion-select-option>
-        <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">Fecha de actualización</ion-select-option>
-        <ion-select-option *ngIf="esHistorial" value="eguneratze_data">Fecha de borrado</ion-select-option>
-      </ion-select>
-  
-      <ion-label>{{ 'Ordenar: ' }}</ion-label>
-      <ion-select [(ngModel)]="ordenActual.ascendente" interface="popover" (ionChange)="cambiarOrden($event)">
-        <!-- Agregar un placeholder que cambia dependiendo del valor de ascendente -->
-        <ion-select-option value="true">{{ 'Ascendente' }}</ion-select-option>
-        <ion-select-option value="false">{{ 'Descendente' }}</ion-select-option>
-        <ion-label slot="start">
-          {{ ordenActual.ascendente === true ? 'Ascendente' : 'Descendente' }}
-        </ion-label>
-      </ion-select>      
-    </ion-item>
-  </div>
-  
-  <!-- Paginación -->
-  <ion-row>
-    <ion-col>
-      <ion-button *ngFor="let page of hacerPaginacion()" (click)="cambiarPagina(page)">
-        {{ page }}
-      </ion-button>
-    </ion-col>
-  </ion-row>
+      <!-- Fila de productos -->
+      <!-- Fila de productos -->
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <table class="custom-table">
+              <thead>
+                <tr>
+                  <th>{{ 'SERVICIOS.ID' | translate }}</th>
+                  <th>{{ 'SERVICIOS.NAME' | translate }}</th>
+                  <th>{{ 'SERVICIOS.PRICE_HOME' | translate }}</th>
+                  <th>{{ 'SERVICIOS.PRICE_AWAY' | translate }}</th>
+                  <th>{{ 'SERVICIOS.CREATE_DATE' | translate }}</th>
+                  <th>{{ 'SERVICIOS.UPDATE_DATE' | translate }}</th>
+                  <th>{{ 'SERVICIOS.ACTIONS' | translate }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let servicio of serviciosFiltrados | slice: (paginaActual - 1) * ServiciosPorPagina : paginaActual * ServiciosPorPagina; let i = index">
+                  <td [ngClass]="{'custom-white-column': par(i), 'custom-tertiary-column': !par(i)}">
+                    {{ servicio.id || '-' }}
+                  </td>
+                  <td [ngClass]="{'custom-white-column': par(i+1), 'custom-tertiary-column': !par(i+1)}">
+                    {{ servicio.izena || '-' }}
+                  </td>
+                  <td [ngClass]="{'custom-white-column': par(i+2), 'custom-tertiary-column': !par(i+2)}">
+                    {{ servicio.etxeko_prezioa || '-' }}
+                  </td>
+                  <td [ngClass]="{'custom-white-column': par(i+3), 'custom-tertiary-column': !par(i+3)}">
+                    {{ servicio.kanpoko_prezioa || '-' }}
+                  </td>
+                  <td *ngIf="esHistorial"
+                    [ngClass]="{'custom-white-column': par(i+4), 'custom-tertiary-column': !par(i+4)}">
+                    {{ servicio.data.ezabatze_data | date:'yyyy-MM-dd' }}
+                  </td>
+                  <td *ngIf="!esHistorial"
+                    [ngClass]="{'custom-white-column': par(i+4), 'custom-tertiary-column': !par(i+4)}">
+                    {{ servicio.data.sortze_data | date:'yyyy-MM-dd' }}
+                  </td>
+                  <td [ngClass]="{'custom-white-column': par(i+5), 'custom-tertiary-column': !par(i+5)}"
+                    style="color: black;">
+                    {{ servicio.data.eguneratze_data ? (servicio.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}
+                  </td>
+                  <td [ngClass]="{'custom-white-column': par(i+6), 'custom-tertiary-column': !par(i+6)}">
+                    <ion-button color="primary" (click)="editarProducto(servicio)">
+                      {{ 'SERVICIOS.EDIT' | translate }}
+                    </ion-button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-content>
 
-  <ion-row *ngIf= "esProfe">
-    <ion-col size="12" class="ion-text-center">
-      <ion-button color="primary" expand="block" [routerLink]="'/crear-servicio'">Añadir Servicio
-        <ion-icon name="add-circle-outline"></ion-icon>
-      </ion-button>
-    </ion-col>
-  </ion-row>
+    <ion-content [fullscreen]="true" *ngIf="mobilaDa">
+      <!-- Buscador -->
+      <ion-searchbar search-icon="search-circle" [placeholder]="search" (ionInput)="aplicarFiltro($event)">
+      </ion-searchbar>
 
-  <!-- Fila de edición visible solo en modo edición -->
-  <ion-row *ngIf="editandoServicio">
-    <ion-col size="12">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>EDITAR</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <form #productoForm="ngForm" (ngSubmit)="confirmarEdicion()" novalidate>
-          <ion-item>
-            <ion-label position="floating">ID</ion-label>
-            <ion-input [(ngModel)]="servicioSeleccionado.id" name="id" #id="ngModel" readonly></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">NOMBRE</ion-label>
-            <ion-input [(ngModel)]="servicioSeleccionado.izena" name="izena" #izena ="ngModel" required></ion-input>
-            <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
-              El nombre es obligatorio.
-            </ion-note>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Precio de casa</ion-label>
-            <ion-input [(ngModel)]="servicioSeleccionado.etxeko_prezioa" name="etxeko_prezioa" #etxeko_prezioa="ngModel" required></ion-input>
-            <ion-note *ngIf="etxeko_prezioa.invalid && etxeko_prezioa.touched" color="danger">
-              El precio es obligatorio.
-            </ion-note>
-          </ion-item>          
-          <ion-item>
-            <ion-label position="floating">Precio de fuera</ion-label>
-            <ion-input 
-              [(ngModel)]="servicioSeleccionado.kanpoko_prezioa" 
-              name="kanpoko_prezioa" 
-              #kanpoko_prezioa="ngModel" 
-              required
-              [disabled]="!esProfe">
-            </ion-input>
-            <ion-note *ngIf="kanpoko_prezioa.invalid && kanpoko_prezioa.touched" color="danger">
-              El precio es obligatorio.
-            </ion-note>
-          </ion-item>      
-            
-            <!-- Tienes que poner informacion del historial cuando este -->
-            <ion-button color="tertiary" expand="full" (click)="confirmarEdicion()" type="submit" [disabled]="productoForm.invalid">CONFIRMAR</ion-button>
-            <ion-button expand="full" color="danger" (click)="cancelarEdicion()">DEJAR</ion-button>
-            <ion-button *ngIf="esProfe" expand="full" class="custom-red-button" (click)="eliminarProducto()">
-              Borrar producto
-            </ion-button>
-          </form>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
+      <!-- Selector de productos por página -->
+      <div class="productosPorPagina">
+        <ion-item class="producto-item">
+          <ion-label size="small">{{ 'SERVICIOS.PRODUCTS_PER_PAGE' | translate }}:</ion-label>
+          <ion-select [(ngModel)]="ServiciosPorPagina" interface="popover" size="small" (ionChange)="cambiarPagina(1)">
+            <ion-select-option [value]="5">5</ion-select-option>
+            <ion-select-option [value]="10">10</ion-select-option>
+            <ion-select-option [value]="25">25</ion-select-option>
+            <ion-select-option [value]="50">50</ion-select-option>
+            <ion-select-option [value]="100">100</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
 
+      <div class="ordenacion-filtros">
+        <ion-item>
+          <ion-label>{{ 'SERVICIOS.SORT_BY' | translate }}</ion-label>
+          <ion-select [(ngModel)]="ordenActual.columna" interface="popover"
+            (ionChange)="ordenarPor(ordenActual.columna)">
+            <ion-select-option value="id">{{ 'SERVICIOS.ID' | translate }}</ion-select-option>
+            <ion-select-option value="izena">{{ 'SERVICIOS.NAME' | translate }}</ion-select-option>
+            <ion-select-option value="etxeko_prezioa">{{ 'SERVICIOS.PRICE_HOME' | translate }}</ion-select-option>
+            <ion-select-option value="kanpoko_prezioa">{{ 'SERVICIOS.PRICE_AWAY' | translate }}</ion-select-option>
+            <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">{{ 'SERVICIOS.UPDATE_DATE' | translate
+              }}</ion-select-option>
+            <ion-select-option *ngIf="esHistorial" value="eguneratze_data">{{ 'SERVICIOS.DELETE_DATE' | translate
+              }}</ion-select-option>
+          </ion-select>
 
-  <!-- Fila de productos -->
-  <ion-row justify-content-center *ngFor="let servicio of serviciosFiltrados | slice: (paginaActual - 1) * ServiciosPorPagina : paginaActual * ServiciosPorPagina">
-    <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-      <ion-card *ngIf="servicioSeleccionado.id !== servicio.id" (click)="editarProducto(servicio)">
-        <ion-card-header>
-          <ion-card-title>{{ servicio.izena || '-' }}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <p><strong>ID:</strong> {{ servicio.id || '-' }}</p>
-          <p><strong>{{name}}:</strong> {{ servicio.izena || '-' }}</p>
-          <p><strong>Precio de casa:</strong> {{ servicio.etxeko_prezioa || '-' }}</p> 
-          <p><strong>Precio de fuera:</strong> {{ servicio.kanpoko_prezioa || '-' }}</p> 
-          <p><strong>{{cd}}:</strong> {{ servicio.data.sortze_data | date:'yyyy-MM-dd' }}</p>
-         <p *ngIf="!esHistorial"><strong>{{ud}}:</strong> {{ servicio.data.eguneratze_data ? (servicio.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>
-         <p *ngIf="esHistorial"><strong>{{ud}}:</strong> {{ servicio.data.ezabatze_data ? (servicio.data.ezabatze_data | date:'yyyy-MM-dd') : '-' }}</p>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
+          <ion-label>{{ 'SERVICIOS.ORDER' | translate }}</ion-label>
+          <ion-select [(ngModel)]="ordenActual.ascendente" interface="popover" (ionChange)="cambiarOrden($event)">
+            <ion-select-option value="true">{{ 'SERVICIOS.ASCENDING' | translate }}</ion-select-option>
+            <ion-select-option value="false">{{ 'SERVICIOS.DESCENDING' | translate }}</ion-select-option>
+            <ion-label slot="start">
+              {{ ordenActual.ascendente === true ? ('SERVICIOS.ASCENDING' | translate) : ('SERVICIOS.DESCENDING' |
+              translate) }}
+            </ion-label>
+          </ion-select>
+        </ion-item>
+      </div>
 
-</ion-content>
+      <!-- Paginación -->
+      <ion-row>
+        <ion-col>
+          <ion-button *ngFor="let page of hacerPaginacion()" (click)="cambiarPagina(page)">
+            {{ page }}
+          </ion-button>
+        </ion-col>
+      </ion-row>
 
-</ion-app>
+      <ion-row *ngIf="esProfe">
+        <ion-col size="12" class="ion-text-center">
+          <ion-button color="primary" expand="block" [routerLink]="'/crear-servicio'">
+            {{ 'SERVICIOS.ADD_SERVICE' | translate }}
+            <ion-icon name="add-circle-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+
+      <!-- Fila de edición visible solo en modo edición -->
+      <ion-row *ngIf="editandoServicio">
+        <ion-col size="12">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>{{ 'SERVICIOS.EDIT' | translate }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <form #productoForm="ngForm" (ngSubmit)="confirmarEdicion()" novalidate>
+                <ion-item>
+                  <ion-label position="floating">ID</ion-label>
+                  <ion-input [(ngModel)]="servicioSeleccionado.id" name="id" #id="ngModel" readonly></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">{{ 'SERVICIOS.NAME' | translate }}</ion-label>
+                  <ion-input [(ngModel)]="servicioSeleccionado.izena" name="izena" #izena="ngModel"
+                    required></ion-input>
+                  <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
+                    {{ 'SERVICIOS.NAME_REQUIRED' | translate }}
+                  </ion-note>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">{{ 'SERVICIOS.PRICE_HOME' | translate }}</ion-label>
+                  <ion-input [(ngModel)]="servicioSeleccionado.etxeko_prezioa" name="etxeko_prezioa"
+                    #etxeko_prezioa="ngModel" required></ion-input>
+                  <ion-note *ngIf="etxeko_prezioa.invalid && etxeko_prezioa.touched" color="danger">
+                    {{ 'SERVICIOS.PRICE_REQUIRED' | translate }}
+                  </ion-note>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">{{ 'SERVICIOS.PRICE_AWAY' | translate }}</ion-label>
+                  <ion-input [(ngModel)]="servicioSeleccionado.kanpoko_prezioa" name="kanpoko_prezioa"
+                    #kanpoko_prezioa="ngModel" required [disabled]="!esProfe">
+                  </ion-input>
+                  <ion-note *ngIf="kanpoko_prezioa.invalid && kanpoko_prezioa.touched" color="danger">
+                    {{ 'SERVICIOS.PRICE_REQUIRED' | translate }}
+                  </ion-note>
+                </ion-item>
+
+                <!-- Tienes que poner informacion del historial cuando este -->
+                <ion-button color="tertiary" expand="full" (click)="confirmarEdicion()" type="submit"
+                  [disabled]="productoForm.invalid">{{ 'SERVICIOS.CONFIRM' | translate }}</ion-button>
+                <ion-button expand="full" color="danger" (click)="cancelarEdicion()"> {{ 'SERVICIOS.CANCEL' | translate
+                  }}</ion-button>
+                <ion-button *ngIf="esProfe" expand="full" class="custom-red-button" (click)="eliminarProducto()">
+                  {{ 'SERVICIOS.DELETE' | translate }}
+                </ion-button>
+              </form>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <!-- Fila de productos -->
+      <ion-row justify-content-center
+        *ngFor="let servicio of serviciosFiltrados | slice: (paginaActual - 1) * ServiciosPorPagina : paginaActual * ServiciosPorPagina">
+        <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
+          <ion-card *ngIf="servicioSeleccionado.id !== servicio.id" (click)="editarProducto(servicio)">
+            <ion-card-header>
+              <ion-card-title>{{ servicio.izena || '-' }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p><strong>{{ 'SERVICIOS.ID' | translate }}:</strong> {{ servicio.id || '-' }}</p>
+              <p><strong>{{ 'SERVICIOS.NAME' | translate }}:</strong> {{ servicio.izena || '-' }}</p>
+              <p><strong>{{ 'SERVICIOS.PRICE_HOME' | translate }}:</strong> {{ servicio.etxeko_prezioa || '-' }}</p>
+              <p><strong>{{ 'SERVICIOS.PRICE_AWAY' | translate }}:</strong> {{ servicio.kanpoko_prezioa || '-' }}</p>
+              <p><strong>{{ cd }}:</strong> {{ servicio.data.sortze_data | date:'yyyy-MM-dd' }}</p>
+              <p *ngIf="!esHistorial"><strong>{{ ud }}:</strong> {{ servicio.data.eguneratze_data ?
+                (servicio.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>
+              <p *ngIf="esHistorial"><strong>{{ ud }}:</strong> {{ servicio.data.ezabatze_data ?
+                (servicio.data.ezabatze_data | date:'yyyy-MM-dd') : '-' }}</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+    </ion-content>
+
+  </ion-app>

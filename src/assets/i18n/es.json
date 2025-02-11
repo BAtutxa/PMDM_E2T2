@@ -180,9 +180,33 @@
     "NAME": "NOMBRE",
     "SURNAME": "APELLIDO",
     "TELEFONO": "TELEFONO",
-    "PIEL_SENSIBLE":"PIEL SENSIBLE",
-    "GUARDAR":"GUARDAR",
-    "SI":"SI",
-    "NO":"NO"
+    "PIEL_SENSIBLE": "PIEL SENSIBLE",
+    "GUARDAR": "GUARDAR",
+    "SI": "SI",
+    "NO": "NO"
+  },
+  "SERVICIOS": {
+    "TITLE":"SERVICIOS",
+    "SEARCH": "Buscar",
+    "PRODUCTS_PER_PAGE": "Productos por página",
+    "SORT_BY": "Ordenar por",
+    "ORDER": "Orden",
+    "ID": "ID",
+    "NAME": "Nombre",
+    "PRICE_HOME": "Precio en casa",
+    "PRICE_AWAY": "Precio fuera",
+    "CREATE_DATE": "Fecha de creación",
+    "UPDATE_DATE": "Fecha de actualización",
+    "DELETE_DATE": "Fecha de eliminación",
+    "ACTIONS": "Acciones",
+    "CONFIRM": "Confirmar",
+    "CANCEL": "Cancelar",
+    "ADD_SERVICE": "Añadir servicio",
+    "EDIT": "Editar",
+    "DELETE": "Eliminar",
+    "NAME_REQUIRED": "El nombre es obligatorio",
+    "PRICE_REQUIRED": "El precio es obligatorio",
+    "ASCENDING": "Ascendente",
+    "DESCENDING": "Descendente"
   }
 }

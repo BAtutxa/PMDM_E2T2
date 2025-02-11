@@ -169,9 +169,33 @@
     "NAME": "IZENA",
     "SURNAME": "ABIZENA",
     "TELEFONO": "TELEFONOA",
-    "PIEL_SENSIBLE":"AZAL SENTIKORRA",
-    "GUARDAR":"GORDE",
-    "SI":"BAI",
-    "NO":"EZ"
+    "PIEL_SENSIBLE": "AZAL SENTIKORRA",
+    "GUARDAR": "GORDE",
+    "SI": "BAI",
+    "NO": "EZ"
+  },
+  "SERVICIOS": {
+    "TITLE":"ZERBITZUAK",
+    "SEARCH": "Bilatu",
+    "PRODUCTS_PER_PAGE": "Produktuak orrialde bakoitzean",
+    "SORT_BY": "Ordenatu honen arabera",
+    "ORDER": "Ordena",
+    "ID": "ID",
+    "NAME": "Izena",
+    "PRICE_HOME": "Prezioa etxean",
+    "PRICE_AWAY": "Prezioa kanpoan",
+    "CREATE_DATE": "Sortze-data",
+    "UPDATE_DATE": "Eguneratze-data",
+    "DELETE_DATE": "Ezabatze-data",
+    "ACTIONS": "Ekintzak",
+    "CONFIRM": "Berretsi",
+    "CANCEL": "Ezeztatu",
+    "ADD_SERVICE": "Gehitu zerbitzua",
+    "EDIT": "Editatu",
+    "DELETE": "Ezabatu",
+    "NAME_REQUIRED": "Izena beharrezkoa da",
+    "PRICE_REQUIRED": "Prezioa beharrezkoa da",
+    "ASCENDING": "Igoera",
+    "DESCENDING": "Jaitsiera"
   }
 }
