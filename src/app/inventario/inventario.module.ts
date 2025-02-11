@@ -8,6 +8,7 @@ import { InventarioPageRoutingModule } from './inventario-routing.module';
 
 import { InventarioPage } from './inventario.page';
 import { NireKonponenteakModule } from "../nire-konponenteak/nire-konponenteak.module";
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { NireKonponenteakModule } from "../nire-konponenteak/nire-konponenteak.m
     FormsModule,
     IonicModule,
     InventarioPageRoutingModule,
-    NireKonponenteakModule
+    NireKonponenteakModule,
+    TranslateModule
 ],
   declarations: [InventarioPage]
 })

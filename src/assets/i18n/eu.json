@@ -207,5 +207,9 @@
     "NOMBRE_REQUIRED":"Izena derrigorrezkoa da. ",
     "PRECIO_CASA_OBLIGATORIO":"Etxeko prezioa derrigorrezkoa da. ",
     "PRECIO_FUERA_OBLIGATORIO":"Kanpoko mprezioa derrigorrezkoa da. "
+  },
+  "INVENTRAIO":{
+    "PROD_MUGIMENDUAK":"Produktu mugimenduak",
+    "MATERIAL_MAILEGU":"Material maileguak"
   }
 }

@@ -218,5 +218,9 @@
     "NOMBRE_REQUIRED":"El nombre es obligatorio. ",
     "PRECIO_CASA_OBLIGATORIO":"El precio de casa es obligatorio. ",
     "PRECIO_FUERA_OBLIGATORIO":"El precio de fuera es obligatorio"
+  },
+  "INVENTARIO":{
+    "PROD_MUGIMENDUAK":"Movimiento de productos",
+    "MATERIAL_MAILEGU":"Prestamo de material"
   }
 }
