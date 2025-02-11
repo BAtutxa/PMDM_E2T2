@@ -12,7 +12,7 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button> <!-- Botón de menú -->
         </ion-buttons>
-        <ion-title><strong>Administración</strong></ion-title>
+        <ion-title><strong>{{ 'ADMINISTRACION.TITULO' | translate }}</strong></ion-title>
       </ion-toolbar>
     </ion-header>
 
@@ -21,26 +21,26 @@
       <ion-row class="buttons-row">
         <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
           <ion-button shape="" [routerLink]="'/categorias'" class="custom-button">
-            <img src="assets/Images/inventario.webp" alt="Kategoriak" class="button-icon" />
-            <span>Categorias</span>
+            <img src="assets/Images/inventario.webp" alt="{{ 'ADMINISTRACION.CATEGORIAS' | translate }}" class="button-icon" />
+            <span>{{ 'ADMINISTRACION.CATEGORIAS' | translate }}</span>
           </ion-button>
         </ion-col>
         <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
           <ion-button shape="" [routerLink]="'/grupos'" class="custom-button">
-            <img src="assets/Images/grupo.jpg" alt="Taldeak" class="button-icon" />
-            <span>Grupos</span>
+            <img src="assets/Images/grupo.jpg" alt="{{ 'ADMINISTRACION.GRUPOS' | translate }}" class="button-icon" />
+            <span>{{ 'ADMINISTRACION.GRUPOS' | translate }}</span>
           </ion-button>
         </ion-col>
         <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
           <ion-button shape="" [routerLink]="'/informes'" class="custom-button">
-            <img src="assets/Images/informe.png" alt="Txostenak" class="button-icon" />
-            <span>Informes</span>
+            <img src="assets/Images/informe.png" alt="{{ 'ADMINISTRACION.INFORMES' | translate }}" class="button-icon" />
+            <span>{{ 'ADMINISTRACION.INFORMES' | translate }}</span>
           </ion-button>
         </ion-col>
         <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
           <ion-button shape="" [routerLink]="'/historiala'" class="custom-button">
-            <img src="assets/Images/borrar.png" alt="Ezabatze" class="button-icon" />
-            <span>Hiostorial de borrado</span>
+            <img src="assets/Images/borrar.png" alt="{{ 'ADMINISTRACION.HISTORIAL_BORRADO' | translate }}" class="button-icon" />
+            <span>{{ 'ADMINISTRACION.HISTORIAL_BORRADO' | translate }}</span>
           </ion-button>
         </ion-col>
       </ion-row>

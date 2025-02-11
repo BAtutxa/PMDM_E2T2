@@ -327,5 +327,12 @@
     "INTRODUCE_ETIKETA": "Sartu etiketa bat",
     "ETIKETA_OBLIGATORIA": "Etiketa derrigorrezkoa da",
     "GUARDAR": "Gorde"
+  },
+  "ADMINISTRACION": {
+    "TITULO": "Kudeaketa",
+    "CATEGORIAS": "Kategoriak",
+    "GRUPOS": "Taldeak",
+    "INFORMES": "Txostenak",
+    "HISTORIAL_BORRADO": "Ezabatzeen Historia"
   }
 }

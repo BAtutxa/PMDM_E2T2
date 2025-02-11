@@ -8,6 +8,7 @@ import { AdministracionPageRoutingModule } from './administracion-routing.module
 
 import { AdministracionPage } from './administracion.page';
 import { NireKonponenteakModule } from '../nire-konponenteak/nire-konponenteak.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { NireKonponenteakModule } from '../nire-konponenteak/nire-konponenteak.m
     FormsModule,
     IonicModule,
     AdministracionPageRoutingModule,
-    NireKonponenteakModule
+    NireKonponenteakModule,
+    TranslateModule
   ],
   declarations: [AdministracionPage]
 })

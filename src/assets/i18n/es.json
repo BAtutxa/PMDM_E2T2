@@ -324,5 +324,13 @@
     "INTRODUCE_ETIKETA": "Introduce una etiqueta",
     "ETIKETA_OBLIGATORIA": "La etiqueta es obligatoria",
     "GUARDAR": "Guardar"
+  },
+
+  "ADMINISTRACION": {
+    "TITULO": "Administración",
+    "CATEGORIAS": "Categorías",
+    "GRUPOS": "Grupos",
+    "INFORMES": "Informes",
+    "HISTORIAL_BORRADO": "Historial de Borrado"
   }
 }
