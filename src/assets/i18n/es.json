@@ -134,6 +134,7 @@
     "PRINT_TICKET": "Imprimir Ticket"
   },
   "CLIENTES": {
+    "BORRAR": "BORRAR",
     "TITLE": "Clientes",
     "CLIENTES": "Clientes",
     "ID": "ID",
@@ -172,5 +173,14 @@
   },
   "ERRORS": {
     "TELEFONO_MAXIMO": "El teléfono debe contener un máximo de 9 números."
+  },
+  "CREAR_CITA": {
+    "NAME": "NOMBRE",
+    "SURNAME": "APELLIDO",
+    "TELEFONO": "TELEFONO",
+    "PIEL_SENSIBLE":"PIEL SENSIBLE",
+    "GUARDAR":"GUARDAR",
+    "SI":"SI",
+    "NO":"NO"
   }
 }

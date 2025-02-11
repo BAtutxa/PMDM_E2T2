@@ -123,16 +123,8 @@
     "DELETE": "Ezabatu",
     "PRINT_TICKET": "Ticket-a Inprimatu"
   },
-    "CREAR_CITA": {
-      "NAME": "Izena",
-      "SURNAME": "Abizena",
-      "TELEFONO": "Telefonoa",
-      "PIEL_SENSIBLE": "Azal sentikorra",
-      "SI": "Bai",
-      "NO": "Ez",
-      "GUARDAR": "Gorde"
-  },
   "CLIENTES": {
+    "BORRAR": "EZABATU",
     "TITLE": "Bezeroak",
     "CLIENTES": "Bezeroak",
     "ID": "ID",
@@ -171,5 +163,14 @@
   },
   "ERRORS": {
     "TELEFONO_MAXIMO": "Telefonoak gehienez 9 zenbaki izan behar ditu."
+  },
+  "CREAR_CITA": {
+    "NAME": "IZENA",
+    "SURNAME": "ABIZENA",
+    "TELEFONO": "TELEFONOA",
+    "PIEL_SENSIBLE":"AZAL SENTIKORRA",
+    "GUARDAR":"GORDE",
+    "SI":"BAI",
+    "NO":"EZ"
   }
 }
