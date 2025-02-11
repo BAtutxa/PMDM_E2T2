@@ -8,7 +8,7 @@ import { MaterialesPageRoutingModule } from './materiales-routing.module';
 
 import { MaterialesPage } from './materiales.page';
 import { NireKonponenteakModule } from '../nire-konponenteak/nire-konponenteak.module';
-
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -16,7 +16,8 @@ import { NireKonponenteakModule } from '../nire-konponenteak/nire-konponenteak.m
     FormsModule,
     IonicModule,
     MaterialesPageRoutingModule,
-    NireKonponenteakModule
+    NireKonponenteakModule,
+    TranslateModule
     
   ],
   declarations: [MaterialesPage]

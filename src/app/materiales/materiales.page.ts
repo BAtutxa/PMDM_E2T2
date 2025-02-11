@@ -59,7 +59,7 @@ export class MaterialesPage implements OnInit {
     this.cargarMateriales();
     this.translateLabels();
     this.translateService.setDefaultLang('es');
-    this.translateService.use('es');
+    this.translateService.use('eu');
   }
 
   VerSiEsProfe(){
