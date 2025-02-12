@@ -247,8 +247,8 @@
     "UPDATED_DATE": "Eguneratze-data",
     "STOCK_ALERT": "Stock alerta",
     "ACTIVITIES": "Ekintzak",
-    "AÑADIR_PRODUCTO":"PRODUKTUA GEHITU",
-    "ORDENAR":"Ordenatu"
+    "AÑADIR_PRODUCTO": "PRODUKTUA GEHITU",
+    "ORDENAR": "Ordenatu"
   },
   "CREAR_PRODUCTO": {
     "TITLE": "Produktu sortu",
@@ -291,7 +291,7 @@
     "FECHA_BORRADO": "Ezabatze Data",
     "CREATION_DATE": "Sortze Data",
     "UPDATE_DATE": "Eguneratze Data",
-    "ANADIR_MATERIAL":"Materiala gehitu"
+    "ANADIR_MATERIAL": "Materiala gehitu"
   },
   "MATERIAL_MAILEGUAK": {
     "TITLE": "Material Maileguak",
@@ -367,41 +367,47 @@
     "INTRODUCE_NOMBRE": "Sartu izenaren balioa",
     "GUARDAR": "Gorde"
   },
-  
-    "EQUIPOS": {
-      "TITULO": "Taldeak",
-      "ID": "ID",
-      "EDITAR": "Editatu",
-      "BORRAR": "Ezabatu",
-      "EDITAR_TRABAJADOR": "Langilea editatu",
-      "NOMBRE": "Izena",
-      "INTRODUCE_NOMBRE": "Sartu izena",
-      "ERROR_NOMBRE": "Langileak izen bat izan behar du.",
-      "APELLIDO": "Abizenak",
-      "INTRODUCE_APELLIDO": "Sartu abizena",
-      "ERROR_APELLIDO": "Langileak behintzat abizena izan behar du.",
-      "CANCELAR": "Utzi",
-      "GUARDAR": "Gorde"
+
+  "EQUIPOS": {
+    "TITULO": "Taldeak",
+    "ID": "ID",
+    "EDITAR": "Editatu",
+    "BORRAR": "Ezabatu",
+    "EDITAR_TRABAJADOR": "Langilea editatu",
+    "NOMBRE": "Izena",
+    "INTRODUCE_NOMBRE": "Sartu izena",
+    "ERROR_NOMBRE": "Langileak izen bat izan behar du.",
+    "APELLIDO": "Abizenak",
+    "INTRODUCE_APELLIDO": "Sartu abizena",
+    "ERROR_APELLIDO": "Langileak behintzat abizena izan behar du.",
+    "CANCELAR": "Utzi",
+    "GUARDAR": "Gorde"
   },
-    "EDITAR_EQUIPO": {
-      "TITULO": "Taldea editatu",
-      "NOMBRE": "Taldearen izena",
-      "INTRODUCE_NOMBRE": "Sartu taldearen izena",
-      "ERROR_NOMBRE": "Taldeak izen bat izan behar du.",
-      "TRABAJADORES": "Langileak",
-      "SELECCIONAR_TRABAJADORES": "Hautatu langileak",
-      "GUARDAR": "Taldea gorde"
+  "EDITAR_EQUIPO": {
+    "TITULO": "Taldea editatu",
+    "NOMBRE": "Taldearen izena",
+    "INTRODUCE_NOMBRE": "Sartu taldearen izena",
+    "ERROR_NOMBRE": "Taldeak izen bat izan behar du.",
+    "TRABAJADORES": "Langileak",
+    "SELECCIONAR_TRABAJADORES": "Hautatu langileak",
+    "GUARDAR": "Taldea gorde"
   },
-    "CREAR_TRABAJADOR": {
-      "TITULO": "Langilea sortu",
-      "NOMBRE": "Izena",
-      "INTRODUCE_NOMBRE": "Sartu langilearen izena",
-      "ERROR_NOMBRE": "Langileak izen bat izan behar du.",
-      "APELLIDOS": "Abizenak",
-      "INTRODUCE_APELLIDOS": "Sartu langilearen abizenak",
-      "ERROR_APELLIDOS": "Langileak gutxienez abizen bat izan behar du.",
-      "SELECCIONAR_EQUIPO": "Hautatu taldea",
-      "GUARDAR": "Langilea gorde"
+  "CREAR_TRABAJADOR": {
+    "TITULO": "Langilea sortu",
+    "NOMBRE": "Izena",
+    "INTRODUCE_NOMBRE": "Sartu langilearen izena",
+    "ERROR_NOMBRE": "Langileak izen bat izan behar du.",
+    "APELLIDOS": "Abizenak",
+    "INTRODUCE_APELLIDOS": "Sartu langilearen abizenak",
+    "ERROR_APELLIDOS": "Langileak gutxienez abizen bat izan behar du.",
+    "SELECCIONAR_EQUIPO": "Hautatu taldea",
+    "GUARDAR": "Langilea gorde"
+  },
+  "INFORMES": {
+    "TITULO": "Txostenak",
+    "GENERAR_INFORME": "Sortu txostena",
+    "INGRESE_TEXTO": "Sartu txostenaren testua",
+    "ESCRIBIR_INFORME": "Idatzi txostena hemen...",
+    "GENERAR_PDF": "Sortu PDF"
   }
-  
 }
