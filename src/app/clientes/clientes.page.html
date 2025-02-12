@@ -272,9 +272,9 @@
           <span *ngIf="!ficha.azal_sentikorra">{{ 'CLIENTES.DESCONOCIDO' | translate }}</span>
         </ion-col>
         <ion-col>{{ ficha.telefonoa || '-' }}</ion-col>
-        <ion-col *ngIf="!esHistorial">{{ ficha.data?.sortze_data | date:'yyyy-MM-dd' }}</ion-col>
-        <ion-col *ngIf="!esHistorial">{{ ficha.data?.eguneratze_data ? (ficha.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</ion-col>
-        <ion-col *ngIf="esHistorial">{{ ficha.data?.ezabatze_data ? (ficha.data.ezabatze_data | date:'yyyy-MM-dd') : '-' }}</ion-col>
+        <ion-col *ngIf="!esHistorial">{{ ficha.data.sortze_data | date:'yyyy-MM-dd' }}</ion-col>
+        <ion-col *ngIf="!esHistorial">{{ ficha.data.eguneratze_data ? (ficha.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</ion-col>
+        <ion-col *ngIf="esHistorial">{{ ficha.data.ezabatze_data ? (ficha.data.ezabatze_data | date:'yyyy-MM-dd') : '-' }}</ion-col>
         <ion-col>
           <ion-button (click)="editarFicha(ficha)">Editar</ion-button>
           <ion-button color="danger" *ngIf="!esHistorial" (click)="eliminarFicha()">{{ 'CLIENTES.BORRAR' | translate }}</ion-button>

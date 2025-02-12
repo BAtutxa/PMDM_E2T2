@@ -154,7 +154,10 @@
     "NOMBRE_OBLIGATORIO": "Izena derrigorrezkoa da.",
     "APELLIDO_OBLIGATORIO": "Abizena derrigorrezkoa da.",
     "TELEFONO_NUEVE": "Telefonoak gehienez 9 zenbaki izan behar ditu.",
-    "EDITAR_FICHA": "Fitxa editatu"
+    "EDITAR_FICHA": "Fitxa editatu",
+    "RESTAURAR":"Berritu",
+        "ASCENDENTE": "Gorakorra",
+    "DESCENDENTE": "Beherakorra"
   },
   "BUSCADOR": {
     "PLACEHOLDER": "Bilatu"

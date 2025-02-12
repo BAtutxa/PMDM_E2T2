@@ -150,7 +150,10 @@
     "NOMBRE_OBLIGATORIO": "El nombre es obligatorio.",
     "APELLIDO_OBLIGATORIO": "El apellido es obligatorio.",
     "TELEFONO_NUEVE": "El teléfono debe contener un máximo de 9 números.",
-    "EDITAR_FICHA": "Editar ficha"
+    "EDITAR_FICHA": "Editar ficha",
+    "RESTAURAR":"Restaurar",
+    "ASCENDENTE": "Ascendente",
+    "DESCENDENTE": "Descendente"
   },
   "BUSCADOR": {
     "PLACEHOLDER": "Buscar"
