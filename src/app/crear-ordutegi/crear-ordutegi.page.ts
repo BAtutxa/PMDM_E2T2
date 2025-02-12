@@ -79,17 +79,16 @@ ordutegi: IOrdutegi = {
     }
   
     const formatFecha = (fecha: any) => fecha ? new Date(fecha).toISOString().split('T')[0] : null;
-    const today = new Date().toISOString().split('T')[0];
   
     const ordutegiToSend: IOrdutegi = {
       ...this.ordutegi,
       hasiera_data: formatFecha(hasiera_data),
       amaiera_data: formatFecha(amaiera_data),
       denbora: {
-        hasiera_ordua: { hours: denbora.hasiera_ordua.hours, minutes: denbora.hasiera_ordua.minutes },
-        amaiera_ordua: { hours: denbora.amaiera_ordua.hours, minutes: denbora.amaiera_ordua.minutes }
+      hasiera_ordua: { hours: denbora.hasiera_ordua.hours, minutes: denbora.hasiera_ordua.minutes, seconds: 0 },
+      amaiera_ordua: { hours: denbora.amaiera_ordua.hours, minutes: denbora.amaiera_ordua.minutes, seconds: 0 }
       },
-      data: { sortze_data:  new Date(), eguneratze_data:  new Date(), ezabatze_data:  new Date() }
+      data: { sortze_data: new Date(), eguneratze_data: new Date(), ezabatze_data: null }
     };
   
     console.log("Enviando al servidor:", ordutegiToSend);
@@ -103,6 +102,7 @@ ordutegi: IOrdutegi = {
       error: (error: any) => console.error('Error al crear el ordutegi:', error)
     });
   }
+  
   
   resetOrdutegi() {
     this.ordutegi = {

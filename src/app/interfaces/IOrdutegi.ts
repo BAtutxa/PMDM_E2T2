@@ -1,4 +1,4 @@
-import { Time } from '@angular/common';
+import { ITime } from "./ITime"
 import { IData } from "./IData"
 
 export  interface IOrdutegi{
@@ -8,8 +8,8 @@ export  interface IOrdutegi{
     hasiera_data: Date | null |string,
     amaiera_data : Date |null|string,
     denbora:{
-        hasiera_ordua : Time |null ,
-        amaiera_ordua : Time | null,
+        hasiera_ordua : ITime |null ,
+        amaiera_ordua : ITime | null,
     }
     data: IData
 }
