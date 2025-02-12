@@ -8,6 +8,7 @@ import { TicketsPageRoutingModule } from './tickets-routing.module';
 
 import { TicketsPage } from './tickets.page';
 import { NireKonponenteakModule } from "../nire-konponenteak/nire-konponenteak.module";
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { NireKonponenteakModule } from "../nire-konponenteak/nire-konponenteak.m
     FormsModule,
     IonicModule,
     TicketsPageRoutingModule,
-    NireKonponenteakModule
+    NireKonponenteakModule,
+    TranslateModule
 ],
   declarations: [TicketsPage]
 })

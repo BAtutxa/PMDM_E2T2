@@ -151,7 +151,7 @@
     "APELLIDO_OBLIGATORIO": "El apellido es obligatorio.",
     "TELEFONO_NUEVE": "El teléfono debe contener un máximo de 9 números.",
     "EDITAR_FICHA": "Editar ficha",
-    "RESTAURAR":"Restaurar",
+    "RESTAURAR": "Restaurar",
     "ASCENDENTE": "Ascendente",
     "DESCENDENTE": "Descendente"
   },
@@ -408,5 +408,56 @@
     "INGRESE_TEXTO": "Ingrese el texto del informe",
     "ESCRIBIR_INFORME": "Escribe el informe aquí...",
     "GENERAR_PDF": "Generar PDF"
+  },
+  "TICKETS": {
+    "TITLE": "Tickets",
+    "ORDER_BY": "Ordenar por",
+    "ORDER": "Orden",
+    "ASCENDING": "Ascendente",
+    "DESCENDING": "Descendente",
+    "ID": "ID",
+    "SERVICE": "Servicio",
+    "PRICE": "Precio",
+    "CREATED_DATE": "Fecha de creación",
+    "UPDATE_DATE": "Fecha de actualización",
+    "DELETE_DATE": "Fecha de eliminación",
+    "ACTIVITIES": "Actividades",
+    "ADD_TICKET": "Añadir ticket",
+    "EDIT": "Editar",
+    "CONFIRM": "Confirmar",
+    "CANCEL": "Cancelar",
+    "DELETE_TICKET": "Eliminar ticket",
+    "CONFIRM_DELETE": "Confirmar eliminación",
+    "RESTORE_TICKET": "Restaurar ticket",
+    "SERVICE_REQUIRED": "El servicio es obligatorio",
+    "PRICE_REQUIRED": "El precio es obligatorio",
+    "SEARCH": {
+      "PLACEHOLDER": "Buscar..."
+    }
+  },
+  "SORT": {
+    "BY": "Ordenar por",
+    "ID": "ID",
+    "SERVICE": "Servicio",
+    "PRICE": "Precio",
+    "CREATION_DATE": "Fecha de creación",
+    "UPDATE_DATE": "Fecha de actualización",
+    "DELETE_DATE": "Fecha de eliminación",
+    "ORDER": "Orden",
+    "ASCENDING": "Ascendente",
+    "DESCENDING": "Descendente"
+  },
+  "EDIT": {
+    "TITLE": "Editar ticket",
+    "ID": "ID",
+    "SERVICE": "Servicio",
+    "PRICE": "Precio",
+    "SERVICE_REQUIRED": "El servicio es obligatorio",
+    "PRICE_REQUIRED": "El precio es obligatorio",
+    "CONFIRM": "Confirmar",
+    "CANCEL": "Cancelar",
+    "DELETE": "Eliminar",
+    "CONFIRM_DELETE": "Confirmar eliminación",
+    "RESTORE": "Restaurar"
   }
 }

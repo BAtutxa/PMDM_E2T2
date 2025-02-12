@@ -1,294 +1,329 @@
 <ion-app>
   <app-menu-header></app-menu-header>
-  
-    <!-- Contenido principal -->
-    <ion-app class="ion-page" id="main-content">
-      <!-- Header principal -->
-      <ion-header>
-        <ion-toolbar color="primary">
-          <ion-buttons slot="start">
-            <ion-menu-button></ion-menu-button>
-          </ion-buttons>
-          <ion-title>Tickets</ion-title>
-        </ion-toolbar>
-      </ion-header>
 
-<ion-content [fullscreen]="true" *ngIf="!mobilaDa">
-  <!-- Buscador -->
-  <ion-searchbar
-    search-icon="search-circle"
-    [placeholder]="search"
-    (ionInput)="aplicarFiltro($event)">
-  </ion-searchbar>
+  <!-- Contenido principal -->
+  <ion-app class="ion-page" id="main-content">
+    <!-- Header principal -->
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>{{ 'TICKETS.TITLE' | translate }}</ion-title>
+      </ion-toolbar>
+    </ion-header>
 
-  <!-- Selector de productos por página -->
-  <div class="productosPorPagina">
-    <ion-item class="producto-item">
-      <ion-label size="small">{{title}}:</ion-label>
-      <ion-select [(ngModel)]="productosPorPagina" interface="popover" size="small" (ionChange)="cambiarPagina(1)">
-        <ion-select-option [value]="5">5</ion-select-option>
-        <ion-select-option [value]="10">10</ion-select-option>
-        <ion-select-option [value]="25">25</ion-select-option>
-        <ion-select-option [value]="50">50</ion-select-option>
-        <ion-select-option [value]="100">100</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </div>
+    <ion-content [fullscreen]="true" *ngIf="!mobilaDa">
+      <!-- Buscador -->
+      <ion-searchbar search-icon="search-circle" [placeholder]="search" (ionInput)="aplicarFiltro($event)">
+      </ion-searchbar>
 
-  <div class="ordenacion-filtros">
-    <ion-item>
-      <ion-label>{{ 'Ordenar por:' }}</ion-label>
-      <ion-select [(ngModel)]="ordenActual.columna" interface="popover" (ionChange)="ordenarPor(ordenActual.columna)">
-        <ion-select-option value="id">{{ 'ID' }}</ion-select-option>
-        <ion-select-option value="zerbitzuak.izena">Servicio</ion-select-option>
-        <ion-select-option value="prezioa">Precio</ion-select-option>
-        <ion-select-option value="sortze_data">{{ cd }}</ion-select-option>
-        <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">{{ ud }}</ion-select-option>
-        <ion-select-option  *ngIf="esHistorial" value="ezabatze_data">{{ ud }}</ion-select-option>
-      </ion-select>
-  
-      <ion-label>{{ 'Ordenar: ' }}</ion-label>
-      <ion-select [(ngModel)]="ordenActual.ascendente" interface="popover" (ionChange)="cambiarOrden($event)">
-        <!-- Agregar un placeholder que cambia dependiendo del valor de ascendente -->
-        <ion-select-option value="true">{{ 'Ascendente' }}</ion-select-option>
-        <ion-select-option value="false">{{ 'Descendente' }}</ion-select-option>
-        <ion-label slot="start">
-          {{ ordenActual.ascendente === true ? 'Ascendente' : 'Descendente' }}
-        </ion-label>
-      </ion-select>      
-    </ion-item>
-  </div>
-  
-  <!-- Paginación -->
-  <ion-row>
-    <ion-col>
-      <ion-button *ngFor="let page of hacerPaginacion()" (click)="cambiarPagina(page)">
-        {{ page }}
-      </ion-button>
-    </ion-col>
-  </ion-row>
+      <!-- Selector de productos por página -->
+      <div class="productosPorPagina">
+        <ion-item class="producto-item">
+          <ion-label size="small">{{ 'TICKETS.TITLE' | translate }}:</ion-label>
+          <ion-select [(ngModel)]="productosPorPagina" interface="popover" size="small" (ionChange)="cambiarPagina(1)">
+            <ion-select-option [value]="5">5</ion-select-option>
+            <ion-select-option [value]="10">10</ion-select-option>
+            <ion-select-option [value]="25">25</ion-select-option>
+            <ion-select-option [value]="50">50</ion-select-option>
+            <ion-select-option [value]="100">100</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
 
-  <!-- Fila de edición visible solo en modo edición -->
-  <ion-row *ngIf="editandoProducto">
-    <ion-col size="12">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>EDITAR</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <form #productoForm="ngForm" (ngSubmit)="confirmarEdicion()" novalidate>
-            <ion-item>
-              <ion-label position="floating">ID</ion-label>
-              <ion-input [(ngModel)]="productoSeleccionado.id" name="id" #id="ngModel" readonly></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">SERVICIO</ion-label>
-              <ion-select [(ngModel)]="productoSeleccionado.zerbitzuak.id" name="zerbitzu" required>
-                <ion-select-option *ngFor="let zerbitzu of servicios" [value]="zerbitzu.id">{{ zerbitzu.izena }}</ion-select-option>
-              </ion-select>
-              <ion-note *ngIf="productoSeleccionado.zerbitzuak.id === 'null' || productoSeleccionado.zerbitzuak.id === null" color="danger">
-                El servicio es obligatorio.
-              </ion-note>            
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">PRECIO</ion-label>
-              <ion-input [(ngModel)]="productoSeleccionado.prezioa" name="prezioa" #prezioa="ngModel" required></ion-input>
-              <ion-note *ngIf="prezioa.invalid && prezioa.touched" color="danger">
-                El precio es obligatoria.
-              </ion-note>
-            </ion-item>   
-         
-          <ion-button color="tertiary" expand="full" (click)="confirmarEdicion()"  type="submit" [disabled]="productoForm.invalid">CONFIRMAR</ion-button>
-          <ion-button expand="full" color="danger" (click)="cancelarEdicion()">UTZI</ion-button>
-          <ion-button *ngIf="esProfe && !esHistorial" expand="full"  class="custom-red-button" (click)="eliminarProducto()">
-            Borrar ticket
+      <div class="ordenacion-filtros">
+        <ion-item>
+          <ion-label>{{ 'TICKETS.ORDER_BY' | translate }}</ion-label>
+          <ion-select [(ngModel)]="ordenActual.columna" interface="popover"
+            (ionChange)="ordenarPor(ordenActual.columna)">
+            <ion-select-option value="id">{{ 'TICKETS.ID' | translate }}</ion-select-option>
+            <ion-select-option value="zerbitzuak.izena">{{ 'TICKETS.SERVICE' | translate }}</ion-select-option>
+            <ion-select-option value="prezioa">{{ 'TICKETS.PRICE' | translate }}</ion-select-option>
+            <ion-select-option value="sortze_data">{{ 'TICKETS.CREATED_DATE' | translate }}</ion-select-option>
+            <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">{{ 'TICKETS.UPDATE_DATE' | translate
+              }}</ion-select-option>
+            <ion-select-option *ngIf="esHistorial" value="ezabatze_data">{{ 'TICKETS.DELETE_DATE' | translate
+              }}</ion-select-option>
+          </ion-select>
+
+          <ion-label>{{ 'TICKETS.ORDER' | translate }}</ion-label>
+          <ion-select [(ngModel)]="ordenActual.ascendente" interface="popover" (ionChange)="cambiarOrden($event)">
+            <ion-select-option value="true">{{ 'TICKETS.ASCENDING' | translate }}</ion-select-option>
+            <ion-select-option value="false">{{ 'TICKETS.DESCENDING' | translate }}</ion-select-option>
+            <ion-label slot="start">
+              {{ ordenActual.ascendente === true ? ('TICKETS.ASCENDING' | translate) : ('TICKETS.DESCENDING' |
+              translate) }}
+            </ion-label>
+          </ion-select>
+        </ion-item>
+      </div>
+
+      <!-- Paginación -->
+      <ion-row>
+        <ion-col>
+          <ion-button *ngFor="let page of hacerPaginacion()" (click)="cambiarPagina(page)">
+            {{ page }}
           </ion-button>
-          <ion-button *ngIf="esHistorial" expand="full" class="custom-gray-button" type="button" (click)="confirmarBorrado()">
-            Confirmar borrado
+        </ion-col>
+      </ion-row>
+
+      <!-- Fila de edición visible solo en modo edición -->
+      <ion-row *ngIf="editandoProducto">
+        <ion-col size="12">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>{{ 'TICKETS.EDIT' | translate }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <form #productoForm="ngForm" (ngSubmit)="confirmarEdicion()" novalidate>
+                <ion-item>
+                  <ion-label position="floating">{{ 'TICKETS.ID' | translate }}</ion-label>
+                  <ion-input [(ngModel)]="productoSeleccionado.id" name="id" #id="ngModel" readonly></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">{{ 'TICKETS.SERVICE' | translate }}</ion-label>
+                  <ion-select [(ngModel)]="productoSeleccionado.zerbitzuak.id" name="zerbitzu" required>
+                    <ion-select-option *ngFor="let zerbitzu of servicios" [value]="zerbitzu.id">{{ zerbitzu.izena
+                      }}</ion-select-option>
+                  </ion-select>
+                  <ion-note
+                    *ngIf="productoSeleccionado.zerbitzuak.id === 'null' || productoSeleccionado.zerbitzuak.id === null"
+                    color="danger">
+                    {{ 'TICKETS.SERVICE_REQUIRED' | translate }}
+                  </ion-note>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">{{ 'TICKETS.PRICE' | translate }}</ion-label>
+                  <ion-input [(ngModel)]="productoSeleccionado.prezioa" name="prezioa" #prezioa="ngModel"
+                    required></ion-input>
+                  <ion-note *ngIf="prezioa.invalid && prezioa.touched" color="danger">
+                    {{ 'TICKETS.PRICE_REQUIRED' | translate }}
+                  </ion-note>
+                </ion-item>
+
+                <ion-button color="tertiary" expand="full" (click)="confirmarEdicion()" type="submit"
+                  [disabled]="productoForm.invalid">{{ 'TICKETS.CONFIRM' | translate }}</ion-button>
+                <ion-button expand="full" color="danger" (click)="cancelarEdicion()">{{ 'TICKETS.CANCEL' | translate
+                  }}</ion-button>
+                <ion-button *ngIf="esProfe && !esHistorial" expand="full" class="custom-red-button"
+                  (click)="eliminarProducto()">
+                  {{ 'TICKETS.DELETE_TICKET' | translate }}
+                </ion-button>
+                <ion-button *ngIf="esHistorial" expand="full" class="custom-gray-button" type="button"
+                  (click)="confirmarBorrado()">
+                  {{ 'TICKETS.CONFIRM_DELETE' | translate }}
+                </ion-button>
+
+                <ion-button *ngIf="esHistorial" expand="full" class="custom-purple-button" type="button"
+                  (click)="restaurarProducto()">
+                  {{ 'TICKETS.RESTORE_TICKET' | translate }}
+                </ion-button>
+
+              </form>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row *ngIf="esProfe">
+        <ion-col size="12" class="ion-text-center">
+          <ion-button *ngIf="!esHistorial" color="primary" expand="block" [routerLink]="'/gestionar-citas'">
+            {{ 'TICKETS.ADD_TICKET' | translate }}
+            <ion-icon name="add-circle-outline"></ion-icon>
           </ion-button>
-          
-          <ion-button *ngIf="esHistorial" expand="full" class="custom-purple-button" type="button" (click)="restaurarProducto()">
-            Restaurar ticket
+        </ion-col>
+      </ion-row>
+
+      <!-- Fila de productos -->
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <table class="custom-table">
+              <thead>
+                <tr>
+                  <th>{{ 'TICKETS.ID' | translate }}</th>
+                  <th>{{ 'TICKETS.SERVICE' | translate }}</th>
+                  <th>{{ 'TICKETS.PRICE' | translate }}</th>
+                  <th>{{ 'TICKETS.CREATION_DATE' | translate }}</th>
+                  <th *ngIf="!esHistorial">{{ 'TICKETS.UPDATE_DATE' | translate }}</th>
+                  <th *ngIf="esHistorial">{{ 'TICKETS.DELETED_DATE' | translate }}</th>
+                  <th>{{ 'TICKETS.ACTIVITIES' | translate }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  *ngFor="let producto of productosFiltrados | slice: (paginaActual - 1) * productosPorPagina : paginaActual * productosPorPagina">
+                  <td [ngClass]="{'custom-white-column': par(0), 'custom-tertiary-column': !par(0)}">{{ producto.id ||
+                    '-' }}</td>
+                  <td [ngClass]="{'custom-white-column': par(1), 'custom-tertiary-column': !par(1)}">{{
+                    producto.zerbitzuak.izena || '-' }}</td>
+                  <td [ngClass]="{'custom-white-column': par(2), 'custom-tertiary-column': !par(2)}">{{ producto.prezioa
+                    || '-' }}</td>
+                  <td [ngClass]="{'custom-white-column': par(4), 'custom-tertiary-column': !par(3)}">{{
+                    producto.data.sortze_data | date:'yyyy-MM-dd' }}</td>
+                  <td *ngIf="!esHistorial"
+                    [ngClass]="{'custom-white-column': par(4), 'custom-tertiary-column': !par(3)}">{{
+                    producto.data.eguneratze_data | date:'yyyy-MM-dd' }}</td>
+                  <td *ngIf="esHistorial"
+                    [ngClass]="{'custom-white-column': par(5), 'custom-tertiary-column': !par(4)}">{{
+                    producto.data.ezabatze_data | date:'yyyy-MM-dd' }}</td>
+                  <td [ngClass]="{'custom-white-column': par(6), 'custom-tertiary-column': !par(6)}">
+                    <ion-button color="primary" (click)="editarProducto(producto)">
+                      {{ 'TICKETS.EDIT' | translate }}
+                    </ion-button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </ion-content>
+
+    <ion-content [fullscreen]="true" *ngIf="mobilaDa">
+
+      <!-- Buscador -->
+      <ion-searchbar search-icon="search-circle" [placeholder]="'SEARCH.PLACEHOLDER' | translate"
+        (ionInput)="aplicarFiltro($event)">
+      </ion-searchbar>
+
+      <!-- Selector de productos por página -->
+      <div class="productosPorPagina">
+        <ion-item class="producto-item">
+          <ion-label size="small">{{ 'TICKETS.TITLE' | translate }}:</ion-label>
+          <ion-select [(ngModel)]="productosPorPagina" interface="popover" size="small" (ionChange)="cambiarPagina(1)">
+            <ion-select-option [value]="5">5</ion-select-option>
+            <ion-select-option [value]="10">10</ion-select-option>
+            <ion-select-option [value]="25">25</ion-select-option>
+            <ion-select-option [value]="50">50</ion-select-option>
+            <ion-select-option [value]="100">100</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
+
+      <div class="ordenacion-filtros">
+        <ion-item>
+          <ion-label>{{ 'SORT.BY' | translate }}</ion-label>
+          <ion-select [(ngModel)]="ordenActual.columna" interface="popover"
+            (ionChange)="ordenarPor(ordenActual.columna)">
+            <ion-select-option value="id">{{ 'SORT.ID' | translate }}</ion-select-option>
+            <ion-select-option value="zerbitzuak.izena">{{ 'SORT.SERVICE' | translate }}</ion-select-option>
+            <ion-select-option value="prezioa">{{ 'SORT.PRICE' | translate }}</ion-select-option>
+            <ion-select-option value="sortze_data">{{ 'SORT.CREATION_DATE' | translate }}</ion-select-option>
+            <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">{{ 'SORT.UPDATE_DATE' | translate
+              }}</ion-select-option>
+            <ion-select-option *ngIf="esHistorial" value="ezabatze_data">{{ 'SORT.DELETE_DATE' | translate
+              }}</ion-select-option>
+          </ion-select>
+
+          <ion-label>{{ 'SORT.ORDER' | translate }}</ion-label>
+          <ion-select [(ngModel)]="ordenActual.ascendente" interface="popover" (ionChange)="cambiarOrden($event)">
+            <ion-select-option value="true">{{ 'SORT.ASCENDING' | translate }}</ion-select-option>
+            <ion-select-option value="false">{{ 'SORT.DESCENDING' | translate }}</ion-select-option>
+            <ion-label slot="start">
+              {{ ordenActual.ascendente === true ? ('SORT.ASCENDING' | translate) : ('SORT.DESCENDING' | translate) }}
+            </ion-label>
+          </ion-select>
+        </ion-item>
+      </div>
+
+      <!-- Paginación -->
+      <ion-row>
+        <ion-col>
+          <ion-button *ngFor="let page of hacerPaginacion()" (click)="cambiarPagina(page)">
+            {{ page }}
           </ion-button>
+        </ion-col>
+      </ion-row>
 
-        </form>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
-
-  <ion-row *ngIf= "esProfe">
-    <ion-col size="12" class="ion-text-center">
-      <ion-button *ngIf="!esHistorial" color="primary" expand="block" [routerLink]="'/gestionar-citas'">Añadir Ticket
-        <ion-icon name="add-circle-outline"></ion-icon>
-      </ion-button>
-    </ion-col>
-  </ion-row>
-<!-- Fila de productos -->
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12">
-        <table class="custom-table">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>SERVICIO</th>
-              <th>PRECIO</th>
-              <th>FECHA DE CREACIÓN</th>
-              <th *ngIf="!esHistorial">FECHA DE ACTUALIZACIÓN</th>
-              <th *ngIf="esHistorial">FECHA DE BORRADO</th>
-              <th>ACTIVIDADES</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let producto of productosFiltrados | slice: (paginaActual - 1) * productosPorPagina : paginaActual * productosPorPagina">
-              <td [ngClass]="{'custom-white-column': par(0), 'custom-tertiary-column': !par(0)}">{{ producto.id || '-' }}</td>
-              <td [ngClass]="{'custom-white-column': par(1), 'custom-tertiary-column': !par(1)}">{{ producto.zerbitzuak.izena || '-' }}</td>
-              <td [ngClass]="{'custom-white-column': par(2), 'custom-tertiary-column': !par(2)}">{{ producto.prezioa || '-' }}</td>
-              <td [ngClass]="{'custom-white-column': par(4), 'custom-tertiary-column': !par(3)}">{{ producto.data.sortze_data | date:'yyyy-MM-dd' }}</td>
-              <td *ngIf="!esHistorial" [ngClass]="{'custom-white-column': par(4), 'custom-tertiary-column': !par(3)}">{{ producto.data.eguneratze_data | date:'yyyy-MM-dd' }}</td>
-              <td *ngIf="esHistorial" [ngClass]="{'custom-white-column': par(5), 'custom-tertiary-column': !par(4)}">{{ producto.data.ezabatze_data | date:'yyyy-MM-dd' }}</td>
-              <td [ngClass]="{'custom-white-column': par(6), 'custom-tertiary-column': !par(6)}">
-                <ion-button color="primary" (click)="editarProducto(producto)">EDITAR</ion-button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-</ion-content>
-
-<ion-content [fullscreen]="true" *ngIf="mobilaDa">
-  <!-- Buscador -->
-  <ion-searchbar
-    search-icon="search-circle"
-    [placeholder]="search"
-    (ionInput)="aplicarFiltro($event)">
-  </ion-searchbar>
-
-  <!-- Selector de productos por página -->
-  <div class="productosPorPagina">
-    <ion-item class="producto-item">
-      <ion-label size="small">{{title}}:</ion-label>
-      <ion-select [(ngModel)]="productosPorPagina" interface="popover" size="small" (ionChange)="cambiarPagina(1)">
-        <ion-select-option [value]="5">5</ion-select-option>
-        <ion-select-option [value]="10">10</ion-select-option>
-        <ion-select-option [value]="25">25</ion-select-option>
-        <ion-select-option [value]="50">50</ion-select-option>
-        <ion-select-option [value]="100">100</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </div>
-
-  <div class="ordenacion-filtros">
-    <ion-item>
-      <ion-label>{{ 'Ordenar por:' }}</ion-label>
-      <ion-select [(ngModel)]="ordenActual.columna" interface="popover" (ionChange)="ordenarPor(ordenActual.columna)">
-        <ion-select-option value="id">{{ 'ID' }}</ion-select-option>
-        <ion-select-option value="zerbitzuak.izena">Servicio</ion-select-option>
-        <ion-select-option value="prezioa">Precio</ion-select-option>
-        <ion-select-option value="sortze_data">{{ cd }}</ion-select-option>
-        <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">{{ ud }}</ion-select-option>
-        <ion-select-option  *ngIf="esHistorial" value="ezabatze_data">{{ ud }}</ion-select-option>
-      </ion-select>
-  
-      <ion-label>{{ 'Ordenar: ' }}</ion-label>
-      <ion-select [(ngModel)]="ordenActual.ascendente" interface="popover" (ionChange)="cambiarOrden($event)">
-        <!-- Agregar un placeholder que cambia dependiendo del valor de ascendente -->
-        <ion-select-option value="true">{{ 'Ascendente' }}</ion-select-option>
-        <ion-select-option value="false">{{ 'Descendente' }}</ion-select-option>
-        <ion-label slot="start">
-          {{ ordenActual.ascendente === true ? 'Ascendente' : 'Descendente' }}
-        </ion-label>
-      </ion-select>      
-    </ion-item>
-  </div>
-  
-  <!-- Paginación -->
-  <ion-row>
-    <ion-col>
-      <ion-button *ngFor="let page of hacerPaginacion()" (click)="cambiarPagina(page)">
-        {{ page }}
-      </ion-button>
-    </ion-col>
-  </ion-row>
-
-  <ion-row *ngIf= "esProfe">
-    <ion-col size="12" class="ion-text-center">
-      <ion-button  *ngIf="!esHistorial"  color="primary" expand="block" [routerLink]="'/gestionar-citas'">Añadir Ticket
-        <ion-icon name="add-circle-outline"></ion-icon>
-      </ion-button>
-    </ion-col>
-  </ion-row>
-
-  <!-- Fila de edición visible solo en modo edición -->
-  <ion-row *ngIf="editandoProducto">
-    <ion-col size="12">
-      <ion-card>
-        <ion-card-header>
-          <ion-card-title>EDITAR</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <form #productoForm="ngForm" (ngSubmit)="confirmarEdicion()" novalidate>
-            <ion-item>
-              <ion-label position="floating">ID</ion-label>
-              <ion-input [(ngModel)]="productoSeleccionado.id" name="id" #id="ngModel" readonly></ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">SERVICIO</ion-label>
-              <ion-select [(ngModel)]="productoSeleccionado.zerbitzuak.id" name="zerbitzu" required>
-                <ion-select-option *ngFor="let zerbitzu of servicios" [value]="zerbitzu.id">{{ zerbitzu.izena }}</ion-select-option>
-              </ion-select>
-              <ion-note *ngIf="productoSeleccionado.zerbitzuak.id === 'null' || productoSeleccionado.zerbitzuak.id === null" color="danger">
-                El servicio es obligatorio.
-              </ion-note>            
-            </ion-item>
-            <ion-item>
-              <ion-label position="floating">PRECIO</ion-label>
-              <ion-input [(ngModel)]="productoSeleccionado.prezioa" name="prezioa" #prezioa="ngModel" required></ion-input>
-              <ion-note *ngIf="prezioa.invalid && prezioa.touched" color="danger">
-                El precio es obligatoria.
-              </ion-note>
-            </ion-item>   
-         
-          <ion-button color="tertiary" expand="full" (click)="confirmarEdicion()"  type="submit" [disabled]="productoForm.invalid">CONFIRMAR</ion-button>
-          <ion-button expand="full" color="danger" (click)="cancelarEdicion()">UTZI</ion-button>
-          <ion-button *ngIf="esProfe && !esHistorial" expand="full"  class="custom-red-button" (click)="eliminarProducto()">
-            Borrar ticket
+      <ion-row *ngIf="esProfe">
+        <ion-col size="12" class="ion-text-center">
+          <ion-button *ngIf="!esHistorial" color="primary" expand="block" [routerLink]="'/gestionar-citas'">{{
+            'TICKETS.ADD' | translate }}
+            <ion-icon name="add-circle-outline"></ion-icon>
           </ion-button>
-          <ion-button *ngIf="esHistorial" expand="full" class="custom-gray-button" type="button" (click)="confirmarBorrado()">
-            Confirmar borrado
-          </ion-button>
-          
-          <ion-button *ngIf="esHistorial" expand="full" class="custom-purple-button" type="button" (click)="restaurarProducto()">
-            Restaurar ticket
-          </ion-button>
+        </ion-col>
+      </ion-row>
 
-        </form>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
+      <!-- Fila de edición visible solo en modo edición -->
+      <ion-row *ngIf="editandoProducto">
+        <ion-col size="12">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>{{ 'EDIT.TITLE' | translate }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <form #productoForm="ngForm" (ngSubmit)="confirmarEdicion()" novalidate>
+                <ion-item>
+                  <ion-label position="floating">{{ 'EDIT.ID' | translate }}</ion-label>
+                  <ion-input [(ngModel)]="productoSeleccionado.id" name="id" #id="ngModel" readonly></ion-input>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">{{ 'EDIT.SERVICE' | translate }}</ion-label>
+                  <ion-select [(ngModel)]="productoSeleccionado.zerbitzuak.id" name="zerbitzu" required>
+                    <ion-select-option *ngFor="let zerbitzu of servicios" [value]="zerbitzu.id">{{ zerbitzu.izena
+                      }}</ion-select-option>
+                  </ion-select>
+                  <ion-note
+                    *ngIf="productoSeleccionado.zerbitzuak.id === 'null' || productoSeleccionado.zerbitzuak.id === null"
+                    color="danger">
+                    {{ 'EDIT.SERVICE_REQUIRED' | translate }}
+                  </ion-note>
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">{{ 'EDIT.PRICE' | translate }}</ion-label>
+                  <ion-input [(ngModel)]="productoSeleccionado.prezioa" name="prezioa" #prezioa="ngModel"
+                    required></ion-input>
+                  <ion-note *ngIf="prezioa.invalid && prezioa.touched" color="danger">
+                    {{ 'EDIT.PRICE_REQUIRED' | translate }}
+                  </ion-note>
+                </ion-item>
 
+                <ion-button color="tertiary" expand="full" (click)="confirmarEdicion()" type="submit"
+                  [disabled]="productoForm.invalid">{{ 'EDIT.CONFIRM' | translate }}</ion-button>
+                <ion-button expand="full" color="danger" (click)="cancelarEdicion()">{{ 'EDIT.CANCEL' | translate
+                  }}</ion-button>
+                <ion-button *ngIf="esProfe && !esHistorial" expand="full" class="custom-red-button"
+                  (click)="eliminarProducto()">
+                  {{ 'EDIT.DELETE' | translate }}
+                </ion-button>
+                <ion-button *ngIf="esHistorial" expand="full" class="custom-gray-button" type="button"
+                  (click)="confirmarBorrado()">
+                  {{ 'EDIT.CONFIRM_DELETE' | translate }}
+                </ion-button>
 
-  <!-- Fila de productos -->
-  <ion-row justify-content-center *ngFor="let producto of productosFiltrados | slice: (paginaActual - 1) * productosPorPagina : paginaActual * productosPorPagina">
-    <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-      <ion-card *ngIf="productoSeleccionado.id !== producto.id" (click)="editarProducto(producto)">
-        <ion-card-header>
-          <ion-card-title>Ticket {{ producto.id || '-' }}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content>
-          <p><strong>Servicio:</strong> {{ producto.zerbitzuak.izena || '-' }}</p>
-          <p><strong>{{brand}}:</strong> {{ producto.prezioa || '-' }}</p> 
-          <p><strong>{{cd}}:</strong> {{ producto.data.sortze_data | date:'yyyy-MM-dd' }}</p>
-          <p><strong>{{ud}}:</strong> {{ producto.data.eguneratze_data ? (producto.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>
-        </ion-card-content>
-      </ion-card>
-    </ion-col>
-  </ion-row>
+                <ion-button *ngIf="esHistorial" expand="full" class="custom-purple-button" type="button"
+                  (click)="restaurarProducto()">
+                  {{ 'EDIT.RESTORE' | translate }}
+                </ion-button>
+              </form>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
 
-</ion-content>
+      <!-- Fila de productos -->
+      <ion-row justify-content-center
+        *ngFor="let producto of productosFiltrados | slice: (paginaActual - 1) * productosPorPagina : paginaActual * productosPorPagina">
+        <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
+          <ion-card *ngIf="productoSeleccionado.id !== producto.id" (click)="editarProducto(producto)">
+            <ion-card-header>
+              <ion-card-title>{{ 'TICKETS.TITLE' | translate }} {{ producto.id || '-' }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <p><strong>{{ 'TICKETS.SERVICE' | translate }}:</strong> {{ producto.zerbitzuak.izena || '-' }}</p>
+              <p><strong>{{ 'TICKETS.PRICE' | translate }}:</strong> {{ producto.prezioa || '-' }}</p>
+              <p><strong>{{ 'TICKETS.CREATION_DATE' | translate }}:</strong> {{ producto.data.sortze_data |
+                date:'yyyy-MM-dd' }}</p>
+              <p><strong>{{ 'TICKETS.UPDATE_DATE' | translate }}:</strong> {{ producto.data.eguneratze_data ?
+                (producto.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
 
-</ion-app>
+    </ion-content>
+
+  </ion-app>

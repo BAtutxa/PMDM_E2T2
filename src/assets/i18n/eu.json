@@ -155,8 +155,8 @@
     "APELLIDO_OBLIGATORIO": "Abizena derrigorrezkoa da.",
     "TELEFONO_NUEVE": "Telefonoak gehienez 9 zenbaki izan behar ditu.",
     "EDITAR_FICHA": "Fitxa editatu",
-    "RESTAURAR":"Berritu",
-        "ASCENDENTE": "Gorakorra",
+    "RESTAURAR": "Berritu",
+    "ASCENDENTE": "Gorakorra",
     "DESCENDENTE": "Beherakorra"
   },
   "BUSCADOR": {
@@ -412,5 +412,56 @@
     "INGRESE_TEXTO": "Sartu txostenaren testua",
     "ESCRIBIR_INFORME": "Idatzi txostena hemen...",
     "GENERAR_PDF": "Sortu PDF"
+  },
+  "TICKETS": {
+    "TITLE": "Ticket",
+    "ORDER_BY": "Ordenatu",
+    "ORDER": "Ordena",
+    "ASCENDING": "Gorakorra",
+    "DESCENDING": "Beherakorra",
+    "ID": "ID",
+    "SERVICE": "Zerbitzua",
+    "PRICE": "Prezioa",
+    "CREATED_DATE": "Sortze data",
+    "UPDATE_DATE": "Eguneratze data",
+    "DELETE_DATE": "Ezabatze data",
+    "ACTIVITIES": "Jarduerak",
+    "ADD_TICKET": "Gehitu ticket",
+    "EDIT": "Editatu",
+    "CONFIRM": "Berretsi",
+    "CANCEL": "Ezeztatu",
+    "DELETE_TICKET": "Ezabatu ticket",
+    "CONFIRM_DELETE": "Berretsi ezabatzea",
+    "RESTORE_TICKET": "Berreskuratu txartela",
+    "SERVICE_REQUIRED": "Zerbitzua beharrezkoa da",
+    "PRICE_REQUIRED": "Prezioa beharrezkoa da",
+    "SEARCH": {
+      "PLACEHOLDER": "Bilatu..."
+    }
+  },
+  "SORT": {
+    "BY": "Ordenatu",
+    "ID": "ID",
+    "SERVICE": "Zerbitzua",
+    "PRICE": "Prezioa",
+    "CREATION_DATE": "Sortze data",
+    "UPDATE_DATE": "Eguneratze data",
+    "DELETE_DATE": "Ezabatze data",
+    "ORDER": "Ordena",
+    "ASCENDING": "Gorakorra",
+    "DESCENDING": "Beherakorra"
+  },
+  "EDIT": {
+    "TITLE": "Editatu txartela",
+    "ID": "ID",
+    "SERVICE": "Zerbitzua",
+    "PRICE": "Prezioa",
+    "SERVICE_REQUIRED": "Zerbitzua beharrezkoa da",
+    "PRICE_REQUIRED": "Prezioa beharrezkoa da",
+    "CONFIRM": "Berretsi",
+    "CANCEL": "Ezeztatu",
+    "DELETE": "Ezabatu",
+    "CONFIRM_DELETE": "Berretsi ezabatzea",
+    "RESTORE": "Berreskuratu"
   }
 }
