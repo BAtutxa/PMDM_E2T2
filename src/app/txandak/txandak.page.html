@@ -1,0 +1,44 @@
+<ion-content [fullscreen]="true">
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>ORDUTEGIAK</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content class="ion-padding">
+    <!-- Select para elegir txanda -->
+    <ion-item>
+      <ion-label>Selecciona Txanda</ion-label>
+      <ion-select [(ngModel)]="selectedOrdutegi" (ionChange)="onTxandaChange($event)">
+        <ion-select-option *ngFor="let ordutegi of ordutegiak; let i = index" [value]="ordutegi">
+          Equipo: {{ getEquipoNombre(ordutegi.kodea) }} - Eguna: {{ egunaStringEgin(i) }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    
+
+    <!-- Mostrar detalles de la txanda seleccionada -->
+  <div *ngIf="selectedOrdutegi">
+    <ion-item>
+      <ion-label>Ordutegia</ion-label>
+      <ion-datetime
+        display-format="YYYY-MM-DD HH:mm"
+        [(ngModel)]="selectedOrdutegi.hasiera_data"
+        [value]="selectedOrdutegi.hasiera_data"
+      ></ion-datetime>
+    </ion-item>
+  </div>
+
+
+    <!-- Botón centrado -->
+    <div class="center-button">
+      <ion-button routerLink="/crear-ordutegi" color="primary" shape="round">
+        Sumar ordutegi
+      </ion-button>
+    </div>
+
+  </ion-content>
+</ion-content>

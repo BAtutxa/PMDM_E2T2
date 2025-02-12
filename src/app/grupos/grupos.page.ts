@@ -54,9 +54,9 @@ grupo: any;
     private activatedRoute: ActivatedRoute
   ) {}
 
-  goToCalendario(event: Event) {
+  goToTxandak(event: Event) {
     event.stopPropagation(); // Previene que el menú se cierre
-    this.router.navigate(['/calendario']); // Navega manualmente al calendario
+    this.router.navigate(['/txandak']); // Navega manualmente al calendario
     this.menuCtrl.open(); // Abre el menú si es necesario
   }
 

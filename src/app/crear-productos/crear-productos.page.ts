@@ -39,7 +39,6 @@ export class CrearProductosPage implements OnInit {
 
   constructor(
     private productoService: ProductoService,
-    private router: Router,
     private kategoriaService: KategoriaService
   ) {}
 

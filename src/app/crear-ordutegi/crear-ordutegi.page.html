@@ -1,0 +1,119 @@
+<ion-content>
+  <div class="card-container">
+    <form #ordutegiForm="ngForm" (ngSubmit)="guardarOrdutegi()">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>CREAR ORDUTEGI</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-list>
+            <!-- Equipo a asignar -->
+            <ion-item>
+              <ion-label>Equipo a asignar</ion-label>
+              <ion-select [(ngModel)]="ordutegi.kodea" name="equipos" placeholder="Selecciona un equipo" required>
+                <ion-select-option *ngFor="let equipo of equipos" [value]="equipo.kodea">
+                  {{ equipo.izena }}
+                </ion-select-option>
+              </ion-select>
+              <ion-note *ngIf="ordutegiForm.controls['equipos']?.invalid && ordutegiForm.controls['equipos']?.touched" color="danger">
+                Es obligatorio asignar un equipo
+              </ion-note>
+            </ion-item>
+            
+            <!-- Día -->
+            <ion-item>
+              <ion-label position="stacked">Día</ion-label>
+              <ion-select
+                [(ngModel)]="ordutegi.eguna"
+                name="eguna"
+                required
+                interface="popover"
+                placeholder="Selecciona un día"
+              >
+                <ion-select-option value="1">Lunes</ion-select-option>
+                <ion-select-option value="2">Martes</ion-select-option>
+                <ion-select-option value="3">Miércoles</ion-select-option>
+                <ion-select-option value="4">Jueves</ion-select-option>
+                <ion-select-option value="5">Viernes</ion-select-option>
+              </ion-select>
+              <ion-note *ngIf="ordutegiForm.controls['eguna']?.invalid && ordutegiForm.controls['eguna']?.touched" color="danger">
+                El día es obligatorio
+              </ion-note>
+            </ion-item>
+            
+            <!-- Fecha de inicio -->
+            <ion-item>
+              <ion-label position="stacked">Fecha de inicio</ion-label>
+              <ion-input
+                [(ngModel)]="ordutegi.hasiera_data"
+                name="hasiera_data"
+                placeholder="Selecciona una fecha de inicio"
+                type="date"
+                required
+              ></ion-input>
+              <ion-note *ngIf="ordutegiForm.controls['hasiera_data']?.invalid && ordutegiForm.controls['hasiera_data']?.touched" color="danger">
+                La fecha de inicio es obligatoria
+              </ion-note>
+            </ion-item>
+            
+            <!-- Fecha de fin -->
+            <ion-item>
+              <ion-label position="stacked">Fecha de fin</ion-label>
+              <ion-input
+                [(ngModel)]="ordutegi.amaiera_data"
+                name="amaiera_data"
+                placeholder="Selecciona una fecha de fin"
+                type="date"
+                required
+              ></ion-input>
+              <ion-note *ngIf="ordutegiForm.controls['amaiera_data']?.invalid && ordutegiForm.controls['amaiera_data']?.touched" color="danger">
+                La fecha de fin es obligatoria
+              </ion-note>
+            </ion-item>
+            
+            <!-- Hora de inicio -->
+            <ion-item>
+              <ion-label position="stacked">Hora de inicio</ion-label>
+              <ion-input
+                [(ngModel)]="ordutegi.denbora.hasiera_ordua"
+                name="hasiera_ordua"
+                placeholder="Selecciona una hora de inicio"
+                type="time"
+                required
+              ></ion-input>
+              <ion-note *ngIf="ordutegiForm.controls['hasiera_ordua']?.invalid && ordutegiForm.controls['hasiera_ordua']?.touched" color="danger">
+                La hora de inicio es obligatoria
+              </ion-note>
+            </ion-item>
+            
+            <!-- Hora de fin -->
+            <ion-item>
+              <ion-label position="stacked">Hora de fin</ion-label>
+              <ion-input
+                [(ngModel)]="ordutegi.denbora.amaiera_ordua"
+                name="amaiera_ordua"
+                placeholder="Selecciona una hora de fin"
+                type="time"
+                required
+              ></ion-input>
+              <ion-note *ngIf="ordutegiForm.controls['amaiera_ordua']?.invalid && ordutegiForm.controls['amaiera_ordua']?.touched" color="danger">
+                La hora de fin es obligatoria
+              </ion-note>
+            </ion-item>
+
+            <!-- Save Button -->
+            <ion-button
+              expand="full"
+              type="submit"
+              color="tertiary"
+              [disabled]="ordutegiForm.invalid"
+            >
+              Guardar Ordutegi
+            </ion-button>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </form>
+  </div>
+</ion-content>

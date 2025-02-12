@@ -117,6 +117,14 @@ const routes: Routes = [
   {
     path: 'kolore-historialak',
     loadChildren: () => import('./kolore-historialak/kolore-historialak.module').then( m => m.KoloreHistorialakPageModule)
+  },
+  {
+    path: 'txandak',
+    loadChildren: () => import('./txandak/txandak.module').then( m => m.TxandakPageModule)
+  },
+  {
+    path: 'crear-ordutegi',
+    loadChildren: () => import('./crear-ordutegi/crear-ordutegi.module').then( m => m.CrearOrdutegiPageModule)
   }
 
 ];

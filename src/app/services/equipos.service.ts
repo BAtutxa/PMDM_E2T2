@@ -25,6 +25,7 @@ export class EquipoService {
       error: (err) => console.error('Error al cargar grupos:', err),
     });
   }
+  
 
   // Obtener el siguiente ID disponible para un equipo como string
   obtenerIDDisponible(): Observable<string> {
