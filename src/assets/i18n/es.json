@@ -118,11 +118,13 @@
     "CONFIRM": "Confirmar",
     "DELETE": "Borrar",
     "PRINT_TICKET": "Imprimir Ticket",
-    "SERVICE": "Servicio"
+    "SERVICE": "Servicio",
+    "ACCIONES":"Acciones",
+    "CITAS_PROGRAMADAS":"Citas programadas"
   },
   "CLIENTES": {
     "BORRAR": "BORRAR",
-    "TITLE": "Clientes",
+    "TITLE": "CLIENTES",
     "CLIENTES": "Clientes",
     "ID": "ID",
     "NOMBRE": "Nombre",
@@ -209,7 +211,8 @@
   },
   "INVENTARIO": {
     "PROD_MUGIMENDUAK": "Movimiento de productos",
-    "MATERIAL_MAILEGU": "Prestamo de material"
+    "MATERIAL_MAILEGU": "Prestamo de material",
+    "TITULO":"INVENTARIO"
   },
   "PRODUCTOS": {
     "TITLE": "Productos",
@@ -410,7 +413,7 @@
     "GENERAR_PDF": "Generar PDF"
   },
   "TICKETS": {
-    "TITLE": "Tickets",
+    "TITLE": "TICKETS",
     "ORDER_BY": "Ordenar por",
     "ORDER": "Orden",
     "ASCENDING": "Ascendente",
