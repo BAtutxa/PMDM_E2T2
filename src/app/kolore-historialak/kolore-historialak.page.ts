@@ -11,6 +11,9 @@ import { AlertController } from '@ionic/angular';
 export class KoloreHistorialakPage implements OnInit {
 
   historial: IKoloreHistorialak[] = [];
+  selectedHistorial: IKoloreHistorialak | null = null; // Variable para el historial seleccionado
+  newHistorial: IKoloreHistorialak = this.getEmptyHistorial(); // Inicializar un historial vacío para crear
+  showCreateForm: boolean = false; // Variable para controlar la visibilidad del formulario de creación
 
   constructor(
     private koloreHistorialakService: KoloreHistorialakService,
@@ -35,8 +38,28 @@ export class KoloreHistorialakPage implements OnInit {
 
   // Función para editar el historial
   editHistorial(item: IKoloreHistorialak): void {
-    // Aquí podrías abrir un formulario o un modal para editar el item.
-    console.log('Editar item:', item);
+    this.selectedHistorial = { ...item }; // Crear una copia para editar
+  }
+
+  // Función para guardar los cambios
+  saveChanges(): void {
+    if (this.selectedHistorial) {
+      this.koloreHistorialakService.updateKoloreHistorialak(this.selectedHistorial).subscribe(
+        (updatedItem) => {
+          console.log('Historial actualizado con éxito', updatedItem);
+          this.selectedHistorial = null; // Resetear el formulario
+          this.loadHistorial(); // Recargar el historial después de la actualización
+        },
+        (error) => {
+          console.error('Error al actualizar historial', error);
+        }
+      );
+    }
+  }
+
+  // Función para cancelar la edición
+  cancelEdit(): void {
+    this.selectedHistorial = null; // Cancelar y resetear el formulario
   }
 
   // Función para eliminar el historial
@@ -50,5 +73,44 @@ export class KoloreHistorialakPage implements OnInit {
         console.error('Error al eliminar historial', error);
       }
     );
+  }
+
+  // Función para crear un nuevo historial
+  createHistorial(): void {
+    this.koloreHistorialakService.createKoloreHistorialak(this.newHistorial).subscribe(
+      (createdItem) => {
+        console.log('Nuevo historial creado con éxito', createdItem);
+        this.newHistorial = this.getEmptyHistorial(); // Resetear el formulario
+        this.loadHistorial(); // Recargar el historial después de la creación
+        this.showCreateForm = false; // Ocultar el formulario de creación
+      },
+      (error) => {
+        console.error('Error al crear historial', error);
+      }
+    );
+  }
+
+  // Función para resetear los valores del nuevo historial
+  getEmptyHistorial(): IKoloreHistorialak {
+    return {
+      id: 0,
+      bezero: 0,
+      produktu_id: 0,
+      data: null,
+      kantitatea: 0,
+      bolumena: null,
+      oharrak: null,
+      dataSimple: {
+        sortze_data: null,
+        eguneratze_data: null,
+        ezabatze_data: null
+      }
+    };
+  }
+
+  // Función para cancelar la creación del nuevo historial
+  cancelCreate(): void {
+    this.showCreateForm = false; // Ocultar el formulario de creación
+    this.newHistorial = this.getEmptyHistorial(); // Limpiar los datos del formulario
   }
 }

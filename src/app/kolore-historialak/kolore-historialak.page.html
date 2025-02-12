@@ -9,7 +9,87 @@
     <p>No hay registros disponibles.</p>
   </div>
 
-  <ion-list *ngIf="historial.length > 0">
+  <!-- Botón para crear un nuevo historial -->
+  <ion-button expand="full" color="primary" (click)="showCreateForm = true" *ngIf="!selectedHistorial && !showCreateForm">Crear Nuevo Historial</ion-button>
+
+  <!-- Formulario para crear un nuevo historial, visible solo cuando showCreateForm sea true -->
+  <div *ngIf="showCreateForm && !selectedHistorial">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Nuevo Historial</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="floating">Bezero</ion-label>
+          <ion-input [(ngModel)]="newHistorial.bezero" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Producto ID</ion-label>
+          <ion-input [(ngModel)]="newHistorial.produktu_id" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Fecha</ion-label>
+          <ion-datetime [(ngModel)]="newHistorial.data" displayFormat="MM/DD/YYYY"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Cantidad</ion-label>
+          <ion-input [(ngModel)]="newHistorial.kantitatea" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Volumen</ion-label>
+          <ion-input [(ngModel)]="newHistorial.bolumena"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Observaciones</ion-label>
+          <ion-textarea [(ngModel)]="newHistorial.oharrak"></ion-textarea>
+        </ion-item>
+
+        <ion-button expand="full" color="primary" (click)="createHistorial()">Guardar Nuevo Historial</ion-button>
+        <ion-button expand="full" color="secondary" (click)="cancelCreate()">Cancelar</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Formulario de Edición (solo visible cuando hay un historial seleccionado) -->
+  <div *ngIf="selectedHistorial">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Editar Historial</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="floating">Bezero</ion-label>
+          <ion-input [(ngModel)]="selectedHistorial.bezero" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Producto ID</ion-label>
+          <ion-input [(ngModel)]="selectedHistorial.produktu_id" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Fecha</ion-label>
+          <ion-datetime [(ngModel)]="selectedHistorial.data" displayFormat="MM/DD/YYYY"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Cantidad</ion-label>
+          <ion-input [(ngModel)]="selectedHistorial.kantitatea" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Volumen</ion-label>
+          <ion-input [(ngModel)]="selectedHistorial.bolumena"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Observaciones</ion-label>
+          <ion-textarea [(ngModel)]="selectedHistorial.oharrak"></ion-textarea>
+        </ion-item>
+        
+        <ion-button expand="full" color="primary" (click)="saveChanges()">Guardar Cambios</ion-button>
+        <ion-button expand="full" color="secondary" (click)="cancelEdit()">Cancelar</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Lista de Historiales -->
+  <ion-list *ngIf="historial.length > 0 && !selectedHistorial">
     <ion-item *ngFor="let item of historial">
       <ion-label>
         <h2>Bezero: {{ item.bezero }}</h2>
