@@ -242,7 +242,7 @@
               }}</ion-select-option>
           </ion-select>
 
-          <ion-label>{{ 'Ordenar: ' }}</ion-label>
+          <ion-label>{{ 'PRODUCTOS.ORDENAR' | translate }}</ion-label>
           <ion-select [(ngModel)]="ordenActual.ascendente" interface="popover" (ionChange)="cambiarOrden($event)">
             <!-- Agregar un placeholder que cambia dependiendo del valor de ascendente -->
             <ion-select-option value="true">{{ 'PRODUCTOS.ASCENDING' | translate }}</ion-select-option>
@@ -266,7 +266,7 @@
       <ion-row *ngIf="esProfe">
         <ion-col size="12" class="ion-text-center">
           <ion-button *ngIf="!esHistorial && esProfe" color="primary" expand="block"
-            [routerLink]="'/crear-productos'">Añadir producto
+            [routerLink]="'/crear-productos'">{{ 'PRODUCTOS.AÑADIR_PRODUCTO' | translate }}
             <ion-icon name="add-circle-outline"></ion-icon>
           </ion-button>
         </ion-col>
@@ -381,7 +381,5 @@
           </ion-card>
         </ion-col>
       </ion-row>
-
     </ion-content>
-
   </ion-app>

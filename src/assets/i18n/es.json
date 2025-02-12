@@ -242,7 +242,9 @@
     "CREATED_DATE": "Fecha de creacion",
     "UPDATED_DATE": "Fecha de actualizacion",
     "STOCK_ALERT": "Alerta de stock",
-    "ACTIVITIES": "Acciones"
+    "ACTIVITIES": "Acciones",
+    "AÑADIR_PRODUCTO":"AÑADIR PRODUCTO",
+    "ORDENAR":"Ordenar"
   },
   "CREAR_PRODUCTO": {
     "TITLE": "Crear producto",
