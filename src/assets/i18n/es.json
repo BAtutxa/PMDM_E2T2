@@ -431,6 +431,8 @@
     "RESTORE_TICKET": "Restaurar ticket",
     "SERVICE_REQUIRED": "El servicio es obligatorio",
     "PRICE_REQUIRED": "El precio es obligatorio",
+    "CREATION_DATE":"Fecha de creación",
+    "ADD": "Añadir ticket",
     "SEARCH": {
       "PLACEHOLDER": "Buscar..."
     }

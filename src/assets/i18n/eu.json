@@ -435,6 +435,8 @@
     "RESTORE_TICKET": "Berreskuratu txartela",
     "SERVICE_REQUIRED": "Zerbitzua beharrezkoa da",
     "PRICE_REQUIRED": "Prezioa beharrezkoa da",
+    "CREATION_DATE":"Sortze Data",
+    "ADD": "Gehitu ticketa",
     "SEARCH": {
       "PLACEHOLDER": "Bilatu..."
     }
