@@ -117,6 +117,10 @@ const routes: Routes = [
   {
     path: 'kolore-historialak',
     loadChildren: () => import('./kolore-historialak/kolore-historialak.module').then( m => m.KoloreHistorialakPageModule)
+  },
+  {
+    path: 'kolore-historialak-ezabatuta',
+    loadChildren: () => import('./kolore-historialak-ezabatuta/kolore-historialak-ezabatuta.module').then( m => m.KoloreHistorialakEzabatutaPageModule)
   }
 
 ];

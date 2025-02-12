@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { KoloreHistorialakService } from '../services/koloreHistorialak.service';
 import { IKoloreHistorialak } from '../interfaces/IKoloreHistorialak';
 import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-kolore-historialak',
@@ -17,7 +18,8 @@ export class KoloreHistorialakPage implements OnInit {
 
   constructor(
     private koloreHistorialakService: KoloreHistorialakService,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -113,4 +115,9 @@ export class KoloreHistorialakPage implements OnInit {
     this.showCreateForm = false; // Ocultar el formulario de creación
     this.newHistorial = this.getEmptyHistorial(); // Limpiar los datos del formulario
   }
+
+    // Nueva función para redirigir a la página 'kolore-historialak-ezabatuta'
+    goToEzabatuta(): void {
+      this.router.navigate(['/kolore-historialak-ezabatuta']);  // Navegar a la página
+    }
 }
