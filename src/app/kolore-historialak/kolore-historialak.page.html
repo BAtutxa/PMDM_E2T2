@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Historial Kolore</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="historial.length === 0" class="empty-message">
+    <p>No hay registros disponibles.</p>
+  </div>
+
+  <ion-list *ngIf="historial.length > 0">
+    <ion-item *ngFor="let item of historial">
+      <ion-label>
+        <h2>Bezero: {{ item.bezero }}</h2>
+        <p><strong>Producto ID:</strong> {{ item.produktu_id }}</p>
+        <p><strong>Fecha:</strong> {{ item.data | date:'short' }}</p>
+        <p><strong>Kantitatea:</strong> {{ item.kantitatea }}</p>
+        <p><strong>Volumen:</strong> {{ item.bolumena }}</p>
+        <p><strong>Observaciones:</strong> {{ item.oharrak || 'Sin observaciones' }}</p>
+      </ion-label>
+
+      <!-- Botones de acción (Editar y Eliminar) -->
+      <ion-buttons slot="end">
+        <!-- Botón de editar -->
+        <ion-button color="primary" (click)="editHistorial(item)">
+          <ion-icon name="pencil"></ion-icon>
+        </ion-button>
+        
+        <!-- Botón de eliminar -->
+        <ion-button color="danger" (click)="deleteHistorial(item.id)">
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+</ion-content>
