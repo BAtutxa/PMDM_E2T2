@@ -18,7 +18,7 @@ export class FooterComponent implements OnInit {
     const url = this.router.url;
     this.agertuBueltatu = (url == '/productos' || url == '/grupos' || url == '/crear-ficha' || url =='/informes' || url == '/stock' || url == '/materiales'
       || url.startsWith('/citas-del-dia') || url.startsWith('/citas') || url== '/categorias' ||url.startsWith('/crear') ||url=== '/historiala'
-      ||url == '/material-maileguak' ||url == '/produktu-mugimenduak' ||url == '/txandak'
+      ||url == '/material-maileguak' ||url == '/produktu-mugimenduak' || url=='/langile' ||url == '/txandak'
     );
   }
   

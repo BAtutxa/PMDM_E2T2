@@ -86,7 +86,8 @@ const routes: Routes = [
   {
     path: 'historiala',
     loadChildren: () => import('./historiala/historiala.module').then(m => m.HistorialaPageModule)
-  },  {
+  },
+  {
     path: 'categorias',
     loadChildren: () => import('./categorias/categorias.module').then( m => m.CategoriasPageModule)
   },
@@ -125,6 +126,10 @@ const routes: Routes = [
   {
     path: 'crear-ordutegi',
     loadChildren: () => import('./crear-ordutegi/crear-ordutegi.module').then( m => m.CrearOrdutegiPageModule)
+  },
+  {
+    path: 'kolore-historialak-ezabatuta',
+    loadChildren: () => import('./kolore-historialak-ezabatuta/kolore-historialak-ezabatuta.module').then( m => m.KoloreHistorialakEzabatutaPageModule)
   }
 
 ];

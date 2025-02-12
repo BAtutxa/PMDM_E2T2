@@ -118,11 +118,13 @@
     "CONFIRM": "Confirmar",
     "DELETE": "Borrar",
     "PRINT_TICKET": "Imprimir Ticket",
-    "SERVICE": "Servicio"
+    "SERVICE": "Servicio",
+    "ACCIONES":"Acciones",
+    "CITAS_PROGRAMADAS":"Citas programadas"
   },
   "CLIENTES": {
     "BORRAR": "BORRAR",
-    "TITLE": "Clientes",
+    "TITLE": "CLIENTES",
     "CLIENTES": "Clientes",
     "ID": "ID",
     "NOMBRE": "Nombre",
@@ -150,7 +152,10 @@
     "NOMBRE_OBLIGATORIO": "El nombre es obligatorio.",
     "APELLIDO_OBLIGATORIO": "El apellido es obligatorio.",
     "TELEFONO_NUEVE": "El teléfono debe contener un máximo de 9 números.",
-    "EDITAR_FICHA": "Editar ficha"
+    "EDITAR_FICHA": "Editar ficha",
+    "RESTAURAR": "Restaurar",
+    "ASCENDENTE": "Ascendente",
+    "DESCENDENTE": "Descendente"
   },
   "BUSCADOR": {
     "PLACEHOLDER": "Buscar"
@@ -206,7 +211,8 @@
   },
   "INVENTARIO": {
     "PROD_MUGIMENDUAK": "Movimiento de productos",
-    "MATERIAL_MAILEGU": "Prestamo de material"
+    "MATERIAL_MAILEGU": "Prestamo de material",
+    "TITULO":"INVENTARIO"
   },
   "PRODUCTOS": {
     "TITLE": "Productos",
@@ -243,8 +249,8 @@
     "UPDATED_DATE": "Fecha de actualizacion",
     "STOCK_ALERT": "Alerta de stock",
     "ACTIVITIES": "Acciones",
-    "AÑADIR_PRODUCTO":"AÑADIR PRODUCTO",
-    "ORDENAR":"Ordenar"
+    "AÑADIR_PRODUCTO": "AÑADIR PRODUCTO",
+    "ORDENAR": "Ordenar"
   },
   "CREAR_PRODUCTO": {
     "TITLE": "Crear producto",
@@ -363,5 +369,100 @@
     "NOMBRE": "Nombre",
     "INTRODUCE_NOMBRE": "Introduce un valor para nombre",
     "GUARDAR": "Guardar"
+  },
+  "EQUIPOS": {
+    "TITULO": "Equipos",
+    "ID": "ID",
+    "EDITAR": "Editar",
+    "BORRAR": "Borrar",
+    "EDITAR_TRABAJADOR": "Editar Trabajador",
+    "NOMBRE": "Nombre",
+    "INTRODUCE_NOMBRE": "Introduce el nombre",
+    "ERROR_NOMBRE": "El trabajador debe contener un nombre.",
+    "APELLIDO": "Apellido",
+    "INTRODUCE_APELLIDO": "Introduce el apellido",
+    "ERROR_APELLIDO": "El trabajador debe contener al menos un apellido.",
+    "CANCELAR": "Cancelar",
+    "GUARDAR": "Guardar"
+  },
+  "EDITAR_EQUIPO": {
+    "TITULO": "Editar equipo",
+    "NOMBRE": "Nombre del Equipo",
+    "INTRODUCE_NOMBRE": "Introduce el nombre del equipo",
+    "ERROR_NOMBRE": "El equipo debe contener un nombre.",
+    "TRABAJADORES": "Trabajadores",
+    "SELECCIONAR_TRABAJADORES": "Selecciona los trabajadores",
+    "GUARDAR": "Guardar Equipo"
+  },
+  "CREAR_TRABAJADOR": {
+    "TITULO": "Crear trabajador",
+    "NOMBRE": "Nombre",
+    "INTRODUCE_NOMBRE": "Introduce el nombre del trabajador",
+    "ERROR_NOMBRE": "El trabajador debe contener un nombre.",
+    "APELLIDOS": "Apellidos",
+    "INTRODUCE_APELLIDOS": "Introduce los apellidos del trabajador",
+    "ERROR_APELLIDOS": "El trabajador debe contener al menos un apellido.",
+    "SELECCIONAR_EQUIPO": "Seleccionar equipo",
+    "GUARDAR": "Guardar trabajador"
+  },
+  "INFORMES": {
+    "TITULO": "Informes",
+    "GENERAR_INFORME": "Generar Informe",
+    "INGRESE_TEXTO": "Ingrese el texto del informe",
+    "ESCRIBIR_INFORME": "Escribe el informe aquí...",
+    "GENERAR_PDF": "Generar PDF"
+  },
+  "TICKETS": {
+    "TITLE": "TICKETS",
+    "ORDER_BY": "Ordenar por",
+    "ORDER": "Orden",
+    "ASCENDING": "Ascendente",
+    "DESCENDING": "Descendente",
+    "ID": "ID",
+    "SERVICE": "Servicio",
+    "PRICE": "Precio",
+    "CREATED_DATE": "Fecha de creación",
+    "UPDATE_DATE": "Fecha de actualización",
+    "DELETE_DATE": "Fecha de eliminación",
+    "ACTIVITIES": "Actividades",
+    "ADD_TICKET": "Añadir ticket",
+    "EDIT": "Editar",
+    "CONFIRM": "Confirmar",
+    "CANCEL": "Cancelar",
+    "DELETE_TICKET": "Eliminar ticket",
+    "CONFIRM_DELETE": "Confirmar eliminación",
+    "RESTORE_TICKET": "Restaurar ticket",
+    "SERVICE_REQUIRED": "El servicio es obligatorio",
+    "PRICE_REQUIRED": "El precio es obligatorio",
+    "CREATION_DATE":"Fecha de creación",
+    "ADD": "Añadir ticket",
+    "SEARCH": {
+      "PLACEHOLDER": "Buscar..."
+    }
+  },
+  "SORT": {
+    "BY": "Ordenar por",
+    "ID": "ID",
+    "SERVICE": "Servicio",
+    "PRICE": "Precio",
+    "CREATION_DATE": "Fecha de creación",
+    "UPDATE_DATE": "Fecha de actualización",
+    "DELETE_DATE": "Fecha de eliminación",
+    "ORDER": "Orden",
+    "ASCENDING": "Ascendente",
+    "DESCENDING": "Descendente"
+  },
+  "EDIT": {
+    "TITLE": "Editar ticket",
+    "ID": "ID",
+    "SERVICE": "Servicio",
+    "PRICE": "Precio",
+    "SERVICE_REQUIRED": "El servicio es obligatorio",
+    "PRICE_REQUIRED": "El precio es obligatorio",
+    "CONFIRM": "Confirmar",
+    "CANCEL": "Cancelar",
+    "DELETE": "Eliminar",
+    "CONFIRM_DELETE": "Confirmar eliminación",
+    "RESTORE": "Restaurar"
   }
 }

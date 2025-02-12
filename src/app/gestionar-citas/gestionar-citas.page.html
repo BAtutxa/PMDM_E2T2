@@ -115,16 +115,16 @@
     
     <div class="container" *ngIf="!mobilaDa">
     
-      <h1>Citas Programadas</h1>
+      <h1>{{ 'GESTION_CITAS.CITAS_PROGRAMADAS' | translate }}</h1>
       <table class="citas-table" *ngIf="citas && citas.length > 0">
         <thead>
           <tr>
-            <th>Nombre</th>
-            <th>Fecha</th>
-            <th>Hora Inicio</th>
-            <th>Hora Fin</th>
-            <th>Descripción</th>
-            <th>Acciones</th>
+            <th>{{ 'GESTION_CITAS.NAME' | translate }}</th>
+            <th>{{ 'GESTION_CITAS.DATE' | translate }}</th>
+            <th>{{ 'GESTION_CITAS.START_TIME' | translate }}</th>
+            <th>{{ 'GESTION_CITAS.END_TIME' | translate }}</th>
+            <th>{{ 'GESTION_CITAS.DESCRIPTION' | translate }}</th>
+            <th>{{ 'GESTION_CITAS.ACCIONES' | translate }}</th>
           </tr>
         </thead>
         <tbody>

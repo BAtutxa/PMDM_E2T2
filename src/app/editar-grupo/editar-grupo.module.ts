@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { EditarGrupoPageRoutingModule } from './editar-grupo-routing.module';
 
 import { EditarGrupoPage } from './editar-grupo.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    EditarGrupoPageRoutingModule
+    EditarGrupoPageRoutingModule,
+    TranslateModule
   ],
   declarations: [EditarGrupoPage]
 })

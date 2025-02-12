@@ -73,7 +73,7 @@ readonly content = viewChild(IonContent);
     this.translateLabels();
     this.cargarServicios();
     this.translateService.setDefaultLang('es');
-    this.translateService.use('es');
+    this.translateService.use('eu');
 
   }
 

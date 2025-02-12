@@ -31,7 +31,7 @@
     <!-- Filtros de ordenación -->
     <div class="ordenacion-filtros">
       <ion-item>
-        <ion-label>{{ 'Ordenar por:' }}</ion-label>
+        <ion-label>{{ 'MATERIALES.ORDENAR' | translate }}</ion-label>
         <ion-select [(ngModel)]="ordenActual.columna" interface="popover" (ionChange)="ordenarPor(ordenActual.columna)">
           <ion-select-option value="id">{{ 'MATERIALES.ID' | translate }}</ion-select-option>
           <ion-select-option value="izena">{{ 'MATERIALES.NOMBRE' | translate }}</ion-select-option>

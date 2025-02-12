@@ -5,13 +5,15 @@ import { IonicModule } from '@ionic/angular';
 
 import { GruposPageRoutingModule } from './grupos-routing.module';
 import { GruposPage } from './grupos.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    GruposPageRoutingModule
+    GruposPageRoutingModule,
+    TranslateModule
   ],
   declarations: [GruposPage]
 })

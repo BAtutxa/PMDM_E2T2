@@ -1,6 +1,6 @@
 {
   "LOGIN": {
-    "TITLE": "Saioa hasi",
+    "TITLE": "SAIOA HASI",
     "WELCOME": "Ongi etorri!",
     "NAME": "Izena",
     "PASSWORD": "Pasahitza",
@@ -27,12 +27,12 @@
     "SELECT_DAY": "Hautatu egun bat"
   },
   "INVENTORY": {
-    "TITLE": "Inbentarioa",
+    "TITLE": "INBENTARIOA",
     "PRODUCT": "Produktuak",
     "MATERIAL": "Materialak"
   },
   "PRODUCT": {
-    "TITLE": "Produktuak",
+    "TITLE": "PRODUKTUAK",
     "NAME": "Izena",
     "BRAND": "Marka",
     "ID_CATEGORY": "ID kategoria",
@@ -52,7 +52,7 @@
     "CONFIRM": "Baieztatu"
   },
   "MATERIAL": {
-    "TITLE": "Materialak",
+    "TITLE": "MATERIALAK",
     "LABEL": "Etiketa",
     "HEADER": "Ziur zaude?",
     "MESSAGE": "Materialaren balioak eguneratuko dira.",
@@ -61,7 +61,7 @@
     "CLOSE": "Itxi"
   },
   "APPOINTMENTS": {
-    "TITLE": "Eguneko hitzorduak",
+    "TITLE": "EGUNEKO HITZORDUAK",
     "LABEL": "Hitzorduak",
     "RESERVE": "Erreserbatu",
     "ORDER_BY_SEAT": "Ordenatu eserlekuaren arabera",
@@ -75,7 +75,7 @@
     "DESCRIPTION": "Deskribapena"
   },
   "RESERVAR_CITA": {
-    "TITLE": "Hitzordua erreserbatu",
+    "TITLE": "HITZORDUA ERRESERBATU",
     "SELECTED_DATE": "Hautatutako data:",
     "NAME": "Izena",
     "PHONE": "Telefonoa",
@@ -90,7 +90,7 @@
     "CANCEL": "Ezabatu"
   },
   "CITA_DETALLES": {
-    "TITLE": "Hitzorduaren xehetasunak",
+    "TITLE": "HITZORDUAREN XEHETASUNAK",
     "GENERAL_INFO": "Informazio Orokorra",
     "NAME": "Izena",
     "PHONE": "Telefonoa",
@@ -108,7 +108,7 @@
   },
   "GESTION_CITAS": {
     "ID": "ID",
-    "TITLE": "Hitzorduak Kudeatu",
+    "TITLE": "HITZORDUAK KUDEATU",
     "DETAILS_TITLE": "Hitzorduen Xehetasunak",
     "NAME": "Izena",
     "PHONE": "Telefonoa",
@@ -122,11 +122,13 @@
     "CONFIRM": "Baieztatu",
     "DELETE": "Ezabatu",
     "PRINT_TICKET": "Ticket-a Inprimatu",
-    "SERVICE": "Zerbitzuak"
+    "SERVICE": "Zerbitzuak",
+    "ACCIONES":"Ekintzak",
+    "CITAS_PROGRAMADAS":"Programatutako hitzorduak"
   },
   "CLIENTES": {
     "BORRAR": "Ezabatu",
-    "TITLE": "Bezeroak",
+    "TITLE": "BEZEROAK",
     "CLIENTES": "Bezeroak",
     "ID": "ID",
     "NOMBRE": "Izena",
@@ -154,7 +156,10 @@
     "NOMBRE_OBLIGATORIO": "Izena derrigorrezkoa da.",
     "APELLIDO_OBLIGATORIO": "Abizena derrigorrezkoa da.",
     "TELEFONO_NUEVE": "Telefonoak gehienez 9 zenbaki izan behar ditu.",
-    "EDITAR_FICHA": "Fitxa editatu"
+    "EDITAR_FICHA": "Fitxa editatu",
+    "RESTAURAR": "Berritu",
+    "ASCENDENTE": "Gorakorra",
+    "DESCENDENTE": "Beherakorra"
   },
   "BUSCADOR": {
     "PLACEHOLDER": "Bilatu"
@@ -175,7 +180,7 @@
     "NO": "EZ"
   },
   "SERVICIOS": {
-    "TITLE": "Zerbitzuak",
+    "TITLE": "ZERBITZUAK",
     "SEARCH": "Bilatu",
     "PRODUCTS_PER_PAGE": "Produktuak orrialde bakoitzean",
     "SORT_BY": "Ordenatu honen arabera",
@@ -199,7 +204,7 @@
     "DESCENDING": "Beherakorra"
   },
   "CREAR_SERVICIO": {
-    "TITLE": "Zerbitzu berria",
+    "TITLE": "ZERBITZU BERRIA",
     "NAME": "Izena",
     "PRECIO_FUERA": "Kanpoko prezioa",
     "PRECIO_CASA": "Etxeko prezioa",
@@ -210,10 +215,11 @@
   },
   "INVENTARIO": {
     "PROD_MUGIMENDUAK": "Produktu mugimenduak",
-    "MATERIAL_MAILEGU": "Material maileguak"
+    "MATERIAL_MAILEGU": "Material maileguak",
+    "TITULO":"INBENTARIO"
   },
   "PRODUCTOS": {
-    "TITLE": "Produktuak",
+    "TITLE": "PRODUKTUAK",
     "SEARCH": "Bilatu produktuak",
     "ORDER_BY": "Ordenatu",
     "ID": "ID",
@@ -247,11 +253,11 @@
     "UPDATED_DATE": "Eguneratze-data",
     "STOCK_ALERT": "Stock alerta",
     "ACTIVITIES": "Ekintzak",
-    "AÑADIR_PRODUCTO":"PRODUKTUA GEHITU",
-    "ORDENAR":"Ordenatu"
+    "AÑADIR_PRODUCTO": "PRODUKTUA GEHITU",
+    "ORDENAR": "Ordenatu"
   },
   "CREAR_PRODUCTO": {
-    "TITLE": "Produktu sortu",
+    "TITLE": "PRODUKTUAK SORTU",
     "NOMBRE": "Izena",
     "MARCA": "Marka",
     "MARCA_REQUIRED": "Marka beharrezkoa da.",
@@ -265,7 +271,7 @@
     "GUARDAR": "Gorde"
   },
   "MATERIALES": {
-    "TITLE": "Materialak",
+    "TITLE": "MATERIALAK",
     "SEARCH": "Bilatu",
     "ID": "ID",
     "NOMBRE": "Izena",
@@ -290,7 +296,8 @@
     "LABEL_OBLIGATORIO": "Etiketa beharrezkoa da",
     "FECHA_BORRADO": "Ezabatze Data",
     "CREATION_DATE": "Sortze Data",
-    "UPDATE_DATE": "Eguneratze Data"
+    "UPDATE_DATE": "Eguneratze Data",
+    "ANADIR_MATERIAL": "Materiala gehitu"
   },
   "MATERIAL_MAILEGUAK": {
     "TITLE": "Material Maileguak",
@@ -365,5 +372,101 @@
     "NOMBRE": "Izena",
     "INTRODUCE_NOMBRE": "Sartu izenaren balioa",
     "GUARDAR": "Gorde"
+  },
+
+  "EQUIPOS": {
+    "TITULO": "Taldeak",
+    "ID": "ID",
+    "EDITAR": "Editatu",
+    "BORRAR": "Ezabatu",
+    "EDITAR_TRABAJADOR": "Langilea editatu",
+    "NOMBRE": "Izena",
+    "INTRODUCE_NOMBRE": "Sartu izena",
+    "ERROR_NOMBRE": "Langileak izen bat izan behar du.",
+    "APELLIDO": "Abizenak",
+    "INTRODUCE_APELLIDO": "Sartu abizena",
+    "ERROR_APELLIDO": "Langileak behintzat abizena izan behar du.",
+    "CANCELAR": "Utzi",
+    "GUARDAR": "Gorde"
+  },
+  "EDITAR_EQUIPO": {
+    "TITULO": "Taldea editatu",
+    "NOMBRE": "Taldearen izena",
+    "INTRODUCE_NOMBRE": "Sartu taldearen izena",
+    "ERROR_NOMBRE": "Taldeak izen bat izan behar du.",
+    "TRABAJADORES": "Langileak",
+    "SELECCIONAR_TRABAJADORES": "Hautatu langileak",
+    "GUARDAR": "Taldea gorde"
+  },
+  "CREAR_TRABAJADOR": {
+    "TITULO": "Langilea sortu",
+    "NOMBRE": "Izena",
+    "INTRODUCE_NOMBRE": "Sartu langilearen izena",
+    "ERROR_NOMBRE": "Langileak izen bat izan behar du.",
+    "APELLIDOS": "Abizenak",
+    "INTRODUCE_APELLIDOS": "Sartu langilearen abizenak",
+    "ERROR_APELLIDOS": "Langileak gutxienez abizen bat izan behar du.",
+    "SELECCIONAR_EQUIPO": "Hautatu taldea",
+    "GUARDAR": "Langilea gorde"
+  },
+  "INFORMES": {
+    "TITULO": "Txostenak",
+    "GENERAR_INFORME": "Sortu txostena",
+    "INGRESE_TEXTO": "Sartu txostenaren testua",
+    "ESCRIBIR_INFORME": "Idatzi txostena hemen...",
+    "GENERAR_PDF": "Sortu PDF"
+  },
+  "TICKETS": {
+    "TITLE": "TICKETS",
+    "ORDER_BY": "Ordenatu",
+    "ORDER": "Ordena",
+    "ASCENDING": "Gorakorra",
+    "DESCENDING": "Beherakorra",
+    "ID": "ID",
+    "SERVICE": "Zerbitzua",
+    "PRICE": "Prezioa",
+    "CREATED_DATE": "Sortze data",
+    "UPDATE_DATE": "Eguneratze data",
+    "DELETE_DATE": "Ezabatze data",
+    "ACTIVITIES": "Jarduerak",
+    "ADD_TICKET": "Gehitu ticket",
+    "EDIT": "Editatu",
+    "CONFIRM": "Berretsi",
+    "CANCEL": "Ezeztatu",
+    "DELETE_TICKET": "Ezabatu ticket",
+    "CONFIRM_DELETE": "Berretsi ezabatzea",
+    "RESTORE_TICKET": "Berreskuratu txartela",
+    "SERVICE_REQUIRED": "Zerbitzua beharrezkoa da",
+    "PRICE_REQUIRED": "Prezioa beharrezkoa da",
+    "CREATION_DATE":"Sortze Data",
+    "ADD": "Gehitu ticketa",
+    "SEARCH": {
+      "PLACEHOLDER": "Bilatu..."
+    }
+  },
+  "SORT": {
+    "BY": "Ordenatu",
+    "ID": "ID",
+    "SERVICE": "Zerbitzua",
+    "PRICE": "Prezioa",
+    "CREATION_DATE": "Sortze data",
+    "UPDATE_DATE": "Eguneratze data",
+    "DELETE_DATE": "Ezabatze data",
+    "ORDER": "Ordena",
+    "ASCENDING": "Gorakorra",
+    "DESCENDING": "Beherakorra"
+  },
+  "EDIT": {
+    "TITLE": "Editatu txartela",
+    "ID": "ID",
+    "SERVICE": "Zerbitzua",
+    "PRICE": "Prezioa",
+    "SERVICE_REQUIRED": "Zerbitzua beharrezkoa da",
+    "PRICE_REQUIRED": "Prezioa beharrezkoa da",
+    "CONFIRM": "Berretsi",
+    "CANCEL": "Ezeztatu",
+    "DELETE": "Ezabatu",
+    "CONFIRM_DELETE": "Berretsi ezabatzea",
+    "RESTORE": "Berreskuratu"
   }
 }

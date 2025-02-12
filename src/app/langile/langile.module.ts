@@ -7,12 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { LangilePageRoutingModule } from './langile-routing.module';
 
 import { LangilePage } from './langile.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    TranslateModule,
     LangilePageRoutingModule
   ],
   declarations: [LangilePage]

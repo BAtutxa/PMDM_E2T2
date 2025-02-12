@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title>Editar equipo</ion-title>
+    <ion-title>{{ 'EDITAR_EQUIPO.TITULO' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -8,42 +8,42 @@
   <form (ngSubmit)="editarGrupo()">
     <ion-list>
       <form #grupoForm="ngForm" (ngSubmit)="editarGrupo()" novalidate>
-      <!-- Nombre del equipo -->
-      <ion-item>
-        <ion-label position="floating">Nombre del Equipo</ion-label>
-        <ion-input
-          [(ngModel)]="equipo.izena"
-          name="izena"
-          placeholder="Introduce el nombre del equipo"
-          required
-          #izena = "ngModel"
-        ></ion-input>
-        <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
-          El equipo debe contener un nombre.
-        </ion-note>
-      </ion-item>
+        <!-- Nombre del equipo -->
+        <ion-item>
+          <ion-label position="floating">{{ 'EDITAR_EQUIPO.NOMBRE' | translate }}</ion-label>
+          <ion-input
+            [(ngModel)]="equipo.izena"
+            name="izena"
+            placeholder="{{ 'EDITAR_EQUIPO.INTRODUCE_NOMBRE' | translate }}"
+            required
+            #izena="ngModel"
+          ></ion-input>
+          <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
+            {{ 'EDITAR_EQUIPO.ERROR_NOMBRE' | translate }}
+          </ion-note>
+        </ion-item>
 
-      <!-- Seleccionar trabajadores -->
-      <ion-item>
-        <ion-label>Trabajadores</ion-label>
-        <ion-select
-          multiple="true"
-          [(ngModel)]="equipo.langileak"
-          name="langileak"
-          placeholder="Selecciona los trabajadores">
-          <ion-select-option
-            *ngFor="let trabajador of trabajadores"
-            [value]="trabajador">
-            {{ trabajador.izena }} {{ trabajador.abizenak }}
-          </ion-select-option>
-        </ion-select>
-      </ion-item>
+        <!-- Seleccionar trabajadores -->
+        <ion-item>
+          <ion-label>{{ 'EDITAR_EQUIPO.TRABAJADORES' | translate }}</ion-label>
+          <ion-select
+            multiple="true"
+            [(ngModel)]="equipo.langileak"
+            name="langileak"
+            placeholder="{{ 'EDITAR_EQUIPO.SELECCIONAR_TRABAJADORES' | translate }}">
+            <ion-select-option
+              *ngFor="let trabajador of trabajadores"
+              [value]="trabajador">
+              {{ trabajador.izena }} {{ trabajador.abizenak }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
 
-      <!-- Botón para guardar -->
-      <ion-button expand="full" type="submit" [disabled]="grupoForm.invalid" color="tertiary">
-        Guardar Equipo
-      </ion-button>
-    </form>
+        <!-- Botón para guardar -->
+        <ion-button expand="full" type="submit" [disabled]="grupoForm.invalid" color="tertiary">
+          {{ 'EDITAR_EQUIPO.GUARDAR' | translate }}
+        </ion-button>
+      </form>
     </ion-list>
   </form>
 </ion-content>

@@ -1,30 +1,27 @@
 <ion-app>
-    <app-menu-header></app-menu-header>
-    
-    <!-- Header principal -->
-    <ion-header>
-      <ion-toolbar color="primary">
-        <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
-        </ion-buttons>
-        <ion-title>{{ 'CLIENTES.TITLE' | translate }}</ion-title>
-      </ion-toolbar>
-    </ion-header>
-  
-    <!-- Contenido principal -->
-    <div color="secondary" class="ion-page" id="main-content">
-      <p >Aquí va el contenido principal de la página.</p>
-    </div>
+  <app-menu-header></app-menu-header>
+
+  <!-- Header principal -->
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>{{ 'CLIENTES.TITLE' | translate }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Contenido principal -->
+  <div color="secondary" class="ion-page" id="main-content">
+    <p>Aquí va el contenido principal de la página.</p>
+  </div>
 
   <ion-content *ngIf="mobilaDa" [fullscreen]="true">
-  
+
     <!-- Buscador -->
-    <ion-searchbar
-      search-icon="search-circle"
-      placeholder="Buscar"
-      (ionInput)="aplicarFiltro($event)">
+    <ion-searchbar search-icon="search-circle" placeholder="Buscar" (ionInput)="aplicarFiltro($event)">
     </ion-searchbar>
-  
+
     <!-- Selector de fichas por página -->
     <div class="fichas-por-pagina">
       <ion-item class="ficha-item">
@@ -38,7 +35,7 @@
         </ion-select>
       </ion-item>
     </div>
-  
+
     <!-- Filtros de ordenación -->
     <div class="ordenacion-filtros">
       <ion-item>
@@ -47,18 +44,21 @@
           <ion-select-option value="id">{{ 'CLIENTES.ID' | translate }}</ion-select-option>
           <ion-select-option value="izena">{{ 'CLIENTES.NOMBRE' | translate }}</ion-select-option>
           <ion-select-option value="abizena">{{ 'CLIENTES.APELLIDO' | translate }}</ion-select-option>
-          <ion-select-option *ngIf="!esHistorial" value="sortze_data">{{ 'CLIENTES.FECHA_CREACION' | translate }}</ion-select-option>
-          <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">{{ 'CLIENTES.FECHA_ACTUALIZACION' | translate }}</ion-select-option>
-          <ion-select-option *ngIf="esHistorial" value="ezabatze_data">{{ 'CLIENTES.FECHA_BORRADO' | translate }}</ion-select-option>
+          <ion-select-option *ngIf="!esHistorial" value="sortze_data">{{ 'CLIENTES.FECHA_CREACION' | translate
+            }}</ion-select-option>
+          <ion-select-option *ngIf="!esHistorial" value="eguneratze_data">{{ 'CLIENTES.FECHA_ACTUALIZACION' | translate
+            }}</ion-select-option>
+          <ion-select-option *ngIf="esHistorial" value="ezabatze_data">{{ 'CLIENTES.FECHA_BORRADO' | translate
+            }}</ion-select-option>
         </ion-select>
-  
+
         <ion-select [(ngModel)]="ordenActual.ascendente" interface="popover" (ionChange)="cambiarOrden($event)">
           <ion-select-option [value]="true">{{ 'CLIENTES.ASCENDENTE' | translate }}</ion-select-option>
           <ion-select-option [value]="false">{{ 'CLIENTES.DESCENDENTE' | translate }}</ion-select-option>
         </ion-select>
       </ion-item>
     </div>
-  
+
     <!-- Paginación -->
     <ion-row>
       <ion-col>
@@ -67,9 +67,9 @@
         </ion-button>
       </ion-col>
     </ion-row>
-  
+
     <hr>
-  
+
     <!-- Fila de edición visible solo en modo edición -->
     <ion-row *ngIf="editandoFicha">
       <ion-col size="12">
@@ -88,7 +88,7 @@
                 <ion-input [(ngModel)]="fichaSeleccionada.izena" name="izena" #izena="ngModel" required>
                 </ion-input>
                 <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
-                  El nombre es obligatorio.
+                  {{ 'CLIENTES.NOMBRE_OBLIGATORIO' | translate }}
                 </ion-note>
               </ion-item>
               <ion-item>
@@ -96,7 +96,7 @@
                 <ion-input [(ngModel)]="fichaSeleccionada.abizena" name="abizena" #abizena="ngModel" required>
                 </ion-input>
                 <ion-note *ngIf="abizena.invalid && abizena.touched" color="danger">
-                  El apellido es obligatorio.
+                  {{ 'CLIENTES.APELLIDO_OBLIGATORIO' | translate }}
                 </ion-note>
               </ion-item>
               <ion-item>
@@ -108,43 +108,51 @@
               </ion-item>
               <ion-item>
                 <ion-label position="floating">{{ 'CLIENTES.TELEFONO' | translate }}</ion-label>
-                <ion-input [(ngModel)]="fichaSeleccionada.telefonoa" name="telefonoa" #telefonoa="ngModel" maxlength="9" pattern="^[0-9]*$">
+                <ion-input [(ngModel)]="fichaSeleccionada.telefonoa" name="telefonoa" #telefonoa="ngModel" maxlength="9"
+                  pattern="^[0-9]*$">
                 </ion-input>
                 <ion-note *ngIf="telefonoa.invalid && telefonoa.touched" color="danger">
-                  El teléfono debe contener un máximo de 9 números.
+                  {{ 'CLIENTES.TELEFONO_NUEVE' | translate }}
                 </ion-note>
               </ion-item>
-              <ion-button color = "tertiary" expand="full" type="submit" [disabled]="fichaForm.invalid">Confirmar</ion-button>
-              <ion-button expand="full" color="danger" type="button" (click)="cancelarEdicion()">{{ 'CLIENTES.CANCELAR' | translate }}</ion-button>
-              <ion-button *ngIf="!esHistorial" expand="full" class="custom-red-button" type="button" (click)="eliminarFicha()">
-               {{ 'CLIENTES.TELEFONO' | translate }}
+              <ion-button color="tertiary" expand="full" type="submit"
+                [disabled]="fichaForm.invalid">Confirmar</ion-button>
+              <ion-button expand="full" color="danger" type="button" (click)="cancelarEdicion()">{{ 'CLIENTES.CANCELAR'
+                | translate }}</ion-button>
+              <ion-button *ngIf="!esHistorial" expand="full" class="custom-red-button" type="button"
+                (click)="eliminarFicha()">
+                {{ 'CLIENTES.TELEFONO' | translate }}
               </ion-button>
-              
-              <ion-button *ngIf="esHistorial" expand="full" class="custom-gray-button" type="button" (click)="trueEliminarFicha()">
-               {{ 'CLIENTES.CONFIRMAR_BORRADO' | translate }}
+
+              <ion-button *ngIf="esHistorial" expand="full" class="custom-gray-button" type="button"
+                (click)="trueEliminarFicha()">
+                {{ 'CLIENTES.CONFIRMAR_BORRADO' | translate }}
               </ion-button>
-              
-              <ion-button *ngIf="esHistorial" expand="full" class="custom-purple-button" type="button" (click)="restaurarFicha()">
+
+              <ion-button *ngIf="esHistorial" expand="full" class="custom-purple-button" type="button"
+                (click)="restaurarFicha()">
                 {{ 'CLIENTES.RESTAURAR_FICHA' | translate }}
               </ion-button>
-              
+
             </form>
           </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
-  
+
     <!-- Botón para añadir fichas -->
-    <ion-row *ngIf= "!esHistorial">
+    <ion-row *ngIf="!esHistorial">
       <ion-col size="12" class="ion-text-center">
-        <ion-button color="primary" expand="block" [routerLink]="'/crear-ficha'">{{ 'CLIENTES.AÑADIR_FICHA' | translate }}
+        <ion-button color="primary" expand="block" [routerLink]="'/crear-ficha'">{{ 'CLIENTES.AÑADIR_FICHA' | translate
+          }}
           <ion-icon name="add-circle-outline"></ion-icon>
         </ion-button>
       </ion-col>
     </ion-row>
-  
+
     <!-- Fila de fichas -->
-    <ion-row justify-content-center *ngFor="let ficha of fichasFiltradas | slice: (paginaActual - 1) * FichasPorPagina : paginaActual * FichasPorPagina">
+    <ion-row justify-content-center
+      *ngFor="let ficha of fichasFiltradas | slice: (paginaActual - 1) * FichasPorPagina : paginaActual * FichasPorPagina">
       <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
         <ion-card *ngIf="fichaSeleccionada?.id !== ficha.id" (click)="editarFicha(ficha)">
           <ion-card-header>
@@ -152,17 +160,18 @@
           </ion-card-header>
           <ion-card-content>
             <p><strong>{{ 'CLIENTES.ID' | translate }}:</strong> {{ ficha.id || '-' }}</p>
-            <p><strong>{{ 'CLIENTES.PIEL_SENSIBLE' | translate }}:</strong> 
+            <p><strong>{{ 'CLIENTES.PIEL_SENSIBLE' | translate }}:</strong>
               <span *ngIf="ficha.azal_sentikorra === 'B'">{{ 'CLIENTES.SI' | translate }}</span>
               <span *ngIf="ficha.azal_sentikorra === 'E'">{{ 'CLIENTES.NO' | translate }}</span>
               <span *ngIf="ficha.azal_sentikorra === ''">{{ 'CLIENTES.DESCONOCIDO' | translate }}</span>
-            </p>               
+            </p>
             <p><strong>{{ 'CLIENTES.TELEFONO' | translate }}:</strong> {{ ficha.telefonoa || '-' }}</p>
-            <p *ngIf="!esHistorial"><strong>{{ 'CLIENTES.FECHA_CREACION' | translate }}:</strong> {{ ficha.data.sortze_data | date:'yyyy-MM-dd' }}</p>
-            <p *ngIf="!esHistorial"><strong>{{ 'CLIENTES.ULTIMA_ACTUALIZACION' | translate }}:</strong> 
+            <p *ngIf="!esHistorial"><strong>{{ 'CLIENTES.FECHA_CREACION' | translate }}:</strong> {{
+              ficha.data.sortze_data | date:'yyyy-MM-dd' }}</p>
+            <p *ngIf="!esHistorial"><strong>{{ 'CLIENTES.ULTIMA_ACTUALIZACION' | translate }}:</strong>
               {{ ficha.data.eguneratze_data ? (ficha.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}
             </p>
-            <p *ngIf="esHistorial"><strong>{{ 'CLIENTES.FECHA_ELIMINACION' | translate }}:</strong> 
+            <p *ngIf="esHistorial"><strong>{{ 'CLIENTES.FECHA_ELIMINACION' | translate }}:</strong>
               {{ ficha.data.ezabatze_data ? (ficha.data.ezabatze_data | date:'yyyy-MM-dd') : '-' }}
             </p>
           </ion-card-content>
@@ -170,15 +179,12 @@
       </ion-col>
     </ion-row>
   </ion-content>
-  
-  
+
+
   <ion-content *ngIf="!mobilaDa" [fullscreen]="true">
-    <ion-searchbar
-      search-icon="search-circle"
-      placeholder="Buscar"
-      (ionInput)="aplicarFiltro($event)">
+    <ion-searchbar search-icon="search-circle" placeholder="Buscar" (ionInput)="aplicarFiltro($event)">
     </ion-searchbar>
-  
+
     <!-- Fila de edición visible solo en modo edición -->
     <ion-row *ngIf="editandoFicha">
       <ion-col size="12">
@@ -217,39 +223,45 @@
               </ion-item>
               <ion-item>
                 <ion-label position="floating">{{ 'CLIENTES.TELEFONO' | translate }}</ion-label>
-                <ion-input [(ngModel)]="fichaSeleccionada.telefonoa" name="telefonoa" #telefonoa="ngModel" maxlength="9" pattern="^[0-9]*$">
+                <ion-input [(ngModel)]="fichaSeleccionada.telefonoa" name="telefonoa" #telefonoa="ngModel" maxlength="9"
+                  pattern="^[0-9]*$">
                 </ion-input>
                 <ion-note *ngIf="telefonoa.invalid && telefonoa.touched" color="danger">
                   El teléfono debe contener un máximo de 9 números.{{ 'CLIENTES.TELEFONO_NUEVE' | translate }}
                 </ion-note>
               </ion-item>
-              <ion-button color = "tertiary" expand="full" type="submit" [disabled]="fichaForm.invalid">{{ 'CLIENTES.CONFIRMAR' | translate }}</ion-button>
-              <ion-button expand="full" color="danger" type="button" (click)="cancelarEdicion()">{{ 'CLIENTES.CANCELAR' | translate }}</ion-button>
-              <ion-button *ngIf="!esHistorial" expand="full" class="custom-red-button" type="button" (click)="eliminarFicha()">
+              <ion-button color="tertiary" expand="full" type="submit" [disabled]="fichaForm.invalid">{{
+                'CLIENTES.CONFIRMAR' | translate }}</ion-button>
+              <ion-button expand="full" color="danger" type="button" (click)="cancelarEdicion()">{{ 'CLIENTES.CANCELAR'
+                | translate }}</ion-button>
+              <ion-button *ngIf="!esHistorial" expand="full" class="custom-red-button" type="button"
+                (click)="eliminarFicha()">
                 {{ 'CLIENTES.BORRAR_FICHA' | translate }}
               </ion-button>
-              
-              <ion-button *ngIf="esHistorial" expand="full" class="custom-gray-button" type="button" (click)="trueEliminarFicha()">
+
+              <ion-button *ngIf="esHistorial" expand="full" class="custom-gray-button" type="button"
+                (click)="trueEliminarFicha()">
                 {{ 'CLIENTES.CONFIRMAR_BORRADO' | translate }}
               </ion-button>
-              
-              <ion-button *ngIf="esHistorial" expand="full" class="custom-purple-button" type="button" (click)="restaurarFicha()">
+
+              <ion-button *ngIf="esHistorial" expand="full" class="custom-purple-button" type="button"
+                (click)="restaurarFicha()">
                 {{ 'CLIENTES.RESTAURAR_FICHA' | translate }}
               </ion-button>
-              
+
             </form>
           </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
-    
+
     <ion-item>
       <ion-label>{{ 'CLIENTES.CLIENTES_PORPAGINA' | translate }}</ion-label>
       <ion-select [(ngModel)]="FichasPorPagina" interface="popover" (ionChange)="cambiarPagina(1)">
         <ion-select-option *ngFor="let num of [5, 10, 25, 50, 100]" [value]="num">{{ num }}</ion-select-option>
       </ion-select>
     </ion-item>
-  
+
     <ion-grid>
       <ion-row>
         <ion-col><strong>{{ 'CLIENTES.ID' | translate }}</strong></ion-col>
@@ -262,7 +274,8 @@
         <ion-col *ngIf="esHistorial"><strong>{{ 'CLIENTES.FECHA_ELIMINACION' | translate }}</strong></ion-col>
         <ion-col><strong>{{ 'CLIENTES.ACCIONES' | translate }}</strong></ion-col>
       </ion-row>
-      <ion-row *ngFor="let ficha of fichasFiltradas | slice: (paginaActual - 1) * FichasPorPagina : paginaActual * FichasPorPagina">
+      <ion-row
+        *ngFor="let ficha of fichasFiltradas | slice: (paginaActual - 1) * FichasPorPagina : paginaActual * FichasPorPagina">
         <ion-col>{{ ficha.id || '-' }}</ion-col>
         <ion-col>{{ ficha.izena || '-' }}</ion-col>
         <ion-col>{{ ficha.abizena || '-' }}</ion-col>
@@ -272,24 +285,29 @@
           <span *ngIf="!ficha.azal_sentikorra">{{ 'CLIENTES.DESCONOCIDO' | translate }}</span>
         </ion-col>
         <ion-col>{{ ficha.telefonoa || '-' }}</ion-col>
-        <ion-col *ngIf="!esHistorial">{{ ficha.data?.sortze_data | date:'yyyy-MM-dd' }}</ion-col>
-        <ion-col *ngIf="!esHistorial">{{ ficha.data?.eguneratze_data ? (ficha.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</ion-col>
-        <ion-col *ngIf="esHistorial">{{ ficha.data?.ezabatze_data ? (ficha.data.ezabatze_data | date:'yyyy-MM-dd') : '-' }}</ion-col>
+        <ion-col *ngIf="!esHistorial">{{ ficha.data.sortze_data | date:'yyyy-MM-dd' }}</ion-col>
+        <ion-col *ngIf="!esHistorial">{{ ficha.data.eguneratze_data ? (ficha.data.eguneratze_data | date:'yyyy-MM-dd') :
+          '-' }}</ion-col>
+        <ion-col *ngIf="esHistorial">{{ ficha.data.ezabatze_data ? (ficha.data.ezabatze_data | date:'yyyy-MM-dd') : '-'
+          }}</ion-col>
         <ion-col>
           <ion-button (click)="editarFicha(ficha)">Editar</ion-button>
-          <ion-button color="danger" *ngIf="!esHistorial" (click)="eliminarFicha()">{{ 'CLIENTES.BORRAR' | translate }}</ion-button>
-          <ion-button color="success" *ngIf="esHistorial" (click)="restaurarFicha()">{{ 'CLIENTES.RESTAURAR' | translate }}</ion-button>
+          <ion-button color="danger" *ngIf="!esHistorial" (click)="eliminarFicha()">{{ 'CLIENTES.BORRAR' | translate
+            }}</ion-button>
+          <ion-button color="success" *ngIf="esHistorial" (click)="restaurarFicha()">{{ 'CLIENTES.RESTAURAR' | translate
+            }}</ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
-  
+
     <ion-row>
       <ion-col class="ion-text-center">
-        <ion-button *ngIf="!esHistorial" color="primary" expand="block" [routerLink]="'/crear-ficha'">{{ 'CLIENTES.AÑADIR_FICHA' | translate }} <ion-icon name="add-circle-outline"></ion-icon></ion-button>
-        
+        <ion-button *ngIf="!esHistorial" color="primary" expand="block" [routerLink]="'/crear-ficha'">{{
+          'CLIENTES.AÑADIR_FICHA' | translate }} <ion-icon name="add-circle-outline"></ion-icon></ion-button>
+
       </ion-col>
     </ion-row>
-  
+
     <ion-row>
       <ion-col>
         <ion-button *ngFor="let page of hacerPaginacion()" (click)="cambiarPagina(page)">
