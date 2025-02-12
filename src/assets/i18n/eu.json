@@ -382,6 +382,26 @@
       "ERROR_APELLIDO": "Langileak behintzat abizena izan behar du.",
       "CANCELAR": "Utzi",
       "GUARDAR": "Gorde"
+  },
+    "EDITAR_EQUIPO": {
+      "TITULO": "Taldea editatu",
+      "NOMBRE": "Taldearen izena",
+      "INTRODUCE_NOMBRE": "Sartu taldearen izena",
+      "ERROR_NOMBRE": "Taldeak izen bat izan behar du.",
+      "TRABAJADORES": "Langileak",
+      "SELECCIONAR_TRABAJADORES": "Hautatu langileak",
+      "GUARDAR": "Taldea gorde"
+  },
+    "CREAR_TRABAJADOR": {
+      "TITULO": "Langilea sortu",
+      "NOMBRE": "Izena",
+      "INTRODUCE_NOMBRE": "Sartu langilearen izena",
+      "ERROR_NOMBRE": "Langileak izen bat izan behar du.",
+      "APELLIDOS": "Abizenak",
+      "INTRODUCE_APELLIDOS": "Sartu langilearen abizenak",
+      "ERROR_APELLIDOS": "Langileak gutxienez abizen bat izan behar du.",
+      "SELECCIONAR_EQUIPO": "Hautatu taldea",
+      "GUARDAR": "Langilea gorde"
   }
   
 }

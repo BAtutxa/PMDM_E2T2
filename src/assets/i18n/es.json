@@ -378,6 +378,25 @@
       "ERROR_APELLIDO": "El trabajador debe contener al menos un apellido.",
       "CANCELAR": "Cancelar",
       "GUARDAR": "Guardar"
-    }
-  
+    },
+      "EDITAR_EQUIPO": {
+        "TITULO": "Editar equipo",
+        "NOMBRE": "Nombre del Equipo",
+        "INTRODUCE_NOMBRE": "Introduce el nombre del equipo",
+        "ERROR_NOMBRE": "El equipo debe contener un nombre.",
+        "TRABAJADORES": "Trabajadores",
+        "SELECCIONAR_TRABAJADORES": "Selecciona los trabajadores",
+        "GUARDAR": "Guardar Equipo"
+    },
+      "CREAR_TRABAJADOR": {
+        "TITULO": "Crear trabajador",
+        "NOMBRE": "Nombre",
+        "INTRODUCE_NOMBRE": "Introduce el nombre del trabajador",
+        "ERROR_NOMBRE": "El trabajador debe contener un nombre.",
+        "APELLIDOS": "Apellidos",
+        "INTRODUCE_APELLIDOS": "Introduce los apellidos del trabajador",
+        "ERROR_APELLIDOS": "El trabajador debe contener al menos un apellido.",
+        "SELECCIONAR_EQUIPO": "Seleccionar equipo",
+        "GUARDAR": "Guardar trabajador"
+      }
 }

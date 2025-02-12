@@ -2,7 +2,7 @@
 </ion-header>
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title>Crear trabajador</ion-title>
+    <ion-title>{{ 'CREAR_TRABAJADOR.TITULO' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -10,46 +10,47 @@
   <form (ngSubmit)="crearLangile()">
     <ion-list>
       <form #LangileForm="ngForm" (ngSubmit)="crearLangile()" novalidate>
-      <ion-item>
-        <ion-label position="floating">Nombre</ion-label>
-        <ion-input
-          [(ngModel)]="langile.izena"
-          name="izena"
-          placeholder="Introduce el nombre del trabajador"
-          required
-          #izena = "ngModel"
-        ></ion-input>
-        <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
-          El trabajador debe contener un nombre.
-        </ion-note>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating">Apellidos</ion-label>
-        <ion-input
-          [(ngModel)]="langile.abizenak"
-          name="abizena"
-          placeholder="Introduce los apellidos del trabajador"
-          required
-          #abizena = "ngModel"
-        ></ion-input>
-        <ion-note *ngIf="abizena.invalid && abizena.touched" color="danger">
-          El trabajador debe contener al menos un apellido.
-        </ion-note>
-      </ion-item>
-      <ion-item>
-        <ion-label>Seleccionar equipo</ion-label>
-        <ion-select [(ngModel)]="equipoNombre" name="equipo" required (ionChange)="seleccionarEquipo()">
-          <ion-select-option *ngFor="let equipo of equipos" [value]="equipo.kodea">
-            {{ equipo.izena }}
-          </ion-select-option>
-        </ion-select>
-      </ion-item>
-      
-      
-      <ion-button expand="full" type="submit" [disabled]="LangileForm.invalid" color="primary">
-        Guardar trabajador
-      </ion-button>
-    </form>
+        <ion-item>
+          <ion-label position="floating">{{ 'CREAR_TRABAJADOR.NOMBRE' | translate }}</ion-label>
+          <ion-input
+            [(ngModel)]="langile.izena"
+            name="izena"
+            placeholder="{{ 'CREAR_TRABAJADOR.INTRODUCE_NOMBRE' | translate }}"
+            required
+            #izena="ngModel"
+          ></ion-input>
+          <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
+            {{ 'CREAR_TRABAJADOR.ERROR_NOMBRE' | translate }}
+          </ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">{{ 'CREAR_TRABAJADOR.APELLIDOS' | translate }}</ion-label>
+          <ion-input
+            [(ngModel)]="langile.abizenak"
+            name="abizena"
+            placeholder="{{ 'CREAR_TRABAJADOR.INTRODUCE_APELLIDOS' | translate }}"
+            required
+            #abizena="ngModel"
+          ></ion-input>
+          <ion-note *ngIf="abizena.invalid && abizena.touched" color="danger">
+            {{ 'CREAR_TRABAJADOR.ERROR_APELLIDOS' | translate }}
+          </ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>{{ 'CREAR_TRABAJADOR.SELECCIONAR_EQUIPO' | translate }}</ion-label>
+          <ion-select [(ngModel)]="equipoNombre" name="equipo" required (ionChange)="seleccionarEquipo()">
+            <ion-select-option *ngFor="let equipo of equipos" [value]="equipo.kodea">
+              {{ equipo.izena }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-button expand="full" type="submit" [disabled]="LangileForm.invalid" color="primary">
+          {{ 'CREAR_TRABAJADOR.GUARDAR' | translate }}
+        </ion-button>
+      </form>
     </ion-list>
   </form>
 </ion-content>
