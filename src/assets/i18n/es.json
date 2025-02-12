@@ -363,5 +363,21 @@
     "NOMBRE": "Nombre",
     "INTRODUCE_NOMBRE": "Introduce un valor para nombre",
     "GUARDAR": "Guardar"
-  }
+  },
+    "EQUIPOS": {
+      "TITULO": "Equipos",
+      "ID": "ID",
+      "EDITAR": "Editar",
+      "BORRAR": "Borrar",
+      "EDITAR_TRABAJADOR": "Editar Trabajador",
+      "NOMBRE": "Nombre",
+      "INTRODUCE_NOMBRE": "Introduce el nombre",
+      "ERROR_NOMBRE": "El trabajador debe contener un nombre.",
+      "APELLIDO": "Apellido",
+      "INTRODUCE_APELLIDO": "Introduce el apellido",
+      "ERROR_APELLIDO": "El trabajador debe contener al menos un apellido.",
+      "CANCELAR": "Cancelar",
+      "GUARDAR": "Guardar"
+    }
+  
 }

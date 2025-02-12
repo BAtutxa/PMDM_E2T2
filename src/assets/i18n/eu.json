@@ -290,7 +290,8 @@
     "LABEL_OBLIGATORIO": "Etiketa beharrezkoa da",
     "FECHA_BORRADO": "Ezabatze Data",
     "CREATION_DATE": "Sortze Data",
-    "UPDATE_DATE": "Eguneratze Data"
+    "UPDATE_DATE": "Eguneratze Data",
+    "ANADIR_MATERIAL":"Materiala gehitu"
   },
   "MATERIAL_MAILEGUAK": {
     "TITLE": "Material Maileguak",
@@ -365,5 +366,22 @@
     "NOMBRE": "Izena",
     "INTRODUCE_NOMBRE": "Sartu izenaren balioa",
     "GUARDAR": "Gorde"
+  },
+  
+    "EQUIPOS": {
+      "TITULO": "Taldeak",
+      "ID": "ID",
+      "EDITAR": "Editatu",
+      "BORRAR": "Ezabatu",
+      "EDITAR_TRABAJADOR": "Langilea editatu",
+      "NOMBRE": "Izena",
+      "INTRODUCE_NOMBRE": "Sartu izena",
+      "ERROR_NOMBRE": "Langileak izen bat izan behar du.",
+      "APELLIDO": "Abizenak",
+      "INTRODUCE_APELLIDO": "Sartu abizena",
+      "ERROR_APELLIDO": "Langileak behintzat abizena izan behar du.",
+      "CANCELAR": "Utzi",
+      "GUARDAR": "Gorde"
   }
+  
 }

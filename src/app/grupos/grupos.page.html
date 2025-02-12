@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-title>
-      Equipos
+      {{ 'EQUIPOS.TITULO' | translate }}
       <ion-icon (click)="CrearEquipo()" name="add"></ion-icon>
       <ion-icon routerLink="/langile" name="person-add"></ion-icon>
       <!-- Añadimos un evento de click para evitar que el menú se cierre -->
@@ -22,7 +22,7 @@
           <div *ngFor="let trabajador of grupo.langileak">
             <ion-chip color="secondary" (click)="editarLangile(trabajador)">
               <ion-label>
-                ID: {{ trabajador.id }} - {{ trabajador.izena }} {{ trabajador.abizenak }}
+                {{ 'EQUIPOS.ID' | translate }}: {{ trabajador.id }} - {{ trabajador.izena }} {{ trabajador.abizenak }}
               </ion-label>
             </ion-chip>
           </div>
@@ -31,60 +31,65 @@
         <!-- Botones para editar/eliminar -->
         <ion-buttons slot="end">
           <ion-button color="tertiary" [routerLink]="['/editar-grupo', grupo.kodea]">
-            Editar
+            {{ 'EQUIPOS.EDITAR' | translate }}
           </ion-button>
           <ion-button color="danger" (click)="eliminarGrupo(grupo)">
-            Borrar
+            {{ 'EQUIPOS.BORRAR' | translate }}
           </ion-button>
         </ion-buttons>
       </ion-item>
     </ion-list>
   </div>
 
- <!-- Card para editar trabajador (visible al editar) -->
-<div *ngIf="mostrarEditor">
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title color = "terciary">Editar Trabajador</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <form #trabajadorForm="ngForm" (ngSubmit)="guardarCambios()">
-        <div class="input-container">
-          <ion-label class="input-label" color="terciary">Nombre</ion-label>
-          <ion-input
-            class="custom-input"
-            [(ngModel)]="langileSeleccionado.izena"
-            name="izena"
-            #izena="ngModel"
-            required
-            placeholder="Introduce el nombre"
-          ></ion-input>
-          <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
-            El trabajador debe contener un nombre.
-          </ion-note>
-        </div>
+  <!-- Card para editar trabajador (visible al editar) -->
+  <div *ngIf="mostrarEditor">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title color="terciary">{{ 'EQUIPOS.EDITAR_TRABAJADOR' | translate }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <form #trabajadorForm="ngForm" (ngSubmit)="guardarCambios()">
+          <div class="input-container">
+            <ion-label class="input-label" color="terciary">{{ 'EQUIPOS.NOMBRE' | translate }}</ion-label>
+            <ion-input
+              class="custom-input"
+              [(ngModel)]="langileSeleccionado.izena"
+              name="izena"
+              #izena="ngModel"
+              required
+              placeholder="{{ 'EQUIPOS.INTRODUCE_NOMBRE' | translate }}"
+            ></ion-input>
+            <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
+              {{ 'EQUIPOS.ERROR_NOMBRE' | translate }}
+            </ion-note>
+          </div>
 
-        <div class="input-container">
-          <ion-label class="input-label" color="terciary">Apellido</ion-label>
-          <ion-input
-            class="custom-input"
-            [(ngModel)]="langileSeleccionado.abizenak"
-            name="abizenak"
-            #abizena="ngModel"
-            required
-            placeholder="Introduce el apellido"
-          ></ion-input>
-          <ion-note *ngIf="abizena.invalid && abizena.touched" color="danger">
-            El trabajador debe contener al menos un apellido.
-          </ion-note>
-        </div>
+          <div class="input-container">
+            <ion-label class="input-label" color="terciary">{{ 'EQUIPOS.APELLIDO' | translate }}</ion-label>
+            <ion-input
+              class="custom-input"
+              [(ngModel)]="langileSeleccionado.abizenak"
+              name="abizenak"
+              #abizena="ngModel"
+              required
+              placeholder="{{ 'EQUIPOS.INTRODUCE_APELLIDO' | translate }}"
+            ></ion-input>
+            <ion-note *ngIf="abizena.invalid && abizena.touched" color="danger">
+              {{ 'EQUIPOS.ERROR_APELLIDO' | translate }}
+            </ion-note>
+          </div>
 
-        <div class="botones">
-          <ion-button color="medium" color="danger" (click)="cancelarEdicion()">Cancelar</ion-button>
-          <ion-button color="primary" type="submit"  [disabled]="trabajadorForm.invalid" >Guardar</ion-button>
-        </div>
-      </form>
-    </ion-card-content>
-  </ion-card>
-</div>
+          <div class="botones">
+            <ion-button color="medium" color="danger" (click)="cancelarEdicion()">
+              {{ 'EQUIPOS.CANCELAR' | translate }}
+            </ion-button>
+            <ion-button color="primary" type="submit" [disabled]="trabajadorForm.invalid">
+              {{ 'EQUIPOS.GUARDAR' | translate }}
+            </ion-button>
+          </div>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
+
