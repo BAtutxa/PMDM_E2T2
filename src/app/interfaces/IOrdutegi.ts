@@ -11,4 +11,4 @@ export  interface IOrdutegi{
         amaiera_ordua : string | null,
     }
     data: IData
-}
+}   

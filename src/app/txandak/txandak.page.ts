@@ -11,6 +11,22 @@ import { IEquipos } from '../interfaces/IEquipos';
   styleUrls: ['./txandak.page.scss'],
 })
 export class TxandakPage implements OnInit {
+  ordutegi: IOrdutegi = {
+    id: null,
+    kodea: '',
+    eguna: 0,
+    hasiera_data: null,
+    amaiera_data: null,
+    denbora: {
+      hasiera_ordua: null,
+      amaiera_ordua: null,
+    },
+    data: {
+      sortze_data: new Date(),
+      eguneratze_data: new Date(),
+      ezabatze_data: null
+    }
+  };
 
   ordutegiak: IOrdutegi[] = [];
   selectedOrdutegi: IOrdutegi | null = null;
@@ -29,6 +45,10 @@ export class TxandakPage implements OnInit {
   }
 
   egunaStringEgin(index: number): string {
+    if (!this.ordutegiak || index >= this.ordutegiak.length || !this.ordutegiak[index]) {
+      return "Desconocido";
+    }
+  
     let egunaString: string;
     switch(this.ordutegiak[index].eguna) {
       case 1: egunaString = "Lunes"; break;
@@ -40,14 +60,17 @@ export class TxandakPage implements OnInit {
     }
     return egunaString;
   }
-
   cargarOrdutegi() {
     this.ordutegiObservable = this.ordutegiService.getOrdutegisActivos();
     this.ordutegiService.getOrdutegisActivos().subscribe(data => {
       this.ordutegiak = data; // Guardamos los ordutegiak
       if (this.ordutegiak.length > 0) {
         this.cargarGrupos(); // Llamamos a cargarGrupos después de que ordutegiak estén cargados
+      } else {
+        console.warn('No se encontraron ordutegiak.');
       }
+    }, error => {
+      console.error('Error al cargar ordutegiak:', error);
     });
   }
 

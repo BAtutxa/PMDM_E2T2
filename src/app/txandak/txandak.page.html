@@ -28,9 +28,13 @@
       <ion-card-content>
         <p><strong>Equipo:</strong> {{ getEquipoNombre(selectedOrdutegi.kodea) }}</p>
         <p><strong>Fecha:</strong> {{ selectedOrdutegi.hasiera_data | date: 'yyyy-MM-dd' }}</p>
-        <p><strong>Día:</strong> {{ selectedOrdutegi.hasiera_data | date: 'yyyy-MM-dd' }}</p>
+        <p><strong>Día:</strong> {{ egunaStringEgin(selectedOrdutegi.eguna) }}</p>
         <p><strong>Hora de Inicio:</strong> {{ selectedOrdutegi.denbora.hasiera_ordua }}</p>
         <p><strong>Hora de Fin:</strong> {{ selectedOrdutegi.denbora.amaiera_ordua }}</p>
+        <p><strong>Hora de Inicio:</strong> {{ selectedOrdutegi.denbora.hasiera_ordua }}</p>
+        <p><strong>Hora de Fin:</strong> {{ selectedOrdutegi.denbora.amaiera_ordua }}</p>
+        <p><strong>Fecha de creacion:</strong> {{ selectedOrdutegi.data.sortze_data | date: 'yyyy-MM-dd' }}</p>
+        <p><strong>Fecha de actualización:</strong> {{ selectedOrdutegi.data.eguneratze_data  | date: 'yyyy-MM-dd'}}</p>
       </ion-card-content>
       <ion-button color="tertiary" shape="round" fill="solid" (click)="editarOrdutegi(selectedOrdutegi)">
         <ion-icon name="create-outline" slot="start"></ion-icon>
