@@ -29,8 +29,8 @@
         <p><strong>Equipo:</strong> {{ getEquipoNombre(selectedOrdutegi.kodea) }}</p>
         <p><strong>Fecha:</strong> {{ selectedOrdutegi.hasiera_data | date: 'yyyy-MM-dd' }}</p>
         <p><strong>Día:</strong> {{ egunaStringEgin(selectedOrdutegi.eguna) }}</p>
-        <p><strong>Hora de Inicio:</strong> {{ selectedOrdutegi.denbora.hasiera_ordua }}</p>
-        <p><strong>Hora de Fin:</strong> {{ selectedOrdutegi.denbora.amaiera_ordua }}</p>
+        <p><strong>Fecha inicio:</strong> {{ selectedOrdutegi.hasiera_data }}</p>
+        <p><strong>Fecha Fin:</strong> {{ selectedOrdutegi.amaiera_data }}</p>
         <p><strong>Hora de Inicio:</strong> {{ selectedOrdutegi.denbora.hasiera_ordua }}</p>
         <p><strong>Hora de Fin:</strong> {{ selectedOrdutegi.denbora.amaiera_ordua }}</p>
         <p><strong>Fecha de creacion:</strong> {{ selectedOrdutegi.data.sortze_data | date: 'yyyy-MM-dd' }}</p>
@@ -48,21 +48,55 @@
         <ion-card-title>Editar Ordutegi</ion-card-title>
       </ion-card-header>
       <ion-card-content>
+        <!-- Fecha de inicio -->
         <ion-item>
           <ion-label>Fecha inicio</ion-label>
-          <ion-datetime presentation="date" [(ngModel)]="editingOrdutegi.hasiera_data"></ion-datetime>
+          <ion-input
+            type="date"
+            [(ngModel)]="editingOrdutegi.hasiera_data"
+          ></ion-input>
         </ion-item>
+    
+        <!-- Fecha final -->
         <ion-item>
           <ion-label>Fecha final</ion-label>
-          <ion-datetime presentation="date" [(ngModel)]="editingOrdutegi.amaiera_data"></ion-datetime>
+          <ion-input
+            type="date"
+            [(ngModel)]="editingOrdutegi.amaiera_data"
+          ></ion-input>
         </ion-item>
+    
+        <!-- Día -->
+        <ion-select
+        [(ngModel)]="editingOrdutegi.eguna"
+        name="eguna"
+        required
+        interface="popover"
+        placeholder="Selecciona un día"
+      >
+        <ion-select-option [value]="1">Lunes</ion-select-option>
+        <ion-select-option [value]="2">Martes</ion-select-option>
+        <ion-select-option [value]="3">Miércoles</ion-select-option>
+        <ion-select-option [value]="4">Jueves</ion-select-option>
+        <ion-select-option [value]="5">Viernes</ion-select-option>
+      </ion-select>
+    
+        <!-- Hora de inicio -->
         <ion-item>
           <ion-label>Hora de Inicio</ion-label>
-          <ion-input type="time" [(ngModel)]="editingOrdutegi.denbora.hasiera_ordua"></ion-input>
+          <ion-input
+            type="time"
+            [(ngModel)]="editingOrdutegi.denbora.hasiera_ordua"
+          ></ion-input>
         </ion-item>
+    
+        <!-- Hora de fin -->
         <ion-item>
           <ion-label>Hora de Fin</ion-label>
-          <ion-input type="time" [(ngModel)]="editingOrdutegi.denbora.amaiera_ordua"></ion-input>
+          <ion-input
+            type="time"
+            [(ngModel)]="editingOrdutegi.denbora.amaiera_ordua"
+          ></ion-input>
         </ion-item>
       </ion-card-content>
       <ion-button color="success" expand="full" (click)="guardarCambios()">Guardar</ion-button>

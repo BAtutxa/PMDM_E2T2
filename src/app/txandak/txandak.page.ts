@@ -104,64 +104,100 @@ export class TxandakPage implements OnInit {
   }
 
   editarOrdutegi(ordutegi: IOrdutegi) {
-    this.editingOrdutegi = { ...ordutegi }; 
+    // Formatear fechas a "yyyy-MM-dd" para el input type="date"
+    const formatFechaParaInput = (fecha: string | Date | null): string => {
+      if (!fecha) return '';
+      const date = new Date(fecha);
+      return date.toISOString().split('T')[0]; // Formato "yyyy-MM-dd"
+    };
+  
+    // Crear una copia del ordutegi y formatear fechas
+    this.editingOrdutegi = {
+      ...ordutegi,
+      hasiera_data: formatFechaParaInput(ordutegi.hasiera_data),
+      amaiera_data: formatFechaParaInput(ordutegi.amaiera_data),
+    };
+  
     this.editando = true;
   }
   
 
-    guardarCambios() {
-      if (!this.editingOrdutegi) {
-          alert("No hay ningún ordutegi en edición.");
-          return;
-      }
+  guardarCambios() {
+    if (!this.editingOrdutegi) {
+        alert("No hay ningún ordutegi en edición.");
+        return;
+    }
 
-      const { kodea, eguna, hasiera_data, amaiera_data, denbora } = this.editingOrdutegi;
+    const { kodea, eguna, hasiera_data, amaiera_data, denbora } = this.editingOrdutegi;
 
-      if (!kodea || !eguna || !hasiera_data || !amaiera_data || !denbora?.hasiera_ordua || !denbora?.amaiera_ordua) {
-          alert('Por favor, completa todos los campos obligatorios.');
-          return;
-      }
+    if (!kodea || !eguna || !hasiera_data || !amaiera_data || !denbora?.hasiera_ordua || !denbora?.amaiera_ordua) {
+        alert('Por favor, completa todos los campos obligatorios.');
+        return;
+    }
 
-      // Formatear fechas y horas correctamente
-      const formatFecha = (fecha: any): string | null => {
-          return fecha ? new Date(fecha).toISOString().split('T')[0] : null;
-      };
+    // Función para verificar si una fecha está en formato "yyyy-MM-dd"
+    const isDateFormatValid = (fecha: any): boolean => {
+        return typeof fecha === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(fecha);
+    };
 
-      const formatHora = (hora: string | null): string | null => {
-          if (!hora) return null;
-          const [hours, minutes] = hora.split(":");
-          return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}:00`;
-      };
+    // Función para formatear fechas a "yyyy-MM-dd"
+    const formatFecha = (fecha: any): string | null => {
+        if (!fecha) return null;
+        if (isDateFormatValid(fecha)) return fecha; // Si ya está en el formato correcto, no se formatea
+        return new Date(fecha).toISOString().split('T')[0]; // Formatea a "yyyy-MM-dd"
+    };
 
-      // Crear el objeto actualizado
-      const ordutegiToUpdate: IOrdutegi = {
-          ...this.editingOrdutegi,
-          hasiera_data: formatFecha(hasiera_data),
-          amaiera_data: formatFecha(amaiera_data),
-          denbora: {
-              hasiera_ordua: formatHora(denbora.hasiera_ordua),
-              amaiera_ordua: formatHora(denbora.amaiera_ordua)
-          },
-          data: {
-              sortze_data: this.editingOrdutegi.data?.sortze_data || new Date(),
-              eguneratze_data: new Date(),
-              ezabatze_data: null
-          }
-      };
+    // Función para verificar si una hora está en formato "HH:mm:ss"
+    const isHoraFormatValid = (hora: string | null): boolean => {
+        return typeof hora === 'string' && /^\d{2}:\d{2}:\d{2}$/.test(hora);
+    };
 
-      console.log("Enviando actualización al servidor:", ordutegiToUpdate);
+    // Función para formatear horas a "HH:mm:ss"
+    const formatHora = (hora: string | null): string | null => {
+        if (!hora) return null;
+        if (isHoraFormatValid(hora)) return hora; // Si ya está en el formato correcto, no se formatea
+        const [hours, minutes] = hora.split(":");
+        return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}:00`; // Formatea a "HH:mm:ss"
+    };
 
-      // Enviar datos al backend para actualizar
-      this.ordutegiService.actualizarOrdutegi(ordutegiToUpdate).subscribe({
-          next: () => {
-              alert("El horario ha sido actualizado correctamente.");
-              this.cargarOrdutegi(); // Recargar la lista de horarios
-              this.editando = false;
-          },
-          error: (error: any) => {
-              console.error('Error al actualizar el horario:', error);
-              alert("Hubo un error al actualizar el horario.");
-          }
-      });
-  }
+    // Crear el objeto actualizado
+    const ordutegiToUpdate: IOrdutegi = {
+        ...this.editingOrdutegi,
+        eguna: Number(this.editingOrdutegi.eguna), // Asegura que eguna sea un número
+        hasiera_data: formatFecha(hasiera_data),
+        amaiera_data: formatFecha(amaiera_data),
+        denbora: {
+            hasiera_ordua: formatHora(denbora.hasiera_ordua),
+            amaiera_ordua: formatHora(denbora.amaiera_ordua)
+        },
+        data: {
+            sortze_data: this.editingOrdutegi.data?.sortze_data || new Date(),
+            eguneratze_data: new Date(),
+            ezabatze_data: null
+        }
+    };
+
+    console.log("Enviando actualización al servidor:", ordutegiToUpdate);
+
+    // Enviar datos al backend para actualizar
+    this.ordutegiService.actualizarOrdutegi(ordutegiToUpdate).subscribe({
+        next: (response) => {
+            console.log("Respuesta del servidor:", response);
+
+            // Actualiza el ordutegi en la lista
+            const index = this.ordutegiak.findIndex(o => o.id === response.id);
+            if (index !== -1) {
+                this.ordutegiak[index] = response;
+            }
+
+            alert("El horario ha sido actualizado correctamente.");
+            this.editando = false;
+            window.location.reload();
+        },
+        error: (error: any) => {
+            console.error('Error al actualizar el horario:', error);
+            alert("Hubo un error al actualizar el horario.");
+        }
+    });
+}
 }
