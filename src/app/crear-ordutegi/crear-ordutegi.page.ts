@@ -30,6 +30,7 @@ ordutegi: IOrdutegi = {
   equipos: IEquipos[] = [];  
   Ordutegiak: IOrdutegi[] = []; 
 
+
   constructor(
     private ordutegiService: OrdutegiService,
     private equipoService: EquipoService

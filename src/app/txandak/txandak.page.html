@@ -14,7 +14,7 @@
       <ion-label>Selecciona Txanda</ion-label>
       <ion-select [(ngModel)]="selectedOrdutegi" (ionChange)="onTxandaChange($event)">
         <ion-select-option *ngFor="let ordutegi of ordutegiak; let i = index" [value]="ordutegi">
-          Equipo: {{ getEquipoNombre(ordutegi.kodea) }} - Eguna: {{ egunaStringEgin(i) }} 
+          {{ getEquipoNombre(ordutegi.kodea) }} - Eguna: {{ egunaStringEgin(i) }} 
           - De: {{ ordutegi.denbora.hasiera_ordua }} A: {{ ordutegi.denbora.amaiera_ordua }}
         </ion-select-option>
       </ion-select>
@@ -29,9 +29,40 @@
         <p><strong>Equipo:</strong> {{ getEquipoNombre(selectedOrdutegi.kodea) }}</p>
         <p><strong>Fecha:</strong> {{ selectedOrdutegi.hasiera_data | date: 'yyyy-MM-dd' }}</p>
         <p><strong>Día:</strong> {{ selectedOrdutegi.hasiera_data | date: 'yyyy-MM-dd' }}</p>
-        <p><strong>Hora de Inicio:</strong>{{ egunaStringEgin(selectedOrdutegi.eguna) }}</p>
+        <p><strong>Hora de Inicio:</strong> {{ selectedOrdutegi.denbora.hasiera_ordua }}</p>
         <p><strong>Hora de Fin:</strong> {{ selectedOrdutegi.denbora.amaiera_ordua }}</p>
       </ion-card-content>
+      <ion-button color="tertiary" shape="round" fill="solid" (click)="editarOrdutegi(selectedOrdutegi)">
+        <ion-icon name="create-outline" slot="start"></ion-icon>
+        Editar
+      </ion-button>
+    </ion-card>
+
+    <!-- Tarjeta emergente para editar -->
+    <ion-card *ngIf="editando" class="edit-card">
+      <ion-card-header>
+        <ion-card-title>Editar Ordutegi</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-label>Fecha inicio</ion-label>
+          <ion-datetime presentation="date" [(ngModel)]="editingOrdutegi.hasiera_data"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label>Fecha final</ion-label>
+          <ion-datetime presentation="date" [(ngModel)]="editingOrdutegi.amaiera_data"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label>Hora de Inicio</ion-label>
+          <ion-input type="time" [(ngModel)]="editingOrdutegi.denbora.hasiera_ordua"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Hora de Fin</ion-label>
+          <ion-input type="time" [(ngModel)]="editingOrdutegi.denbora.amaiera_ordua"></ion-input>
+        </ion-item>
+      </ion-card-content>
+      <ion-button color="success" expand="full" (click)="guardarCambios()">Guardar</ion-button>
+      <ion-button color="danger" expand="full" (click)="editando = false">Cancelar</ion-button>
     </ion-card>
 
     <!-- Botón centrado -->

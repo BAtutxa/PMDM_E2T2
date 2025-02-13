@@ -11,6 +11,7 @@ import { IEquipos } from '../interfaces/IEquipos';
   styleUrls: ['./txandak.page.scss'],
 })
 export class TxandakPage implements OnInit {
+
   ordutegiak: IOrdutegi[] = [];
   selectedOrdutegi: IOrdutegi | null = null;
   ordutegiObservable!: Observable<IOrdutegi[]>;
@@ -18,6 +19,8 @@ export class TxandakPage implements OnInit {
   egunaString !:String;
   equipos: IEquipos[] = [];
   equipo !: IEquipos;
+  editando: boolean = false;
+  editingOrdutegi !: IOrdutegi;
 
   constructor(private ordutegiService: OrdutegiService, private equipoService: EquipoService) {}
 
@@ -72,43 +75,70 @@ export class TxandakPage implements OnInit {
     this.selectedOrdutegi = event.detail.value;
   }
 
-  
-
-  sumarOrdutegi() {
-
-    const nuevoTicket: IOrdutegi = {
-      kodea: '1', // Asigna el valor adecuado para el código
-      eguna: 1, // Asigna el día correspondiente
-      hasiera_data: new Date(), // Asigna la fecha de inicio (puedes ajustar según sea necesario)
-      amaiera_data: new Date(),
-      id: null,
-      denbora: {
-        hasiera_ordua: null,
-        amaiera_ordua: null
-      },
-      data: {
-        eguneratze_data: new Date(),
-        sortze_data : new Date(),
-        ezabatze_data : null
-      }
-    };
-  
-    // Llamar a la función del servicio para crear el ordutegi
-    this.ordutegiService.crearOrdutegi(nuevoTicket).subscribe(
-      (respuesta) => {
-        console.log('Ordutegi creado exitosamente:', respuesta);
-        // Aquí puedes hacer algo con la respuesta, como mostrar un mensaje de éxito
-      },
-      (error) => {
-        console.error('Error al crear el ordutegi:', error);
-        // Manejar el error (por ejemplo, mostrar un mensaje de error)
-      }
-    );
-  }
-  
-
   getEquipoNombre(kodea: string): string |null {
     const equipo = this.equipos.find(equipo => equipo.kodea === kodea);
     return equipo ? equipo.izena : 'Equipo no encontrado'; // Ajusta la propiedad 'nombre' según tu modelo de datos
+  }
+
+  editarOrdutegi(ordutegi: IOrdutegi) {
+    this.editingOrdutegi = { ...ordutegi }; 
+    this.editando = true;
+  }
+  
+
+    guardarCambios() {
+      if (!this.editingOrdutegi) {
+          alert("No hay ningún ordutegi en edición.");
+          return;
+      }
+
+      const { kodea, eguna, hasiera_data, amaiera_data, denbora } = this.editingOrdutegi;
+
+      if (!kodea || !eguna || !hasiera_data || !amaiera_data || !denbora?.hasiera_ordua || !denbora?.amaiera_ordua) {
+          alert('Por favor, completa todos los campos obligatorios.');
+          return;
+      }
+
+      // Formatear fechas y horas correctamente
+      const formatFecha = (fecha: any): string | null => {
+          return fecha ? new Date(fecha).toISOString().split('T')[0] : null;
+      };
+
+      const formatHora = (hora: string | null): string | null => {
+          if (!hora) return null;
+          const [hours, minutes] = hora.split(":");
+          return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}:00`;
+      };
+
+      // Crear el objeto actualizado
+      const ordutegiToUpdate: IOrdutegi = {
+          ...this.editingOrdutegi,
+          hasiera_data: formatFecha(hasiera_data),
+          amaiera_data: formatFecha(amaiera_data),
+          denbora: {
+              hasiera_ordua: formatHora(denbora.hasiera_ordua),
+              amaiera_ordua: formatHora(denbora.amaiera_ordua)
+          },
+          data: {
+              sortze_data: this.editingOrdutegi.data?.sortze_data || new Date(),
+              eguneratze_data: new Date(),
+              ezabatze_data: null
+          }
+      };
+
+      console.log("Enviando actualización al servidor:", ordutegiToUpdate);
+
+      // Enviar datos al backend para actualizar
+      this.ordutegiService.actualizarOrdutegi(ordutegiToUpdate).subscribe({
+          next: () => {
+              alert("El horario ha sido actualizado correctamente.");
+              this.cargarOrdutegi(); // Recargar la lista de horarios
+              this.editando = false;
+          },
+          error: (error: any) => {
+              console.error('Error al actualizar el horario:', error);
+              alert("Hubo un error al actualizar el horario.");
+          }
+      });
   }
 }
