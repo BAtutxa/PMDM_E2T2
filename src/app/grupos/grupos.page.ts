@@ -60,6 +60,13 @@ grupo: any;
     this.menuCtrl.open(); // Abre el menú si es necesario
   }
 
+  
+  goToOrdutegi(event: Event) {
+    event.stopPropagation(); // Previene que el menú se cierre
+    this.router.navigate(['/ordutegi']); // Navega manualmente al calendario
+    this.menuCtrl.open(); // Abre el menú si es necesario
+  }
+
   ngOnInit(): void {
     this.grupoId = this.activatedRoute.snapshot.paramMap.get('kodea')!;
     this.cargarGrupos();
