@@ -83,14 +83,8 @@ export class TxandakPage implements OnInit {
       amaiera_data: new Date(),
       id: null,
       denbora: {
-        hasiera_ordua: {
-          hours: 0,
-          minutes: 0
-        },
-        amaiera_ordua: {
-          hours: 0,
-          minutes: 0
-        },
+        hasiera_ordua: null,
+        amaiera_ordua: null
       },
       data: {
         eguneratze_data: new Date(),

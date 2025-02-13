@@ -1,4 +1,3 @@
-import { ITime } from "./ITime"
 import { IData } from "./IData"
 
 export  interface IOrdutegi{
@@ -8,8 +7,8 @@ export  interface IOrdutegi{
     hasiera_data: Date | null |string,
     amaiera_data : Date |null|string,
     denbora:{
-        hasiera_ordua : ITime |null ,
-        amaiera_ordua : ITime | null,
+        hasiera_ordua : string |null ,
+        amaiera_ordua : string | null,
     }
     data: IData
 }

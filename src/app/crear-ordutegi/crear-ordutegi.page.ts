@@ -17,14 +17,8 @@ ordutegi: IOrdutegi = {
   hasiera_data: null,
   amaiera_data: null,
   denbora: {
-    hasiera_ordua: {
-      hours: 0,
-      minutes: 0
-    },
-    amaiera_ordua: {
-      hours: 0,
-      minutes: 0
-    },
+    hasiera_ordua: null,
+    amaiera_ordua: null
   },
   data:{
     sortze_data: new Date(),
@@ -72,43 +66,70 @@ ordutegi: IOrdutegi = {
 
   guardarOrdutegi() {
     const { kodea, eguna, hasiera_data, amaiera_data, denbora } = this.ordutegi;
-  
+
     if (!kodea || !eguna || !hasiera_data || !amaiera_data || !denbora?.hasiera_ordua || !denbora?.amaiera_ordua) {
-      console.error('Por favor, completa todos los campos obligatorios.');
-      return;
+        console.error('Por favor, completa todos los campos obligatorios.');
+        return;
     }
+
+    // Función para formatear fechas como "YYYY-MM-DD"
+    const formatFecha = (fecha: any): string | null => {
+        return fecha ? new Date(fecha).toISOString().split('T')[0] : null;
+    };
+
+    const formatHora = (hora: string | null): string | null => {
+      if (!hora) return null; // Verifica que haya un valor
   
-    const formatFecha = (fecha: any) => fecha ? new Date(fecha).toISOString().split('T')[0] : null;
+      const [hours, minutes] = hora.split(":"); // Divide el string en horas y minutos
+  
+      if (!hours || !minutes) return null; // Verifica que los valores sean correctos
+  
+      return `${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}:00`; // Retorna el formato "HH:mm:ss"
+  };
   
     const ordutegiToSend: IOrdutegi = {
-      ...this.ordutegi,
-      hasiera_data: formatFecha(hasiera_data),
-      amaiera_data: formatFecha(amaiera_data),
-      denbora: {
-      hasiera_ordua: { hours: denbora.hasiera_ordua.hours, minutes: denbora.hasiera_ordua.minutes, seconds: 0 },
-      amaiera_ordua: { hours: denbora.amaiera_ordua.hours, minutes: denbora.amaiera_ordua.minutes, seconds: 0 }
-      },
-      data: { sortze_data: new Date(), eguneratze_data: new Date(), ezabatze_data: null }
+        ...this.ordutegi,
+        hasiera_data: formatFecha(hasiera_data),
+        amaiera_data: formatFecha(amaiera_data),
+        denbora: {
+            hasiera_ordua: formatHora(denbora.hasiera_ordua),
+            amaiera_ordua: formatHora(denbora.amaiera_ordua)
+        },
+        data: {
+            sortze_data: new Date(),
+            eguneratze_data:new Date(),
+            ezabatze_data: null // Puede ser null si se desea
+        }
     };
-  
+
     console.log("Enviando al servidor:", ordutegiToSend);
-  
+
     this.ordutegiService.crearOrdutegi(ordutegiToSend).subscribe({
-      next: () => {
-        alert("El ordutegi ha sido creado.");
-        this.resetOrdutegi();
-        window.location.reload();
-      },
-      error: (error: any) => console.error('Error al crear el ordutegi:', error)
+        next: () => {
+            alert("El ordutegi ha sido creado.");
+            this.resetOrdutegi();
+            window.location.reload();
+        },
+        error: (error: any) => console.error('Error al crear el ordutegi:', error)
     });
-  }
-  
-  
+}
+
   resetOrdutegi() {
-    this.ordutegi = {
-      id: null, kodea: '', eguna: null, hasiera_data: null, amaiera_data: null,
-      denbora: { hasiera_ordua: { hours: 0, minutes: 0 }, amaiera_ordua: { hours: 0, minutes: 0 } },
-      data: { sortze_data: new Date(), eguneratze_data:  new Date(), ezabatze_data: null }
-    };
-  }  
+      this.ordutegi = {
+          id: null,
+          kodea: '',
+          eguna: null,
+          hasiera_data: null,
+          amaiera_data: null,
+          denbora: {
+              hasiera_ordua: "00:00:00",
+              amaiera_ordua: "00:00:00"
+          },
+          data: {
+              sortze_data: null,
+              eguneratze_data: null,
+              ezabatze_data: null
+          }
+      };
+  }
 }
