@@ -14,24 +14,25 @@
       <ion-label>Selecciona Txanda</ion-label>
       <ion-select [(ngModel)]="selectedOrdutegi" (ionChange)="onTxandaChange($event)">
         <ion-select-option *ngFor="let ordutegi of ordutegiak; let i = index" [value]="ordutegi">
-          Equipo: {{ getEquipoNombre(ordutegi.kodea) }} - Eguna: {{ egunaStringEgin(i) }}
+          Equipo: {{ getEquipoNombre(ordutegi.kodea) }} - Eguna: {{ egunaStringEgin(i) }} 
+          - De: {{ ordutegi.denbora.hasiera_ordua }} A: {{ ordutegi.denbora.amaiera_ordua }}
         </ion-select-option>
       </ion-select>
     </ion-item>
-    
 
-    <!-- Mostrar detalles de la txanda seleccionada -->
-  <div *ngIf="selectedOrdutegi">
-    <ion-item>
-      <ion-label>Ordutegia</ion-label>
-      <ion-datetime
-        display-format="YYYY-MM-DD HH:mm"
-        [(ngModel)]="selectedOrdutegi.hasiera_data"
-        [value]="selectedOrdutegi.hasiera_data"
-      ></ion-datetime>
-    </ion-item>
-  </div>
-
+    <!-- Mostrar detalles de la txanda seleccionada en un ion-card -->
+    <ion-card *ngIf="selectedOrdutegi">
+      <ion-card-header>
+        <ion-card-title>Detalles del ordutegi</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>Equipo:</strong> {{ getEquipoNombre(selectedOrdutegi.kodea) }}</p>
+        <p><strong>Fecha:</strong> {{ selectedOrdutegi.hasiera_data | date: 'yyyy-MM-dd' }}</p>
+        <p><strong>Día:</strong> {{ selectedOrdutegi.hasiera_data | date: 'yyyy-MM-dd' }}</p>
+        <p><strong>Hora de Inicio:</strong>{{ egunaStringEgin(selectedOrdutegi.eguna) }}</p>
+        <p><strong>Hora de Fin:</strong> {{ selectedOrdutegi.denbora.amaiera_ordua }}</p>
+      </ion-card-content>
+    </ion-card>
 
     <!-- Botón centrado -->
     <div class="center-button">
@@ -39,6 +40,5 @@
         Sumar ordutegi
       </ion-button>
     </div>
-
   </ion-content>
 </ion-content>

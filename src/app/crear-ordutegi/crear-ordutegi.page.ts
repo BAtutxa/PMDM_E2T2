@@ -13,7 +13,7 @@ export class CrearOrdutegiPage {
 ordutegi: IOrdutegi = {
   id: null,
   kodea: '',
-  eguna: null,
+  eguna: 1,
   hasiera_data: null,
   amaiera_data: null,
   denbora: {
@@ -118,7 +118,7 @@ ordutegi: IOrdutegi = {
       this.ordutegi = {
           id: null,
           kodea: '',
-          eguna: null,
+          eguna: 1,
           hasiera_data: null,
           amaiera_data: null,
           denbora: {

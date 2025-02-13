@@ -3,7 +3,7 @@ import { IData } from "./IData"
 export  interface IOrdutegi{
     id: number |null,
     kodea: string,
-    eguna: number |null,
+    eguna: number,
     hasiera_data: Date | null |string,
     amaiera_data : Date |null|string,
     denbora:{
