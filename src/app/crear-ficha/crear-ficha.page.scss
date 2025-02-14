@@ -1,134 +1,75 @@
-/* Estilo general del ion-content */
+/* Estilos generales */
 ion-content {
-    --background: #1c345c; /* Fondo principal */
-  }
-  
-  /* Centrado del ion-card */
-  .card-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: calc(100vh - 56px); /* Usamos 100vh menos la altura de la cabecera */
-    padding: 16px;
-    box-sizing: border-box;
-  }
-  
-  /* Estilo del ion-card */
+  --background: #f5f5f5; /* Fondo claro */
+  padding: 20px;
+}
+
+.card-container {
+  max-width: 600px;
+  margin: 0 auto; /* Centrar el formulario */
+}
+
+/* Estilos para la tarjeta */
+ion-card {
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 0;
+}
+
+ion-card-header {
+  background-color: #1c345c; /* Color de fondo del encabezado */
+  border-radius: 12px 12px 0 0;
+  padding: 16px;
+}
+
+ion-card-title {
+  color: white; /* Color del título */
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+ion-card-content {
+  padding: 20px;
+}
+
+/* Estilos para los mensajes de error */
+ion-note {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.875rem;
+  color: #ff4444; /* Color rojo para errores */
+}
+
+/* Estilos para el botón de guardar */
+ion-button {
+  --border-radius: 8px;
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+  font-weight: bold;
+  margin-top: 20px;
+  text-transform: uppercase;
+}
+
+/* Estilos para el botón deshabilitado */
+ion-button[disabled] {
+  --background: #ccc;
+  --color: #666;
+}
+
+/* Estilos responsivos */
+@media (max-width: 600px) {
   ion-card {
-    width: 100%; /* Se ajusta al 100% del contenedor */
-    max-width: 800px; /* Establece un ancho máximo de la tarjeta */
-    --background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    padding: 16px;
-    box-sizing: border-box;
+    border-radius: 0;
+    box-shadow: none;
   }
-  
-  /* Centrar el título del ion-card */
-  ion-card-title {
-    text-align: center;
-    font-size: 24px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 16px;
+
+  ion-card-header {
+    border-radius: 0;
   }
-  
-  /* Diseño del formulario en dos columnas */
-  .form-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-  
-  .form-column {
-    flex: 1;
-    min-width: 300px; /* Mínimo de 300px para las columnas */
-  }
-  
-  ion-item {
-    margin-bottom: 12px;
-  }
-  
-  .button-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-  }
-  
+
   ion-button {
-    width: 48%; /* Botones ajustados en 48% de ancho */
+    --padding-top: 12px;
+    --padding-bottom: 12px;
   }
-  
-  @media (max-width: 768px) {
-    /* En pantallas más pequeñas, las columnas se apilan */
-    .form-column {
-      flex: 1 1 100%;
-      min-width: unset;
-    }
-  
-    /* Los botones se apilan verticalmente */
-    .button-container {
-      flex-direction: column;
-      gap: 12px;
-    }
-  
-    ion-button {
-      width: 100%; /* Los botones ocupan el 100% del ancho */
-    }
-  
-    /* Ajuste en el tamaño del título */
-    ion-card-title {
-      font-size: 20px;
-    }
-  }
-  
-  @media (max-width: 576px) {
-    /* En pantallas muy pequeñas, ajustamos el tamaño y padding */
-    .card-container {
-      height: auto;
-      padding: 32px 16px;
-    }
-  
-    ion-card {
-      padding: 12px;
-    }
-  
-    ion-card-title {
-      font-size: 18px; /* Título más pequeño */
-    }
-  }
-  
-  @media (orientation: landscape) {
-    /* En modo landscape, ajustamos la disposición */
-    .card-container {
-      flex-direction: row; /* Los elementos se colocan en fila */
-      padding: 16px;
-    }
-  
-    ion-card {
-      max-width: 600px; /* Ancho máximo más pequeño para landscape */
-      margin: 0 auto;
-    }
-  
-    .form-grid {
-      flex-wrap: nowrap;
-      gap: 24px;
-    }
-  
-    .form-column {
-      flex: 1;
-      min-width: 200px; /* Asegura que las columnas no sean demasiado pequeñas */
-    }
-  
-    .button-container {
-      justify-content: space-around; /* Ajuste de botones en landscape */
-    }
-  }
-  
-  ion-input,
-  ion-label,
-  ion-select-option,
-  ion-select {
-    color: black !important;
-  }
-  
+}

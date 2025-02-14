@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ProductoService } from '../services/productos.service';
 import { KategoriaService } from '../services/Kategoria.Service';
 import { IKategoria } from '../interfaces/IKategoria';
-import { Router } from '@angular/router';
 import { IEProduktuak } from '../interfaces/IEProduktuak';
 
 @Component({
