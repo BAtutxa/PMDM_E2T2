@@ -552,51 +552,67 @@
     "OBLIGATORIO_HORA_FIN": "Amaiera ordua derrigorrezkoa da",
     "GUARDAR_ORDUTEGI": "Gorde Ordutegia"
   },
-  "TXANDAK": {
+  "CREAR_TXANDA": {
     "TXANDAK": "Txandak",
-    "SELECCIONA_TXANDA": "Aukeratu txanda",
-    "TXANDA": "Txanda",
-    "DETALLES_TXANDA": "Txandaren xehetasunak",
-    "ID": "ID",
-    "FECHA": "Data",
-    "TIPO": "Mota",
-    "NOMBRE_TRABAJADOR": "Langilearen izena",
-    "FECHA_CREACION": "Sortze data",
-    "FECHA_ACTUALIZACION": "Eguneratzeko data",
-    "EDITAR": "Editatu",
-    "EDITAR_TXANDA": "Editatu txanda",
-    "SELECCIONA_TIPO": "Aukeratu mota",
+    "TIPO": "Tipo",
+    "SELECCIONA_TIPO": "Hautatu mota bat",
     "RECEPCION": "Harrera",
-    "LIMPIEZA": "Garbitzea",
+    "LIMPIEZA": "Garbitze",
+    "OBLIGATORIO_TIPO": "Mota hautatzea derrigorrezkoa da",
     "TRABAJADOR": "Langilea",
-    "SELECCIONA_TRABAJADOR": "Aukeratu langilea",
-    "SUMAR_TXANDA": "Txanda gehitu",
-    "GUARDAR": "Gorde",
-    "CANCELAR": "Ezeztatu"
+    "INSERTA_TRABAJADOR": "Sartu langile bat",
+    "OBLIGATORIO_TRABAJADOR": "Langilea hautatzea derrigorrezkoa da",
+    "FECHA": "Data",
+    "PON_FECHA": "Jarri data",
+    "OBLIGATORIO_FECHA": "Data jartzea derrigorrezkoa da",
+    "GUARDAR_TXANDA": "Gorde txanda"
   },
-    "confirmDelete": {
-      "header": "Ziur zaude?",
-      "message": "Hautatutako taldea ezabatuko da.",
-      "cancel": "Ezeztatu",
-      "confirm": "Baieztatu"
-    },
-    "createTeam": {
-      "header": "Talde Berri Bat Sortu",
-      "message": "Sartu talde berriaren xehetasunak.",
-      "cancel": "Ezeztatu",
-      "create": "Sortu",
-      "namePlaceholder":"Izena sartu"
-    },
-    "success": {
-      "header": "Arrakasta",
-      "message": "Talde berria arrakastaz sortu da.",
-      "ok": "Onartu"
-    },
-    "error": {
-      "header": "Errorea",
-      "message": "Taldea sortzeko errore bat egon da.",
-      "ok": "Onartu"
-    },
-    "namePlaceholder": "Taldearen izena"
-  
+
+  "TXANDAK": {
+    "TXANDAK": "Turnos",
+    "SELECCIONA_TXANDA": "Selecciona un turno",
+    "TXANDA": "Txanda",
+    "DETALLES_TXANDA": "Detalles del turno",
+    "ID": "ID",
+    "FECHA": "Fecha",
+    "TIPO": "Tipo",
+    "NOMBRE_TRABAJADOR": "Nombre del trabajador",
+    "FECHA_CREACION": "Fecha de creación",
+    "FECHA_ACTUALIZACION": "Fecha de actualización",
+    "EDITAR": "Editar",
+    "BORRAR_TXANDA": "Borrar turno",
+    "EDITAR_TXANDA": "Editar turno",
+    "SELECCIONA_TIPO": "Selecciona el tipo",
+    "RECEPCION": "Recepción",
+    "LIMPIEZA": "Limpieza",
+    "TRABAJADOR": "Trabajador",
+    "SELECCIONA_TRABAJADOR": "Selecciona un trabajador",
+    "GUARDAR": "Guardar",
+    "CANCELAR": "Cancelar",
+    "SUMAR_TXANDA": "Sumar turno"
+  },
+  "confirmDelete": {
+    "header": "Ziur zaude?",
+    "message": "Hautatutako taldea ezabatuko da.",
+    "cancel": "Ezeztatu",
+    "confirm": "Baieztatu"
+  },
+  "createTeam": {
+    "header": "Talde Berri Bat Sortu",
+    "message": "Sartu talde berriaren xehetasunak.",
+    "cancel": "Ezeztatu",
+    "create": "Sortu",
+    "namePlaceholder": "Izena sartu"
+  },
+  "success": {
+    "header": "Arrakasta",
+    "message": "Talde berria arrakastaz sortu da.",
+    "ok": "Onartu"
+  },
+  "error": {
+    "header": "Errorea",
+    "message": "Taldea sortzeko errore bat egon da.",
+    "ok": "Onartu"
+  },
+  "namePlaceholder": "Taldearen izena"
 }

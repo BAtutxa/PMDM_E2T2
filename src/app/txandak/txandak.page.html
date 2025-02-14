@@ -43,11 +43,11 @@
       </ion-card-content>
       <ion-button color="tertiary" shape="round" fill="solid" (click)="editarTxanda(selectedTxandak)">
         <ion-icon name="create-outline" slot="start"></ion-icon>
-        Editar
+        {{ 'TXANDAK.EDITAR' | translate }}
       </ion-button>
-      <ion-button (click)="borrar(selectedTxandak)"  color="danger" shape="round">
+      <ion-button (click)="borrar(selectedTxandak)" color="danger" shape="round">
         <ion-icon name="trash-outline"></ion-icon>
-        Borrar txanda
+        {{ 'TXANDAK.BORRAR_TXANDA' | translate }}
       </ion-button>
     </ion-card>
     
@@ -76,24 +76,24 @@
           </ion-select>
         </ion-item>
 
-    <!-- Fecha -->
-    <ion-item>
-      <ion-label>Fecha</ion-label>
-      <ion-datetime [(ngModel)]="editingTxanda.data" presentation="date"></ion-datetime>
-    </ion-item>
-    
+        <!-- Fecha -->
+        <ion-item>
+          <ion-label>{{ 'TXANDAK.FECHA' | translate }}</ion-label>
+          <ion-datetime [(ngModel)]="editingTxanda.data" presentation="date"></ion-datetime>
+        </ion-item>
 
-    <!-- Botones -->
-    <ion-item class="ion-text-center">
-      <ion-button color="success" expand="full" (click)="guardarCambios()">Guardar</ion-button>
-      <ion-button color="danger" expand="full" (click)="editando = false">Cancelar</ion-button>
-    </ion-item>
-  </ion-card-content>
-</ion-card>
+        <!-- Botones -->
+        <ion-item class="ion-text-center">
+          <ion-button color="success" expand="full" (click)="guardarCambios()">{{ 'TXANDAK.GUARDAR' | translate }}</ion-button>
+          <ion-button color="danger" expand="full" (click)="editando = false">{{ 'TXANDAK.CANCELAR' | translate }}</ion-button>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+    
     <!-- Botón para sumar txanda -->
     <div class="center-button ion-text-center">
       <ion-button routerLink="/crear-txandak" color="primary" shape="round">
-        Sumar txanda
+        {{ 'TXANDAK.SUMAR_TXANDA' | translate }}
       </ion-button>
     </div>
   </ion-content>

@@ -3,48 +3,48 @@
     <form #ordutegiForm="ngForm" (ngSubmit)="guardarTxanda()">
       <ion-card>
         <ion-card-header>
-          <ion-card-title>Txandak</ion-card-title>
+          <ion-card-title>{{ 'CREAR_TXANDA.TXANDAK' | translate }}</ion-card-title>
         </ion-card-header>
 
         <ion-card-content>
           <ion-list>
             <!-- Tipo (mota) -->
             <ion-item>
-              <ion-label>Tipo</ion-label>
-              <ion-select [(ngModel)]="ordutegi.mota" name="mota" placeholder="Selecciona un tipo" required>
-                <ion-select-option value="M">Recepción</ion-select-option>
-                <ion-select-option value="G">Limpieza</ion-select-option>
+              <ion-label>{{ 'CREAR_TXANDA.TIPO' | translate }}</ion-label>
+              <ion-select [(ngModel)]="ordutegi.mota" name="mota" placeholder="{{ 'CREAR_TXANDA.SELECCIONA_TIPO' | translate }}" required>
+                <ion-select-option value="M">{{ 'CREAR_TXANDA.RECEPCION' | translate }}</ion-select-option>
+                <ion-select-option value="G">{{ 'CREAR_TXANDA.LIMPIEZA' | translate }}</ion-select-option>
               </ion-select>
               <ion-note *ngIf="ordutegiForm.controls['mota']?.invalid && ordutegiForm.controls['mota']?.touched" color="danger">
-                 El tipo es obligatorio
+                {{ 'CREAR_TXANDA.OBLIGATORIO_TIPO' | translate }}
               </ion-note>
             </ion-item>
 
             <!-- Trabajador -->
             <ion-item>
-              <ion-label>Trabajador</ion-label>
-              <ion-select [(ngModel)]="ordutegi.langileak.id" name="langileak" placeholder="Inserte un trabajador" required>
+              <ion-label>{{ 'CREAR_TXANDA.TRABAJADOR' | translate }}</ion-label>
+              <ion-select [(ngModel)]="ordutegi.langileak.id" name="langileak" placeholder="{{ 'CREAR_TXANDA.INSERTA_TRABAJADOR' | translate }}" required>
                 <ion-select-option *ngFor="let trabajador of trabajadores" [value]="trabajador.id">
                   {{ trabajador.izena }} {{ trabajador.abizenak }}
                 </ion-select-option>
               </ion-select>
               <ion-note *ngIf="ordutegiForm.controls['langileak']?.invalid && ordutegiForm.controls['langileak']?.touched" color="danger">
-                El trabajador es obligatorio
+                {{ 'CREAR_TXANDA.OBLIGATORIO_TRABAJADOR' | translate }}
               </ion-note>
             </ion-item>
 
             <!-- Fecha -->
             <ion-item>
-              <ion-label>Fecha</ion-label>
-              <ion-input [(ngModel)]="ordutegi.data" name="fecha" placeholder="Pon la fecha" type="date" required></ion-input>
+              <ion-label>{{ 'CREAR_TXANDA.FECHA' | translate }}</ion-label>
+              <ion-input [(ngModel)]="ordutegi.data" name="fecha" placeholder="{{ 'CREAR_TXANDA.PON_FECHA' | translate }}" type="date" required></ion-input>
               <ion-note *ngIf="ordutegiForm.controls['fecha']?.invalid && ordutegiForm.controls['fecha']?.touched" color="danger">
-                 la fecha es obligatoria.
+                {{ 'CREAR_TXANDA.OBLIGATORIO_FECHA' | translate }}
               </ion-note>
             </ion-item>
 
             <!-- Save Button -->
             <ion-button expand="full" type="submit" color="tertiary" [disabled]="ordutegiForm.invalid">
-              Guardar txanda
+              {{ 'CREAR_TXANDA.GUARDAR_TXANDA' | translate }}
             </ion-button>
           </ion-list>
         </ion-card-content>
