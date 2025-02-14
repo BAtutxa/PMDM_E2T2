@@ -5,6 +5,7 @@ import { AlertController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { ITrabajador } from '../interfaces/ITrabajador';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-citas',
@@ -16,14 +17,16 @@ export class CitasPage implements OnInit {
   fechaSeleccionada: string = ''; // Variable para almacenar la fecha seleccionada
   langileakList: ITrabajador[] = []; // Lista para almacenar los Langileak
 
-  constructor(
-    private fb: FormBuilder,
-    private alertCtrl: AlertController,
-    private navCtrl: NavController,
-    private route: ActivatedRoute,
-    private router: Router,
-    private langileakService: LangileakService
-  ) {
+constructor(
+  private fb: FormBuilder,
+  private alertCtrl: AlertController,
+  private navCtrl: NavController,
+  private route: ActivatedRoute,
+  private router: Router,
+  private langileakService: LangileakService,
+  private translate: TranslateService // <-- Agregado
+) {
+
     this.citaForm = this.fb.group({
       nombre: ['', [Validators.required]],
       telefono: ['', [Validators.pattern('^[0-9]+$')]], // Ya no es obligatorio
@@ -76,15 +79,14 @@ export class CitasPage implements OnInit {
     if (this.citaForm.valid) {
       const datos = this.citaForm.value;
   
-      // Verificar que el campo 'eslekua' no sea mayor a 5
       if (datos.eslekua > 5) {
         const alert = await this.alertCtrl.create({
-          header: 'Error',
-          message: 'El campo "Eslekua" debe ser menor o igual a 5.',
+          header: this.translate.instant('ERROR.TITLE'),
+          message: this.translate.instant('ERROR.ESLEKUA_MAX'),
           buttons: ['OK'],
         });
         await alert.present();
-        return; // Detener la ejecución si hay un error
+        return;
       }
   
       this.navCtrl.navigateForward(['/confirmar-cita'], {
@@ -102,16 +104,16 @@ export class CitasPage implements OnInit {
         },
       });
     } else {
-      let errorMessage = 'Por favor, rellena todos los campos correctamente.';
+      let errorMessage = this.translate.instant('ERROR.FILL_FIELDS');
   
       if (this.citaForm.get('nombre')?.invalid) {
-        errorMessage = 'El campo "Nombre" es obligatorio.';
+        errorMessage = this.translate.instant('ERROR.NAME_REQUIRED');
       } else if (this.citaForm.get('hora')?.invalid) {
-        errorMessage = 'Por favor, ingresa una hora válida (ejemplo: 14:30).';
+        errorMessage = this.translate.instant('ERROR.INVALID_TIME');
       }
   
       const alert = await this.alertCtrl.create({
-        header: 'Error',
+        header: this.translate.instant('ERROR.TITLE'),
         message: errorMessage,
         buttons: ['OK'],
       });

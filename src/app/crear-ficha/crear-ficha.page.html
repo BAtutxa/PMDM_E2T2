@@ -3,41 +3,41 @@
     <form #fichaForm="ngForm" (ngSubmit)="guardarFicha()">
       <ion-card>
         <ion-card-header>
-          <ion-card-title>Ficha Personal</ion-card-title>
+          <ion-card-title>{{ 'CREAR_CITA.FICHA_PERSONAL' | translate }}</ion-card-title>
         </ion-card-header>
 
         <ion-card-content>
           <ion-list>
             <!-- Nombre Input -->
             <ion-item>
-              <ion-label position="stacked">{{'CREAR_CITA.NAME'| translate}}</ion-label>
+              <ion-label position="stacked">{{ 'CREAR_CITA.NAME' | translate }}</ion-label>
               <ion-input
                 [(ngModel)]="ficha.izena"
                 name="izena"
-                placeholder="Introduce un valor para nombre"
+                placeholder="{{ 'CREAR_CITA.NAME_PLACEHOLDER' | translate }}"
                 required
               ></ion-input>
             </ion-item>
 
             <!-- Apellido Input -->
             <ion-item>
-              <ion-label position="stacked">{{'CREAR_CITA.SURNAME'|translate}}</ion-label>
+              <ion-label position="stacked">{{ 'CREAR_CITA.SURNAME' | translate }}</ion-label>
               <ion-input
                 [(ngModel)]="ficha.abizena"
                 name="abizena"
-                placeholder="Introduce un valor para apellido"
+                placeholder="{{ 'CREAR_CITA.SURNAME_PLACEHOLDER' | translate }}"
                 required
               ></ion-input>
             </ion-item>
 
             <!-- Teléfono Input -->
             <ion-item>
-              <ion-label position="stacked">{{'CREAR_CITA.TELEFONO'|translate}}</ion-label>
+              <ion-label position="stacked">{{ 'CREAR_CITA.TELEFONO' | translate }}</ion-label>
               <ion-input
                 [(ngModel)]="ficha.telefonoa"
                 name="telefonoa"
                 type="tel"
-                placeholder="Introduce un valor para teléfono"
+                placeholder="{{ 'CREAR_CITA.TELEFONO_PLACEHOLDER' | translate }}"
                 required
                 #telefonoa="ngModel"
                 maxlength="9"
@@ -47,21 +47,21 @@
                 *ngIf="telefonoa.invalid && telefonoa.touched"
                 color="danger"
               >
-                El teléfono debe tener un máximo de 9 números.
+                {{ 'CREAR_CITA.TELEFONO_ERROR' | translate }}
               </ion-note>
             </ion-item>
 
             <!-- Piel Sensible Select -->
             <ion-item>
-              <ion-label>{{'CREAR_CITA.PIEL_SENSIBLE'|translate}}</ion-label>
+              <ion-label>{{ 'CREAR_CITA.PIEL_SENSIBLE' | translate }}</ion-label>
               <ion-select
                 [(ngModel)]="ficha.azal_sentikorra"
                 name="azal_sentikorra"
-                placeholder="Selecciona una opción"
+                placeholder="{{ 'CREAR_CITA.SELECT_OPTION' | translate }}"
                 required
               >
-                <ion-select-option value="B">{{'CREAR_CITA.SI'|translate}}</ion-select-option>
-                <ion-select-option value="E">{{'CREAR_CITA.NO'|translate}}</ion-select-option>
+                <ion-select-option value="B">{{ 'CREAR_CITA.SI' | translate }}</ion-select-option>
+                <ion-select-option value="E">{{ 'CREAR_CITA.NO' | translate }}</ion-select-option>
               </ion-select>
             </ion-item>
           </ion-list>
@@ -72,8 +72,9 @@
             type="submit"
             color="tertiary"
             [disabled]="fichaForm.invalid"
-            >{{'CREAR_CITA.GUARDAR'|translate}}</ion-button
           >
+            {{ 'CREAR_CITA.GUARDAR' | translate }}
+          </ion-button>
         </ion-card-content>
       </ion-card>
     </form>

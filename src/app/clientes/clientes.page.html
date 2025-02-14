@@ -227,7 +227,7 @@
                   pattern="^[0-9]*$">
                 </ion-input>
                 <ion-note *ngIf="telefonoa.invalid && telefonoa.touched" color="danger">
-                  El teléfono debe contener un máximo de 9 números.{{ 'CLIENTES.TELEFONO_NUEVE' | translate }}
+                  {{ 'CLIENTES.TELEFONO_NUEVE' | translate }}
                 </ion-note>
               </ion-item>
               <ion-button color="tertiary" expand="full" type="submit" [disabled]="fichaForm.invalid">{{
