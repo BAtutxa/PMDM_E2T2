@@ -361,7 +361,7 @@
       "ETIKETA_OBLIGATORIA": "La etiqueta es obligatoria",
       "GUARDAR": "Guardar"
     },
-    
+
   "ADMINISTRACION": {
     "TITULO": "Administración",
     "CATEGORIAS": "Categorías",
@@ -501,5 +501,29 @@
       "MENSAJE_CONFIRMAR_EDICION": "Se actualizarán los valores de la ficha.",
       "CANCELAR": "Cancelar",
       "CONFIRMAR": "Confirmar"
-    }
+    },
+      "CRERAR_ORDUTEGIAK": {
+        "TITULO": "Horarios",
+        "SELECCIONA_TXANDA": "Selecciona una jornada",
+        "EGUNA": "Día",
+        "DE": "De",
+        "A": "A",
+        "DETALLES": "Detalles del horario",
+        "EQUIPO": "Equipo",
+        "FECHA": "Fecha",
+        "DIA": "Día",
+        "FECHA_INICIO": "Fecha de inicio",
+        "FECHA_FIN": "Fecha de fin",
+        "HORA_INICIO": "Hora de inicio",
+        "HORA_FIN": "Hora de fin",
+        "FECHA_CREACION": "Fecha de creación",
+        "FECHA_ACTUALIZACION": "Fecha de actualización",
+        "EDITAR": "Editar",
+        "EDITAR_ORDUTEGI": "Editar horario",
+        "SELECCIONA_DIA": "Selecciona un día",
+        "GUARDAR": "Guardar",
+        "CANCELAR": "Cancelar",
+        "SUMAR_ORDUTEGI": "Añadir horario"
+      }
+    
 }

@@ -506,5 +506,51 @@
       "MENSAJE_CONFIRMAR_EDICION": "Fichako balioak eguneratuko dira.",
       "CANCELAR": "Ezeztatu",
       "CONFIRMAR": "Baieztatu"
-  }
+  },
+    "ORDUTEGIAK": {
+      "TITULO": "Ordutegiak",
+      "SELECCIONA_TXANDA": "Aukeratu Txanda",
+      "EGUNA": "Eguna",
+      "DE": "Hasiera",
+      "A": "Amaiera",
+      "DETALLES": "Ordutegiaren xehetasunak",
+      "EQUIPO": "Taldea",
+      "FECHA": "Data",
+      "DIA": "Eguna",
+      "FECHA_INICIO": "Hasiera Data",
+      "FECHA_FIN": "Amaiera Data",
+      "HORA_INICIO": "Hasiera Ordutegia",
+      "HORA_FIN": "Amaiera Ordutegia",
+      "FECHA_CREACION": "Sortze Data",
+      "FECHA_ACTUALIZACION": "Eguneratze Data",
+      "EDITAR": "Editatu",
+      "EDITAR_ORDUTEGI": "Editatu Ordutegia",
+      "SELECCIONA_DIA": "Aukeratu eguna",
+      "GUARDAR": "Gorde",
+      "CANCELAR": "Ezeztatu",
+      "SUMAR_ORDUTEGI": "Ordutegi gehitu"
+    },
+      "CREAR_ORDUTEGIAK": {
+        "CREAR_ORDUTEGI": "Sortu Ordutegia",
+        "EQUIPO_ASIGNAR": "Taldea asignatzeko",
+        "SELECCIONA_EQUIPO": "Aukeratu taldea",
+        "OBLIGATORIO_EQUIPO": "Talde bat esleitu behar da",
+        "DIA": "Eguna",
+        "SELECCIONA_DIA": "Aukeratu eguna",
+        "OBLIGATORIO_DIA": "Eguna derrigorrezkoa da",
+        "FECHA_INICIO": "Hasiera Data",
+        "SELECCIONA_FECHA_INICIO": "Aukeratu hasiera data",
+        "OBLIGATORIO_FECHA_INICIO": "Hasiera data derrigorrezkoa da",
+        "FECHA_FIN": "Amaiera Data",
+        "SELECCIONA_FECHA_FIN": "Aukeratu amaiera data",
+        "OBLIGATORIO_FECHA_FIN": "Amaiera data derrigorrezkoa da",
+        "HORA_INICIO": "Hasiera Ordua",
+        "SELECCIONA_HORA_INICIO": "Aukeratu hasiera ordua",
+        "OBLIGATORIO_HORA_INICIO": "Hasiera ordua derrigorrezkoa da",
+        "HORA_FIN": "Amaiera Ordua",
+        "SELECCIONA_HORA_FIN": "Aukeratu amaiera ordua",
+        "OBLIGATORIO_HORA_FIN": "Amaiera ordua derrigorrezkoa da",
+        "GUARDAR_ORDUTEGI": "Gorde Ordutegia"
+      }
+  
 }
