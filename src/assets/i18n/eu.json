@@ -567,6 +567,28 @@
     "OBLIGATORIO_FECHA": "Data jartzea derrigorrezkoa da",
     "GUARDAR_TXANDA": "Gorde txanda"
   },
+  "KOLORE_HISTORIALA": {
+    "TITULO": "Kolore Historikoa",
+    "NO_REGISTROS": "Ez daude erregistroak eskuragarri.",
+    "CREAR_NUEVO": "Sortu Historiko Berria",
+    "NUEVO": "Historiko Berria",
+    "CLIENTE": "Bezeroa",
+    "SELECCIONAR_CLIENTE": "Hautatu bezero bat",
+    "PRODUCTO": "Produktu",
+    "SELECCIONAR_PRODUCTO": "Hautatu produktu bat",
+    "FECHA": "Data",
+    "CANTIDAD": "Kantitatea",
+    "VOLUMEN": "Bolumena",
+    "OBSERVACIONES": "Oharrak",
+    "GUARDAR_NUEVO": "Gorde Historiko Berria",
+    "CANCELAR": "Ezeztatu",
+    "EDITAR": "Editatu Historikoa",
+    "NOMBRE_PRODUCTO": "Produktuen izena",
+    "GUARDAR_CAMBIOS": "Aldaketak Gorde",
+    "PRODUCTO_ID": "Produktuaren ID",
+    "SIN_OBSERVACIONES": "Ez daude oharrak",
+    "IR_A_ELIMINADO": "Joan Ezabatutako Historikoetara"
+  },
 
   "TXANDAK": {
     "TXANDAK": "Turnos",

@@ -1,112 +1,110 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Historial Kolore</ion-title>
+    <ion-title>{{ 'KOLORE_HISTORIALA.TITULO' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <div *ngIf="historial.length === 0" class="empty-message">
-    <p>No hay registros disponibles.</p>
+    <p>{{ 'KOLORE_HISTORIALA.NO_REGISTROS' | translate }}</p>
   </div>
 
   <!-- Botón para crear un nuevo historial -->
-  <ion-button expand="full" color="primary" (click)="showCreateForm = true" *ngIf="!selectedHistorial && !showCreateForm">Crear Nuevo Historial</ion-button>
+  <ion-button expand="full" color="primary" (click)="showCreateForm = true" *ngIf="!selectedHistorial && !showCreateForm">{{ 'KOLORE_HISTORIALA.CREAR_NUEVO' | translate }}</ion-button>
 
   <!-- Formulario para crear un nuevo historial, visible solo cuando showCreateForm sea true -->
-  <!-- Formulario para crear un nuevo historial, visible solo cuando showCreateForm sea true -->
-<div *ngIf="showCreateForm && !selectedHistorial">
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Nuevo Historial</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <!-- Selector de cliente -->
-      <ion-item>
-        <ion-label position="floating">Bezero</ion-label>
-        <ion-select [(ngModel)]="newHistorial.bezero" placeholder="Selecciona un cliente">
-          <ion-select-option *ngFor="let cliente of clientes" [value]="cliente.id">
-            {{ cliente.izena }}  {{ cliente.abizena }}
-          </ion-select-option>
-        </ion-select>
-      </ion-item>
+  <div *ngIf="showCreateForm && !selectedHistorial">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{ 'KOLORE_HISTORIALA.NUEVO' | translate }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <!-- Selector de cliente -->
+        <ion-item>
+          <ion-label position="floating">{{ 'KOLORE_HISTORIALA.CLIENTE' | translate }}</ion-label>
+          <ion-select [(ngModel)]="newHistorial.bezero" placeholder="{{ 'KOLORE_HISTORIALA.SELECCIONAR_CLIENTE' | translate }}">
+            <ion-select-option *ngFor="let cliente of clientes" [value]="cliente.id">
+              {{ cliente.izena }}  {{ cliente.abizena }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
 
-      <!-- Selector de producto -->
-      <ion-item>
-        <ion-label position="floating">Producto</ion-label>
-        <ion-select [(ngModel)]="newHistorial.produktu_id" placeholder="Selecciona un producto">
-          <ion-select-option *ngFor="let producto of productos" [value]="producto.id">
-            {{ producto.izena }}  {{ producto.marka }}
-          </ion-select-option>
-        </ion-select>
-      </ion-item>
+        <!-- Selector de producto -->
+        <ion-item>
+          <ion-label position="floating">{{ 'KOLORE_HISTORIALA.PRODUCTO' | translate }}</ion-label>
+          <ion-select [(ngModel)]="newHistorial.produktu_id" placeholder="{{ 'KOLORE_HISTORIALA.SELECCIONAR_PRODUCTO' | translate }}">
+            <ion-select-option *ngFor="let producto of productos" [value]="producto.id">
+              {{ producto.izena }}  {{ producto.marka }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
 
-      <!-- Selector de fecha -->
-      <ion-item>
-        <ion-label position="floating">Fecha</ion-label>
-        <ion-datetime [(ngModel)]="newHistorial.data" displayFormat="MM/DD/YYYY"></ion-datetime>
-      </ion-item>
+        <!-- Selector de fecha -->
+        <ion-item>
+          <ion-label position="floating">{{ 'KOLORE_HISTORIALA.FECHA' | translate }}</ion-label>
+          <ion-datetime [(ngModel)]="newHistorial.data" displayFormat="MM/DD/YYYY"></ion-datetime>
+        </ion-item>
 
-      <!-- Selector de cantidad -->
-      <ion-item>
-        <ion-label position="floating">Cantidad</ion-label>
-        <ion-input [(ngModel)]="newHistorial.kantitatea" type="number"></ion-input>
-      </ion-item>
+        <!-- Selector de cantidad -->
+        <ion-item>
+          <ion-label position="floating">{{ 'KOLORE_HISTORIALA.CANTIDAD' | translate }}</ion-label>
+          <ion-input [(ngModel)]="newHistorial.kantitatea" type="number"></ion-input>
+        </ion-item>
 
-      <!-- Selector de volumen -->
-      <ion-item>
-        <ion-label position="floating">Volumen</ion-label>
-        <ion-input [(ngModel)]="newHistorial.bolumena"></ion-input>
-      </ion-item>
+        <!-- Selector de volumen -->
+        <ion-item>
+          <ion-label position="floating">{{ 'KOLORE_HISTORIALA.VOLUMEN' | translate }}</ion-label>
+          <ion-input [(ngModel)]="newHistorial.bolumena"></ion-input>
+        </ion-item>
 
-      <!-- Selector de observaciones -->
-      <ion-item>
-        <ion-label position="floating">Observaciones</ion-label>
-        <ion-textarea [(ngModel)]="newHistorial.oharrak"></ion-textarea>
-      </ion-item>
+        <!-- Selector de observaciones -->
+        <ion-item>
+          <ion-label position="floating">{{ 'KOLORE_HISTORIALA.OBSERVACIONES' | translate }}</ion-label>
+          <ion-textarea [(ngModel)]="newHistorial.oharrak"></ion-textarea>
+        </ion-item>
 
-      <!-- Botones de acción -->
-      <ion-button expand="full" color="primary" (click)="createHistorial()">Guardar Nuevo Historial</ion-button>
-      <ion-button expand="full" color="secondary" (click)="cancelCreate()">Cancelar</ion-button>
-    </ion-card-content>
-  </ion-card>
-</div>
-
+        <!-- Botones de acción -->
+        <ion-button expand="full" color="primary" (click)="createHistorial()">{{ 'KOLORE_HISTORIALA.GUARDAR_NUEVO' | translate }}</ion-button>
+        <ion-button expand="full" color="secondary" (click)="cancelCreate()">{{ 'KOLORE_HISTORIALA.CANCELAR' | translate }}</ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
 
   <!-- Formulario de Edición (solo visible cuando hay un historial seleccionado) -->
   <div *ngIf="selectedHistorial">
     <ion-card>
       <ion-card-header>
-        <ion-card-title>Editar Historial</ion-card-title>
+        <ion-card-title>{{ 'KOLORE_HISTORIALA.EDITAR' | translate }}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <ion-select [(ngModel)]="selectedHistorial.bezero" placeholder="Selecciona un cliente">
+        <ion-select [(ngModel)]="selectedHistorial.bezero" placeholder="{{ 'KOLORE_HISTORIALA.SELECCIONAR_CLIENTE' | translate }}">
           <ion-select-option *ngFor="let cliente of clientes" [value]="cliente.id">
             {{ cliente.izena }}  {{ cliente.abizena }}
           </ion-select-option>
         </ion-select>
         <ion-item>
-          <ion-label position="floating">Producto nombre</ion-label>
+          <ion-label position="floating">{{ 'KOLORE_HISTORIALA.NOMBRE_PRODUCTO' | translate }}</ion-label>
           <ion-input [(ngModel)]="selectedHistorial.produktu_id" type="number"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="floating">Fecha</ion-label>
+          <ion-label position="floating">{{ 'KOLORE_HISTORIALA.FECHA' | translate }}</ion-label>
           <ion-datetime [(ngModel)]="selectedHistorial.data" displayFormat="MM/DD/YYYY"></ion-datetime>
         </ion-item>
         <ion-item>
-          <ion-label position="floating">Cantidad</ion-label>
+          <ion-label position="floating">{{ 'KOLORE_HISTORIALA.CANTIDAD' | translate }}</ion-label>
           <ion-input [(ngModel)]="selectedHistorial.kantitatea" type="number"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="floating">Volumen</ion-label>
+          <ion-label position="floating">{{ 'KOLORE_HISTORIALA.VOLUMEN' | translate }}</ion-label>
           <ion-input [(ngModel)]="selectedHistorial.bolumena"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="floating">Observaciones</ion-label>
+          <ion-label position="floating">{{ 'KOLORE_HISTORIALA.OBSERVACIONES' | translate }}</ion-label>
           <ion-textarea [(ngModel)]="selectedHistorial.oharrak"></ion-textarea>
         </ion-item>
-        
-        <ion-button expand="full" color="primary" (click)="saveChanges()">Guardar Cambios</ion-button>
-        <ion-button expand="full" color="secondary" (click)="cancelEdit()">Cancelar</ion-button>
+
+        <ion-button expand="full" color="primary" (click)="saveChanges()">{{ 'KOLORE_HISTORIALA.GUARDAR_CAMBIOS' | translate }}</ion-button>
+        <ion-button expand="full" color="secondary" (click)="cancelEdit()">{{ 'KOLORE_HISTORIALA.CANCELAR' | translate }}</ion-button>
       </ion-card-content>
     </ion-card>
   </div>
@@ -115,12 +113,12 @@
   <ion-list *ngIf="historial.length > 0 && !selectedHistorial">
     <ion-item *ngFor="let item of historial">
       <ion-label>
-        <h2>Bezero: {{ item.bezero }}</h2>
-        <p><strong>Producto ID:</strong> {{ item.produktu_id }}</p>
-        <p><strong>Fecha:</strong> {{ item.data | date:'short' }}</p>
-        <p><strong>Kantitatea:</strong> {{ item.kantitatea }}</p>
-        <p><strong>Volumen:</strong> {{ item.bolumena }}</p>
-        <p><strong>Observaciones:</strong> {{ item.oharrak || 'Sin observaciones' }}</p>
+        <h2>{{ 'KOLORE_HISTORIALA.CLIENTE' | translate }}: {{ item.bezero }}</h2>
+        <p><strong>{{ 'KOLORE_HISTORIALA.PRODUCTO_ID' | translate }}:</strong> {{ item.produktu_id }}</p>
+        <p><strong>{{ 'KOLORE_HISTORIALA.FECHA' | translate }}:</strong> {{ item.data | date:'short' }}</p>
+        <p><strong>{{ 'KOLORE_HISTORIALA.CANTIDAD' | translate }}:</strong> {{ item.kantitatea }}</p>
+        <p><strong>{{ 'KOLORE_HISTORIALA.VOLUMEN' | translate }}:</strong> {{ item.bolumena }}</p>
+        <p><strong>{{ 'KOLORE_HISTORIALA.OBSERVACIONES' | translate }}:</strong> {{ item.oharrak || ('KOLORE_HISTORIALA.SIN_OBSERVACIONES' | translate) }}</p>
       </ion-label>
 
       <!-- Botones de acción (Editar y Eliminar) -->
@@ -129,7 +127,7 @@
         <ion-button color="primary" (click)="editHistorial(item)">
           <ion-icon name="pencil"></ion-icon>
         </ion-button>
-        
+
         <!-- Botón de eliminar -->
         <ion-button color="danger" (click)="deleteHistorial(item.id)">
           <ion-icon name="trash"></ion-icon>
@@ -138,5 +136,5 @@
     </ion-item>
   </ion-list>
 
-  <ion-button expand="full" color="tertiary" (click)="goToEzabatuta()">Ir a Historial Eliminado</ion-button>
+  <ion-button expand="full" color="tertiary" (click)="goToEzabatuta()">{{ 'KOLORE_HISTORIALA.IR_A_ELIMINADO' | translate }}</ion-button>
 </ion-content>

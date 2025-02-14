@@ -541,6 +541,28 @@
     "OBLIGATORIO_FECHA": "La fecha es obligatoria",
     "GUARDAR_TXANDA": "Guardar txanda"
   },
+  "KOLORE_HISTORIALA": {
+    "TITULO": "Historial Kolore",
+    "NO_REGISTROS": "No hay registros disponibles.",
+    "CREAR_NUEVO": "Crear Nuevo Historial",
+    "NUEVO": "Nuevo Historial",
+    "CLIENTE": "Bezero",
+    "SELECCIONAR_CLIENTE": "Selecciona un cliente",
+    "PRODUCTO": "Producto",
+    "SELECCIONAR_PRODUCTO": "Selecciona un producto",
+    "FECHA": "Fecha",
+    "CANTIDAD": "Cantidad",
+    "VOLUMEN": "Volumen",
+    "OBSERVACIONES": "Observaciones",
+    "GUARDAR_NUEVO": "Guardar Nuevo Historial",
+    "CANCELAR": "Cancelar",
+    "EDITAR": "Editar Historial",
+    "NOMBRE_PRODUCTO": "Producto nombre",
+    "GUARDAR_CAMBIOS": "Guardar Cambios",
+    "PRODUCTO_ID": "Producto ID",
+    "SIN_OBSERVACIONES": "Sin observaciones",
+    "IR_A_ELIMINADO": "Ir a Historial Eliminado"
+  },
 
   "TXANDAK": {
     "TXANDAK": "Turnos",
