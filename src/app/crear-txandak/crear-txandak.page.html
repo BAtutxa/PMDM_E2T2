@@ -1,0 +1,54 @@
+<ion-content>
+  <div class="card-container">
+    <form #ordutegiForm="ngForm" (ngSubmit)="guardarTxanda()">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Txandak</ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-list>
+            <!-- Tipo (mota) -->
+            <ion-item>
+              <ion-label>Tipo</ion-label>
+              <ion-select [(ngModel)]="ordutegi.mota" name="mota" placeholder="Selecciona un tipo" required>
+                <ion-select-option value="M">Recepción</ion-select-option>
+                <ion-select-option value="G">Limpieza</ion-select-option>
+              </ion-select>
+              <ion-note *ngIf="ordutegiForm.controls['mota']?.invalid && ordutegiForm.controls['mota']?.touched" color="danger">
+                 El tipo es obligatorio
+              </ion-note>
+            </ion-item>
+
+            <!-- Trabajador -->
+            <ion-item>
+              <ion-label>Trabajador</ion-label>
+              <ion-select [(ngModel)]="ordutegi.langileak.id" name="langileak" placeholder="Inserte un trabajador" required>
+                <ion-select-option *ngFor="let trabajador of trabajadores" [value]="trabajador.id">
+                  {{ trabajador.izena }} {{ trabajador.abizenak }}
+                </ion-select-option>
+              </ion-select>
+              <ion-note *ngIf="ordutegiForm.controls['langileak']?.invalid && ordutegiForm.controls['langileak']?.touched" color="danger">
+                El trabajador es obligatorio
+              </ion-note>
+            </ion-item>
+
+            <!-- Fecha -->
+            <ion-item>
+              <ion-label>Fecha</ion-label>
+              <ion-input [(ngModel)]="ordutegi.data" name="fecha" placeholder="Pon la fecha" type="date" required></ion-input>
+              <ion-note *ngIf="ordutegiForm.controls['fecha']?.invalid && ordutegiForm.controls['fecha']?.touched" color="danger">
+                 la fecha es obligatoria.
+              </ion-note>
+            </ion-item>
+
+            <!-- Save Button -->
+            <ion-button expand="full" type="submit" color="tertiary" [disabled]="ordutegiForm.invalid">
+              Guardar txanda
+            </ion-button>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </form>
+  </div>
+</ion-content>

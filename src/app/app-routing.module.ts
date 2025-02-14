@@ -133,6 +133,10 @@ const routes: Routes = [
   },  {
     path: 'ordutegi',
     loadChildren: () => import('./ordutegi/ordutegi.module').then( m => m.OrdutegiPageModule)
+  },
+  {
+    path: 'crear-txandak',
+    loadChildren: () => import('./crear-txandak/crear-txandak.module').then( m => m.CrearTxandakPageModule)
   }
 
 
