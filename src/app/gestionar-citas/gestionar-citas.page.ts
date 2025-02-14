@@ -10,8 +10,9 @@ import { IZerbitzuak } from '../interfaces/IZerbitzuak';
 import { ZerbitzuakService } from '../services/zerbitzuak.service';
 import { AlertController } from '@ionic/angular';
 import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ChangeDetectorRef } from '@angular/core';
+import { EsHistorialService } from '../services/EsHistorial.service';
 
 @Component({
   selector: 'app-gestionar-citas',
@@ -27,6 +28,7 @@ export class GestionarCitasPage implements OnInit {
   listaServicios: IZerbitzuak[] = [];
   mobilaDa: boolean = false; 
   servicioSeleccionado: number | null = null;  // Variable para almacenar el servicio seleccionado
+  esHistorial: boolean = false;
   
   constructor(
     private http: HttpClient,
@@ -36,7 +38,9 @@ export class GestionarCitasPage implements OnInit {
     private serviciosService : ZerbitzuakService,
     private alertController : AlertController,
     private router : Router,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private route: ActivatedRoute,
+    private historialService: EsHistorialService
   ) {}
 
   // Detectar cambios en el tamaño de la pantalla
@@ -46,8 +50,18 @@ export class GestionarCitasPage implements OnInit {
   }
 
   ngOnInit() {
-    this.onResize();  // Actualizar mobilaDa al cargar la página
-    this.obtenerCitas();
+    this.onResize();
+     // Leer el parámetro "desdeHistorial" de la URL
+     this.route.queryParams.subscribe(params => {
+      this.esHistorial = params['desdeHistorial'] === 'true';
+      this.historialService.setEsHistorial(this.esHistorial);
+      console.log("Historial:", this.esHistorial);
+    });
+    if(this.esHistorial){
+      this.obtenerCitasEliminadas
+    }else{
+      this.obtenerCitas();
+    }
     
     // Obtener los servicios disponibles
     this.serviciosService.getZerbitzuak().subscribe(data => {
@@ -70,6 +84,18 @@ export class GestionarCitasPage implements OnInit {
 
   obtenerCitas() {
     this.http.get<any[]>('http://localhost:8080/hitzorduak/hitzorduakGuztiak').subscribe(
+      (data) => {
+        this.citas = data;
+        console.log('Citas obtenidas:', this.citas);
+      },
+      (error) => {
+        console.error('Error al obtener las citas:', error);
+      }
+    );
+  }
+
+  obtenerCitasEliminadas() {
+    this.http.get<any[]>('http://localhost:8080/hitzorduak/ezabatuak').subscribe(
       (data) => {
         this.citas = data;
         console.log('Citas obtenidas:', this.citas);

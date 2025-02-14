@@ -6,7 +6,7 @@ import { ClientesService } from '../services/clientes.service';
 import { IBezero } from '../interfaces/IEBezero';
 import { IData } from '../interfaces/IData';
 import { EsHistorialService } from '../services/EsHistorial.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

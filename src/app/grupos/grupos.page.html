@@ -21,7 +21,7 @@
           <h2>{{ grupo.izena }}</h2>
           <!-- Mostrar los integrantes del grupo -->
           <div *ngFor="let trabajador of grupo.langileak">
-            <ion-chip color="secondary" (click)="editarLangile(trabajador)">
+            <ion-chip color="tertiary" (click)="editarLangile(trabajador)">
               <ion-label>
                 {{ 'EQUIPOS.ID' | translate }}: {{ trabajador.id }} - {{ trabajador.izena }} {{ trabajador.abizenak }}
               </ion-label>

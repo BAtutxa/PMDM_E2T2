@@ -140,7 +140,7 @@ export class InformesPage implements OnInit {
     doc.text(textLines, 10, yPosition);
   
     const charts = [
-      { id: 'barChartCanvas', title: 'Precio total de los clientes formato barra' },
+      { id: 'barChartCanvas', title: 'Precio casa de los clientes formato barra' },
       { id: 'pieChartCanvas', title: 'Precio total de los clientes formato queso' },
       { id: 'lineChartCanvas', title: 'Gráfico de Líneas' }
     ];

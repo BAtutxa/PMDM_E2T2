@@ -9,6 +9,8 @@ import {IPM}  from '../interfaces/IPM';
 import { IPMService } from '../services/ProduktuMugimendu.service';
 import { LangileakService } from '../services/Langileak.service';
 import { firstValueFrom } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { EsHistorialService } from '../services/EsHistorial.service';
 
 @Component({
   selector: 'app-produktu-mugimenduak',
@@ -57,10 +59,18 @@ export class ProduktuMugimenduakPage implements OnInit {
        private productoService : ProductoService,
        private userService: UserService,
        private ipmService : IPMService,
-       private langileakService : LangileakService
+       private langileakService : LangileakService,
+       private route: ActivatedRoute,
+       private historialService: EsHistorialService,
      ) {}
    
      ngOnInit() {
+        // Leer el parámetro "desdeHistorial" de la URL
+      this.route.queryParams.subscribe(params => {
+        this.esHistorial = params['desdeHistorial'] === 'true';
+        this.historialService.setEsHistorial(this.esHistorial);
+        console.log("Historial:", this.esHistorial);
+      });
        this.VerSiEsProfe();
        this.mobilbista();
        this.cargarIPM();

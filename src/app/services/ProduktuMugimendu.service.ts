@@ -20,7 +20,7 @@ export class IPMService {
   }
 
   getIPMBorrados(): Observable<IPM[]> {
-    return this.http.get<IPM[]>(`${this.baseUrl}/materialakEzabatuta`);
+    return this.http.get<IPM[]>(`${this.baseUrl}/ezabatuta`);
   }
 
   actualizarIPM(material: IPM): Observable<IPM> {

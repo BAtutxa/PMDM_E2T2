@@ -9,6 +9,8 @@ import { IMaileguak } from '../interfaces/IMaileguak';
 import { ITrabajador } from '../interfaces/ITrabajador';
 import { IEMaterialak } from '../interfaces/IEMaterialak';
 import { MaterialService } from '../services/materiales.service';
+import { ActivatedRoute } from '@angular/router';
+import { EsHistorialService } from '../services/EsHistorial.service';
 
 @Component({
   selector: 'app-material-maileguak',
@@ -57,10 +59,19 @@ export class MaterialMaileguakPage implements OnInit {
      private materialService : MaterialService,
      private userService: UserService,
      private maileguService : MaileguService,
-     private langileakService : LangileakService
+     private langileakService : LangileakService,
+     private route: ActivatedRoute,
+     private historialService: EsHistorialService,
+
    ) {}
  
    ngOnInit() {
+    // Leer el parámetro "desdeHistorial" de la URL
+    this.route.queryParams.subscribe(params => {
+      this.esHistorial = params['desdeHistorial'] === 'true';
+      this.historialService.setEsHistorial(this.esHistorial);
+      console.log("Historial:", this.esHistorial);
+    });
      this.VerSiEsProfe();
      this.mobilbista();
      this.cargarmaileguak();
@@ -118,12 +129,22 @@ export class MaterialMaileguakPage implements OnInit {
    }
 
    async cargarMateriales() {
-    try {
+    if(this.esHistorial){
+      try {
+        const data = await firstValueFrom(this.materialService.getMaterialesBorrados());
+        this.materiales = data;
+    } catch (error) {
+      console.error('Error al cargar materiales:', error);
+    }
+    }else{
+      try {
         const data = await firstValueFrom(this.materialService.getMateriales());
         this.materiales = data;
     } catch (error) {
       console.error('Error al cargar materiales:', error);
     }
+    }
+   
   }
 
   

@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { KoloreHistorialakService } from '../services/koloreHistorialak.service';
 import { IKoloreHistorialak } from '../interfaces/IKoloreHistorialak';
 import { AlertController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ClientesService } from '../services/clientes.service';
 import { IBezero } from '../interfaces/IEBezero';
 import { ProductoService } from '../services/productos.service';
 import { IEProduktuak } from '../interfaces/IEProduktuak';
+import { EsHistorialService } from '../services/EsHistorial.service';
 
 @Component({
   selector: 'app-kolore-historialak',
@@ -56,17 +57,30 @@ export class KoloreHistorialakPage implements OnInit {
     }
   } 
   showCreateForm: boolean = false; 
+  esHistorial: boolean = false;
 
   constructor(
     private koloreHistorialakService: KoloreHistorialakService,
     private clienteService : ClientesService,
     private ProductoService: ProductoService,
     private alertController: AlertController,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
+    private historialService: EsHistorialService,
   ) { }
 
   ngOnInit(): void {
-    this.loadHistorial();
+    // Leer el parámetro "desdeHistorial" de la URL
+    this.route.queryParams.subscribe(params => {
+      this.esHistorial = params['desdeHistorial'] === 'true';
+      this.historialService.setEsHistorial(this.esHistorial);
+      console.log("Historial:", this.esHistorial);
+    });
+    if(this.esHistorial){
+      this.loadHistorialEliminado
+    }else{
+      this.loadHistorial();
+    }
     this.cargarClientes();
     this.cargarProductos();
   }
@@ -82,6 +96,18 @@ export class KoloreHistorialakPage implements OnInit {
       }
     );
   }
+
+    // Cargar historial  eliminado
+    loadHistorialEliminado(): void {
+      this.koloreHistorialakService.getKoloreHistorialakEzabatuta().subscribe(
+        (data) => {
+          this.historial = data;
+        },
+        (error) => {
+          console.error('Error al cargar el historial', error);
+        }
+      );
+    }
 
   obtenerNombreCliente(bezeroId: number): string {
     const cliente = this.clientes.find(c => c.id === bezeroId);

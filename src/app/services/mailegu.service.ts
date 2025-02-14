@@ -19,7 +19,7 @@ export class MaileguService {
   }
 
   getmailegusDelete(): Observable<IMaileguak[]> {
-    return this.http.get<IMaileguak[]>(`${this.baseUrl}/fitxakEzabatuta`);
+    return this.http.get<IMaileguak[]>(`${this.baseUrl}/ezabatuta`);
   }
 
   actualizarmailegu(mailegu: IMaileguak): Observable<IMaileguak> {

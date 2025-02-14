@@ -6,6 +6,8 @@ import { MaterialService } from '../services/materiales.service';
 import { firstValueFrom } from 'rxjs';
 import { IEMaterialak } from '../interfaces/IEMaterialak';
 import { TranslateService } from '@ngx-translate/core';
+import { ActivatedRoute } from '@angular/router';
+import { EsHistorialService } from '../services/EsHistorial.service';
 
 @Component({
   selector: 'app-materiales',
@@ -50,10 +52,18 @@ export class MaterialesPage implements OnInit {
   constructor(private alertController: AlertController, 
     private MaterialService: MaterialService, 
     private translateService: TranslateService,
-    private userService: UserService
+    private userService: UserService,
+    private route: ActivatedRoute,
+    private historialService: EsHistorialService,
   ) {}
 
   ngOnInit() {
+     // Leer el parámetro "desdeHistorial" de la URL
+     this.route.queryParams.subscribe(params => {
+      this.esHistorial = params['desdeHistorial'] === 'true';
+      this.historialService.setEsHistorial(this.esHistorial);
+      console.log("Historial:", this.esHistorial);
+    });
     this.VerSiEsProfe();
     this.mobilbista();
     this.cargarMateriales();

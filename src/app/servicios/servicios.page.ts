@@ -6,6 +6,8 @@ import { AlertController, IonContent } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../services/user.service';
 import { firstValueFrom } from 'rxjs';
+import { EsHistorialService } from '../services/EsHistorial.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-servicios',
@@ -42,20 +44,34 @@ export class ServiciosPage implements OnInit {
    cancel: string = ''
    info: string = ''
    search: string = ''
-   esHistorial: Boolean = false;
-   esProfe: Boolean = false;
+   esHistorial: boolean = false;
+   esProfe: boolean = false;
  
    constructor(
      private alertController: AlertController, 
      private servicioService: ZerbitzuakService, 
      private translateService: TranslateService, 
-     private userService:UserService
+     private userService:UserService,
+     private historialService: EsHistorialService,
+     private route: ActivatedRoute,
+
    ) {}
  
    ngOnInit() {
+    // Leer el parámetro "desdeHistorial" de la URL
+    this.route.queryParams.subscribe(params => {
+      this.esHistorial = params['desdeHistorial'] === 'true';
+      this.historialService.setEsHistorial(this.esHistorial);
+      console.log("Historial:", this.esHistorial);
+    });
      this.VerSiEsProfe();
      this.mobilbista();
-     this.cargarServicios();
+     if(this.esHistorial){
+        this.cargarServiciosBorrados();
+     }else{
+      this.cargarServicios();
+     }
+     
      this.translateLabels();
  
      this.translateService.setDefaultLang('es');
@@ -96,6 +112,16 @@ export class ServiciosPage implements OnInit {
        console.error('Error al cargar productos:', error);
      }
    }
+
+   async cargarServiciosBorrados() {
+    try {
+      const data = await firstValueFrom(this.servicioService.getZerbitzuakBorrado());
+      this.servicios = data;
+      this.serviciosFiltrados = [...this.servicios];
+    } catch (error) {
+      console.error('Error al cargar productos:', error);
+    }
+  }
  
    cambiarPagina(pagina: number) {
      if (pagina < 1) {

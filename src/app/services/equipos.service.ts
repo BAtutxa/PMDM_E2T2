@@ -47,7 +47,7 @@ export class EquipoService {
   }
 
   cargarGruposEliminados(): Observable<IEquipos[]> {
-    return this.http.get<IEquipos[]>(`${this.baseUrl}/taldeEzabatuta`);
+    return this.http.get<IEquipos[]>(`${this.baseUrl}/ezabatutako-taldeak`);
   }
 
   // Crear un nuevo grupo

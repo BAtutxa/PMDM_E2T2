@@ -9,6 +9,7 @@ import { ITrabajador } from '../interfaces/ITrabajador';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core'; // Importar el servicio de traducción
+import { EsHistorialService } from '../services/EsHistorial.service';
 
 @Component({
   selector: 'app-grupos',
@@ -45,6 +46,10 @@ export class GruposPage implements OnInit {
   mostrarEditor: boolean = false; 
   grupo: any;
 
+  esHistorial: boolean = false;
+  acabaDeBorrar: boolean = false;
+  loading: any;
+
   constructor(
     private router: Router, 
     private menuCtrl: MenuController,
@@ -52,24 +57,46 @@ export class GruposPage implements OnInit {
     private alertController: AlertController,
     private langileakService: LangileakService,
     private activatedRoute: ActivatedRoute,
-    private translate: TranslateService // Inyectar TranslateService
+    private translate: TranslateService,
+    private historialService: EsHistorialService,
+    private route: ActivatedRoute,
   ) {}
 
+  ngOnDestroy() {
+    if (this.acabaDeBorrar) {
+      console.log('Eliminado, no se restablece esHistorial.');
+    } else {
+      this.historialService.resetEsHistorial();
+      console.log('Se ha restablecido esHistorial a false');
+    }
+  }
+
   goToTxandak(event: Event) {
-    event.stopPropagation(); // Previene que el menú se cierre
-    this.router.navigate(['/txandak']); // Navega manualmente al calendario
-    this.menuCtrl.open(); // Abre el menú si es necesario
+    event.stopPropagation(); 
+    this.router.navigate(['/txandak']);
+    this.menuCtrl.open(); 
   }
 
   goToOrdutegi(event: Event) {
-    event.stopPropagation(); // Previene que el menú se cierre
-    this.router.navigate(['/ordutegi']); // Navega manualmente al calendario
-    this.menuCtrl.open(); // Abre el menú si es necesario
+    event.stopPropagation(); 
+    this.router.navigate(['/ordutegi']); 
+    this.menuCtrl.open();
   }
 
   ngOnInit(): void {
     this.grupoId = this.activatedRoute.snapshot.paramMap.get('kodea')!;
-    this.cargarGrupos();
+    this.route.queryParams.subscribe(params => {
+      this.esHistorial = params['desdeHistorial'] === 'true';
+      this.historialService.setEsHistorial(this.esHistorial);
+      console.log("Historial:", this.esHistorial);
+    });
+    console.log("Es historial", this.esHistorial);
+    if(this.esHistorial){
+      this.cargarGruposEliminados;
+    }else{
+      this.cargarGrupos();
+    }
+ 
     this.cargarTrabajadores();
   }
 
@@ -91,6 +118,25 @@ export class GruposPage implements OnInit {
   
   cargarGrupos(): void {
     this.equipoService.grupos$.subscribe({
+      next: (grupos) => {
+        this.equipos = grupos;
+        console.log('Grupos cargados:', grupos);
+
+        const grupo = this.equipos.find(grupo => grupo.kodea === this.grupoId);
+        if (grupo) {
+          this.equipo = { ...grupo }; 
+        } else {
+          console.error('Grupo no encontrado con el ID:', this.grupoId);
+        }
+      },
+      error: (err) => {
+        console.error('Error al cargar los grupos:', err);
+      },
+    });
+  }
+
+  cargarGruposEliminados(): void {
+    this.equipoService.cargarGruposEliminados().subscribe({
       next: (grupos) => {
         this.equipos = grupos;
         console.log('Grupos cargados:', grupos);
