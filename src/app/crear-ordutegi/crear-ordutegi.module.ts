@@ -7,13 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { CrearOrdutegiPageRoutingModule } from './crear-ordutegi-routing.module';
 
 import { CrearOrdutegiPage } from './crear-ordutegi.page';
+import { TranslateModule } from '@ngx-translate/core';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CrearOrdutegiPageRoutingModule
+    CrearOrdutegiPageRoutingModule,
+    TranslateModule
   ],
   declarations: [CrearOrdutegiPage]
 })

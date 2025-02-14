@@ -1,35 +1,35 @@
-<ion-content>
+<ion-content> 
   <div class="card-container">
     <form #ordutegiForm="ngForm" (ngSubmit)="guardarOrdutegi()">
       <ion-card>
         <ion-card-header>
-          <ion-card-title>CREAR ORDUTEGI</ion-card-title>
+          <ion-card-title>{{ 'CREAR_ORDUTEGIAK.CREAR_ORDUTEGI' | translate }}</ion-card-title>
         </ion-card-header>
 
         <ion-card-content>
           <ion-list>
             <!-- Equipo a asignar -->
             <ion-item>
-              <ion-label>Equipo a asignar</ion-label>
-              <ion-select [(ngModel)]="ordutegi.kodea" name="equipos" placeholder="Selecciona un equipo" required>
+              <ion-label>{{ 'CREAR_ORDUTEGIAK.EQUIPO_ASIGNAR' | translate }}</ion-label>
+              <ion-select [(ngModel)]="ordutegi.kodea" name="equipos" placeholder="{{ 'CREAR_ORDUTEGIAK.SELECCIONA_EQUIPO' | translate }}" required>
                 <ion-select-option *ngFor="let equipo of equipos" [value]="equipo.kodea">
                   {{ equipo.izena }}
                 </ion-select-option>
               </ion-select>
               <ion-note *ngIf="ordutegiForm.controls['equipos']?.invalid && ordutegiForm.controls['equipos']?.touched" color="danger">
-                Es obligatorio asignar un equipo
+                {{ 'CREAR_ORDUTEGIAK.OBLIGATORIO_EQUIPO' | translate }}
               </ion-note>
             </ion-item>
             
             <!-- Día -->
             <ion-item>
-              <ion-label position="stacked">Día</ion-label>
+              <ion-label position="stacked">{{ 'CREAR_ORDUTEGIAK.DIA' | translate }}</ion-label>
               <ion-select
                 [(ngModel)]="ordutegi.eguna"
                 name="eguna"
                 required
                 interface="popover"
-                placeholder="Selecciona un día"
+                placeholder="{{ 'CREAR_ORDUTEGIAK.SELECCIONA_DIA' | translate }}"
               >
                 <ion-select-option value="1">Lunes</ion-select-option>
                 <ion-select-option value="2">Martes</ion-select-option>
@@ -38,67 +38,67 @@
                 <ion-select-option value="5">Viernes</ion-select-option>
               </ion-select>
               <ion-note *ngIf="ordutegiForm.controls['eguna']?.invalid && ordutegiForm.controls['eguna']?.touched" color="danger">
-                El día es obligatorio
+                {{ 'CREAR_ORDUTEGIAK.OBLIGATORIO_DIA' | translate }}
               </ion-note>
             </ion-item>
             
             <!-- Fecha de inicio -->
             <ion-item>
-              <ion-label position="stacked">Fecha de inicio</ion-label>
+              <ion-label position="stacked">{{ 'CREAR_ORDUTEGIAK.FECHA_INICIO' | translate }}</ion-label>
               <ion-input
                 [(ngModel)]="ordutegi.hasiera_data"
                 name="hasiera_data"
-                placeholder="Selecciona una fecha de inicio"
+                placeholder="{{ 'CREAR_ORDUTEGIAK.SELECCIONA_FECHA_INICIO' | translate }}"
                 type="date"
                 required
               ></ion-input>
               <ion-note *ngIf="ordutegiForm.controls['hasiera_data']?.invalid && ordutegiForm.controls['hasiera_data']?.touched" color="danger">
-                La fecha de inicio es obligatoria
+                {{ 'CREAR_ORDUTEGIAK.OBLIGATORIO_FECHA_INICIO' | translate }}
               </ion-note>
             </ion-item>
             
             <!-- Fecha de fin -->
             <ion-item>
-              <ion-label position="stacked">Fecha de fin</ion-label>
+              <ion-label position="stacked">{{ 'CREAR_ORDUTEGIAK.FECHA_FIN' | translate }}</ion-label>
               <ion-input
                 [(ngModel)]="ordutegi.amaiera_data"
                 name="amaiera_data"
-                placeholder="Selecciona una fecha de fin"
+                placeholder="{{ 'CREAR_ORDUTEGIAK.SELECCIONA_FECHA_FIN' | translate }}"
                 type="date"
                 required
               ></ion-input>
               <ion-note *ngIf="ordutegiForm.controls['amaiera_data']?.invalid && ordutegiForm.controls['amaiera_data']?.touched" color="danger">
-                La fecha de fin es obligatoria
+                {{ 'CREAR_ORDUTEGIAK.OBLIGATORIO_FECHA_FIN' | translate }}
               </ion-note>
             </ion-item>
             
             <!-- Hora de inicio -->
             <ion-item>
-              <ion-label position="stacked">Hora de inicio</ion-label>
+              <ion-label position="stacked">{{ 'CREAR_ORDUTEGIAK.HORA_INICIO' | translate }}</ion-label>
               <ion-input
                 [(ngModel)]="ordutegi.denbora.hasiera_ordua"
                 name="hasiera_ordua"
-                placeholder="Selecciona una hora de inicio"
+                placeholder="{{ 'CREAR_ORDUTEGIAK.SELECCIONA_HORA_INICIO' | translate }}"
                 type="time"
                 required
               ></ion-input>
               <ion-note *ngIf="ordutegiForm.controls['hasiera_ordua']?.invalid && ordutegiForm.controls['hasiera_ordua']?.touched" color="danger">
-                La hora de inicio es obligatoria
+                {{ 'CREAR_ORDUTEGIAK.OBLIGATORIO_HORA_INICIO' | translate }}
               </ion-note>
             </ion-item>
             
             <!-- Hora de fin -->
             <ion-item>
-              <ion-label position="stacked">Hora de fin</ion-label>
+              <ion-label position="stacked">{{ 'CREAR_ORDUTEGIAK.HORA_FIN' | translate }}</ion-label>
               <ion-input
                 [(ngModel)]="ordutegi.denbora.amaiera_ordua"
                 name="amaiera_ordua"
-                placeholder="Selecciona una hora de fin"
+                placeholder="{{ 'CREAR_ORDUTEGIAK.SELECCIONA_HORA_FIN' | translate }}"
                 type="time"
                 required
               ></ion-input>
               <ion-note *ngIf="ordutegiForm.controls['amaiera_ordua']?.invalid && ordutegiForm.controls['amaiera_ordua']?.touched" color="danger">
-                La hora de fin es obligatoria
+                {{ 'CREAR_ORDUTEGIAK.OBLIGATORIO_HORA_FIN' | translate }}
               </ion-note>
             </ion-item>
 
@@ -109,7 +109,7 @@
               color="tertiary"
               [disabled]="ordutegiForm.invalid"
             >
-              Guardar Ordutegi
+              {{ 'CREAR_ORDUTEGIAK.GUARDAR_ORDUTEGI' | translate }}
             </ion-button>
           </ion-list>
         </ion-card-content>
