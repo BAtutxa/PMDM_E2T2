@@ -105,7 +105,7 @@ search-icon="search-circle"
 
 <ion-row *ngIf="esProfe">
 <ion-col size="12" class="ion-text-center">
-  <ion-button color="primary" expand="block" [routerLink]="'/crear-maileguak'">Añadir préstamo
+  <ion-button color="primary" expand="block" [routerLink]="'/crear-ipm'">Añadir IPM
     <ion-icon name="add-circle-outline"></ion-icon>
   </ion-button>
 </ion-col>
@@ -113,36 +113,38 @@ search-icon="search-circle"
 
 <!-- Fila de materiales -->
 <ion-grid>
-<ion-row>
-  <ion-col size="12">
-    <table class="custom-table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Trabajador</th>
-          <th>Material</th>
-          <th>Fecha</th>
-          <th>Fecha de creación</th>
-          <th>Fecha de actualización</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let mailegu of maileguakFiltrados | slice: (paginaActual - 1) * maileguakPorPagina : paginaActual * maileguakPorPagina">
-          <td>{{ mailegu.id || '-' }}</td>
-          <td>{{ obtenerNombreLangile(mailegu.langilea) }}</td>
-          <td>{{ obtenerNombreProducto(mailegu.produktuak) }}</td>               
-          <td>{{ mailegu.data_Zutabea ? (mailegu.data_Zutabea | date:'yyyy-MM-dd') : '-' }}</td>
-          <td>{{ mailegu.data.sortze_data ? (mailegu.data.sortze_data | date:'yyyy-MM-dd') : '-' }}</td>
-          <td>{{ mailegu.data.eguneratze_data ? (mailegu.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</td>
-          <td>
-            <ion-button color="primary" (click)="editarIPM(mailegu)">Editar</ion-button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </ion-col>
-</ion-row>
+  <ion-row>
+    <ion-col size="12">
+      <table class="custom-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Trabajador</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Fecha</th>
+            <th>Fecha de creación</th>
+            <th>Fecha de actualización</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let mailegu of maileguakFiltrados | slice: (paginaActual - 1) * maileguakPorPagina : paginaActual * maileguakPorPagina">
+            <td>{{ mailegu.id || '-' }}</td>
+            <td>{{ obtenerNombreLangile(mailegu.langilea) }}</td>
+            <td>{{ obtenerNombreProducto(mailegu.produktuak) }}</td>
+            <td>{{ mailegu.kantitatea || '-' }}</td>
+            <td>{{ mailegu.data_Zutabea ? (mailegu.data_Zutabea | date:'yyyy-MM-dd') : '-' }}</td>
+            <td>{{ mailegu.data.sortze_data ? (mailegu.data.sortze_data | date:'yyyy-MM-dd') : '-' }}</td>
+            <td>{{ mailegu.data.eguneratze_data ? (mailegu.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</td>
+            <td>
+              <ion-button color="primary" (click)="editarIPM(mailegu)">Editar</ion-button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ion-col>
+  </ion-row>
 </ion-grid>
 </ion-content>
 
@@ -262,8 +264,8 @@ search-icon="search-circle"
   <!-- Botón para añadir préstamo -->
   <ion-row *ngIf="esProfe">
     <ion-col size="12" class="ion-text-center">
-      <ion-button color="primary" expand="block" [routerLink]="'/crear-maileguak'">
-        Añadir préstamo
+      <ion-button color="primary" expand="block" [routerLink]="'/crear-ipm'">
+        Añadir IPM
         <ion-icon name="add-circle-outline"></ion-icon>
       </ion-button>
     </ion-col>
@@ -282,6 +284,7 @@ search-icon="search-circle"
           <p><strong>ID:</strong>{{ mailegu.id || '-' }}</p>
           <p><strong>Trabajador:</strong>{{ obtenerNombreLangile(mailegu.langilea) }}</p>
           <p><strong>Producto:</strong>{{ obtenerNombreProducto(mailegu.produktuak) }}</p>
+          <p><strong>Producto:</strong>{{mailegu.kantitatea}}</p>
           <p><strong>Fecha:</strong>{{ mailegu.data_Zutabea ? (mailegu.data_Zutabea | date:'yyyy-MM-dd') : '-' }}</p>
           <p><strong>Fecha de Sortze:</strong>{{ mailegu.data.sortze_data ? (mailegu.data.sortze_data | date:'yyyy-MM-dd') : '-' }}</p>
           <p><strong>Fecha de Eguneratze:</strong>{{ mailegu.data.eguneratze_data ? (mailegu.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>

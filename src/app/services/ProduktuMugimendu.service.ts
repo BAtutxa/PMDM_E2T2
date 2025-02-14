@@ -28,7 +28,7 @@ export class IPMService {
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json');
     
-    return this.http.put<IPM>(`${this.baseUrl}/update`, material, { headers }).pipe(
+    return this.http.put<IPM>(`${this.baseUrl}/eguneratu`, material, { headers }).pipe(
       tap((materialActualizado) => {
         const materialesActualizados = this.materialSubject.getValue().map(m =>
           m.id === materialActualizado.id ? materialActualizado : m
@@ -43,13 +43,13 @@ export class IPMService {
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json');
     
-    return this.http.post<IPM>(`${this.baseUrl}/create`, material, { headers }).pipe(
+    return this.http.post<IPM>(`${this.baseUrl}/sortu`, material, { headers }).pipe(
       tap(() => this.getIPM().subscribe(materiales => this.materialSubject.next(materiales)))
     );
   }
 
   trueEliminarIPM(material: IPM): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/delete/${material.id}`).pipe(
+    return this.http.delete<void>(`${this.baseUrl}/hard/${material.id}`).pipe(
       tap(() => this.getIPM().subscribe(materiales => this.materialSubject.next(materiales)))
     );
   }

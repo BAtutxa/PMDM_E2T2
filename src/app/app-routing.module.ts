@@ -141,6 +141,10 @@ const routes: Routes = [
   {
     path: 'crear-maileguak',
     loadChildren: () => import('./crear-maileguak/crear-maileguak.module').then( m => m.CrearMaileguakPageModule)
+  },
+  {
+    path: 'crear-ipm',
+    loadChildren: () => import('./crear-ipm/crear-ipm.module').then( m => m.CrearIPMPageModule)
   }
 
 
