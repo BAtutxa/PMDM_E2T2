@@ -87,5 +87,23 @@ export class HistorialaPage{
     this.menuCtrl.open();
     this.router.navigate(['/material-maileguak'], { queryParams: { desdeHistorial: 'true' } });
   }
+
+  irATickets(){
+    this.historialService.setEsHistorial(true);  
+    this.router.navigate(['/tickets']).then(() => {
+        window.location.reload(); // Recarga la página
+    });
+    this.menuCtrl.open();
+    this.router.navigate(['/tickets'], { queryParams: { desdeHistorial: 'true' } });
+  }
+
+  irAServicios(){
+    this.historialService.setEsHistorial(true);  
+    this.router.navigate(['/servicios']).then(() => {
+        window.location.reload(); // Recarga la página
+    });
+    this.menuCtrl.open();
+    this.router.navigate(['/servicios'], { queryParams: { desdeHistorial: 'true' } });
+  }
   
 }

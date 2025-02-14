@@ -46,7 +46,7 @@
       </ion-col>
       <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
         <ion-button shape="" (click)=" irAMaterialMaileguak()" class="custom-button">
-          <img src="assets/Images/reloj.webp" alt="Ordutegiak" class="button-icon" />
+          <img src="assets/Images/reloj.webp" alt="Maileguak" class="button-icon" />
           <span>{{ 'HISTORIAL.HORARIOS' | translate }}</span>
         </ion-button>
       </ion-col>
@@ -57,13 +57,13 @@
         </ion-button>
       </ion-col>
       <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-        <ion-button shape="" [routerLink]="'/tickets'" class="custom-button">
+        <ion-button shape="" (click)="irATickets()" class="custom-button">
           <img src="assets/Images/ticket.jpg" alt="Tickets" class="button-icon" />
           <span>{{ 'HISTORIAL.TICKETS' | translate }}</span>
         </ion-button>
       </ion-col>
       <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-        <ion-button shape="" [routerLink]="'/servicios'" class="custom-button">
+        <ion-button shape="" (click)="irAServicios()" class="custom-button">
           <img src="assets/Images/servicios.jpg" alt="Zerbitzuak" class="button-icon" />
           <span>{{ 'HISTORIAL.SERVICIOS' | translate }}</span>
         </ion-button>

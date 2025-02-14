@@ -171,7 +171,7 @@ export class GestionarCitasPage implements OnInit {
   imprimirTicket() {
     let listaCitas: any[] = [];
   
-    // Ahora cargamos las citas después de obtener los servicios
+    // Cargar las citas después de obtener los servicios
     this.http.get<any[]>('http://localhost:8080/hitzorduak/hitzorduakGuztiak').subscribe(
       (data) => {
         listaCitas = data;
@@ -186,7 +186,7 @@ export class GestionarCitasPage implements OnInit {
           return;
         }
   
-        // Verificamos si el servicio está seleccionado
+        // Verificar si el servicio está seleccionado
         if (!this.servicioSeleccionado) {
           this.mostrarAlerta('Por favor, selecciona un servicio antes de generar el ticket.');
           return;
@@ -216,7 +216,7 @@ export class GestionarCitasPage implements OnInit {
                   return;
                 }
   
-                // Ahora creamos el nuevo ticket
+                // Crear el nuevo ticket
                 const nuevoTicket: ITicket = {
                   id: null,
                   zerbitzuak: {
@@ -258,29 +258,41 @@ export class GestionarCitasPage implements OnInit {
   
                 // Crear PDF
                 const doc = new jsPDF();
-                doc.text(`Ticket de Cita`, 10, 10);
-                doc.text(`Nombre: ${nuevoTicket.hitzorduak.izena}`, 10, 20);
-                doc.text(`Telefono: ${nuevoTicket.hitzorduak.telefonoa}`, 10, 30);
-                doc.text(`Servicio: ${nuevoTicket.zerbitzuak.izena}`, 10, 40);
-                doc.text(`Trabajador: ${trabajadorNombre}`, 10, 50);
-                doc.text(`Fecha: ${nuevoTicket.hitzorduak.data}`, 10, 60);
-                doc.text(`Hora: ${nuevoTicket.hitzorduak.hasiera_ordua} - ${nuevoTicket.hitzorduak.amaiera_ordua}`, 10, 70);
-                doc.save('ticket-cita.pdf');
   
-                this.ticketService.crearTicket(nuevoTicket).subscribe(
-                  (response: any) => {
-                    console.log("Ticket guardado correctamente");
-                    this.cerrarModal();
-                    this.router.navigate(['/tickets']).then(() => {
-                      window.location.reload(); // Recarga la página solo después de llegar a /tickets
-                    });
-
-                  },
-                  (error) => {
-                    console.error("Error al guardar el ticket:", error);
-                  }
-                );      
-                    
+                // Cargar y agregar la imagen al PDF
+                const img = new Image();
+                img.src = 'assets/Images/IMP_Logotipoa.png';
+  
+                img.onload = () => {
+                  // Agregar la imagen al PDF
+                  doc.addImage(img, 'PNG', 10, 10, 50, 50); // Ajusta las coordenadas y el tamaño según sea necesario
+  
+                  // Agregar el texto al PDF
+                  doc.text(`Ticket de Cita`, 10, 70);
+                  doc.text(`Nombre: ${nuevoTicket.hitzorduak.izena}`, 10, 80);
+                  doc.text(`Telefono: ${nuevoTicket.hitzorduak.telefonoa}`, 10, 90);
+                  doc.text(`Servicio: ${nuevoTicket.zerbitzuak.izena}`, 10, 100);
+                  doc.text(`Trabajador: ${trabajadorNombre}`, 10, 110);
+                  doc.text(`Fecha: ${nuevoTicket.hitzorduak.data}`, 10, 120);
+                  doc.text(`Hora: ${nuevoTicket.hitzorduak.hasiera_ordua} - ${nuevoTicket.hitzorduak.amaiera_ordua}`, 10, 130);
+  
+                  // Guardar el PDF
+                  doc.save('ticket-cita.pdf');
+  
+                  // Guardar el ticket en el servidor
+                  this.ticketService.crearTicket(nuevoTicket).subscribe(
+                    (response: any) => {
+                      console.log("Ticket guardado correctamente");
+                      this.cerrarModal();
+                      this.router.navigate(['/tickets']).then(() => {
+                        window.location.reload(); // Recarga la página solo después de llegar a /tickets
+                      });
+                    },
+                    (error) => {
+                      console.error("Error al guardar el ticket:", error);
+                    }
+                  );
+                };
               },
               (error) => {
                 console.error('Error al obtener los trabajadores:', error);
