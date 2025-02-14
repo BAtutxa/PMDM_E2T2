@@ -500,10 +500,10 @@
   },
   "ALERTAS": {
     "ESTAS_SEGURO": "Ziur zaude?",
-    "MENSAJE_BORRAR_FICHA": "Fichoa ezabatuko da.",
-    "MENSAJE_BORRAR_FICHA_DEFINITIVA": "Fichoa behin betiko ezabatuko da eta ezin izango da berreskuratu.",
-    "MENSAJE_RESTAURAR_FICHA": "Fichoa berreskuratuko da.",
-    "MENSAJE_CONFIRMAR_EDICION": "Fichako balioak eguneratuko dira.",
+    "MENSAJE_BORRAR_FICHA": "Fitxategia ezabatuko da.",
+    "MENSAJE_BORRAR_FICHA_DEFINITIVA": "Fitxategia behin betiko ezabatuko da eta ezin izango da berreskuratu.",
+    "MENSAJE_RESTAURAR_FICHA": "Fitxategia berreskuratuko da.",
+    "MENSAJE_CONFIRMAR_EDICION": "Fitxategiko balioak eguneratuko dira.",
     "CANCELAR": "Ezeztatu",
     "CONFIRMAR": "Baieztatu"
   },
