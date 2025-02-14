@@ -7,7 +7,7 @@ import { IMaileguak } from '../interfaces/IMaileguak';
   providedIn: 'root'
 })
 export class MaileguService {
-  private baseUrl = 'http://localhost:8080/maileguak'; // URL del backend Spring Boot
+  private baseUrl = 'http://localhost:8080/api/mailegu'; // URL del backend Spring Boot
   private maileguSubject = new BehaviorSubject<IMaileguak[]>([]); 
 
   constructor(private http: HttpClient) {

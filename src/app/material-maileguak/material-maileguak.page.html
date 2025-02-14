@@ -157,8 +157,8 @@ search-icon="search-circle"
         <tbody>
           <tr *ngFor="let mailegu of maileguakFiltrados | slice: (paginaActual - 1) * maileguakPorPagina : paginaActual * maileguakPorPagina">
             <td>{{ mailegu.id || '-' }}</td>
-            <td>{{ mailegu.langilea.izena || '-' }}</td>
-            <td>{{ mailegu.materiala.izena }}</td>
+            <td>{{ mailegu.idLangilea || '-' }}</td>
+            <td>{{ mailegu.materiala_id }}</td>
             <td>{{ mailegu.hasieraData ? (mailegu.hasieraData | date:'yyyy-MM-dd') : '-' }}</td>
             <td>{{ mailegu.amaieraData ? (mailegu.amaieraData | date:'yyyy-MM-dd') : '-' }}</td>
             <td>{{ mailegu.data.sortze_data ? (mailegu.data.sortze_data | date:'yyyy-MM-dd') : '-' }}</td>
@@ -308,11 +308,11 @@ search-icon="search-circle"
   <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
     <ion-card *ngIf="IMaileguSeleccionado.id !== mailegu.id" (click)="editarIMailegu(mailegu)">
       <ion-card-header>
-        <ion-card-title>{{ mailegu.materiala.izena || '-' }}</ion-card-title>
+        <ion-card-title>{{ mailegu.materiala_id || '-' }}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <p><strong>{{ 'MATERIAL_MAILEGUAK.ID' | translate }}:</strong> {{ mailegu.id || '-' }}</p>
-        <p><strong>{{ 'MATERIAL_MAILEGUAK.LANGILE_IZENA' | translate }}:</strong> {{ mailegu.langilea.izena || '-' }}</p>
+        <p><strong>{{ 'MATERIAL_MAILEGUAK.LANGILE_IZENA' | translate }}:</strong> {{ mailegu.idLangilea || '-' }}</p>
         <p><strong>{{ 'MATERIAL_MAILEGUAK.SORTZE_DATA' | translate }}:</strong> {{ mailegu.hasieraData | date:'yyyy-MM-dd' }}</p>
         <p><strong>{{ 'MATERIAL_MAILEGUAK.EGUNERATZE_DATA' | translate }}:</strong> {{ mailegu.data.eguneratze_data ? (mailegu.data.eguneratze_data | date:'yyyy-MM-dd') : '-' }}</p>
         <p><strong>{{ 'MATERIAL_MAILEGUAK.HASIERA_DATA' | translate }}:</strong> {{ mailegu.hasieraData | date:'yyyy-MM-dd' }}</p>

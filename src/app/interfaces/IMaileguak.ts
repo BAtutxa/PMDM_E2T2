@@ -4,8 +4,8 @@ import { ITrabajador } from "./ITrabajador"
 
 export interface IMaileguak {
     id: number |null,
-    materiala: IEMaterialak,
-    langilea: ITrabajador,
+    materiala_id: number,
+    idLangilea: number,
     kodea:  number | null
     data: IData
     hasieraData: Date | null

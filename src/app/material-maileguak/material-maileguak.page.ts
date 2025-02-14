@@ -80,6 +80,17 @@ export class MaterialMaileguakPage implements OnInit {
        this.esProfe = false;
      }
    }
+   
+   obtenerNombreLangile(langileId: number): string {
+    const langile = this.trabajadores.find(t => t.id === langileId);
+    return langile ? `${langile.izena} ${langile.abizenak}` : '-';
+  }
+  
+  obtenerNombreMaterial(materialId: number): string {
+    const material = this.materiales.find(m => m.id === materialId);
+    return material ? material.izena : '-';
+  }
+  
  
    @HostListener('window:resize', ['$event'])
    onResize() {
@@ -217,9 +228,9 @@ export class MaterialMaileguakPage implements OnInit {
        this.maileguakFiltrados = [...this.maileguak];
      } else {
        this.maileguakFiltrados = this.maileguak.filter((IMailegu) => {
-         const coincideLangileIzena = IMailegu.langilea.izena && IMailegu.langilea.izena.toLowerCase().includes(texto);
+         const coincideLangileIzena = IMailegu.idLangilea && IMailegu.idLangilea.toString().includes(texto);
          const coincideId = IMailegu.id && IMailegu.id.toString().includes(texto);
-         const coincideMaterialIzena = IMailegu.materiala.izena && IMailegu.materiala.izena.toString().includes(texto);
+         const coincideMaterialIzena = IMailegu.materiala_id && IMailegu.materiala_id.toString().includes(texto);
          const coincideFecha = IMailegu.data && this.compararFechas(IMailegu.data, texto);
    
          return coincideLangileIzena ||  coincideId || coincideMaterialIzena || coincideFecha;
