@@ -1,137 +1,134 @@
 /* Estilo general del ion-content */
 ion-content {
     --background: #1c345c; /* Fondo principal */
-    height: 100%; /* Asegura que el contenido ocupe toda la altura */
-    display: flex; /* Usamos flexbox para centrar el contenido */
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-}
-
-/* Centrado del ion-card */
-.card-container {
+  }
+  
+  /* Centrado del ion-card */
+  .card-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 80%; /* Cambia esto para hacerlo más ancho (por ejemplo, 80%) */
-    height: 100%; /* Mantiene la altura igual */
+    height: calc(100vh - 56px); /* Usamos 100vh menos la altura de la cabecera */
     padding: 16px;
-}
-
-/* Estilo del ion-card */
-ion-card {
-    width: 150%; /* El ancho del card es del 90% */
-    max-width: 1000px; /* Ancho máximo para evitar que crezca indefinidamente */
+    box-sizing: border-box;
+  }
+  
+  /* Estilo del ion-card */
+  ion-card {
+    width: 100%; /* Se ajusta al 100% del contenedor */
+    max-width: 800px; /* Establece un ancho máximo de la tarjeta */
     --background: white;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     padding: 16px;
-    margin: 0 auto; /* Centrado */
-}
-
-/* Centrar el título del ion-card */
-ion-card-title {
+    box-sizing: border-box;
+  }
+  
+  /* Centrar el título del ion-card */
+  ion-card-title {
     text-align: center;
     font-size: 24px;
     font-weight: bold;
     color: #333;
     margin-bottom: 16px;
-}
-
-/* Diseño del formulario */
-ion-list {
-    margin: 0;
-    padding: 0;
+  }
+  
+  /* Diseño del formulario en dos columnas */
+  .form-grid {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     gap: 16px;
-}
-
-/* Estilo para cada ion-item */
-ion-item {
+  }
+  
+  .form-column {
+    flex: 1;
+    min-width: 300px; /* Mínimo de 300px para las columnas */
+  }
+  
+  ion-item {
     margin-bottom: 12px;
-}
-
-/* Estilo de los botones */
-ion-button {
-    width: 100%;
-    margin-top: 20px;
-}
-
-/* Estilo del campo de teléfono cuando es inválido */
-ion-note {
-    font-size: 14px;
-    margin-top: 5px;
-}
-
-/* Estilo para la lista del formulario */
-ion-item ion-input,
-ion-item ion-select {
-    width: 100%;
-}
-
-.button-container {
+  }
+  
+  .button-container {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
-}
-
-ion-button {
-    width: 48%;
-}
-
-/* Media query adjustments */
-@media (max-width: 768px) {
-    .button-container {
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    ion-button {
-        width: 100%;
-    }
-
-    ion-card-title {
-        font-size: 20px;
-    }
-}
-
-@media (max-width: 576px) {
-    .card-container {
-        height: auto;
-        padding: 32px 16px;
-    }
-
-    ion-card {
-        padding: 12px;
-    }
-
-    ion-card-title {
-        font-size: 18px;
-    }
-}
-
-@media (orientation: landscape) {
-    .card-container {
-        flex-direction: row;
-        padding: 16px;
-    }
-
-    ion-card {
-        max-width: 800px; /* Mantén un tamaño adecuado para pantallas grandes */
-        margin: 0 auto;
-    }
-
-    .form-grid {
-        flex-wrap: nowrap;
-        gap: 24px;
-    }
-
+  }
+  
+  ion-button {
+    width: 48%; /* Botones ajustados en 48% de ancho */
+  }
+  
+  @media (max-width: 768px) {
+    /* En pantallas más pequeñas, las columnas se apilan */
     .form-column {
-        flex: 1;
-        min-width: 200px;
+      flex: 1 1 100%;
+      min-width: unset;
     }
-
+  
+    /* Los botones se apilan verticalmente */
     .button-container {
-        justify-content: space-around;
+      flex-direction: column;
+      gap: 12px;
     }
-}
+  
+    ion-button {
+      width: 100%; /* Los botones ocupan el 100% del ancho */
+    }
+  
+    /* Ajuste en el tamaño del título */
+    ion-card-title {
+      font-size: 20px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    /* En pantallas muy pequeñas, ajustamos el tamaño y padding */
+    .card-container {
+      height: auto;
+      padding: 32px 16px;
+    }
+  
+    ion-card {
+      padding: 12px;
+    }
+  
+    ion-card-title {
+      font-size: 18px; /* Título más pequeño */
+    }
+  }
+  
+  @media (orientation: landscape) {
+    /* En modo landscape, ajustamos la disposición */
+    .card-container {
+      flex-direction: row; /* Los elementos se colocan en fila */
+      padding: 16px;
+    }
+  
+    ion-card {
+      max-width: 600px; /* Ancho máximo más pequeño para landscape */
+      margin: 0 auto;
+    }
+  
+    .form-grid {
+      flex-wrap: nowrap;
+      gap: 24px;
+    }
+  
+    .form-column {
+      flex: 1;
+      min-width: 200px; /* Asegura que las columnas no sean demasiado pequeñas */
+    }
+  
+    .button-container {
+      justify-content: space-around; /* Ajuste de botones en landscape */
+    }
+  }
+  
+  ion-input,
+  ion-label,
+  ion-select-option,
+  ion-select {
+    color: black !important;
+  }
+  
