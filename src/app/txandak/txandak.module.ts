@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { TxandakPageRoutingModule } from './txandak-routing.module';
 
 import { TxandakPage } from './txandak.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    TxandakPageRoutingModule
+    TxandakPageRoutingModule,
+    TranslateModule
   ],
   declarations: [TxandakPage]
 })

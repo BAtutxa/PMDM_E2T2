@@ -4,93 +4,92 @@
       <ion-buttons slot="start">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title>TXANDAK</ion-title>
+      <ion-title>{{ 'TXANDAK.TXANDAK' | translate }}</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-content class="ion-padding">
     <!-- Select para elegir txanda -->
     <ion-item>
-      <ion-label>Selecciona Txanda</ion-label>
+      <ion-label>{{ 'TXANDAK.SELECCIONA_TXANDA' | translate }}</ion-label>
       <ion-select [(ngModel)]="selectedTxandak" (ionChange)="onTxandaChange($event)">
         <ion-select-option *ngFor="let txanda of txandak; let i = index" [value]="txanda">
-          Txanda {{ txanda.id }} 
+          {{ 'TXANDAK.TXANDA' | translate }} {{ txanda.id }} 
         </ion-select-option>
       </ion-select>
     </ion-item>
 
     <ion-card *ngIf="selectedTxandak">
       <ion-card-header>
-        <ion-card-title>Detalles del txanda</ion-card-title>
+        <ion-card-title>{{ 'TXANDAK.DETALLES_TXANDA' | translate }}</ion-card-title>
       </ion-card-header>
       <ion-card-content>
-        <p><strong>ID:</strong> {{ selectedTxandak.id }}</p>
-        <p><strong>Fecha:</strong> 
+        <p><strong>{{ 'TXANDAK.ID' | translate }}:</strong> {{ selectedTxandak.id }}</p>
+        <p><strong>{{ 'TXANDAK.FECHA' | translate }}:</strong> 
           {{ selectedTxandak.dataSimple ? (selectedTxandak.data | date: 'yyyy-MM-dd') : 'No disponible' }}
         </p>
-        <p><strong>Tipo:</strong> {{ selectedTxandak.mota === 'M' ? 'Recepción' : selectedTxandak.mota === 'G' ? 'Limpieza' : 'Desconocido' }}</p>
-        <p *ngIf="selectedTxandak && selectedTxandak.langileak">
-          <strong>Nombre del trabajador:</strong> {{ selectedTxandak.langileak.izena }} {{ selectedTxandak.langileak.abizenak }}
+        <p><strong>{{ 'TXANDAK.TIPO' | translate }}:</strong> 
+          {{ selectedTxandak.mota === 'M' ? 'Recepción' : selectedTxandak.mota === 'G' ? 'Limpieza' : 'Desconocido' }}
         </p>
-        <p><strong>Fecha de creación:</strong> 
+        <p *ngIf="selectedTxandak && selectedTxandak.langileak">
+          <strong>{{ 'TXANDAK.NOMBRE_TRABAJADOR' | translate }}:</strong> {{ selectedTxandak.langileak.izena }} {{ selectedTxandak.langileak.abizenak }}
+        </p>
+        <p><strong>{{ 'TXANDAK.FECHA_CREACION' | translate }}:</strong> 
           {{ selectedTxandak.dataSimple.sortze_data ? (selectedTxandak.dataSimple.sortze_data | date: 'yyyy-MM-dd') : 'No disponible' }}
         </p>
-        <p><strong>Fecha de actualización:</strong> 
+        <p><strong>{{ 'TXANDAK.FECHA_ACTUALIZACION' | translate }}:</strong> 
           {{ selectedTxandak.dataSimple.eguneratze_data ? (selectedTxandak.dataSimple.eguneratze_data | date: 'yyyy-MM-dd') : 'No disponible' }}
         </p>
       </ion-card-content>
       <ion-button color="tertiary" shape="round" fill="solid" (click)="editarTxanda(selectedTxandak)">
         <ion-icon name="create-outline" slot="start"></ion-icon>
-        Editar
+        {{ 'TXANDAK.EDITAR' | translate }}
       </ion-button>
     </ion-card>
     
-
     <!-- Tarjeta emergente para editar -->
-<ion-card *ngIf="editando" class="edit-card">
-  <ion-card-header>
-    <ion-card-title>Editar txanda</ion-card-title>
-  </ion-card-header>
-  <ion-card-content>
-    <!-- Tipo (mota) -->
-    <ion-item>
-      <ion-label>Tipo</ion-label>
-      <ion-select [(ngModel)]="editingTxanda.mota" placeholder="Selecciona tipo">
-        <ion-select-option value="M">Recepción</ion-select-option>
-        <ion-select-option value="G">Limpieza</ion-select-option>
-      </ion-select>
-    </ion-item>
+    <ion-card *ngIf="editando" class="edit-card">
+      <ion-card-header>
+        <ion-card-title>{{ 'TXANDAK.EDITAR_TXANDA' | translate }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <!-- Tipo (mota) -->
+        <ion-item>
+          <ion-label>{{ 'TXANDAK.TIPO' | translate }}</ion-label>
+          <ion-select [(ngModel)]="editingTxanda.mota" placeholder="{{ 'TXANDAK.SELECCIONA_TIPO' | translate }}">
+            <ion-select-option value="M">{{ 'TXANDAK.RECEPCION' | translate }}</ion-select-option>
+            <ion-select-option value="G">{{ 'TXANDAK.LIMPIEZA' | translate }}</ion-select-option>
+          </ion-select>
+        </ion-item>
 
-    <!-- Trabajador -->
-    <ion-item>
-      <ion-label>Trabajador</ion-label>
-      <ion-select [(ngModel)]="editingTxanda.langileak.id" placeholder="Selecciona un trabajador">
-        <ion-select-option *ngFor="let trabajador of trabajadores" [value]="trabajador.id">
-          {{ trabajador.izena }} {{ trabajador.abizenak }}
-        </ion-select-option>
-      </ion-select>
-    </ion-item>
+        <!-- Trabajador -->
+        <ion-item>
+          <ion-label>{{ 'TXANDAK.TRABAJADOR' | translate }}</ion-label>
+          <ion-select [(ngModel)]="editingTxanda.langileak.id" placeholder="{{ 'TXANDAK.SELECCIONA_TRABAJADOR' | translate }}">
+            <ion-select-option *ngFor="let trabajador of trabajadores" [value]="trabajador.id">
+              {{ trabajador.izena }} {{ trabajador.abizenak }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
 
-    <!-- Fechas -->
-    <ion-item>
-      <ion-label>Fecha</ion-label>
-      <ion-datetime [(ngModel)]="editingTxanda.data" presentation="date"></ion-datetime>
-    </ion-item>
-    
+        <!-- Fechas -->
+        <ion-item>
+          <ion-label>{{ 'TXANDAK.FECHA' | translate }}</ion-label>
+          <ion-datetime [(ngModel)]="editingTxanda.data" presentation="date"></ion-datetime>
+        </ion-item>
 
-    <!-- Botones -->
-    <ion-item class="ion-text-center">
-      <ion-button color="success" expand="full" (click)="guardarCambios()">Guardar</ion-button>
-      <ion-button color="danger" expand="full" (click)="editando = false">Cancelar</ion-button>
-    </ion-item>
-  </ion-card-content>
-</ion-card>
-
+        <!-- Botones -->
+        <ion-item class="ion-text-center">
+          <ion-button color="success" expand="full" (click)="guardarCambios()">{{ 'TXANDAK.GUARDAR' | translate }}</ion-button>
+          <ion-button color="danger" expand="full" (click)="editando = false">{{ 'TXANDAK.CANCELAR' | translate }}</ion-button>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
 
     <!-- Botón para sumar txanda -->
     <div class="center-button ion-text-center">
       <ion-button routerLink="/crear-txanda" color="primary" shape="round">
-        Sumar txanda
+        {{ 'TXANDAK.SUMAR_TXANDA' | translate }}
       </ion-button>
     </div>
   </ion-content>
