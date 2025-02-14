@@ -73,55 +73,72 @@
 
 
   <!-- Formulario de Edición (solo visible cuando hay un historial seleccionado) -->
-  <div *ngIf="selectedHistorial">
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Editar Historial</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-select [(ngModel)]="selectedHistorial.bezero" placeholder="Selecciona un cliente">
-          <ion-select-option *ngFor="let cliente of clientes" [value]="cliente.id">
-            {{ cliente.izena }}  {{ cliente.abizena }}
+<div *ngIf="selectedHistorial">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Editar Historial</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- Selector de cliente -->
+      <ion-select [(ngModel)]="selectedHistorial.bezero" placeholder="Selecciona un cliente">
+        <ion-select-option *ngFor="let cliente of clientes" [value]="cliente.id">
+          {{ cliente.izena }}  {{ cliente.abizena }}
+        </ion-select-option>
+      </ion-select>
+
+      <!-- Selector de producto -->
+      <ion-item>
+        <ion-label position="floating">Producto</ion-label>
+        <ion-select [(ngModel)]="selectedHistorial.produktu_id" placeholder="Selecciona un producto">
+          <ion-select-option *ngFor="let producto of productos" [value]="producto.id">
+            {{ producto.izena }}  {{ producto.marka }}
           </ion-select-option>
         </ion-select>
-        <ion-item>
-          <ion-label position="floating">Producto nombre</ion-label>
-          <ion-input [(ngModel)]="selectedHistorial.produktu_id" type="number"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Fecha</ion-label>
-          <ion-datetime [(ngModel)]="selectedHistorial.data" displayFormat="MM/DD/YYYY"></ion-datetime>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Cantidad</ion-label>
-          <ion-input [(ngModel)]="selectedHistorial.kantitatea" type="number"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Volumen</ion-label>
-          <ion-input [(ngModel)]="selectedHistorial.bolumena"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Observaciones</ion-label>
-          <ion-textarea [(ngModel)]="selectedHistorial.oharrak"></ion-textarea>
-        </ion-item>
-        
-        <ion-button expand="full" color="primary" (click)="saveChanges()">Guardar Cambios</ion-button>
-        <ion-button expand="full" color="secondary" (click)="cancelEdit()">Cancelar</ion-button>
-      </ion-card-content>
-    </ion-card>
-  </div>
+      </ion-item>
+
+      <!-- Selector de fecha -->
+      <ion-item>
+        <ion-label position="floating">Fecha</ion-label>
+        <ion-datetime [(ngModel)]="selectedHistorial.data" displayFormat="MM/DD/YYYY"></ion-datetime>
+      </ion-item>
+
+      <!-- Selector de cantidad -->
+      <ion-item>
+        <ion-label position="floating">Cantidad</ion-label>
+        <ion-input [(ngModel)]="selectedHistorial.kantitatea" type="number"></ion-input>
+      </ion-item>
+
+      <!-- Selector de volumen -->
+      <ion-item>
+        <ion-label position="floating">Volumen</ion-label>
+        <ion-input [(ngModel)]="selectedHistorial.bolumena"></ion-input>
+      </ion-item>
+
+      <!-- Selector de observaciones -->
+      <ion-item>
+        <ion-label position="floating">Observaciones</ion-label>
+        <ion-textarea [(ngModel)]="selectedHistorial.oharrak"></ion-textarea>
+      </ion-item>
+
+      <!-- Botones de acción -->
+      <ion-button expand="full" color="primary" (click)="saveChanges()">Guardar Cambios</ion-button>
+      <ion-button expand="full" color="secondary" (click)="cancelEdit()">Cancelar</ion-button>
+    </ion-card-content>
+  </ion-card>
+</div>
 
   <!-- Lista de Historiales -->
-  <ion-list *ngIf="historial.length > 0 && !selectedHistorial">
-    <ion-item *ngFor="let item of historial">
-      <ion-label>
-        <h2>Bezero: {{ item.bezero }}</h2>
-        <p><strong>Producto ID:</strong> {{ item.produktu_id }}</p>
-        <p><strong>Fecha:</strong> {{ item.data | date:'short' }}</p>
-        <p><strong>Kantitatea:</strong> {{ item.kantitatea }}</p>
-        <p><strong>Volumen:</strong> {{ item.bolumena }}</p>
-        <p><strong>Observaciones:</strong> {{ item.oharrak || 'Sin observaciones' }}</p>
-      </ion-label>
+ <ion-list *ngIf="historial.length > 0 && !selectedHistorial">
+  <ion-item *ngFor="let item of historial">
+    <ion-label>
+      <h2>Bezero: {{ obtenerNombreCliente(item.bezero) }}</h2>
+      <!-- Cambiar el producto ID por su nombre -->
+      <p><strong>Producto:</strong> {{ obtenerNombreProducto(item.produktu_id) }}</p>
+      <p><strong>Fecha:</strong> {{ item.data | date:'short' }}</p>
+      <p><strong>Kantitatea:</strong> {{ item.kantitatea }}</p>
+      <p><strong>Volumen:</strong> {{ item.bolumena }}</p>
+      <p><strong>Observaciones:</strong> {{ item.oharrak || 'Sin observaciones' }}</p>
+    </ion-label>
 
       <!-- Botones de acción (Editar y Eliminar) -->
       <ion-buttons slot="end">

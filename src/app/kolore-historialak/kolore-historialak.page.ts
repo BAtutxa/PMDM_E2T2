@@ -18,6 +18,28 @@ export class KoloreHistorialakPage implements OnInit {
   historial: IKoloreHistorialak[] = [];
   clientes : IBezero []= [];
   productos: IEProduktuak []= [];
+  producto : IEProduktuak = {
+    id: null,
+    izena: '',
+    deskribapena: null,
+    kategoriak: {
+      id: null,
+      izena: '',
+      data: {
+        sortze_data: null,
+        eguneratze_data: null,
+        ezabatze_data: null
+      }
+    },
+    marka: '',
+    stock: null,
+    stock_alerta: null,
+    data: {
+      sortze_data: null,
+      eguneratze_data: null,
+      ezabatze_data: null
+    }
+  }
   selectedHistorial: IKoloreHistorialak | null = null; 
   newHistorial: IKoloreHistorialak =  {
     id: 0,
@@ -60,6 +82,18 @@ export class KoloreHistorialakPage implements OnInit {
       }
     );
   }
+
+  obtenerNombreCliente(bezeroId: number): string {
+    const cliente = this.clientes.find(c => c.id === bezeroId);
+    return cliente ? cliente.izena : 'Cliente no encontrado';
+  }
+  
+
+  obtenerNombreProducto(produktuId: number): string {
+    const producto = this.productos.find(p => p.id === produktuId);
+    return producto ? producto.izena : 'Producto no encontrado';
+  }
+  
 
   cargarClientes(){
     this.clienteService.getFichas().subscribe(
