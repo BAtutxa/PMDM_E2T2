@@ -43,6 +43,10 @@
         <ion-icon name="create-outline" slot="start"></ion-icon>
         Editar
       </ion-button>
+      <ion-button (click)="borrar(selectedTxandak)"  color="danger" shape="round">
+        <ion-icon name="trash-outline"></ion-icon>
+        Borrar txanda
+      </ion-button>
     </ion-card>
     
 
@@ -85,8 +89,6 @@
     </ion-item>
   </ion-card-content>
 </ion-card>
-
-
     <!-- Botón para sumar txanda -->
     <div class="center-button ion-text-center">
       <ion-button routerLink="/crear-txanda" color="primary" shape="round">
