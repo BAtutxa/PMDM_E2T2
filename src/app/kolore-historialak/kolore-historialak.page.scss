@@ -1,4 +1,38 @@
 ion-toolbar {
-    --background: #1c345c;
-    --color: #fff;
+  --background: #1c345c;
+  --color: #fff;
+}
+
+ion-card {
+  max-width: 90%; // Hace la tarjeta más pequeña
+  margin: auto; // Centrar la tarjeta
+  border-radius: 10px; // Bordes redondeados
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); // Sombra ligera
+}
+
+ion-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center; // Centrar contenido
+}
+
+ion-item {
+  width: 100%;
+}
+
+ion-datetime {
+  margin: 10px auto; // Centra el calendario en la tarjeta
+  display: flex;
+  justify-content: center;
+}
+
+// Hacer la tarjeta responsiva
+@media screen and (max-width: 768px) {
+  ion-card {
+    max-width: 100%;
   }
+
+  ion-button {
+    font-size: 14px; // Ajustar botones en móviles
+  }
+}
