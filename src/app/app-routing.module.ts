@@ -137,6 +137,10 @@ const routes: Routes = [
   {
     path: 'crear-txandak',
     loadChildren: () => import('./crear-txandak/crear-txandak.module').then( m => m.CrearTxandakPageModule)
+  },
+  {
+    path: 'crear-maileguak',
+    loadChildren: () => import('./crear-maileguak/crear-maileguak.module').then( m => m.CrearMaileguakPageModule)
   }
 
 
