@@ -87,8 +87,18 @@
     "PRICE": "Prezioa (€)",
     "WORKER": "Langilea",
     "CONFIRM": "Baieztatu",
-    "CANCEL": "Ezabatu"
+    "CANCEL": "Ezabatu",
+    "NO": "Ez",
+    "YES": "Bai"
   },
+  "ERROR": {
+    "TITLE": "Errorea",
+    "FILL_FIELDS": "Mesedez, bete eremu guztiak behar bezala.",
+    "NAME_REQUIRED": "'Izena' eremua derrigorrezkoa da.",
+    "INVALID_TIME": "Mesedez, sartu ordu baliodun bat (adibidez: 14:30).",
+    "ESLEKUA_MAX": "'Eslekua' eremua 5 edo gutxiago izan behar da."
+  },
+
   "CITA_DETALLES": {
     "TITLE": "HITZORDUAREN XEHETASUNAK",
     "GENERAL_INFO": "Informazio Orokorra",
@@ -123,8 +133,8 @@
     "DELETE": "Ezabatu",
     "PRINT_TICKET": "Ticket-a Inprimatu",
     "SERVICE": "Zerbitzuak",
-    "ACCIONES":"Ekintzak",
-    "CITAS_PROGRAMADAS":"Programatutako hitzorduak"
+    "ACCIONES": "Ekintzak",
+    "CITAS_PROGRAMADAS": "Programatutako hitzorduak"
   },
   "CLIENTES": {
     "BORRAR": "Ezabatu",
@@ -170,15 +180,23 @@
   "ERRORS": {
     "TELEFONO_MAXIMO": "Telefonoak gehienez 9 zenbaki izan behar ditu."
   },
-  "CREAR_CITA": {
-    "NAME": "IZENA",
-    "SURNAME": "ABIZENA",
-    "TELEFONO": "TELEFONOA",
-    "PIEL_SENSIBLE": "AZAL SENTIKORRA",
-    "GUARDAR": "GORDE",
-    "SI": "BAI",
-    "NO": "EZ"
-  },
+
+    "CREAR_CITA": {
+      "FICHA_PERSONAL": "Fitxa Pertsonala",
+      "NAME": "Izena",
+      "NAME_PLACEHOLDER": "Idatzi izena",
+      "SURNAME": "Abizena",
+      "SURNAME_PLACEHOLDER": "Idatzi abizena",
+      "TELEFONO": "Telefonoa",
+      "TELEFONO_PLACEHOLDER": "Sartu telefono zenbakia",
+      "TELEFONO_ERROR": "Telefonoak gehienez 9 zenbaki izan behar ditu.",
+      "PIEL_SENSIBLE": "Azal sentikorra",
+      "SELECT_OPTION": "Aukeratu aukera bat",
+      "SI": "Bai",
+      "NO": "Ez",
+      "GUARDAR": "Gorde"
+    },
+  
   "SERVICIOS": {
     "TITLE": "ZERBITZUAK",
     "SEARCH": "Bilatu",
@@ -201,22 +219,26 @@
     "NAME_REQUIRED": "Izena beharrezkoa da",
     "PRICE_REQUIRED": "Prezioa beharrezkoa da",
     "ASCENDING": "Gorakorra",
-    "DESCENDING": "Beherakorra"
+    "DESCENDING": "Beherakorra",
+    "DELETE_PRODUCT": "Ezabatu produktua"
   },
-  "CREAR_SERVICIO": {
-    "TITLE": "ZERBITZU BERRIA",
-    "NAME": "Izena",
-    "PRECIO_FUERA": "Kanpoko prezioa",
-    "PRECIO_CASA": "Etxeko prezioa",
-    "GUARDAR": "Gorde",
-    "NOMBRE_REQUIRED": "Izena derrigorrezkoa da. ",
-    "PRECIO_CASA_OBLIGATORIO": "Etxeko prezioa derrigorrezkoa da. ",
-    "PRECIO_FUERA_OBLIGATORIO": "Kanpoko mprezioa derrigorrezkoa da. "
+    "CREAR_SERVICIO": {
+      "TITLE": "Zerbitzuaren Sortzea",
+      "NAME": "Izena",
+      "PRECIO_FUERA": "Kanpoko Prezioa",
+      "PRECIO_CASA": "Etxeko Prezioa",
+      "GUARDAR": "Gorde",
+      "NOMBRE_REQUIRED": "Izena derrigorrezkoa da.",
+      "PRECIO_CASA_OBLIGATORIO": "Etxeko prezioa derrigorrezkoa da.",
+      "PRECIO_FUERA_OBLIGATORIO": "Kanpoko prezioa derrigorrezkoa da.",
+      "PLACEHOLDER_NAME": "Izena sartu",
+      "PLACEHOLDER_PRECIO_FUERA": "Kanpoko prezioa sartu",
+      "PLACEHOLDER_PRECIO_CASA": "Etxeko prezioa sartu"
   },
   "INVENTARIO": {
     "PROD_MUGIMENDUAK": "Produktu mugimenduak",
     "MATERIAL_MAILEGU": "Material maileguak",
-    "TITULO":"INBENTARIO"
+    "TITULO": "INBENTARIO"
   },
   "PRODUCTOS": {
     "TITLE": "PRODUKTUAK",
@@ -256,20 +278,26 @@
     "AÑADIR_PRODUCTO": "PRODUKTUA GEHITU",
     "ORDENAR": "Ordenatu"
   },
-  "CREAR_PRODUCTO": {
-    "TITLE": "PRODUKTUAK SORTU",
-    "NOMBRE": "Izena",
-    "MARCA": "Marka",
-    "MARCA_REQUIRED": "Marka beharrezkoa da.",
-    "DESCRIPCION": "Deskribapena",
-    "STOCK": "Stock",
-    "STOCK_REQUIRED": "Stock-a beharrezkoa da.",
-    "STOCK_ALERTA": "Stock alerta",
-    "ALERTA_REQUIRED": "Stock alertaren beharra dago.",
-    "CATEGORIA": "Kategoria",
-    "CATEGORIA_REQUIRED": "Kategoria beharrezkoa da.",
-    "GUARDAR": "Gorde"
-  },
+    "CREAR_PRODUCTO": {
+      "TITLE": "Produktu sortu",
+      "NOMBRE": "Izena",
+      "MARCA": "Marka",
+      "DESCRIPCION": "Deskribapena",
+      "STOCK": "Stock",
+      "STOCK_ALERTA": "Stock alerta",
+      "CATEGORIA": "Kategoria",
+      "GUARDAR": "Gorde",
+      "NOMBRE_PLACEHOLDER": "Idatzi izen bat",
+      "MARCA_PLACEHOLDER": "Idatzi marka bat",
+      "DESCRIPCION_PLACEHOLDER": "Idatzi deskribapen bat",
+      "STOCK_PLACEHOLDER": "Idatzi stock-aren balio bat",
+      "STOCK_ALERTA_PLACEHOLDER": "Idatzi stock alertaren balio bat",
+      "CATEGORIA_PLACEHOLDER": "Aukeratu kategoria bat",
+      "MARCA_REQUIRED": "Marka beharrezkoa da",
+      "STOCK_REQUIRED": "Stock beharrezkoa da",
+      "ALERTA_REQUIRED": "Stock alerta beharrezkoa da",
+      "CATEGORIA_REQUIRED": "Kategoria beharrezkoa da"
+    },
   "MATERIALES": {
     "TITLE": "MATERIALAK",
     "SEARCH": "Bilatu",
@@ -329,14 +357,15 @@
     "ORDENA": "Orrialdeko perstamo-kopurua"
   },
   "CREAR_MATERIAL": {
-    "NUEVO_MATERIAL": "Material Berria Sortu",
+    "NUEVO_MATERIAL": "Material Berria",
     "NOMBRE": "Izena",
-    "NOMBRE_OBLIGATORIO": "Izena derrigorrezkoa da",
     "ETIKETA": "Etiketa",
-    "INTRODUCE_ETIKETA": "Sartu etiketa bat",
+    "INTRODUCE_NOMBRE": "Sartu izena",
+    "INTRODUCE_ETIKETA": "Sartu etiketa",
+    "NOMBRE_OBLIGATORIO": "Izena derrigorrezkoa da",
     "ETIKETA_OBLIGATORIA": "Etiketa derrigorrezkoa da",
     "GUARDAR": "Gorde"
-  },
+},
   "ADMINISTRACION": {
     "TITULO": "Kudeaketa",
     "CATEGORIAS": "Kategoriak",
@@ -438,7 +467,7 @@
     "RESTORE_TICKET": "Berreskuratu txartela",
     "SERVICE_REQUIRED": "Zerbitzua beharrezkoa da",
     "PRICE_REQUIRED": "Prezioa beharrezkoa da",
-    "CREATION_DATE":"Sortze Data",
+    "CREATION_DATE": "Sortze Data",
     "ADD": "Gehitu ticketa",
     "SEARCH": {
       "PLACEHOLDER": "Bilatu..."
@@ -468,5 +497,14 @@
     "DELETE": "Ezabatu",
     "CONFIRM_DELETE": "Berretsi ezabatzea",
     "RESTORE": "Berreskuratu"
+  },
+    "ALERTAS": {
+      "ESTAS_SEGURO": "Ziur zaude?",
+      "MENSAJE_BORRAR_FICHA": "Fichoa ezabatuko da.",
+      "MENSAJE_BORRAR_FICHA_DEFINITIVA": "Fichoa behin betiko ezabatuko da eta ezin izango da berreskuratu.",
+      "MENSAJE_RESTAURAR_FICHA": "Fichoa berreskuratuko da.",
+      "MENSAJE_CONFIRMAR_EDICION": "Fichako balioak eguneratuko dira.",
+      "CANCELAR": "Ezeztatu",
+      "CONFIRMAR": "Baieztatu"
   }
 }

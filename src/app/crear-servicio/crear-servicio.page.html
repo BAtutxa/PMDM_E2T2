@@ -11,28 +11,28 @@
             <!-- Nombre Input -->
             <ion-item>
               <ion-label position="stacked">{{ 'CREAR_SERVICIO.NAME' | translate }}</ion-label>
-              <ion-input [(ngModel)]="servicio.izena" name="izena" placeholder="Introduce un valor para nombre"
+              <ion-input [(ngModel)]="servicio.izena" name="izena" placeholder="{{ 'CREAR_SERVICIO.PLACEHOLDER_NAME' | translate }}"
                 #izena=ngModel required></ion-input>
               <ion-note *ngIf="izena.invalid && izena.touched" color="danger">
                 {{ 'CREAR_SERVICIO.NOMBRE_REQUIRED' | translate }}
               </ion-note>
             </ion-item>
 
-            <!-- Apellido Input -->
+            <!-- Precio Fuera Input -->
             <ion-item>
               <ion-label position="stacked">{{ 'CREAR_SERVICIO.PRECIO_FUERA' | translate }}</ion-label>
               <ion-input [(ngModel)]="servicio.kanpoko_prezioa" name="kanpoko_prezioa"
-                placeholder="Introduce un valor para el precio de fuera" #kanpoko_prezioa=ngModel required></ion-input>
-              <ion-note *ngIf="etxeko_prezioa.invalid && etxeko_prezioa.touched" color="danger">
+                placeholder="{{ 'CREAR_SERVICIO.PLACEHOLDER_PRECIO_FUERA' | translate }}" #kanpoko_prezioa=ngModel required></ion-input>
+              <ion-note *ngIf="kanpoko_prezioa.invalid && kanpoko_prezioa.touched" color="danger">
                 {{ 'CREAR_SERVICIO.PRECIO_CASA_OBLIGATORIO' | translate }}
               </ion-note>
             </ion-item>
 
-            <!-- Teléfono Input -->
+            <!-- Precio Casa Input -->
             <ion-item>
               <ion-label position="stacked">{{ 'CREAR_SERVICIO.PRECIO_CASA' | translate }}</ion-label>
               <ion-input [(ngModel)]="servicio.etxeko_prezioa" name="etxeko_prezioa"
-                placeholder="Introduce un valor para el precio de casa" #etxeko_prezioa=ngModel required>
+                placeholder="{{ 'CREAR_SERVICIO.PLACEHOLDER_PRECIO_CASA' | translate }}" #etxeko_prezioa=ngModel required>
               </ion-input>
               <ion-note *ngIf="etxeko_prezioa.invalid && etxeko_prezioa.touched" color="danger">
                 {{ 'CREAR_SERVICIO.PRECIO_FUERA_OBLIGATORIO' | translate }}
@@ -42,8 +42,9 @@
           </ion-list>
 
           <!-- Save Button -->
-          <ion-button expand="full" type="submit" color="tertiary" [disabled]="servicioForm.invalid">{{
-            'CREAR_SERVICIO.GUARDAR' | translate }}</ion-button>
+          <ion-button expand="full" type="submit" color="tertiary" [disabled]="servicioForm.invalid">
+            {{ 'CREAR_SERVICIO.GUARDAR' | translate }}
+          </ion-button>
         </ion-card-content>
       </ion-card>
     </form>

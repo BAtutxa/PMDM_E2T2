@@ -7,6 +7,7 @@ import { IBezero } from '../interfaces/IEBezero';
 import { IData } from '../interfaces/IData';
 import { EsHistorialService } from '../services/EsHistorial.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-clientes',
@@ -33,6 +34,7 @@ export class ClientesPage implements OnInit {
   loading: any;
 
   constructor(
+    private translate: TranslateService,
     private alertController: AlertController, 
     private ClientesService: ClientesService, 
     private historialService: EsHistorialService,
@@ -49,6 +51,7 @@ export class ClientesPage implements OnInit {
     });
     this.mobilbista();
     this.cargarClientes();
+    this.translate.use('eu');
   }
 
   ngOnDestroy() {
@@ -125,20 +128,20 @@ export class ClientesPage implements OnInit {
 
   async eliminarFicha() {
     const alert = await this.alertController.create({
-      header: '¿Estás seguro?',
-      message: 'Se borrará la ficha.',
+      header: this.translate.instant('ALERTAS.ESTAS_SEGURO'),
+      message: this.translate.instant('ALERTAS.MENSAJE_BORRAR_FICHA'),
       buttons: [
         {
-          text: 'Cancelar',
+          text: this.translate.instant('ALERTAS.CANCELAR'),
           role: 'cancel',
         },
         {
-          text: 'Confirmar',
+          text: this.translate.instant('ALERTAS.CONFIRMAR'),
           handler: async () => {
             const now = new Date();
             this.fichaSeleccionada.data = this.fichaSeleccionada.data || {};
             this.fichaSeleccionada.data.ezabatze_data = now;
-
+  
             try {
               await firstValueFrom(this.ClientesService.actualizarFicha(this.fichaSeleccionada));
               const index = this.fichas.findIndex(ficha => ficha.id === this.fichaSeleccionada.id);
@@ -159,21 +162,21 @@ export class ClientesPage implements OnInit {
 
   async trueEliminarFicha() {
     const alert = await this.alertController.create({
-      header: '¿Estás seguro?',
-      message: 'Se borrará definitivamente la ficha y no se podrá recuperar.',
+      header: this.translate.instant('ALERTAS.ESTAS_SEGURO'),
+      message: this.translate.instant('ALERTAS.MENSAJE_BORRAR_FICHA_DEFINITIVA'),
       buttons: [
         {
-          text: 'Cancelar',
+          text: this.translate.instant('ALERTAS.CANCELAR'),
           role: 'cancel',
         },
         {
-          text: 'Confirmar',
+          text: this.translate.instant('ALERTAS.CONFIRMAR'),
           handler: async () => {
             try {
               await firstValueFrom(this.ClientesService.eliminarFicha(this.fichaSeleccionada));
   
               this.fichas = this.fichas.filter(ficha => ficha.id !== this.fichaSeleccionada.id);
-              this.acabaDeBorrar = true; 
+              this.acabaDeBorrar = true;
               this.editandoFicha = false;
             } catch (error) {
               console.error('Error al borrar ficha:', error);
@@ -188,24 +191,24 @@ export class ClientesPage implements OnInit {
 
   async restaurarFicha() {
     const alert = await this.alertController.create({
-      header: '¿Estás seguro?',
-      message: 'Se restaurará la ficha.',
+      header: this.translate.instant('ALERTAS.ESTAS_SEGURO'),
+      message: this.translate.instant('ALERTAS.MENSAJE_RESTAURAR_FICHA'),
       buttons: [
         {
-          text: 'Cancelar',
+          text: this.translate.instant('ALERTAS.CANCELAR'),
           role: 'cancel',
         },
         {
-          text: 'Confirmar',
+          text: this.translate.instant('ALERTAS.CONFIRMAR'),
           handler: async () => {
             const now = new Date();
             this.fichaSeleccionada.data = this.fichaSeleccionada.data || {};
-            this.fichaSeleccionada.data.ezabatze_data = null; 
-            this.fichaSeleccionada.data.eguneratze_data = now; 
+            this.fichaSeleccionada.data.ezabatze_data = null;
+            this.fichaSeleccionada.data.eguneratze_data = now;
   
             try {
               const fichaRestaurada = await firstValueFrom(this.ClientesService.actualizarFicha(this.fichaSeleccionada));
-              
+  
               const index = this.fichas.findIndex(ficha => ficha.id === fichaRestaurada.id);
               if (index !== -1) {
                 this.fichas[index] = fichaRestaurada;
@@ -233,20 +236,20 @@ export class ClientesPage implements OnInit {
 
   async confirmarEdicion() {
     const alert = await this.alertController.create({
-      header: '¿Estás seguro?',
-      message: 'Se actualizarán los valores de la ficha.',
+      header: this.translate.instant('ALERTAS.ESTAS_SEGURO'),
+      message: this.translate.instant('ALERTAS.MENSAJE_CONFIRMAR_EDICION'),
       buttons: [
         {
-          text: 'Cancelar',
+          text: this.translate.instant('ALERTAS.CANCELAR'),
           role: 'cancel',
         },
         {
-          text: 'Confirmar',
+          text: this.translate.instant('ALERTAS.CONFIRMAR'),
           handler: async () => {
             const now = new Date();
             this.fichaSeleccionada.data = this.fichaSeleccionada.data || {};
             this.fichaSeleccionada.data.eguneratze_data = now;
-
+  
             try {
               await firstValueFrom(this.ClientesService.actualizarFicha(this.fichaSeleccionada));
               const index = this.fichas.findIndex(ficha => ficha.id === this.fichaSeleccionada.id);
@@ -262,7 +265,7 @@ export class ClientesPage implements OnInit {
         },
       ],
     });
-
+  
     await alert.present();
   }
 

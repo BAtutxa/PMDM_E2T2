@@ -14,7 +14,7 @@
               <ion-input
                 [(ngModel)]="producto.izena"
                 name="izena"
-                placeholder="Introduce un valor para nombre"
+                placeholder="{{ 'CREAR_PRODUCTO.NOMBRE_PLACEHOLDER' | translate }}"
                 required
               ></ion-input>
             </ion-item>
@@ -25,7 +25,7 @@
               <ion-input
                 [(ngModel)]="producto.marka"
                 name="marka"
-                placeholder="Introduce un valor para marca"
+                placeholder="{{ 'CREAR_PRODUCTO.MARCA_PLACEHOLDER' | translate }}"
                 required
               ></ion-input>
               <ion-note *ngIf="productoForm.controls['marka']?.invalid && productoForm.controls['marka']?.touched" color="danger">
@@ -39,7 +39,7 @@
               <ion-input
                 [(ngModel)]="producto.deskribapena"
                 name="deskribapena"
-                placeholder="Introduce un valor para descripción"
+                placeholder="{{ 'CREAR_PRODUCTO.DESCRIPCION_PLACEHOLDER' | translate }}"
                 #deskribapena="ngModel"
               >
               </ion-input>
@@ -47,11 +47,11 @@
 
             <!-- Stock Input -->
             <ion-item>
-              <ion-label position="stacked">Stock{{ 'CREAR_PRODUCTO.STOCK' | translate }}</ion-label>
+              <ion-label position="stacked">{{ 'CREAR_PRODUCTO.STOCK' | translate }}</ion-label>
               <ion-input
                 [(ngModel)]="producto.stock"
                 name="stock"
-                placeholder="Introduce un valor para stock"
+                placeholder="{{ 'CREAR_PRODUCTO.STOCK_PLACEHOLDER' | translate }}"
                 #stock="ngModel"
                 required
               ></ion-input>
@@ -66,7 +66,7 @@
               <ion-input
                 [(ngModel)]="producto.stock_alerta"
                 name="stock_alerta"
-                placeholder="Introduce un valor para la alerta del stock"
+                placeholder="{{ 'CREAR_PRODUCTO.STOCK_ALERTA_PLACEHOLDER' | translate }}"
                 #stock_alerta="ngModel"
                 required
               ></ion-input>
@@ -78,7 +78,7 @@
             <!-- Categoría Select -->
             <ion-item>
               <ion-label>{{ 'CREAR_PRODUCTO.CATEGORIA' | translate }}</ion-label>
-              <ion-select [(ngModel)]="producto.kategoriak.id" name="kategoriak" placeholder="Selecciona una categoría" required>
+              <ion-select [(ngModel)]="producto.kategoriak.id" name="kategoriak" placeholder="{{ 'CREAR_PRODUCTO.CATEGORIA_PLACEHOLDER' | translate }}" required>
                 <ion-select-option *ngFor="let categoria of categorias" [value]="categoria.id">
                   {{ categoria.izena }}
                 </ion-select-option>

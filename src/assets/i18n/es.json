@@ -81,7 +81,17 @@
     "WORKER": "Trabajador",
     "SERVICE": "Servicio",
     "CONFIRM": "Confirmar",
-    "CANCEL": "Cancelar"
+    "CANCEL": "Cancelar",
+    "NO": "No",
+    "YES": "Si"
+  },
+
+  "ERROR": {
+    "TITLE": "Error",
+    "FILL_FIELDS": "Please fill in all fields correctly.",
+    "NAME_REQUIRED": "The 'Name' field is required.",
+    "INVALID_TIME": "Please enter a valid time (e.g., 14:30).",
+    "ESLEKUA_MAX": "'Eslekua' must be 5 or less."
   },
 
   "CITA_DETALLES": {
@@ -119,8 +129,8 @@
     "DELETE": "Borrar",
     "PRINT_TICKET": "Imprimir Ticket",
     "SERVICE": "Servicio",
-    "ACCIONES":"Acciones",
-    "CITAS_PROGRAMADAS":"Citas programadas"
+    "ACCIONES": "Acciones",
+    "CITAS_PROGRAMADAS": "Citas programadas"
   },
   "CLIENTES": {
     "BORRAR": "BORRAR",
@@ -167,13 +177,19 @@
     "TELEFONO_MAXIMO": "El teléfono debe contener un máximo de 9 números."
   },
   "CREAR_CITA": {
-    "NAME": "NOMBRE",
-    "SURNAME": "APELLIDO",
-    "TELEFONO": "TELEFONO",
-    "PIEL_SENSIBLE": "PIEL SENSIBLE",
-    "GUARDAR": "GUARDAR",
-    "SI": "SI",
-    "NO": "NO"
+    "FICHA_PERSONAL": "Ficha Personal",
+    "NAME": "Nombre",
+    "NAME_PLACEHOLDER": "Introduce un nombre",
+    "SURNAME": "Apellido",
+    "SURNAME_PLACEHOLDER": "Introduce un apellido",
+    "TELEFONO": "Teléfono",
+    "TELEFONO_PLACEHOLDER": "Introduce un número de teléfono",
+    "TELEFONO_ERROR": "El teléfono debe tener un máximo de 9 números.",
+    "PIEL_SENSIBLE": "Piel Sensible",
+    "SELECT_OPTION": "Selecciona una opción",
+    "SI": "Sí",
+    "NO": "No",
+    "GUARDAR": "Guardar"
   },
   "SERVICIOS": {
     "TITLE": "SERVICIOS",
@@ -199,20 +215,24 @@
     "ASCENDING": "Ascendente",
     "DESCENDING": "Descendente"
   },
-  "CREAR_SERVICIO": {
-    "TITLE": "Nuevo servicio",
-    "NAME": "Nombre",
-    "PRECIO_FUERA": "Precio de fuera",
-    "PRECIO_CASA": "Precio de casa",
-    "GUARDAR": "Guardar",
-    "NOMBRE_REQUIRED": "El nombre es obligatorio. ",
-    "PRECIO_CASA_OBLIGATORIO": "El precio de casa es obligatorio. ",
-    "PRECIO_FUERA_OBLIGATORIO": "El precio de fuera es obligatorio"
+    "CREAR_SERVICIO": {
+      "TITLE": "Creación de Servicio",
+      "NAME": "Nombre",
+      "PRECIO_FUERA": "Precio Fuera",
+      "PRECIO_CASA": "Precio Casa",
+      "GUARDAR": "Guardar",
+      "NOMBRE_REQUIRED": "El nombre es obligatorio.",
+      "PRECIO_CASA_OBLIGATORIO": "El precio de casa es obligatorio.",
+      "PRECIO_FUERA_OBLIGATORIO": "El precio fuera es obligatorio.",
+      "PLACEHOLDER_NAME": "Introduce un valor para el nombre",
+      "PLACEHOLDER_PRECIO_FUERA": "Introduce un valor para el precio fuera",
+      "PLACEHOLDER_PRECIO_CASA": "Introduce un valor para el precio de casa"
   },
+  
   "INVENTARIO": {
     "PROD_MUGIMENDUAK": "Movimiento de productos",
     "MATERIAL_MAILEGU": "Prestamo de material",
-    "TITULO":"INVENTARIO"
+    "TITULO": "INVENTARIO"
   },
   "PRODUCTOS": {
     "TITLE": "Productos",
@@ -252,20 +272,26 @@
     "AÑADIR_PRODUCTO": "AÑADIR PRODUCTO",
     "ORDENAR": "Ordenar"
   },
-  "CREAR_PRODUCTO": {
-    "TITLE": "Crear producto",
-    "NOMBRE": "Nombre",
-    "MARCA": "Marca",
-    "MARCA_REQUIRED": "La marca es requerida.",
-    "DESCRIPCION": "Descripción",
-    "STOCK": "Stock",
-    "STOCK_REQUIRED": "El stock es requerido.",
-    "STOCK_ALERTA": "Alerta del stock",
-    "ALERTA_REQUIRED": "La alerta de stock es requerida.",
-    "CATEGORIA": "Categoría",
-    "CATEGORIA_REQUIRED": "La categoría es requerida.",
-    "GUARDAR": "Guardar"
-  },
+    "CREAR_PRODUCTO": {
+      "TITLE": "Crear Producto",
+      "NOMBRE": "Nombre",
+      "MARCA": "Marca",
+      "DESCRIPCION": "Descripción",
+      "STOCK": "Stock",
+      "STOCK_ALERTA": "Alerta Stock",
+      "CATEGORIA": "Categoría",
+      "GUARDAR": "Guardar",
+      "NOMBRE_PLACEHOLDER": "Introduce un valor para nombre",
+      "MARCA_PLACEHOLDER": "Introduce un valor para marca",
+      "DESCRIPCION_PLACEHOLDER": "Introduce un valor para descripción",
+      "STOCK_PLACEHOLDER": "Introduce un valor para stock",
+      "STOCK_ALERTA_PLACEHOLDER": "Introduce un valor para la alerta del stock",
+      "CATEGORIA_PLACEHOLDER": "Selecciona una categoría",
+      "MARCA_REQUIRED": "Marca es requerida",
+      "STOCK_REQUIRED": "Stock es requerido",
+      "ALERTA_REQUIRED": "Alerta de stock es requerida",
+      "CATEGORIA_REQUIRED": "Categoría es requerida"
+    },
   "MATERIALES": {
     "TITLE": "Materiales",
     "SEARCH": "Buscar",
@@ -324,16 +350,18 @@
     "DESCENDENTE": "Descendente",
     "ORDENA": "Numero de prestamos por pagina"
   },
-  "CREAR_MATERIAL": {
-    "NUEVO_MATERIAL": "Crear Nuevo Material",
-    "NOMBRE": "Nombre",
-    "NOMBRE_OBLIGATORIO": "El nombre es obligatorio",
-    "ETIKETA": "Etiqueta",
-    "INTRODUCE_ETIKETA": "Introduce una etiqueta",
-    "ETIKETA_OBLIGATORIA": "La etiqueta es obligatoria",
-    "GUARDAR": "Guardar"
-  },
 
+    "CREAR_MATERIAL": {
+      "NUEVO_MATERIAL": "Nuevo Material",
+      "NOMBRE": "Nombre",
+      "ETIKETA": "Etiqueta",
+      "INTRODUCE_NOMBRE": "Introduce un valor para nombre",
+      "INTRODUCE_ETIKETA": "Introduce una etiqueta",
+      "NOMBRE_OBLIGATORIO": "El nombre es obligatorio",
+      "ETIKETA_OBLIGATORIA": "La etiqueta es obligatoria",
+      "GUARDAR": "Guardar"
+    },
+    
   "ADMINISTRACION": {
     "TITULO": "Administración",
     "CATEGORIAS": "Categorías",
@@ -434,7 +462,7 @@
     "RESTORE_TICKET": "Restaurar ticket",
     "SERVICE_REQUIRED": "El servicio es obligatorio",
     "PRICE_REQUIRED": "El precio es obligatorio",
-    "CREATION_DATE":"Fecha de creación",
+    "CREATION_DATE": "Fecha de creación",
     "ADD": "Añadir ticket",
     "SEARCH": {
       "PLACEHOLDER": "Buscar..."
@@ -464,5 +492,14 @@
     "DELETE": "Eliminar",
     "CONFIRM_DELETE": "Confirmar eliminación",
     "RESTORE": "Restaurar"
-  }
+  },
+    "ALERTAS": {
+      "ESTAS_SEGURO": "¿Estás seguro?",
+      "MENSAJE_BORRAR_FICHA": "Se borrará la ficha.",
+      "MENSAJE_BORRAR_FICHA_DEFINITIVA": "Se borrará definitivamente la ficha y no se podrá recuperar.",
+      "MENSAJE_RESTAURAR_FICHA": "Se restaurará la ficha.",
+      "MENSAJE_CONFIRMAR_EDICION": "Se actualizarán los valores de la ficha.",
+      "CANCELAR": "Cancelar",
+      "CONFIRMAR": "Confirmar"
+    }
 }

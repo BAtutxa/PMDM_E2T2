@@ -1,6 +1,7 @@
 import { Component} from '@angular/core';
 import { ZerbitzuakService } from '../services/zerbitzuak.service';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 export interface IZerbitzuak{
   id: number |null
@@ -21,7 +22,7 @@ export interface IZerbitzuak{
 })
 export class CrearServicioPage{
 
-  constructor(private zerbitzuakService: ZerbitzuakService, private router: Router) { }
+  constructor( private translateService: TranslateService, private zerbitzuakService: ZerbitzuakService, private router: Router) { }
 
   servicio:IZerbitzuak = {
     id: null,
@@ -35,23 +36,31 @@ export class CrearServicioPage{
     },
   }
 
+  ngOnInit() {
+    this.translateService.setDefaultLang('es');
+    this.translateService.use('eu');
+  }
+
   guardarServicio() {
-    if (!this.servicio.izena || !this.servicio.etxeko_prezioa || !this.servicio.kanpoko_prezioa) {
-      console.error('Por favor, completa todos los campos obligatorios.');
-      return;
-    }
+    this.translateService.get(['CREAR_SERVICIO.CAMPOS_OBLIGATORIOS', 'CREAR_SERVICIO.SERVICIO_CREADO']).subscribe(translations => {
+      if (!this.servicio.izena || !this.servicio.etxeko_prezioa || !this.servicio.kanpoko_prezioa) {
+        console.error(translations['CREAR_SERVICIO.CAMPOS_OBLIGATORIOS']);
+        return;
+      }
   
-    console.log('Servicio a guardar:', this.servicio); // Verifica los datos aquí
-   
-    this.zerbitzuakService.saveZerbitzuak(this.servicio).subscribe({
-      next: (response: IZerbitzuak) => {
-        this.servicio.id=0;
-        alert("Tu servicio ha sido creado.");
-        this.router.navigate(['/servicios']);
-      },
-      error: (error: any) => {
-        console.error('Error al crear el servicio:', error);
-      },
+      console.log('Servicio a guardar:', this.servicio);
+      
+      this.zerbitzuakService.saveZerbitzuak(this.servicio).subscribe({
+        next: (response: IZerbitzuak) => {
+          this.servicio.id = 0;
+          alert(translations['CREAR_SERVICIO.SERVICIO_CREADO']);
+          this.router.navigate(['/servicios']);
+        },
+        error: (error: any) => {
+          console.error('Error al crear el servicio:', error);
+        },
+      });
     });
   }
+  
 }
