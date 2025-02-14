@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { HistorialaPageRoutingModule } from './historiala-routing.module';
 
 import { HistorialaPage } from './historiala.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HistorialaPageRoutingModule
+    HistorialaPageRoutingModule,
+    TranslateModule
   ],
   declarations: [HistorialaPage]
 })

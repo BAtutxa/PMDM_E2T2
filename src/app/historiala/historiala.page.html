@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title>Historial</ion-title>
+    <ion-title>{{ 'HISTORIAL.TITULO' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,61 +11,61 @@
       <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
         <ion-button (click)="cambiarAClientes()" class="custom-button">
           <img src="assets/Images/client.png" alt="Bezeroak" class="button-icon" />
-          <span>Fichas de clientes</span>
+          <span>{{ 'HISTORIAL.FICHAS_CLIENTES' | translate }}</span>
         </ion-button>
       </ion-col>
       <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
         <ion-button shape="" [routerLink]="'/grupos'" class="custom-button">
           <img src="assets/Images/grupo.jpg" alt="Taldeak" class="button-icon" />
-          <span>Grupos</span>
+          <span>{{ 'HISTORIAL.GRUPOS' | translate }}</span>
         </ion-button>
       </ion-col>
       <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
         <ion-button shape="" [routerLink]="'/langile'" class="custom-button">
           <img src="assets/Images/langileak.jpg" alt="Langileak" class="button-icon" />
-          <span>Trabajadores</span>
+          <span>{{ 'HISTORIAL.TRABAJADORES' | translate }}</span>
         </ion-button>
       </ion-col>
       <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
         <ion-button shape="" href="gestionar-citas" class="custom-button">
           <img src="assets/Images/citas.jpg" alt="Hitzorduak" class="button-icon" />
-          <span>Citas</span>
+          <span>{{ 'HISTORIAL.CITAS' | translate }}</span>
         </ion-button>
       </ion-col>
       <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-        <ion-button shape=""  (click)="cambiarAProductos()"  class="custom-button">
+        <ion-button shape="" (click)="cambiarAProductos()" class="custom-button">
           <img src="assets/Images/productos.png" alt="Produktuak" class="button-icon" />
-          <span>Productos</span>
+          <span>{{ 'HISTORIAL.PRODUCTOS' | translate }}</span>
         </ion-button>
       </ion-col>
       <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
         <ion-button shape="" [routerLink]="'/materiales'" class="custom-button">
           <img src="assets/Images/materiales.png" alt="Materialak" class="button-icon" />
-          <span>Materiales</span>
+          <span>{{ 'HISTORIAL.MATERIALES' | translate }}</span>
         </ion-button>
       </ion-col>
       <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
         <ion-button shape="" [routerLink]="'/informes'" class="custom-button">
           <img src="assets/Images/reloj.webp" alt="Ordutegiak" class="button-icon" />
-          <span>Horarios</span>
+          <span>{{ 'HISTORIAL.HORARIOS' | translate }}</span>
         </ion-button>
       </ion-col>
       <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-        <ion-button shape="" (click)="cambiarACategorias()"  class="custom-button">
+        <ion-button shape="" (click)="cambiarACategorias()" class="custom-button">
           <img src="assets/Images/inventario.webp" alt="Kategoriak" class="button-icon" />
-          <span>Categorias</span>
+          <span>{{ 'HISTORIAL.CATEGORIAS' | translate }}</span>
         </ion-button>
       </ion-col>
       <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
         <ion-button shape="" [routerLink]="'/informes'" class="custom-button">
           <img src="assets/Images/ticket.jpg" alt="Tickets" class="button-icon" />
-          <span>Tickets</span>
+          <span>{{ 'HISTORIAL.TICKETS' | translate }}</span>
         </ion-button>
       </ion-col>
       <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
         <ion-button shape="" [routerLink]="'/servicios'" class="custom-button">
           <img src="assets/Images/servicios.jpg" alt="Zerbitzuak" class="button-icon" />
-          <span>Servicios</span>
+          <span>{{ 'HISTORIAL.SERVICIOS' | translate }}</span>
         </ion-button>
       </ion-col>
     </ion-row>

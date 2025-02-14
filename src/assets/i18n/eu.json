@@ -567,6 +567,20 @@
     "OBLIGATORIO_FECHA": "Data jartzea derrigorrezkoa da",
     "GUARDAR_TXANDA": "Gorde txanda"
   },
+  "HISTORIAL": {
+    "TITULO": "Historiala",
+    "FICHAS_CLIENTES": "Bezeroen fitxak",
+    "GRUPOS": "Taldeak",
+    "TRABAJADORES": "Langileak",
+    "CITAS": "Hitzorduak",
+    "PRODUCTOS": "Produktuak",
+    "MATERIALES": "Materialak",
+    "HORARIOS": "Ordutegiak",
+    "CATEGORIAS": "Kategoriak",
+    "TICKETS": "Sarrerak",
+    "SERVICIOS": "Zerbitzuak"
+  },
+
   "KOLORE_HISTORIALA": {
     "TITULO": "Kolore Historikoa",
     "NO_REGISTROS": "Ez daude erregistroak eskuragarri.",
@@ -590,7 +604,9 @@
     "IR_A_ELIMINADO": "Joan Ezabatutako Historikoetara"
   },
   "KOLORE_EZABATU": {
-    "TITULUA": "KOLORE HISTORIALA EZABATUA"
+    "TITULUA": "Ezabatutako Historialak",
+    "RECUPERAR": "Berreskuratu",
+    "ELIMINAR_DEFINITIVAMENTE": "Behin betiko Ezabatu"
   },
 
   "TXANDAK": {

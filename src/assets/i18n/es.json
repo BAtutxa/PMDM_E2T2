@@ -542,8 +542,11 @@
     "GUARDAR_TXANDA": "Guardar txanda"
   },
   "KOLORE_EZABATU": {
-    "TITULUA": "HISTORIAL DE COLORES BORRADO"
+    "TITULUA": "Historiales Eliminados",
+    "RECUPERAR": "Recuperar",
+    "ELIMINAR_DEFINITIVAMENTE": "Eliminar Definitivamente"
   },
+
   "KOLORE_HISTORIALA": {
     "TITULO": "Historial Kolore",
     "NO_REGISTROS": "No hay registros disponibles.",
@@ -565,6 +568,19 @@
     "PRODUCTO_ID": "Producto ID",
     "SIN_OBSERVACIONES": "Sin observaciones",
     "IR_A_ELIMINADO": "Ir a Historial Eliminado"
+  },
+  "HISTORIAL": {
+    "TITULO": "Historial",
+    "FICHAS_CLIENTES": "Fichas de clientes",
+    "GRUPOS": "Grupos",
+    "TRABAJADORES": "Trabajadores",
+    "CITAS": "Citas",
+    "PRODUCTOS": "Productos",
+    "MATERIALES": "Materiales",
+    "HORARIOS": "Horarios",
+    "CATEGORIAS": "Categorías",
+    "TICKETS": "Tickets",
+    "SERVICIOS": "Servicios"
   },
 
   "TXANDAK": {
