@@ -14,8 +14,8 @@ export class TxandakPage implements OnInit {
   txanda: Itxandak = {
     id: null,
     mota: '',
-    dataSimple: new Date(), // Asegurar que es un objeto Date
-    langilea: {
+    data: new Date(), // Asegurar que es un objeto Date
+    langileak: {
       kodea: '',
       id: null,
       izena: '',
@@ -26,7 +26,7 @@ export class TxandakPage implements OnInit {
         ezabatze_data: new Date(),
       }
     },
-    data: {
+    dataSimple: {
       sortze_data: new Date(),
       eguneratze_data: new Date(),
       ezabatze_data: new Date(),
@@ -40,7 +40,6 @@ export class TxandakPage implements OnInit {
   editando: boolean = false;
   editingTxanda!: Itxandak;
   trabajadores: ITrabajador[] = [];
-  editingTxandak!: Itxandak;
 
   constructor(private txandaService: TxandaService, private trabajadorService: LangileakService) {}
 
@@ -55,21 +54,50 @@ export class TxandakPage implements OnInit {
 
   cargarTxandak() {
     this.txandakObservable = this.txandaService.getTxandaActivos();
+  
     this.txandaService.getTxandaActivos().subscribe(data => {
-      this.txandak = data.map(txanda => ({
-        ...txanda,
-        dataSimple: txanda.dataSimple ? new Date(txanda.dataSimple) : null, // Convierte string a Date o asigna null
-      }));
+      console.log('Datos recibidos del servidor:', data);
+  
+      this.txandak = data.map(txanda => {
+        // Extraer las fechas de 'dataSimple' en lugar de 'data'
+        const sortzeDataStr = txanda.dataSimple?.sortze_data ?? '';  // Si es null, asignamos una cadena vacía
+        const eguneratzeDataStr = txanda.dataSimple?.eguneratze_data ?? ''; 
+        const ezabatzeDataStr = txanda.dataSimple?.ezabatze_data ?? ''; 
+  
+        // Mostrar las fechas para depuración
+        console.log('Fechas desde el servidor:', { sortzeDataStr, eguneratzeDataStr, ezabatzeDataStr });
+  
+        // Verifica que las fechas sean cadenas no vacías antes de convertirlas a Date
+        const sortzeDataDate = (typeof sortzeDataStr === 'string' && sortzeDataStr.trim()) ? new Date(sortzeDataStr) : null;
+        const eguneratzeDataDate = (typeof eguneratzeDataStr === 'string' && eguneratzeDataStr.trim()) ? new Date(eguneratzeDataStr) : null;
+        const ezabatzeDataDate = (typeof ezabatzeDataStr === 'string' && ezabatzeDataStr.trim()) ? new Date(ezabatzeDataStr) : null;
+  
+        // Validación de si las fechas son válidas
+        const isValidSortzeData = sortzeDataDate && !isNaN(sortzeDataDate.getTime());
+        const isValidEguneratzeData = eguneratzeDataDate && !isNaN(eguneratzeDataDate.getTime());
+        const isValidEzabatzeData = ezabatzeDataDate && !isNaN(ezabatzeDataDate.getTime());
+  
+        console.log('Fechas convertidas:', { sortzeDataDate, eguneratzeDataDate, ezabatzeDataDate });
+  
+        return {
+          ...txanda,
+          dataSimple: {
+            sortze_data: isValidSortzeData ? sortzeDataDate : null,
+            eguneratze_data: isValidEguneratzeData ? eguneratzeDataDate : null,
+            ezabatze_data: isValidEzabatzeData ? ezabatzeDataDate : null
+          }
+        };
+      });
     }, error => {
       console.error('Error al cargar txandak:', error);
     });
   }
   
-
   cargarTrabajadores() {
     this.trabajadorObservable = this.trabajadorService.getLangileak();
     this.trabajadorService.getLangileak().subscribe(data => {
       this.trabajadores = data;
+      console.log("Trabajadores:", this.trabajadores);
     }, error => {
       console.error('Error al cargar trabajadores:', error);
     });
@@ -78,10 +106,19 @@ export class TxandakPage implements OnInit {
   editarTxanda(txanda: Itxandak) {
     this.editingTxanda = { 
       ...txanda,
-      dataSimple: txanda.dataSimple ? new Date(txanda.dataSimple) : null, // Convertir a Date
+      dataSimple: txanda.dataSimple ? {
+        sortze_data: txanda.dataSimple.sortze_data ? new Date(txanda.dataSimple.sortze_data) : new Date(),
+        eguneratze_data: txanda.dataSimple.eguneratze_data ? new Date(txanda.dataSimple.eguneratze_data) : new Date(),
+        ezabatze_data: txanda.dataSimple.ezabatze_data ? new Date(txanda.dataSimple.ezabatze_data) : new Date(),
+      } : {
+        sortze_data: new Date(),
+        eguneratze_data: new Date(),
+        ezabatze_data: new Date(),
+      },
     };
     this.editando = true;
   }
+  
 
   guardarCambios() {
     if (!this.editingTxanda) {
@@ -89,23 +126,25 @@ export class TxandakPage implements OnInit {
       return;
     }
 
-   
+    // Función para asegurar que dataSimple siempre sea un Date o null
+    const formatFecha = (fecha: any): Date | null => {
+      if (!fecha) return null;
+      if (fecha instanceof Date) return fecha; // Si ya es Date, lo dejamos igual
+      if (typeof fecha === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(fecha)) {
+        return new Date(fecha + 'T00:00:00'); // Convertir string a Date
+      }
+      return null;
+    };
 
-   // Función para asegurar que dataSimple siempre sea un Date o null
-const formatFecha = (fecha: any): Date | null => {
-  if (!fecha) return null;
-  if (fecha instanceof Date) return fecha; // Si ya es Date, lo dejamos igual
-  if (typeof fecha === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(fecha)) {
-    return new Date(fecha + 'T00:00:00'); // Convertir string a Date
-  }
-  return null;
-};
-
-// Crear objeto actualizado
-const txandaToUpdate: Itxandak = {
-  ...this.editingTxanda,
-  dataSimple: formatFecha(this.editingTxanda.dataSimple), // Ahora devuelve un Date | null
-};
+    // Crear objeto actualizado
+    const txandaToUpdate: Itxandak = {
+      ...this.editingTxanda,
+      dataSimple: {
+        sortze_data: formatFecha(this.editingTxanda.dataSimple.sortze_data), // Ahora devuelve un Date | null
+        eguneratze_data: formatFecha(this.editingTxanda.dataSimple.eguneratze_data),
+        ezabatze_data: formatFecha(this.editingTxanda.dataSimple.ezabatze_data),
+      },
+    };
 
     console.log("Enviando actualización al servidor:", txandaToUpdate);
 

@@ -11,7 +11,7 @@
   <ion-content class="ion-padding">
     <!-- Select para elegir txanda -->
     <ion-item>
-      <ion-label>Selecciona Txanda</ion-label>
+      <ion-label>Selecciona ordutegi</ion-label>
       <ion-select [(ngModel)]="selectedOrdutegi" (ionChange)="onTxandaChange($event)">
         <ion-select-option *ngFor="let ordutegi of ordutegiak; let i = index" [value]="ordutegi">
           {{ getEquipoNombre(ordutegi.kodea) }} - Eguna: {{ egunaStringEgin(i) }} 

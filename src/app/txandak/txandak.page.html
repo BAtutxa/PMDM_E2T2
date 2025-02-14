@@ -19,24 +19,32 @@
       </ion-select>
     </ion-item>
 
-    <!-- Mostrar detalles de la txanda seleccionada en un ion-card -->
     <ion-card *ngIf="selectedTxandak">
       <ion-card-header>
         <ion-card-title>Detalles del txanda</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <p><strong>ID:</strong> {{ selectedTxandak.id }}</p>
-        <p><strong>Fecha:</strong> {{ selectedTxandak.dataSimple | date: 'yyyy-MM-dd' }}</p>
+        <p><strong>Fecha:</strong> 
+          {{ selectedTxandak.dataSimple ? (selectedTxandak.data | date: 'yyyy-MM-dd') : 'No disponible' }}
+        </p>
         <p><strong>Tipo:</strong> {{ selectedTxandak.mota }}</p>
-        <p><strong>Nombre del trabajador:</strong> {{ selectedTxandak.langilea.izena }} {{ selectedTxandak.langilea.abizenak }}</p>
-        <p><strong>Fecha de creación:</strong> {{ selectedTxandak.data.sortze_data | date: 'yyyy-MM-dd' }}</p>
-        <p><strong>Fecha de actualización:</strong> {{ selectedTxandak.data.eguneratze_data | date: 'yyyy-MM-dd' }}</p>
+        <p *ngIf="selectedTxandak && selectedTxandak.langileak">
+          <strong>Nombre del trabajador:</strong> {{ selectedTxandak.langileak.izena }} {{ selectedTxandak.langileak.abizenak }}
+        </p>
+        <p><strong>Fecha de creación:</strong> 
+          {{ selectedTxandak.dataSimple.sortze_data ? (selectedTxandak.dataSimple.sortze_data | date: 'yyyy-MM-dd') : 'No disponible' }}
+        </p>
+        <p><strong>Fecha de actualización:</strong> 
+          {{ selectedTxandak.dataSimple.eguneratze_data ? (selectedTxandak.dataSimple.eguneratze_data | date: 'yyyy-MM-dd') : 'No disponible' }}
+        </p>
       </ion-card-content>
-      <ion-button color="tertiary" shape="round" fill="solid" (click)="(selectedTxandak)">
+      <ion-button color="tertiary" shape="round" fill="solid" (click)="editarTxanda(selectedTxandak)">
         <ion-icon name="create-outline" slot="start"></ion-icon>
         Editar
       </ion-button>
     </ion-card>
+    
 
     <!-- Tarjeta emergente para editar -->
     <ion-card *ngIf="editando" class="edit-card">
@@ -47,13 +55,13 @@
         <!-- Tipo -->
         <ion-item>
           <ion-label>Tipo</ion-label>
-          <ion-input type="text" [(ngModel)]="editingTxandak.mota"></ion-input>
+          <ion-input type="text" [(ngModel)]="editingTxanda.mota"></ion-input>
         </ion-item>
 
         <!-- Trabajador -->
         <ion-item>
           <ion-label>Trabajador</ion-label>
-          <ion-select [(ngModel)]="editingTxandak.langilea.id" placeholder="Selecciona un trabajador">
+          <ion-select [(ngModel)]="editingTxanda.langileak.id" placeholder="Selecciona un trabajador">
             <ion-select-option *ngFor="let trabajador of trabajadores" [value]="trabajador.id">
               {{ trabajador.izena }} {{ trabajador.abizenak }}
             </ion-select-option>
