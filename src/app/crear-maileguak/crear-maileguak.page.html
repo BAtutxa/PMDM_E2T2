@@ -1,13 +1,83 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>crear-maileguak</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content> 
+  <div class="card-container">
+    <form #ordutegiForm="ngForm" (ngSubmit)="guardarOrdutegi()">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Crear maileguak</ion-card-title>
+        </ion-card-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">crear-maileguak</ion-title>
-    </ion-toolbar>
-  </ion-header>
+        <ion-card-content>
+          <ion-list>
+
+           <!-- Material a asignar -->
+            <ion-item>
+              <ion-label>Material</ion-label>
+              <ion-select [(ngModel)]="ordutegi.materiala_id" name="materialak" placeholder="a" required>
+                <ion-select-option *ngFor="let material of materialak" [value]="material.id">
+                  {{ material.izena }} 
+                </ion-select-option>
+              </ion-select>
+              <ion-note *ngIf="ordutegiForm.controls['materialak']?.invalid && ordutegiForm.controls['materialak']?.touched" color="danger">
+                Material obligatorio
+              </ion-note>
+            </ion-item>
+
+            <!-- Trabajador a asignar -->
+            <ion-item>
+              <ion-label>Trabajador</ion-label>
+              <ion-select [(ngModel)]="ordutegi.idLangilea" name="langileak" placeholder="a" required>
+                <ion-select-option *ngFor="let trabajador of langileak" [value]="trabajador.id">
+                  {{ trabajador.izena }}    {{ trabajador.abizenak }}
+                </ion-select-option>
+              </ion-select>
+              <ion-note *ngIf="ordutegiForm.controls['langileak']?.invalid && ordutegiForm.controls['langileak']?.touched" color="danger">
+                Trabajador obligatorio
+              </ion-note>
+            </ion-item>
+                        
+            
+            <!-- Fecha de inicio -->
+            <ion-item>
+              <ion-label position="stacked">FECHA INICIO</ion-label>
+              <ion-input
+                [(ngModel)]="ordutegi.hasieraData"
+                name="hasieraData"
+                placeholder="a"
+                type="date"
+                required
+              ></ion-input>
+              <ion-note *ngIf="ordutegiForm.controls['hasieraData']?.invalid && ordutegiForm.controls['hasieraData']?.touched" color="danger">
+                Obligatorio
+              </ion-note>
+            </ion-item>
+            
+            <!-- Fecha de fin -->
+            <ion-item>
+              <ion-label position="stacked">Fecha fin</ion-label>
+              <ion-input
+                [(ngModel)]="ordutegi.amaieraData"
+                name="amaieraData"
+                placeholder="FECHA_FIN"
+                type="date"
+                required
+              ></ion-input>
+              <ion-note *ngIf="ordutegiForm.controls['amaieraData']?.invalid && ordutegiForm.controls['amaieraData']?.touched" color="danger">
+                Obligatorio
+              </ion-note>
+            </ion-item>
+            
+            <!-- Save Button -->
+            <ion-button
+              expand="full"
+              type="submit"
+              color="tertiary"
+              [disabled]="ordutegiForm.invalid"
+            >
+              Insertar
+            </ion-button>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+    </form>
+  </div>
 </ion-content>
