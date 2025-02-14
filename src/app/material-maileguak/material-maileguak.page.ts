@@ -222,21 +222,24 @@ export class MaterialMaileguakPage implements OnInit {
    }
    
    aplicarFiltro(event: any) {
-     const texto = event.target.value.toLowerCase();
-     
-     if (texto.trim() === '') {
-       this.maileguakFiltrados = [...this.maileguak];
-     } else {
-       this.maileguakFiltrados = this.maileguak.filter((IMailegu) => {
-         const coincideLangileIzena = IMailegu.idLangilea && IMailegu.idLangilea.toString().includes(texto);
-         const coincideId = IMailegu.id && IMailegu.id.toString().includes(texto);
-         const coincideMaterialIzena = IMailegu.materiala_id && IMailegu.materiala_id.toString().includes(texto);
-         const coincideFecha = IMailegu.data && this.compararFechas(IMailegu.data, texto);
-   
-         return coincideLangileIzena ||  coincideId || coincideMaterialIzena || coincideFecha;
-       });
-     }
-   }
+    const texto = event.target.value.toLowerCase().trim();
+  
+    if (texto === '') {
+      this.maileguakFiltrados = [...this.maileguak];
+    } else {
+      this.maileguakFiltrados = this.maileguak.filter((IMailegu) => {
+        const nombreLangile = this.obtenerNombreLangile(IMailegu.idLangilea).toLowerCase();
+        const nombreMaterial = this.obtenerNombreMaterial(IMailegu.materiala_id).toLowerCase();
+        const coincideLangileIzena = nombreLangile.includes(texto);
+        const coincideMaterialIzena = nombreMaterial.includes(texto);
+        const coincideId = IMailegu.id && IMailegu.id.toString().includes(texto);
+        const coincideFecha = IMailegu.data && this.compararFechas(IMailegu.data, texto);
+  
+        return coincideLangileIzena || coincideMaterialIzena || coincideId || coincideFecha;
+      });
+    }
+  }
+  
    
    compararFechas(fecha: any, texto: string): boolean {
      if (fecha instanceof Date && !isNaN(fecha.getTime())) {
@@ -247,38 +250,6 @@ export class MaterialMaileguakPage implements OnInit {
      }
    }
    
- 
-   ordenarPor(columna: string) {
-     if (this.ordenActual.columna === columna) {
-       this.ordenActual.ascendente = !this.ordenActual.ascendente;
-     } else {
-       this.ordenActual.columna = columna;
-       this.ordenActual.ascendente = true;
-     }
-   
-     this.maileguakFiltrados.sort((a, b) => {
-       let valorA = (a as any)[columna];
-       let valorB = (b as any)[columna];
-   
-       if (columna === 'id') {
-         valorA = Number(valorA);
-         valorB = Number(valorB);
-       }
-   
-       if (columna === 'sortze_data' || columna === 'eguneratze_data') {
-         valorA = valorA ? new Date(valorA) : null;
-         valorB = valorB ? new Date(valorB) : null;
-       }
-   
-       if (valorA < valorB || valorA === null) {
-         return this.ordenActual.ascendente ? -1 : 1;
-       } else if (valorA > valorB || valorB === null) {
-         return this.ordenActual.ascendente ? 1 : -1;
-       } else {
-         return 0;
-       }
-     });
-   }
  
    async eliminarIMailegu() {
      const alert = await this.alertController.create({
@@ -345,6 +316,17 @@ export class MaterialMaileguakPage implements OnInit {
    
      await alert.present();
    }
+
+      // Ordenar trabajadores por nombre
+    get trabajadoresOrdenados() {
+      return this.trabajadores.slice().sort((a, b) => a.izena.localeCompare(b.izena));
+    }
+
+    // Ordenar materiales por nombre
+    get materialesOrdenados() {
+      return this.materiales.slice().sort((a, b) => a.izena.localeCompare(b.izena));
+    }
+
  
    getOrdenClass(columna: string): string {
      if (this.ordenActual.columna === columna) {
