@@ -111,14 +111,14 @@
                 </ion-item>
 
                 <!-- Tienes que poner informacion del historial cuando este -->
-                <ion-button color="tertiary" expand="full" (click)="confirmarEdicion()" type="submit"
+                <ion-button  *ngIf="esHistorial" color="tertiary" expand="full" (click)="confirmarEdicion()" type="submit"
                   [disabled]="productoForm.invalid">
                   {{ 'SERVICIOS.CONFIRM' | translate }}
                 </ion-button>
-                <ion-button expand="full" color="danger" (click)="cancelarEdicion()">
+                <ion-button *ngIf="esHistorial" expand="full" color="danger" (click)="cancelarEdicion()">
                   {{ 'SERVICIOS.CANCEL' | translate }}
                 </ion-button>
-                <ion-button *ngIf="esProfe" expand="full" class="custom-red-button" (click)="eliminarProducto()">
+                <ion-button *ngIf="esProfe && !esHistorial" expand="full" class="custom-red-button" (click)="eliminarProducto()">
                   {{ 'SERVICIOS.DELETE_PRODUCT' | translate }}
                 </ion-button>
               </form>
@@ -127,16 +127,14 @@
         </ion-col>
       </ion-row>
 
-      <ion-row *ngIf="esProfe">
+      <ion-row *ngIf="esProfe && !esHistorial">
         <ion-col size="12" class="ion-text-center">
-          <ion-button color="primary" expand="block" [routerLink]="'/crear-servicio'">
+          <ion-button *ngIf="esProfe && !esHistorial"  color="primary" expand="block" [routerLink]="'/crear-servicio'">
             {{ 'SERVICIOS.ADD_SERVICE' | translate }}
             <ion-icon name="add-circle-outline"></ion-icon>
           </ion-button>
         </ion-col>
       </ion-row>
-
-      <!-- Fila de productos -->
       <!-- Fila de productos -->
       <ion-grid>
         <ion-row>
@@ -248,9 +246,9 @@
         </ion-col>
       </ion-row>
 
-      <ion-row *ngIf="esProfe">
+      <ion-row *ngIf="esProfe  && !esHistorial">
         <ion-col size="12" class="ion-text-center">
-          <ion-button color="primary" expand="block" [routerLink]="'/crear-servicio'">
+          <ion-button *ngIf="!esHistorial"  color="primary" expand="block" [routerLink]="'/crear-servicio'">
             {{ 'SERVICIOS.ADD_SERVICE' | translate }}
             <ion-icon name="add-circle-outline"></ion-icon>
           </ion-button>
@@ -296,12 +294,11 @@
                   </ion-note>
                 </ion-item>
 
-                <!-- Tienes que poner informacion del historial cuando este -->
-                <ion-button color="tertiary" expand="full" (click)="confirmarEdicion()" type="submit"
+                <ion-button *ngIf="!esHistorial"  color="tertiary" expand="full" (click)="confirmarEdicion()" type="submit"
                   [disabled]="productoForm.invalid">{{ 'SERVICIOS.CONFIRM' | translate }}</ion-button>
                 <ion-button expand="full" color="danger" (click)="cancelarEdicion()"> {{ 'SERVICIOS.CANCEL' | translate
                   }}</ion-button>
-                <ion-button *ngIf="esProfe" expand="full" class="custom-red-button" (click)="eliminarProducto()">
+                <ion-button *ngIf="esProfe && !esHistorial" expand="full" class="custom-red-button" (click)="eliminarProducto()">
                   {{ 'SERVICIOS.DELETE' | translate }}
                 </ion-button>
               </form>

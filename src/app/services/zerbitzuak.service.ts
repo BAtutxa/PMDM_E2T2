@@ -17,7 +17,7 @@ export class ZerbitzuakService {
   }
 
   getZerbitzuakBorrado(): Observable<IZerbitzuak[]> {
-    return this.http.get<IZerbitzuak[]>(`${this.apiUrl}/ezabatuak`);
+    return this.http.get<IZerbitzuak[]>(`${this.apiUrl}/ez-aktiboak`);
   }
 
   saveZerbitzuak(zerbitzuak: IZerbitzuak): Observable<IZerbitzuak> {

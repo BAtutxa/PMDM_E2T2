@@ -52,15 +52,6 @@ export class HistorialaPage{
     this.router.navigate(['/grupos'], { queryParams: { desdeHistorial: 'true' } });
   }
 
-  cambiarAlangile(){
-    this.historialService.setEsHistorial(true);  
-    this.router.navigate(['/langile']).then(() => {
-        window.location.reload(); // Recarga la página
-    });
-    this.menuCtrl.open();
-    this.router.navigate(['/langile'], { queryParams: { desdeHistorial: 'true' } });
-  }
-
   irAGestionarcitas(){
     this.historialService.setEsHistorial(true);  
     this.router.navigate(['/gestionar-citas']).then(() => {

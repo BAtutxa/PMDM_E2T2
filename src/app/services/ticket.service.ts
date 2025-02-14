@@ -41,11 +41,10 @@ export class TicketService {
       .set('Content-Type', 'application/json')
       .set('Accept', 'application/json');
   
-    return this.http.put(`${this.baseUrl}/update`, ticket, { headers, responseType: 'text' }).pipe(
-      map((response: any) => {
-        // Si la respuesta es un texto, puedes convertirla a un formato adecuado o simplemente devolverlo
-        console.log(response);  // Aquí verás el mensaje del servidor
-        return ticket;  // Aquí devuelves el ticket sin intentar hacer un parseo de JSON
+    return this.http.put<ITicket>(`${this.baseUrl}/update`, ticket, { headers }).pipe(
+      map((response: ITicket) => {
+        console.log('Ticket actualizado:', response);
+        return response;  // Devuelve el ticket actualizado desde el servidor
       }),
       catchError(error => {
         console.error('Error al actualizar el ticket:', error);

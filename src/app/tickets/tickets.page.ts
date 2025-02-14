@@ -411,46 +411,6 @@ async confirmarBorrado() {
   await alert.present();
 }
 
-  async restaurarProducto(){
-    const alert = await this.alertController.create({
-      header: '¿Estás seguro?',
-      message: 'Se restaurará el ticket.',
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-        },
-        {
-          text: 'Confirmar',
-          handler: async () => {
-            const now = new Date();
-            this.productoSeleccionado.data = this.productoSeleccionado.data || {};
-            this.productoSeleccionado.data.ezabatze_data = null; 
-            this.productoSeleccionado.data.eguneratze_data = now; 
-  
-            try {
-              const productoRestaurado = await firstValueFrom(this.productoService.actualizarTicket(this.productoSeleccionado));
-              
-              const index = this.productos.findIndex(producto => producto.id === productoRestaurado.id);
-              if (index !== -1) {
-                this.productos[index] = productoRestaurado;
-              }
-  
-              this.acabaDeBorrar = true;
-              this.editandoProducto = false;
-              window.location.reload();
-          
-            } catch (error) {
-              console.error('Error al restaurar producto:', error);
-            }
-          },
-        },
-      ],
-    });
-  
-    await alert.present();
-  }
-
   translateLabels() {
     this.translateService.get([
       'PRODUCT.TITLE',
