@@ -46,7 +46,8 @@
         <!-- Selector de fecha -->
         <ion-item>
           <ion-label position="floating">{{ 'KOLORE_HISTORIALA.FECHA' | translate }}</ion-label>
-          <ion-datetime [(ngModel)]="selectedHistorial.data" displayFormat="MM/DD/YYYY"></ion-datetime>
+          <ion-datetime presentation="date" [(ngModel)]="selectedHistorial.data" display-format="DD MMM YYYY"
+            picker-format="DD MMM YYYY" show-default-time="false" color="tertiary"></ion-datetime>
         </ion-item>
 
         <!-- Selector de cantidad -->
