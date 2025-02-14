@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { formatDate } from '@angular/common';
 import { IOrdutegi } from '../interfaces/IOrdutegi';
 import { Observable } from 'rxjs';
 import { IEquipos } from '../interfaces/IEquipos';
@@ -11,6 +12,7 @@ import { EquipoService } from '../services/equipos.service';
   styleUrls: ['./ordutegi.page.scss'],
 })
 export class OrdutegiPage implements OnInit {
+
  ordutegi: IOrdutegi = {
     id: null,
     kodea: '',
@@ -200,5 +202,21 @@ export class OrdutegiPage implements OnInit {
         }
     });
   }
+
+  borrar(selectedOrdutegi: IOrdutegi) {
+    // Establece la fecha de eliminación como la fecha actual
+    selectedOrdutegi.data.ezabatze_data = new Date(formatDate(new Date(), 'yyyy-MM-dd', 'en-US'));
+     
+       // Llamada al servicio para actualizar el txanda
+       this.ordutegiService.actualizarOrdutegi(selectedOrdutegi).subscribe(
+         (updatedTxanda) => {
+           console.log('Txanda eliminada correctamente', updatedTxanda);
+           window.location.reload();
+         },
+         (error) => {
+           console.error('Error al borrar la txanda', error);
+         }
+       );
+     }
 }
 

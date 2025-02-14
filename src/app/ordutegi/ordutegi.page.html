@@ -40,6 +40,10 @@
         <ion-icon name="create-outline" slot="start"></ion-icon>
         {{ 'ORDUTEGIAK.EDITAR' | translate }}
       </ion-button>
+      <ion-button (click)="borrar(selectedOrdutegi)"  color="danger" shape="round">
+        <ion-icon name="trash-outline"></ion-icon>
+        Borrar txanda
+      </ion-button>
     </ion-card>
 
     <!-- Tarjeta emergente para editar -->

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { formatDate } from '@angular/common';
 import { Itxandak } from '../interfaces/ITxandak';
 import { Observable } from 'rxjs';
 import { TxandaService } from '../services/txanda.service';
@@ -11,6 +12,7 @@ import { LangileakService } from '../services/Langileak.service';
   styleUrls: ['./txandak.page.scss'],
 })
 export class TxandakPage implements OnInit {
+
   txanda: Itxandak = {
     id: null,
     mota: '',
@@ -167,5 +169,21 @@ export class TxandakPage implements OnInit {
         alert("Hubo un error al actualizar el txanda.");
       }
     });
+  }
+
+  borrar(selectedTxandak: Itxandak) {
+    // Establece la fecha de eliminación como la fecha actual
+    selectedTxandak.dataSimple.ezabatze_data = new Date(formatDate(new Date(), 'yyyy-MM-dd', 'en-US'));
+  
+    // Llamada al servicio para actualizar el txanda
+    this.txandaService.actualizarTxanda(selectedTxandak).subscribe(
+      (updatedTxanda) => {
+        console.log('Txanda eliminada correctamente', updatedTxanda);
+        window.location.reload();
+      },
+      (error) => {
+        console.error('Error al borrar la txanda', error);
+      }
+    );
   }
 }
