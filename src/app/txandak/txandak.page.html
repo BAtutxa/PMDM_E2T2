@@ -54,22 +54,22 @@
     <!-- Tarjeta emergente para editar -->
     <ion-card *ngIf="editando" class="edit-card">
       <ion-card-header>
-        <ion-card-title>{{ 'TXANDAK.EDITAR_TXANDA' | translate }}</ion-card-title>
+        <ion-card-title>Editar txanda</ion-card-title>
       </ion-card-header>
       <ion-card-content>
         <!-- Tipo (mota) -->
         <ion-item>
           <ion-label>{{ 'TXANDAK.TIPO' | translate }}</ion-label>
-          <ion-select [(ngModel)]="editingTxanda.mota" placeholder="{{ 'TXANDAK.SELECCIONA_TIPO' | translate }}">
-            <ion-select-option value="M">{{ 'TXANDAK.RECEPCION' | translate }}</ion-select-option>
-            <ion-select-option value="G">{{ 'TXANDAK.LIMPIEZA' | translate }}</ion-select-option>
+          <ion-select [(ngModel)]="editingTxanda.mota" placeholder="Selecciona tipo">
+            <ion-select-option value="M">Recepción</ion-select-option>
+            <ion-select-option value="G">Limpieza</ion-select-option>
           </ion-select>
         </ion-item>
 
         <!-- Trabajador -->
         <ion-item>
           <ion-label>{{ 'TXANDAK.TRABAJADOR' | translate }}</ion-label>
-          <ion-select [(ngModel)]="editingTxanda.langileak.id" placeholder="{{ 'TXANDAK.SELECCIONA_TRABAJADOR' | translate }}">
+          <ion-select [(ngModel)]="editingTxanda.langileak.id" placeholder="Selecciona TRABAJADOR">
             <ion-select-option *ngFor="let trabajador of trabajadores" [value]="trabajador.id">
               {{ trabajador.izena }} {{ trabajador.abizenak }}
             </ion-select-option>
