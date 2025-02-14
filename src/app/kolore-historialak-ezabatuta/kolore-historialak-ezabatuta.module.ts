@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { KoloreHistorialakEzabatutaPageRoutingModule } from './kolore-historialak-ezabatuta-routing.module';
 
 import { KoloreHistorialakEzabatutaPage } from './kolore-historialak-ezabatuta.page';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    KoloreHistorialakEzabatutaPageRoutingModule
+    KoloreHistorialakEzabatutaPageRoutingModule,
+    TranslateModule
   ],
   declarations: [KoloreHistorialakEzabatutaPage]
 })

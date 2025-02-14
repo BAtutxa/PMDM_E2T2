@@ -541,6 +541,9 @@
     "OBLIGATORIO_FECHA": "La fecha es obligatoria",
     "GUARDAR_TXANDA": "Guardar txanda"
   },
+  "KOLORE_EZABATU": {
+    "TITULUA": "HISTORIAL DE COLORES BORRADO"
+  },
   "KOLORE_HISTORIALA": {
     "TITULO": "Historial Kolore",
     "NO_REGISTROS": "No hay registros disponibles.",
