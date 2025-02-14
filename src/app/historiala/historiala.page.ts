@@ -105,5 +105,23 @@ export class HistorialaPage{
     this.menuCtrl.open();
     this.router.navigate(['/servicios'], { queryParams: { desdeHistorial: 'true' } });
   }
+
+  irAKolore(){
+    this.historialService.setEsHistorial(true);  
+    this.router.navigate(['/kolore-historialak']).then(() => {
+        window.location.reload(); // Recarga la página
+    });
+    this.menuCtrl.open();
+    this.router.navigate(['/kolore-historialak'], { queryParams: { desdeHistorial: 'true' } });
+  }
+
+  irAMugimenduak(){
+    this.historialService.setEsHistorial(true);  
+    this.router.navigate(['/produktu-mugimenduak']).then(() => {
+        window.location.reload(); // Recarga la página
+    });
+    this.menuCtrl.open();
+    this.router.navigate(['/produktu-mugimenduak'], { queryParams: { desdeHistorial: 'true' } });
+  }
   
 }
