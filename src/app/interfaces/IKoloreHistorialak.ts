@@ -5,7 +5,7 @@ export interface IKoloreHistorialak {
     bezero: number;
     produktu_id: number;
     data: Date | null;
-    kantitatea: number;
+    kantitatea: number |null;
     bolumena: string | null;
     oharrak: string | null;
     dataSimple: IData;
