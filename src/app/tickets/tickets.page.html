@@ -106,7 +106,7 @@
                   [disabled]="productoForm.invalid">{{ 'TICKETS.CONFIRM' | translate }}</ion-button>
                 <ion-button expand="full" color="danger" (click)="cancelarEdicion()">{{ 'TICKETS.CANCEL' | translate
                   }}</ion-button>
-                <ion-button *ngIf="esProfe && !esHistorial" expand="full" class="custom-red-button"
+                <ion-button  *ngIf="esProfe && !esHistorial" expand="full" class="custom-red-button"
                   (click)="eliminarProducto()">
                   {{ 'TICKETS.DELETE_TICKET' | translate }}
                 </ion-button>

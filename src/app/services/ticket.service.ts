@@ -63,11 +63,6 @@ export class TicketService {
         tap(() => this.getTicketActivos().subscribe(tickets => this.ticketSubject.next(tickets)))
       );
   }
-
-  eliminarticketPermanente(id: number): Observable<string> {
-    return this.http.delete<string>(`${this.baseUrl}/hard-delete/${id}`, { responseType: 'text' as 'json' });
-  }
-
   get tickets$(): Observable<ITicket[]> {
     return this.ticketSubject.asObservable();
   }

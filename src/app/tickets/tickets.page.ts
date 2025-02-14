@@ -354,62 +354,6 @@ async eliminarProducto() {
   await alert.present();
 }
 
-async confirmarBorrado() {
-  const alert = await this.alertController.create({
-    header: '¿Estás seguro?',
-    message: 'Se borrará definitivamente el ticket y no se podrá recuperar.',
-    buttons: [
-      {
-        text: 'Cancelar',
-        role: 'cancel',
-      },
-      {
-        text: 'Confirmar',
-        handler: async () => {
-          try {
-            // 1. Eliminar el producto permanentemente
-            await firstValueFrom(this.productoService.eliminarticketPermanente(this.productoSeleccionado.id));
-
-            // 2. Actualizar la lista de productos eliminando el producto eliminado
-            this.productos = this.productos.filter(producto => producto.id !== this.productoSeleccionado.id);
-            this.acabaDeBorrar = true;
-            this.editandoProducto = false;
-
-            // 3. Mostrar alerta de éxito después de la eliminación
-            const successAlert = await this.alertController.create({
-              header: 'Ticket Eliminado',
-              message: 'El ticket ha sido borrado correctamente.',
-              buttons: [
-                {
-                  text: 'OK',
-                  handler: () => {
-                    // Recargar la página cuando se presione OK
-                    window.location.reload();
-                  },
-                },
-              ],
-            });
-
-            // Mostrar la alerta de éxito
-            await successAlert.present();
-
-          } catch (error) {
-            console.error('Error al borrar ticket:', error);
-            // Si ocurre un error, podemos mostrar una alerta de error si lo deseamos
-            const errorAlert = await this.alertController.create({
-              header: 'Error',
-              message: 'Hubo un error al intentar eliminar el ticket. Por favor, inténtalo de nuevo.',
-              buttons: ['OK'],
-            });
-            await errorAlert.present();
-          }
-        },
-      },
-    ],
-  });
-
-  await alert.present();
-}
 
   translateLabels() {
     this.translateService.get([
