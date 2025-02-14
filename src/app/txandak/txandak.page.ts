@@ -142,7 +142,7 @@ export class TxandakPage implements OnInit {
       dataSimple: {
         sortze_data: formatFecha(this.editingTxanda.dataSimple.sortze_data), // Ahora devuelve un Date | null
         eguneratze_data: formatFecha(this.editingTxanda.dataSimple.eguneratze_data),
-        ezabatze_data: formatFecha(this.editingTxanda.dataSimple.ezabatze_data),
+        ezabatze_data: null
       },
     };
 
