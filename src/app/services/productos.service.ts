@@ -18,7 +18,7 @@ export class ProductoService {
     return this.http.get<IEProduktuak[]>(`${this.baseUrl}/produktuGuztiak`);
   }
 
-  getProductoById(id: number): Observable<IEProduktuak> {
+  getProductoById(id: number |null): Observable<IEProduktuak> {
     return this.http.get<IEProduktuak>(`${this.baseUrl}/produktuGuztiak/${id}`);
   }
 
