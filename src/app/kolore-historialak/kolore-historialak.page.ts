@@ -3,6 +3,10 @@ import { KoloreHistorialakService } from '../services/koloreHistorialak.service'
 import { IKoloreHistorialak } from '../interfaces/IKoloreHistorialak';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { ClientesService } from '../services/clientes.service';
+import { IBezero } from '../interfaces/IEBezero';
+import { ProductoService } from '../services/productos.service';
+import { IEProduktuak } from '../interfaces/IEProduktuak';
 
 @Component({
   selector: 'app-kolore-historialak',
@@ -12,18 +16,37 @@ import { Router } from '@angular/router';
 export class KoloreHistorialakPage implements OnInit {
 
   historial: IKoloreHistorialak[] = [];
-  selectedHistorial: IKoloreHistorialak | null = null; // Variable para el historial seleccionado
-  newHistorial: IKoloreHistorialak = this.getEmptyHistorial(); // Inicializar un historial vacío para crear
-  showCreateForm: boolean = false; // Variable para controlar la visibilidad del formulario de creación
+  clientes : IBezero []= [];
+  productos: IEProduktuak []= [];
+  selectedHistorial: IKoloreHistorialak | null = null; 
+  newHistorial: IKoloreHistorialak =  {
+    id: 0,
+    bezero: 0,
+    produktu_id: 0,
+    data: null,
+    kantitatea: null,
+    bolumena: null,
+    oharrak: null,
+    dataSimple: {
+      sortze_data: new Date(),
+      eguneratze_data: new Date(),
+      ezabatze_data: null
+    }
+  } 
+  showCreateForm: boolean = false; 
 
   constructor(
     private koloreHistorialakService: KoloreHistorialakService,
+    private clienteService : ClientesService,
+    private ProductoService: ProductoService,
     private alertController: AlertController,
     private router: Router
   ) { }
 
   ngOnInit(): void {
     this.loadHistorial();
+    this.cargarClientes();
+    this.cargarProductos();
   }
 
   // Cargar historial no eliminado
@@ -34,6 +57,29 @@ export class KoloreHistorialakPage implements OnInit {
       },
       (error) => {
         console.error('Error al cargar el historial', error);
+      }
+    );
+  }
+
+  cargarClientes(){
+    this.clienteService.getFichas().subscribe(
+      (data) => {
+        this.clientes = data;
+      },
+      (error) => {
+        console.error('Error al cargar el historial', error);
+      }
+    );
+  }
+
+  
+  cargarProductos(){
+    this.ProductoService.getProductosActivos().subscribe(
+      (data) => {
+        this.productos = data;
+      },
+      (error) => {
+        console.error('Error al cargar los productos', error);
       }
     );
   }
@@ -87,6 +133,7 @@ export class KoloreHistorialakPage implements OnInit {
         this.showCreateForm = false; // Ocultar el formulario de creación
       },
       (error) => {
+        console.log('Datos enviados al backend:', this.newHistorial);
         console.error('Error al crear historial', error);
       }
     );
