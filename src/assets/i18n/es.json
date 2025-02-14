@@ -525,11 +525,28 @@
     "CANCELAR": "Cancelar",
     "SUMAR_ORDUTEGI": "Añadir horario"
   },
+
+  "CREAR_TXANDA": {
+    "TXANDAK": "Turnos",
+    "TIPO": "Tipo",
+    "SELECCIONA_TIPO": "Selecciona un tipo",
+    "RECEPCION": "Recepción",
+    "LIMPIEZA": "Limpieza",
+    "OBLIGATORIO_TIPO": "El tipo es obligatorio",
+    "TRABAJADOR": "Trabajador",
+    "INSERTA_TRABAJADOR": "Inserte un trabajador",
+    "OBLIGATORIO_TRABAJADOR": "El trabajador es obligatorio",
+    "FECHA": "Fecha",
+    "PON_FECHA": "Pon la fecha",
+    "OBLIGATORIO_FECHA": "La fecha es obligatoria",
+    "GUARDAR_TXANDA": "Guardar txanda"
+  },
+
   "TXANDAK": {
-    "TXANDAK": "Txandak",
-    "SELECCIONA_TXANDA": "Selecciona txanda",
+    "TXANDAK": "Turnos",
+    "SELECCIONA_TXANDA": "Selecciona un turno",
     "TXANDA": "Txanda",
-    "DETALLES_TXANDA": "Detalles del txanda",
+    "DETALLES_TXANDA": "Detalles del turno",
     "ID": "ID",
     "FECHA": "Fecha",
     "TIPO": "Tipo",
@@ -537,38 +554,39 @@
     "FECHA_CREACION": "Fecha de creación",
     "FECHA_ACTUALIZACION": "Fecha de actualización",
     "EDITAR": "Editar",
-    "EDITAR_TXANDA": "Editar txanda",
-    "SELECCIONA_TIPO": "Selecciona tipo",
+    "BORRAR_TXANDA": "Borrar turno",
+    "EDITAR_TXANDA": "Editar turno",
+    "SELECCIONA_TIPO": "Selecciona el tipo",
     "RECEPCION": "Recepción",
     "LIMPIEZA": "Limpieza",
     "TRABAJADOR": "Trabajador",
     "SELECCIONA_TRABAJADOR": "Selecciona un trabajador",
-    "SUMAR_TXANDA": "Sumar txanda",
     "GUARDAR": "Guardar",
-    "CANCELAR": "Cancelar"
+    "CANCELAR": "Cancelar",
+    "SUMAR_TXANDA": "Sumar turno"
   },
   "confirmDelete": {
-      "header": "¿Estás seguro?",
-      "message": "Se eliminará el grupo seleccionado.",
-      "cancel": "Cancelar",
-      "confirm": "Confirmar"
-    },
-    "createTeam": {
-      "header": "Crear Nuevo Equipo",
-      "message": "Ingresa los detalles del nuevo equipo.",
-      "cancel": "Cancelar",
-      "create": "Crear",
-      "namePlaceholder":"Nombre"
-    },
-    "success": {
-      "header": "Éxito",
-      "message": "Nuevo equipo creado con éxito.",
-      "ok": "OK"
-    },
-    "error": {
-      "header": "Error",
-      "message": "Hubo un error al crear el equipo.",
-      "ok": "OK"
-    },
-    "namePlaceholder": "Nombre del equipo"
+    "header": "¿Estás seguro?",
+    "message": "Se eliminará el grupo seleccionado.",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar"
+  },
+  "createTeam": {
+    "header": "Crear Nuevo Equipo",
+    "message": "Ingresa los detalles del nuevo equipo.",
+    "cancel": "Cancelar",
+    "create": "Crear",
+    "namePlaceholder": "Nombre"
+  },
+  "success": {
+    "header": "Éxito",
+    "message": "Nuevo equipo creado con éxito.",
+    "ok": "OK"
+  },
+  "error": {
+    "header": "Error",
+    "message": "Hubo un error al crear el equipo.",
+    "ok": "OK"
+  },
+  "namePlaceholder": "Nombre del equipo"
 }
