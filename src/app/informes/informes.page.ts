@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { jsPDF } from 'jspdf';
 import Chart from 'chart.js/auto';
 import html2canvas from 'html2canvas';
+import { ITicket } from '../interfaces/ITicket';
 
 @Component({
   selector: 'app-informes',
@@ -12,6 +13,7 @@ import html2canvas from 'html2canvas';
 export class InformesPage implements OnInit {
   informeText: string = '';
   hitzorduak: any[] = [];
+  tickets: ITicket[] = [];
 
   constructor(private http: HttpClient) { }
 
@@ -22,12 +24,25 @@ export class InformesPage implements OnInit {
   fetchData() {
     this.http.get<any[]>('http://localhost:8080/hitzorduak/hitzorduakGuztiak')
       .subscribe(data => {
+        console.log("Datos de hitzorduak:", data);
         this.hitzorduak = data;
-        this.createCharts();
+        this.fetchTicketsData(); // Llamamos a la nueva función para obtener tickets
       }, error => {
-        console.error('Error fetching data:', error);
+        console.error('Error al obtener hitzorduak:', error);
       });
   }
+  
+  fetchTicketsData() {
+    this.http.get<any[]>('http://localhost:8080/api/ticket_lerroak/aktiboak')
+      .subscribe(ticketData => {
+        console.log("Datos de tickets:", ticketData);
+        this.tickets = [...this.tickets, ...ticketData]; // Fusionar ambos datos
+        this.createCharts();
+      }, error => {
+        console.error('Error al obtener tickets:', error);
+      });
+  }
+  
 
   createCharts() {
     this.createBarChart();
@@ -42,10 +57,10 @@ export class InformesPage implements OnInit {
     new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: this.hitzorduak.map(h => h.izena),
+        labels: this.tickets.map(h => h.zerbitzuak.izena),
         datasets: [{
-          label: 'Prezio Totala',
-          data: this.hitzorduak.map(h => h.prezio_totala),
+          label: 'Etxeko Totala',
+          data: this.tickets.map(h => h.zerbitzuak.etxeko_prezioa),
           backgroundColor: 'rgba(54, 162, 235, 0.5)',
           borderColor: 'rgba(54, 162, 235, 1)',
           borderWidth: 1
@@ -125,12 +140,12 @@ export class InformesPage implements OnInit {
     doc.text(textLines, 10, yPosition);
   
     const charts = [
-      { id: 'barChartCanvas', title: 'Gráfico de Barras' },
-      { id: 'pieChartCanvas', title: 'Gráfico de Pastel' },
+      { id: 'barChartCanvas', title: 'Precio total de los clientes formato barra' },
+      { id: 'pieChartCanvas', title: 'Precio total de los clientes formato queso' },
       { id: 'lineChartCanvas', title: 'Gráfico de Líneas' }
     ];
   
-    let yOffset = yPosition + textLines.length * 5 + 10; // Ajuste para evitar superposición con el texto
+    let yOffset = yPosition + textLines.length * 5 + 10; 
   
     const addChartToPDF = (chartIndex: number) => {
       if (chartIndex >= charts.length) {

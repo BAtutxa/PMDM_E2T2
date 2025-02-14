@@ -42,5 +42,50 @@ export class HistorialaPage{
     this.menuCtrl.open();
     this.router.navigate(['/productos'], { queryParams: { desdeHistorial: 'true' } });
   }
+
+  cambiarAGrupos(){
+    this.historialService.setEsHistorial(true);  
+    this.router.navigate(['/grupos']).then(() => {
+        window.location.reload(); // Recarga la página
+    });
+    this.menuCtrl.open();
+    this.router.navigate(['/grupos'], { queryParams: { desdeHistorial: 'true' } });
+  }
+
+  cambiarAlangile(){
+    this.historialService.setEsHistorial(true);  
+    this.router.navigate(['/langile']).then(() => {
+        window.location.reload(); // Recarga la página
+    });
+    this.menuCtrl.open();
+    this.router.navigate(['/langile'], { queryParams: { desdeHistorial: 'true' } });
+  }
+
+  irAGestionarcitas(){
+    this.historialService.setEsHistorial(true);  
+    this.router.navigate(['/gestionar-citas']).then(() => {
+        window.location.reload(); // Recarga la página
+    });
+    this.menuCtrl.open();
+    this.router.navigate(['/gestionar-citas'], { queryParams: { desdeHistorial: 'true' } });
+  }
+
+  irAMateriales(){
+    this.historialService.setEsHistorial(true);  
+    this.router.navigate(['/materiales']).then(() => {
+        window.location.reload(); // Recarga la página
+    });
+    this.menuCtrl.open();
+    this.router.navigate(['/materiales'], { queryParams: { desdeHistorial: 'true' } });
+  }
+
+  irAMaterialMaileguak(){
+    this.historialService.setEsHistorial(true);  
+    this.router.navigate(['/material-maileguak']).then(() => {
+        window.location.reload(); // Recarga la página
+    });
+    this.menuCtrl.open();
+    this.router.navigate(['/material-maileguak'], { queryParams: { desdeHistorial: 'true' } });
+  }
   
 }

@@ -15,19 +15,19 @@
         </ion-button>
       </ion-col>
       <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-        <ion-button shape="" [routerLink]="'/grupos'" class="custom-button">
+        <ion-button shape="" (click)="cambiarAGrupos()" class="custom-button">
           <img src="assets/Images/grupo.jpg" alt="Taldeak" class="button-icon" />
           <span>{{ 'HISTORIAL.GRUPOS' | translate }}</span>
         </ion-button>
       </ion-col>
       <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-        <ion-button shape="" [routerLink]="'/langile'" class="custom-button">
+        <ion-button shape="" (click)="cambiarAlangile()"  class="custom-button">
           <img src="assets/Images/langileak.jpg" alt="Langileak" class="button-icon" />
           <span>{{ 'HISTORIAL.TRABAJADORES' | translate }}</span>
         </ion-button>
       </ion-col>
       <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-        <ion-button shape="" href="gestionar-citas" class="custom-button">
+        <ion-button shape="" (click)="irAGestionarcitas()" class="custom-button">
           <img src="assets/Images/citas.jpg" alt="Hitzorduak" class="button-icon" />
           <span>{{ 'HISTORIAL.CITAS' | translate }}</span>
         </ion-button>
@@ -39,13 +39,13 @@
         </ion-button>
       </ion-col>
       <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-        <ion-button shape="" [routerLink]="'/materiales'" class="custom-button">
+        <ion-button shape="" (click)=" irAMateriales()" class="custom-button">
           <img src="assets/Images/materiales.png" alt="Materialak" class="button-icon" />
           <span>{{ 'HISTORIAL.MATERIALES' | translate }}</span>
         </ion-button>
       </ion-col>
       <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-        <ion-button shape="" [routerLink]="'/informes'" class="custom-button">
+        <ion-button shape="" (click)=" irAMaterialMaileguak()" class="custom-button">
           <img src="assets/Images/reloj.webp" alt="Ordutegiak" class="button-icon" />
           <span>{{ 'HISTORIAL.HORARIOS' | translate }}</span>
         </ion-button>
@@ -57,7 +57,7 @@
         </ion-button>
       </ion-col>
       <ion-col size="12" size-md="6" size-lg="4" class="ion-text-center">
-        <ion-button shape="" [routerLink]="'/informes'" class="custom-button">
+        <ion-button shape="" [routerLink]="'/tickets'" class="custom-button">
           <img src="assets/Images/ticket.jpg" alt="Tickets" class="button-icon" />
           <span>{{ 'HISTORIAL.TICKETS' | translate }}</span>
         </ion-button>
