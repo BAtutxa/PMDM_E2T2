@@ -161,50 +161,92 @@ export class ProduktuMugimenduakPage implements OnInit {
      }
    
    
-     editarIPM(IPM: IPM) {
-       this.IPMSeleccionadoAnterior = { ...this.IPMSeleccionado }; 
-       this.editandoIPM = true;
-       this.IPMSeleccionado = { ...IPM };
+     editarIPM(ipm: IPM) {
+      this.editandoIPM = true; // Activar el modo de edición
+      this.IPMSeleccionado = { ...ipm }; // Copiar los datos del IPM seleccionado
+    
+      // Formatear las fechas si es necesario
+      if (this.IPMSeleccionado.hasieraData) {
+        this.IPMSeleccionado.hasieraData = this.formatearFecha(this.IPMSeleccionado.hasieraData);
+      }
+      if (this.IPMSeleccionado.amaieraData) {
+        this.IPMSeleccionado.amaieraData = this.formatearFecha(this.IPMSeleccionado.amaieraData);
+      }
+    }
+
+    formatearFecha(fecha: any): string {
+      if (fecha instanceof Date) {
+        return fecha.toISOString().split('T')[0]; // Convertir Date a 'YYYY-MM-DD'
+      } else if (typeof fecha === 'string') {
+        return fecha.split('T')[0]; // Si es un string ISO, extraer la parte de la fecha
+      }
+      return fecha; // Devolver la fecha tal cual si ya está en el formato correcto
+    }
    
-       this.moverVistaAlPrimerIPM();
-     }
-   
-     async confirmarEdicion() {
-       const translations = await this.translateService.get(['IPM.HEADER', 'IPM.MESSAGE', 'PRODUCT.CANCEL', 'PRODUCT.CONFIRM']).toPromise();
-       const alert = await this.alertController.create({
-         header: translations['IPM.HEADER'],
-         message: translations['IPM.MESSAGE'],
-         buttons: [
-           {
-             text: translations['PRODUCT.CANCEL'],
-             role: 'cancel',
-           },
-           {
-             text: translations['PRODUCT.CONFIRM'],
-             handler: async () => {
-               const now = new Date().toISOString();
-               this.IPMSeleccionado.data = this.IPMSeleccionado.data || {};
-               this.IPMSeleccionado.data.eguneratze_data = now;
-   
-               try {
-                 await firstValueFrom(this.ipmService.actualizarIPM(this.IPMSeleccionado));
-                 const index = this.maileguak.findIndex(IPM => IPM.id === this.IPMSeleccionado.id);
-                 if (index !== -1) {
-                   this.maileguak[index] = { ...this.IPMSeleccionado };
-                   this.aplicarFiltro({ target: { value: '' } });
-                 }
-                 this.editandoIPM = false;
-                 window.location.reload();
-               } catch (error) {
-                 console.error('Error al actualizar IPM:', error);
-               }
-             },
-           },
-         ],
-       });
-   
-       await alert.present();
-     }
+    async confirmarEdicion() {
+      const translations = await this.translateService
+        .get(['IPM.HEADER', 'IPM.MESSAGE', 'PRODUCT.CANCEL', 'PRODUCT.CONFIRM'])
+        .toPromise();
+    
+      const alert = await this.alertController.create({
+        header: translations['IPM.HEADER'],
+        message: translations['IPM.MESSAGE'],
+        buttons: [
+          {
+            text: translations['PRODUCT.CANCEL'],
+            role: 'cancel',
+          },
+          {
+            text: translations['PRODUCT.CONFIRM'],
+            handler: async () => {
+              try {
+                // Actualizar la fecha de modificación
+                const now = new Date().toISOString();
+                this.IPMSeleccionado.data = this.IPMSeleccionado.data || {};
+                this.IPMSeleccionado.data.eguneratze_data = now;
+    
+                // Enviar la solicitud al backend
+                const response = await firstValueFrom(
+                  this.ipmService.actualizarIPM(this.IPMSeleccionado)
+                );
+    
+                // Verificar si la respuesta es válida
+                if (!response) {
+                  throw new Error('El backend no devolvió una respuesta válida.');
+                }
+    
+                // Actualizar la lista local de IPMs
+                const index = this.maileguak.findIndex(
+                  (IPM) => IPM.id === this.IPMSeleccionado.id
+                );
+                if (index !== -1) {
+                  this.maileguak[index] = { ...this.IPMSeleccionado };
+                  this.aplicarFiltro({ target: { value: '' } }); // Refrescar el filtro
+                }
+    
+                // Desactivar el modo de edición
+                this.editandoIPM = false;
+    
+                // Recargar la página (opcional, dependiendo de tu flujo)
+                window.location.reload();
+              } catch (error) {
+                console.error('Error al actualizar IPM:', error);
+    
+                // Mostrar un mensaje de error al usuario
+                const errorAlert = await this.alertController.create({
+                  header: 'Error',
+                  message: 'No se pudo actualizar el IPM. Por favor, inténtalo de nuevo.',
+                  buttons: ['OK'],
+                });
+                await errorAlert.present();
+              }
+            },
+          },
+        ],
+      });
+    
+      await alert.present();
+    }
    
      cancelarEdicion() {
        this.IPMSeleccionado = { ...this.IPMSeleccionadoAnterior };

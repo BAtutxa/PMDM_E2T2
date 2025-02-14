@@ -42,65 +42,82 @@ search-icon="search-circle"
 </ion-col>
 </ion-row>
 
-<!-- Fila de edición visible solo en modo edición -->
 <ion-row *ngIf="editandoIPM">
-<ion-col size="12">
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Editar Material</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <form #materialForm="ngForm" (ngSubmit)="confirmarEdicion()" novalidate>
-        <ion-item>
-          <ion-label position="floating">ID</ion-label>
-          <ion-input [(ngModel)]="IPMSeleccionado.id" name="id" #id="ngModel" readonly></ion-input>
-        </ion-item>
+  <ion-col size="12">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Editar Material</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <form #materialForm="ngForm" (ngSubmit)="confirmarEdicion()" novalidate>
+          <!-- ID (solo lectura) -->
+          <ion-item>
+            <ion-label position="floating">ID</ion-label>
+            <ion-input [(ngModel)]="IPMSeleccionado.id" name="id" #id="ngModel" readonly></ion-input>
+          </ion-item>
 
-        <!-- Selección de Material -->
-        <ion-item>
-          <ion-label position="floating">Material</ion-label>
-          <ion-select [(ngModel)]="IPMSeleccionado.materiala_id" name="materiala" required>
-            <ion-select-option *ngFor="let material of materiales" [value]="material.id">
-              {{ material.izena }}
-            </ion-select-option>
-          </ion-select>
-        </ion-item>
+          <!-- Selección de Material -->
+          <ion-item>
+            <ion-label position="floating">Producto</ion-label>
+            <ion-select [(ngModel)]="IPMSeleccionado.produktuak" name="materiala" required>
+              <ion-select-option *ngFor="let material of materiales" [value]="material.id">
+                {{ material.izena }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
 
-        <!-- Selección de Trabajador -->
-        <ion-item>
-          <ion-label position="floating">Trabajador</ion-label>
-          <ion-select [(ngModel)]="IPMSeleccionado.idLangilea" name="langilea" required>
-            <ion-select-option *ngFor="let trabajador of trabajadores" [value]="trabajador.id">
-              {{ trabajador.izena }} {{ trabajador.abizenak }}
-            </ion-select-option>
-          </ion-select>
-        </ion-item>
+          <!-- Selección de Trabajador -->
+          <ion-item>
+            <ion-label position="floating">Trabajador</ion-label>
+            <ion-select [(ngModel)]="IPMSeleccionado.langilea" name="langilea" required>
+              <ion-select-option *ngFor="let trabajador of trabajadores" [value]="trabajador.id">
+                {{ trabajador.izena }} {{ trabajador.abizenak }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
 
-        <ion-item>
-          <ion-label position="floating">Fecha de inicio</ion-label>
-          <ion-input [(ngModel)]="IPMSeleccionado.hasieraData" name="hasiera_Data" #hasiera_Data="ngModel" required type="date"></ion-input>
-          <ion-note *ngIf="hasiera_Data.invalid && hasiera_Data.touched" color="danger">
-            Fecha de inicio es obligatoria
-          </ion-note>
-        </ion-item>
+          <!-- Fecha de inicio -->
+          <ion-item>
+            <ion-label position="floating">Fecha de inicio</ion-label>
+            <ion-input
+              [(ngModel)]="IPMSeleccionado.hasieraData"
+              name="hasiera_Data"
+              #hasiera_Data="ngModel"
+              required
+              type="date"
+            ></ion-input>
+            <ion-note *ngIf="hasiera_Data.invalid && hasiera_Data.touched" color="danger">
+              Fecha de inicio es obligatoria
+            </ion-note>
+          </ion-item>
 
-        <ion-item>
-          <ion-label position="floating">Fecha de fin</ion-label>
-          <ion-input [(ngModel)]="IPMSeleccionado.amaieraData" name="amaiera_Data" #amaiera_Data="ngModel" required type="date"></ion-input>
-          <ion-note *ngIf="amaiera_Data.invalid && amaiera_Data.touched" color="danger">
-            Fecha de fin es obligatoria
-          </ion-note>
-        </ion-item>
+          <!-- Fecha de fin -->
+          <ion-item>
+            <ion-label position="floating">Fecha de fin</ion-label>
+            <ion-input
+              [(ngModel)]="IPMSeleccionado.amaieraData"
+              name="amaiera_Data"
+              #amaiera_Data="ngModel"
+              required
+              type="date"
+            ></ion-input>
+            <ion-note *ngIf="amaiera_Data.invalid && amaiera_Data.touched" color="danger">
+              Fecha de fin es obligatoria
+            </ion-note>
+          </ion-item>
 
-        <ion-button expand="full" color="tertiary" type="submit" [disabled]="materialForm.invalid">Confirmar</ion-button>
-        <ion-button expand="full" color="danger" (click)="cancelarEdicion()">Cancelar</ion-button>
-        <ion-button *ngIf="esProfe" expand="full" class="custom-red-button" (click)="eliminarIPM()">
-          Borrar préstamo
-        </ion-button>
-      </form>
-    </ion-card-content>
-  </ion-card>
-</ion-col>
+          <!-- Botones -->
+          <ion-button expand="full" color="tertiary" type="submit" [disabled]="materialForm.invalid">
+            Confirmar
+          </ion-button>
+          <ion-button expand="full" color="danger" (click)="cancelarEdicion()">Cancelar</ion-button>
+          <ion-button *ngIf="esProfe" expand="full" class="custom-red-button" (click)="eliminarIPM()">
+            Borrar préstamo
+          </ion-button>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </ion-col>
 </ion-row>
 
 <ion-row *ngIf="esProfe">
@@ -198,10 +215,10 @@ search-icon="search-circle"
               <ion-input [(ngModel)]="IPMSeleccionado.id" name="id" #id="ngModel" readonly></ion-input>
             </ion-item>
 
-            <!-- Selección de Material -->
+            <!-- Selección de Producto -->
             <ion-item>
-              <ion-label position="floating">Material</ion-label>
-              <ion-select [(ngModel)]="IPMSeleccionado.materiala_id" name="materiala" required>
+              <ion-label position="floating">Producto</ion-label>
+              <ion-select [(ngModel)]="IPMSeleccionado.produktuak" name="materiala" required>
                 <ion-select-option *ngFor="let material of materiales" [value]="material.id">
                   {{ material.izena }}
                 </ion-select-option>
@@ -211,7 +228,7 @@ search-icon="search-circle"
             <!-- Selección de Trabajador -->
             <ion-item>
               <ion-label position="floating">Trabajador</ion-label>
-              <ion-select [(ngModel)]="IPMSeleccionado.idLangilea" name="langilea" required>
+              <ion-select [(ngModel)]="IPMSeleccionado.langilea" name="langilea" required>
                 <ion-select-option *ngFor="let trabajador of trabajadores" [value]="trabajador.id">
                   {{ trabajador.izena }} {{ trabajador.abizenak }}
                 </ion-select-option>
