@@ -103,9 +103,11 @@
 
             <ion-footer>
               <ion-buttons>
-                <ion-button style="--background: var(--ion-color-tertiary); --color: white;" (click)="confirmarCambios()">{{ 'GESTION_CITAS.CONFIRM' | translate }}</ion-button>
-                <ion-button style="--background: var(--ion-color-danger); --color: white;" (click)="cancelarCambios()">{{ 'GESTION_CITAS.DELETE' | translate }}</ion-button>
-                <ion-button style="--background: var(--ion-color-warning); --color: white;" (click)="imprimirTicket()">{{ 'GESTION_CITAS.PRINT_TICKET' | translate }}</ion-button>
+                <ion-button *ngIf="!esHistorial" style="--background: var(--ion-color-tertiary); --color: white;" (click)="confirmarCambios()">{{ 'GESTION_CITAS.CONFIRM' | translate }}</ion-button>
+                <ion-button *ngIf="!esHistorial" style="--background: var(--ion-color-danger); --color: white;" (click)="cancelarCambios()">{{ 'GESTION_CITAS.DELETE' | translate }}</ion-button>
+                <ion-button *ngIf="esHistorial" style="--background: var(--ion-color-danger); --color: white;" (click)="Borrar()">{{ 'GESTION_CITAS.DELETE' | translate }}</ion-button>
+                <ion-button *ngIf="esHistorial" style="--background: var(--ion-color-tertiary); --color: white;" (click)="Restaurar()">Restaurar</ion-button>
+                <ion-button *ngIf="!esHistorial" style="--background: var(--ion-color-warning); --color: white;" (click)="imprimirTicket()">{{ 'GESTION_CITAS.PRINT_TICKET' | translate }}</ion-button>
               </ion-buttons>
             </ion-footer>
           </ion-content>

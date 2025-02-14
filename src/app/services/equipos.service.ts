@@ -50,18 +50,17 @@ export class EquipoService {
     return this.http.get<IEquipos[]>(`${this.baseUrl}/ezabatutako-taldeak`);
   }
 
-  // Crear un nuevo grupo
+
   agregarGrupo(grupo: IEquipos): Observable<IEquipos> {
     return this.http.post<IEquipos>(`${this.baseUrl}/create`, grupo);
   }
-
-  // Actualizar un grupo existente
+  
   actualizarGrupo(grupo: IEquipos): Observable<IEquipos> {
     return this.http.put<IEquipos>(`${this.baseUrl}/update`, grupo);
   }
 
-  // Marcar un grupo como eliminado
   eliminarGrupo(grupo: IEquipos): Observable<IEquipos> {
-    return this.http.put<IEquipos>(`${this.baseUrl}/delete`, grupo);
+    return this.http.delete<IEquipos>(`${this.baseUrl}/delete/${grupo.kodea}`);
   }
 }
+

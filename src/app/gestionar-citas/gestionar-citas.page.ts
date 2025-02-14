@@ -9,7 +9,7 @@ import { ITicket } from '../interfaces/ITicket';
 import { IZerbitzuak } from '../interfaces/IZerbitzuak';
 import { ZerbitzuakService } from '../services/zerbitzuak.service';
 import { AlertController } from '@ionic/angular';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChangeDetectorRef } from '@angular/core';
 import { EsHistorialService } from '../services/EsHistorial.service';
@@ -58,7 +58,7 @@ export class GestionarCitasPage implements OnInit {
       console.log("Historial:", this.esHistorial);
     });
     if(this.esHistorial){
-      this.obtenerCitasEliminadas
+      this.obtenerCitasEliminadas();
     }else{
       this.obtenerCitas();
     }
@@ -111,28 +111,35 @@ export class GestionarCitasPage implements OnInit {
     this.modalAbierto = true;
   }
 
-  cerrarModal() {
+  cerrarModal(recargarDatos: boolean = false) {
     this.modalAbierto = false;
-    this.cdRef.detectChanges();
+    this.cdRef.detectChanges(); // Forzar la detección de cambios
+  
+    if (recargarDatos) {
+      if (this.esHistorial) {
+        this.obtenerCitasEliminadas(); // Recargar citas eliminadas si estamos en el historial
+      } else {
+        this.obtenerCitas(); // Recargar citas activas
+      }
+    }
   }
 
   // Método para confirmar los cambios (actualizar la cita)
   confirmarCambios() {
     console.log('Confirmando cambios para la cita:', this.citaSeleccionada);
-
+  
     // Convertir la fecha a un objeto Date y sumar un día
     let fecha = new Date(this.citaSeleccionada.data);
     fecha.setDate(fecha.getDate() + 1); // Sumar 1 día
-
+  
     // Convertir la fecha de nuevo a formato ISO string (sin la parte de la hora)
     this.citaSeleccionada.data = fecha.toISOString().split('T')[0];  // Solo la fecha (YYYY-MM-DD)
-
+  
     // Llamar al servicio para actualizar la cita
     this.citaService.updateCita(this.citaSeleccionada).subscribe(
       (response) => {
         console.log('Cita actualizada exitosamente:', response);
-        this.obtenerCitas(); // Volver a obtener las citas actualizadas
-        this.cerrarModal(); // Cerrar el modal después de la actualización
+        this.cerrarModal(true); // Cerrar el modal y recargar los datos
       },
       (error) => {
         console.error('Error al actualizar la cita:', error);
@@ -141,26 +148,24 @@ export class GestionarCitasPage implements OnInit {
   }
 
   cancelarCambios() {
-    console.log('Eliminando cita:', this.citaSeleccionada);
-  
-    // Aquí podrías mostrar un diálogo de confirmación al usuario antes de eliminar
-    if (confirm('¿Estás seguro de que deseas eliminar esta cita?')) {
-      // Llamar al servicio para eliminar la cita
-      this.citaService.deleteCita(this.citaSeleccionada.id).subscribe(
-        (response) => {
-          console.log('Cita eliminada exitosamente:', response);
-          // Eliminar la cita de la lista en la interfaz
-          this.citas = this.citas.filter(cita => cita.id !== this.citaSeleccionada.id);
-          this.cerrarModal();
-        },
-        (error) => {
-          console.error('Error al eliminar la cita:', error);
-        }
-      );
-    } else {
-      console.log('Cancelación de la eliminación de la cita');
-    }
+  console.log('Eliminando cita:', this.citaSeleccionada);
+
+  // Aquí podrías mostrar un diálogo de confirmación al usuario antes de eliminar
+  if (confirm('¿Estás seguro de que deseas eliminar esta cita?')) {
+    // Llamar al servicio para eliminar la cita
+    this.citaService.deleteCita(this.citaSeleccionada.id).subscribe(
+      (response) => {
+        console.log('Cita eliminada exitosamente:', response);
+        this.cerrarModal(true); // Cerrar el modal y recargar los datos
+      },
+      (error) => {
+        console.error('Error al eliminar la cita:', error);
+      }
+    );
+  } else {
+    console.log('Cancelación de la eliminación de la cita');
   }
+}
 
   obtenerTrabajadorPorId(id: number | null): string {
     if (id === null) {
@@ -332,6 +337,94 @@ export class GestionarCitasPage implements OnInit {
       },
       (error) => {
         console.error('Error al obtener las citas:', error);
+      }
+    );
+  }
+
+  async Borrar() {
+    if (!this.citaSeleccionada) {
+      console.error('No se ha seleccionado ninguna cita para eliminar.');
+      return;
+    }
+  
+    const alert = await this.alertController.create({
+      header: 'Confirmar eliminación',
+      message: '¿Estás seguro de que deseas eliminar esta cita permanentemente?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+        },
+        {
+          text: 'Eliminar',
+          handler: async () => {
+            try {
+              const response = await firstValueFrom(this.citaService.deleteCitaPermanently(this.citaSeleccionada.id));
+              console.log('Respuesta del servidor:', response);
+  
+              // Mostrar un mensaje de éxito
+              const successAlert = await this.alertController.create({
+                header: 'Éxito',
+                message: 'La cita ha sido eliminada permanentemente.',
+                buttons: ['OK'],
+              });
+              await successAlert.present();
+  
+              // Cerrar el modal y recargar los datos
+              this.cerrarModal(true);
+            } catch (error) {
+              console.error('Error al eliminar la cita:', error);
+  
+              // Mostrar un mensaje de error
+              const errorAlert = await this.alertController.create({
+                header: 'Error',
+                message: 'No se pudo eliminar la cita. Inténtalo de nuevo.',
+                buttons: ['OK'],
+              });
+              await errorAlert.present();
+            }
+          },
+        },
+      ],
+    });
+  
+    await alert.present();
+  }
+
+  Restaurar() {
+    if (!this.citaSeleccionada) {
+      console.error('No se ha seleccionado ninguna cita para restaurar.');
+      return;
+    }
+  
+    console.log('Restaurando cita:', this.citaSeleccionada);
+  
+    // Establecer ezabatze_data en null
+    this.citaSeleccionada.ezabatze_data = null;
+  
+    // Convertir la fecha a un objeto Date y sumar un día (si es necesario)
+    let fecha = new Date(this.citaSeleccionada.data);
+    fecha.setDate(fecha.getDate() + 1); // Sumar 1 día
+  
+    // Convertir la fecha de nuevo a formato ISO string (sin la parte de la hora)
+    this.citaSeleccionada.data = fecha.toISOString().split('T')[0];  // Solo la fecha (YYYY-MM-DD)
+  
+    // Llamar al servicio para actualizar la cita
+    this.citaService.updateCita(this.citaSeleccionada).subscribe(
+      (response) => {
+        console.log('Cita restaurada exitosamente:', response);
+  
+        // Mostrar un mensaje de éxito
+        this.mostrarAlerta('La cita ha sido restaurada correctamente.');
+  
+        // Cerrar el modal y recargar los datos
+        this.cerrarModal(true);
+      },
+      (error) => {
+        console.error('Error al restaurar la cita:', error);
+  
+        // Mostrar un mensaje de error
+        this.mostrarAlerta('No se pudo restaurar la cita. Inténtalo de nuevo.');
       }
     );
   }

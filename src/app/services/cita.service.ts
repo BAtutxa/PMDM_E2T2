@@ -35,4 +35,8 @@ export class CitaService {
     console.log('Eliminando cita con ID:', id);
     return this.http.delete<any>(`${this.apiUrl}/delete/${id}`);
   }
+
+   deleteCitaPermanently(id: number): Observable<any> {
+    return this.http.delete<any>(`http://localhost:8080/hitzorduak/hardDelete/${id}`);
+  }
 }

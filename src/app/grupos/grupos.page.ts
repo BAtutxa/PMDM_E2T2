@@ -92,7 +92,7 @@ export class GruposPage implements OnInit {
     });
     console.log("Es historial", this.esHistorial);
     if(this.esHistorial){
-      this.cargarGruposEliminados;
+      this.cargarGruposEliminados();
     }else{
       this.cargarGrupos();
     }
@@ -175,9 +175,10 @@ export class GruposPage implements OnInit {
             const now = new Date();
             grupo.data = grupo.data || {};
             grupo.data.ezabatze_data = now;
+            grupo.langileak = [];
 
             try {
-              await firstValueFrom(this.equipoService.eliminarGrupo(grupo));
+              await firstValueFrom(this.equipoService.actualizarGrupo(grupo));
               this.equipos = this.equipos.filter((borrado) => borrado.kodea !== grupo.kodea);
             } catch (error) {
               console.error('Error al eliminar el grupo:', error);
@@ -189,6 +190,73 @@ export class GruposPage implements OnInit {
     await alert.present();
   }
 
+  async restaurar(grupo: IEquipos): Promise<void> {
+    const alert = await this.alertController.create({
+      header: this.translate.instant('confirmDelete.header'),
+      message: this.translate.instant('confirmDelete.message'),
+      buttons: [
+        {
+          text: this.translate.instant('confirmDelete.cancel'),
+          role: 'cancel',
+        },
+        {
+          text: this.translate.instant('confirmDelete.confirm'),
+          handler: async () => {
+            const now = new Date();
+            grupo.data = grupo.data || {};
+            grupo.data.ezabatze_data = null;
+
+            try {
+              await firstValueFrom(this.equipoService.actualizarGrupo(grupo));
+              this.equipos = this.equipos.filter((borrado) => borrado.kodea !== grupo.kodea);
+            } catch (error) {
+              console.error('Error al eliminar el grupo:', error);
+            }
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
+
+  async eliminarGrupoDefinitivo(grupo: IEquipos): Promise<void> {
+    const alert = await this.alertController.create({
+      header: this.translate.instant('confirmDelete.header'),
+      message: this.translate.instant('confirmDelete.message'),
+      buttons: [
+        {
+          text: this.translate.instant('confirmDelete.cancel'),
+          role: 'cancel',
+        },
+        {
+          text: this.translate.instant('confirmDelete.confirm'),
+          handler: async () => {
+            const now = new Date();
+            grupo.data = grupo.data || {};
+            grupo.data.ezabatze_data = now;
+  
+            // Vaciar el array de langileak
+            grupo.langileak = [];
+  
+            try {
+              // Actualizar el grupo para vaciar langileak
+              await firstValueFrom(this.equipoService.actualizarGrupo(grupo));
+  
+              // Eliminar físicamente el grupo
+              await firstValueFrom(this.equipoService.eliminarGrupo(grupo));
+  
+              // Actualizar la lista de equipos en el frontend
+              this.equipos = this.equipos.filter((borrado) => borrado.kodea !== grupo.kodea);
+            } catch (error) {
+              console.error('Error al eliminar el grupo:', error);
+            }
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
+  
   async CrearEquipo() {
     const alert = await this.alertController.create({
       header: this.translate.instant('createTeam.header'),

@@ -31,10 +31,16 @@
 
         <!-- Botones para editar/eliminar -->
         <ion-buttons slot="end">
-          <ion-button color="tertiary" [routerLink]="['/editar-grupo', grupo.kodea]">
+          <ion-button *ngIf="!esHistorial" color="tertiary" [routerLink]="['/editar-grupo', grupo.kodea]">
             {{ 'EQUIPOS.EDITAR' | translate }}
           </ion-button>
-          <ion-button color="danger" (click)="eliminarGrupo(grupo)">
+          <ion-button *ngIf="esHistorial" color="primary" (click)="restaurar(grupo)">
+            Restaurar
+          </ion-button>
+          <ion-button *ngIf="!esHistorial" color="danger" (click)="eliminarGrupo(grupo)">
+            {{ 'EQUIPOS.BORRAR' | translate }}
+          </ion-button>
+          <ion-button *ngIf="esHistorial" color="danger" (click)="eliminarGrupoDefinitivo(grupo)">
             {{ 'EQUIPOS.BORRAR' | translate }}
           </ion-button>
         </ion-buttons>
