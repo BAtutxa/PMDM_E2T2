@@ -8,7 +8,7 @@ import { LangileakService } from '../services/Langileak.service';
 import { ITrabajador } from '../interfaces/ITrabajador';
 import { Router } from '@angular/router';
 import { MenuController } from '@ionic/angular';
-
+import { TranslateService } from '@ngx-translate/core'; // Importar el servicio de traducción
 
 @Component({
   selector: 'app-grupos',
@@ -43,7 +43,7 @@ export class GruposPage implements OnInit {
     },
   }; 
   mostrarEditor: boolean = false; 
-grupo: any;
+  grupo: any;
 
   constructor(
     private router: Router, 
@@ -51,7 +51,8 @@ grupo: any;
     private equipoService: EquipoService,
     private alertController: AlertController,
     private langileakService: LangileakService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private translate: TranslateService // Inyectar TranslateService
   ) {}
 
   goToTxandak(event: Event) {
@@ -60,7 +61,6 @@ grupo: any;
     this.menuCtrl.open(); // Abre el menú si es necesario
   }
 
-  
   goToOrdutegi(event: Event) {
     event.stopPropagation(); // Previene que el menú se cierre
     this.router.navigate(['/ordutegi']); // Navega manualmente al calendario
@@ -80,10 +80,9 @@ grupo: any;
   
   guardarCambios() {
     this.langileakService.actualizarLangile(this.langileSeleccionado).subscribe();
-    alert('Cambios guardados con éxito');
+    alert(this.translate.instant('success.message'));
     window.location.reload();
     this.mostrarEditor = false;
-
   }
   
   cancelarEdicion() {
@@ -117,15 +116,15 @@ grupo: any;
 
   async eliminarGrupo(grupo: IEquipos): Promise<void> {
     const alert = await this.alertController.create({
-      header: '¿Estás seguro?',
-      message: 'Se eliminará el grupo seleccionado.',
+      header: this.translate.instant('confirmDelete.header'),
+      message: this.translate.instant('confirmDelete.message'),
       buttons: [
         {
-          text: 'Cancelar',
+          text: this.translate.instant('confirmDelete.cancel'),
           role: 'cancel',
         },
         {
-          text: 'Confirmar',
+          text: this.translate.instant('confirmDelete.confirm'),
           handler: async () => {
             const now = new Date();
             grupo.data = grupo.data || {};
@@ -146,22 +145,22 @@ grupo: any;
 
   async CrearEquipo() {
     const alert = await this.alertController.create({
-      header: 'Crear Nuevo Equipo',
-      message: 'Ingresa los detalles del nuevo equipo.',
+      header: this.translate.instant('createTeam.header'),
+      message: this.translate.instant('createTeam.message'),
       inputs: [
         {
           name: 'nombre',
           type: 'text',
-          placeholder: 'Nombre del equipo',
+          placeholder: this.translate.instant('createTeam.namePlaceholder'),
         },
       ],
       buttons: [
         {
-          text: 'Cancelar',
+          text: this.translate.instant('createTeam.cancel'),
           role: 'cancel',
         },
         {
-          text: 'Crear',
+          text: this.translate.instant('createTeam.create'),
           handler: async (data) => {
             const ahora = new Date();
             this.equipoService.obtenerIDDisponible().subscribe((nextKodea: string) => {
@@ -173,9 +172,9 @@ grupo: any;
               this.equipoService.agregarGrupo(this.equipo).subscribe(
                 async (response: any) => {
                   const ondoAlerta = await this.alertController.create({
-                    header: 'Éxito',
-                    message: 'Nuevo equipo creado con éxito.',
-                    buttons: ['OK'],
+                    header: this.translate.instant('success.header'),
+                    message: this.translate.instant('success.message'),
+                    buttons: [this.translate.instant('success.ok')],
                   });
   
                   await ondoAlerta.present();
@@ -186,9 +185,9 @@ grupo: any;
                 async (error: any) => {
                   console.error('Error al crear el equipo:', error);
                   const errorAlert = await this.alertController.create({
-                    header: 'Error',
-                    message: 'Hubo un error al crear el equipo.',
-                    buttons: ['OK'],
+                    header: this.translate.instant('error.header'),
+                    message: this.translate.instant('error.message'),
+                    buttons: [this.translate.instant('error.ok')],
                   });
   
                   await errorAlert.present();

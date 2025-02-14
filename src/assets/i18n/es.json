@@ -215,20 +215,20 @@
     "ASCENDING": "Ascendente",
     "DESCENDING": "Descendente"
   },
-    "CREAR_SERVICIO": {
-      "TITLE": "Creación de Servicio",
-      "NAME": "Nombre",
-      "PRECIO_FUERA": "Precio Fuera",
-      "PRECIO_CASA": "Precio Casa",
-      "GUARDAR": "Guardar",
-      "NOMBRE_REQUIRED": "El nombre es obligatorio.",
-      "PRECIO_CASA_OBLIGATORIO": "El precio de casa es obligatorio.",
-      "PRECIO_FUERA_OBLIGATORIO": "El precio fuera es obligatorio.",
-      "PLACEHOLDER_NAME": "Introduce un valor para el nombre",
-      "PLACEHOLDER_PRECIO_FUERA": "Introduce un valor para el precio fuera",
-      "PLACEHOLDER_PRECIO_CASA": "Introduce un valor para el precio de casa"
+  "CREAR_SERVICIO": {
+    "TITLE": "Creación de Servicio",
+    "NAME": "Nombre",
+    "PRECIO_FUERA": "Precio Fuera",
+    "PRECIO_CASA": "Precio Casa",
+    "GUARDAR": "Guardar",
+    "NOMBRE_REQUIRED": "El nombre es obligatorio.",
+    "PRECIO_CASA_OBLIGATORIO": "El precio de casa es obligatorio.",
+    "PRECIO_FUERA_OBLIGATORIO": "El precio fuera es obligatorio.",
+    "PLACEHOLDER_NAME": "Introduce un valor para el nombre",
+    "PLACEHOLDER_PRECIO_FUERA": "Introduce un valor para el precio fuera",
+    "PLACEHOLDER_PRECIO_CASA": "Introduce un valor para el precio de casa"
   },
-  
+
   "INVENTARIO": {
     "PROD_MUGIMENDUAK": "Movimiento de productos",
     "MATERIAL_MAILEGU": "Prestamo de material",
@@ -272,26 +272,26 @@
     "AÑADIR_PRODUCTO": "AÑADIR PRODUCTO",
     "ORDENAR": "Ordenar"
   },
-    "CREAR_PRODUCTO": {
-      "TITLE": "Crear Producto",
-      "NOMBRE": "Nombre",
-      "MARCA": "Marca",
-      "DESCRIPCION": "Descripción",
-      "STOCK": "Stock",
-      "STOCK_ALERTA": "Alerta Stock",
-      "CATEGORIA": "Categoría",
-      "GUARDAR": "Guardar",
-      "NOMBRE_PLACEHOLDER": "Introduce un valor para nombre",
-      "MARCA_PLACEHOLDER": "Introduce un valor para marca",
-      "DESCRIPCION_PLACEHOLDER": "Introduce un valor para descripción",
-      "STOCK_PLACEHOLDER": "Introduce un valor para stock",
-      "STOCK_ALERTA_PLACEHOLDER": "Introduce un valor para la alerta del stock",
-      "CATEGORIA_PLACEHOLDER": "Selecciona una categoría",
-      "MARCA_REQUIRED": "Marca es requerida",
-      "STOCK_REQUIRED": "Stock es requerido",
-      "ALERTA_REQUIRED": "Alerta de stock es requerida",
-      "CATEGORIA_REQUIRED": "Categoría es requerida"
-    },
+  "CREAR_PRODUCTO": {
+    "TITLE": "Crear Producto",
+    "NOMBRE": "Nombre",
+    "MARCA": "Marca",
+    "DESCRIPCION": "Descripción",
+    "STOCK": "Stock",
+    "STOCK_ALERTA": "Alerta Stock",
+    "CATEGORIA": "Categoría",
+    "GUARDAR": "Guardar",
+    "NOMBRE_PLACEHOLDER": "Introduce un valor para nombre",
+    "MARCA_PLACEHOLDER": "Introduce un valor para marca",
+    "DESCRIPCION_PLACEHOLDER": "Introduce un valor para descripción",
+    "STOCK_PLACEHOLDER": "Introduce un valor para stock",
+    "STOCK_ALERTA_PLACEHOLDER": "Introduce un valor para la alerta del stock",
+    "CATEGORIA_PLACEHOLDER": "Selecciona una categoría",
+    "MARCA_REQUIRED": "Marca es requerida",
+    "STOCK_REQUIRED": "Stock es requerido",
+    "ALERTA_REQUIRED": "Alerta de stock es requerida",
+    "CATEGORIA_REQUIRED": "Categoría es requerida"
+  },
   "MATERIALES": {
     "TITLE": "Materiales",
     "SEARCH": "Buscar",
@@ -351,16 +351,16 @@
     "ORDENA": "Numero de prestamos por pagina"
   },
 
-    "CREAR_MATERIAL": {
-      "NUEVO_MATERIAL": "Nuevo Material",
-      "NOMBRE": "Nombre",
-      "ETIKETA": "Etiqueta",
-      "INTRODUCE_NOMBRE": "Introduce un valor para nombre",
-      "INTRODUCE_ETIKETA": "Introduce una etiqueta",
-      "NOMBRE_OBLIGATORIO": "El nombre es obligatorio",
-      "ETIKETA_OBLIGATORIA": "La etiqueta es obligatoria",
-      "GUARDAR": "Guardar"
-    },
+  "CREAR_MATERIAL": {
+    "NUEVO_MATERIAL": "Nuevo Material",
+    "NOMBRE": "Nombre",
+    "ETIKETA": "Etiqueta",
+    "INTRODUCE_NOMBRE": "Introduce un valor para nombre",
+    "INTRODUCE_ETIKETA": "Introduce una etiqueta",
+    "NOMBRE_OBLIGATORIO": "El nombre es obligatorio",
+    "ETIKETA_OBLIGATORIA": "La etiqueta es obligatoria",
+    "GUARDAR": "Guardar"
+  },
 
   "ADMINISTRACION": {
     "TITULO": "Administración",
@@ -493,37 +493,82 @@
     "CONFIRM_DELETE": "Confirmar eliminación",
     "RESTORE": "Restaurar"
   },
-    "ALERTAS": {
-      "ESTAS_SEGURO": "¿Estás seguro?",
-      "MENSAJE_BORRAR_FICHA": "Se borrará la ficha.",
-      "MENSAJE_BORRAR_FICHA_DEFINITIVA": "Se borrará definitivamente la ficha y no se podrá recuperar.",
-      "MENSAJE_RESTAURAR_FICHA": "Se restaurará la ficha.",
-      "MENSAJE_CONFIRMAR_EDICION": "Se actualizarán los valores de la ficha.",
-      "CANCELAR": "Cancelar",
-      "CONFIRMAR": "Confirmar"
+  "ALERTAS": {
+    "ESTAS_SEGURO": "¿Estás seguro?",
+    "MENSAJE_BORRAR_FICHA": "Se borrará la ficha.",
+    "MENSAJE_BORRAR_FICHA_DEFINITIVA": "Se borrará definitivamente la ficha y no se podrá recuperar.",
+    "MENSAJE_RESTAURAR_FICHA": "Se restaurará la ficha.",
+    "MENSAJE_CONFIRMAR_EDICION": "Se actualizarán los valores de la ficha.",
+    "CANCELAR": "Cancelar",
+    "CONFIRMAR": "Confirmar"
+  },
+  "CRERAR_ORDUTEGIAK": {
+    "TITULO": "Horarios",
+    "SELECCIONA_TXANDA": "Selecciona una jornada",
+    "EGUNA": "Día",
+    "DE": "De",
+    "A": "A",
+    "DETALLES": "Detalles del horario",
+    "EQUIPO": "Equipo",
+    "FECHA": "Fecha",
+    "DIA": "Día",
+    "FECHA_INICIO": "Fecha de inicio",
+    "FECHA_FIN": "Fecha de fin",
+    "HORA_INICIO": "Hora de inicio",
+    "HORA_FIN": "Hora de fin",
+    "FECHA_CREACION": "Fecha de creación",
+    "FECHA_ACTUALIZACION": "Fecha de actualización",
+    "EDITAR": "Editar",
+    "EDITAR_ORDUTEGI": "Editar horario",
+    "SELECCIONA_DIA": "Selecciona un día",
+    "GUARDAR": "Guardar",
+    "CANCELAR": "Cancelar",
+    "SUMAR_ORDUTEGI": "Añadir horario"
+  },
+  "TXANDAK": {
+    "TXANDAK": "Txandak",
+    "SELECCIONA_TXANDA": "Selecciona txanda",
+    "TXANDA": "Txanda",
+    "DETALLES_TXANDA": "Detalles del txanda",
+    "ID": "ID",
+    "FECHA": "Fecha",
+    "TIPO": "Tipo",
+    "NOMBRE_TRABAJADOR": "Nombre del trabajador",
+    "FECHA_CREACION": "Fecha de creación",
+    "FECHA_ACTUALIZACION": "Fecha de actualización",
+    "EDITAR": "Editar",
+    "EDITAR_TXANDA": "Editar txanda",
+    "SELECCIONA_TIPO": "Selecciona tipo",
+    "RECEPCION": "Recepción",
+    "LIMPIEZA": "Limpieza",
+    "TRABAJADOR": "Trabajador",
+    "SELECCIONA_TRABAJADOR": "Selecciona un trabajador",
+    "SUMAR_TXANDA": "Sumar txanda",
+    "GUARDAR": "Guardar",
+    "CANCELAR": "Cancelar"
+  },
+  "confirmDelete": {
+      "header": "¿Estás seguro?",
+      "message": "Se eliminará el grupo seleccionado.",
+      "cancel": "Cancelar",
+      "confirm": "Confirmar"
     },
-      "CRERAR_ORDUTEGIAK": {
-        "TITULO": "Horarios",
-        "SELECCIONA_TXANDA": "Selecciona una jornada",
-        "EGUNA": "Día",
-        "DE": "De",
-        "A": "A",
-        "DETALLES": "Detalles del horario",
-        "EQUIPO": "Equipo",
-        "FECHA": "Fecha",
-        "DIA": "Día",
-        "FECHA_INICIO": "Fecha de inicio",
-        "FECHA_FIN": "Fecha de fin",
-        "HORA_INICIO": "Hora de inicio",
-        "HORA_FIN": "Hora de fin",
-        "FECHA_CREACION": "Fecha de creación",
-        "FECHA_ACTUALIZACION": "Fecha de actualización",
-        "EDITAR": "Editar",
-        "EDITAR_ORDUTEGI": "Editar horario",
-        "SELECCIONA_DIA": "Selecciona un día",
-        "GUARDAR": "Guardar",
-        "CANCELAR": "Cancelar",
-        "SUMAR_ORDUTEGI": "Añadir horario"
-      }
-    
+    "createTeam": {
+      "header": "Crear Nuevo Equipo",
+      "message": "Ingresa los detalles del nuevo equipo.",
+      "cancel": "Cancelar",
+      "create": "Crear",
+      "namePlaceholder":"Nombre"
+    },
+    "success": {
+      "header": "Éxito",
+      "message": "Nuevo equipo creado con éxito.",
+      "ok": "OK"
+    },
+    "error": {
+      "header": "Error",
+      "message": "Hubo un error al crear el equipo.",
+      "ok": "OK"
+    },
+    "namePlaceholder": "Nombre del equipo"
 }
