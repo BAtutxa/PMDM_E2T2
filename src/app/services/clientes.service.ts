@@ -24,19 +24,20 @@ export class ClientesService {
 
   actualizarFicha(ficha: IBezero): Observable<IBezero> {
     const headers = new HttpHeaders()
-      .set('Content-Type', 'application/json')
-      .set('Accept', 'application/json');
-    
-    return this.http.put<IBezero>(`${this.baseUrl}/update`, ficha, { headers }).pipe(
+    console.log('Enviando ficha:', ficha); // Verifica que el id no sea 0
+    const fichaSinHistorial = { ...ficha }; // Crea una copia del objeto
+  
+    return this.http.put<IBezero>(`${this.baseUrl}/update`, fichaSinHistorial, { headers }).pipe(
       tap((fichaActualizada) => {
-        // Aquí actualizamos la lista de fichas
         const fichasActualizadas = this.fichasSubject.getValue().map(f =>
-          f.id === fichaActualizada.id ? fichaActualizada : f  // Reemplazamos la ficha restaurada
+          f.id === fichaActualizada.id ? fichaActualizada : f
         );
-        this.fichasSubject.next(fichasActualizadas);  // Emitimos la nueva lista
+        this.fichasSubject.next(fichasActualizadas);
+        window.location.reload();
       })
     );
   }
+  
   
   eliminarFicha(ficha: IBezero): Observable<void> {
     const headers = new HttpHeaders()
@@ -56,6 +57,7 @@ export class ClientesService {
       .pipe(
         tap(() => this.getFichas().subscribe(fichas => this.fichasSubject.next(fichas)))
       );
+      
   }
 
   

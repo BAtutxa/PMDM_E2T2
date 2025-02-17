@@ -8,6 +8,7 @@ import { IData } from '../interfaces/IData';
 import { EsHistorialService } from '../services/EsHistorial.service';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-clientes',
@@ -40,6 +41,7 @@ export class ClientesPage implements OnInit {
     private historialService: EsHistorialService,
     private loadingController: LoadingController,
     private route: ActivatedRoute,
+    private changeDetector: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -126,7 +128,7 @@ export class ClientesPage implements OnInit {
     return Array.from({ length: this.paginacionMaxima }, (_, i) => i + 1);
   }
 
-  async eliminarFicha() {
+  async eliminarFicha(ficha: IBezero) {
     const alert = await this.alertController.create({
       header: this.translate.instant('ALERTAS.ESTAS_SEGURO'),
       message: this.translate.instant('ALERTAS.MENSAJE_BORRAR_FICHA'),
@@ -139,19 +141,34 @@ export class ClientesPage implements OnInit {
           text: this.translate.instant('ALERTAS.CONFIRMAR'),
           handler: async () => {
             const now = new Date();
-            this.fichaSeleccionada.data = this.fichaSeleccionada.data || {};
-            this.fichaSeleccionada.data.ezabatze_data = now;
+            
+            // Utiliza el parámetro 'ficha' en lugar de 'fichaSeleccionada'
+            ficha.data = ficha.data || {};  // Asegúrate de que 'data' exista
+            ficha.data.ezabatze_data = now;  // Establecer la fecha de eliminación
+  
+            // Verifica que el 'id' esté presente antes de enviar
+            if (!ficha.id || ficha.id === 0) {
+              console.error('El id de la ficha es necesario para eliminarla.');
+              return;
+            }
   
             try {
-              await firstValueFrom(this.ClientesService.actualizarFicha(this.fichaSeleccionada));
-              const index = this.fichas.findIndex(ficha => ficha.id === this.fichaSeleccionada.id);
+              // Enviar toda la ficha, no solo la data
+              await firstValueFrom(this.ClientesService.actualizarFicha(ficha));
+              
+              // Actualizar la lista localmente (asumiendo que tienes la lista de 'fichas' con los objetos)
+              const index = this.fichas.findIndex(f => f.id === ficha.id);
               if (index !== -1) {
-                this.fichas[index] = { ...this.fichaSeleccionada };
+                this.fichas[index] = { ...ficha };  // Reemplazar la ficha eliminada
                 this.aplicarFiltro({ target: { value: '' } });
               }
               this.editandoFicha = false;
+              this.changeDetector.detectChanges();
             } catch (error) {
               console.error('Error al borrar ficha:', error);
+              console.log("Cath");
+              this.editandoFicha = false;
+              this.changeDetector.detectChanges();
             }
           },
         },
@@ -159,6 +176,8 @@ export class ClientesPage implements OnInit {
     });
     await alert.present();
   }
+  
+  
 
   async trueEliminarFicha() {
     const alert = await this.alertController.create({
@@ -180,6 +199,9 @@ export class ClientesPage implements OnInit {
               this.editandoFicha = false;
             } catch (error) {
               console.error('Error al borrar ficha:', error);
+              this.fichas = this.fichas.filter(ficha => ficha.id !== this.fichaSeleccionada.id);
+              this.acabaDeBorrar = true;
+              this.editandoFicha = false;
             }
           },
         },
@@ -218,6 +240,8 @@ export class ClientesPage implements OnInit {
               this.editandoFicha = false;
             } catch (error) {
               console.error('Error al restaurar ficha:', error);
+              this.acabaDeBorrar = true;
+              this.editandoFicha = false;
             }
           },
         },
@@ -252,14 +276,25 @@ export class ClientesPage implements OnInit {
   
             try {
               await firstValueFrom(this.ClientesService.actualizarFicha(this.fichaSeleccionada));
+              
+              // Actualizar la lista de fichas
               const index = this.fichas.findIndex(ficha => ficha.id === this.fichaSeleccionada.id);
               if (index !== -1) {
                 this.fichas[index] = { ...this.fichaSeleccionada };
                 this.aplicarFiltro({ target: { value: '' } });
+                
               }
+              this.changeDetector.detectChanges();
+  
+              // Opcional: Reemplazar el estado de edición
               this.editandoFicha = false;
+            
             } catch (error) {
               console.error('Error al actualizar ficha:', error);
+              console.log("Cath");
+              this.editandoFicha = false;
+              this.changeDetector.detectChanges();
+              window.location.reload();
             }
           },
         },

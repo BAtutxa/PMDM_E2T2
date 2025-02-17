@@ -121,7 +121,7 @@
               <ion-button expand="full" color="danger" type="button" (click)="cancelarEdicion()">{{ 'CLIENTES.CANCELAR'
                 | translate }}</ion-button>
               <ion-button *ngIf="!esHistorial" expand="full" class="custom-red-button" type="button"
-                (click)="eliminarFicha()">
+                (click)="eliminarFicha(fichaSeleccionada)">
                 {{ 'CLIENTES.TELEFONO' | translate }}
               </ion-button>
 
@@ -236,7 +236,7 @@
               <ion-button expand="full" color="danger" type="button" (click)="cancelarEdicion()">{{ 'CLIENTES.CANCELAR'
                 | translate }}</ion-button>
               <ion-button *ngIf="!esHistorial" expand="full" class="custom-red-button" type="button"
-                (click)="eliminarFicha()">
+                (click)="eliminarFicha(fichaSeleccionada)">
                 {{ 'CLIENTES.BORRAR_FICHA' | translate }}
               </ion-button>
 
@@ -293,7 +293,7 @@
           }}</ion-col>
         <ion-col>
           <ion-button (click)="editarFicha(ficha)">Editar</ion-button>
-          <ion-button color="danger" *ngIf="!esHistorial" (click)="eliminarFicha()">{{ 'CLIENTES.BORRAR' | translate
+          <ion-button color="danger" *ngIf="!esHistorial" (click)="eliminarFicha(ficha)">{{ 'CLIENTES.BORRAR' | translate
             }}</ion-button>
           <ion-button color="success" *ngIf="esHistorial" (click)="restaurarFicha()">{{ 'CLIENTES.RESTAURAR' | translate
             }}</ion-button>
