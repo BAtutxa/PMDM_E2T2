@@ -297,16 +297,18 @@ export class GestionarCitasPage implements OnInit {
                 img.onload = () => {
                   // Agregar la imagen al PDF
                   doc.addImage(img, 'PNG', 10, 10, 50, 50); // Ajusta las coordenadas y el tamaño según sea necesario
-  
+                
                   // Agregar el texto al PDF
-                  doc.text(`Ticket de Cita`, 10, 70);
-                  doc.text(`Nombre: ${nuevoTicket.hitzorduak.izena}`, 10, 80);
-                  doc.text(`Telefono: ${nuevoTicket.hitzorduak.telefonoa}`, 10, 90);
-                  doc.text(`Servicio: ${nuevoTicket.zerbitzuak.izena}`, 10, 100);
-                  doc.text(`Trabajador: ${trabajadorNombre}`, 10, 110);
-                  doc.text(`Fecha: ${nuevoTicket.hitzorduak.data}`, 10, 120);
-                  doc.text(`Hora: ${nuevoTicket.hitzorduak.hasiera_ordua} - ${nuevoTicket.hitzorduak.amaiera_ordua}`, 10, 130);
-  
+                  const startY = 70; // Punto de inicio para el primer texto
+                  const lineHeight = 10; // Espacio entre líneas
+                
+                  doc.text(`Ticket de Cita`, 10, startY);
+                  doc.text(`Precio: ${citaSeleccionada.prezio_totala} €`, 10, startY + lineHeight);
+                  doc.text(`Servicio: ${nuevoTicket.zerbitzuak.izena}`, 10, startY + 2 * lineHeight);
+                  doc.text(`Trabajador: ${trabajadorNombre}`, 10, startY + 3 * lineHeight);
+                  doc.text(`Fecha: ${nuevoTicket.hitzorduak.data}`, 10, startY + 4 * lineHeight);
+                  doc.text(`Hora: ${nuevoTicket.hitzorduak.hasiera_ordua} - ${nuevoTicket.hitzorduak.amaiera_ordua}`, 10, startY + 5 * lineHeight);
+                
                   // Guardar el PDF
                   doc.save('ticket-cita.pdf');
   
