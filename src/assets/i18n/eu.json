@@ -233,7 +233,8 @@
     "PRECIO_FUERA_OBLIGATORIO": "Kanpoko prezioa derrigorrezkoa da.",
     "PLACEHOLDER_NAME": "Izena sartu",
     "PLACEHOLDER_PRECIO_FUERA": "Kanpoko prezioa sartu",
-    "PLACEHOLDER_PRECIO_CASA": "Etxeko prezioa sartu"
+    "PLACEHOLDER_PRECIO_CASA": "Etxeko prezioa sartu",
+    "SERVICIO_CREADO": "Zerbitzua sortuta"
   },
   "INVENTARIO": {
     "PROD_MUGIMENDUAK": "Produktu mugimenduak",

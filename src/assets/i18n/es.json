@@ -226,7 +226,8 @@
     "PRECIO_FUERA_OBLIGATORIO": "El precio fuera es obligatorio.",
     "PLACEHOLDER_NAME": "Introduce un valor para el nombre",
     "PLACEHOLDER_PRECIO_FUERA": "Introduce un valor para el precio fuera",
-    "PLACEHOLDER_PRECIO_CASA": "Introduce un valor para el precio de casa"
+    "PLACEHOLDER_PRECIO_CASA": "Introduce un valor para el precio de casa",
+    "SERVICIO_CREADO": "Servicio creado" 
   },
 
   "INVENTARIO": {
