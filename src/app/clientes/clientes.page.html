@@ -126,12 +126,12 @@
               </ion-button>
 
               <ion-button *ngIf="esHistorial" expand="full" class="custom-gray-button" type="button"
-                (click)="trueEliminarFicha()">
+                (click)="trueEliminarFicha(fichaSeleccionada)">
                 {{ 'CLIENTES.CONFIRMAR_BORRADO' | translate }}
               </ion-button>
 
               <ion-button *ngIf="esHistorial" expand="full" class="custom-purple-button" type="button"
-                (click)="restaurarFicha()">
+                (click)="restaurarFicha(fichaSeleccionada)">
                 {{ 'CLIENTES.RESTAURAR_FICHA' | translate }}
               </ion-button>
 
@@ -241,12 +241,12 @@
               </ion-button>
 
               <ion-button *ngIf="esHistorial" expand="full" class="custom-gray-button" type="button"
-                (click)="trueEliminarFicha()">
+                (click)="trueEliminarFicha(fichaSeleccionada)">
                 {{ 'CLIENTES.CONFIRMAR_BORRADO' | translate }}
               </ion-button>
 
               <ion-button *ngIf="esHistorial" expand="full" class="custom-purple-button" type="button"
-                (click)="restaurarFicha()">
+                (click)="restaurarFicha(fichaSeleccionada)">
                 {{ 'CLIENTES.RESTAURAR_FICHA' | translate }}
               </ion-button>
 
@@ -295,7 +295,7 @@
           <ion-button (click)="editarFicha(ficha)">Editar</ion-button>
           <ion-button color="danger" *ngIf="!esHistorial" (click)="eliminarFicha(ficha)">{{ 'CLIENTES.BORRAR' | translate
             }}</ion-button>
-          <ion-button color="success" *ngIf="esHistorial" (click)="restaurarFicha()">{{ 'CLIENTES.RESTAURAR' | translate
+          <ion-button color="success" *ngIf="esHistorial" (click)="restaurarFicha(ficha)">{{ 'CLIENTES.RESTAURAR' | translate
             }}</ion-button>
         </ion-col>
       </ion-row>

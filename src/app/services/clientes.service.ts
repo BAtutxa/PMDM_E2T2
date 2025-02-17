@@ -57,10 +57,8 @@ export class ClientesService {
       .pipe(
         tap(() => this.getFichas().subscribe(fichas => this.fichasSubject.next(fichas)))
       );
-      
   }
 
-  
   crearFicha(ficha: IBezero): Observable<IBezero> {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')

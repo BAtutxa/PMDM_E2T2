@@ -169,6 +169,7 @@ export class ClientesPage implements OnInit {
               console.log("Cath");
               this.editandoFicha = false;
               this.changeDetector.detectChanges();
+              window.location.reload();
             }
           },
         },
@@ -177,9 +178,8 @@ export class ClientesPage implements OnInit {
     await alert.present();
   }
   
-  
 
-  async trueEliminarFicha() {
+  async trueEliminarFicha(ficha: IBezero) {
     const alert = await this.alertController.create({
       header: this.translate.instant('ALERTAS.ESTAS_SEGURO'),
       message: this.translate.instant('ALERTAS.MENSAJE_BORRAR_FICHA_DEFINITIVA'),
@@ -191,17 +191,28 @@ export class ClientesPage implements OnInit {
         {
           text: this.translate.instant('ALERTAS.CONFIRMAR'),
           handler: async () => {
-            try {
-              await firstValueFrom(this.ClientesService.eliminarFicha(this.fichaSeleccionada));
+            if (!ficha.id) {
+              console.error('El id de la ficha es necesario para eliminarla.');
+              return;
+            }
   
-              this.fichas = this.fichas.filter(ficha => ficha.id !== this.fichaSeleccionada.id);
+            try {
+              // Aquí se pasa la ficha con el id correcto al servicio de eliminación
+              await firstValueFrom(this.ClientesService.trueEliminarFicha(ficha));
+  
+              // Filtrar la ficha eliminada de la lista local
+              this.fichas = this.fichas.filter(f => f.id !== ficha.id);
               this.acabaDeBorrar = true;
               this.editandoFicha = false;
+              this.changeDetector.detectChanges();
+              window.location.reload();
             } catch (error) {
               console.error('Error al borrar ficha:', error);
-              this.fichas = this.fichas.filter(ficha => ficha.id !== this.fichaSeleccionada.id);
+              this.fichas = this.fichas.filter(f => f.id !== ficha.id);
               this.acabaDeBorrar = true;
               this.editandoFicha = false;
+              this.changeDetector.detectChanges();
+              window.location.reload();
             }
           },
         },
@@ -210,8 +221,9 @@ export class ClientesPage implements OnInit {
   
     await alert.present();
   }
+  
 
-  async restaurarFicha() {
+  async restaurarFicha(ficha: IBezero) {
     const alert = await this.alertController.create({
       header: this.translate.instant('ALERTAS.ESTAS_SEGURO'),
       message: this.translate.instant('ALERTAS.MENSAJE_RESTAURAR_FICHA'),
@@ -223,25 +235,34 @@ export class ClientesPage implements OnInit {
         {
           text: this.translate.instant('ALERTAS.CONFIRMAR'),
           handler: async () => {
+            if (!ficha.id) {
+              console.error('El id de la ficha es necesario para restaurarla.');
+              return;
+            }
+  
             const now = new Date();
-            this.fichaSeleccionada.data = this.fichaSeleccionada.data || {};
-            this.fichaSeleccionada.data.ezabatze_data = null;
-            this.fichaSeleccionada.data.eguneratze_data = now;
+            ficha.data = ficha.data || {};
+            ficha.data.ezabatze_data = null;
+            ficha.data.eguneratze_data = now;
   
             try {
-              const fichaRestaurada = await firstValueFrom(this.ClientesService.actualizarFicha(this.fichaSeleccionada));
+              // Aquí se pasa la ficha con el id al servicio de actualización
+              const fichaRestaurada = await firstValueFrom(this.ClientesService.actualizarFicha(ficha));
   
-              const index = this.fichas.findIndex(ficha => ficha.id === fichaRestaurada.id);
+              // Actualiza la lista local con la ficha restaurada
+              const index = this.fichas.findIndex(f => f.id === fichaRestaurada.id);
               if (index !== -1) {
                 this.fichas[index] = fichaRestaurada;
               }
   
-              this.acabaDeBorrar = true;
+              this.acabaDeBorrar = false;
               this.editandoFicha = false;
             } catch (error) {
               console.error('Error al restaurar ficha:', error);
-              this.acabaDeBorrar = true;
+              this.acabaDeBorrar = false;
               this.editandoFicha = false;
+              this.changeDetector.detectChanges();
+              window.location.reload();
             }
           },
         },
@@ -250,6 +271,7 @@ export class ClientesPage implements OnInit {
   
     await alert.present();
   }
+  
 
   editarFicha(ficha: IBezero) {
     this.fichaSeleccionadaAnterior = { ...this.fichaSeleccionada };
@@ -291,7 +313,6 @@ export class ClientesPage implements OnInit {
             
             } catch (error) {
               console.error('Error al actualizar ficha:', error);
-              console.log("Cath");
               this.editandoFicha = false;
               this.changeDetector.detectChanges();
               window.location.reload();
