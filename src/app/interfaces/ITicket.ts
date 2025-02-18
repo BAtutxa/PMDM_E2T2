@@ -14,7 +14,7 @@ export interface ITicket{
             amaiera_ordua: Time
             hasiera_ordua_erreala: null |Time,
             amaiera_ordua_erreala: null |Time,
-            izena: string,
+            izena: string, 
             telefonoa: string,
             deskribapena: string,
             etxekoa: string,
