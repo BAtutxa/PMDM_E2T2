@@ -110,16 +110,12 @@
                   </ion-note>
                 </ion-item>
 
-                <!-- Tienes que poner informacion del historial cuando este -->
-                <ion-button  *ngIf="esHistorial" color="tertiary" expand="full" (click)="confirmarEdicion()" type="submit"
-                  [disabled]="productoForm.invalid">
-                  {{ 'SERVICIOS.CONFIRM' | translate }}
-                </ion-button>
-                <ion-button *ngIf="esHistorial" expand="full" color="danger" (click)="cancelarEdicion()">
-                  {{ 'SERVICIOS.CANCEL' | translate }}
-                </ion-button>
+                <ion-button *ngIf="!esHistorial"  color="tertiary" expand="full" (click)="confirmarEdicion()" type="submit"
+                  [disabled]="productoForm.invalid">{{ 'SERVICIOS.CONFIRM' | translate }}</ion-button>
+                <ion-button expand="full" color="danger" (click)="cancelarEdicion()"> {{ 'SERVICIOS.CANCEL' | translate
+                  }}</ion-button>
                 <ion-button *ngIf="esProfe && !esHistorial" expand="full" class="custom-red-button" (click)="eliminarProducto()">
-                  {{ 'SERVICIOS.DELETE_PRODUCT' | translate }}
+                  {{ 'SERVICIOS.DELETE' | translate }}
                 </ion-button>
               </form>
             </ion-card-content>
